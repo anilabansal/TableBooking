@@ -66,6 +66,7 @@ flutter:
   assets:
      - assets/images/splash/
      - assets/images/auth/
+     - assets/images/zip_code/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
