@@ -1,4 +1,4 @@
-import 'package:booking_table/view/splash_screen/splash_view.dart';
+import 'package:booking_table/view/payment/add_card_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return const GetMaterialApp(
       title: 'Flutter Demo',
       home: Material(
-        child: SplashView(),
+        child: AddCreditCardDetailsView(),
       ),
     );
   }

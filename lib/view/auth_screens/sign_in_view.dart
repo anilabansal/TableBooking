@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:booking_table/view/auth_screens/widgets/sign_in_bottom_view.dart';
 import 'package:booking_table/view/auth_screens/widgets/sign_in_top_view.dart';
 import 'package:flutter/material.dart';

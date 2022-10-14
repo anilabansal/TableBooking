@@ -10,3 +10,6 @@ const String appleLogo = 'assets/images/auth/apple_logo.png';
 const String signInLogo = 'assets/images/auth/mobile_sign_in_screen.png';
 const String signInBackgroundLogo =
     'assets/images/auth/mobile_sign_in_screen_background.png';
+
+// ZIP CODE SCREEN
+const String zipcodeUserImage = 'assets/images/zip_code/zip_code.png';

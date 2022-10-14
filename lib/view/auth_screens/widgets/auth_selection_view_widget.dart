@@ -1,7 +1,9 @@
 import 'package:booking_table/controller/authentication/auth_view_controller.dart';
+import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text_field.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/auth_screens/sign_in_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,17 +23,17 @@ class AuthScreenViewWidget extends StatelessWidget {
           height: 54,
           width: 143,
         ),
-        _sizedBox(height: 26),
-        CommonTextField(
+        CommonSizedBox(height: 26),
+        CommonText(
           text: 'Welcome!',
-          color: Colors.black,
+          color: black040404,
           fontSize: 24,
           fontWeight: FontWeight.w700,
         ),
-        _sizedBox(height: 20),
+        CommonSizedBox(height: 20),
         CommonButton(
           text: 'Sign In',
-          bgColor: Colors.red,
+          bgColor: redE2211C,
           onTap: () {
             // TODO: Sign In Functionality
             Get.to(
@@ -42,20 +44,20 @@ class AuthScreenViewWidget extends StatelessWidget {
           },
           textColor: Colors.white,
         ),
-        _sizedBox(height: 20),
-        CommonTextField(
+        CommonSizedBox(height: 20),
+        CommonText(
           text: 'OR',
-          color: Colors.grey,
+          color: textLight868686,
           fontSize: 14,
           fontWeight: FontWeight.w400,
         ),
-        _sizedBox(height: 20),
-        CommonTextField(
+        CommonSizedBox(height: 20),
+        CommonText(
             text: 'No Account?',
-            color: Colors.grey,
+            color: textLight868686,
             fontWeight: FontWeight.w400,
             fontSize: 14),
-        _sizedBox(height: 10),
+        CommonSizedBox(height: 10),
         CommonButton(
           onTap: () {
             Get.to(
@@ -65,32 +67,25 @@ class AuthScreenViewWidget extends StatelessWidget {
             );
           },
           text: 'Sign Up',
-          bgColor: Colors.black,
+          bgColor: black000000,
           textColor: Colors.white,
         ),
-        _sizedBox(height: 20),
-        CommonTextField(
+        CommonSizedBox(height: 20),
+        CommonText(
             text: 'OR',
             fontWeight: FontWeight.w400,
-            color: Colors.grey,
+            color: textLight868686,
             fontSize: 14),
-        _sizedBox(height: 20),
-        CommonTextField(
+        CommonSizedBox(height: 20),
+        CommonText(
           text: 'Continue with',
-          color: Colors.black,
+          color: black000000,
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),
-        _sizedBox(height: 15),
+        CommonSizedBox(height: 15),
         _iconRow(),
       ],
-    );
-  }
-
-  SizedBox _sizedBox({double? height, double? width}) {
-    return SizedBox(
-      height: height,
-      width: width,
     );
   }
 
@@ -103,13 +98,13 @@ class AuthScreenViewWidget extends StatelessWidget {
           height: 46,
           width: 70,
         ),
-        _sizedBox(width: 20),
+        CommonSizedBox(width: 20),
         Image.asset(
           googleLogo,
           height: 46,
           width: 70,
         ),
-        _sizedBox(width: 20),
+        CommonSizedBox(width: 20),
         Image.asset(
           appleLogo,
           height: 46,

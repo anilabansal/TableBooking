@@ -1,8 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text_field.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/auth_screens/otp_screen.dart';
-import 'package:country_phone_code_picker/core/country_phone_code_picker_widget.dart';
 import 'package:country_phone_code_picker/country_phone_code_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -20,24 +22,25 @@ class SignInScreenBottomView extends StatelessWidget {
     return Column(
       children: [
         // Heading
-        CommonTextField(
+        CommonText(
           text: callFrom == 'Login'
               ? 'Enter Mobile Number'
               : 'Create Your Free Account',
           fontSize: 24,
+          color: black040404,
           fontWeight: FontWeight.w700,
         ),
-        const SizedBox(height: 15),
+        CommonSizedBox(height: 15),
         _textFieldRow(),
-        const SizedBox(height: 15),
-        CommonTextField(
+        CommonSizedBox(height: 15),
+        CommonText(
           text: 'A 4 digit code will be sent to this number.',
           fontWeight: FontWeight.w400,
           fontSize: 14,
-          color: Colors.grey,
+          color: textLight868686,
         ),
         callFrom == 'Login'
-            ? const SizedBox(height: 40)
+            ? CommonSizedBox(height: 40)
             : _privacyPolicyNTerms(),
         // Button
         Container(
@@ -55,10 +58,10 @@ class SignInScreenBottomView extends StatelessWidget {
             textColor: Colors.white,
           ),
         ),
-        const SizedBox(height: 20),
-        CommonTextField(text: 'OR', color: Colors.grey, fontSize: 14),
-        const SizedBox(height: 20),
-        CommonTextField(
+        CommonSizedBox(height: 20),
+        CommonText(text: 'OR', color: textLight868686, fontSize: 14),
+        CommonSizedBox(height: 20),
+        CommonText(
           text: 'Continue as Guest',
           color: redE2211C,
           fontSize: 16,
@@ -71,8 +74,7 @@ class SignInScreenBottomView extends StatelessWidget {
   Container _textFieldRow() {
     return Container(
       decoration: BoxDecoration(
-          color: const Color.fromRGBO(253, 244, 243, 1),
-          borderRadius: BorderRadius.circular(5)),
+          color: otpFieldFDF4F3, borderRadius: BorderRadius.circular(5)),
       margin: const EdgeInsets.only(
         left: 27,
         right: 13,
@@ -87,7 +89,7 @@ class SignInScreenBottomView extends StatelessWidget {
               right: 15,
             ),
             width: 1,
-            color: Colors.grey,
+            color: textLight868686,
             height: 34,
           ),
           // TextField
@@ -96,9 +98,7 @@ class SignInScreenBottomView extends StatelessWidget {
             autovalidateMode: AutovalidateMode.always,
             keyboardType: TextInputType.number,
             cursorWidth: 0,
-            style: const TextStyle(
-              fontSize: 20,
-            ),
+            style: const TextStyle(fontSize: 20, color: black000000),
             decoration: const InputDecoration(
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
@@ -109,8 +109,8 @@ class SignInScreenBottomView extends StatelessWidget {
     );
   }
 
-  SizedBox _codePicker() {
-    return SizedBox(
+  CommonSizedBox _codePicker() {
+    return CommonSizedBox(
       width: 79,
       child: CountryPhoneCodePicker.withDefaultSelectedCountry(
         defaultCountryCode:
@@ -130,7 +130,7 @@ class SignInScreenBottomView extends StatelessWidget {
   Column _privacyPolicyNTerms() {
     return Column(
       children: <Widget>[
-        const SizedBox(height: 58),
+        CommonSizedBox(height: 58),
         Row(
           children: [
             Checkbox(
@@ -150,11 +150,11 @@ class SignInScreenBottomView extends StatelessWidget {
                   children: [
                     const TextSpan(
                         text: 'I agree with all ',
-                        style: TextStyle(color: Colors.black, fontSize: 14)),
+                        style: TextStyle(color: textDark3F3E3E, fontSize: 14)),
                     TextSpan(
                       text: 'Terms & Conditions ',
                       style: const TextStyle(
-                        color: Colors.black,
+                        color: black040404,
                         fontSize: 14,
                         decoration: TextDecoration.underline,
                       ),
@@ -166,13 +166,13 @@ class SignInScreenBottomView extends StatelessWidget {
                     const TextSpan(
                         text: 'and ',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: textDark3F3E3E,
                           fontSize: 14,
                         )),
                     TextSpan(
                       text: 'Privacy Policy',
                       style: const TextStyle(
-                        color: Colors.black,
+                        color: black040404,
                         fontSize: 14,
                         decoration: TextDecoration.underline,
                       ),
@@ -184,7 +184,7 @@ class SignInScreenBottomView extends StatelessWidget {
                     const TextSpan(
                       text: '.',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: textDark3F3E3E,
                         fontSize: 14,
                       ),
                     ),
@@ -194,7 +194,7 @@ class SignInScreenBottomView extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 15),
+        CommonSizedBox(height: 15),
       ],
     );
   }

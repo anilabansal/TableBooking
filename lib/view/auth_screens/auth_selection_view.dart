@@ -1,5 +1,6 @@
 import 'package:booking_table/controller/authentication/auth_view_controller.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text_field.dart';
+import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/auth_screens/widgets/auth_selection_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,9 +25,9 @@ class AuthSelectionView extends StatelessWidget {
               // Bottom
               Column(
                 children: [
-                  CommonTextField(
+                  CommonText(
                     text: 'Continue as Guest',
-                    color: Colors.red,
+                    color: redE2211C,
                     decoration: TextDecoration.underline,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
