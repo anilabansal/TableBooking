@@ -2,6 +2,7 @@ import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_textformfield.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class AddCardDetailsRowThree extends StatelessWidget {
@@ -133,6 +134,83 @@ class AddCardDetailsRowOne extends StatelessWidget {
         CommonSizedBox(
           height: 20,
         ),
+      ],
+    );
+  }
+}
+
+class AddCardDetailsPrivacyPolicy extends StatelessWidget {
+  const AddCardDetailsPrivacyPolicy({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        // CommonSizedBox(height: 58),
+        Row(
+          children: [
+            Checkbox(
+              value: true,
+              onChanged: null,
+              fillColor: MaterialStateProperty.resolveWith<Color>(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.red;
+                }
+                return Colors.white;
+              }),
+            ),
+            Expanded(
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    const TextSpan(
+                        text: 'I agree with all ',
+                        style: TextStyle(color: textDark3F3E3E, fontSize: 14)),
+                    TextSpan(
+                      text: 'Terms & Conditions ',
+                      style: const TextStyle(
+                        color: black040404,
+                        fontSize: 14,
+                        decoration: TextDecoration.underline,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          // TODO : TERMS & CONDITIONS
+                        },
+                    ),
+                    const TextSpan(
+                        text: 'and ',
+                        style: TextStyle(
+                          color: textDark3F3E3E,
+                          fontSize: 14,
+                        )),
+                    TextSpan(
+                      text: 'Privacy Policy',
+                      style: const TextStyle(
+                        color: black040404,
+                        fontSize: 14,
+                        decoration: TextDecoration.underline,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          // TODO : PRIVACY POLICY
+                        },
+                    ),
+                    const TextSpan(
+                      text: '.',
+                      style: TextStyle(
+                        color: textDark3F3E3E,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        CommonSizedBox(height: 15),
       ],
     );
   }
