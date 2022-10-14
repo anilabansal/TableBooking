@@ -10,8 +10,14 @@ class SignInScreenTopView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset(signInBackgroundLogo),
-        Image.asset(signInLogo),
+        Image.asset(
+          signInBackgroundLogo,
+          height: 247,
+        ),
+        Image.asset(
+          signInLogo,
+          height: 247,
+        ),
       ],
     );
   }

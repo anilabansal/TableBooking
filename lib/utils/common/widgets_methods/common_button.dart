@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CommonButton extends StatelessWidget {
-  dynamic onTap;
+  Function()? onTap;
   String? text;
   dynamic bgColor;
   dynamic textColor;

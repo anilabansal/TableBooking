@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/authentication/auth_view_controller.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text_field.dart';
 import 'package:booking_table/view/auth_screens/widgets/auth_selection_view_widget.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ class AuthSelectionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authController = Get.lazyPut(() => AuthViewController());
     return Scaffold(
       body: Center(
         child: Padding(

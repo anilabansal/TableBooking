@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/authentication/auth_view_controller.dart';
 import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text_field.dart';
@@ -10,6 +11,8 @@ class AuthScreenViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authController = Get.lazyPut(() => AuthViewController());
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
