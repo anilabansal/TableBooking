@@ -1,5 +1,8 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text_field.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/auth_screens/get_zip_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,15 +20,17 @@ class OtpScreenViewWidget extends StatelessWidget {
     return Column(
       children: <Widget>[
         const SizedBox(height: 25),
-        CommonTextField(
+        CommonText(
           text: 'Enter the 4 digit code sent to',
           fontWeight: FontWeight.w400,
           fontSize: 18,
+          color: textDark3F3E3E,
         ),
         const SizedBox(height: 5),
-        CommonTextField(
+        CommonText(
           text: '+1-310-422-5076',
           fontWeight: FontWeight.w500,
+          color: black000000,
           fontSize: 22,
         ),
         const SizedBox(height: 40),
@@ -36,30 +41,32 @@ class OtpScreenViewWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: CommonButton(
             onTap: () {
-              Get.off(
-                () => const GetZipCodeView(),
-              );
+              if (callFrom == 'Login') {
+                Get.off(
+                  () => const GetZipCodeView(),
+                );
+              }
             },
             text: callFrom == 'Login' ? 'Sign In' : 'Submit',
-            bgColor: Colors.red,
+            bgColor: redE2211C,
             textColor: Colors.white,
           ),
         ),
         const SizedBox(height: 20),
-        CommonTextField(
+        CommonText(
           text: 'Resend Code',
           decoration: TextDecoration.underline,
-          color: Colors.red,
+          color: redE2211C,
           fontSize: 16,
           fontWeight: FontWeight.w400,
         ),
         const SizedBox(height: 20),
         callFrom == 'Login'
             ? Container()
-            : CommonTextField(
+            : CommonText(
                 text: 'Change Phone Number',
                 decoration: TextDecoration.underline,
-                color: Colors.black,
+                color: black040404,
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
               ),
@@ -85,8 +92,9 @@ class PinBoxWidget extends StatelessWidget {
         defaultPinTheme: PinTheme(
           width: 64,
           height: 75,
-          decoration: BoxDecoration(color: Color.fromRGBO(253, 244, 243, 1)),
-          textStyle: TextStyle(fontWeight: FontWeight.w600, fontSize: 40),
+          decoration: BoxDecoration(color: otpFieldFDF4F3),
+          textStyle: TextStyle(
+              fontWeight: FontWeight.w600, fontSize: 40, color: black000000),
         ),
       ),
     );
