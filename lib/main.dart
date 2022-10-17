@@ -1,4 +1,4 @@
-import 'package:booking_table/view/book_a_table/book_a_table_main.dart';
+import 'package:booking_table/view/summary/mid_service_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,10 +11,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       home: Material(
-        child: BookATableView(),
+        child: ServiceSummaryView(
+          callFrom: '',
+        ),
       ),
     );
   }
