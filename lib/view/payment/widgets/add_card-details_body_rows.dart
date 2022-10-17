@@ -23,7 +23,7 @@ class AddCardDetailsRowThree extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               CommonText(
-                text: 'Card Holder Name',
+                text: 'Exp. Date',
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 // fontFamily: mainLatoFont,
@@ -99,14 +99,14 @@ class AddCardDetailsRowTwo extends StatelessWidget {
           text: 'Credit Card Number',
           fontSize: 14,
           fontWeight: FontWeight.w400,
-          // fontFamily: mainLatoFont,
         ),
         CommonSizedBox(
           height: 6,
         ),
         CommonTextFormField(
-          hintText: 'Exp. Date',
+          hintText: 'Enter card Number',
           filled: true,
+          keyboardType: TextInputType.number,
           fillColor: whiteF4F4F4,
         ),
         CommonSizedBox(

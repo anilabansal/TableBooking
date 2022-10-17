@@ -10,17 +10,19 @@ class AddCardDetailsController extends GetxController {
   selectDate() async {
     final DateTime? pickedDate = await showDatePicker(
       context: Get.context!,
+      initialDatePickerMode: DatePickerMode.year,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
       initialDate: selectedCardDate.value,
-      firstDate: DateTime(2020),
+      firstDate: DateTime.now(),
       lastDate: DateTime(3000),
     );
     if (pickedDate != null && pickedDate != selectedCardDate.value) {
       selectedCardDate.value = pickedDate;
       cardExpiryDate.text =
-          DateFormat('MM-y').format(selectedCardDate.value).toString();
+          DateFormat('M-yy').format(selectedCardDate.value).toString();
     } else if (cardExpiryDate.text.isEmpty) {
       cardExpiryDate.text =
-          DateFormat('MM-y').format(DateTime.now()).toString();
+          DateFormat('M-yy').format(DateTime.now()).toString();
     }
   }
 }
