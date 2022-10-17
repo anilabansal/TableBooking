@@ -1,10 +1,10 @@
 import 'package:booking_table/controller/book_a_table/book_a_table_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
-import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_textformfield.dart';
+import 'package:booking_table/utils/common/widgets_methods/restaurant_name_distance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:get/get.dart';
@@ -21,34 +21,7 @@ class BookATableBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Image.asset(
-              bookATableImage,
-              height: 57,
-              width: 57,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CommonText(
-                  text: 'Venisa’s Kitchen',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-                CommonSizedBox(
-                  height: 5,
-                ),
-                CommonText(
-                  text: '5 miles away',
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                  color: textLight868686,
-                ),
-              ],
-            ).paddingOnly(left: 11.0),
-          ],
-        ).paddingOnly(left: 28, top: 31),
+        const CommonRestaurantNameDistance(),
         Container(
           width: Get.width,
           height: 1,

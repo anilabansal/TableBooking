@@ -15,13 +15,13 @@ class AddCardDetailsBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           // ROW ONE
-          AddCardDetailsRowOne(),
+          const AddCardDetailsRowOne(),
           // Row TWO
-          AddCardDetailsRowTwo(),
+          const AddCardDetailsRowTwo(),
           //   ROW THREE
           AddCardDetailsRowThree(),
           //  PRIVACY POLICY TERMS N CONDITIONS
-          AddCardDetailsPrivacyPolicy(),
+          const AddCardDetailsPrivacyPolicy(),
           //   Button
           CommonButton(
             text: 'Save Card',

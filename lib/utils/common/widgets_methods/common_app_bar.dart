@@ -3,13 +3,15 @@ import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:flutter/material.dart';
 
-AppBar bookATableAppBar() {
+AppBar appBarCommon({
+  String? text,
+}) {
   return AppBar(
     backgroundColor: Colors.white,
     centerTitle: true,
-    title: const Text(
-      'Book a Table',
-      style: TextStyle(
+    title: Text(
+      text!,
+      style: const TextStyle(
           fontSize: 22,
           color: black000000,
           fontWeight: FontWeight.w600,
