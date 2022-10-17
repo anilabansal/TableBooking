@@ -16,3 +16,8 @@ const String zipcodeUserImage = 'assets/images/zip_code/zip_code.png';
 
 // BOOK A TABLE
 const String bookATableImage = 'assets/images/book_a_table/bookATable.png';
+
+// PAYMENT DONE
+const String paymentDoneTick = 'assets/images/payment/payment_done_tick.png';
+const String paymentDoneCircle =
+    'assets/images/payment/payment_done_circle.png';
