@@ -1,14 +1,17 @@
+import 'package:booking_table/controller/add_card_details/add_card_details_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_textformfield.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddCardDetailsRowThree extends StatelessWidget {
-  const AddCardDetailsRowThree({
+  AddCardDetailsRowThree({
     Key? key,
   }) : super(key: key);
+  AddCardDetailsController controller = Get.put(AddCardDetailsController());
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +31,18 @@ class AddCardDetailsRowThree extends StatelessWidget {
               CommonSizedBox(
                 height: 6,
               ),
-              CommonTextFormField(
-                hintText: 'DD/MM',
-                // suffixIcon: const Icon(Icons.arrow_drop_down),
-                filled: true,
-                fillColor: whiteF4F4F4,
+              InkWell(
+                onTap: () async {
+                  await controller.selectDate();
+                },
+                child: CommonTextFormField(
+                  enable: false,
+                  hintText: 'DD/MM',
+                  controller: controller.cardExpiryDate,
+                  // suffixIcon: const Icon(Icons.arrow_drop_down),
+                  filled: true,
+                  fillColor: whiteF4F4F4,
+                ),
               ),
               CommonSizedBox(
                 height: 20,
