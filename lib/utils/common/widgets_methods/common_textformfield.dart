@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 
 class CommonTextFormField extends StatelessWidget {
   String? hintText;
+  TextEditingController? controller;
+  Function()? onTap;
   double? fontSize;
   int? maxLength;
   Widget? suffixIcon;
   Color? color;
+  bool? enable;
   Color? fillColor;
   bool? filled;
   bool? obscureText;
@@ -17,6 +20,9 @@ class CommonTextFormField extends StatelessWidget {
   FontWeight? fontWeight;
   CommonTextFormField({
     this.hintText,
+    this.enable,
+    this.onTap,
+    this.controller,
     this.maxLength,
     this.suffixIcon,
     this.keyboardType,
@@ -33,9 +39,12 @@ class CommonTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTap: onTap,
+      enabled: enable,
       autovalidateMode: AutovalidateMode.always,
       keyboardType: keyboardType,
       maxLength: maxLength,
+      controller: controller,
       cursorWidth: 1,
       style: const TextStyle(fontSize: 20, color: black000000),
       obscureText: obscureText ?? false,

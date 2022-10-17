@@ -13,3 +13,6 @@ const String signInBackgroundLogo =
 
 // ZIP CODE SCREEN
 const String zipcodeUserImage = 'assets/images/zip_code/zip_code.png';
+
+// BOOK A TABLE
+const String bookATableImage = 'assets/images/book_a_table/bookATable.png';
