@@ -10,24 +10,26 @@ class AddCardDetailsMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        // ROW ONE
-        AddCardDetailsRowOne(),
-        // Row TWO
-        AddCardDetailsRowTwo(),
-        //   ROW THREE
-        AddCardDetailsRowThree(),
-        //  PRIVACY POLICY TERMS N CONDITIONS
-        AddCardDetailsPrivacyPolicy(),
-        //   Button
-        CommonButton(
-          text: 'Save Card',
-          bgColor: redE2211C,
-          textColor: Colors.white,
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          // ROW ONE
+          AddCardDetailsRowOne(),
+          // Row TWO
+          AddCardDetailsRowTwo(),
+          //   ROW THREE
+          AddCardDetailsRowThree(),
+          //  PRIVACY POLICY TERMS N CONDITIONS
+          AddCardDetailsPrivacyPolicy(),
+          //   Button
+          CommonButton(
+            text: 'Save Card',
+            bgColor: redE2211C,
+            textColor: Colors.white,
+          ),
+        ],
+      ),
     );
   }
 }
