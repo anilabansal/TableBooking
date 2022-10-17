@@ -5,12 +5,17 @@ import 'package:flutter/material.dart';
 class CommonButton extends StatelessWidget {
   Function()? onTap;
   String? text;
-  dynamic bgColor;
-  dynamic textColor;
+  Color? bgColor;
+  Color? textColor;
+  Icon? icon;
+  double? fontSize;
+
   CommonButton({
+    this.icon,
     this.onTap,
     this.text,
     this.bgColor,
+    this.fontSize,
     this.textColor,
     Key? key,
   }) : super(key: key);
@@ -29,7 +34,9 @@ class CommonButton extends StatelessWidget {
         child: Text(
           text!,
           style: TextStyle(
-              color: textColor, fontSize: 18, fontWeight: FontWeight.w500),
+              color: textColor,
+              fontSize: fontSize ?? 18,
+              fontWeight: FontWeight.w500),
         ),
       ),
     );
