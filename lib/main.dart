@@ -1,4 +1,4 @@
-import 'package:booking_table/view/payment/add_card_details.dart';
+import 'package:booking_table/view/book_a_table/book_a_table_main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return const GetMaterialApp(
       title: 'Flutter Demo',
       home: Material(
-        child: AddCreditCardDetailsView(),
+        child: BookATableView(),
       ),
     );
   }
