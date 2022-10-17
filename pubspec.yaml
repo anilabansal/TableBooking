@@ -38,8 +38,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   pinput:
-#  country_picker: ^2.0.16
+  intl:
   country_phone_code_picker: ^0.0.41
+  flutter_toggle_tab:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,6 +69,7 @@ flutter:
      - assets/images/splash/
      - assets/images/auth/
      - assets/images/zip_code/
+     - assets/images/book_a_table/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
