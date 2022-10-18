@@ -19,7 +19,7 @@ class MidSummaryBottomView extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 30, right: 14),
+          padding: const EdgeInsets.only(left: 20, right: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -48,7 +48,7 @@ class MidSummaryBottomView extends StatelessWidget {
           color: textLight868686,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 30, right: 14),
+          padding: const EdgeInsets.only(left: 20, right: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -76,7 +76,7 @@ class MidSummaryBottomView extends StatelessWidget {
           color: textLight868686,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 30, right: 14),
+          padding: const EdgeInsets.only(left: 20, right: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -132,7 +132,7 @@ class AddATipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30, right: 14),
+      padding: const EdgeInsets.only(left: 20, right: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

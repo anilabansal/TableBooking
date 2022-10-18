@@ -88,7 +88,7 @@ class MidSummaryBookingDetailsView extends StatelessWidget {
                 ],
               ),
               CommonSizedBox(
-                height: 28,
+                height: 43,
               ),
             ],
           ),
