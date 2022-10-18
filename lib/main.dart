@@ -1,4 +1,4 @@
-import 'package:booking_table/view/favourite/favourite_view.dart';
+import 'package:booking_table/view/reservation/reservation_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,10 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return const GetMaterialApp(
       title: 'Flutter Demo',
       home: Material(
-        child: FavouriteView(),
+        child: ReservationView(),
       ),
     );
   }
