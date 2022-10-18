@@ -74,6 +74,7 @@ flutter:
      - assets/images/book_a_table/
      - assets/images/payment/
      - assets/images/summary/
+     - assets/images/favorites/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
