@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:booking_table/controller/service_type/pre_order_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/images_string.dart';
@@ -22,7 +24,7 @@ class PreOrderView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CommonRestaurantNameDistance(),
+            const CommonRestaurantNameDistance(),
             Container(
               margin: const EdgeInsets.only(bottom: 18.0, top: 26.0),
               height: 1,

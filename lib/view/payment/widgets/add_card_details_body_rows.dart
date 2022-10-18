@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:booking_table/controller/add_card_details/add_card_details_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';

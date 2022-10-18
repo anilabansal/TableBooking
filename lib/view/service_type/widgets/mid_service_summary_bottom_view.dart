@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:booking_table/controller/service_type/summary_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
@@ -36,7 +38,7 @@ class MidSummaryBottomView extends StatelessWidget {
               CommonTextFormField(
                 fillColor: whiteF5F5F5,
                 filled: true,
-                suffixIcon: Icon(Icons.arrow_drop_down),
+                suffixIcon: const Icon(Icons.arrow_drop_down),
               ),
             ],
           ),

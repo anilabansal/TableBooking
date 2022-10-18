@@ -121,7 +121,7 @@ class MidSummaryPreOrderBookingDetailsView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  IconButton(
+                  const IconButton(
                     onPressed: null,
                     icon: Icon(
                       Icons.close,
@@ -166,7 +166,7 @@ class MidSummaryPreOrderBookingDetailsView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  IconButton(
+                  const IconButton(
                     onPressed: null,
                     icon: Icon(
                       Icons.close,

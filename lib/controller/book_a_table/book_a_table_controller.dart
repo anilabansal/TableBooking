@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -20,7 +21,9 @@ class BookATableController extends GetxController {
   //Select Type Of Service
   void selectService(index) {
     selectTypeOfService.value = index;
-    print(selectTypeOfService.value);
+    if (kDebugMode) {
+      print(selectTypeOfService.value);
+    }
   }
 
   // Select Date
@@ -54,7 +57,9 @@ class BookATableController extends GetxController {
     if (pickedTime != null && pickedTime != selectedTime.value) {
       selectedTime.value = pickedTime;
       bookingTime.text = selectedTime.value.toString();
-      print(bookingTime.text.toString());
+      if (kDebugMode) {
+        print(bookingTime.text.toString());
+      }
     }
     // else if (bookingDate.text.isEmpty) {
     //   bookingDate.text =

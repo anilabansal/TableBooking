@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:booking_table/controller/service_type/summary_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_app_bar.dart';
@@ -23,9 +25,9 @@ class MidServiceSummaryView extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            MidSummaryTopView(),
+            const MidSummaryTopView(),
             CommonSizedBox(height: 21),
-            MidSummaryBookingDetailsView(),
+            const MidSummaryBookingDetailsView(),
             Container(
               margin: const EdgeInsets.only(bottom: 18.0, top: 26.0),
               height: 1,

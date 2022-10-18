@@ -4,6 +4,7 @@ import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_textformfield.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -72,8 +73,10 @@ class RateReviewView extends StatelessWidget {
                   color: Colors.amber,
                 ),
                 onRatingUpdate: (rating) {
-                  print(rating);
-                  print(Get.height);
+                  if (kDebugMode) {
+                    print(rating);
+                    print(Get.height);
+                  }
                 },
               ),
               CommonSizedBox(

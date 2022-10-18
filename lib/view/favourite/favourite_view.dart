@@ -39,7 +39,7 @@ class FavouriteView extends StatelessWidget {
                           width: Get.width,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            image: DecorationImage(
+                            image: const DecorationImage(
                               image: AssetImage(
                                 bookATableImage,
                               ),
