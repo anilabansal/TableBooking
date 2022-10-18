@@ -267,70 +267,19 @@ class MainCourseItemsIwdgets extends StatelessWidget {
                         height: 4,
                       ),
                       Container(
-                          decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(4)),
-                          height: 22,
-                          width: 64,
-                          alignment: Alignment.center,
-                          child: CommonText(
-                            textAlign: TextAlign.center,
-                            text: "Add",
-                            color: Colors.white,
-                            fontSize: 12,
-                          )
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //   crossAxisAlignment: CrossAxisAlignment.center,
-                          //   children: <Widget>[
-                          //     Expanded(
-                          //       child: InkWell(
-                          //         onTap: () {
-                          //           controller.decrement();
-                          //         },
-                          //         child: Container(
-                          //             color: Colors.black,
-                          //             height: 22,
-                          //             width: 21,
-                          //             alignment: Alignment.center,
-                          //             child: CommonText(
-                          //               text: '-',
-                          //               color: Colors.white,
-                          //               fontSize: 18,
-                          //               textAlign: TextAlign.center,
-                          //             )),
-                          //       ),
-                          //     ),
-                          //     Obx(() => Expanded(
-                          //           child: CommonText(
-                          //             textAlign: TextAlign.center,
-                          //             text: controller.count.value.toString(),
-                          //             fontSize: 12,
-                          //             fontWeight: FontWeight.w400,
-                          //           ),
-                          //         )),
-                          //     Expanded(
-                          //       child: InkWell(
-                          //         onTap: () {
-                          //           controller.increment();
-                          //         },
-                          //         child: Container(
-                          //           color: Colors.black,
-                          //           height: 22,
-                          //           width: 21,
-                          //           alignment: Alignment.center,
-                          //           child: CommonText(
-                          //             text: '+',
-                          //             color: Colors.white,
-                          //             fontSize: 18,
-                          //             textAlign: TextAlign.center,
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-                          ),
+                        decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(4)),
+                        height: 22,
+                        width: 64,
+                        alignment: Alignment.center,
+                        child: CommonText(
+                          textAlign: TextAlign.center,
+                          text: "Add",
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
                     ],
                   ),
                   CommonSizedBox(
