@@ -41,6 +41,7 @@ dependencies:
   intl:
   country_phone_code_picker: ^0.0.41
   flutter_toggle_tab:
+  flutter_rating_bar:
 
 
 dev_dependencies:
