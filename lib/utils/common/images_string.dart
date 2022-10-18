@@ -27,3 +27,7 @@ const String paymentDoneCircle =
 const String venmoLogo = 'assets/images/summary/venmo_logo.png';
 const String gPayLogo = 'assets/images/summary/GpayLogo.png';
 const String appleLogoSummary = 'assets/images/summary/apple_logo.png';
+
+// Favourite PAGE
+
+const String heartLogo = 'assets/images/favorites/heart_icon.png';
