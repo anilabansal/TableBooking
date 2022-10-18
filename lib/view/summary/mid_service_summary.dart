@@ -1,5 +1,6 @@
 import 'package:booking_table/controller/summary/summary_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_app_bar.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
@@ -7,6 +8,7 @@ import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_textformfield.dart';
 import 'package:booking_table/utils/common/widgets_methods/restaurant_name_distance.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:get/get.dart';
 
 class ServiceSummaryView extends StatelessWidget {
@@ -44,9 +46,10 @@ class ServiceSummaryView extends StatelessWidget {
 }
 
 class SummaryBottomView extends StatelessWidget {
-  const SummaryBottomView({
+  SummaryBottomView({
     Key? key,
   }) : super(key: key);
+  SummaryController controller = Get.put(SummaryController());
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +130,86 @@ class SummaryBottomView extends StatelessWidget {
                 height: 20,
               ),
               Row(
-                children: [],
+                children: [
+                  Container(
+                    child: Row(
+                      children: [
+                        Container(
+                          color: whiteF8F8F8,
+                          height: 32,
+                          width: 97,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                venmoLogo,
+                                height: 16,
+                                width: 16,
+                              ),
+                              CommonSizedBox(
+                                width: 10,
+                              ),
+                              CommonText(
+                                text: 'Venmo',
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                color: textLight868686,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          color: Colors.black,
+                          height: 32,
+                          width: 82,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                appleLogo,
+                                height: 15,
+                                width: 13,
+                              ),
+                              CommonSizedBox(
+                                width: 10,
+                              ),
+                              CommonText(
+                                text: 'Apple',
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                color: textLight868686,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          color: whiteF8F8F8,
+                          height: 32,
+                          width: 97,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                venmoLogo,
+                                height: 16,
+                                width: 16,
+                              ),
+                              CommonSizedBox(
+                                width: 10,
+                              ),
+                              CommonText(
+                                text: 'Venmo',
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                color: textLight868686,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
             ],
           ),
@@ -153,11 +235,51 @@ class SummaryBottomView extends StatelessWidget {
               CommonSizedBox(
                 height: 20,
               ),
-              Row(
-                children: [],
+              Center(
+                child: Obx(
+                  () => FlutterToggleTab(
+                    height: 37,
+                    width: 75,
+                    borderRadius: 5,
+                    // marginSelected: const EdgeInsets.only(left: 10, right: 10),
+                    selectedIndex: controller.selectTipPrice.value,
+                    selectedBackgroundColors: const [Colors.black],
+                    selectedTextStyle: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14),
+                    unSelectedTextStyle: const TextStyle(
+                        color: textLight868686,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14),
+                    labels: controller.listOfTipPrice,
+                    selectedLabelIndex: (index) =>
+                        controller.selectTipPrice(index),
+                    isScroll: false,
+                  ),
+                ),
+              ),
+              CommonSizedBox(
+                height: 15,
+              ),
+              CommonTextFormField(
+                hintText: 'Enter Amount',
+                fillColor: whiteF5F5F5,
+                filled: true,
+              ),
+              CommonSizedBox(
+                height: 41,
               ),
             ],
           ),
+        ),
+        CommonButton(
+          text: 'Confirm Booking',
+          textColor: Colors.white,
+          bgColor: redE2211C,
+        ).paddingOnly(left: 20, right: 20),
+        CommonSizedBox(
+          height: 30,
         ),
       ],
     );
