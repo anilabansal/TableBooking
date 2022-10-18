@@ -21,3 +21,9 @@ const String bookATableImage = 'assets/images/book_a_table/bookATable.png';
 const String paymentDoneTick = 'assets/images/payment/payment_done_tick.png';
 const String paymentDoneCircle =
     'assets/images/payment/payment_done_circle.png';
+
+// Summary PAGE LOGO
+
+const String venmoLogo = 'assets/images/summary/venmo_logo.png';
+const String gPayLogo = 'assets/images/summary/GpayLogo.png';
+const String appleLogoSummary = 'assets/images/summary/apple_logo.png';

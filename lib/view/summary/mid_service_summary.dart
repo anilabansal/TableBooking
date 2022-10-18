@@ -130,86 +130,95 @@ class SummaryBottomView extends StatelessWidget {
                 height: 20,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
+                    height: 32,
+                    width: 97,
+                    decoration: BoxDecoration(
+                        color: whiteF8F8F8,
+                        borderRadius: BorderRadius.circular(4)),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          color: whiteF8F8F8,
-                          height: 32,
-                          width: 97,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                venmoLogo,
-                                height: 16,
-                                width: 16,
-                              ),
-                              CommonSizedBox(
-                                width: 10,
-                              ),
-                              CommonText(
-                                text: 'Venmo',
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                color: textLight868686,
-                              ),
-                            ],
-                          ),
+                        Image.asset(
+                          venmoLogo,
+                          height: 16,
+                          width: 16,
                         ),
-                        Container(
-                          color: Colors.black,
-                          height: 32,
-                          width: 82,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                appleLogo,
-                                height: 15,
-                                width: 13,
-                              ),
-                              CommonSizedBox(
-                                width: 10,
-                              ),
-                              CommonText(
-                                text: 'Apple',
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                color: textLight868686,
-                              ),
-                            ],
-                          ),
+                        CommonSizedBox(
+                          width: 10,
                         ),
-                        Container(
-                          color: whiteF8F8F8,
-                          height: 32,
-                          width: 97,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                venmoLogo,
-                                height: 16,
-                                width: 16,
-                              ),
-                              CommonSizedBox(
-                                width: 10,
-                              ),
-                              CommonText(
-                                text: 'Venmo',
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                color: textLight868686,
-                              ),
-                            ],
-                          ),
+                        CommonText(
+                          text: 'Venmo',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                          color: textLight868686,
                         ),
                       ],
                     ),
-                  )
+                  ),
+                  Container(
+                    height: 32,
+                    width: 82,
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(4)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          appleLogo,
+                          height: 15,
+                          width: 13,
+                        ),
+                        CommonSizedBox(
+                          width: 10,
+                        ),
+                        CommonText(
+                          text: 'Apple',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 32,
+                    width: 97,
+                    decoration: BoxDecoration(
+                        color: whiteF8F8F8,
+                        borderRadius: BorderRadius.circular(4)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          gPayLogo,
+                          height: 15,
+                          width: 40,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
+              ),
+              CommonSizedBox(
+                height: 18,
+              ),
+              Container(
+                height: 32,
+                width: 137,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: whiteF8F8F8, borderRadius: BorderRadius.circular(4)),
+                child: CommonText(
+                  textAlign: TextAlign.center,
+                  text: 'Pay At Restaurant',
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                  color: textLight868686,
+                ),
               ),
             ],
           ),

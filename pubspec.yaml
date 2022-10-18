@@ -72,6 +72,7 @@ flutter:
      - assets/images/zip_code/
      - assets/images/book_a_table/
      - assets/images/payment/
+     - assets/images/summary/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
