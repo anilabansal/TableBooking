@@ -1,4 +1,4 @@
-import 'package:booking_table/controller/summary/summary_controller.dart';
+import 'package:booking_table/controller/service_type/summary_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
