@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 
 AppBar appBarCommon({
   String? text,
+  dynamic bottom,
 }) {
   return AppBar(
     backgroundColor: Colors.white,
     centerTitle: true,
+    bottom: bottom,
     title: Text(
       text!,
       style: const TextStyle(
