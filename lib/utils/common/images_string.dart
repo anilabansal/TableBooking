@@ -35,3 +35,6 @@ const String heartLogo = 'assets/images/favorites/heart_icon.png';
 //RESERVATION
 const greyStar = 'assets/images/reservations/grey_star.png';
 const yellowStar = 'assets/images/reservations/yellow_star.png';
+
+// Support
+const supportIcon = 'assets/images/support/support_icon.png';

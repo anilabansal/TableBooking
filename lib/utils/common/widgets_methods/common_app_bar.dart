@@ -12,7 +12,7 @@ AppBar appBarCommon({
     centerTitle: true,
     bottom: bottom,
     title: Text(
-      text!,
+      text ?? '',
       style: const TextStyle(
           fontSize: 22,
           color: black000000,

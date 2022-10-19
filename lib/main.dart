@@ -1,4 +1,4 @@
-import 'package:booking_table/view/reservation/reservation_view.dart';
+import 'package:booking_table/view/support/support_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return const GetMaterialApp(
       title: 'Flutter Demo',
       home: Material(
-        child: ReservationView(),
+        child: SupportView(),
       ),
     );
   }
