@@ -5,7 +5,7 @@ class ReservationController extends GetxController
     with SingleGetTickerProviderMixin {
   late TabController tabController;
   final myTabs = [
-    Tab(
+    const Tab(
       // child: Container(
       //   height: 56,
       //   width: 156,
@@ -13,7 +13,7 @@ class ReservationController extends GetxController
       // ),
       text: 'Upcoming',
     ),
-    Tab(text: 'Previous'),
+    const Tab(text: 'Previous'),
   ];
   @override
   void onInit() {

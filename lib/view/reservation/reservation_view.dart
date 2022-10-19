@@ -28,7 +28,7 @@ class ReservationView extends StatelessWidget {
           padding: const EdgeInsets.only(top: 30.0),
           child: TabBarView(
             controller: controller.tabController,
-            children: [
+            children: const [
               UpComingReservations(),
               PreviousReservations(),
             ],
