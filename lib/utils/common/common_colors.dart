@@ -14,3 +14,5 @@ const whiteDBDBDB = Color(0xFFDBDBDB);
 const whiteE5E5E5 = Color(0xFFE5E5E5);
 const redF2E6E6 = Color(0xFFF2E6E6);
 const yellowFFC107 = Color(0xFFFFC107);
+const blueCDE4D7 = Color(0xFFCDE4D7);
+const blue339653 = Color(0xFF339653);
