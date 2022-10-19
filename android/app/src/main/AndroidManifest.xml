@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.servrest.booking_table">
    <application
-        android:label="booking_table"
+        android:label="Table Booking"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
