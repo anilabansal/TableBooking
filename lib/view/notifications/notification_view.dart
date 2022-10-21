@@ -39,7 +39,7 @@ class NotificationView extends StatelessWidget {
                         width: 31.0,
                         height: 16.0,
                         valueFontSize: 0.0,
-                        toggleSize: 10.0,
+                        toggleSize: 10.0, inactiveColor: Color(0xFFD9D9D9),
 
                         value: controller.isOpen.value,
                         borderRadius: 00.0,
