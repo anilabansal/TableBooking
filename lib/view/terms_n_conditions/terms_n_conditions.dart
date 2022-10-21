@@ -10,7 +10,7 @@ class TermsNConditionsView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appBarCommon(),
-      body: TermsNConditionBody(),
+      body: const TermsNConditionBody(),
     );
   }
 }

@@ -39,7 +39,9 @@ dependencies:
   get: ^4.6.5
   pinput:
   intl:
+  toggle_switch: ^2.0.1
   country_phone_code_picker: ^0.0.41
+  flutter_switch: ^0.3.2
   flutter_toggle_tab:
   flutter_rating_bar:
   card_scanner: ^0.2.2

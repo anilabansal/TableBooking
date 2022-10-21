@@ -36,6 +36,7 @@ class SupportBody extends StatelessWidget {
           CommonSizedBox(
             height: 30,
           ),
+          // ignore: prefer_const_constructors
           SupportBottomView(),
         ],
       ),

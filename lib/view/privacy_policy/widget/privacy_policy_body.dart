@@ -44,7 +44,7 @@ class PrivacyPolicyBody extends StatelessWidget {
             Row(
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.circle,
                   size: 10,
                   color: Colors.yellow,
@@ -68,7 +68,7 @@ class PrivacyPolicyBody extends StatelessWidget {
             Row(
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.circle,
                   size: 10,
                   color: Colors.yellow,

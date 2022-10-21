@@ -1,13 +1,18 @@
+import 'package:booking_table/controller/notification_screen/notification_screen_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_app_bar.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 
 class NotificationView extends StatelessWidget {
-  const NotificationView({Key? key}) : super(key: key);
+  NotificationView({Key? key}) : super(key: key);
+
+  NotificationScreenController controller =
+      Get.put(NotificationScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +27,30 @@ class NotificationView extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: [
-                  CommonText(
-                    text: 'Settings',
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CommonText(
+                        text: 'Settings',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      FlutterSwitch(
+                        width: 31.0,
+                        height: 16.0,
+                        valueFontSize: 0.0,
+                        toggleSize: 10.0,
+
+                        value: controller.isOpen.value,
+                        borderRadius: 00.0,
+                        // padding: 8.0,
+                        showOnOff: false,
+                        onToggle: (val) {
+                          controller.toggleSwitch(val);
+                          print(val);
+                        },
+                      ),
+                    ],
                   ),
                   CommonSizedBox(
                     height: 11,
@@ -34,7 +59,7 @@ class NotificationView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.error,
                         color: Colors.red,
                         size: 15,
@@ -64,9 +89,9 @@ class NotificationView extends StatelessWidget {
             CommonSizedBox(
               height: 20,
             ),
-            NotificationWidget(),
-            NotificationWidget(),
-            NotificationWidget(),
+            const NotificationWidget(),
+            const NotificationWidget(),
+            const NotificationWidget(),
           ],
         ),
       ),
@@ -105,10 +130,10 @@ class NotificationWidget extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   width: 48,
                   decoration: BoxDecoration(
-                    color: Color(0xFFFCE9E9),
+                    color: const Color(0xFFFCE9E9),
                     borderRadius: BorderRadius.circular(50),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Icon(
                       Icons.paste,
                       color: redE2211C,

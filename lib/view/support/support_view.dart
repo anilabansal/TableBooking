@@ -17,7 +17,7 @@ class SupportView extends StatelessWidget {
       appBar: appBarCommon(
         text: 'Support',
       ),
-      body: SupportBody(),
+      body: const SupportBody(),
     );
   }
 }
