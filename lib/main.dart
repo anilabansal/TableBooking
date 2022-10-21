@@ -1,4 +1,4 @@
-import 'package:booking_table/view/terms_n_conditions/terms_n_conditions.dart';
+import 'package:booking_table/view/notifications/notification_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,10 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       home: Material(
-        child: TermsNConditionsView(),
+        child: NotificationView(),
       ),
     );
   }

@@ -38,3 +38,6 @@ const yellowStar = 'assets/images/reservations/yellow_star.png';
 
 // Support
 const supportIcon = 'assets/images/support/support_icon.png';
+
+// CARD
+const scanCard = 'assets/images/payment/card_scan.png';
