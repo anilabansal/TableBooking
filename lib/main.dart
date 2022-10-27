@@ -1,4 +1,4 @@
-import 'package:booking_table/view/splash_screen/splash_view.dart';
+import 'package:booking_table/view/service_type/full_service_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,9 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       home: Material(
-        child: SplashView(),
+        child: FullServiceSummaryView(
+          callFrom: '',
+        ),
       ),
     );
   }
