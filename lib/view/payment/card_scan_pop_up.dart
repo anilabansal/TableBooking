@@ -22,6 +22,7 @@ class CardScanPopUpView extends StatelessWidget {
             horizontal: 36,
           ),
           child: InkWell(
+            onTap: null,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
