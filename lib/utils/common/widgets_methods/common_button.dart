@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CommonButton extends StatelessWidget {
-  dynamic onTap;
-  String? text;
-  dynamic bgColor;
-  dynamic textColor;
-  CommonButton({
+  final dynamic onTap;
+  final String? text;
+  final dynamic bgColor;
+  final dynamic textColor;
+
+  const CommonButton({
     this.onTap,
     this.text,
     this.bgColor,
@@ -18,7 +19,8 @@ class CommonButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        height: 50,
+        //padding: const EdgeInsets.symmetric(vertical: 12),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: bgColor,

@@ -1,14 +1,14 @@
-import 'package:booking_table/utils/common/common_strings.dart';
+import 'package:booking_table/utils/common/common_font.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text_field.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/auth_screens/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class SignInScreenBottomView extends StatelessWidget {
-  String? callFrom;
-  SignInScreenBottomView({
+ final  String? callFrom;
+  const SignInScreenBottomView({
     required this.callFrom,
     Key? key,
   }) : super(key: key);
@@ -17,7 +17,7 @@ class SignInScreenBottomView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CommonTextField(
+        CommonText(
           text: 'Enter Mobile Number',
           fontSize: 24,
           fontWeight: FontWeight.w700,
@@ -27,15 +27,15 @@ class SignInScreenBottomView extends StatelessWidget {
           onInputChanged: null,
           hintText: 'Phone Number',
           errorMessage: 'Invalid phone number',
-          textStyle: TextStyle(
+          textStyle: const TextStyle(
             fontFamily: mainLatoFont,
             fontWeight: FontWeight.w400,
             fontSize: 20,
           ),
-          inputDecoration: ,
+         // inputDecoration: ,
         ),
         const SizedBox(height: 15),
-        CommonTextField(
+        CommonText(
           text: 'A 4 digit code will be sent to this number.',
           fontWeight: FontWeight.w400,
           fontSize: 14,
@@ -58,7 +58,7 @@ class SignInScreenBottomView extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 58),
-        CommonTextField(
+        CommonText(
             text: 'Continue as Guest', color: Colors.red, fontSize: 16),
       ],
     );

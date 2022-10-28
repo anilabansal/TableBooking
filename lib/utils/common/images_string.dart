@@ -10,3 +10,21 @@ const String appleLogo = 'assets/images/auth/apple_logo.png';
 const String signInLogo = 'assets/images/auth/mobile_sign_in_screen.png';
 const String signInBackgroundLogo =
     'assets/images/auth/mobile_sign_in_screen_background.png';
+//createProfile screen
+String createProfileBackGroundImage = 'assets/images/profile/create_profile_background.png';
+// CARD
+const scanCard = 'assets/images/payment/card_scan.png';
+// home screen
+String profileImage = "assets/images/home/profile_image.png";
+String dropDownIconImage =   "assets/images/home/drop_down.png";
+String filterImage = "assets/images/home/filter_icon_image.png";
+String restaurantImage = "assets/images/home/restaurants_image.png";
+String lineImage = "assets/images/home/Line_image.png";
+String menuImage = "assets/images/home/menu_icon_image.png";
+String locationImage = "assets/images/home/location_filter_image.png";
+String  mapImage = "assets/images/home/map_image.png";
+String drawerImage = "assets/images/home/drawer_image.png";
+String forwardArrowImage = "assets/images/home/forward_arrow.png";
+//payment screen
+String cardImage = "assets/images/payment/card_icon.png";
+String infoIcon = "assets/images/home/info_icon.png";

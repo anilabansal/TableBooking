@@ -1,6 +1,6 @@
 import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text_field.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/auth_screens/sign_in_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,7 @@ class AuthScreenViewWidget extends StatelessWidget {
           width: 143,
         ),
         _sizedBox(height: 26),
-        CommonTextField(
+        CommonText(
           text: 'Welcome!',
           color: Colors.black,
           fontSize: 24,
@@ -40,14 +40,14 @@ class AuthScreenViewWidget extends StatelessWidget {
           textColor: Colors.white,
         ),
         _sizedBox(height: 20),
-        CommonTextField(
+        CommonText(
           text: 'OR',
           color: Colors.grey,
           fontSize: 14,
           fontWeight: FontWeight.w400,
         ),
         _sizedBox(height: 20),
-        CommonTextField(
+        CommonText(
             text: 'No Account?',
             color: Colors.grey,
             fontWeight: FontWeight.w400,
@@ -66,13 +66,13 @@ class AuthScreenViewWidget extends StatelessWidget {
           textColor: Colors.white,
         ),
         _sizedBox(height: 20),
-        CommonTextField(
+        CommonText(
             text: 'OR',
             fontWeight: FontWeight.w400,
             color: Colors.grey,
             fontSize: 14),
         _sizedBox(height: 20),
-        CommonTextField(
+        CommonText(
           text: 'Continue with',
           color: Colors.black,
           fontSize: 16,

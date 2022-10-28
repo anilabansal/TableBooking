@@ -1,4 +1,4 @@
-import 'package:booking_table/utils/common/widgets_methods/common_text_field.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 
 class GetZipCodeView extends StatelessWidget {
@@ -15,14 +15,14 @@ class GetZipCodeView extends StatelessWidget {
             const Text(
               'Image',
             ),
-            CommonTextField(
+            CommonText(
               text: 'Welcome',
               color: Colors.red,
               fontSize: 18,
               fontWeight: FontWeight.w500,
               decoration: TextDecoration.underline,
             ),
-            CommonTextField(
+            CommonText(
               text: 'Claire Fiona',
               fontSize: 22,
               fontWeight: FontWeight.w700,
@@ -31,7 +31,7 @@ class GetZipCodeView extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 alignment: Alignment.center,
-                child: CommonTextField(
+                child: CommonText(
                   text: 'Enter your location to find restaurants in your area.',
                   fontSize: 16,
                   fontWeight: FontWeight.w400,

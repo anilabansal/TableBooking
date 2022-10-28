@@ -1,0 +1,217 @@
+import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/images_string.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../../controller/home/home_controller.dart';
+import '../../../utils/common/common_font.dart';
+import '../../payments/payment_method_screen.dart';
+import '../../profile_screen/edit_profile_screen.dart';
+
+class DrawerScreen extends StatelessWidget {
+  const DrawerScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    HomeController homeController = Get.find();
+    return SafeArea(
+      child: Drawer(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  onPressed: () {
+                    homeController.drawerKey.currentState!.closeDrawer();
+                  },
+                  icon: const Icon(
+                    Icons.close,
+                    size: 25,
+                    color: black000000,
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  Container(
+                    width: 68,
+                    height: 68,
+                    decoration:  BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: AssetImage(
+                                profileImage),
+                            fit: BoxFit.cover)),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CommonText(
+                        text: "Chaire Fiona",
+                        fontFamily: proximaNovaFont,
+                        fontWeight: FontWeight.w600,
+                        color: black000000,
+                        fontSize: 16,
+                      ),
+                      CommonText(
+                        text: "chaire_fione@gmail.com",
+                        fontFamily: proximaNovaFont,
+                        fontWeight: FontWeight.w400,
+                        color: black000000,
+                        fontSize: 14,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => EditProfileScreen());
+                        },
+                        child: CommonText(
+                          text: "Edit Profile",
+                          fontFamily: proximaNovaFont,
+                          fontWeight: FontWeight.w400,
+                          color: redE2211C,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 28,
+              ),
+              Image.asset(lineImage),
+              const SizedBox(
+                height: 13,
+              ),
+              iconContainer(
+                  const Icon(
+                    Icons.home,
+                    color: redE2211C,
+                  ),
+                  "Home",
+                  () {}),
+              iconContainer(
+                  const Icon(
+                    Icons.favorite,
+                    color: redE2211C,
+                  ),
+                  "Favorites",
+                  () {}),
+              iconContainer(
+                  const Icon(
+                    Icons.book,
+                    color: redE2211C,
+                  ),
+                  "Reservations",
+                  () {}),
+              iconContainer(
+                  const Icon(
+                    Icons.wallet,
+                    color: redE2211C,
+                  ),
+                  "Payment Methods", () {
+                Get.to(() => const PaymentMethodScreen());
+              }),
+              iconContainer(
+                  const Icon(
+                    Icons.notifications,
+                    color: redE2211C,
+                  ),
+                  "Notifications",
+                  () {}),
+              const SizedBox(
+                height: 10,
+              ),
+              Image.asset(lineImage),
+              const SizedBox(
+                height: 30,
+              ),
+              textAndIcon("Terms & Conditions"),
+              textAndIcon("Legal & About"),
+              textAndIcon("Customer Support"),
+              textAndIcon("Logout"),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  iconContainer(icon, text, onTap) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Column(
+        children: [
+          InkWell(
+            onTap: onTap,
+            child: Row(
+              children: [
+                Container(
+                  width: 28,
+                  height: 28,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: greyF5F5F5),
+                  child: icon,
+                ),
+                const SizedBox(
+                  width: 12,
+                ),
+                CommonText(
+                  text: text,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: proximaNovaFont,
+                  fontSize: 16,
+                ),
+                const Spacer(),
+                Image.asset(
+                  forwardArrowImage,
+                  width: 4,
+                  height: 9,
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  textAndIcon(text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              CommonText(
+                text: text,
+                fontSize: 16,
+                fontFamily: proximaNovaFont,
+                fontWeight: FontWeight.w400,
+                color: black000000,
+              ),
+              const Spacer(),
+              Image.asset(
+                forwardArrowImage,
+                width: 4,
+                height: 9,
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}

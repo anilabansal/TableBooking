@@ -1,13 +1,13 @@
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text_field.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/auth_screens/get_zip_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpScreenViewWidget extends StatelessWidget {
-  String? callFrom;
-  OtpScreenViewWidget({
+ final String? callFrom;
+  const OtpScreenViewWidget({
     required this.callFrom,
     Key? key,
   }) : super(key: key);
@@ -17,13 +17,13 @@ class OtpScreenViewWidget extends StatelessWidget {
     return Column(
       children: <Widget>[
         const SizedBox(height: 25),
-        CommonTextField(
+        CommonText(
           text: 'Enter the 4 digit code sent to',
           fontWeight: FontWeight.w400,
           fontSize: 18,
         ),
         const SizedBox(height: 5),
-        CommonTextField(
+        CommonText(
           text: '+1-310-422-5076',
           fontWeight: FontWeight.w500,
           fontSize: 22,
@@ -46,7 +46,7 @@ class OtpScreenViewWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        CommonTextField(
+        CommonText(
           text: 'Resend Code',
           decoration: TextDecoration.underline,
           color: Colors.red,
@@ -56,7 +56,7 @@ class OtpScreenViewWidget extends StatelessWidget {
         const SizedBox(height: 20),
         callFrom == 'Login'
             ? Container()
-            : CommonTextField(
+            : CommonText(
                 text: 'Change Phone Number',
                 decoration: TextDecoration.underline,
                 color: Colors.black,
