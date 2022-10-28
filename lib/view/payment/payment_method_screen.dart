@@ -2,12 +2,13 @@ import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../utils/common/widgets_methods/app_bar_back_button.dart';
 import '../../utils/common/widgets_methods/common_info_icon.dart';
+import 'card_scan_pop_up.dart';
 
 class PaymentMethodScreen extends StatelessWidget {
   const PaymentMethodScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,11 +45,14 @@ class PaymentMethodScreen extends StatelessWidget {
               const SizedBox(
                 height: 17,
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.start,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const InfoIcon(),
-                  const SizedBox(width: 7,),
+                  const SizedBox(
+                    width: 7,
+                  ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 60,
                     child: CommonText(
@@ -64,33 +68,38 @@ class PaymentMethodScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Center(
-                child: Container(
-                  width: 188,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: black0D0000),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.add,
-                          color: white,
-                          size: 12,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        CommonText(
-                          text: "Add Card",
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: white,
-                        )
-                      ],
+              InkWell(
+                onTap: () {
+                  Get.to(() => const CardScanPopUpView());
+                },
+                child: Center(
+                  child: Container(
+                    width: 188,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: black0D0000),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.add,
+                            color: white,
+                            size: 12,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          CommonText(
+                            text: "Add Card",
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: white,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),

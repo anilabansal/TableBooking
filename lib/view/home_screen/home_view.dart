@@ -66,6 +66,8 @@ class HomeView extends StatelessWidget {
                                           height: 9,
                                           child: Image.asset(
                                             drawerImage,
+                                            width: 13,
+                                            height: 9,
                                             fit: BoxFit.fill,
                                           ),
                                         )),

@@ -1,4 +1,3 @@
-
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +9,6 @@ class PhoneField extends StatefulWidget {
   final TextEditingController? phoneController;
   final Function(String)? onCodeChange;
   final Function(String)? onCountryFlag;
-
   const PhoneField(
       {Key? key,
       this.phoneController,
@@ -40,7 +38,6 @@ class _PhoneFieldState extends State<PhoneField> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-
           InkWell(
             onTap: () {
               // ///TODO: store code
@@ -54,7 +51,6 @@ class _PhoneFieldState extends State<PhoneField> {
                   widget.onCountryFlag!(country.flagEmoji);
                 },
               );
-
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 15.0, right: 10.0),
@@ -72,7 +68,6 @@ class _PhoneFieldState extends State<PhoneField> {
                         fontWeight: FontWeight.normal),
                   ),
                 ),
-
               ),
             ),
           ),

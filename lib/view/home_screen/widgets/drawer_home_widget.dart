@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/home/home_controller.dart';
 import '../../../utils/common/common_font.dart';
-import '../../notifications/payment_method_screen.dart';
+import '../../payment/payment_method_screen.dart';
 import '../../profile_screen/edit_profile_screen.dart';
 
 class DrawerScreen extends StatelessWidget {
