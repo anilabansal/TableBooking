@@ -32,7 +32,7 @@ class SignInScreenBottomView extends StatelessWidget {
             fontWeight: FontWeight.w400,
             fontSize: 20,
           ),
-          inputDecoration: ,
+          //inputDecoration: ,
         ),
         const SizedBox(height: 15),
         CommonTextField(
