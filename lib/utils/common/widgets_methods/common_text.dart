@@ -3,15 +3,17 @@
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
 
-class CommonTextField extends StatelessWidget {
+class CommonText extends StatelessWidget {
   String? text;
   Color? color;
   double? fontSize;
   FontWeight? fontWeight;
   TextDecoration? decoration;
   String? fontFamily;
-  CommonTextField({
+  TextAlign? textAlign;
+  CommonText({
     this.text,
+    this.textAlign,
     this.fontFamily,
     this.decoration,
     this.fontWeight,
@@ -24,6 +26,7 @@ class CommonTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text!,
+      textAlign: textAlign,
       style: TextStyle(
         fontFamily: fontFamily ?? mainLatoFont,
         decoration: decoration,

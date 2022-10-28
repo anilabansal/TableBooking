@@ -38,7 +38,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   pinput:
-  intl_phone_number_input: ^0.7.1
+  intl:
+  toggle_switch: ^2.0.1
+  country_phone_code_picker: ^0.0.41
+  flutter_switch: ^0.3.2
+  flutter_toggle_tab:
+  flutter_rating_bar:
+  card_scanner: ^0.2.2
+
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +73,13 @@ flutter:
   assets:
      - assets/images/splash/
      - assets/images/auth/
+     - assets/images/zip_code/
+     - assets/images/book_a_table/
+     - assets/images/payment/
+     - assets/images/summary/
+     - assets/images/favorites/
+     - assets/images/reservations/
+     - assets/images/support/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
