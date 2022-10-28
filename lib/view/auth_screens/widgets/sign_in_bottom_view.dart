@@ -1,10 +1,9 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/auth_screens/otp_screen.dart';
+import 'package:country_phone_code_picker/country_phone_code_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,27 +28,10 @@ class SignInScreenBottomView extends StatelessWidget {
           color: black040404,
           fontWeight: FontWeight.w700,
         ),
-
-        const SizedBox(height: 15),
-        // InternationalPhoneNumberInput(
-        //   onInputChanged: null,
-        //   hintText: 'Phone Number',
-        //   errorMessage: 'Invalid phone number',
-        //   textStyle: TextStyle(
-        //     fontFamily: mainLatoFont,
-        //     fontWeight: FontWeight.w400,
-        //     fontSize: 20,
-        //   ),
-        //   //inputDecoration: ,
-        // ),
-        const SizedBox(height: 15),
-
-
         CommonSizedBox(height: 15),
         _textFieldRow(),
         CommonSizedBox(height: 15),
         CommonText(
-
           text: 'A 4 digit code will be sent to this number.',
           fontWeight: FontWeight.w400,
           fontSize: 14,
@@ -64,7 +46,7 @@ class SignInScreenBottomView extends StatelessWidget {
           child: CommonButton(
             onTap: () {
               Get.off(
-                () => OtpScreenView(
+                    () => OtpScreenView(
                   callFrom: callFrom,
                 ),
               );
@@ -98,7 +80,7 @@ class SignInScreenBottomView extends StatelessWidget {
       child: Row(
         children: <Widget>[
           //Code Picker
-          // _codePicker(),
+          _codePicker(),
           // Divider
           Container(
             margin: const EdgeInsets.only(
@@ -111,37 +93,38 @@ class SignInScreenBottomView extends StatelessWidget {
           // TextField
           Expanded(
               child: TextFormField(
-            autovalidateMode: AutovalidateMode.always,
-            keyboardType: TextInputType.number,
-            cursorWidth: 0,
-            style: const TextStyle(fontSize: 20, color: black000000),
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-              focusedBorder: InputBorder.none,
-            ),
-          )),
+                autovalidateMode: AutovalidateMode.always,
+                keyboardType: TextInputType.number,
+                cursorWidth: 0,
+                style: const TextStyle(fontSize: 20, color: black000000),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                ),
+              )),
         ],
       ),
     );
   }
 
-  // CommonSizedBox _codePicker() {
-  //   return CommonSizedBox(
-  //     width: 79,
-  //     child: CountryPhoneCodePicker.withDefaultSelectedCountry(
-  //       defaultCountryCode:
-  //           Country(name: 'USA', countryCode: 'USA', phoneCode: '+1'),
-  //       borderRadius: 50,
-  //       borderWidth: 0,
-  //       flagBorderRadius: 100,
-  //       flagHeight: 30,
-  //       flagWidth: 30,
-  //       borderColor: Colors.transparent,
-  //       style: const TextStyle(fontSize: 16),
-  //       searchBarHintText: 'Search by name',
-  //     ),
-  //   );
-  // }
+  CommonSizedBox _codePicker() {
+    return CommonSizedBox(
+      width: 79,
+      child: CountryPhoneCodePicker.withDefaultSelectedCountry(
+
+        defaultCountryCode:
+        Country(name: 'USA', countryCode: 'USA', phoneCode: '+1'),
+        borderRadius: 50,
+        borderWidth: 0,
+        flagBorderRadius: 100,
+        flagHeight: 30,
+        flagWidth: 30,
+        borderColor: Colors.transparent,
+        style: const TextStyle(fontSize: 16),
+        searchBarHintText: 'Search by name',
+      ),
+    );
+  }
 
   Column _privacyPolicyNTerms() {
     return Column(
@@ -153,12 +136,12 @@ class SignInScreenBottomView extends StatelessWidget {
               value: true,
               onChanged: null,
               fillColor: MaterialStateProperty.resolveWith<Color>(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return Colors.red;
-                }
-                return Colors.white;
-              }),
+                      (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.disabled)) {
+                      return Colors.red;
+                    }
+                    return Colors.white;
+                  }),
             ),
             Expanded(
               child: RichText(

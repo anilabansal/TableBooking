@@ -8,9 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../profile_screen/create_profile_screen.dart';
+
 class OtpScreenViewWidget extends StatelessWidget {
-  String? callFrom;
-  OtpScreenViewWidget({
+  final String? callFrom;
+
+  const OtpScreenViewWidget({
     required this.callFrom,
     Key? key,
   }) : super(key: key);
@@ -44,6 +47,10 @@ class OtpScreenViewWidget extends StatelessWidget {
               if (callFrom == 'Login') {
                 Get.off(
                   () => const GetZipCodeView(),
+                );
+              } else if (callFrom == 'Sign Up') {
+                Get.off(
+                  () => const CreateProfileScreen(),
                 );
               }
             },

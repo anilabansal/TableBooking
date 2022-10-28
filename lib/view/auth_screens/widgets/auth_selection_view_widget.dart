@@ -34,7 +34,7 @@ class AuthScreenViewWidget extends StatelessWidget {
           onTap: () {
             // TODO: Sign In Functionality
             Get.to(
-              () => SignInView(
+                  () => SignInView(
                 callFrom: 'Login',
               ),
             );
@@ -58,7 +58,7 @@ class AuthScreenViewWidget extends StatelessWidget {
         CommonButton(
           onTap: () {
             Get.to(
-              () => SignInView(
+                  () => SignInView(
                 callFrom: 'Sign Up',
               ),
             );

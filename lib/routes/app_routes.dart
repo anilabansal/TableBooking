@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '/routes/route_name.dart';
 import '/view/auth_screens/get_zip_code_view.dart';
 import '/view/auth_screens/otp_screen.dart';
@@ -24,7 +23,7 @@ import '/view/terms_n_conditions/terms_n_conditions.dart';
 
 appRoutes() => [
       GetPage(
-        name: RouteName.home, page: () => const HomeView(),
+        name: RouteName.home, page: () => HomeView(),
         // binding: ,
       ),
       GetPage(

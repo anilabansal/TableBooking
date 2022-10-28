@@ -1,7 +1,8 @@
 import 'package:booking_table/utils/common/common_colors.dart';
-import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:flutter/material.dart';
+
+import '../common_font.dart';
 
 AppBar appBarCommon({
   String? text,
