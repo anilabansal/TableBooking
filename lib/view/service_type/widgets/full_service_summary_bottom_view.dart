@@ -91,6 +91,9 @@ class FullSummaryBottomView extends StatelessWidget {
         // ADD A TIP
         AddATipWidget(controller: controller),
         CommonButton(
+          onTap: (){
+            Get.toNamed('/payment-done');
+          },
           text: 'Confirm Booking',
           textColor: Colors.white,
           bgColor: redE2211C,

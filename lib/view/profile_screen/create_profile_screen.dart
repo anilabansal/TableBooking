@@ -173,7 +173,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                     ),
                     CommonButton(
                       onTap: () {
-                        Get.to(() => const GetZipCodeView());
+                        Get.toNamed('/zip-code');
                       },
                       text: "Proceed",
                       bgColor: redE2211C,

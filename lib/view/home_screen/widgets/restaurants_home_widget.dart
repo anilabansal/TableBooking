@@ -2,9 +2,9 @@ import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../controller/home/home_controller.dart';
 import '../../../utils/common/images_string.dart';
-import '../restaurant_details_screen.dart';
 
 class RestaurantHomeScreen extends StatelessWidget {
   const RestaurantHomeScreen({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class RestaurantHomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 15.0),
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => const RestaurantDetailScreen());
+                        Get.toNamed('/restaurant-details');
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width,

@@ -100,6 +100,9 @@ class RateReviewView extends StatelessWidget {
                 height: 68,
               ),
               CommonButton(
+                onTap: () {
+                  Get.toNamed('/home');
+                },
                 text: 'Submit',
                 bgColor: redE2211C,
                 textColor: Colors.white,

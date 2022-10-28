@@ -2,6 +2,7 @@ import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/view/payment/widgets/add_card_details_body_rows.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddCardDetailsBody extends StatelessWidget {
   const AddCardDetailsBody({
@@ -23,10 +24,15 @@ class AddCardDetailsBody extends StatelessWidget {
           //  PRIVACY POLICY TERMS N CONDITIONS
           const AddCardDetailsPrivacyPolicy(),
           //   Button
-          CommonButton(
-            text: 'Save Card',
-            bgColor: redE2211C,
-            textColor: Colors.white,
+          InkWell(
+            onTap: () {
+              Get.toNamed('/book-a-table');
+            },
+            child: CommonButton(
+              text: 'Save Card',
+              bgColor: redE2211C,
+              textColor: Colors.white,
+            ),
           ),
         ],
       ),

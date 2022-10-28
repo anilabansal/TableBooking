@@ -182,10 +182,15 @@ class BookATableBody extends StatelessWidget {
               height: 31,
             ),
             // Button
-            CommonButton(
-              textColor: Colors.white,
-              bgColor: redE2211C,
-              text: 'Proceed',
+            InkWell(
+              onTap: () {
+                Get.toNamed('/full-service');
+              },
+              child: CommonButton(
+                textColor: Colors.white,
+                bgColor: redE2211C,
+                text: 'Proceed',
+              ),
             ),
             CommonSizedBox(
               height: 31,

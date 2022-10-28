@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
@@ -63,7 +62,6 @@ class GalleryTab extends StatelessWidget {
                           ),
                         ),
                       );
-
                     },
                     child: Image.asset(galleryImages[index])),
               );

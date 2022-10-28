@@ -46,7 +46,7 @@ class SignInScreenBottomView extends StatelessWidget {
           child: CommonButton(
             onTap: () {
               Get.off(
-                    () => OtpScreenView(
+                () => OtpScreenView(
                   callFrom: callFrom,
                 ),
               );
@@ -59,11 +59,16 @@ class SignInScreenBottomView extends StatelessWidget {
         CommonSizedBox(height: 20),
         CommonText(text: 'OR', color: textLight868686, fontSize: 14),
         CommonSizedBox(height: 20),
-        CommonText(
-          text: 'Continue as Guest',
-          color: redE2211C,
-          fontSize: 16,
-          decoration: TextDecoration.underline,
+        InkWell(
+          onTap: () {
+            Get.toNamed('/home');
+          },
+          child: CommonText(
+            text: 'Continue as Guest',
+            color: redE2211C,
+            fontSize: 16,
+            decoration: TextDecoration.underline,
+          ),
         ),
       ],
     );
@@ -93,15 +98,15 @@ class SignInScreenBottomView extends StatelessWidget {
           // TextField
           Expanded(
               child: TextFormField(
-                autovalidateMode: AutovalidateMode.always,
-                keyboardType: TextInputType.number,
-                cursorWidth: 0,
-                style: const TextStyle(fontSize: 20, color: black000000),
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                ),
-              )),
+            autovalidateMode: AutovalidateMode.always,
+            keyboardType: TextInputType.number,
+            cursorWidth: 0,
+            style: const TextStyle(fontSize: 20, color: black000000),
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+            ),
+          )),
         ],
       ),
     );
@@ -111,9 +116,8 @@ class SignInScreenBottomView extends StatelessWidget {
     return CommonSizedBox(
       width: 79,
       child: CountryPhoneCodePicker.withDefaultSelectedCountry(
-
         defaultCountryCode:
-        Country(name: 'USA', countryCode: 'USA', phoneCode: '+1'),
+            Country(name: 'USA', countryCode: 'USA', phoneCode: '+1'),
         borderRadius: 50,
         borderWidth: 0,
         flagBorderRadius: 100,
@@ -136,12 +140,12 @@ class SignInScreenBottomView extends StatelessWidget {
               value: true,
               onChanged: null,
               fillColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.disabled)) {
-                      return Colors.red;
-                    }
-                    return Colors.white;
-                  }),
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.red;
+                }
+                return Colors.white;
+              }),
             ),
             Expanded(
               child: RichText(
@@ -160,6 +164,7 @@ class SignInScreenBottomView extends StatelessWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           // TODO : TERMS & CONDITIONS
+                          Get.toNamed('/terms-and-conditions');
                         },
                     ),
                     const TextSpan(
@@ -178,6 +183,7 @@ class SignInScreenBottomView extends StatelessWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           // TODO : PRIVACY POLICY
+                          Get.toNamed('/privacy-policy');
                         },
                     ),
                     const TextSpan(

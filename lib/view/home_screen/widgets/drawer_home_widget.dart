@@ -3,10 +3,9 @@ import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../controller/home/home_controller.dart';
 import '../../../utils/common/common_font.dart';
-import '../../notifications/payment_method_screen.dart';
-import '../../profile_screen/edit_profile_screen.dart';
 
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -40,11 +39,10 @@ class DrawerScreen extends StatelessWidget {
                   Container(
                     width: 68,
                     height: 68,
-                    decoration:  BoxDecoration(
+                    decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                            image: AssetImage(
-                                profileImage),
+                            image: AssetImage(profileImage),
                             fit: BoxFit.cover)),
                   ),
                   const SizedBox(
@@ -73,7 +71,7 @@ class DrawerScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(() => EditProfileScreen());
+                          Get.toNamed('/edit-profile');
                         },
                         child: CommonText(
                           text: "Edit Profile",
@@ -99,37 +97,41 @@ class DrawerScreen extends StatelessWidget {
                     Icons.home,
                     color: redE2211C,
                   ),
-                  "Home",
-                  () {}),
+                  "Home", () {
+                Get.toNamed('/home');
+              }),
               iconContainer(
                   const Icon(
                     Icons.favorite,
                     color: redE2211C,
                   ),
-                  "Favorites",
-                  () {}),
+                  "Favorites", () {
+                Get.toNamed('/favourite');
+              }),
               iconContainer(
                   const Icon(
                     Icons.book,
                     color: redE2211C,
                   ),
-                  "Reservations",
-                  () {}),
+                  "Reservations", () {
+                Get.toNamed('/reservation');
+              }),
               iconContainer(
                   const Icon(
                     Icons.wallet,
                     color: redE2211C,
                   ),
                   "Payment Methods", () {
-                Get.to(() => const PaymentMethodScreen());
+                Get.toNamed('/payment-method');
               }),
               iconContainer(
                   const Icon(
                     Icons.notifications,
                     color: redE2211C,
                   ),
-                  "Notifications",
-                  () {}),
+                  "Notifications", () {
+                Get.toNamed('/notifications');
+              }),
               const SizedBox(
                 height: 10,
               ),
@@ -137,10 +139,18 @@ class DrawerScreen extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              textAndIcon("Terms & Conditions"),
-              textAndIcon("Legal & About"),
-              textAndIcon("Customer Support"),
-              textAndIcon("Logout"),
+              textAndIcon("Terms & Conditions", () {
+                Get.toNamed('/terms-and-conditions');
+              }),
+              textAndIcon("Legal & About", () {
+                Get.toNamed('/privacy-policy');
+              }),
+              textAndIcon("Customer Support", () {
+                Get.toNamed('/support');
+              }),
+              textAndIcon("Logout", () {
+                Get.toNamed('/authentication');
+              }),
             ],
           ),
         ),
@@ -188,27 +198,30 @@ class DrawerScreen extends StatelessWidget {
     );
   }
 
-  textAndIcon(text) {
+  textAndIcon(text, onTap) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         children: [
-          Row(
-            children: [
-              CommonText(
-                text: text,
-                fontSize: 16,
-                fontFamily: proximaNovaFont,
-                fontWeight: FontWeight.w400,
-                color: black000000,
-              ),
-              const Spacer(),
-              Image.asset(
-                forwardArrowImage,
-                width: 4,
-                height: 9,
-              )
-            ],
+          InkWell(
+            onTap: onTap,
+            child: Row(
+              children: [
+                CommonText(
+                  text: text,
+                  fontSize: 16,
+                  fontFamily: proximaNovaFont,
+                  fontWeight: FontWeight.w400,
+                  color: black000000,
+                ),
+                const Spacer(),
+                Image.asset(
+                  forwardArrowImage,
+                  width: 4,
+                  height: 9,
+                )
+              ],
+            ),
           )
         ],
       ),

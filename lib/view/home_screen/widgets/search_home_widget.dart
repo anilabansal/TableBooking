@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 
 import '../../../utils/common/common_colors.dart';
 import '../../../utils/common/images_string.dart';
-import '../filter_screen.dart';
 
 class SearchBoxScreen extends StatelessWidget {
   const SearchBoxScreen({Key? key}) : super(key: key);
@@ -16,7 +15,8 @@ class SearchBoxScreen extends StatelessWidget {
       padding: const EdgeInsets.all(15.0),
       child: Column(
         children: [
-          Row(mainAxisAlignment: MainAxisAlignment.start,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
@@ -41,8 +41,8 @@ class SearchBoxScreen extends StatelessWidget {
                 width: 10,
               ),
               InkWell(
-                onTap: (){
-                  Get.to(()=>const FilterScreen());
+                onTap: () {
+                  Get.toNamed('/filter-screen');
                 },
                 child: Container(
                   width: 45,

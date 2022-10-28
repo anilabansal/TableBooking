@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 import '../../../utils/common/common_font.dart';
 import '../../../utils/common/images_string.dart';
-import '../../payment/add_card_details.dart';
 
 class RestaurantDetailTopScreen extends StatelessWidget {
   const RestaurantDetailTopScreen({Key? key}) : super(key: key);
@@ -66,7 +65,6 @@ class RestaurantDetailTopScreen extends StatelessWidget {
             )
           ],
         ),
-
         Positioned(
           top: 219,
           child: Container(
@@ -207,7 +205,7 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                       ),
                       CommonButton(
                         onTap: () {
-                          Get.to(()=>const AddCreditCardDetailsView());
+                          Get.toNamed('/add-card-details');
                         },
                         text: "Book Now",
                         bgColor: redE2211C,
@@ -222,14 +220,17 @@ class RestaurantDetailTopScreen extends StatelessWidget {
           ),
         ),
         Positioned(
-          top:207,
+          top: 207,
           right: 30,
           child: Container(
             width: 37,
             height: 37,
             decoration:
-            const BoxDecoration(shape: BoxShape.circle, color: greyF2F2F2),
-            child: const Icon(Icons.favorite,color: greyCACACA,),
+                const BoxDecoration(shape: BoxShape.circle, color: greyF2F2F2),
+            child: const Icon(
+              Icons.favorite,
+              color: greyCACACA,
+            ),
           ),
         ),
       ],

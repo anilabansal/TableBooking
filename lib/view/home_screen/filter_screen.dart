@@ -157,9 +157,11 @@ class _FilterScreenState extends State<FilterScreen> {
                   height: 15,
                 ),
                 Row(
-                  children:  [
+                  children: [
                     const InfoIcon(),
-                    const SizedBox(width: 10,),
+                    const SizedBox(
+                      width: 10,
+                    ),
                     CommonText(
                       text: "Traditional order when seated with a server",
                       fontWeight: FontWeight.w400,
@@ -204,7 +206,7 @@ class _FilterScreenState extends State<FilterScreen> {
                 ),
                 CommonButton(
                   onTap: () {
-                    Get.to(() =>  const FilterResultScreen());
+                    Get.toNamed('/filter-screen');
                   },
                   text: "Apply",
                   bgColor: redE2211C,

@@ -3,7 +3,6 @@ import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
-import 'package:booking_table/view/auth_screens/sign_in_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,11 +32,7 @@ class AuthScreenViewWidget extends StatelessWidget {
           bgColor: redE2211C,
           onTap: () {
             // TODO: Sign In Functionality
-            Get.to(
-                  () => SignInView(
-                callFrom: 'Login',
-              ),
-            );
+            Get.toNamed('/login');
           },
           textColor: Colors.white,
         ),
@@ -57,11 +52,7 @@ class AuthScreenViewWidget extends StatelessWidget {
         CommonSizedBox(height: 10),
         CommonButton(
           onTap: () {
-            Get.to(
-                  () => SignInView(
-                callFrom: 'Sign Up',
-              ),
-            );
+            Get.toNamed('/register');
           },
           text: 'Sign Up',
           bgColor: black000000,
