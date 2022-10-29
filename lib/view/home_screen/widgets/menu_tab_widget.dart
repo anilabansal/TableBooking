@@ -76,6 +76,9 @@ class MenuTab extends StatelessWidget {
                   return restaurantItem(context);
                 },
               ),
+              const SizedBox(
+                height: 12,
+              ),
             ],
           ),
 

@@ -28,13 +28,15 @@ class FullServiceSummaryView extends StatelessWidget {
         child: Column(
           children: [
             const FullSummaryTopView(),
-            CommonSizedBox(height: 21),
+            // CommonSizedBox(height: 21),
             const FullSummaryBookingDetailsView(),
             Container(
-              margin: const EdgeInsets.only(bottom: 18.0, top: 26.0),
+              width: Get.width,
               height: 1,
-              width: Get.width * 0.9,
-              color: textLight868686,
+              color: whiteE5E5E5,
+            ).paddingOnly(
+              top: 5,
+              bottom: 5,
             ),
             FullSummaryBottomView(),
           ],

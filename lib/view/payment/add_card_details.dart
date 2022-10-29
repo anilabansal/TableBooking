@@ -10,7 +10,7 @@ class AddCreditCardDetailsView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appBarCommon(
-        text: 'CreditCard',
+        text: 'Credit Card',
       ),
       body: const SafeArea(
         child: Padding(

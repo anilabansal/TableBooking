@@ -53,24 +53,17 @@ class HomeView extends StatelessWidget {
                                     bottom: 0,
                                     right: 0,
                                     child: Container(
-                                        width: 24,
-                                        height: 24,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: white,
-                                          // image: DecorationImage(
-                                          //     image: AssetImage(drawerImage))
-                                        ),
-                                        child: SizedBox(
-                                          width: 13,
-                                          height: 9,
-                                          child: Image.asset(
-                                            drawerImage,
-                                            width: 13,
-                                            height: 9,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        )),
+                                      width: 24,
+                                      height: 24,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: white,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Image.asset(drawerImage),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -111,7 +104,7 @@ class HomeView extends StatelessWidget {
                                       dropDownIconImage,
                                       width: 9,
                                       height: 12,
-                                    )
+                                    ),
                                   ],
                                 ),
                               ],
@@ -159,15 +152,16 @@ class HomeView extends StatelessWidget {
                                                   ? black000000
                                                   : greyF4F4F4),
                                           child: Center(
-                                              child: Image.asset(
-                                            menuImage,
-                                            width: 14,
-                                            height: 14,
-                                            color: homeController
-                                                    .restaurantFilter.value
-                                                ? white
-                                                : greyC1C1C1,
-                                          )),
+                                            child: Image.asset(
+                                              menuImage,
+                                              width: 14,
+                                              height: 14,
+                                              color: homeController
+                                                      .restaurantFilter.value
+                                                  ? white
+                                                  : greyC1C1C1,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -192,15 +186,16 @@ class HomeView extends StatelessWidget {
                                                 ? black000000
                                                 : greyF4F4F4),
                                         child: Center(
-                                            child: Image.asset(locationImage,
-                                                width: 14,
-                                                height: 14,
-                                                color: homeController
-                                                            .restaurantFilter
-                                                            .value ==
-                                                        false
-                                                    ? white
-                                                    : greyC1C1C1)),
+                                          child: Image.asset(locationImage,
+                                              width: 14,
+                                              height: 14,
+                                              color: homeController
+                                                          .restaurantFilter
+                                                          .value ==
+                                                      false
+                                                  ? white
+                                                  : greyC1C1C1),
+                                        ),
                                       ),
                                     ),
                                   ],

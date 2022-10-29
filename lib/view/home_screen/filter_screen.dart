@@ -8,8 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/common/images_string.dart';
 import '../../utils/common/widgets_methods/app_bar_back_button.dart';
+import '../../utils/common/widgets_methods/common_app_bar.dart';
 import '../../utils/common/widgets_methods/common_date_picker_widget.dart';
-import 'filter_result_screen.dart';
+
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({Key? key}) : super(key: key);
@@ -20,198 +21,199 @@ class FilterScreen extends StatefulWidget {
 
 class _FilterScreenState extends State<FilterScreen> {
   HomeController homeController = Get.put(HomeController());
-
   // HomeController homeController = Get.find();
   final dateController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(22.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
+      appBar: appBarCommon(
+        text: "Filter"
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(22.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Stack(
+              //   children: [
+              //     const AppBarBackButton(),
+              //     Center(
+              //       child: CommonText(
+              //         text: "Filter",
+              //         fontSize: 22,
+              //         fontWeight: FontWeight.w600,
+              //         color: black000000,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // const SizedBox(
+              //   height: 35,
+              // ),
+              CommonText(
+                text: "Date",
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: black000000,
+                textAlign: TextAlign.start,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              // const CommonDropDown(
+              //   hintText: "",
+              // ),
+              CommonDatePicker(
+                controller: dateController,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Image.asset(lineImage),
+              const SizedBox(
+                height: 20,
+              ),
+              CommonText(
+                text: "Time",
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: black000000,
+                textAlign: TextAlign.start,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const CommonDropDown(
+                hintText: "Select Time",
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Image.asset(lineImage),
+              const SizedBox(
+                height: 20,
+              ),
+              CommonText(
+                text: "Party Size",
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: black000000,
+                textAlign: TextAlign.start,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const CommonDropDown(
+                hintText: "None",
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Image.asset(lineImage),
+              const SizedBox(
+                height: 20,
+              ),
+              CommonText(
+                text: "Type of Service",
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: black000000,
+                textAlign: TextAlign.start,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Obx(
+                () => Row(
                   children: [
-                    const AppBarBackButton(),
-                    Center(
-                      child: CommonText(
-                        text: "Filter",
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
-                        color: black000000,
-                      ),
+                    typeServiceContainer(
+                        "Full",
+                        // ignore: unrelated_type_equality_checks
+                        homeController.serviceType.value == "Full"),
+                    const SizedBox(
+                      width: 10,
                     ),
+                    // ignore: unrelated_type_equality_checks
+                    typeServiceContainer(
+                        "Mid", homeController.serviceType.value == "Mid"),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    // ignore: unrelated_type_equality_checks
+                    typeServiceContainer(
+                        "No", homeController.serviceType.value == "No"),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    // ignore: unrelated_type_equality_checks
+                    typeServiceContainer(
+                        "Go To", homeController.serviceType.value == "Go To"),
                   ],
                 ),
-                const SizedBox(
-                  height: 35,
-                ),
-                CommonText(
-                  text: "Date",
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: black000000,
-                  textAlign: TextAlign.start,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                // const CommonDropDown(
-                //   hintText: "",
-                // ),
-                CommonDatePicker(
-                  controller: dateController,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Image.asset(lineImage),
-                const SizedBox(
-                  height: 20,
-                ),
-                CommonText(
-                  text: "Time",
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: black000000,
-                  textAlign: TextAlign.start,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const CommonDropDown(
-                  hintText: "Select Time",
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Image.asset(lineImage),
-                const SizedBox(
-                  height: 20,
-                ),
-                CommonText(
-                  text: "Party Size",
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: black000000,
-                  textAlign: TextAlign.start,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const CommonDropDown(
-                  hintText: "None",
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Image.asset(lineImage),
-                const SizedBox(
-                  height: 20,
-                ),
-                CommonText(
-                  text: "Type of Service",
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: black000000,
-                  textAlign: TextAlign.start,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Obx(
-                  () => Row(
-                    children: [
-                      typeServiceContainer(
-                          "Full",
-                          // ignore: unrelated_type_equality_checks
-                          homeController.serviceType.value == "Full"),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      // ignore: unrelated_type_equality_checks
-                      typeServiceContainer(
-                          "Mid", homeController.serviceType.value == "Mid"),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      // ignore: unrelated_type_equality_checks
-                      typeServiceContainer(
-                          "No", homeController.serviceType.value == "No"),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      // ignore: unrelated_type_equality_checks
-                      typeServiceContainer(
-                          "Go To", homeController.serviceType.value == "Go To"),
-                    ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  const InfoIcon(),
+                  const SizedBox(
+                    width: 10,
                   ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  children:  [
-                    const InfoIcon(),
-                    const SizedBox(width: 10,),
-                    CommonText(
-                      text: "Traditional order when seated with a server",
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: textGrey868686,
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Image.asset(lineImage),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    CommonText(
-                      text: "Type of Food ",
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: black000000,
-                      textAlign: TextAlign.start,
-                    ),
-                    CommonText(
-                      text: "(optional) ",
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: textDark3F3E3E,
-                      textAlign: TextAlign.start,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const CommonDropDown(
-                  hintText: "Select Type",
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                CommonButton(
-                  onTap: () {
-                    Get.to(() =>  const FilterResultScreen());
-                  },
-                  text: "Apply",
-                  bgColor: redE2211C,
-                  textColor: white,
-                ),
-              ],
-            ),
+                  CommonText(
+                    text: "Traditional order when seated with a server",
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    color: textGrey868686,
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Image.asset(lineImage),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  CommonText(
+                    text: "Type of Food ",
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: black000000,
+                    textAlign: TextAlign.start,
+                  ),
+                  CommonText(
+                    text: "(optional) ",
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: textDark3F3E3E,
+                    textAlign: TextAlign.start,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const CommonDropDown(
+                hintText: "Select Type",
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              CommonButton(
+                onTap: () {
+                  Get.toNamed('/filter-result-screen');
+                },
+                text: "Apply",
+                bgColor: redE2211C,
+                textColor: white,
+              ),
+            ],
           ),
         ),
       ),

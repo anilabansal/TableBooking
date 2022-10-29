@@ -28,7 +28,7 @@ class CommonText extends StatelessWidget {
       text!,
       textAlign:textAlign,
       style: TextStyle(
-        fontFamily: fontFamily ?? mainLatoFont,
+        fontFamily: fontFamily ?? mainLaToFont,
         decoration: decoration,
         color: color,
         fontSize: fontSize,

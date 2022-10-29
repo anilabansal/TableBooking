@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:booking_table/view/auth_screens/auth_selection_view.dart';
 import 'package:get/get.dart';
 
 class SplashViewController extends GetxController {
@@ -13,7 +12,8 @@ class SplashViewController extends GetxController {
   Future<void> splashInit() async {
     await Future.delayed(const Duration(seconds: 2));
     // if () {
-    Get.offAll(() => const AuthSelectionView());
+    // Get.offAll(() => const AuthSelectionView());
+    Get.offAllNamed('/authentication');
     // } else {
     //   Get.offAll(() => LoginView());
     // }

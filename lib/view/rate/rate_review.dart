@@ -95,11 +95,15 @@ class RateReviewView extends StatelessWidget {
                 hintText: 'Type Here...',
                 filled: true,
                 fillColor: whiteF5F5F5,
-              ).paddingSymmetric(horizontal: 22),
+                maxLines: 10,
+              ).paddingSymmetric(horizontal: 22,),
               CommonSizedBox(
                 height: 68,
               ),
               CommonButton(
+                onTap: () {
+                  Get.toNamed('/home');
+                },
                 text: 'Submit',
                 bgColor: redE2211C,
                 textColor: Colors.white,

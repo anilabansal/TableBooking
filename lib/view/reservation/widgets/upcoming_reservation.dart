@@ -4,6 +4,8 @@ import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/common/common_font.dart';
+
 class UpComingReservations extends StatelessWidget {
   const UpComingReservations({
     Key? key,
@@ -11,109 +13,141 @@ class UpComingReservations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: SizedBox(
-        height: 138,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Column(
-              children: [
-                Container(
-                  height: 118,
-                  width: 98,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                        topRight: Radius.circular(5)),
-                    image: DecorationImage(
-                      image: AssetImage(bookATableImage),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(5),
-                        bottomRight: Radius.circular(5)),
-                  ),
-                  height: 18,
-                  width: 98,
-                ),
-              ],
-            ),
-            Expanded(
+    return ListView.builder(
+        itemCount: 2,
+        itemBuilder: (context, index) {
+          return Padding(
+            //  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.all(20),
+            child: Container(
+              decoration: const BoxDecoration(color: white, boxShadow: [
+                BoxShadow(
+                    offset: Offset(0, 4),
+                    color: Color.fromRGBO(0, 0, 0, 0.06),
+                    blurRadius: 10)
+              ]),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.all(10),
                 child: SizedBox(
-                  height: 138,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      CommonText(
-                        text: 'Venisa’s Kitchen',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      // CommonSizedBox(
-                      //   height: 10,
-                      // ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Column(
                         children: [
-                          const Icon(Icons.place),
-                          Expanded(
+                          Container(
+                            height: 118,
+                            width: 98,
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(6),
+                                  topRight: Radius.circular(6)),
+                              image: DecorationImage(
+                                image: AssetImage(bookATableImage),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(6),
+                                bottomRight: Radius.circular(6),
+                              ),
+                            ),
+                            height: 18,
+                            width: 98,
+                            alignment: Alignment.center,
                             child: CommonText(
-                              color: textDark3F3E3E,
-                              text:
-                                  '6363 Montana Ave, El Paso, Texas, Montgo- mery, 35004',
-                              fontSize: 12,
+                              text: 'Full Service',
+                              fontSize: 10,
                               fontWeight: FontWeight.w400,
+                              color: Colors.white,
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ],
                       ),
-                      CommonSizedBox(
-                        height: 18,
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 15),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              CommonText(
+                                text: 'Venisa’s Kitchen',
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              CommonSizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Icon(Icons.place),
+                                  Expanded(
+                                    child: CommonText(
+                                      color: textDark3F3E3E,
+                                      text:
+                                          '6363 Montana Ave, El Paso, Texas, Montgo- mery, 35004',
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: interFont,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              CommonSizedBox(
+                                height: 18,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: <Widget>[
+                                      const Icon(
+                                        Icons.calendar_month,
+                                        color: redE2211C,
+                                      ),
+                                      CommonText(
+                                        text: '24 July, 2022',
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: interFont,
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      const Icon(
+                                        Icons.watch_later,
+                                        color: redE2211C,
+                                      ),
+                                      CommonText(
+                                        text: '09:30 PM',
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: interFont,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: <Widget>[
-                              const Icon(Icons.calendar_month),
-                              CommonText(
-                                text: '24 July, 2022',
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              const Icon(Icons.watch_later),
-                              CommonText(
-                                text: '09:30 PM',
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
                     ],
                   ),
                 ),
               ),
             ),
-          ],
-        ),
-      ),
-    );
+          );
+        });
   }
 }

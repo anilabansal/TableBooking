@@ -28,6 +28,7 @@ const Color greyF5F5F5  = Color(0xffF5F5F5);
 const Color greyF8F8F8  = Color(0xffF8F8F8);
 const Color greyA2A2A2   = Color(0xffA2A2A2);
 const Color greyC1C1C1 = Color(0xffC1C1C1);
+const Color greyEAEAEA  = Color(0xffEAEAEA);
 //15percent opacity
 const Color red26E2211C = Color(0x26E2211C);
 //30% opacity

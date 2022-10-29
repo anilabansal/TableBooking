@@ -13,7 +13,7 @@ class SupportView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: white,
       appBar: appBarCommon(
         text: 'Support',
       ),
@@ -63,6 +63,7 @@ class SupportBody extends StatelessWidget {
                   textAlign: TextAlign.left,
                   fontWeight: FontWeight.w400,
                 ),
+                const SizedBox(height: 5,),
                 CommonTextFormField(
                   filled: true,
                   fillColor: whiteF4F4F4,
@@ -79,6 +80,7 @@ class SupportBody extends StatelessWidget {
                   textAlign: TextAlign.left,
                   fontWeight: FontWeight.w400,
                 ),
+                const SizedBox(height: 5,),
                 CommonTextFormField(
                   filled: true,
                   fillColor: whiteF4F4F4,
@@ -95,13 +97,14 @@ class SupportBody extends StatelessWidget {
                   textAlign: TextAlign.left,
                   fontWeight: FontWeight.w400,
                 ),
+                const SizedBox(height: 5,),
                 CommonTextFormField(
-                  filled: true,
-                  fillColor: whiteF4F4F4,
-                  hintText: 'Type Here...',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                ),
+                    filled: true,
+                    fillColor: whiteF4F4F4,
+                    hintText: 'Type Here...',
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    maxLines: 5),
                 CommonSizedBox(
                   height: 25,
                 ),

@@ -10,7 +10,7 @@ class CardScanPopUpView extends StatefulWidget {
   State<CardScanPopUpView> createState() => _CardScanPopUpViewState();
 }
 class _CardScanPopUpViewState extends State<CardScanPopUpView> {
-  CardDetails? _cardDetails;
+  //CardDetails? _cardDetails;
   CardScanOptions scanOptions = const CardScanOptions(
     scanCardHolderName: true,
     //  enableDebugLogs: true,
@@ -24,9 +24,9 @@ class _CardScanPopUpViewState extends State<CardScanPopUpView> {
     final CardDetails? cardDetails =
         await CardScanner.scanCard(scanOptions: scanOptions);
     if (!mounted || cardDetails == null) return;
-    setState(() {
-      _cardDetails = cardDetails;
-    });
+    // setState(() {
+    //   _cardDetails = cardDetails;
+    // });
   }
 
   CardScanController controller = Get.put(CardScanController());

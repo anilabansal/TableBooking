@@ -1,5 +1,3 @@
-
-
 import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
@@ -28,7 +26,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
     _tabController.addListener(() {
-      restaurantController.selectedIndex.value = _tabController!.index;
+      restaurantController.selectedIndex.value = _tabController.index;
     });
   }
 
@@ -98,13 +96,12 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen>
                     )
                   ]),
             ),
-            const SizedBox(height: 30,),
             SizedBox(
-               // height: double.maxFinite,
-               height: MediaQuery.of(context).size.height-100,
+              // height: double.maxFinite,
+              height: MediaQuery.of(context).size.height - 100,
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: TabBarView(controller: _tabController, children:  [
+                padding: const EdgeInsets.fromLTRB(20.0,25,20,20),
+                child: TabBarView(controller: _tabController, children: [
                   const MenuTab(),
                   const AboutTabScreen(),
                   const ReviewsTabScreen(),

@@ -3,12 +3,9 @@
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
-import 'package:booking_table/view/auth_screens/get_zip_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
-
-import '../../profile_screen/create_profile_screen.dart';
 
 class OtpScreenViewWidget extends StatelessWidget {
   final String? callFrom;
@@ -45,16 +42,12 @@ class OtpScreenViewWidget extends StatelessWidget {
           child: CommonButton(
             onTap: () {
               if (callFrom == 'Login') {
-                Get.off(
-                  () => const GetZipCodeView(),
-                );
-              } else if (callFrom == 'Sign Up') {
-                Get.off(
-                  () => const CreateProfileScreen(),
-                );
+                Get.offAllNamed('/zip-code');
+              } else {
+                Get.offAllNamed('/create-profile');
               }
             },
-            text: callFrom == 'Login' ? 'Sign In' : 'Submit',
+            text: 'Submit',
             bgColor: redE2211C,
             textColor: Colors.white,
           ),
@@ -70,12 +63,19 @@ class OtpScreenViewWidget extends StatelessWidget {
         const SizedBox(height: 20),
         callFrom == 'Login'
             ? Container()
-            : CommonText(
-                text: 'Change Phone Number',
-                decoration: TextDecoration.underline,
-                color: black040404,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
+            : InkWell(
+                onTap: () {
+                  Get.toNamed('/register');
+                },
+                child: Container(
+                  child: CommonText(
+                    text: 'Change Phone Number',
+                    decoration: TextDecoration.underline,
+                    color: black040404,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
               ),
       ],
     );

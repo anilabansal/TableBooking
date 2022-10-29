@@ -11,13 +11,12 @@ class BookATableController extends GetxController {
     'ToGo',
   ];
   var selectTypeOfService = 0.obs;
-
+  var serviceType = ''.obs;
   var selectedDate = DateTime.now().obs;
   var bookingDate = TextEditingController();
   var selectedTime = TimeOfDay.now().obs;
   var bookingTime = TextEditingController();
   var partySize = TextEditingController();
-
   //Select Type Of Service
   void selectService(index) {
     selectTypeOfService.value = index;

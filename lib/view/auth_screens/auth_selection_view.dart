@@ -1,4 +1,3 @@
-
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/auth_screens/widgets/auth_selection_view_widget.dart';
 import 'package:flutter/material.dart';
@@ -25,12 +24,17 @@ class AuthSelectionView extends StatelessWidget {
               // Bottom
               Column(
                 children: [
-                  CommonText(
-                    text: 'Continue as Guest',
-                    color: redE2211C,
-                    decoration: TextDecoration.underline,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed('/home');
+                    },
+                    child: CommonText(
+                      text: 'Continue as Guest',
+                      color: redE2211C,
+                      decoration: TextDecoration.underline,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                   const SizedBox(height: 10),
                 ],

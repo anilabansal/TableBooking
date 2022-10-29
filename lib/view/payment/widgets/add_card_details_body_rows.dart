@@ -70,9 +70,9 @@ class AddCardDetailsRowThree extends StatelessWidget {
               ),
               CommonTextFormField(
                 hintText: '***',
-                maxLength: 3,
                 keyboardType: TextInputType.number,
                 obscureText: true,
+                maxLines: 1,
                 filled: true,
                 fillColor: whiteF4F4F4,
               ),
@@ -106,7 +106,7 @@ class AddCardDetailsRowTwo extends StatelessWidget {
           height: 6,
         ),
         CommonTextFormField(
-          hintText: 'Enter card Number',
+          hintText: 'Enter Card Number',
           filled: true,
           keyboardType: TextInputType.number,
           fillColor: whiteF4F4F4,
@@ -139,7 +139,7 @@ class AddCardDetailsRowOne extends StatelessWidget {
           height: 6,
         ),
         CommonTextFormField(
-          hintText: 'Enter card holder name',
+          hintText: 'Enter Card Holder Name',
           filled: true,
           fillColor: whiteF4F4F4,
         ),

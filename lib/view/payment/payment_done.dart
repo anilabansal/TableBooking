@@ -5,10 +5,10 @@ import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PaymentDoneView extends StatelessWidget {
   const PaymentDoneView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,6 +100,9 @@ class PaymentDoneView extends StatelessWidget {
               height: 50,
               width: 205,
               child: CommonButton(
+                onTap: () {
+                  Get.toNamed('/reviews');
+                },
                 text: 'Continue',
                 textColor: Colors.white,
                 bgColor: redE2211C,

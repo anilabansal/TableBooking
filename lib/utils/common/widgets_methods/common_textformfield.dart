@@ -8,7 +8,8 @@ class CommonTextFormField extends StatelessWidget {
   TextEditingController? controller;
   Function()? onTap;
   double? fontSize;
-  int? maxLength;
+  // int? maxLength;
+  int?maxLines;
   Widget? suffixIcon;
   Color? color;
   bool? enable;
@@ -23,7 +24,7 @@ class CommonTextFormField extends StatelessWidget {
     this.enable,
     this.onTap,
     this.controller,
-    this.maxLength,
+    // this.maxLength,
     this.suffixIcon,
     this.keyboardType,
     this.obscureText,
@@ -33,6 +34,7 @@ class CommonTextFormField extends StatelessWidget {
     this.fillColor,
     this.filled,
     this.fontWeight,
+    this.maxLines,
     Key? key,
   }) : super(key: key);
 
@@ -43,14 +45,15 @@ class CommonTextFormField extends StatelessWidget {
       enabled: enable,
       autovalidateMode: AutovalidateMode.always,
       keyboardType: keyboardType,
-      maxLength: maxLength,
+      // maxLength: maxLength,
+      maxLines: maxLines,
       controller: controller,
       cursorWidth: 1,
       style: const TextStyle(fontSize: 20, color: black000000),
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
         helperMaxLines: 3,
-        contentPadding: contentPadding ?? const EdgeInsets.only(left: 13),
+        contentPadding: contentPadding ?? const EdgeInsets.only(left: 13, ),
         hintText: hintText,
         filled: filled,
         fillColor: fillColor,

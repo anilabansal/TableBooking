@@ -5,6 +5,7 @@ class SummaryController extends GetxController {
   var selectTipPrice = 0.obs;
   var selectPaymentMethod = 0.obs;
   final listOfPaymentMethods = [];
+  var addTip = "".obs;
 
   final listOfTipPrice = [
     '10%',
