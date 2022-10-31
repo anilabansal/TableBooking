@@ -8,7 +8,6 @@ import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_textformfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:get/get.dart';
 
 class FullSummaryBottomView extends StatelessWidget {
@@ -55,7 +54,7 @@ class FullSummaryBottomView extends StatelessWidget {
           color: whiteE5E5E5,
         ).paddingOnly(
           top: 5,
-          bottom:5,
+          bottom: 5,
         ),
         Padding(
           padding: const EdgeInsets.all(15),
@@ -77,7 +76,7 @@ class FullSummaryBottomView extends StatelessWidget {
                 filled: true,
                 hintText: 'Type Here...',
                 color: textLight868686,
-                maxLines: 5 ,
+                maxLines: 5,
                 fontSize: 18,
               ),
             ],
@@ -116,9 +115,9 @@ class FullSummaryBottomView extends StatelessWidget {
         // ADD A TIP
         AddATipWidget(controller: controller),
         Padding(
-          padding: const EdgeInsets.fromLTRB(15.0,30,15,15),
+          padding: const EdgeInsets.fromLTRB(15.0, 30, 15, 15),
           child: CommonButton(
-            onTap: (){
+            onTap: () {
               Get.toNamed('/payment-done');
             },
             text: 'Confirm Booking',
@@ -164,7 +163,8 @@ class ChoosePaymentMethodWidget extends StatelessWidget {
                   height: 32,
                   width: 97,
                   decoration: BoxDecoration(
-                      color: whiteF8F8F8, borderRadius: BorderRadius.circular(4)),
+                      color: whiteF8F8F8,
+                      borderRadius: BorderRadius.circular(4)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -186,7 +186,9 @@ class ChoosePaymentMethodWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 12,),
+              const SizedBox(
+                width: 12,
+              ),
               Expanded(
                 child: Container(
                   height: 32,
@@ -195,7 +197,7 @@ class ChoosePaymentMethodWidget extends StatelessWidget {
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(4)),
                   child: Padding(
-                    padding: const EdgeInsets.only(right:0.0),
+                    padding: const EdgeInsets.only(right: 0.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -204,9 +206,12 @@ class ChoosePaymentMethodWidget extends StatelessWidget {
                         //   // height: 17,
                         //   // width: 17,
                         // ),
-                        const Icon(Icons.apple,color: white,),
+                        const Icon(
+                          Icons.apple,
+                          color: white,
+                        ),
                         CommonSizedBox(
-                          width:8,
+                          width: 8,
                         ),
                         CommonText(
                           text: 'Apple',
@@ -219,13 +224,16 @@ class ChoosePaymentMethodWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 21,),
+              const SizedBox(
+                width: 21,
+              ),
               Expanded(
                 child: Container(
                   height: 32,
                   width: 97,
                   decoration: BoxDecoration(
-                      color: whiteF8F8F8, borderRadius: BorderRadius.circular(4)),
+                      color: whiteF8F8F8,
+                      borderRadius: BorderRadius.circular(4)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -312,35 +320,34 @@ class AddATipWidget extends StatelessWidget {
           //   ),
           // ),
           Obx(
-                () => Row(
+            () => Row(
               children: [
                 addTipContainer(
                     "10%",
                     // ignore: unrelated_type_equality_checks
-                    controller.addTip.value == "10%",12.0),
+                    controller.addTip.value == "10%",
+                    12.0),
+                const SizedBox(
+                  width: 10,
+                ),
+                // ignore: unrelated_type_equality_checks
+                addTipContainer("15%", controller.addTip.value == "15%", 12.0),
+                const SizedBox(
+                  width: 10,
+                ),
+                // ignore: unrelated_type_equality_checks
+                addTipContainer("20%", controller.addTip.value == "20%", 12.0),
                 const SizedBox(
                   width: 10,
                 ),
                 // ignore: unrelated_type_equality_checks
                 addTipContainer(
-                    "15%", controller.addTip.value == "15%",12.0),
-                const SizedBox(
-                  width: 10,
-                ),
-                // ignore: unrelated_type_equality_checks
-                addTipContainer(
-                    "20%", controller.addTip.value == "20%",12.0),
-                const SizedBox(
-                  width: 10,
-                ),
-                // ignore: unrelated_type_equality_checks
-                addTipContainer(
-                    "Custom", controller.addTip.value == "Custom",10.0),
+                    "Custom", controller.addTip.value == "Custom", 10.0),
                 const SizedBox(
                   width: 10,
                 ),
                 addTipContainer(
-                    "None", controller.addTip.value == "None",12.0),
+                    "None", controller.addTip.value == "None", 12.0),
               ],
             ),
           ),
@@ -360,7 +367,7 @@ class AddATipWidget extends StatelessWidget {
     );
   }
 
-  addTipContainer(text, isSelected,fontSize) {
+  addTipContainer(text, isSelected, fontSize) {
     return Expanded(
       child: InkWell(
         onTap: () {
