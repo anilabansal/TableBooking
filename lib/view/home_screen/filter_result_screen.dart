@@ -11,7 +11,7 @@ class FilterResultScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: white,
       appBar: appBarCommon(text: "Filter Result"),
-      body: FilterResultBody(),
+      body: const FilterResultBody(),
     );
   }
 }
