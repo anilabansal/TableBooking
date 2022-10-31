@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:booking_table/controller/notification_screen/notification_screen_controller.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_app_bar.dart';
 import 'package:booking_table/view/notifications/widgets/notification_body.dart';

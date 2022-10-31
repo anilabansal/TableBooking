@@ -13,7 +13,7 @@ class AddCardDetailsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.only(left: 31.0, right: 26, top: 54),
+        padding: const EdgeInsets.only(left: 31.0, right: 26, top: 54),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/view/home_screen/widgets/filter_screen_body.dart';
