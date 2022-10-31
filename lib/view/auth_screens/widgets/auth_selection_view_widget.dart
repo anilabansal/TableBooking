@@ -14,12 +14,14 @@ class AuthScreenViewWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
+        // LOGO
         Image.asset(
           authSelectScreenLogo,
           height: 54,
           width: 143,
         ),
         CommonSizedBox(height: 26),
+        // WELCOME TEXT
         CommonText(
           text: 'Welcome!',
           color: black040404,
@@ -27,6 +29,7 @@ class AuthScreenViewWidget extends StatelessWidget {
           fontWeight: FontWeight.w700,
         ),
         CommonSizedBox(height: 20),
+        // SIGNIN BUTTON
         CommonButton(
           text: 'Sign In',
           bgColor: redE2211C,
@@ -50,6 +53,7 @@ class AuthScreenViewWidget extends StatelessWidget {
             fontWeight: FontWeight.w400,
             fontSize: 14),
         CommonSizedBox(height: 10),
+        // REGISTER BUTTON
         CommonButton(
           onTap: () {
             Get.toNamed('/register');
@@ -71,12 +75,14 @@ class AuthScreenViewWidget extends StatelessWidget {
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),
+        // SOCIAL SIGN IN
         CommonSizedBox(height: 15),
         _iconRow(),
       ],
     );
   }
 
+  // SOCIAL SIGN IN
   Row _iconRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
