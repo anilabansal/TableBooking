@@ -12,9 +12,7 @@ class PreviousBookingDetailsView extends StatelessWidget {
       appBar: appBarCommon(
         text: 'Booking Details',
       ),
-      body: const SingleChildScrollView(
-        child: PreviousReservationBody(),
-      ),
+      body: const PreviousReservationBody(),
     );
   }
 }

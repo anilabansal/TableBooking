@@ -8,6 +8,7 @@ class SignInScreenTopView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // BACKGROUND IMAGES
     return Stack(
       children: [
         Image.asset(

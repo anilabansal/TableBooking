@@ -17,67 +17,77 @@ class OtpScreenViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        const SizedBox(height: 25),
-        CommonText(
-          text: 'Enter the 4 digit code sent to',
-          fontWeight: FontWeight.w400,
-          fontSize: 18,
-          color: textDark3F3E3E,
-        ),
-        const SizedBox(height: 5),
-        CommonText(
-          text: '+1-310-422-5076',
-          fontWeight: FontWeight.w500,
-          color: black000000,
-          fontSize: 22,
-        ),
-        const SizedBox(height: 40),
-        const PinBoxWidget(),
-        const SizedBox(height: 38),
-        // Button
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: CommonButton(
-            onTap: () {
-              if (callFrom == 'Login') {
-                Get.offAllNamed('/zip-code');
-              } else {
-                Get.offAllNamed('/create-profile');
-              }
-            },
-            text: 'Submit',
-            bgColor: redE2211C,
-            textColor: Colors.white,
-          ),
-        ),
-        const SizedBox(height: 20),
-        CommonText(
-          text: 'Resend Code',
-          decoration: TextDecoration.underline,
-          color: redE2211C,
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-        ),
-        const SizedBox(height: 20),
-        callFrom == 'Login'
-            ? Container()
-            : InkWell(
+    return SafeArea(
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            const SizedBox(height: 25),
+            // CODE SENT MESSAGE
+            CommonText(
+              text: 'Enter the 4 digit code sent to',
+              fontWeight: FontWeight.w400,
+              fontSize: 18,
+              color: textDark3F3E3E,
+            ),
+            const SizedBox(height: 5),
+            // MOBILE NUMBER
+            CommonText(
+              text: '+1-310-422-5076',
+              fontWeight: FontWeight.w500,
+              color: black000000,
+              fontSize: 22,
+            ),
+            const SizedBox(height: 40),
+            // PIN INPUT BOX
+            const PinBoxWidget(),
+            const SizedBox(height: 38),
+            // SUBMIT Button
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: CommonButton(
                 onTap: () {
-                  Get.toNamed('/register');
+                  // IF CALL FROM LOGIN PAGE
+                  if (callFrom == 'Login') {
+                    Get.offAllNamed('/zip-code');
+                  } else {
+                    // IF CALL FROM REGISTER PAGE
+                    Get.offAllNamed('/create-profile');
+                  }
                 },
-                child: Container(
-                  child: CommonText(
-                    text: 'Change Phone Number',
-                    decoration: TextDecoration.underline,
-                    color: black040404,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
+                text: 'Submit',
+                bgColor: redE2211C,
+                textColor: Colors.white,
               ),
-      ],
+            ),
+            const SizedBox(height: 20),
+            // RESEND CODE BUTTON
+            CommonText(
+              text: 'Resend Code',
+              decoration: TextDecoration.underline,
+              color: redE2211C,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
+            const SizedBox(height: 20),
+            callFrom == 'Login'
+                ? Container()
+                :
+                // CHANGE PHONE NUMBER BUTTON
+                InkWell(
+                    onTap: () {
+                      Get.toNamed('/register');
+                    },
+                    child: CommonText(
+                      text: 'Change Phone Number',
+                      decoration: TextDecoration.underline,
+                      color: black040404,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -89,6 +99,7 @@ class PinBoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // PIN INPUT BOX
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 22,

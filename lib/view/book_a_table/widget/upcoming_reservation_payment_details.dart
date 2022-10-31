@@ -28,6 +28,7 @@ class UpcomingReservationsPaymentDetails extends StatelessWidget {
                 height: 22,
                 width: 31,
               ),
+              // CARD DETAILS
               Column(
                 children: [
                   CommonText(text: '****-*****-3455'),
@@ -35,6 +36,7 @@ class UpcomingReservationsPaymentDetails extends StatelessWidget {
                 ],
               ),
               Container(),
+              // PAYMENT STATUS
               Container(
                 height: 19,
                 width: 61,
@@ -64,6 +66,7 @@ class UpcomingReservationsPaymentDetails extends StatelessWidget {
           CommonSizedBox(
             height: 10,
           ),
+          // BOOKING AMOUNT
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

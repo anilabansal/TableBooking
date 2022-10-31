@@ -3,6 +3,7 @@ import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MidSummaryBookingDetailsView extends StatelessWidget {
   const MidSummaryBookingDetailsView({
@@ -79,6 +80,9 @@ class MidSummaryBookingDetailsView extends StatelessWidget {
                     height: 40,
                     width: 100,
                     child: CommonButton(
+                      onTap: () {
+                        Get.toNamed('pre-order');
+                      },
                       text: 'Place Order',
                       bgColor: redF2E6E6,
                       fontSize: 14,

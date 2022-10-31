@@ -19,7 +19,7 @@ class SignInScreenBottomView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Heading
+        // HEADER
         CommonText(
           text: callFrom == 'Login'
               ? 'Enter Mobile Number'
@@ -38,9 +38,13 @@ class SignInScreenBottomView extends StatelessWidget {
           color: textLight868686,
         ),
         callFrom == 'Login'
-            ? CommonSizedBox(height: 40)
-            : _privacyPolicyNTerms(),
-        // Button
+            ?
+            // IF LOGIN
+            CommonSizedBox(height: 40)
+            :
+            // IF REGISTER
+            _privacyPolicyNTerms(),
+        // LOGIN/REGISTER BUTTON
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: CommonButton(
@@ -59,6 +63,7 @@ class SignInScreenBottomView extends StatelessWidget {
         CommonSizedBox(height: 20),
         CommonText(text: 'OR', color: textLight868686, fontSize: 14),
         CommonSizedBox(height: 20),
+        // GUEST BUTTON
         InkWell(
           onTap: () {
             Get.toNamed('/home');
@@ -74,6 +79,7 @@ class SignInScreenBottomView extends StatelessWidget {
     );
   }
 
+  // MOBILE NUMBER ENTER ROW
   Container _textFieldRow() {
     return Container(
       decoration: BoxDecoration(
@@ -112,6 +118,7 @@ class SignInScreenBottomView extends StatelessWidget {
     );
   }
 
+  // COUNTRY CODE PICKER
   CommonSizedBox _codePicker() {
     return CommonSizedBox(
       width: 79,
@@ -130,6 +137,7 @@ class SignInScreenBottomView extends StatelessWidget {
     );
   }
 
+  // PRIVACY POLICY & TERMS N CONDITIONS
   Column _privacyPolicyNTerms() {
     return Column(
       children: <Widget>[
