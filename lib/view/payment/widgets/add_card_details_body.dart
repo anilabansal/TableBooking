@@ -11,30 +11,35 @@ class AddCardDetailsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          // ROW ONE
-          const AddCardDetailsRowOne(),
-          // Row TWO
-          const AddCardDetailsRowTwo(),
-          //   ROW THREE
-          AddCardDetailsRowThree(),
-          //  PRIVACY POLICY TERMS N CONDITIONS
-          const AddCardDetailsPrivacyPolicy(),
-          //   Button
-          InkWell(
-            onTap: () {
-              Get.toNamed('/book-a-table');
-            },
-            child: CommonButton(
-              text: 'Save Card',
-              bgColor: redE2211C,
-              textColor: Colors.white,
-            ),
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.only(left: 31.0, right: 26, top: 54),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              // ROW ONE
+              const AddCardDetailsRowOne(),
+              // Row TWO
+              const AddCardDetailsRowTwo(),
+              //   ROW THREE
+              AddCardDetailsRowThree(),
+              //  PRIVACY POLICY TERMS N CONDITIONS
+              const AddCardDetailsPrivacyPolicy(),
+              //   Button
+              InkWell(
+                onTap: () {
+                  Get.toNamed('/book-a-table');
+                },
+                child: CommonButton(
+                  text: 'Save Card',
+                  bgColor: redE2211C,
+                  textColor: Colors.white,
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
