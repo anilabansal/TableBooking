@@ -12,7 +12,7 @@ class AddCreditCardDetailsView extends StatelessWidget {
       appBar: appBarCommon(
         text: 'Credit Card',
       ),
-      body: AddCardDetailsBody(),
+      body: const AddCardDetailsBody(),
     );
   }
 }
