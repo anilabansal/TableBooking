@@ -2,16 +2,16 @@ import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class CommonDatePicker extends StatefulWidget {
+class CommonDatePicker extends StatelessWidget {
   final TextEditingController? controller;
 
   const CommonDatePicker({Key? key, this.controller}) : super(key: key);
 
-  @override
-  State<CommonDatePicker> createState() => _CommonDatePickerState();
-}
-
-class _CommonDatePickerState extends State<CommonDatePicker> {
+//   @override
+//   State<CommonDatePicker> createState() => _CommonDatePickerState();
+// }
+//
+// class _CommonDatePickerState extends State<CommonDatePicker> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +21,7 @@ class _CommonDatePickerState extends State<CommonDatePicker> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5), color: greyF5F5F5),
       child: TextFormField(
-        controller: widget.controller,
+        controller: controller,
         style: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w400,
@@ -60,8 +60,7 @@ class _CommonDatePickerState extends State<CommonDatePicker> {
                     firstDate: DateTime(1900),
                     lastDate: DateTime.now());
                 if (picked != null) {
-                  widget.controller!.text =
-                      DateFormat('dd-MM-yyyy').format(picked);
+                  controller!.text = DateFormat('dd-MM-yyyy').format(picked);
                 }
               },
               icon: const Icon(
