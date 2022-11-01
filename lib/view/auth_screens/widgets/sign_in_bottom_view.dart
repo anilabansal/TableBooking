@@ -8,7 +8,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignInScreenBottomView extends StatelessWidget {
+import '../../../controller/authentication/auth_view_controller.dart';
+
+class SignInScreenBottomView extends StatefulWidget {
   String? callFrom;
   SignInScreenBottomView({
     required this.callFrom,
@@ -16,12 +18,18 @@ class SignInScreenBottomView extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<SignInScreenBottomView> createState() => _SignInScreenBottomViewState();
+}
+AuthViewController controller =  Get.put(AuthViewController());
+ // Country? selectedCountry;
+class _SignInScreenBottomViewState extends State<SignInScreenBottomView> {
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         // Heading
         CommonText(
-          text: callFrom == 'Login'
+          text: widget.callFrom == 'Login'
               ? 'Enter Mobile Number'
               : 'Create Your Free Account',
           fontSize: 24,
@@ -37,7 +45,7 @@ class SignInScreenBottomView extends StatelessWidget {
           fontSize: 14,
           color: textLight868686,
         ),
-        callFrom == 'Login'
+        widget.callFrom == 'Login'
             ? CommonSizedBox(height: 40)
             : _privacyPolicyNTerms(),
         // Button
@@ -47,11 +55,11 @@ class SignInScreenBottomView extends StatelessWidget {
             onTap: () {
               Get.off(
                 () => OtpScreenView(
-                  callFrom: callFrom,
+                  callFrom: widget.callFrom,
                 ),
               );
             },
-            text: callFrom == 'Login' ? 'Sign In' : 'Sign Up',
+            text: widget.callFrom == 'Login' ? 'Sign In' : 'Sign Up',
             bgColor: redE2211C,
             textColor: Colors.white,
           ),
@@ -113,11 +121,14 @@ class SignInScreenBottomView extends StatelessWidget {
   }
 
   CommonSizedBox _codePicker() {
+
+  // CountryController controller = Get.put(CountryController());
+  //   controller.updateSelectedCountry(controller.selectedCountry);
     return CommonSizedBox(
       width: 79,
       child: CountryPhoneCodePicker.withDefaultSelectedCountry(
         defaultCountryCode:
-            Country(name: 'USA', countryCode: 'USA', phoneCode: '+1'),
+         Country(name: 'USA', countryCode: 'USA', phoneCode: '+1'),
         borderRadius: 50,
         borderWidth: 0,
         flagBorderRadius: 100,
@@ -126,7 +137,7 @@ class SignInScreenBottomView extends StatelessWidget {
         borderColor: Colors.transparent,
         style: const TextStyle(fontSize: 16),
         searchBarHintText: 'Search by name',
-      ),
+      )
     );
   }
 

@@ -9,14 +9,17 @@ class PhoneField extends StatefulWidget {
   final TextEditingController? phoneController;
   final Function(String)? onCodeChange;
   final Function(String)? onCountryFlag;
-  const PhoneField(
-      {Key? key,
-      this.phoneController,
-      this.onCodeChange,
-      this.countryCode,
-      this.onCountryFlag,
-      this.countryFlag})
-      : super(key: key);
+  final Color? textFieldColor;
+
+  const PhoneField({
+    Key? key,
+    this.phoneController,
+    this.onCodeChange,
+    this.countryCode,
+    this.onCountryFlag,
+    this.countryFlag,
+    this.textFieldColor,
+  }) : super(key: key);
 
   @override
   State<PhoneField> createState() => _PhoneFieldState();
@@ -31,8 +34,8 @@ class _PhoneFieldState extends State<PhoneField> {
       alignment: Alignment.center,
       //margin: const EdgeInsets.symmetric(horizontal: 30),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: greyF4F4F4,
+        borderRadius: BorderRadius.circular(5),
+        color: widget.textFieldColor,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

@@ -3,8 +3,9 @@ import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_textformfield.dart';
 import 'package:flutter/material.dart';
+
+import '../../../utils/common/widgets_methods/common_text_form_field.dart';
 
 class SupportBody extends StatelessWidget {
   const SupportBody({

@@ -4,8 +4,10 @@ import 'package:intl/intl.dart';
 
 class CommonDatePicker extends StatefulWidget {
   final TextEditingController? controller;
+  final Color? fillColor;
 
-  const CommonDatePicker({Key? key, this.controller}) : super(key: key);
+  const CommonDatePicker({Key? key, this.controller, this.fillColor})
+      : super(key: key);
 
   @override
   State<CommonDatePicker> createState() => _CommonDatePickerState();
@@ -19,7 +21,7 @@ class _CommonDatePickerState extends State<CommonDatePicker> {
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(left: 8, right: 5),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5), color: greyF5F5F5),
+          borderRadius: BorderRadius.circular(5), color: widget.fillColor,),
       child: TextFormField(
         controller: widget.controller,
         style: const TextStyle(

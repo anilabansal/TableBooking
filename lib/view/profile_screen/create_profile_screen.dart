@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/profile/profile_controller.dart';
 import '../../utils/common/common_colors.dart';
-import '../../utils/common/common_text_field.dart';
 import '../../utils/common/images_string.dart';
 import '../../utils/common/widgets_methods/common_date_picker_widget.dart';
 import '../../utils/common/widgets_methods/common_phone_field.dart';
-import '../auth_screens/get_zip_code_view.dart';
+import '../../utils/common/widgets_methods/common_text_form_field.dart';
 
 class CreateProfileScreen extends StatefulWidget {
   const CreateProfileScreen({Key? key}) : super(key: key);
@@ -77,10 +76,20 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       text: "First Name",
                       color: black040404,
                       fontSize: 14,
-                      fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.w400,
                     ),
-                    const CommonTextField(
-                      hint: "Enter First Name",
+                    // const CommonTextField(
+                    //   hint: "Enter First Name",
+                    // ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    CommonTextFormField(
+                      hintText: "Enter First Name",
+                      filled: true,
+                      fillColor: greyF4F4F4,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
                     ),
                     const SizedBox(
                       height: 20,
@@ -91,8 +100,18 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
                     ),
-                    const CommonTextField(
-                      hint: "Enter Last Name",
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    // const CommonTextField(
+                    //   hint: "Enter Last Name",
+                    // ),
+                    CommonTextFormField(
+                      hintText: "Enter Last Name",
+                      filled: true,
+                      fillColor: greyF4F4F4,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
                     ),
                     const SizedBox(
                       height: 20,
@@ -101,13 +120,17 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       text: "Mobile Number",
                       color: black040404,
                       fontSize: 14,
-                      fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    const SizedBox(
+                      height: 5,
                     ),
                     // const CommonTextField(
                     //   hint: "Enter Mobile Number",
                     // ),
                     Obx(
                       () => PhoneField(
+                        textFieldColor: greyF4F4F4,
                         countryCode: profileController.countryCode.value,
                         countryFlag: profileController.countryFlag.value,
                         onCountryFlag: (value) {
@@ -125,9 +148,14 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       text: "Date of Birth",
                       color: black040404,
                       fontSize: 14,
-                      fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.w400,
                     ),
-                    const CommonDatePicker(),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const CommonDatePicker(
+                      fillColor: greyF4F4F4,
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -135,9 +163,18 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       text: "Street Address",
                       color: black040404,
                       fontSize: 14,
-                      fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.w400,
                     ),
-                    const CommonTextField(),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    // const CommonTextField(),
+                    CommonTextFormField(
+                      filled: true,
+                      fillColor: greyF4F4F4,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -147,7 +184,16 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
                     ),
-                    const CommonTextField(),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    // const CommonTextField(),
+                    CommonTextFormField(
+                      filled: true,
+                      fillColor: greyF4F4F4,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -155,9 +201,18 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       text: "State",
                       color: black040404,
                       fontSize: 14,
-                      fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.w400,
                     ),
-                    const CommonTextField(),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    // const CommonTextField(),
+                    CommonTextFormField(
+                      filled: true,
+                      fillColor: greyF4F4F4,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -165,9 +220,18 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       text: "Zipcode",
                       color: black040404,
                       fontSize: 14,
-                      fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.w400,
                     ),
-                    const CommonTextField(),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    // const CommonTextField(),
+                    CommonTextFormField(
+                      filled: true,
+                      fillColor: greyF4F4F4,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                    ),
                     const SizedBox(
                       height: 30,
                     ),

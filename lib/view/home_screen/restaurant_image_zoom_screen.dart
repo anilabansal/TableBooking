@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../utils/common/common_colors.dart';
 
 class RestaurantZoomScreen extends StatelessWidget {

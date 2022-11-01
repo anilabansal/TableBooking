@@ -1,3 +1,4 @@
+import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
@@ -28,11 +29,11 @@ class GetZipCodeView extends StatelessWidget {
               height: 33,
             ),
             CommonText(
-              text: 'Welcome',
+              text: 'Welcome!',
               color: Colors.red,
               fontSize: 18,
               fontWeight: FontWeight.w500,
-              decoration: TextDecoration.underline,
+              //decoration: TextDecoration.underline,
             ),
             CommonSizedBox(
               height: 7,
@@ -61,6 +62,8 @@ class GetZipCodeView extends StatelessWidget {
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: greyF5F5F5,
                   hintText: 'Location',
                   suffixIcon: Icon(
                     Icons.place,

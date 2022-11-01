@@ -2,6 +2,12 @@ import 'package:booking_table/routes/route_name.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  toHome() => Get.toNamed(RouteName.home);
-  toUserDetailsPage() => Get.toNamed(RouteName.loginOTP);
+  // toHome() => Get.toNamed(RouteName.home);
+  // toUserDetailsPage() => Get.toNamed(RouteName.loginOTP);
+  static final LoginController loginController = LoginController._internal();
+  factory LoginController(){
+    return loginController;
+  }
+  LoginController._internal();
+
 }

@@ -5,10 +5,11 @@ import 'package:booking_table/utils/common/widgets_methods/common_date_picker_wi
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/profile/profile_controller.dart';
-import '../../utils/common/common_text_field.dart';
+import '../../utils/common/widgets_methods/common_text_field.dart';
 import '../../utils/common/widgets_methods/app_bar_back_button.dart';
 import '../../utils/common/widgets_methods/common_phone_field.dart';
 import '../../utils/common/widgets_methods/common_text.dart';
+import '../../utils/common/widgets_methods/common_text_form_field.dart';
 
 class EditProfileScreen extends StatelessWidget {
   EditProfileScreen({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class EditProfileScreen extends StatelessWidget {
       appBar: appBarCommon(text: "Edit Details"),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(30.0,20,30,30),
+          padding: const EdgeInsets.fromLTRB(30.0, 20, 30, 30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,19 +48,20 @@ class EditProfileScreen extends StatelessWidget {
                   width: 105,
                   height: 105,
                   decoration: BoxDecoration(
-                      border: Border.all(width: 9, color: white),
-                      borderRadius: BorderRadius.circular(3.0),
-                      boxShadow: const [
-                        BoxShadow(
-                            blurRadius: 9,
-                            offset: Offset(0, 4),
-                            color: Color.fromRGBO(192, 192, 192, 0.25))
-                      ],
-                      image: const DecorationImage(
-                        image: AssetImage(
-                            "assets/images/profile/edit_profile_image.png"),
-                        fit: BoxFit.cover,
-                      )),
+                    border: Border.all(width: 9, color: white),
+                    borderRadius: BorderRadius.circular(3.0),
+                    boxShadow: const [
+                      BoxShadow(
+                          blurRadius: 9,
+                          offset: Offset(0, 4),
+                          color: Color.fromRGBO(192, 192, 192, 0.25))
+                    ],
+                    image: const DecorationImage(
+                      image: AssetImage(
+                          "assets/images/profile/edit_profile_image.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -86,8 +88,15 @@ class EditProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: 5.7,
               ),
-              const CommonTextField(
-                hint: "Chaire",
+              // const CommonTextField(
+              //   hint: "Chaire",
+              // ),
+              CommonTextFormField(
+                hintText: "Chaire",
+                filled: true,
+                fillColor: greyF4F4F4,
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
               ),
               const SizedBox(
                 height: 20,
@@ -101,8 +110,15 @@ class EditProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: 5.7,
               ),
-              const CommonTextField(
-                hint: "Fiona",
+              // const CommonTextField(
+              //   hint: "Fiona",
+              // ),
+              CommonTextFormField(
+                hintText: "Fiona",
+                filled: true,
+                fillColor: greyF4F4F4,
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
               ),
               const SizedBox(
                 height: 20,
@@ -116,11 +132,9 @@ class EditProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: 5.7,
               ),
-              // const CommonTextField(
-              //   hint: "23050 W Rd",
-              // ),
               Obx(
                 () => PhoneField(
+                  textFieldColor: greyF4F4F4,
                   countryCode: profileController.countryCode.value,
                   countryFlag: profileController.countryFlag.value,
                   onCountryFlag: (value) {
@@ -145,7 +159,9 @@ class EditProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: 5.7,
               ),
-              const CommonDatePicker(),
+              const CommonDatePicker(
+                fillColor: greyF4F4F4,
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -158,8 +174,15 @@ class EditProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: 5.7,
               ),
-              const CommonTextField(
-                hint: "23050 W Rd",
+              // const CommonTextField(
+              //   hint: "23050 W Rd",
+              // ),
+              CommonTextFormField(
+                hintText: "23050 W Rd",
+                filled: true,
+                fillColor: greyF4F4F4,
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
               ),
               const SizedBox(
                 height: 20,
@@ -173,8 +196,15 @@ class EditProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: 5.7,
               ),
-              const CommonTextField(
-                hint: "Brownstone Twp",
+              // const CommonTextField(
+              //   hint: "Brownstone Twp",
+              // ),
+              CommonTextFormField(
+                hintText: "Brownstone Twp",
+                filled: true,
+                fillColor: greyF4F4F4,
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
               ),
               const SizedBox(
                 height: 20,
@@ -188,8 +218,15 @@ class EditProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: 5.7,
               ),
-              const CommonTextField(
-                hint: "Michigan",
+              // const CommonTextField(
+              //   hint: "Michigan",
+              // ),
+              CommonTextFormField(
+                hintText: "Michigan",
+                filled: true,
+                fillColor: greyF4F4F4,
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
               ),
               const SizedBox(
                 height: 20,
@@ -203,8 +240,15 @@ class EditProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: 5.7,
               ),
-              const CommonTextField(
-                hint: "Michigan",
+              // const CommonTextField(
+              //   hint: "Michigan",
+              // ),
+              CommonTextFormField(
+                hintText: "Michigan",
+                filled: true,
+                fillColor: greyF4F4F4,
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
               ),
               const SizedBox(
                 height: 20,
@@ -218,8 +262,15 @@ class EditProfileScreen extends StatelessWidget {
               const SizedBox(
                 height: 5.7,
               ),
-              const CommonTextField(
-                hint: "48183",
+              // const CommonTextField(
+              //   hint: "48183",
+              // ),
+              CommonTextFormField(
+                hintText: "48183",
+                filled: true,
+                fillColor: greyF4F4F4,
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
               ),
               const SizedBox(
                 height: 30,

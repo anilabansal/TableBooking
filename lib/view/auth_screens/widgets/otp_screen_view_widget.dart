@@ -1,5 +1,4 @@
 // ignore_for_file: must_be_immutable
-
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
@@ -7,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
-class OtpScreenViewWidget extends StatelessWidget {
+import '../../../controller/authentication/auth_view_controller.dart';
+
+class OtpScreenViewWidget extends StatefulWidget {
   final String? callFrom;
 
   const OtpScreenViewWidget({
@@ -15,6 +16,11 @@ class OtpScreenViewWidget extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<OtpScreenViewWidget> createState() => _OtpScreenViewWidgetState();
+}
+AuthViewController controller =  Get.put(AuthViewController());
+class _OtpScreenViewWidgetState extends State<OtpScreenViewWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -41,7 +47,8 @@ class OtpScreenViewWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: CommonButton(
             onTap: () {
-              if (callFrom == 'Login') {
+              print("pinOutPut --->${controller.pinOutPut}");
+              if (widget.callFrom == 'Login') {
                 Get.offAllNamed('/zip-code');
               } else {
                 Get.offAllNamed('/create-profile');
@@ -61,20 +68,18 @@ class OtpScreenViewWidget extends StatelessWidget {
           fontWeight: FontWeight.w400,
         ),
         const SizedBox(height: 20),
-        callFrom == 'Login'
+        widget.callFrom == 'Login'
             ? Container()
             : InkWell(
                 onTap: () {
                   Get.toNamed('/register');
                 },
-                child: Container(
-                  child: CommonText(
-                    text: 'Change Phone Number',
-                    decoration: TextDecoration.underline,
-                    color: black040404,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
+                child: CommonText(
+                  text: 'Change Phone Number',
+                  decoration: TextDecoration.underline,
+                  color: black040404,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
       ],
@@ -93,16 +98,19 @@ class PinBoxWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         horizontal: 22,
       ),
-      child: const Pinput(
+      child:  Pinput(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        defaultPinTheme: PinTheme(
+        defaultPinTheme: const PinTheme(
           width: 64,
           height: 75,
           decoration: BoxDecoration(color: otpFieldFDF4F3),
           textStyle: TextStyle(
               fontWeight: FontWeight.w600, fontSize: 40, color: black000000),
         ),
+        onCompleted: (pin){
+       controller.pinOutPut.value = pin;
+        },
       ),
     );
   }

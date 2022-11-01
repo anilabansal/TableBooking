@@ -4,8 +4,8 @@ import 'package:booking_table/utils/common/widgets_methods/common_app_bar.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_textformfield.dart';
 import 'package:flutter/material.dart';
+import '../../utils/common/widgets_methods/common_text_form_field.dart';
 
 class SupportView extends StatelessWidget {
   const SupportView({Key? key}) : super(key: key);
@@ -17,7 +17,9 @@ class SupportView extends StatelessWidget {
       appBar: appBarCommon(
         text: 'Support',
       ),
-      body: const SupportBody(),
+      body: const SingleChildScrollView(
+        child: SupportBody(),
+      ),
     );
   }
 }
@@ -63,7 +65,9 @@ class SupportBody extends StatelessWidget {
                   textAlign: TextAlign.left,
                   fontWeight: FontWeight.w400,
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 CommonTextFormField(
                   filled: true,
                   fillColor: whiteF4F4F4,
@@ -80,7 +84,9 @@ class SupportBody extends StatelessWidget {
                   textAlign: TextAlign.left,
                   fontWeight: FontWeight.w400,
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 CommonTextFormField(
                   filled: true,
                   fillColor: whiteF4F4F4,
@@ -97,7 +103,9 @@ class SupportBody extends StatelessWidget {
                   textAlign: TextAlign.left,
                   fontWeight: FontWeight.w400,
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 CommonTextFormField(
                     filled: true,
                     fillColor: whiteF4F4F4,

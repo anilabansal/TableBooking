@@ -6,9 +6,8 @@ import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/utils/common/widgets_methods/restaurant_name_distance.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../utils/common/common_text_field.dart';
 import '../../utils/common/widgets_methods/common_date_picker_widget.dart';
+import '../../utils/common/widgets_methods/common_text_form_field.dart';
 
 class BookATableBody extends StatefulWidget {
   const BookATableBody({
@@ -24,154 +23,171 @@ class _BookATableBodyState extends State<BookATableBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const CommonRestaurantNameDistance(),
-        Container(
-          width: Get.width,
-          height: 1,
-          color: whiteE5E5E5,
-        ).paddingOnly(
-          top: 20,
-          bottom: 20,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Date
-            CommonText(
-              text: 'Date',
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-            CommonSizedBox(
-              height: 15,
-            ),
-            const CommonDatePicker(),
-            // InkWell(
-            //   onTap: () async {
-            //     await controller.selectDate();
-            //     if (kDebugMode) {
-            //       print('Button Clicked');
-            //     }
-            //   },
-            //   child: CommonTextFormField(
-            //     enable: false,
-            //     controller: controller.bookingDate,
-            //     suffixIcon: const Icon(
-            //       Icons.calendar_month,
-            //       color: Colors.red,
-            //     ),
-            //     color: whiteF5F5F5,
-            //   ),
-            // ),
-            Container(
-              width: Get.width,
-              height: 1,
-              color: whiteE5E5E5,
-            ).paddingOnly(
-              top: 20,
-              bottom: 20,
-            ),
-            // Time
-            CommonText(
-              text: 'Time',
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-            CommonSizedBox(
-              height: 15,
-            ),
-            const CommonTextField(
-              hint: "09:00 PM",
-            ),
-            // InkWell(
-            //   onTap: () async {
-            //     await controller.selectTime();
-            //     if (kDebugMode) {
-            //       print('Button Clicked');
-            //     }
-            //   },
-            //   child: CommonTextFormField(
-            //     enable: false,
-            //     controller: controller.bookingTime,
-            //     color: whiteF5F5F5,
-            //   ),
-            // ),
-            Container(
-              width: Get.width,
-              height: 1,
-              color: whiteE5E5E5,
-            ).paddingOnly(
-              top: 20,
-              bottom: 20,
-            ),
-            // Party SIze
-            CommonText(
-              text: 'Party Size',
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-            CommonSizedBox(
-              height: 15,
-            ),
-            // CommonTextFormField(
-            //   controller: controller.partySize,
-            //   color: whiteF5F5F5,
-            //   keyboardType: TextInputType.number,
-            //   maxLength: 2,
-            // ),
-            const CommonTextField(
-              hint: "",
-            ),
-            Container(
-              width: Get.width,
-              height: 1,
-              color: whiteE5E5E5,
-            ).paddingOnly(
-              top: 20,
-              bottom: 20,
-            ),
-            //  Field Four
-            CommonText(
-              text: 'Types of Services',
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-            CommonSizedBox(
-              height: 15,
-            ),
-            // Center(
-            //   child: Obx(
-            //     () => Container(
-            //       width: Get.width,
-            //       child: FlutterToggleTab(
-            //         height: 37,
-            //        width: 85,
-            //
-            //         borderRadius: 5,
-            //         // marginSelected: const EdgeInsets.only(left: 10, right: 10),
-            //         selectedIndex: controller.selectTypeOfService.value,
-            //         selectedBackgroundColors: const [Colors.black],
-            //         selectedTextStyle: const TextStyle(
-            //             color: Colors.white,
-            //             fontWeight: FontWeight.w400,
-            //             fontSize: 14),
-            //         unSelectedTextStyle: const TextStyle(
-            //             color: textLight868686,
-            //             fontWeight: FontWeight.w400,
-            //             fontSize: 14),
-            //         labels: controller.listOfServices,
-            //         selectedLabelIndex: (index) =>
-            //             controller.selectService(index),
-            //         isScroll: false,
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            Obx(
-              () => Row(
+    return Obx(
+      () => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CommonRestaurantNameDistance(),
+          Container(
+            width: Get.width,
+            height: 1,
+            color: whiteE5E5E5,
+          ).paddingOnly(
+            top: 20,
+            bottom: 20,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Date
+              CommonText(
+                text: 'Date',
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+              CommonSizedBox(
+                height: 15,
+              ),
+              const CommonDatePicker(
+                fillColor: greyF5F5F5,
+              ),
+              // InkWell(
+              //   onTap: () async {
+              //     await controller.selectDate();
+              //     if (kDebugMode) {
+              //       print('Button Clicked');
+              //     }
+              //   },
+              //   child: CommonTextFormField(
+              //     enable: false,
+              //     controller: controller.bookingDate,
+              //     suffixIcon: const Icon(
+              //       Icons.calendar_month,
+              //       color: Colors.red,
+              //     ),
+              //     color: whiteF5F5F5,
+              //   ),
+              // ),
+              Container(
+                width: Get.width,
+                height: 1,
+                color: whiteE5E5E5,
+              ).paddingOnly(
+                top: 20,
+                bottom: 20,
+              ),
+              // Time
+              CommonText(
+                text: 'Time',
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+              CommonSizedBox(
+                height: 15,
+              ),
+              // const CommonTextField(
+              //   hint: "09:00 PM",
+              // ),
+              CommonTextFormField(
+                hintText: "09:00 PM",
+                filled: true,
+                fillColor: greyF5F5F5,
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+              ),
+
+              // InkWell(
+              //   onTap: () async {
+              //     await controller.selectTime();
+              //     if (kDebugMode) {
+              //       print('Button Clicked');
+              //     }
+              //   },
+              //   child: CommonTextFormField(
+              //     enable: false,
+              //     controller: controller.bookingTime,
+              //     color: whiteF5F5F5,
+              //   ),
+              // ),
+              Container(
+                width: Get.width,
+                height: 1,
+                color: whiteE5E5E5,
+              ).paddingOnly(
+                top: 20,
+                bottom: 20,
+              ),
+              // Party SIze
+              CommonText(
+                text: 'Party Size',
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+              CommonSizedBox(
+                height: 15,
+              ),
+              // CommonTextFormField(
+              //   controller: controller.partySize,
+              //   color: whiteF5F5F5,
+              //   keyboardType: TextInputType.number,
+              //   maxLength: 2,
+              // ),
+              // const CommonTextField(
+              //   hint: "",
+              // ),
+              CommonTextFormField(
+                hintText: "",
+                filled: true,
+                fillColor: greyF5F5F5,
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+              ),
+              Container(
+                width: Get.width,
+                height: 1,
+                color: whiteE5E5E5,
+              ).paddingOnly(
+                top: 20,
+                bottom: 20,
+              ),
+              //  Field Four
+              CommonText(
+                text: 'Types of Services',
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+              CommonSizedBox(
+                height: 15,
+              ),
+              // Center(
+              //   child: Obx(
+              //     () => Container(
+              //       width: Get.width,
+              //       child: FlutterToggleTab(
+              //         height: 37,
+              //        width: 85,
+              //
+              //         borderRadius: 5,
+              //         // marginSelected: const EdgeInsets.only(left: 10, right: 10),
+              //         selectedIndex: controller.selectTypeOfService.value,
+              //         selectedBackgroundColors: const [Colors.black],
+              //         selectedTextStyle: const TextStyle(
+              //             color: Colors.white,
+              //             fontWeight: FontWeight.w400,
+              //             fontSize: 14),
+              //         unSelectedTextStyle: const TextStyle(
+              //             color: textLight868686,
+              //             fontWeight: FontWeight.w400,
+              //             fontSize: 14),
+              //         labels: controller.listOfServices,
+              //         selectedLabelIndex: (index) =>
+              //             controller.selectService(index),
+              //         isScroll: false,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              Row(
                 children: [
                   typeServiceContainer(
                       "Full",
@@ -197,55 +213,65 @@ class _BookATableBodyState extends State<BookATableBody> {
                       "Go To", controller.serviceType.value == "Go To"),
                 ],
               ),
-            ),
-            CommonSizedBox(
-              height: 15,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Icon(
-                  Icons.error,
-                  color: Colors.red,
-                ),
-                CommonSizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: CommonText(
-                    text:
-                        'Pre-Order your food and drink and still have a server in restaurant',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: textLight868686,
-                  ),
-                ),
-              ],
-            ),
-            CommonSizedBox(
-              height: 31,
-            ),
-            // Button
-            InkWell(
-              onTap: () {
-                Get.toNamed('/full-service');
-              },
-              child: CommonButton(
-                textColor: Colors.white,
-                bgColor: redE2211C,
-                text: 'Proceed',
+              CommonSizedBox(
+                height: 15,
               ),
-            ),
-            CommonSizedBox(
-              height: 31,
-            ),
-          ],
-        ).paddingOnly(
-          left: 20,
-          right: 20,
-        ),
-      ],
+              Visibility(
+                visible: controller.serviceType.isNotEmpty,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    ),
+                    CommonSizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: CommonText(
+                        text: controller.serviceType.value == "Full"
+                            ? "Traditional order when seated with a server"
+                            : controller.serviceType.value == "No"
+                                ? "Pre order through the app, and then order everything through the app while at the restaurant."
+                                : controller.serviceType.value == "Go To"
+                                    ? "You can take away your order as well."
+                                    : "",
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        color: textGrey868686,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              CommonSizedBox(
+                height: 31,
+              ),
+              // Button
+              InkWell(
+                onTap: () {
+                  Get.toNamed('/full-service');
+                },
+                child: CommonButton(
+                  textColor: Colors.white,
+                  bgColor: redE2211C,
+                  text: 'Proceed',
+                ),
+              ),
+              CommonSizedBox(
+                height: 31,
+              ),
+            ],
+          ).paddingOnly(
+            left: 20,
+            right: 20,
+          ),
+        ],
+      ),
     );
+
+    // );
   }
 
   typeServiceContainer(text, isSelected) {
@@ -253,6 +279,7 @@ class _BookATableBodyState extends State<BookATableBody> {
       child: InkWell(
         onTap: () {
           controller.serviceType.value = text;
+          controller.update();
           // isSelected = !isSelected;
         },
         child: Container(
