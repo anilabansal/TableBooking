@@ -3,11 +3,17 @@ import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
+import 'package:country_phone_code_picker/controller/country_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controller/authentication/auth_view_controller.dart';
+
 class AuthScreenViewWidget extends StatelessWidget {
-  const AuthScreenViewWidget({Key? key}) : super(key: key);
+  AuthScreenViewWidget({Key? key}) : super(key: key);
+
+  // AuthViewController authController = Get.put(AuthViewController());
+  CountryController controller = Get.put(CountryController());
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +40,28 @@ class AuthScreenViewWidget extends StatelessWidget {
           text: 'Sign In',
           bgColor: redE2211C,
           onTap: () {
+            //  controller.selectedCountry.phoneCode;
+            // print(
+            //     "countryCode ---->${ controller.selectedCountry.phoneCode}");
             // TODO: Sign In Functionality
             Get.toNamed('/login');
           },
           textColor: Colors.white,
         ),
         CommonSizedBox(height: 20),
-        CommonText(
-          text: 'OR',
-          color: textLight868686,
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
+        Row(mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(dividerImage,width: 91,),
+            const SizedBox(width: 10,),
+            CommonText(
+              text: 'OR',
+              color: textLight868686,
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+            const SizedBox(width: 10,),
+            Image.asset(dividerImage,width: 91,),
+          ],
         ),
         CommonSizedBox(height: 20),
         CommonText(
@@ -63,11 +80,20 @@ class AuthScreenViewWidget extends StatelessWidget {
           textColor: Colors.white,
         ),
         CommonSizedBox(height: 20),
-        CommonText(
-            text: 'OR',
-            fontWeight: FontWeight.w400,
-            color: textLight868686,
-            fontSize: 14),
+        Row(mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(dividerImage,width: 91,),
+            const SizedBox(width: 10,),
+            CommonText(
+              text: 'OR',
+              color: textLight868686,
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+            const SizedBox(width: 10,),
+            Image.asset(dividerImage,width: 91,),
+          ],
+        ),
         CommonSizedBox(height: 20),
         CommonText(
           text: 'Continue with',

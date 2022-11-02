@@ -1,13 +1,15 @@
-import 'package:booking_table/controller/profile/profile_controller.dart';
-import 'package:booking_table/utils/common/common_colors.dart';
-import 'package:booking_table/utils/common/common_text_field.dart';
+
 import 'package:booking_table/utils/common/images_string.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_date_picker_widget.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_phone_field.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../controller/profile/profile_controller.dart';
+import '../../../utils/common/common_colors.dart';
+import '../../../utils/common/widgets_methods/common_button.dart';
+import '../../../utils/common/widgets_methods/common_date_picker_widget.dart';
+import '../../../utils/common/widgets_methods/common_phone_field.dart';
+import '../../../utils/common/widgets_methods/common_text.dart';
 
 class CreateProfileScreenBody extends StatelessWidget {
   const CreateProfileScreenBody({
@@ -75,8 +77,16 @@ class CreateProfileScreenBody extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
                   ),
-                  const CommonTextField(
-                    hint: "Enter First Name",
+                  // const CommonTextField(
+                  //   hint: "Enter First Name",
+                  // ),
+                  const SizedBox(
+                    height: 5.7,
+                  ),
+                  CommonTextFormField(
+                    hintText: "Enter First Name",
+                    filled: true,
+                    fillColor: greyF4F4F4,
                   ),
                   const SizedBox(
                     height: 20,
@@ -87,8 +97,17 @@ class CreateProfileScreenBody extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
                   ),
-                  const CommonTextField(
-                    hint: "Enter Last Name",
+                  //  CommonTextField(
+                  //   hint: "Enter Last Name",
+                  // ),
+                  const SizedBox(
+                    height: 5.7,
+                  ),
+                  CommonTextFormField(
+                    hintText: "Enter Last Name",
+                    filled: true,
+                    fillColor: greyF4F4F4,
+                    fontSize: 18,
                   ),
                   const SizedBox(
                     height: 20,
@@ -102,6 +121,9 @@ class CreateProfileScreenBody extends StatelessWidget {
                   // const CommonTextField(
                   //   hint: "Enter Mobile Number",
                   // ),
+                  const SizedBox(
+                    height: 5.7,
+                  ),
                   Obx(
                     () => PhoneField(
                       countryCode: profileController.countryCode.value,
@@ -133,7 +155,8 @@ class CreateProfileScreenBody extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
                   ),
-                  const CommonTextField(),
+                  // const CommonTextField(),
+
                   const SizedBox(
                     height: 20,
                   ),
@@ -143,7 +166,14 @@ class CreateProfileScreenBody extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
                   ),
-                  const CommonTextField(),
+                  const SizedBox(
+                    height: 5.7,
+                  ),
+                  CommonTextFormField(
+                    hintText: "",
+                    filled: true,
+                    fillColor: greyF4F4F4,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -153,7 +183,15 @@ class CreateProfileScreenBody extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
                   ),
-                  const CommonTextField(),
+                  // const CommonTextField(),
+                  const SizedBox(
+                    height: 5.7,
+                  ),
+                  CommonTextFormField(
+                    hintText: "",
+                    filled: true,
+                    fillColor: greyF4F4F4,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -163,7 +201,14 @@ class CreateProfileScreenBody extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
                   ),
-                  const CommonTextField(),
+                  const SizedBox(
+                    height: 5.7,
+                  ),
+                  CommonTextFormField(
+                    hintText: "",
+                    filled: true,
+                    fillColor: greyF4F4F4,
+                  ),
                   const SizedBox(
                     height: 30,
                   ),

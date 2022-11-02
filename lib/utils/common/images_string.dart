@@ -5,6 +5,7 @@ const String authSelectScreenLogo = 'assets/images/auth/auth_select_logo.png';
 const String facebookLogo = 'assets/images/auth/facebook_logo.png';
 const String googleLogo = 'assets/images/auth/google_logo.png';
 const String appleLogo = 'assets/images/auth/apple_logo.png';
+const String dividerImage = 'assets/images/auth/divider.png';
 
 // Sign In Screen
 const String signInLogo = 'assets/images/auth/mobile_sign_in_screen.png';

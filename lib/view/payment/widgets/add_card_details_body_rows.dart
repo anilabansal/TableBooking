@@ -4,12 +4,12 @@ import 'package:booking_table/controller/add_card_details/add_card_details_contr
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_textformfield.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../utils/common/widgets_methods/common_text_form_field.dart';
 
-class AddCardDetailsRowThree extends StatelessWidget {
+class AddCardDetailsRowThree extends StatelessWidget{
   AddCardDetailsRowThree({
     Key? key,
   }) : super(key: key);
@@ -28,7 +28,6 @@ class AddCardDetailsRowThree extends StatelessWidget {
                 text: 'Exp. Date',
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                // fontFamily: mainLatoFont,
               ),
               CommonSizedBox(
                 height: 6,
@@ -63,7 +62,6 @@ class AddCardDetailsRowThree extends StatelessWidget {
                 text: 'Cvv',
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                // fontFamily: mainLatoFont,
               ),
               CommonSizedBox(
                 height: 6,
@@ -133,7 +131,6 @@ class AddCardDetailsRowOne extends StatelessWidget {
           text: 'Card Holder Name',
           fontSize: 14,
           fontWeight: FontWeight.w400,
-          // fontFamily: mainLatoFont,
         ),
         CommonSizedBox(
           height: 6,

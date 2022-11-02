@@ -6,7 +6,6 @@ import 'package:booking_table/view/profile_screen/edit_profile_screen.dart';
 import 'package:booking_table/view/service_type/full_service_summary.dart';
 import 'package:booking_table/view/service_type/mid_service_summary.dart';
 import 'package:get/get.dart';
-
 import '/routes/route_name.dart';
 import '/view/auth_screens/get_zip_code_view.dart';
 import '/view/auth_screens/otp_screen.dart';

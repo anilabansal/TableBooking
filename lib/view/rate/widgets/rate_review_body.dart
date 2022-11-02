@@ -3,11 +3,12 @@ import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_textformfield.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+
+import '../../../utils/common/widgets_methods/common_text_form_field.dart';
 
 class RateReviewBody extends StatelessWidget {
   const RateReviewBody({

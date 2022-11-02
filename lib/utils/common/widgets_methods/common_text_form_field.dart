@@ -49,7 +49,12 @@ class CommonTextFormField extends StatelessWidget {
       maxLines: maxLines,
       controller: controller,
       cursorWidth: 1,
-      style: const TextStyle(fontSize: 20, color: black000000),
+      // style: const TextStyle(fontSize: 20, color: black000000),
+      style:  TextStyle(
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        color: black000000,
+      ),
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
         helperMaxLines: 3,
@@ -64,8 +69,20 @@ class CommonTextFormField extends StatelessWidget {
           color: color,
           fontWeight: fontWeight,
         ),
-        border: InputBorder.none,
-        focusedBorder: InputBorder.none,
+      //  border: InputBorder.none,
+  //   focusedBorder: InputBorder.none,
+  //       border: OutlineInputBorder(
+  //         borderRadius: BorderRadius.circular(5),
+  //         borderSide: BorderSide(color: fillColor!, ),
+  //       ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide:  BorderSide(color: fillColor!, ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide:  BorderSide(color: fillColor!, ),
+        ),
       ),
     );
   }

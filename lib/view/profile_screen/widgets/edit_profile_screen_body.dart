@@ -1,10 +1,10 @@
 import 'package:booking_table/controller/profile/profile_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
-import 'package:booking_table/utils/common/common_text_field.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_date_picker_widget.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_phone_field.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -85,8 +85,14 @@ class EditProfileScreenBody extends StatelessWidget {
             const SizedBox(
               height: 5.7,
             ),
-            const CommonTextField(
-              hint: "Chaire",
+            // const CommonTextField(
+            //   hint: "Chaire",
+            // ),
+            CommonTextFormField(
+              hintText: "Chaire",
+              filled: true,
+              fillColor: greyF4F4F4,
+              fontSize: 18,
             ),
             const SizedBox(
               height: 20,
@@ -100,8 +106,13 @@ class EditProfileScreenBody extends StatelessWidget {
             const SizedBox(
               height: 5.7,
             ),
-            const CommonTextField(
-              hint: "Fiona",
+            // const CommonTextField(
+            //   hint: "Fiona",
+            // ),
+            CommonTextFormField(
+              hintText: "Fiona",
+              filled: true,
+              fillColor: greyF4F4F4,
             ),
             const SizedBox(
               height: 20,
@@ -129,6 +140,7 @@ class EditProfileScreenBody extends StatelessWidget {
                 onCodeChange: (value) {
                   profileController.countryCode.value = value;
                 },
+                textFieldColor:greyF4F4F4 ,
               ),
             ),
 
@@ -157,8 +169,14 @@ class EditProfileScreenBody extends StatelessWidget {
             const SizedBox(
               height: 5.7,
             ),
-            const CommonTextField(
-              hint: "23050 W Rd",
+            // const CommonTextField(
+            //   hint: "23050 W Rd",
+            // ),
+            CommonTextFormField(
+              hintText: "23050 W Rd",
+              filled: true,
+              fillColor: greyF4F4F4,
+              fontSize: 18,
             ),
             const SizedBox(
               height: 20,
@@ -172,8 +190,14 @@ class EditProfileScreenBody extends StatelessWidget {
             const SizedBox(
               height: 5.7,
             ),
-            const CommonTextField(
-              hint: "Brownstone Twp",
+            // const CommonTextField(
+            //   hint: "Brownstone Twp",
+            // ),
+            CommonTextFormField(
+              hintText: "Brownstone Twp",
+              filled: true,
+              fillColor: greyF4F4F4,
+              fontSize: 18,
             ),
             const SizedBox(
               height: 20,
@@ -187,8 +211,14 @@ class EditProfileScreenBody extends StatelessWidget {
             const SizedBox(
               height: 5.7,
             ),
-            const CommonTextField(
-              hint: "Michigan",
+            // const CommonTextField(
+            //   hint: "Michigan",
+            // ),
+            CommonTextFormField(
+              hintText: "Michigan",
+              filled: true,
+              fillColor: greyF4F4F4,
+              fontSize: 18,
             ),
             const SizedBox(
               height: 20,
@@ -202,8 +232,14 @@ class EditProfileScreenBody extends StatelessWidget {
             const SizedBox(
               height: 5.7,
             ),
-            const CommonTextField(
-              hint: "Michigan",
+            // const CommonTextField(
+            //   hint: "Michigan",
+            // ),
+            CommonTextFormField(
+              hintText: "Michigan",
+              filled: true,
+              fillColor: greyF4F4F4,
+              fontSize: 18,
             ),
             const SizedBox(
               height: 20,
@@ -217,8 +253,14 @@ class EditProfileScreenBody extends StatelessWidget {
             const SizedBox(
               height: 5.7,
             ),
-            const CommonTextField(
-              hint: "48183",
+            // const CommonTextField(
+            //   hint: "48183",
+            // ),
+            CommonTextFormField(
+              hintText: "48183",
+              filled: true,
+              fillColor: greyF4F4F4,
+              fontSize: 18,
             ),
             const SizedBox(
               height: 30,
