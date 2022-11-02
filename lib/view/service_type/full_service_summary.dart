@@ -20,7 +20,9 @@ class FullServiceSummaryView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appBarCommon(text: "Summary"),
-      body: const FullServiceSummaryBody(),
+      body: FullServiceSummaryBody(
+        callFrom: callFrom,
+      ),
     );
   }
 }

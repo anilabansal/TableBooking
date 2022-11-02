@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FullServiceSummaryBody extends StatelessWidget {
-  const FullServiceSummaryBody({
+  String? callFrom;
+  FullServiceSummaryBody({
+    this.callFrom,
     Key? key,
   }) : super(key: key);
 
@@ -17,7 +19,9 @@ class FullServiceSummaryBody extends StatelessWidget {
         children: [
           const FullSummaryTopView(),
           // CommonSizedBox(height: 21),
-          const FullSummaryBookingDetailsView(),
+          FullSummaryBookingDetailsView(
+            callFrom: callFrom,
+          ),
           Container(
             width: Get.width,
             height: 1,

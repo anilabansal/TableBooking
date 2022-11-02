@@ -81,6 +81,9 @@ class PreOrderBody extends StatelessWidget {
               left: 20,
             ),
             child: CommonButton(
+              onTap: (){
+                Get.toNamed('/full-service-with-pre-order');
+              },
               text: 'Add',
               bgColor: redE2211C,
               textColor: Colors.white,

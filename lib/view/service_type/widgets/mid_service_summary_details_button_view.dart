@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MidSummaryBookingDetailsView extends StatelessWidget {
-  const MidSummaryBookingDetailsView({
+  String? callFrom;
+  MidSummaryBookingDetailsView({
+    this.callFrom,
     Key? key,
   }) : super(key: key);
 

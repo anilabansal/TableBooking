@@ -18,7 +18,9 @@ class MidServiceSummaryBody extends StatelessWidget {
         children: [
           const MidSummaryTopView(),
           CommonSizedBox(height: 21),
-          const MidSummaryBookingDetailsView(),
+          MidSummaryBookingDetailsView(
+            callFrom: 'Place Order',
+          ),
           Container(
             margin: const EdgeInsets.only(bottom: 18.0, top: 26.0),
             height: 1,

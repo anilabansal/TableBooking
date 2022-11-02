@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FullSummaryBookingDetailsView extends StatelessWidget {
-  const FullSummaryBookingDetailsView({
+  String? callFrom;
+  FullSummaryBookingDetailsView({
+    this.callFrom,
     Key? key,
   }) : super(key: key);
 
@@ -156,30 +158,135 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                 CommonSizedBox(
                   height: 24,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CommonText(
-                      text: 'Pre-Order',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: black000000,
-                    ),
-                    SizedBox(
-                      height: 40,
-                      width: 100,
-                      child: CommonButton(
-                        onTap: () {
-                          Get.toNamed('pre-order');
-                        },
-                        text: 'Place Order',
-                        bgColor: redF2E6E6,
-                        fontSize: 14,
-                        textColor: redE2211C,
+                callFrom == 'Pre Order'
+                    ? Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CommonText(
+                                text: 'Pre-Order',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: black000000,
+                              ),
+                              SizedBox(
+                                height: 40,
+                                width: 100,
+                                child: CommonButton(
+                                  onTap: () {
+                                    Get.toNamed('pre-order');
+                                  },
+                                  text: 'Add More',
+                                  bgColor: redF2E6E6,
+                                  fontSize: 14,
+                                  textColor: redE2211C,
+                                ),
+                              ),
+                            ],
+                          ),
+                          CommonSizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(
+                              left: 15,
+                              right: 10,
+                              top: 13,
+                              bottom: 30,
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CommonText(
+                                          fontWeight: FontWeight.w500,
+                                          text: 'Spicy Crunchy Chicken',
+                                          fontSize: 15,
+                                        ),
+                                        CommonText(
+                                          fontWeight: FontWeight.w500,
+                                          text: 'Quantity: 2',
+                                          fontSize: 12,
+                                          color: textLight868686,
+                                        ),
+                                      ],
+                                    ),
+                                    Icon(
+                                      Icons.close,
+                                      color: Colors.black,
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(
+                                      top: 15, bottom: 15),
+                                  width: Get.width,
+                                  height: 1,
+                                  color: textGrey868686,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CommonText(
+                                          fontWeight: FontWeight.w500,
+                                          text: 'Spicy Crunchy Chicken',
+                                          fontSize: 15,
+                                        ),
+                                        CommonText(
+                                          fontWeight: FontWeight.w500,
+                                          text: 'Quantity: 2',
+                                          fontSize: 12,
+                                          color: textLight868686,
+                                        ),
+                                      ],
+                                    ),
+                                    Icon(
+                                      Icons.close,
+                                      color: Colors.black,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CommonText(
+                            text: 'Pre-Order',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: black000000,
+                          ),
+                          SizedBox(
+                            height: 40,
+                            width: 100,
+                            child: CommonButton(
+                              onTap: () {
+                                Get.toNamed('pre-order');
+                              },
+                              text: 'Place Order',
+                              bgColor: redF2E6E6,
+                              fontSize: 14,
+                              textColor: redE2211C,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
                 CommonSizedBox(
                   height: 28,
                 ),

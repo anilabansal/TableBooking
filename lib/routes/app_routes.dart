@@ -110,7 +110,12 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteName.fullService,
-      page: () => FullServiceSummaryView(callFrom: 'callFrom'),
+      page: () => FullServiceSummaryView(callFrom: 'Pre Order'),
+      // binding: ,
+    ),
+    GetPage(
+      name: RouteName.fullServicePreOrder,
+      page: () => FullServiceSummaryView(callFrom: 'Pre Order'),
       // binding: ,
     ),
     GetPage(

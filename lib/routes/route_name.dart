@@ -16,6 +16,7 @@ class RouteName {
   static const reviews = '/reviews';
   static const reservation = '/reservation';
   static const fullService = '/full-service';
+  static const fullServicePreOrder = '/full-service-with-pre-order';
   static const midService = '/mid-service';
   static const preOrder = '/pre-order';
   static const previousBooking = '/previous-booking';
