@@ -104,7 +104,7 @@ class PaymentDoneBody extends StatelessWidget {
             width: 205,
             child: CommonButton(
               onTap: () {
-                Get.toNamed('/reviews');
+                Get.toNamed('/reservation');
               },
               text: 'Continue',
               textColor: Colors.white,

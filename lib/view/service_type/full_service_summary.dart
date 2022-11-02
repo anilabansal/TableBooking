@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FullServiceSummaryView extends StatelessWidget {
-  String callFrom;
+  String? callFrom;
   FullServiceSummaryView({
-    required this.callFrom,
+    this.callFrom,
     Key? key,
   }) : super(key: key);
 

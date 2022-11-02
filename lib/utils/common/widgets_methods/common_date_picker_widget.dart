@@ -21,7 +21,9 @@ class CommonDatePicker extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(left: 8, right: 5),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5), color: widget.fillColor,),
+        borderRadius: BorderRadius.circular(5),
+        color: fillColor,
+      ),
       child: TextFormField(
         controller: controller,
         style: const TextStyle(
