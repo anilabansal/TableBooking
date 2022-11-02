@@ -169,6 +169,9 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                       height: 40,
                       width: 100,
                       child: CommonButton(
+                        onTap: () {
+                          Get.toNamed('pre-order');
+                        },
                         text: 'Place Order',
                         bgColor: redF2E6E6,
                         fontSize: 14,
@@ -200,11 +203,16 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                         CommonSizedBox(
                           width: 9,
                         ),
-                        CommonText(
-                          text: 'Edit Your Booking',
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed('/edit-a-table');
+                          },
+                          child: CommonText(
+                            text: 'Edit Your Booking',
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ],
                     ),

@@ -1,10 +1,13 @@
-import 'package:booking_table/utils/common/common_colors.dart';
-import 'package:booking_table/utils/common/images_string.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../utils/common/common_colors.dart';
+import '../../utils/common/images_string.dart';
+import '../../utils/common/widgets_methods/common_button.dart';
+import '../../utils/common/widgets_methods/common_sized_box.dart';
+import '../../utils/common/widgets_methods/common_text.dart';
 
 class GetZipCodeView extends StatelessWidget {
   const GetZipCodeView({Key? key}) : super(key: key);
@@ -94,6 +97,7 @@ class GetZipCodeView extends StatelessWidget {
           ],
         ),
       ),
+
     );
   }
 }

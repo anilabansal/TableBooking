@@ -19,13 +19,14 @@ class OtpScreenViewWidget extends StatefulWidget {
   @override
   State<OtpScreenViewWidget> createState() => _OtpScreenViewWidgetState();
 }
-AuthViewController controller =  Get.put(AuthViewController());
+
+AuthViewController controller = Get.put(AuthViewController());
+
 class _OtpScreenViewWidgetState extends State<OtpScreenViewWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        const SizedBox(height: 25),
+    return SafeArea(
+      child: Column(children: <Widget>[
         CommonText(
           text: 'Enter the 4 digit code sent to',
           fontWeight: FontWeight.w400,
@@ -81,8 +82,8 @@ class _OtpScreenViewWidgetState extends State<OtpScreenViewWidget> {
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
-              ),
-      ],
+              )
+      ]),
     );
   }
 }
@@ -94,11 +95,12 @@ class PinBoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // PIN INPUT BOX
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 22,
       ),
-      child:  Pinput(
+      child: Pinput(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         defaultPinTheme: const PinTheme(
@@ -108,8 +110,8 @@ class PinBoxWidget extends StatelessWidget {
           textStyle: TextStyle(
               fontWeight: FontWeight.w600, fontSize: 40, color: black000000),
         ),
-        onCompleted: (pin){
-       controller.pinOutPut.value = pin;
+        onCompleted: (pin) {
+          controller.pinOutPut.value = pin;
         },
       ),
     );

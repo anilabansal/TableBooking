@@ -6,8 +6,6 @@ import 'package:booking_table/view/profile_screen/edit_profile_screen.dart';
 import 'package:booking_table/view/service_type/full_service_summary.dart';
 import 'package:booking_table/view/service_type/mid_service_summary.dart';
 import 'package:get/get.dart';
-import '../view/home_screen/filter_result_screen.dart';
-import '../view/payment/payment_method_screen.dart';
 import '/routes/route_name.dart';
 import '/view/auth_screens/get_zip_code_view.dart';
 import '/view/auth_screens/otp_screen.dart';
@@ -27,6 +25,8 @@ import '/view/service_type/pre_order.dart';
 import '/view/splash_screen/splash_view.dart';
 import '/view/support/support_view.dart';
 import '/view/terms_n_conditions/terms_n_conditions.dart';
+import '../view/home_screen/filter_result_screen.dart';
+import '../view/payment/payment_method_screen.dart';
 
 class AppRoutes {
   static final appRoutes = [
@@ -39,7 +39,7 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.createProfile, page: () => const CreateProfileScreen(),
+      name: RouteName.createProfile, page: () => CreateProfileScreen(),
       // binding: ,
     ),
     GetPage(
@@ -130,7 +130,17 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.bookATable, page: () => const BookATableView(),
+      name: RouteName.bookATable,
+      page: () => BookATableView(
+        callFrom: 'book',
+      ),
+      // binding: ,
+    ),
+    GetPage(
+      name: RouteName.editATable,
+      page: () => BookATableView(
+        callFrom: 'edit',
+      ),
       // binding: ,
     ),
     GetPage(
@@ -142,11 +152,12 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.filterScreen, page: () => const FilterScreen(),
+      name: RouteName.filterScreen, page: () => FilterScreen(),
       // binding: ,
     ),
     GetPage(
-      name: RouteName.filterResultScreen, page: () => const FilterResultScreen(),
+      name: RouteName.filterResultScreen,
+      page: () => const FilterResultScreen(),
       // binding: ,
     ),
     GetPage(
@@ -156,6 +167,11 @@ class AppRoutes {
     GetPage(
       name: RouteName.restaurantDetails,
       page: () => const RestaurantDetailScreen(),
+      // binding: ,
+    ),
+    GetPage(
+      name: RouteName.preOrder,
+      page: () => PreOrderView(),
       // binding: ,
     ),
   ];

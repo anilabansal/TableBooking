@@ -1,11 +1,13 @@
 import 'package:booking_table/utils/common/common_colors.dart';
-import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_app_bar.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
+
+import '../../utils/common/images_string.dart';
+import '../../utils/common/widgets_methods/common_button.dart';
+import '../../utils/common/widgets_methods/common_sized_box.dart';
+import '../../utils/common/widgets_methods/common_text.dart';
 import '../../utils/common/widgets_methods/common_text_form_field.dart';
+
 
 class SupportView extends StatelessWidget {
   const SupportView({Key? key}) : super(key: key);
@@ -23,6 +25,7 @@ class SupportView extends StatelessWidget {
     );
   }
 }
+
 
 class SupportBody extends StatelessWidget {
   const SupportBody({
@@ -130,3 +133,4 @@ class SupportBody extends StatelessWidget {
     );
   }
 }
+

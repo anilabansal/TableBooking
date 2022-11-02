@@ -4,18 +4,14 @@ import 'package:booking_table/view/auth_screens/widgets/otp_screen_view_widget.d
 import 'package:flutter/material.dart';
 
 class OtpScreenView extends StatelessWidget {
- final  String? callFrom;
+  final String? callFrom;
   const OtpScreenView({required this.callFrom, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: OtpScreenViewWidget(
-            callFrom: callFrom,
-          ),
-        ),
+      body: OtpScreenViewWidget(
+        callFrom: callFrom,
       ),
     );
   }

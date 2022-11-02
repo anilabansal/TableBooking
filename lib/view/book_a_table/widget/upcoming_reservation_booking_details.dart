@@ -13,6 +13,7 @@ class UpcomingReservationBookingDetails extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        // BOOKING DEATIS TOP VIEW
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -77,6 +78,7 @@ class UpcomingReservationBookingDetails extends StatelessWidget {
             ),
           ],
         ),
+        // BOOKING DEATIS BOTTOM VIEW
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

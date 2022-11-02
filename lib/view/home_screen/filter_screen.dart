@@ -1,23 +1,21 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_dropdown_widget.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_info_icon.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../utils/common/images_string.dart';
 import '../../utils/common/widgets_methods/common_app_bar.dart';
+import '../../utils/common/widgets_methods/common_button.dart';
 import '../../utils/common/widgets_methods/common_date_picker_widget.dart';
+import '../../utils/common/widgets_methods/common_dropdown_widget.dart';
+import '../../utils/common/widgets_methods/common_info_icon.dart';
+import '../../utils/common/widgets_methods/common_text.dart';
 
-class FilterScreen extends StatefulWidget {
-  const FilterScreen({Key? key}) : super(key: key);
+class FilterScreen extends StatelessWidget {
+  FilterScreen({Key? key}) : super(key: key);
 
-  @override
-  State<FilterScreen> createState() => _FilterScreenState();
-}
-
-class _FilterScreenState extends State<FilterScreen> {
   HomeController homeController = Get.put(HomeController());
   final dateController = TextEditingController();
 
@@ -169,7 +167,7 @@ class _FilterScreenState extends State<FilterScreen> {
                                   ? "Pre order through the app, and then order everything through the app while at the restaurant."
                                   : homeController.serviceType.value == "Go To"
                                       ? "You can take away your order as well."
-                                      : "",
+                                      : "Pre-Order your food and drink and still have a server in restaurant",
                           fontWeight: FontWeight.w400,
                           fontSize: 14,
                           color: textGrey868686,

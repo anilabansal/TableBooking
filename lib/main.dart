@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Table Booking',
       getPages: AppRoutes.appRoutes,
       theme: ThemeData(fontFamily: mainLaToFont),
       home: const Material(

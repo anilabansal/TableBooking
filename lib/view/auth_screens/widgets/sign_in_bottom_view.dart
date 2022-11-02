@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
@@ -27,7 +29,7 @@ class _SignInScreenBottomViewState extends State<SignInScreenBottomView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Heading
+        // HEADER
         CommonText(
           text: widget.callFrom == 'Login'
               ? 'Enter Mobile Number'
@@ -45,10 +47,13 @@ class _SignInScreenBottomViewState extends State<SignInScreenBottomView> {
           fontSize: 14,
           color: textLight868686,
         ),
+
         widget.callFrom == 'Login'
             ? CommonSizedBox(height: 40)
             : _privacyPolicyNTerms(),
         // Button
+        // LOGIN/REGISTER BUTTON
+
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: CommonButton(
@@ -67,6 +72,7 @@ class _SignInScreenBottomViewState extends State<SignInScreenBottomView> {
         CommonSizedBox(height: 20),
         CommonText(text: 'OR', color: textLight868686, fontSize: 14),
         CommonSizedBox(height: 20),
+        // GUEST BUTTON
         InkWell(
           onTap: () {
             Get.toNamed('/home');
@@ -82,6 +88,7 @@ class _SignInScreenBottomViewState extends State<SignInScreenBottomView> {
     );
   }
 
+  // MOBILE NUMBER ENTER ROW
   Container _textFieldRow() {
     return Container(
       decoration: BoxDecoration(
@@ -120,6 +127,7 @@ class _SignInScreenBottomViewState extends State<SignInScreenBottomView> {
     );
   }
 
+  // COUNTRY CODE PICKER
   CommonSizedBox _codePicker() {
 
   // CountryController controller = Get.put(CountryController());
@@ -141,6 +149,7 @@ class _SignInScreenBottomViewState extends State<SignInScreenBottomView> {
     );
   }
 
+  // PRIVACY POLICY & TERMS N CONDITIONS
   Column _privacyPolicyNTerms() {
     return Column(
       children: <Widget>[

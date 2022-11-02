@@ -12,12 +12,7 @@ class AddCreditCardDetailsView extends StatelessWidget {
       appBar: appBarCommon(
         text: 'Credit Card',
       ),
-      body: const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(left: 31.0, right: 26, top: 54),
-          child: AddCardDetailsBody(),
-        ),
-      ),
+      body: const AddCardDetailsBody(),
     );
   }
 }

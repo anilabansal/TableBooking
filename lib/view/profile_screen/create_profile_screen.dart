@@ -1,22 +1,19 @@
-import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
+import 'package:booking_table/view/profile_screen/widgets/create_profile_screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../controller/profile/profile_controller.dart';
 import '../../utils/common/common_colors.dart';
 import '../../utils/common/images_string.dart';
+import '../../utils/common/widgets_methods/common_button.dart';
 import '../../utils/common/widgets_methods/common_date_picker_widget.dart';
 import '../../utils/common/widgets_methods/common_phone_field.dart';
+import '../../utils/common/widgets_methods/common_text.dart';
 import '../../utils/common/widgets_methods/common_text_form_field.dart';
 
-class CreateProfileScreen extends StatefulWidget {
-  const CreateProfileScreen({Key? key}) : super(key: key);
+class CreateProfileScreen extends StatelessWidget {
+  CreateProfileScreen({Key? key}) : super(key: key);
 
-  @override
-  State<CreateProfileScreen> createState() => _CreateProfileScreenState();
-}
-
-class _CreateProfileScreenState extends State<CreateProfileScreen> {
   final ProfileController profileController = Get.put(ProfileController());
 
   @override
@@ -250,6 +247,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
           ),
         ),
       ),
+
     );
   }
 }

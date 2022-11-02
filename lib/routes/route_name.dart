@@ -21,6 +21,7 @@ class RouteName {
   static const previousBooking = '/previous-booking';
   static const upcomingBooking = '/upcoming-booking';
   static const bookATable = '/book-a-table';
+  static const editATable = '/edit-a-table';
   static const zipCodeView = '/zip-code';
   static const editProfile = '/edit-profile';
   static const createProfile = '/create-profile';

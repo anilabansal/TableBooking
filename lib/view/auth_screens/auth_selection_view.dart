@@ -1,14 +1,18 @@
-import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
+import 'package:booking_table/view/auth_screens/widgets/auth_selection_body.dart';
 import 'package:booking_table/view/auth_screens/widgets/auth_selection_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../utils/common/common_colors.dart';
+import '../../utils/common/widgets_methods/common_text.dart';
+
 
 class AuthSelectionView extends StatelessWidget {
   const AuthSelectionView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
