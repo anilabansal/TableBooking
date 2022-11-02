@@ -40,7 +40,7 @@ class ReservationViewBody extends StatelessWidget {
         Expanded(
           child: TabBarView(
             controller: controller.tabController,
-            children: const [
+            children: [
               UpComingReservations(),
               PreviousReservations(),
             ],

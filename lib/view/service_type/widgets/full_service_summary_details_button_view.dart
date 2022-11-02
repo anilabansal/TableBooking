@@ -30,6 +30,14 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
           fontWeight: FontWeight.w600,
         ),
         children: [
+          Container(
+            margin: const EdgeInsets.only(
+              bottom: 20.0,
+            ),
+            height: 1,
+            width: Get.width * 0.9,
+            color: redE2211C,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Column(
@@ -110,7 +118,7 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
             ),
             height: 1,
             width: Get.width * 0.9,
-            color: textLight868686,
+            color: redE2211C,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -229,7 +237,7 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                                       top: 15, bottom: 15),
                                   width: Get.width,
                                   height: 1,
-                                  color: textGrey868686,
+                                  color: whiteE5E5E5,
                                 ),
                                 Row(
                                   mainAxisAlignment:

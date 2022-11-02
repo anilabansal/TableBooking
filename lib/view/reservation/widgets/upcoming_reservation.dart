@@ -72,7 +72,8 @@ class UpComingReservations extends StatelessWidget {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 15),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,6 +112,7 @@ class UpComingReservations extends StatelessWidget {
                                   Row(
                                     children: <Widget>[
                                       const Icon(
+                                        size: 10,
                                         Icons.calendar_month,
                                         color: redE2211C,
                                       ),
@@ -127,6 +129,7 @@ class UpComingReservations extends StatelessWidget {
                                       const Icon(
                                         Icons.watch_later,
                                         color: redE2211C,
+                                        size: 10,
                                       ),
                                       CommonText(
                                         text: '09:30 PM',

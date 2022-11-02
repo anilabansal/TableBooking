@@ -7,9 +7,10 @@ import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../utils/common/widgets_methods/common_text_form_field.dart';
 
-class AddCardDetailsRowThree extends StatelessWidget{
+class AddCardDetailsRowThree extends StatelessWidget {
   AddCardDetailsRowThree({
     Key? key,
   }) : super(key: key);
@@ -219,7 +220,7 @@ class AddCardDetailsPrivacyPolicy extends StatelessWidget {
             ),
           ],
         ),
-        CommonSizedBox(height: 15),
+        CommonSizedBox(height: 38),
       ],
     );
   }

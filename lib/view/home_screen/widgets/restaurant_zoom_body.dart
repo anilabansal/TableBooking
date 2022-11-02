@@ -1,10 +1,10 @@
 import 'package:booking_table/utils/common/common_colors.dart';
-import 'package:booking_table/utils/common/images_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RestaurantZoomBody extends StatelessWidget {
-  const RestaurantZoomBody({Key? key}) : super(key: key);
+  String imageUrl;
+  RestaurantZoomBody({Key? key, required this.imageUrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class RestaurantZoomBody extends StatelessWidget {
                 border: Border.all(color: white, width: 9),
               ),
               child: Image.asset(
-                restaurantImage.toString(),
+                imageUrl.toString(),
                 fit: BoxFit.fill,
               ),
             ),

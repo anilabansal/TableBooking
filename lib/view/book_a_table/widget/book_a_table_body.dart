@@ -6,6 +6,7 @@ import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/utils/common/widgets_methods/restaurant_name_distance.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../utils/common/widgets_methods/common_date_picker_widget.dart';
 import '../../../utils/common/widgets_methods/common_text_form_field.dart';
 
@@ -137,7 +138,7 @@ class _BookATableBodyState extends State<BookATableBody> {
                 //   hint: "",
                 // ),
                 CommonTextFormField(
-                  hintText: "",
+                  hintText: "5",
                   filled: true,
                   fillColor: greyF5F5F5,
                   fontSize: 18,

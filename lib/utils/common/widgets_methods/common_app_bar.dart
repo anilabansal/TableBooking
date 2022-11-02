@@ -44,10 +44,11 @@ AppBar appBarCommon({
           const Text(
             'Back',
             style: TextStyle(
-                fontSize: 18,
-                color: black000000,
-                fontWeight: FontWeight.w400,
-                fontFamily: mainLaToFont),
+              fontSize: 18,
+              color: black000000,
+              fontWeight: FontWeight.w400,
+              fontFamily: mainLaToFont,
+            ),
           ),
         ],
       ),

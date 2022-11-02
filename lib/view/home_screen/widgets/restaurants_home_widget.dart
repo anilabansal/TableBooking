@@ -69,6 +69,7 @@ class RestaurantHomeScreen extends StatelessWidget {
                                     bottom: 0,
                                     right: 20,
                                     child: Container(
+                                      alignment: Alignment.center,
                                       width: 33,
                                       height: 33,
                                       decoration: const BoxDecoration(
@@ -87,12 +88,12 @@ class RestaurantHomeScreen extends StatelessWidget {
                                                 ? const Icon(
                                                     Icons.favorite,
                                                     color: redE2211C,
-                                                    size: 20,
+                                                    size: 18,
                                                   )
                                                 : const Icon(
                                                     Icons.favorite,
                                                     color: greyCACACA,
-                                                    size: 20,
+                                                    size: 18,
                                                   ),
                                           ),
                                         ),
