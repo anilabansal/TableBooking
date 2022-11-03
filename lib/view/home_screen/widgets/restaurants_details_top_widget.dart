@@ -106,10 +106,13 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(
-                            Icons.location_on,
-                            size: 15,
-                            color: black000000,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 3.0),
+                            child: const Icon(
+                              Icons.location_on,
+                              size: 15,
+                              color: black000000,
+                            ),
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width - 55,

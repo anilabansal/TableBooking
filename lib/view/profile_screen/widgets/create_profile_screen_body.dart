@@ -1,4 +1,3 @@
-
 import 'package:booking_table/utils/common/images_string.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -75,18 +74,20 @@ class CreateProfileScreenBody extends StatelessWidget {
                     text: "First Name",
                     color: black040404,
                     fontSize: 14,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w400,
                   ),
                   // const CommonTextField(
                   //   hint: "Enter First Name",
                   // ),
                   const SizedBox(
-                    height: 5.7,
+                    height: 5,
                   ),
                   CommonTextFormField(
                     hintText: "Enter First Name",
                     filled: true,
                     fillColor: greyF4F4F4,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 18,
                   ),
                   const SizedBox(
                     height: 20,
@@ -97,16 +98,17 @@ class CreateProfileScreenBody extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
                   ),
-                  //  CommonTextField(
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  // const CommonTextField(
                   //   hint: "Enter Last Name",
                   // ),
-                  const SizedBox(
-                    height: 5.7,
-                  ),
                   CommonTextFormField(
                     hintText: "Enter Last Name",
                     filled: true,
                     fillColor: greyF4F4F4,
+                    fontWeight: FontWeight.w400,
                     fontSize: 18,
                   ),
                   const SizedBox(
@@ -116,16 +118,17 @@ class CreateProfileScreenBody extends StatelessWidget {
                     text: "Mobile Number",
                     color: black040404,
                     fontSize: 14,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  const SizedBox(
+                    height: 5,
                   ),
                   // const CommonTextField(
                   //   hint: "Enter Mobile Number",
                   // ),
-                  const SizedBox(
-                    height: 5.7,
-                  ),
                   Obx(
                     () => PhoneField(
+                      textFieldColor: greyF4F4F4,
                       countryCode: profileController.countryCode.value,
                       countryFlag: profileController.countryFlag.value,
                       onCountryFlag: (value) {
@@ -143,9 +146,14 @@ class CreateProfileScreenBody extends StatelessWidget {
                     text: "Date of Birth",
                     color: black040404,
                     fontSize: 14,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w400,
                   ),
-                  const CommonDatePicker(),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  const CommonDatePicker(
+                    fillColor: greyF4F4F4,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -153,10 +161,18 @@ class CreateProfileScreenBody extends StatelessWidget {
                     text: "Street Address",
                     color: black040404,
                     fontSize: 14,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  const SizedBox(
+                    height: 5,
                   ),
                   // const CommonTextField(),
-
+                  CommonTextFormField(
+                    filled: true,
+                    fillColor: greyF4F4F4,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -167,12 +183,14 @@ class CreateProfileScreenBody extends StatelessWidget {
                     fontWeight: FontWeight.normal,
                   ),
                   const SizedBox(
-                    height: 5.7,
+                    height: 5,
                   ),
+                  // const CommonTextField(),
                   CommonTextFormField(
-                    hintText: "",
                     filled: true,
                     fillColor: greyF4F4F4,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 18,
                   ),
                   const SizedBox(
                     height: 20,
@@ -181,16 +199,17 @@ class CreateProfileScreenBody extends StatelessWidget {
                     text: "State",
                     color: black040404,
                     fontSize: 14,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  const SizedBox(
+                    height: 5,
                   ),
                   // const CommonTextField(),
-                  const SizedBox(
-                    height: 5.7,
-                  ),
                   CommonTextFormField(
-                    hintText: "",
                     filled: true,
                     fillColor: greyF4F4F4,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 18,
                   ),
                   const SizedBox(
                     height: 20,
@@ -199,15 +218,17 @@ class CreateProfileScreenBody extends StatelessWidget {
                     text: "Zipcode",
                     color: black040404,
                     fontSize: 14,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w400,
                   ),
                   const SizedBox(
-                    height: 5.7,
+                    height: 5,
                   ),
+                  // const CommonTextField(),
                   CommonTextFormField(
-                    hintText: "",
                     filled: true,
                     fillColor: greyF4F4F4,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 18,
                   ),
                   const SizedBox(
                     height: 30,

@@ -106,6 +106,7 @@ class AddCardDetailsRowTwo extends StatelessWidget {
         ),
         CommonTextFormField(
           hintText: 'Enter Card Number',
+          color: textLight868686,
           filled: true,
           keyboardType: TextInputType.number,
           fillColor: whiteF4F4F4,
@@ -138,6 +139,7 @@ class AddCardDetailsRowOne extends StatelessWidget {
         ),
         CommonTextFormField(
           hintText: 'Enter Card Holder Name',
+          color: textLight868686,
           filled: true,
           fillColor: whiteF4F4F4,
         ),
@@ -158,6 +160,7 @@ class AddCardDetailsPrivacyPolicy extends StatelessWidget {
       children: <Widget>[
         // CommonSizedBox(height: 58),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Checkbox(
               value: true,
@@ -178,7 +181,7 @@ class AddCardDetailsPrivacyPolicy extends StatelessWidget {
                         text: 'I agree with all ',
                         style: TextStyle(color: textDark3F3E3E, fontSize: 14)),
                     TextSpan(
-                      text: 'Terms & Conditions ',
+                      text: 'Terms & Conditions',
                       style: const TextStyle(
                         color: black040404,
                         fontSize: 14,
@@ -190,7 +193,7 @@ class AddCardDetailsPrivacyPolicy extends StatelessWidget {
                         },
                     ),
                     const TextSpan(
-                        text: 'and ',
+                        text: ' and ',
                         style: TextStyle(
                           color: textDark3F3E3E,
                           fontSize: 14,
@@ -220,7 +223,7 @@ class AddCardDetailsPrivacyPolicy extends StatelessWidget {
             ),
           ],
         ),
-        CommonSizedBox(height: 38),
+        CommonSizedBox(height: 35),
       ],
     );
   }

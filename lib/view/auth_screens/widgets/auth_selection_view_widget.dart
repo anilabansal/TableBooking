@@ -7,8 +7,6 @@ import 'package:country_phone_code_picker/controller/country_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/authentication/auth_view_controller.dart';
-
 class AuthScreenViewWidget extends StatelessWidget {
   AuthScreenViewWidget({Key? key}) : super(key: key);
 
@@ -49,18 +47,29 @@ class AuthScreenViewWidget extends StatelessWidget {
           textColor: Colors.white,
         ),
         CommonSizedBox(height: 20),
-        Row(mainAxisAlignment: MainAxisAlignment.center,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(dividerImage,width: 91,),
-            const SizedBox(width: 10,),
+            Image.asset(
+              dividerImage,
+              width: 91,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
             CommonText(
               text: 'OR',
               color: textLight868686,
               fontSize: 14,
               fontWeight: FontWeight.w400,
             ),
-            const SizedBox(width: 10,),
-            Image.asset(dividerImage,width: 91,),
+            const SizedBox(
+              width: 10,
+            ),
+            Image.asset(
+              dividerImage,
+              width: 91,
+            ),
           ],
         ),
         CommonSizedBox(height: 20),
@@ -80,18 +89,29 @@ class AuthScreenViewWidget extends StatelessWidget {
           textColor: Colors.white,
         ),
         CommonSizedBox(height: 20),
-        Row(mainAxisAlignment: MainAxisAlignment.center,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(dividerImage,width: 91,),
-            const SizedBox(width: 10,),
+            Image.asset(
+              dividerImage,
+              width: 91,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
             CommonText(
               text: 'OR',
               color: textLight868686,
               fontSize: 14,
               fontWeight: FontWeight.w400,
             ),
-            const SizedBox(width: 10,),
-            Image.asset(dividerImage,width: 91,),
+            const SizedBox(
+              width: 10,
+            ),
+            Image.asset(
+              dividerImage,
+              width: 91,
+            ),
           ],
         ),
         CommonSizedBox(height: 20),
@@ -124,12 +144,18 @@ class AuthScreenViewWidget extends StatelessWidget {
           height: 46,
           width: 70,
         ),
-        CommonSizedBox(width: 20),
-        Image.asset(
-          appleLogo,
-          height: 46,
-          width: 70,
-        ),
+        GetPlatform.isIOS
+            ? Row(
+                children: [
+                  CommonSizedBox(width: 20),
+                  Image.asset(
+                    appleLogo,
+                    height: 46,
+                    width: 70,
+                  ),
+                ],
+              )
+            : Container(),
       ],
     );
   }

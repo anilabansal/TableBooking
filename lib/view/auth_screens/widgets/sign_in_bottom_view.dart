@@ -12,26 +12,22 @@ import 'package:get/get.dart';
 
 import '../../../controller/authentication/auth_view_controller.dart';
 
-class SignInScreenBottomView extends StatefulWidget {
+class SignInScreenBottomView extends StatelessWidget {
   String? callFrom;
   SignInScreenBottomView({
     required this.callFrom,
     Key? key,
   }) : super(key: key);
 
-  @override
-  State<SignInScreenBottomView> createState() => _SignInScreenBottomViewState();
-}
-AuthViewController controller =  Get.put(AuthViewController());
- // Country? selectedCountry;
-class _SignInScreenBottomViewState extends State<SignInScreenBottomView> {
+  AuthViewController controller = Get.put(AuthViewController());
+  // Country? selectedCountry;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         // HEADER
         CommonText(
-          text: widget.callFrom == 'Login'
+          text: callFrom == 'Login'
               ? 'Enter Mobile Number'
               : 'Create Your Free Account',
           fontSize: 24,
@@ -48,7 +44,7 @@ class _SignInScreenBottomViewState extends State<SignInScreenBottomView> {
           color: textLight868686,
         ),
 
-        widget.callFrom == 'Login'
+        callFrom == 'Login'
             ? CommonSizedBox(height: 40)
             : _privacyPolicyNTerms(),
         // Button
@@ -60,11 +56,11 @@ class _SignInScreenBottomViewState extends State<SignInScreenBottomView> {
             onTap: () {
               Get.off(
                 () => OtpScreenView(
-                  callFrom: widget.callFrom,
+                  callFrom: callFrom,
                 ),
               );
             },
-            text: widget.callFrom == 'Login' ? 'Sign In' : 'Sign Up',
+            text: callFrom == 'Login' ? 'Sign In' : 'Sign Up',
             bgColor: redE2211C,
             textColor: Colors.white,
           ),
@@ -129,24 +125,22 @@ class _SignInScreenBottomViewState extends State<SignInScreenBottomView> {
 
   // COUNTRY CODE PICKER
   CommonSizedBox _codePicker() {
-
-  // CountryController controller = Get.put(CountryController());
-  //   controller.updateSelectedCountry(controller.selectedCountry);
+    // CountryController controller = Get.put(CountryController());
+    //   controller.updateSelectedCountry(controller.selectedCountry);
     return CommonSizedBox(
-      width: 79,
-      child: CountryPhoneCodePicker.withDefaultSelectedCountry(
-        defaultCountryCode:
-         Country(name: 'USA', countryCode: 'USA', phoneCode: '+1'),
-        borderRadius: 50,
-        borderWidth: 0,
-        flagBorderRadius: 100,
-        flagHeight: 30,
-        flagWidth: 30,
-        borderColor: Colors.transparent,
-        style: const TextStyle(fontSize: 16),
-        searchBarHintText: 'Search by name',
-      )
-    );
+        width: 79,
+        child: CountryPhoneCodePicker.withDefaultSelectedCountry(
+          defaultCountryCode:
+              Country(name: 'USA', countryCode: 'USA', phoneCode: '+1'),
+          borderRadius: 50,
+          borderWidth: 0,
+          flagBorderRadius: 100,
+          flagHeight: 30,
+          flagWidth: 30,
+          borderColor: Colors.transparent,
+          style: const TextStyle(fontSize: 16),
+          searchBarHintText: 'Search by name',
+        ));
   }
 
   // PRIVACY POLICY & TERMS N CONDITIONS
@@ -218,7 +212,7 @@ class _SignInScreenBottomViewState extends State<SignInScreenBottomView> {
               ),
             ),
           ],
-        ),
+        ).paddingSymmetric(horizontal: 20),
         CommonSizedBox(height: 15),
       ],
     );
