@@ -9,7 +9,7 @@ class CommonTextFormField extends StatelessWidget {
   Function()? onTap;
   double? fontSize;
   // int? maxLength;
-  int?maxLines;
+  int? maxLines;
   Widget? suffixIcon;
   Color? color;
   bool? enable;
@@ -50,7 +50,7 @@ class CommonTextFormField extends StatelessWidget {
       controller: controller,
       cursorWidth: 1,
       // style: const TextStyle(fontSize: 20, color: black000000),
-      style:  TextStyle(
+      style: TextStyle(
         fontSize: fontSize,
         fontWeight: fontWeight,
         color: black000000,
@@ -58,7 +58,8 @@ class CommonTextFormField extends StatelessWidget {
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
         helperMaxLines: 3,
-        contentPadding: contentPadding ?? const EdgeInsets.only(left: 13, ),
+        //contentPadding: contentPadding ?? const EdgeInsets.only(left: 13, ),
+        //contentPadding: contentPadding ?? EdgeInsets.zero,
         hintText: hintText,
         filled: filled,
         fillColor: fillColor,
@@ -69,19 +70,23 @@ class CommonTextFormField extends StatelessWidget {
           color: color,
           fontWeight: fontWeight,
         ),
-      //  border: InputBorder.none,
-  //   focusedBorder: InputBorder.none,
-  //       border: OutlineInputBorder(
-  //         borderRadius: BorderRadius.circular(5),
-  //         borderSide: BorderSide(color: fillColor!, ),
-  //       ),
+        //  border: InputBorder.none,
+        //   focusedBorder: InputBorder.none,
+        //       border: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(5),
+        //         borderSide: BorderSide(color: fillColor!, ),
+        //       ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide:  BorderSide(color: fillColor!, ),
+          borderSide: BorderSide(
+            color: fillColor!,
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide:  BorderSide(color: fillColor!, ),
+          borderSide: BorderSide(
+            color: fillColor!,
+          ),
         ),
       ),
     );

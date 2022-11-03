@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
@@ -39,7 +41,7 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
             color: redE2211C,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -107,7 +109,7 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
                 CommonSizedBox(
-                  height: 25,
+                  height: 20,
                 ),
               ],
             ),
@@ -121,7 +123,7 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
             color: redE2211C,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -140,10 +142,11 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                   color: redE2211C,
                 ),
                 CommonSizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Icon(
                       Icons.error,
@@ -198,7 +201,7 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                           ),
                           Container(
                             padding: const EdgeInsets.only(
-                              left: 15,
+                              left: 10,
                               right: 10,
                               top: 13,
                               bottom: 30,
@@ -226,9 +229,10 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.close,
                                       color: Colors.black,
+                                      size: 18,
                                     ),
                                   ],
                                 ),
@@ -260,9 +264,10 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    Icon(
+                                    const Icon(
                                       Icons.close,
                                       color: Colors.black,
+                                      size: 18,
                                     ),
                                   ],
                                 ),
@@ -296,7 +301,7 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                         ],
                       ),
                 CommonSizedBox(
-                  height: 28,
+                  height: 20,
                 ),
                 Center(
                   child: Container(
@@ -332,7 +337,7 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                       ],
                     ),
                   ),
-                ).paddingOnly(bottom: 21),
+                ).paddingOnly(bottom: 28),
               ],
             ),
           ),

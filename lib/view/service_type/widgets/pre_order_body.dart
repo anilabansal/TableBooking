@@ -31,7 +31,7 @@ class PreOrderBody extends StatelessWidget {
             color: textLight868686,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -49,10 +49,7 @@ class PreOrderBody extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
                 CommonSizedBox(
-                  height: 20,
-                ),
-                CommonSizedBox(
-                  height: 12,
+                  height: 10,
                 ),
                 PopularItemsWidgets(controller: controller),
                 CommonSizedBox(
@@ -64,7 +61,7 @@ class PreOrderBody extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
                 CommonSizedBox(
-                  height: 20,
+                  height: 12,
                 ),
                 MainCourseItemsWidgets(controller: controller),
               ],
@@ -73,15 +70,16 @@ class PreOrderBody extends StatelessWidget {
           Container(
             height: 50,
             width: Get.width,
-            color: redE2211C,
+            decoration: BoxDecoration(
+                color: redE2211C, borderRadius: BorderRadius.circular(5)),
             margin: const EdgeInsets.only(
-              top: 30,
+              top: 0,
               bottom: 30,
               right: 20,
               left: 20,
             ),
             child: CommonButton(
-              onTap: (){
+              onTap: () {
                 Get.toNamed('/full-service-with-pre-order');
               },
               text: 'Add',

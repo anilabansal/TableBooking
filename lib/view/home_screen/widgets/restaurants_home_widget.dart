@@ -36,13 +36,14 @@ class RestaurantHomeScreen extends StatelessWidget {
                               topRight: Radius.circular(20),
                               topLeft: Radius.circular(20),
                             ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromRGBO(0, 0, 0, 0.06),
-                                blurRadius: 4.0,
-                                offset: Offset(0.0, 10),
-                              ),
-                            ]),
+                            // boxShadow: [
+                            //   BoxShadow(
+                            //     color: Color.fromRGBO(0, 0, 0, 0.06),
+                            //     blurRadius: 4.0,
+                            //     offset: Offset(0.0, 10),
+                            //   ),
+                            // ],
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,

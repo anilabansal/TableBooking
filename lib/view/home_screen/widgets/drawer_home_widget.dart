@@ -198,7 +198,7 @@ class DrawerScreen extends StatelessWidget {
                 //   width: 4,
                 //   height: 9,
                 // )
-                Icon(
+                const Icon(
                   Icons.chevron_right,
                   size: 18,
                 ),
@@ -227,7 +227,7 @@ class DrawerScreen extends StatelessWidget {
                   color: black000000,
                 ),
                 const Spacer(),
-                Icon(
+                const Icon(
                   Icons.chevron_right,
                   size: 18,
                 ),

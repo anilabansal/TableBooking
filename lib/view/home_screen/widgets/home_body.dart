@@ -2,6 +2,7 @@ import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/common_font.dart';
 import 'package:booking_table/utils/common/images_string.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/home_screen/widgets/map_home_widget.dart';
 import 'package:booking_table/view/home_screen/widgets/restaurants_home_widget.dart';
@@ -87,7 +88,10 @@ class HomeBody extends StatelessWidget {
                                 const Icon(
                                   Icons.location_on,
                                   color: black000000,
-                                  size: 12,
+                                  size: 14,
+                                ),
+                                CommonSizedBox(
+                                  width: 2,
                                 ),
                                 CommonText(
                                   text: "Montgomery, 35004",
@@ -98,11 +102,12 @@ class HomeBody extends StatelessWidget {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                Image.asset(
-                                  dropDownIconImage,
-                                  width: 9,
-                                  height: 12,
-                                ),
+                                const Icon(Icons.keyboard_arrow_down),
+                                // Image.asset(
+                                //   dropDownIconImage,
+                                //   width: 9,
+                                //   height: 12,
+                                // ),
                               ],
                             ),
                           ],

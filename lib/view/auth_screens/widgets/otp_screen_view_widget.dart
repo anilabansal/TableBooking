@@ -27,8 +27,8 @@ class _OtpScreenViewWidgetState extends State<OtpScreenViewWidget> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 20),
+        const Padding(
+          padding: EdgeInsets.only(top: 20),
         ),
         CommonText(
           text: 'Enter the 4 digit code sent to',

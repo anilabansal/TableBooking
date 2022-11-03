@@ -1,6 +1,5 @@
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/images_string.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_info_icon.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/payment/card_scan_pop_up.dart';
 import 'package:flutter/material.dart';
@@ -50,12 +49,17 @@ class PaymentMethodBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const InfoIcon(),
+              // const InfoIcon(),
+              const Icon(
+                Icons.info,
+                size: 16,
+                color: redE2211C,
+              ),
               const SizedBox(
                 width: 7,
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 60,
+              Expanded(
+                // width: MediaQuery.of(context).size.width - 60,
                 child: CommonText(
                   text:
                       "You can add another credit card by simply scanning your card.",

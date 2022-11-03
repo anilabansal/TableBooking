@@ -56,6 +56,7 @@ class SupportBody extends StatelessWidget {
                   fillColor: whiteF4F4F4,
                   hintText: 'Enter Email',
                   fontSize: 18,
+                  color: textLight868686,
                   fontWeight: FontWeight.w400,
                 ),
                 CommonSizedBox(
@@ -73,6 +74,7 @@ class SupportBody extends StatelessWidget {
                 CommonTextFormField(
                   filled: true,
                   fillColor: whiteF4F4F4,
+                  color: textLight868686,
                   hintText: 'Enter Topic',
                   fontSize: 18,
                   fontWeight: FontWeight.w400,
@@ -92,6 +94,7 @@ class SupportBody extends StatelessWidget {
                 CommonTextFormField(
                     filled: true,
                     fillColor: whiteF4F4F4,
+                    color: textLight868686,
                     hintText: 'Type Here...',
                     fontSize: 18,
                     fontWeight: FontWeight.w400,

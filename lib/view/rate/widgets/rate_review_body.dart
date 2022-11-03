@@ -102,7 +102,7 @@ class RateReviewBody extends StatelessWidget {
               horizontal: 22,
             ),
             CommonSizedBox(
-              height: 68,
+              height: 48,
             ),
             CommonButton(
               onTap: () {
@@ -111,7 +111,7 @@ class RateReviewBody extends StatelessWidget {
               text: 'Submit',
               bgColor: redE2211C,
               textColor: Colors.white,
-            ).paddingSymmetric(horizontal: 22),
+            ).paddingAll(22),
           ],
         ),
       ),

@@ -1,6 +1,9 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:booking_table/controller/authentication/authentication.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/images_string.dart';
+import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
@@ -8,18 +11,20 @@ import 'package:booking_table/view/auth_screens/otp_screen.dart';
 import 'package:country_phone_code_picker/country_phone_code_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/authentication/auth_view_controller.dart';
-
 class SignInScreenBottomView extends StatelessWidget {
+  final AuthenticationController controller;
+
   String? callFrom;
   SignInScreenBottomView({
+    required this.controller,
     required this.callFrom,
     Key? key,
   }) : super(key: key);
 
-  AuthViewController controller = Get.put(AuthViewController());
+  // AuthViewController controller = Get.put(AuthViewController());
   // Country? selectedCountry;
   @override
   Widget build(BuildContext context) {
@@ -54,11 +59,27 @@ class SignInScreenBottomView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: CommonButton(
             onTap: () {
-              Get.off(
-                () => OtpScreenView(
-                  callFrom: callFrom,
-                ),
-              );
+              if (validateFields() != '') {
+                ShowToast.show(msg: validateFields());
+                return;
+              }
+              controller.loginUser(data: {
+                "MobileNumber": controller.mobileNumber.text.trim(),
+                "Email": "",
+                "AuthenticationId": "",
+                "AuthenticationType": "",
+                "DeviceToken": "sdgsgsgsg",
+                "DeviceType": GetPlatform.isAndroid ? "Android" : "iOS",
+              }).then((value) {
+                Get.back();
+                if (value) {
+                  Get.off(
+                    () => OtpScreenView(
+                      callFrom: callFrom,
+                    ),
+                  );
+                }
+              });
             },
             text: callFrom == 'Login' ? 'Sign In' : 'Sign Up',
             bgColor: redE2211C,
@@ -66,7 +87,27 @@ class SignInScreenBottomView extends StatelessWidget {
           ),
         ),
         CommonSizedBox(height: 20),
-        CommonText(text: 'OR', color: textLight868686, fontSize: 14),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              dividerImage,
+              width: 91,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            CommonText(text: 'OR', color: textLight868686, fontSize: 14),
+            const SizedBox(
+              width: 10,
+            ),
+            Image.asset(
+              dividerImage,
+              width: 91,
+            ),
+          ],
+        ),
         CommonSizedBox(height: 20),
         // GUEST BUTTON
         InkWell(
@@ -109,6 +150,7 @@ class SignInScreenBottomView extends StatelessWidget {
           // TextField
           Expanded(
               child: TextFormField(
+            controller: controller.mobileNumber,
             autovalidateMode: AutovalidateMode.always,
             keyboardType: TextInputType.number,
             cursorWidth: 0,
@@ -125,8 +167,6 @@ class SignInScreenBottomView extends StatelessWidget {
 
   // COUNTRY CODE PICKER
   CommonSizedBox _codePicker() {
-    // CountryController controller = Get.put(CountryController());
-    //   controller.updateSelectedCountry(controller.selectedCountry);
     return CommonSizedBox(
         width: 79,
         child: CountryPhoneCodePicker.withDefaultSelectedCountry(
@@ -149,6 +189,7 @@ class SignInScreenBottomView extends StatelessWidget {
       children: <Widget>[
         CommonSizedBox(height: 58),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Checkbox(
               value: true,
@@ -169,7 +210,7 @@ class SignInScreenBottomView extends StatelessWidget {
                         text: 'I agree with all ',
                         style: TextStyle(color: textDark3F3E3E, fontSize: 14)),
                     TextSpan(
-                      text: 'Terms & Conditions ',
+                      text: 'Terms & Conditions',
                       style: const TextStyle(
                         color: black040404,
                         fontSize: 14,
@@ -182,7 +223,7 @@ class SignInScreenBottomView extends StatelessWidget {
                         },
                     ),
                     const TextSpan(
-                        text: 'and ',
+                        text: ' and ',
                         style: TextStyle(
                           color: textDark3F3E3E,
                           fontSize: 14,
@@ -216,5 +257,13 @@ class SignInScreenBottomView extends StatelessWidget {
         CommonSizedBox(height: 15),
       ],
     );
+  }
+
+  // validateFields() {
+  validateFields() {
+    if (!GetUtils.isPhoneNumber(controller.mobileNumber.value.text.trim())) {
+      return 'Please enter valid Phone Number!';
+    }
+    return '';
   }
 }

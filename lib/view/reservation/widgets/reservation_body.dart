@@ -32,6 +32,8 @@ class ReservationViewBody extends StatelessWidget {
               indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(6), color: black0D0000),
               tabs: controller.myTabs,
+              labelStyle:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
               unselectedLabelColor: textLight868686,
             ),
           ),
@@ -40,7 +42,7 @@ class ReservationViewBody extends StatelessWidget {
         Expanded(
           child: TabBarView(
             controller: controller.tabController,
-            children: [
+            children: const [
               UpComingReservations(),
               PreviousReservations(),
             ],

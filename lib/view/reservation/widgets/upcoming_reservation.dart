@@ -17,15 +17,17 @@ class UpComingReservations extends StatelessWidget {
         itemCount: 2,
         itemBuilder: (context, index) {
           return Padding(
-            //  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
             child: Container(
-              decoration: const BoxDecoration(color: white, boxShadow: [
-                BoxShadow(
-                    offset: Offset(0, 4),
-                    color: Color.fromRGBO(0, 0, 0, 0.06),
-                    blurRadius: 10)
-              ]),
+              decoration: BoxDecoration(
+                  color: white,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: const [
+                    BoxShadow(
+                        offset: Offset(0, 4),
+                        color: Color.fromRGBO(0, 0, 0, 0.06),
+                        blurRadius: 10)
+                  ]),
               child: Padding(
                 //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 padding: const EdgeInsets.all(10),

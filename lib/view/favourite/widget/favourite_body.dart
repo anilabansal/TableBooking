@@ -76,7 +76,7 @@ class FavouriteBody extends StatelessWidget {
                                       icon: const Icon(
                                         Icons.favorite,
                                         color: redE2211C,
-                                        size: 20,
+                                        size: 18,
                                       ),
                                     ),
                                   ),

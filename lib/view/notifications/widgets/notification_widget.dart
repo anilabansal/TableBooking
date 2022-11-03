@@ -82,6 +82,7 @@ class NotificationWidget extends StatelessWidget {
                       CommonText(
                         fontSize: 12,
                         text: '3 Min Ago',
+                        color: textGrey868686,
                         fontWeight: FontWeight.w400,
                       ),
                       CommonSizedBox(

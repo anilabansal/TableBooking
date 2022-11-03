@@ -9,11 +9,6 @@ class CommonDatePicker extends StatelessWidget {
   const CommonDatePicker({Key? key, this.controller, this.fillColor})
       : super(key: key);
 
-//   @override
-//   State<CommonDatePicker> createState() => _CommonDatePickerState();
-// }
-//
-// class _CommonDatePickerState extends State<CommonDatePicker> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,7 +30,7 @@ class CommonDatePicker extends StatelessWidget {
             border: InputBorder.none,
             hintText: "dd-mm-yy",
             hintStyle: const TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: FontWeight.w400,
               color: textGrey868686,
             ),

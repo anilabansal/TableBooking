@@ -1,6 +1,7 @@
 import 'package:booking_table/utils/common/common_font.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../utils/common/common_colors.dart';
 import '../../../utils/common/images_string.dart';
 
@@ -50,6 +51,7 @@ class SearchBoxScreen extends StatelessWidget {
                 child: Container(
                   width: 45,
                   height: 45,
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5), color: redE2211C),
                   child: Image.asset(filterImage),

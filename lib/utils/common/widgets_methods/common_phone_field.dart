@@ -1,6 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../common_colors.dart';
 
 class PhoneField extends StatefulWidget {
@@ -98,7 +99,7 @@ class _PhoneFieldState extends State<PhoneField> {
                 border: InputBorder.none,
                 hintText: '+1 7700 900175',
                 hintStyle: TextStyle(
-                  fontSize: 14,
+                  fontSize: 20,
                   fontWeight: FontWeight.normal,
                   color: textGrey868686,
                 ),

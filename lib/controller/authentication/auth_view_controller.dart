@@ -1,11 +1,9 @@
-import 'package:booking_table/routes/route_name.dart';
-import 'package:country_phone_code_picker/controller/country_controller.dart';
-import 'package:country_phone_code_picker/models/country.dart';
 import 'package:get/get.dart';
 
 class AuthViewController extends GetxController {
-  static final AuthViewController authViewController = AuthViewController._internal();
-  factory AuthViewController(){
+  static final AuthViewController authViewController =
+      AuthViewController._internal();
+  factory AuthViewController() {
     return authViewController;
   }
   AuthViewController._internal();

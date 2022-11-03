@@ -42,16 +42,24 @@ class _BookATableBodyState extends State<BookATableBody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Date
-                CommonText(
-                  text: 'Date',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
-                CommonSizedBox(
-                  height: 15,
-                ),
-                const CommonDatePicker(
-                  fillColor: greyF5F5F5,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CommonText(
+                      text: 'Date',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    CommonSizedBox(
+                      height: 15,
+                    ),
+                    const CommonDatePicker(
+                      fillColor: greyF5F5F5,
+                    )
+                  ],
+                ).paddingOnly(
+                  left: 20,
+                  right: 20,
                 ),
                 // InkWell(
                 //   onTap: () async {
@@ -77,25 +85,35 @@ class _BookATableBodyState extends State<BookATableBody> {
                 ).paddingOnly(
                   top: 20,
                   bottom: 20,
+                  left: 0,
+                  right: 0,
                 ),
                 // Time
-                CommonText(
-                  text: 'Time',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
-                CommonSizedBox(
-                  height: 15,
-                ),
-                // const CommonTextField(
-                //   hint: "09:00 PM",
-                // ),
-                CommonTextFormField(
-                  hintText: "09:00 PM",
-                  filled: true,
-                  fillColor: greyF5F5F5,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CommonText(
+                      text: 'Time',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    CommonSizedBox(
+                      height: 15,
+                    ),
+                    // const CommonTextField(
+                    //   hint: "09:00 PM",
+                    // ),
+                    CommonTextFormField(
+                      hintText: "09:00 PM",
+                      filled: true,
+                      fillColor: greyF5F5F5,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ],
+                ).paddingOnly(
+                  left: 20,
+                  right: 20,
                 ),
 
                 // InkWell(
@@ -120,29 +138,37 @@ class _BookATableBodyState extends State<BookATableBody> {
                   bottom: 20,
                 ),
                 // Party SIze
-                CommonText(
-                  text: 'Party Size',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
-                CommonSizedBox(
-                  height: 15,
-                ),
-                // CommonTextFormField(
-                //   controller: controller.partySize,
-                //   color: whiteF5F5F5,
-                //   keyboardType: TextInputType.number,
-                //   maxLength: 2,
-                // ),
-                // const CommonTextField(
-                //   hint: "",
-                // ),
-                CommonTextFormField(
-                  hintText: "5",
-                  filled: true,
-                  fillColor: greyF5F5F5,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CommonText(
+                      text: 'Party Size',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    CommonSizedBox(
+                      height: 15,
+                    ),
+                    // CommonTextFormField(
+                    //   controller: controller.partySize,
+                    //   color: whiteF5F5F5,
+                    //   keyboardType: TextInputType.number,
+                    //   maxLength: 2,
+                    // ),
+                    // const CommonTextField(
+                    //   hint: "",
+                    // ),
+                    CommonTextFormField(
+                      hintText: "5",
+                      filled: true,
+                      fillColor: greyF5F5F5,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ],
+                ).paddingOnly(
+                  left: 20,
+                  right: 20,
                 ),
                 Container(
                   width: Get.width,
@@ -153,121 +179,126 @@ class _BookATableBodyState extends State<BookATableBody> {
                   bottom: 20,
                 ),
                 //  Field Four
-                CommonText(
-                  text: 'Types of Services',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
-                CommonSizedBox(
-                  height: 15,
-                ),
-                // Center(
-                //   child: Obx(
-                //     () => Container(
-                //       width: Get.width,
-                //       child: FlutterToggleTab(
-                //         height: 37,
-                //        width: 85,
-                //
-                //         borderRadius: 5,
-                //         // marginSelected: const EdgeInsets.only(left: 10, right: 10),
-                //         selectedIndex: controller.selectTypeOfService.value,
-                //         selectedBackgroundColors: const [Colors.black],
-                //         selectedTextStyle: const TextStyle(
-                //             color: Colors.white,
-                //             fontWeight: FontWeight.w400,
-                //             fontSize: 14),
-                //         unSelectedTextStyle: const TextStyle(
-                //             color: textLight868686,
-                //             fontWeight: FontWeight.w400,
-                //             fontSize: 14),
-                //         labels: controller.listOfServices,
-                //         selectedLabelIndex: (index) =>
-                //             controller.selectService(index),
-                //         isScroll: false,
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    typeServiceContainer(
-                        "Full",
-                        // ignore: unrelated_type_equality_checks
-                        controller.serviceType.value == "Full"),
-                    const SizedBox(
-                      width: 10,
+                    CommonText(
+                      text: 'Types of Services',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
                     ),
-                    // ignore: unrelated_type_equality_checks
-                    typeServiceContainer(
-                        "Mid", controller.serviceType.value == "Mid"),
-                    const SizedBox(
-                      width: 10,
+                    CommonSizedBox(
+                      height: 15,
                     ),
-                    // ignore: unrelated_type_equality_checks
-                    typeServiceContainer(
-                        "No", controller.serviceType.value == "No"),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    // ignore: unrelated_type_equality_checks
-                    typeServiceContainer(
-                        "Go To", controller.serviceType.value == "Go To"),
-                  ],
-                ),
-                CommonSizedBox(
-                  height: 15,
-                ),
-                Visibility(
-                  visible: controller.serviceType.isNotEmpty,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Icon(
-                        Icons.error,
-                        color: Colors.red,
-                      ),
-                      CommonSizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: CommonText(
-                          text: controller.serviceType.value == "Full"
-                              ? "Traditional order when seated with a server"
-                              : controller.serviceType.value == "No"
-                                  ? "Pre order through the app, and then order everything through the app while at the restaurant."
-                                  : controller.serviceType.value == "Go To"
-                                      ? "You can take away your order as well."
-                                      : "Pre-Order your food and drink and still have a server in restaurant",
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                          color: textGrey868686,
+                    // Center(
+                    //   child: Obx(
+                    //     () => Container(
+                    //       width: Get.width,
+                    //       child: FlutterToggleTab(
+                    //         height: 37,
+                    //        width: 85,
+                    //
+                    //         borderRadius: 5,
+                    //         // marginSelected: const EdgeInsets.only(left: 10, right: 10),
+                    //         selectedIndex: controller.selectTypeOfService.value,
+                    //         selectedBackgroundColors: const [Colors.black],
+                    //         selectedTextStyle: const TextStyle(
+                    //             color: Colors.white,
+                    //             fontWeight: FontWeight.w400,
+                    //             fontSize: 14),
+                    //         unSelectedTextStyle: const TextStyle(
+                    //             color: textLight868686,
+                    //             fontWeight: FontWeight.w400,
+                    //             fontSize: 14),
+                    //         labels: controller.listOfServices,
+                    //         selectedLabelIndex: (index) =>
+                    //             controller.selectService(index),
+                    //         isScroll: false,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    Row(
+                      children: [
+                        typeServiceContainer(
+                            "Full",
+                            // ignore: unrelated_type_equality_checks
+                            controller.serviceType.value == "Full"),
+                        const SizedBox(
+                          width: 10,
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                CommonSizedBox(
-                  height: 31,
-                ),
-                // Button
-                InkWell(
-                  onTap: () {
-                    Get.toNamed('/full-service');
-                  },
-                  child: CommonButton(
-                    textColor: Colors.white,
-                    bgColor: redE2211C,
-                    text: 'Proceed',
-                  ),
-                ),
-                CommonSizedBox(
-                  height: 31,
+                        // ignore: unrelated_type_equality_checks
+                        typeServiceContainer(
+                            "Mid", controller.serviceType.value == "Mid"),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        // ignore: unrelated_type_equality_checks
+                        typeServiceContainer(
+                            "No", controller.serviceType.value == "No"),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        // ignore: unrelated_type_equality_checks
+                        typeServiceContainer(
+                            "Go To", controller.serviceType.value == "Go To"),
+                      ],
+                    ),
+                    CommonSizedBox(
+                      height: 15,
+                    ),
+                    Visibility(
+                      visible: controller.serviceType.isNotEmpty,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Icon(
+                            Icons.error,
+                            color: Colors.red,
+                          ),
+                          CommonSizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: CommonText(
+                              text: controller.serviceType.value == "Full"
+                                  ? "Traditional order when seated with a server"
+                                  : controller.serviceType.value == "No"
+                                      ? "Pre order through the app, and then order everything through the app while at the restaurant."
+                                      : controller.serviceType.value == "Go To"
+                                          ? "You can take away your order as well."
+                                          : "Pre-Order your food and drink and still have a server in restaurant",
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14,
+                              color: textGrey868686,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    CommonSizedBox(
+                      height: 31,
+                    ),
+                    // Button
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed('/full-service');
+                      },
+                      child: CommonButton(
+                        textColor: Colors.white,
+                        bgColor: redE2211C,
+                        text: 'Proceed',
+                      ),
+                    ),
+                    CommonSizedBox(
+                      height: 31,
+                    ),
+                  ],
+                ).paddingOnly(
+                  left: 20,
+                  right: 20,
                 ),
               ],
-            ).paddingOnly(
-              left: 20,
-              right: 20,
             ),
           ],
         ),

@@ -41,7 +41,7 @@ class AddCardDetailsRowThree extends StatelessWidget {
                   enable: false,
                   hintText: 'DD/MM',
                   controller: controller.cardExpiryDate,
-                  // suffixIcon: const Icon(Icons.arrow_drop_down),
+                  suffixIcon: const Icon(Icons.arrow_drop_down),
                   filled: true,
                   fillColor: whiteF4F4F4,
                 ),

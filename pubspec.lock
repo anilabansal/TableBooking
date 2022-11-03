@@ -83,6 +83,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_advanced_switch:
+    dependency: "direct main"
+    description:
+      name: flutter_advanced_switch
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -97,13 +104,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
-  flutter_switch:
-    dependency: "direct main"
-    description:
-      name: flutter_switch
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -121,6 +121,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  fluttertoast:
+    dependency: "direct main"
+    description:
+      name: fluttertoast
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "8.1.1"
   get:
     dependency: "direct main"
     description:
@@ -287,13 +294,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.12"
-  toggle_switch:
-    dependency: "direct main"
-    description:
-      name: toggle_switch
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   vector_math:
     dependency: transitive
     description:

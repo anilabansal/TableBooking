@@ -114,6 +114,7 @@ class PopularItemsWidgets extends StatelessWidget {
                           text:
                               'Creamy Hot Tomato Sauce, Jalapeno with Mozzarella Cheese',
                           fontSize: 12,
+                          color: textDark3F3E3E,
                           fontWeight: FontWeight.w400,
                         ),
                         CommonSizedBox(
@@ -141,7 +142,7 @@ class PopularItemsWidgets extends StatelessWidget {
                 ],
               ),
               CommonSizedBox(
-                height: 31,
+                height: 20,
               ),
             ],
           );
