@@ -263,8 +263,6 @@ class SignInScreenBottomView extends StatelessWidget {
   validateFields() {
     if (!GetUtils.isPhoneNumber(controller.mobileNumber.value.text.trim())) {
       return 'Please enter valid Phone Number!';
-    } else if (controller.mobileNumber.value.text.trim().isEmpty) {
-      return 'Field cannot be empty!';
     }
     return '';
   }
