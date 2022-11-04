@@ -19,8 +19,8 @@ class RouteName {
   static const fullServicePreOrder = '/full-service-with-pre-order';
   static const midService = '/mid-service';
   static const preOrder = '/pre-order';
-  static const previousBooking = '/previous-booking';
-  static const upcomingBooking = '/upcoming-booking';
+  static const bookingDetailsUpcoming = '/upcoming-booking';
+  static const bookingDetailsPrevious = '/previous-booking';
   static const bookATable = '/book-a-table';
   static const editATable = '/edit-a-table';
   static const zipCodeView = '/zip-code';

@@ -77,7 +77,7 @@ class FullSummaryBottomView extends StatelessWidget {
                 fillColor: whiteF5F5F5,
                 filled: true,
                 hintText: 'Type Here...',
-                color: textLight868686,
+
                 maxLines: 5,
                 // fontSize: 16,
               ),
@@ -360,7 +360,6 @@ class AddATipWidget extends StatelessWidget {
             hintText: 'Enter Amount',
             fillColor: whiteF5F5F5,
             filled: true,
-            color: textLight868686,
           ),
           // CommonSizedBox(
           //   height: 41,

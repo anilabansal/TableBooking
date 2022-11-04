@@ -53,7 +53,7 @@ class CommonTextFormField extends StatelessWidget {
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: fontWeight,
-        color: black000000,
+        color: textLight868686,
       ),
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
@@ -62,12 +62,12 @@ class CommonTextFormField extends StatelessWidget {
         //contentPadding: contentPadding ?? EdgeInsets.zero,
         hintText: hintText,
         filled: filled,
-        fillColor: fillColor,
+        fillColor: fillColor ?? whiteF4F4F4,
         suffixIcon: suffixIcon,
         counterText: '',
         hintStyle: TextStyle(
           fontSize: fontSize,
-          color: color,
+          color: textLight868686,
           fontWeight: fontWeight,
         ),
         //  border: InputBorder.none,
@@ -79,13 +79,13 @@ class CommonTextFormField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(
-            color: fillColor!,
+            color: fillColor??whiteF4F4F4,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(
-            color: fillColor!,
+            color: fillColor ?? whiteF4F4F4,
           ),
         ),
       ),

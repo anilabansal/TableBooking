@@ -21,7 +21,7 @@ class SearchBoxScreen extends StatelessWidget {
               Expanded(
                 child: Container(
                     width: MediaQuery.of(context).size.width,
-                    height: 45,
+                    // height: 45,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: greyB3F5F5F5),

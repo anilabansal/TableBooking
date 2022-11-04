@@ -1,8 +1,8 @@
 import 'package:booking_table/view/auth_screens/auth_selection_view.dart';
+import 'package:booking_table/view/book_a_table/booking_details.dart';
 import 'package:booking_table/view/home_screen/filter_screen.dart';
 import 'package:booking_table/view/home_screen/restaurant_details_screen.dart';
-import 'package:booking_table/view/profile_screen/create_profile_screen.dart';
-import 'package:booking_table/view/profile_screen/edit_profile_screen.dart';
+import 'package:booking_table/view/profile_screen/profile_screen.dart';
 import 'package:booking_table/view/service_type/full_service_summary.dart';
 import 'package:booking_table/view/service_type/mid_service_summary.dart';
 import 'package:get/get.dart';
@@ -20,8 +20,6 @@ import '/view/payment/payment_done.dart';
 import '/view/privacy_policy/privacy_policy.dart';
 import '/view/rate/rate_review.dart';
 import '/view/reservation/reservation_view.dart';
-import '/view/reservation/widgets/previous_reservation.dart';
-import '/view/reservation/widgets/upcoming_reservation.dart';
 import '/view/service_type/pre_order.dart';
 import '/view/splash_screen/splash_view.dart';
 import '/view/support/support_view.dart';
@@ -40,7 +38,8 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.createProfile, page: () => CreateProfileScreen(),
+      name: RouteName.createProfile,
+      page: () => EditProfileScreen(callFrom: 'Create Profile'),
       // binding: ,
     ),
     GetPage(
@@ -128,11 +127,13 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.previousBooking, page: () => const PreviousReservations(),
+      name: RouteName.bookingDetailsUpcoming,
+      page: () => BookingDetailsView(callFrom: 'Upcoming'),
       // binding: ,
     ),
     GetPage(
-      name: RouteName.upcomingBooking, page: () => const UpComingReservations(),
+      name: RouteName.bookingDetailsPrevious,
+      page: () => BookingDetailsView(callFrom: 'Previous'),
       // binding: ,
     ),
     GetPage(
@@ -154,7 +155,10 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.editProfile, page: () => EditProfileScreen(),
+      name: RouteName.editProfile,
+      page: () => EditProfileScreen(
+        callFrom: 'Edit',
+      ),
       // binding: ,
     ),
     GetPage(

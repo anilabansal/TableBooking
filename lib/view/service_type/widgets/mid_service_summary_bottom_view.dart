@@ -97,8 +97,6 @@ class MidSummaryBottomView extends StatelessWidget {
                 fillColor: whiteF5F5F5,
                 filled: true,
                 hintText: 'Type Here...',
-                color: textLight868686,
-                fontSize: 18,
               ),
             ],
           ),

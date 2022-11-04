@@ -1,6 +1,6 @@
+import 'package:booking_table/bindings/auth_bindings.dart';
 import 'package:booking_table/routes/app_routes.dart';
 import 'package:booking_table/utils/common/common_font.dart';
-import 'package:booking_table/view/splash_screen/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,12 +16,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Table Booking',
+      initialRoute: '/',
       getPages: AppRoutes.appRoutes,
+      initialBinding: AuthBindings(),
       theme: ThemeData(fontFamily: mainLaToFont),
-      home: const Material(
-        child: SplashView(),
-        //      child: CardScanPopUpView(),
-      ),
     );
   }
 }

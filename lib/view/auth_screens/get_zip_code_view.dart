@@ -1,9 +1,7 @@
-
-
+import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/common/common_colors.dart';
 import '../../utils/common/images_string.dart';
 import '../../utils/common/widgets_methods/common_button.dart';
 import '../../utils/common/widgets_methods/common_sized_box.dart';
@@ -62,20 +60,13 @@ class GetZipCodeView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
               ),
-              child: TextFormField(
+              child: CommonTextFormField(
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  filled: true,
-                  fillColor: greyF5F5F5,
-                  hintText: 'Location',
-                  suffixIcon: Icon(
-                    Icons.place,
-                    color: Colors.black,
-                  ),
-                  hintStyle: TextStyle(
-                    color: Colors.grey,
-                  ),
-                  border: InputBorder.none,
+                filled: true,
+                hintText: 'Location',
+                suffixIcon: const Icon(
+                  Icons.place,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -97,7 +88,6 @@ class GetZipCodeView extends StatelessWidget {
           ],
         ),
       ),
-
     );
   }
 }

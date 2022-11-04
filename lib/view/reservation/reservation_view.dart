@@ -15,14 +15,6 @@ class ReservationView extends StatelessWidget {
       backgroundColor: white,
       appBar: appBarCommon(
         text: 'Reservations',
-        // bottom: TabBar(
-        //   controller: controller.tabController,
-        //   tabs: controller.myTabs,
-        //   unselectedLabelColor: textLight868686,
-        //   labelColor: Colors.black,
-        //   indicatorColor: Colors.black,
-        //   overlayColor: MaterialStateProperty.all(Colors.black),
-        // ),
       ),
       body: ReservationViewBody(controller: controller),
     );

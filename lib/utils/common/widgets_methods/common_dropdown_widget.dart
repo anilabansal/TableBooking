@@ -22,7 +22,7 @@ class CommonDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 45,
+      // height: 45,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5), color: greyB3F5F5F5),
@@ -34,11 +34,12 @@ class CommonDropDown extends StatelessWidget {
           focusColor: white,
           hint: Text(
             hintText!,
-            // style: TextStyle(
-            //   color: color ?? grey9B9B9B,
-            //   fontSize: 14,
-            //   fontWeight: FontWeight.w400,
-            // ),
+            style: TextStyle(
+              color: textLight868686,
+
+              // fontSize: 14,
+              // fontWeight: FontWeight.w400,
+            ),
           ),
           value: value,
           // icon: icon ??
@@ -47,7 +48,11 @@ class CommonDropDown extends StatelessWidget {
           //       height: 6,
           //       width: 11,
           //     ),
-          icon: const Icon(Icons.arrow_drop_down,color: black000000,size: 25,),
+          icon: const Icon(
+            Icons.arrow_drop_down,
+            color: black000000,
+            size: 25,
+          ),
           // style: const TextStyle(color: blackText282828),
           underline: Container(
             height: 0,

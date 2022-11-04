@@ -13,9 +13,6 @@ class SplashView extends StatelessWidget {
       init: SplashViewController(),
       builder: (builder) {
         return Scaffold(
-          // extendBodyBehindAppBar: true,
-          // extendBody: true,
-          // resizeToAvoidBottomInset: true,
           backgroundColor: Colors.white,
           body: Center(
             child: Image.asset(

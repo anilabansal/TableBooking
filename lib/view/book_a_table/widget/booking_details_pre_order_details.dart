@@ -4,8 +4,8 @@ import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class UpcomingReservationPreOrderDetails extends StatelessWidget {
-  const UpcomingReservationPreOrderDetails({
+class BookingDetailsPreOrderDetails extends StatelessWidget {
+  const BookingDetailsPreOrderDetails({
     Key? key,
   }) : super(key: key);
 

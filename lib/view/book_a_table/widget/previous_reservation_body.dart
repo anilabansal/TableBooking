@@ -1,16 +1,20 @@
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/images_string.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/utils/common/widgets_methods/restaurant_name_distance.dart';
-import 'package:booking_table/view/book_a_table/widget/upcoming_reservation_booking_details.dart';
-import 'package:booking_table/view/book_a_table/widget/upcoming_reservation_payment_details.dart';
-import 'package:booking_table/view/book_a_table/widget/upcoming_reservation_pre_order_details.dart';
+import 'package:booking_table/view/book_a_table/widget/booking_details_pre_order_details.dart';
+import 'package:booking_table/view/book_a_table/widget/booking_details_tab.dart';
+import 'package:booking_table/view/book_a_table/widget/booking_table_payment_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PreviousReservationBody extends StatelessWidget {
-  const PreviousReservationBody({
+class BookingDetailsBody extends StatelessWidget {
+  String callFrom;
+
+  BookingDetailsBody({
+    required this.callFrom,
     Key? key,
   }) : super(key: key);
 
@@ -30,7 +34,7 @@ class PreviousReservationBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // BOOKING DETAILS
-                const UpcomingReservationBookingDetails(),
+                BookingDetailsTab(callFrom: callFrom),
                 CommonSizedBox(
                   height: 25,
                 ),
@@ -58,6 +62,9 @@ class PreviousReservationBody extends StatelessWidget {
                   width: Get.width,
                   color: whiteE5E5E5,
                 ),
+                CommonSizedBox(
+                  height: 20,
+                ),
                 // TYPES OF SERVICES
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +90,7 @@ class PreviousReservationBody extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         const Icon(
-                          Icons.error,
+                          Icons.info,
                           color: Colors.red,
                         ),
                         CommonSizedBox(
@@ -113,7 +120,7 @@ class PreviousReservationBody extends StatelessWidget {
                       height: 15,
                     ),
                     // Pre Order Details
-                    const UpcomingReservationPreOrderDetails(),
+                    const BookingDetailsPreOrderDetails(),
                     CommonSizedBox(
                       height: 20,
                     ),
@@ -138,75 +145,91 @@ class PreviousReservationBody extends StatelessWidget {
                     CommonSizedBox(
                       height: 30,
                     ),
-                    Container(
-                      height: 1,
-                      width: Get.width,
-                      color: whiteE5E5E5,
-                    ),
-                    CommonSizedBox(
-                      height: 20,
-                    ),
-                    CommonText(
-                      text: 'Reviews',
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    CommonSizedBox(
-                      height: 20,
-                    ),
-                    CommonText(
-                      text:
-                          'It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    CommonSizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Image.asset(
-                          yellowStar,
-                          height: 12,
-                          width: 12,
-                        ),
-                        CommonSizedBox(
-                          width: 5,
-                        ),
-                        Image.asset(
-                          yellowStar,
-                          height: 12,
-                          width: 12,
-                        ),
-                        CommonSizedBox(
-                          width: 5,
-                        ),
-                        Image.asset(
-                          yellowStar,
-                          height: 12,
-                          width: 12,
-                        ),
-                        CommonSizedBox(
-                          width: 5,
-                        ),
-                        Image.asset(
-                          yellowStar,
-                          height: 12,
-                          width: 12,
-                        ),
-                        CommonSizedBox(
-                          width: 5,
-                        ),
-                        Image.asset(
-                          greyStar,
-                          height: 12,
-                          width: 12,
-                        ),
-                      ],
-                    ),
 
+                    callFrom == 'Upcoming'
+                        ? CommonSizedBox(
+                            height: 50,
+                            child: CommonButton(
+                              onTap: () {
+                                Get.toNamed('/reviews');
+                              },
+                              textColor: Colors.white,
+                              bgColor: redE2211C,
+                              text: 'Give Rating',
+                            ),
+                          )
+                        : Column(
+                            children: [
+                              Container(
+                                height: 1,
+                                width: Get.width,
+                                color: whiteE5E5E5,
+                              ),
+                              CommonSizedBox(
+                                height: 20,
+                              ),
+                              CommonText(
+                                text: 'Reviews',
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              CommonSizedBox(
+                                height: 20,
+                              ),
+                              CommonText(
+                                text:
+                                    'It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              CommonSizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    yellowStar,
+                                    height: 12,
+                                    width: 12,
+                                  ),
+                                  CommonSizedBox(
+                                    width: 5,
+                                  ),
+                                  Image.asset(
+                                    yellowStar,
+                                    height: 12,
+                                    width: 12,
+                                  ),
+                                  CommonSizedBox(
+                                    width: 5,
+                                  ),
+                                  Image.asset(
+                                    yellowStar,
+                                    height: 12,
+                                    width: 12,
+                                  ),
+                                  CommonSizedBox(
+                                    width: 5,
+                                  ),
+                                  Image.asset(
+                                    yellowStar,
+                                    height: 12,
+                                    width: 12,
+                                  ),
+                                  CommonSizedBox(
+                                    width: 5,
+                                  ),
+                                  Image.asset(
+                                    greyStar,
+                                    height: 12,
+                                    width: 12,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                     CommonSizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                   ],
                 ),

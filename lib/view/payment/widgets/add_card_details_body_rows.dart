@@ -106,10 +106,9 @@ class AddCardDetailsRowTwo extends StatelessWidget {
         ),
         CommonTextFormField(
           hintText: 'Enter Card Number',
-          color: textLight868686,
           filled: true,
-          keyboardType: TextInputType.number,
           fillColor: whiteF4F4F4,
+          keyboardType: TextInputType.number,
         ),
         CommonSizedBox(
           height: 20,
@@ -139,7 +138,6 @@ class AddCardDetailsRowOne extends StatelessWidget {
         ),
         CommonTextFormField(
           hintText: 'Enter Card Holder Name',
-          color: textLight868686,
           filled: true,
           fillColor: whiteF4F4F4,
         ),

@@ -5,16 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class AuthenticationController extends GetxController {
-  TextEditingController mobileNumber = TextEditingController();
+  var mobileNumber = TextEditingController();
   ApiCalls apiCall = ApiCalls();
-  static final AuthenticationController _authenticationController =
-      AuthenticationController._internal();
 
-  factory AuthenticationController() {
-    return _authenticationController;
-  }
-
-  AuthenticationController._internal();
   Future<bool> loginUser({Map<String, String>? data}) async {
     final response = await apiCall.callPostApi(
       data!,

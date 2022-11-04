@@ -12,8 +12,6 @@ class CardScanController extends GetxController {
   );
 
   scanCardDetails() async {
-    final CardDetails? cardDetails =
-        await CardScanner.scanCard(scanOptions: scanOptions);
     // if (!mounted || cardDetails == null) return;
     // setState(() {
     //   _cardDetails = cardDetails;

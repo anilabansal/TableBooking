@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 class SplashViewController extends GetxController {
   @override
   void onReady() {
+    print('Splash Screen Init');
     splashInit();
     super.onReady();
   }
@@ -17,5 +18,12 @@ class SplashViewController extends GetxController {
     // } else {
     //   Get.offAll(() => LoginView());
     // }
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    print('Splash Screen Close');
+    super.onClose();
   }
 }

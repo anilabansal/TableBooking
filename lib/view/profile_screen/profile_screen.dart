@@ -1,13 +1,14 @@
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_app_bar.dart';
-import 'package:booking_table/view/profile_screen/widgets/edit_profile_screen_body.dart';
+import 'package:booking_table/view/profile_screen/widgets/profile_screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/profile/profile_controller.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  EditProfileScreen({Key? key}) : super(key: key);
+  String callFrom;
+  EditProfileScreen({Key? key, required this.callFrom}) : super(key: key);
   final ProfileController profileController = Get.put(ProfileController());
 
   @override
@@ -15,7 +16,8 @@ class EditProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: white,
       appBar: appBarCommon(text: "Edit Details"),
-      body: EditProfileScreenBody(profileController: profileController),
+      body: EditProfileScreenBody(
+          callFrom: callFrom, profileController: profileController),
     );
   }
 }

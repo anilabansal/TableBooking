@@ -31,18 +31,18 @@ class RestaurantHomeScreen extends StatelessWidget {
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         decoration: const BoxDecoration(
-                            color: white,
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                            // boxShadow: [
-                            //   BoxShadow(
-                            //     color: Color.fromRGBO(0, 0, 0, 0.06),
-                            //     blurRadius: 4.0,
-                            //     offset: Offset(0.0, 10),
-                            //   ),
-                            // ],
+                          color: white,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(20),
+                          ),
+                          // boxShadow: [
+                          //   BoxShadow(
+                          //     color: Color.fromRGBO(0, 0, 0, 0.06),
+                          //     blurRadius: 4.0,
+                          //     offset: Offset(0.0, 10),
+                          //   ),
+                          // ],
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,

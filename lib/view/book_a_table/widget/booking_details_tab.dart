@@ -3,8 +3,11 @@ import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 
-class UpcomingReservationBookingDetails extends StatelessWidget {
-  const UpcomingReservationBookingDetails({
+class BookingDetailsTab extends StatelessWidget {
+  String callFrom;
+
+  BookingDetailsTab({
+    required this.callFrom,
     Key? key,
   }) : super(key: key);
 
@@ -82,22 +85,39 @@ class UpcomingReservationBookingDetails extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 25,
-              width: 72,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(19),
-                color: Colors.black,
-              ),
-              child: CommonText(
-                text: 'Upcoming',
-                color: Colors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                textAlign: TextAlign.center,
-              ),
-            ),
+            callFrom == 'Upcoming'
+                ? Container(
+                    height: 25,
+                    width: 72,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(19),
+                      color: Colors.black,
+                    ),
+                    child: CommonText(
+                      text: 'Upcoming',
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                : Container(
+                    height: 25,
+                    width: 72,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(19),
+                      color: Colors.green,
+                    ),
+                    child: CommonText(
+                      text: 'Completed',
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
             CommonSizedBox(
               height: 15,
             ),

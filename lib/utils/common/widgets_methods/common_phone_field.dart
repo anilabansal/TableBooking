@@ -1,6 +1,6 @@
+import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../common_colors.dart';
 
@@ -31,7 +31,6 @@ class _PhoneFieldState extends State<PhoneField> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 46,
       alignment: Alignment.center,
       //margin: const EdgeInsets.symmetric(horizontal: 30),
       decoration: BoxDecoration(
@@ -61,7 +60,6 @@ class _PhoneFieldState extends State<PhoneField> {
               child: SizedBox(
                 //  color: Colors.grey,
                 // width: 100,
-                height: 46,
                 child: Center(
                   child: Text(
                     '${widget.countryFlag}+${widget.countryCode}',
@@ -84,26 +82,14 @@ class _PhoneFieldState extends State<PhoneField> {
             height: 34,
           ),
           Expanded(
-            child: TextFormField(
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(10),
-              ],
+            child: CommonTextFormField(
+              // inputFormatters: [
+              //   LengthLimitingTextInputFormatter(10),
+              // ],
               keyboardType: TextInputType.number,
               controller: widget.phoneController,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-                color: black000000,
-              ),
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: '+1 7700 900175',
-                hintStyle: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.normal,
-                  color: textGrey868686,
-                ),
-              ),
+              hintText: '+1 7700 900175',
+              fontSize: 20,
             ),
           ),
         ],

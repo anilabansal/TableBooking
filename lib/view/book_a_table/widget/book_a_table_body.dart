@@ -10,16 +10,11 @@ import 'package:get/get.dart';
 import '../../../utils/common/widgets_methods/common_date_picker_widget.dart';
 import '../../../utils/common/widgets_methods/common_text_form_field.dart';
 
-class BookATableBody extends StatefulWidget {
-  const BookATableBody({
+class BookATableBody extends StatelessWidget {
+  BookATableBody({
     Key? key,
   }) : super(key: key);
 
-  @override
-  State<BookATableBody> createState() => _BookATableBodyState();
-}
-
-class _BookATableBodyState extends State<BookATableBody> {
   final controller = Get.put(BookATableController());
 
   @override
@@ -162,8 +157,6 @@ class _BookATableBodyState extends State<BookATableBody> {
                       hintText: "5",
                       filled: true,
                       fillColor: greyF5F5F5,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
                     ),
                   ],
                 ).paddingOnly(

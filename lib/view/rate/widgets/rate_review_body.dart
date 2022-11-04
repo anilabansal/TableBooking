@@ -106,7 +106,8 @@ class RateReviewBody extends StatelessWidget {
             ),
             CommonButton(
               onTap: () {
-                Get.toNamed('/home');
+                // Get.toNamed('/home');
+                Get.toNamed('/previous-booking');
               },
               text: 'Submit',
               bgColor: redE2211C,

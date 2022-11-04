@@ -7,11 +7,11 @@ import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
+import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:booking_table/view/auth_screens/otp_screen.dart';
 import 'package:country_phone_code_picker/country_phone_code_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 class SignInScreenBottomView extends StatelessWidget {
@@ -63,23 +63,28 @@ class SignInScreenBottomView extends StatelessWidget {
                 ShowToast.show(msg: validateFields());
                 return;
               }
-              controller.loginUser(data: {
-                "MobileNumber": controller.mobileNumber.text.trim(),
-                "Email": "",
-                "AuthenticationId": "",
-                "AuthenticationType": "",
-                "DeviceToken": "sdgsgsgsg",
-                "DeviceType": GetPlatform.isAndroid ? "Android" : "iOS",
-              }).then((value) {
-                Get.back();
-                if (value) {
-                  Get.off(
-                    () => OtpScreenView(
-                      callFrom: callFrom,
-                    ),
-                  );
-                }
-              });
+              // controller.loginUser(data: {
+              //   "MobileNumber": controller.mobileNumber.text.trim(),
+              //   "Email": "",
+              //   "AuthenticationId": "",
+              //   "AuthenticationType": "",
+              //   "DeviceToken": "sdgsgsgsg",
+              //   "DeviceType": GetPlatform.isAndroid ? "Android" : "iOS",
+              // }).then((value) {
+              //   Get.back();
+              //   if (value) {
+              //     Get.off(
+              //       () => OtpScreenView(
+              //         callFrom: callFrom,
+              //       ),
+              //     );
+              //   }
+              // });
+              Get.off(
+                () => OtpScreenView(
+                  callFrom: callFrom,
+                ),
+              );
             },
             text: callFrom == 'Login' ? 'Sign In' : 'Sign Up',
             bgColor: redE2211C,
@@ -166,21 +171,20 @@ class SignInScreenBottomView extends StatelessWidget {
   }
 
   // COUNTRY CODE PICKER
-  CommonSizedBox _codePicker() {
-    return CommonSizedBox(
-        width: 79,
-        child: CountryPhoneCodePicker.withDefaultSelectedCountry(
-          defaultCountryCode:
-              Country(name: 'USA', countryCode: 'USA', phoneCode: '+1'),
-          borderRadius: 50,
-          borderWidth: 0,
-          flagBorderRadius: 100,
-          flagHeight: 30,
-          flagWidth: 30,
-          borderColor: Colors.transparent,
-          style: const TextStyle(fontSize: 16),
-          searchBarHintText: 'Search by name',
-        ));
+  Widget _codePicker() {
+    return CountryPhoneCodePicker.withDefaultSelectedCountry(
+      defaultCountryCode:
+          Country(name: 'USA', countryCode: 'USA', phoneCode: '+1'),
+      borderRadius: 50,
+      borderWidth: 0,
+      flagBorderRadius: 100,
+      flagHeight: 30,
+      flagWidth: 30,
+      borderColor: Colors.transparent,
+      // style: const TextStyle(fontSize: 16),
+      searchBarHintText: 'Search by name',
+      // contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+    );
   }
 
   // PRIVACY POLICY & TERMS N CONDITIONS
@@ -262,7 +266,7 @@ class SignInScreenBottomView extends StatelessWidget {
   // validateFields() {
   validateFields() {
     if (!GetUtils.isPhoneNumber(controller.mobileNumber.value.text.trim())) {
-      return 'Please enter valid Phone Number!';
+      return 'please enter a valid phone number!'.toTitleCase();
     }
     return '';
   }
