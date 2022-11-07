@@ -1,3 +1,4 @@
+import 'package:booking_table/bindings/auth_bindings.dart';
 import 'package:booking_table/view/auth_screens/auth_selection_view.dart';
 import 'package:booking_table/view/book_a_table/booking_details.dart';
 import 'package:booking_table/view/home_screen/filter_screen.dart';
@@ -48,12 +49,14 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.login, page: () => SignInView(callFrom: 'Login'),
-      // binding: ,
+      name: RouteName.login,
+      page: () => SignInView(callFrom: 'Login'),
+      binding: AuthBindings(),
     ),
     GetPage(
-      name: RouteName.register, page: () => SignInView(callFrom: 'Register'),
-      // binding: ,
+      name: RouteName.register,
+      page: () => SignInView(callFrom: 'Register'),
+      binding: AuthBindings(),
     ),
     GetPage(
       name: RouteName.loginOTP,
