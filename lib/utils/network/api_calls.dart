@@ -4,10 +4,11 @@ import 'package:get/get.dart';
 
 import '../common/common_strings.dart';
 
-///This method is for post request
-
 class ApiCalls extends GetConnect {
-//   Post API
+/**
+* This method is for get request to the server.
+ **/
+
   Future<dynamic> callPostApi(Map<String, dynamic> body, String endPoint,
       {bool isToken = false,
       String token = '',
@@ -44,10 +45,14 @@ class ApiCalls extends GetConnect {
       print('Run Successfully!!!!!');
       return response;
     } catch (e) {
-      print("========> Responses ${e.toString()}");
+      print("========> Responses Error ${e.toString()}");
     }
     return;
   }
+
+  /**
+  * This method is for get request
+  **/
 
   Future<dynamic> callGetApi(String endPoint, {String token = ''}) async {
     try {
