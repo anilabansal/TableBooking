@@ -1,25 +1,27 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:booking_table/controller/authentication/authentication.dart';
+import 'package:booking_table/controller/authentication/login_controller.dart';
+import 'package:booking_table/controller/authentication/register_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/images_string.dart';
-import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/utils/extensions/capitalization_strings.dart';
-import 'package:booking_table/view/auth_screens/otp_screen.dart';
+import 'package:booking_table/view/auth_screens/widgets/privacy_policy.dart';
 import 'package:country_phone_code_picker/country_phone_code_picker.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignInScreenBottomView extends StatelessWidget {
-  final AuthenticationController controller;
+  LoginController loginController = Get.find();
+  CountryController countryController = Get.find();
+  RegisterController registerController = Get.find();
 
   String? callFrom;
   SignInScreenBottomView({
-    required this.controller,
+    required this.loginController,
+    required this.registerController,
     required this.callFrom,
     Key? key,
   }) : super(key: key);
@@ -51,40 +53,64 @@ class SignInScreenBottomView extends StatelessWidget {
 
         callFrom == 'Login'
             ? CommonSizedBox(height: 40)
-            : _privacyPolicyNTerms(),
+            : privacyPolicyNTerms(),
         // Button
         // LOGIN/REGISTER BUTTON
 
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: CommonButton(
-            onTap: () {
-              if (validateFields() != '') {
-                ShowToast.show(msg: validateFields());
-                return;
-              }
-              // controller.loginUser(data: {
-              //   "MobileNumber": controller.mobileNumber.text.trim(),
-              //   "Email": "",
-              //   "AuthenticationId": "",
-              //   "AuthenticationType": "",
-              //   "DeviceToken": "sdgsgsgsg",
-              //   "DeviceType": GetPlatform.isAndroid ? "Android" : "iOS",
-              // }).then((value) {
-              //   Get.back();
-              //   if (value) {
-              //     Get.off(
-              //       () => OtpScreenView(
-              //         callFrom: callFrom,
-              //       ),
-              //     );
-              //   }
-              // });
-              Get.off(
-                () => OtpScreenView(
-                  callFrom: callFrom,
-                ),
-              );
+            onTap: () async {
+              // if (validateFields() != '') {
+              //   ShowToast.show(msg: validateFields());
+              //   return;
+              // }
+              callFrom == 'Login'
+                  ? await loginController.loginUser(data: {
+                      // "MobileNumber":
+                      //     '${countryController.selectedCountryPhoneCode}${loginController.mobileNumber.text.trim()}',
+                      "MobileNumber": '+91706000016',
+
+                      "Email": "",
+                      "AuthenticationId": "",
+                      "AuthenticationType": "",
+                      "DeviceToken": "sdgsgsgsg",
+                      "DeviceType": GetPlatform.isAndroid ? "Android" : "iOS",
+                    }).then((value) {
+                      Get.back();
+                      if (value) {
+                        Get.toNamed('/login/otp');
+                      }
+                    })
+                  : registerController.registerUser(data: {
+                      // "MobileNumber":
+                      //     '${countryController.selectedCountryPhoneCode}${loginController.mobileNumber.text.trim()}',
+                      "MobileNumber": '+917066000016',
+                      "Email": "",
+                      "AuthenticationId": "",
+                      "AuthenticationType": "",
+                      "DeviceToken": "sdgsgsgsg",
+                      "DeviceType": GetPlatform.isAndroid ? "Android" : "iOS",
+                    }).then((value) {
+                      Get.back();
+                      if (value) {
+                        Get.toNamed('/register/otp');
+                      }
+                    });
+              // Get.off(
+              //   () => OtpScreenView(
+              //     callFrom: callFrom,
+              //   ),
+              // );
+
+              /**
+                  Check Country Code & Mobile Number
+                  If Valid then goto OtpScreenView
+               **/
+              print(countryController.selectedCountryCode);
+              print(countryController.selectedCountryPhoneCode);
+              print(
+                  '${countryController.selectedCountryPhoneCode}${loginController.mobileNumber.text.trim()}');
             },
             text: callFrom == 'Login' ? 'Sign In' : 'Sign Up',
             bgColor: redE2211C,
@@ -155,7 +181,7 @@ class SignInScreenBottomView extends StatelessWidget {
           // TextField
           Expanded(
               child: TextFormField(
-            controller: controller.mobileNumber,
+            controller: loginController.mobileNumber,
             autovalidateMode: AutovalidateMode.always,
             keyboardType: TextInputType.number,
             cursorWidth: 0,
@@ -180,92 +206,20 @@ class SignInScreenBottomView extends StatelessWidget {
       flagBorderRadius: 100,
       flagHeight: 30,
       flagWidth: 30,
-      borderColor: Colors.transparent,
-      // style: const TextStyle(fontSize: 16),
-      searchBarHintText: 'Search by name',
-      // contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-    );
-  }
 
-  // PRIVACY POLICY & TERMS N CONDITIONS
-  Column _privacyPolicyNTerms() {
-    return Column(
-      children: <Widget>[
-        CommonSizedBox(height: 58),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Checkbox(
-              value: true,
-              onChanged: null,
-              fillColor: MaterialStateProperty.resolveWith<Color>(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return Colors.red;
-                }
-                return Colors.white;
-              }),
-            ),
-            Expanded(
-              child: RichText(
-                text: TextSpan(
-                  children: [
-                    const TextSpan(
-                        text: 'I agree with all ',
-                        style: TextStyle(color: textDark3F3E3E, fontSize: 14)),
-                    TextSpan(
-                      text: 'Terms & Conditions',
-                      style: const TextStyle(
-                        color: black040404,
-                        fontSize: 14,
-                        decoration: TextDecoration.underline,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          // TODO : TERMS & CONDITIONS
-                          Get.toNamed('/terms-and-conditions');
-                        },
-                    ),
-                    const TextSpan(
-                        text: ' and ',
-                        style: TextStyle(
-                          color: textDark3F3E3E,
-                          fontSize: 14,
-                        )),
-                    TextSpan(
-                      text: 'Privacy Policy',
-                      style: const TextStyle(
-                        color: black040404,
-                        fontSize: 14,
-                        decoration: TextDecoration.underline,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          // TODO : PRIVACY POLICY
-                          Get.toNamed('/privacy-policy');
-                        },
-                    ),
-                    const TextSpan(
-                      text: '.',
-                      style: TextStyle(
-                        color: textDark3F3E3E,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ).paddingSymmetric(horizontal: 20),
-        CommonSizedBox(height: 15),
-      ],
+      searchBarPrefixIcon: Icon(null),
+      borderColor: Colors.transparent,
+
+      searchBarHintText: 'Search by name',
+
+      // contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
     );
   }
 
   // validateFields() {
   validateFields() {
-    if (!GetUtils.isPhoneNumber(controller.mobileNumber.value.text.trim())) {
+    if (!GetUtils.isPhoneNumber(
+        loginController.mobileNumber.value.text.trim())) {
       return 'please enter a valid phone number!'.toTitleCase();
     }
     return '';
