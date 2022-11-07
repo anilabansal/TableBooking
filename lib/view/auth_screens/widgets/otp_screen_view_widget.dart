@@ -1,12 +1,11 @@
 // ignore_for_file: must_be_immutable
+import 'package:booking_table/controller/authentication/login_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
-
-import '../../../controller/authentication/auth_view_controller.dart';
 
 class OtpScreenViewWidget extends StatefulWidget {
   final String? callFrom;
@@ -20,7 +19,7 @@ class OtpScreenViewWidget extends StatefulWidget {
   State<OtpScreenViewWidget> createState() => _OtpScreenViewWidgetState();
 }
 
-AuthViewController controller = Get.put(AuthViewController());
+LoginController controller = Get.find();
 
 class _OtpScreenViewWidgetState extends State<OtpScreenViewWidget> {
   @override
