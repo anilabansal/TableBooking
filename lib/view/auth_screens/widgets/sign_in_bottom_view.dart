@@ -4,6 +4,7 @@ import 'package:booking_table/controller/authentication/login_controller.dart';
 import 'package:booking_table/controller/authentication/register_controller.dart';
 import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/utils/common/images_string.dart';
+import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
@@ -61,15 +62,16 @@ class SignInScreenBottomView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: CommonButton(
             onTap: () async {
-              // if (validateFields() != '') {
-              //   ShowToast.show(msg: validateFields());
-              //   return;
-              // }
+              if (validateFields() != '') {
+                ShowToast.show(msg: validateFields());
+                return;
+              }
+              Center(child: CircularProgressIndicator());
               callFrom == 'Login'
                   ? await loginController.loginUser(data: {
-                      // "MobileNumber":
-                      //     '${countryController.selectedCountryPhoneCode}${loginController.mobileNumber.text.trim()}',
-                      "MobileNumber": '+91706000016',
+                      "MobileNumber":
+                          '${countryController.selectedCountryPhoneCode}${loginController.mobileNumber.text.trim()}',
+                      // "MobileNumber": '+917066000016',
 
                       "Email": "",
                       "AuthenticationId": "",
@@ -77,24 +79,40 @@ class SignInScreenBottomView extends StatelessWidget {
                       "DeviceToken": "sdgsgsgsg",
                       "DeviceType": GetPlatform.isAndroid ? "Android" : "iOS",
                     }).then((value) {
-                      Get.back();
+                      // Get.back();
                       if (value) {
-                        Get.toNamed('/login/otp');
+                        Get.toNamed('/login/otp', arguments: [
+                          {
+                            'mobileNumber':
+                                '${countryController.selectedCountryPhoneCode}${loginController.mobileNumber.text.trim()}',
+                          },
+                          {
+                            'callFrom': "Login",
+                          }
+                        ]);
                       }
                     })
                   : registerController.registerUser(data: {
-                      // "MobileNumber":
-                      //     '${countryController.selectedCountryPhoneCode}${loginController.mobileNumber.text.trim()}',
-                      "MobileNumber": '+917066000016',
+                      "MobileNumber":
+                          '${countryController.selectedCountryPhoneCode}${loginController.mobileNumber.text.trim()}',
+                      // "MobileNumber": '+917066000016',
                       "Email": "",
                       "AuthenticationId": "",
                       "AuthenticationType": "",
                       "DeviceToken": "sdgsgsgsg",
                       "DeviceType": GetPlatform.isAndroid ? "Android" : "iOS",
                     }).then((value) {
-                      Get.back();
+                      // Get.back();
                       if (value) {
-                        Get.toNamed('/register/otp');
+                        Get.toNamed('/register/otp', arguments: [
+                          {
+                            'mobileNumber':
+                                '${countryController.selectedCountryPhoneCode}${loginController.mobileNumber.text.trim()}',
+                          },
+                          {
+                            'callFrom': "Register",
+                          }
+                        ]);
                       }
                     });
               // Get.off(
@@ -200,7 +218,7 @@ class SignInScreenBottomView extends StatelessWidget {
   Widget _codePicker() {
     return CountryPhoneCodePicker.withDefaultSelectedCountry(
       defaultCountryCode:
-          Country(name: 'USA', countryCode: 'USA', phoneCode: '+1'),
+          Country(name: 'INDIA', countryCode: 'IN', phoneCode: '+91'),
       borderRadius: 50,
       borderWidth: 0,
       flagBorderRadius: 100,

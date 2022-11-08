@@ -60,13 +60,13 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteName.loginOTP,
-      page: () => const OtpScreenView(callFrom: 'Login'),
-      // binding: ,
+      page: () => OtpScreenView(callFrom: 'Login'),
+      binding: AuthBindings(),
     ),
     GetPage(
       name: RouteName.registerOTP,
-      page: () => const OtpScreenView(callFrom: 'Register'),
-      // binding: ,
+      page: () => OtpScreenView(callFrom: 'Register'),
+      binding: AuthBindings(),
     ),
     GetPage(
       name: RouteName.support, page: () => const SupportView(),

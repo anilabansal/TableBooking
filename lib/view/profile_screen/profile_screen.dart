@@ -15,7 +15,9 @@ class EditProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
-      appBar: appBarCommon(text: "Edit Details"),
+      appBar: appBarCommon(
+        text: callFrom == "Create Profile" ? "Create Profile" : "Edit Details",
+      ),
       body: EditProfileScreenBody(
           callFrom: callFrom, profileController: profileController),
     );

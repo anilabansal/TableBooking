@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
-  var pinOutPut = ''.obs;
   var mobileNumber = TextEditingController();
 
   ApiCalls apiCall = ApiCalls();

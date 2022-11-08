@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   var mobileNumber = TextEditingController();
-  var pinOutPut = ''.obs;
 
   ApiCalls apiCall = ApiCalls();
 
@@ -17,13 +16,20 @@ class LoginController extends GetxController {
       // token: 'token',
     );
     print(data);
-    print('Register Response ======> ${response.body}');
-    if (response.body['response'] == 30) {
+    print('Login Response ======> ${response.body}');
+    if (response.body['response'] == 1 && response.body['data'] != null) {
       return true;
+    } else if (response.body['response'] == 1 &&
+        response.body['address'] == null) {
+      ShowToast.show(
+        msg: 'User not Registered!!',
+        isError: true,
+      );
     } else {
       ShowToast.show(
-          msg: response.body['errorMessage'] ?? 'Please try again!',
-          isError: true);
+        msg: response.body['errorMessage'] ?? 'Please try again!',
+        isError: true,
+      );
     }
     return false;
   }
