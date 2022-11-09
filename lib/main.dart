@@ -1,6 +1,6 @@
 import 'package:booking_table/bindings/auth_bindings.dart';
 import 'package:booking_table/routes/app_routes.dart';
-import 'package:booking_table/utils/common/common_font.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
