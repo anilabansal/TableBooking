@@ -1,5 +1,4 @@
-import 'package:booking_table/utils/common/common_colors.dart';
-import 'package:booking_table/utils/common/images_string.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +55,7 @@ class CommonRestaurantNameDistance extends StatelessWidget {
               ],
             ).paddingOnly(left: 11.0),
           ],
-        ).paddingOnly(left: 11,right: 11, top: 12, bottom: 12),
+        ).paddingOnly(left: 11, right: 11, top: 12, bottom: 12),
       ),
     );
   }
