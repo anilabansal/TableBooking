@@ -195,6 +195,11 @@ class EditProfileScreenBody extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
+
+                /**
+                 * Please make this field compulsory.
+                 * This field is used to check if user is registered or not.
+                 */
                 CommonText(
                   text: "Street Address",
                   fontSize: 14,
@@ -276,6 +281,11 @@ class EditProfileScreenBody extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
+                /**
+                 * If Street Address is empty, display an error message.
+                 * If Street Address field is not compulsory, please make it compulsory.
+                 * This field is used to check if user is registered or not.
+                 */
                 callFrom == 'Create Profile'
                     ? CommonButton(
                         onTap: () {
