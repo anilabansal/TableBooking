@@ -4,12 +4,12 @@ import 'package:booking_table/view/auth_screens/widgets/otp_screen_view_widget.d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OtpScreenView extends StatelessWidget {
+class OtpView extends StatelessWidget {
   String? callFrom;
   String? mobileNumber;
   var data = Get.arguments;
 
-  OtpScreenView({required this.callFrom, this.mobileNumber, Key? key})
+  OtpView({required this.callFrom, this.mobileNumber, Key? key})
       : super(key: key);
 
   @override

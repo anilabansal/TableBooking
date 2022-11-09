@@ -6,8 +6,8 @@ import 'package:booking_table/view/service_type/widgets/mid_service_pre_order_bo
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MidServicePreOrderSummaryView extends StatelessWidget {
-  MidServicePreOrderSummaryView({
+class MidServiceWithPreOrderView extends StatelessWidget {
+  MidServiceWithPreOrderView({
     Key? key,
   }) : super(key: key);
 

@@ -1,12 +1,11 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:booking_table/controller/home/home_controller.dart';
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/common/images_string.dart';
 import '../../utils/common/widgets_methods/common_app_bar.dart';
 import '../../utils/common/widgets_methods/common_button.dart';
 import '../../utils/common/widgets_methods/common_date_picker_widget.dart';
@@ -14,8 +13,8 @@ import '../../utils/common/widgets_methods/common_dropdown_widget.dart';
 import '../../utils/common/widgets_methods/common_info_icon.dart';
 import '../../utils/common/widgets_methods/common_text.dart';
 
-class FilterScreen extends StatelessWidget {
-  FilterScreen({Key? key}) : super(key: key);
+class FilterView extends StatelessWidget {
+  FilterView({Key? key}) : super(key: key);
 
   HomeController homeController = Get.put(HomeController());
   final dateController = TextEditingController();
@@ -23,7 +22,7 @@ class FilterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: Colors.white,
       appBar: appBarCommon(text: "Filter"),
       body: SingleChildScrollView(
         child: GetBuilder<HomeController>(builder: (homeController) {
