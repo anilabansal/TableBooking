@@ -1,5 +1,5 @@
 import 'package:booking_table/controller/notification_screen/notification_screen_controller.dart';
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/notifications/widgets/notification_widget.dart';

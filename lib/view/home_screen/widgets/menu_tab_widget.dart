@@ -1,5 +1,6 @@
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
+
 import '../../../utils/common/widgets_methods/common_text.dart';
 
 class MenuTab extends StatelessWidget {
@@ -81,9 +82,7 @@ class MenuTab extends StatelessWidget {
               ),
             ],
           ),
-
         ),
-
       ],
     );
   }

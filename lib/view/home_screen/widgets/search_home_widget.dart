@@ -1,9 +1,6 @@
-import 'package:booking_table/utils/common/common_font.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../utils/common/common_colors.dart';
-import '../../../utils/common/images_string.dart';
 
 class SearchBoxScreen extends StatelessWidget {
   const SearchBoxScreen({Key? key}) : super(key: key);

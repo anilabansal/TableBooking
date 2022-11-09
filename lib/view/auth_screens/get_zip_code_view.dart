@@ -1,8 +1,8 @@
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/common/images_string.dart';
 import '../../utils/common/widgets_methods/common_button.dart';
 import '../../utils/common/widgets_methods/common_sized_box.dart';
 import '../../utils/common/widgets_methods/common_text.dart';

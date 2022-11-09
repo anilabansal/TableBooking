@@ -1,4 +1,4 @@
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/gestures.dart';

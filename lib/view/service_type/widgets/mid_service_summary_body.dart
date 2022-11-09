@@ -1,4 +1,5 @@
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
+
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/view/service_type/widgets/mid_service_summary_bottom_view.dart';
 import 'package:booking_table/view/service_type/widgets/mid_service_summary_details_button_view.dart';

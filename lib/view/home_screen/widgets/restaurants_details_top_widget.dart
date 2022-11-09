@@ -1,13 +1,10 @@
 import 'package:booking_table/controller/home/home_controller.dart';
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-
-import '../../../utils/common/common_font.dart';
-import '../../../utils/common/images_string.dart';
 
 class RestaurantDetailTopScreen extends StatelessWidget {
   const RestaurantDetailTopScreen({Key? key}) : super(key: key);

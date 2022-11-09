@@ -1,4 +1,5 @@
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
+
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/view/payment/widgets/add_card_details_body_rows.dart';
 import 'package:flutter/material.dart';

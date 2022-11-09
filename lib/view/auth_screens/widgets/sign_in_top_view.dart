@@ -1,4 +1,4 @@
-import 'package:booking_table/utils/common/images_string.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreenTopView extends StatelessWidget {

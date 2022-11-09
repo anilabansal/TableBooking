@@ -1,6 +1,5 @@
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
-import '../images_string.dart';
 
 class InfoIcon extends StatelessWidget {
   const InfoIcon({Key? key}) : super(key: key);
@@ -10,10 +9,7 @@ class InfoIcon extends StatelessWidget {
     return Container(
       width: 13,
       height: 13,
-      decoration:const BoxDecoration(
-        shape: BoxShape.circle,
-        color: redE2211C
-      ),
+      decoration: const BoxDecoration(shape: BoxShape.circle, color: redE2211C),
       child: Image.asset(infoIcon),
     );
   }

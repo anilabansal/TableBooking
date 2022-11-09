@@ -1,8 +1,7 @@
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-
-import '../common_colors.dart';
 
 class PhoneField extends StatefulWidget {
   final String? countryCode;

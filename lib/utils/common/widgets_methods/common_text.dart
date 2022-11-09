@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:booking_table/utils/common/common_font.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
 
 class CommonText extends StatelessWidget {
@@ -26,7 +26,7 @@ class CommonText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text!,
-      textAlign:textAlign,
+      textAlign: textAlign,
       style: TextStyle(
         fontFamily: fontFamily ?? mainLaToFont,
         decoration: decoration,

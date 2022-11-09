@@ -1,5 +1,6 @@
 import 'package:booking_table/controller/splash_screen/splash_view_controller.dart';
-import 'package:booking_table/utils/common/images_string.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

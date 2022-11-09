@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
 
 class CommonTextFormField extends StatelessWidget {
@@ -79,7 +79,7 @@ class CommonTextFormField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(
-            color: fillColor??whiteF4F4F4,
+            color: fillColor ?? whiteF4F4F4,
           ),
         ),
         focusedBorder: OutlineInputBorder(

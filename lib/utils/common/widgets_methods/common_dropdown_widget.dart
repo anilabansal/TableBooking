@@ -1,4 +1,4 @@
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
 
 class CommonDropDown extends StatelessWidget {
@@ -34,7 +34,7 @@ class CommonDropDown extends StatelessWidget {
           focusColor: white,
           hint: Text(
             hintText!,
-            style: TextStyle(
+            style: const TextStyle(
               color: textLight868686,
 
               // fontSize: 14,

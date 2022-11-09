@@ -1,4 +1,4 @@
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -36,10 +36,12 @@ class ReviewsTabScreen extends StatelessWidget {
   }
 
   reviewsWidget(context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.start,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(mainAxisAlignment: MainAxisAlignment.start,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
@@ -51,8 +53,11 @@ class ReviewsTabScreen extends StatelessWidget {
                       image:
                           AssetImage("assets/images/home/profile_image.png"))),
             ),
-            const SizedBox(width: 10,),
-            Column(mainAxisAlignment: MainAxisAlignment.start,
+            const SizedBox(
+              width: 10,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CommonText(
@@ -61,7 +66,9 @@ class ReviewsTabScreen extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   color: black0D0000,
                 ),
-                const SizedBox(height: 8,),
+                const SizedBox(
+                  height: 8,
+                ),
                 RatingBar.builder(
                   itemSize: 20,
                   initialRating: 4,
@@ -80,17 +87,22 @@ class ReviewsTabScreen extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 13,),
+        const SizedBox(
+          height: 13,
+        ),
         SizedBox(
-          width: MediaQuery.of(context).size.width-30,
+          width: MediaQuery.of(context).size.width - 30,
           child: CommonText(
-            text: " It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.",
+            text:
+                " It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.",
             fontSize: 15,
             fontWeight: FontWeight.w400,
             color: textDark3F3E3E,
           ),
         ),
-        const SizedBox(height:20,),
+        const SizedBox(
+          height: 20,
+        ),
       ],
     );
   }

@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
+
 import 'package:booking_table/view/service_type/widgets/full_service_summary_bottom_view.dart';
 import 'package:booking_table/view/service_type/widgets/full_service_summary_details_button_view.dart';
 import 'package:booking_table/view/service_type/widgets/full_service_summary_top_view.dart';

@@ -1,5 +1,5 @@
 import 'package:booking_table/controller/home/home_controller.dart';
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/home_screen/widgets/about_tab_widget.dart';
 import 'package:booking_table/view/home_screen/widgets/gallery_tab_widget.dart';

@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:booking_table/utils/common/common_colors.dart';
 import 'package:booking_table/view/home_screen/widgets/drawer_home_widget.dart';
 import 'package:booking_table/view/home_screen/widgets/home_body.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: Colors.white,
       key: homeController.drawerKey,
       drawer: const DrawerScreen(),
       body: HomeBody(homeController: homeController),

@@ -1,7 +1,6 @@
-import 'package:booking_table/utils/common/common_colors.dart';
-import 'package:booking_table/utils/common/images_string.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
-import 'package:booking_table/view/payment/card_scan_pop_up.dart';
+import 'package:booking_table/view/payment/card_scan_pop_up_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

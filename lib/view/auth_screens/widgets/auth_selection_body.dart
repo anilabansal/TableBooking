@@ -1,4 +1,4 @@
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/auth_screens/widgets/auth_selection_view_widget.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class AuthSelectionBody extends StatelessWidget {
             // TOP
             SizedBox(height: Get.height * 0.15),
             // Middle View
-             AuthScreenViewWidget(),
+            AuthScreenViewWidget(),
             // Bottom
             Column(
               children: [

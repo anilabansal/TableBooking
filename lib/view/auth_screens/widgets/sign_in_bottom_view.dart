@@ -2,8 +2,7 @@
 
 import 'package:booking_table/controller/authentication/login_controller.dart';
 import 'package:booking_table/controller/authentication/register_controller.dart';
-import 'package:booking_table/utils/common/common_colors.dart';
-import 'package:booking_table/utils/common/images_string.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
@@ -66,7 +65,7 @@ class SignInScreenBottomView extends StatelessWidget {
                 ShowToast.show(msg: validateFields());
                 return;
               }
-              Center(child: CircularProgressIndicator());
+              const Center(child: CircularProgressIndicator());
               callFrom == 'Login'
                   ? await loginController.loginUser(data: {
                       "MobileNumber":
@@ -225,7 +224,7 @@ class SignInScreenBottomView extends StatelessWidget {
       flagHeight: 30,
       flagWidth: 30,
 
-      searchBarPrefixIcon: Icon(null),
+      searchBarPrefixIcon: const Icon(null),
       borderColor: Colors.transparent,
 
       searchBarHintText: 'Search by name',

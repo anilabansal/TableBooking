@@ -2,13 +2,13 @@
 
 import 'dart:ui';
 
-import 'package:booking_table/utils/common/common_colors.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
-import '../restaurant_image_zoom_screen.dart';
+import '../restaurant_image_zoom_view.dart';
 
 class GalleryTab extends StatelessWidget {
   GalleryTab({Key? key}) : super(key: key);
@@ -57,7 +57,7 @@ class GalleryTab extends StatelessWidget {
                             backgroundColor: Colors.transparent,
                             content: SizedBox(
                               width: MediaQuery.of(context).size.width,
-                              child: RestaurantZoomScreen(
+                              child: RestaurantImageZoomView(
                                 restaurantImage: galleryImages[index],
                               ),
                             ),
