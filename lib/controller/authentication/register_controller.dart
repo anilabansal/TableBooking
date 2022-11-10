@@ -6,6 +6,10 @@ import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
   var mobileNumber = TextEditingController();
+  var isChecked = false.obs;
+  void updateCheckbox() {
+    isChecked.value = !isChecked.value;
+  }
 
   ApiCalls apiCall = ApiCalls();
 
@@ -17,7 +21,7 @@ class RegisterController extends GetxController {
     );
     print(data);
     print('Register Response ======> ${response.body}');
-    if (response.body['response'] == 30) {
+    if (response.body['response'] == 1) {
       return true;
     } else {
       ShowToast.show(

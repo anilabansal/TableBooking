@@ -59,29 +59,30 @@ class OtpScreenViewWidget extends StatelessWidget {
                 var otp = int.parse(controller.pinOutPut.value);
 
                 print("pinOutPut --->${controller.pinOutPut.value}");
-                callFrom == 'Login'
-                    ? await controller.enterLoginOTP(data: {
-                        "otp": otp,
-                        "mobileNumber": mobileNumber.toString(),
-                      }).then(
-                        (value) {
-                          if (value) {
-                            Get.offAllNamed('/zip-code');
-                          }
-                        },
-                      )
-                    : await controller.enterRegisterOTP(
-                        data: {
-                          "otp": otp,
-                          "mobileNumber": mobileNumber.toString(),
-                        },
-                      ).then(
-                        (value) {
-                          if (value) {
-                            Get.offAllNamed('/create-profile');
-                          }
-                        },
-                      );
+                // callFrom == 'Login'
+                //     ?
+                await controller.enterOTP(data: {
+                  "otp": otp,
+                  "mobileNumber": mobileNumber.toString(),
+                }).then(
+                  (value) {
+                    if (value) {
+                      Get.offAllNamed('/zip-code');
+                    }
+                  },
+                );
+                // : await controller.enterRegisterOTP(
+                //     data: {
+                //       "otp": otp,
+                //       "mobileNumber": mobileNumber.toString(),
+                //     },
+                //   ).then(
+                //     (value) {
+                //       if (value) {
+                //         Get.offAllNamed('/create-profile');
+                //       }
+                //     },
+                //   );
               },
               text: 'Submit',
               bgColor: redE2211C,
@@ -89,12 +90,17 @@ class OtpScreenViewWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          CommonText(
-            text: 'Resend Code',
-            decoration: TextDecoration.underline,
-            color: redE2211C,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
+          InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: CommonText(
+              text: 'Resend Code',
+              decoration: TextDecoration.underline,
+              color: redE2211C,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
           ),
           const SizedBox(height: 20),
           callFrom == 'Login'

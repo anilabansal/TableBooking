@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/authentication/register_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:flutter/gestures.dart';
@@ -6,23 +7,28 @@ import 'package:get/get.dart';
 
 // PRIVACY POLICY & TERMS N CONDITIONS
 Column privacyPolicyNTerms() {
+  RegisterController controller = Get.find();
   return Column(
     children: <Widget>[
       CommonSizedBox(height: 58),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Checkbox(
-            value: true,
-            onChanged: null,
-            fillColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
-                return Colors.red;
-              }
-              return Colors.white;
-            }),
-          ),
+          Obx(() {
+            return Checkbox(
+              value: controller.isChecked.value,
+              onChanged: (value) {
+                controller.updateCheckbox();
+              },
+              fillColor: MaterialStateProperty.resolveWith<Color>(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.red;
+                }
+                return Colors.white;
+              }),
+            );
+          }),
           Expanded(
             child: RichText(
               text: TextSpan(

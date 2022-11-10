@@ -25,18 +25,16 @@ import '/view/service_type/pre_order_view.dart';
 import '/view/splash_screen/splash_view.dart';
 import '/view/support/support_view.dart';
 import '/view/terms_n_conditions/terms_n_conditions_view.dart';
+import '../bindings/home_bindings.dart';
 import '../view/home_screen/filter_result_view.dart';
 import '../view/payment/payment_method_view.dart';
 
 class AppRoutes {
   static final appRoutes = [
     GetPage(
-      name: RouteName.home, page: () => HomeView(),
-      // binding: ,
-    ),
-    GetPage(
-      name: RouteName.splash, page: () => const SplashView(),
-      // binding: ,
+      name: RouteName.splash,
+      page: () => const SplashView(),
+      // binding: AuthBindings(),
     ),
     GetPage(
       name: RouteName.createProfile,
@@ -46,7 +44,7 @@ class AppRoutes {
     GetPage(
       name: RouteName.authSelectionScreen,
       page: () => const AuthSelectionView(),
-      // binding: ,
+      binding: AuthBindings(),
     ),
     GetPage(
       name: RouteName.login,
@@ -67,6 +65,11 @@ class AppRoutes {
       name: RouteName.registerOTP,
       page: () => OtpView(callFrom: 'Register'),
       binding: AuthBindings(),
+    ),
+    GetPage(
+      name: RouteName.home,
+      page: () => HomeView(),
+      binding: HomeBindings(),
     ),
     GetPage(
       name: RouteName.support, page: () => const SupportView(),

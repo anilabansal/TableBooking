@@ -17,14 +17,8 @@ class LoginController extends GetxController {
     );
     print(data);
     print('Login Response ======> ${response.body}');
-    if (response.body['response'] == 1 && response.body['data'] != null) {
+    if (response.body['response'] == 1) {
       return true;
-    } else if (response.body['response'] == 1 &&
-        response.body['address'] == null) {
-      ShowToast.show(
-        msg: 'User not Registered!!',
-        isError: true,
-      );
     } else {
       ShowToast.show(
         msg: response.body['errorMessage'] ?? 'Please try again!',
