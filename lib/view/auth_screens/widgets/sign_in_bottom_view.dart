@@ -217,10 +217,10 @@ class SignInScreenBottomView extends StatelessWidget {
   Widget _codePicker() {
     return CountryPhoneCodePicker.withDefaultSelectedCountry(
       defaultCountryCode:
-          Country(name: 'INDIA', countryCode: 'IN', phoneCode: '+91'),
+          Country(name: 'In', countryCode: 'IN', phoneCode: '+91'),
       borderRadius: 50,
       borderWidth: 0,
-      flagBorderRadius: 100,
+      flagBorderRadius: 50,
       flagHeight: 30,
       flagWidth: 30,
 

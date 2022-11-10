@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:booking_table/controller/user_session/user_session.dart';
 import 'package:get/get.dart';
 
 class SplashViewController extends GetxController {
@@ -12,12 +13,11 @@ class SplashViewController extends GetxController {
 
   Future<void> splashInit() async {
     await Future.delayed(const Duration(seconds: 2));
-    // if () {
-    // Get.offAll(() => const AuthSelectionView());
-    Get.offAllNamed('/authentication');
-    // } else {
-    //   Get.offAll(() => LoginView());
-    // }
+    if (UserSession().isLogin) {
+      Get.offAllNamed('/home');
+    } else {
+      Get.offAllNamed('/authentication');
+    }
   }
 
   @override

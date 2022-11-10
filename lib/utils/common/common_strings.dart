@@ -107,3 +107,8 @@ String forwardArrowImage = "assets/images/home/forward_arrow.png";
 //payment screen
 String cardImage = "assets/images/payment/card_icon.png";
 String infoIcon = "assets/images/home/info_icon.png";
+
+/// User Session Strings
+const isLogInString = 'isLogInString';
+const mobileNumber = 'mobileNumber';
+const tokenString = 'tokenString';
