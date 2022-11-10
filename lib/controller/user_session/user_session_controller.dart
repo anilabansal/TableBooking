@@ -2,7 +2,7 @@ import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-class UserSession extends GetxController {
+class UserSessionController extends GetxController {
   GetStorage box = GetStorage();
 
   final _isLogin = false.obs;
@@ -12,7 +12,7 @@ class UserSession extends GetxController {
   init() async {
     _isLogin.value = box.read(isLogInString) ?? false;
     _token.value = box.read(tokenString) ?? '';
-    _mobileNumber.value = box.read(tokenString) ?? '';
+    _mobileNumber.value = box.read(mobileNumberString) ?? '';
   }
 
   get isLogin => _isLogin.value;
@@ -31,7 +31,7 @@ class UserSession extends GetxController {
 
   void setMobileNumber(String value) {
     _mobileNumber.value = value;
-    setPref(mobileNumber, value);
+    setPref(mobileNumberString, value);
   }
 
   void setPref(String key, dynamic value) async {
