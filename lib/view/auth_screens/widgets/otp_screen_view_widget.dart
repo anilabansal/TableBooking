@@ -1,4 +1,5 @@
 // ignore_for_file: must_be_immutable
+import 'package:booking_table/controller/authentication/login_controller.dart';
 import 'package:booking_table/controller/authentication/otp_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
@@ -11,6 +12,7 @@ import 'package:pinput/pinput.dart';
 
 class OtpScreenViewWidget extends StatelessWidget {
   String? mobileNumber;
+  LoginController loginController = Get.find();
   final String? callFrom;
 
   OtpScreenViewWidget({
@@ -94,7 +96,8 @@ class OtpScreenViewWidget extends StatelessWidget {
                     if (value) {
                       Get.offAllNamed('/create-profile', arguments: [
                         {
-                          'mobileNumber': '${mobileNumber.toString()}',
+                          'mobileNumber':
+                              '${loginController.mobileNumber.text.trim()}',
                         },
                       ]);
                     }

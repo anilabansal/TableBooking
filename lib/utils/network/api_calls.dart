@@ -62,7 +62,7 @@ class ApiCalls extends GetConnect {
    **/
 
   Future<dynamic> callPostApiWithFile(
-      Map<String, dynamic> body, String endPoint,
+      Map<String, dynamic>? body, String endPoint,
       {bool isToken = false,
       String token = '',
       // bool isFullUrl = false,
@@ -76,7 +76,7 @@ class ApiCalls extends GetConnect {
     withToken = {
       "Content-Type": "multipart/form-data",
       'accept': 'text/plain',
-      "Authorization": token,
+      // "Authorization": token,
     };
     print(
         'API Request Header ------------------------------->\n ${jsonEncode(withToken)}');

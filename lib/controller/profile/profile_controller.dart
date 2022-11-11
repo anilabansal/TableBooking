@@ -38,6 +38,11 @@ class ProfileController extends GetxController {
   ApiCalls apiCall = ApiCalls();
   var createProfileImage = File('').obs;
 
+  ///Update Image File
+  updateImageFile(File value) {
+    createProfileImage.value = value;
+  }
+
   /// Create Profile
   Future<bool> createProfile(
       {Map<String, dynamic>? body,
@@ -46,11 +51,11 @@ class ProfileController extends GetxController {
       String? filename}) async {
     try {
       final response = await apiCall.callPostApiWithFile(
-        body!, endPoint!,
-        filename: filename!, imageFile: imageFile,
+        body, endPoint!,
+        filename: filename, imageFile: imageFile,
         // token:
       );
-      print('Response --------> ${response!}');
+      print('Response --------> ${response}');
       if (response['response'] == 1) {
         return true;
       } else {
@@ -60,6 +65,10 @@ class ProfileController extends GetxController {
         );
       }
     } catch (e) {
+      ShowToast.show(
+        msg: e.toString(),
+        isError: true,
+      );
       return false;
     }
     return false;

@@ -311,7 +311,7 @@ class EditProfileScreenBody extends StatelessWidget {
                     ? CommonButton(
                         onTap: () async {
                           print('button clicked');
-                          if (validateFields() != "") {
+                          if (validateFields() == "") {
                             ShowToast.show(
                               msg: validateFields(),
                               isError: true,
@@ -320,45 +320,59 @@ class EditProfileScreenBody extends StatelessWidget {
                           }
                           await profileController.createProfile(
                               body: {
-                                "FirstName": profileController
-                                    .firstNameController.text
-                                    .trim(),
-                                "LastName": profileController
-                                    .lastNameController.text
-                                    .trim(),
-                                "Email": "",
-                                "MobileNo":
-                                    profileController.countryCode.value +
-                                        profileController
-                                            .mobileNumberController.text
-                                            .trim(),
-                                "Address": profileController
-                                    .streetAddressController.text
-                                    .trim(),
+                                "FirstName": "sahil",
+                                // "FirstName":
+                                // profileController
+                                //     .firstNameController.text
+                                //     .trim(),
+                                "LastName": 'Kauhsal',
+                                // "LastName":
+                                // profileController
+                                //     .lastNameController.text
+                                //     .trim(),
+                                "Email": "ss",
+                                "MobileNo": 'ss',
+                                // "MobileNo":
+                                // profileController.countryCode.value +
+                                //     profileController
+                                //         .mobileNumberController.text
+                                //         .trim(),
+                                "Address": "address",
+                                // "Address":
+                                // profileController
+                                //           .streetAddressController.text
+                                //           .trim(),
                                 "DeviceToken": "1234",
                                 "DeviceType":
                                     GetPlatform.isAndroid ? "Android" : "iOS",
-                                "DateofBirth":
-                                    profileController.dateController.text,
-                                "City": profileController.cityController.text
-                                    .trim(),
-                                "State": profileController.stateController.text
-                                    .trim(),
-                                "ZipCode":
-                                    profileController.zipCodeController.text,
-                                "AuthenticationId": "",
-                                "AuthenticationType":
-                                    GetPlatform.isAndroid ? "Android" : "iOS",
+                                "DateofBirth": "dob",
+                                // "DateofBirth":
+                                //     profileController.dateController.text,
+                                "City": "city",
+                                // "City":
+                                // profileController.cityController.text
+                                //           .trim(),
+                                "State": "state",
+                                // "State":
+                                // profileController.stateController.text
+                                //           .trim(),
+                                "ZipCode": "zipcode",
+                                // "ZipCode":
+                                //     profileController.zipCodeController.text,
+                                "AuthenticationId": "s",
+                                "AuthenticationType": "s",
                               },
                               endPoint: createProfileEndPoint,
                               filename: "ProfilePic",
                               imageFile: profileController
                                   .createProfileImage.value).then(
-                            (value) => {
-                              if (value)
-                                {
-                                  // showtoast
-                                }
+                            (value) {
+                             
+                              if (value) {
+                                print(
+                                    profileController.createProfileImage.value);
+                                // showtoast
+                              }
                             },
                           );
                           // Get.toNamed('/zip-code');
