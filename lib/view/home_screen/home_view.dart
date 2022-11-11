@@ -16,7 +16,9 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       key: homeController.drawerKey,
-      drawer: const DrawerScreen(),
+      drawer: DrawerScreen(
+        controller: homeController,
+      ),
       body: HomeBody(homeController: homeController),
     );
   }

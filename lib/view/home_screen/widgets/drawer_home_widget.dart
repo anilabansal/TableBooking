@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,10 @@ import 'package:get/get.dart';
 import '../../../controller/home/home_controller.dart';
 
 class DrawerScreen extends StatelessWidget {
-  const DrawerScreen({Key? key}) : super(key: key);
+  var controller;
+
+  UserSessionController userSessionController = Get.find();
+  DrawerScreen({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +158,7 @@ class DrawerScreen extends StatelessWidget {
                   Get.toNamed('/support');
                 }),
                 textAndIcon("Logout", () {
-                  Get.toNamed('/authentication');
+                  userSessionController.logOut();
                 }),
               ],
             ),

@@ -37,7 +37,7 @@ class OtpScreenViewWidget extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           CommonText(
-          text: mobileNumber.toString(),
+            text: mobileNumber.toString(),
             // text: '+1-310-422-5076',
             fontWeight: FontWeight.w500,
             color: black000000,
@@ -89,30 +89,40 @@ class OtpScreenViewWidget extends StatelessWidget {
                     "otp": otp,
                     "mobileNumber": mobileNumber.toString(),
                   },
-                ).then((value) {
+                ).then(
+                  (value) {
                     if (value) {
-                      Get.offAllNamed('/create-profile');
+                      Get.offAllNamed('/create-profile', arguments: [
+                        {
+                          'mobileNumber': '${mobileNumber.toString()}',
+                        },
+                      ]);
                     }
                   },
                 );
-              //   if (callFrom == 'Login') {
-              //     Get.offAllNamed('/zip-code');
-              //   } else {
-              //     Get.offAllNamed('/create-profile');
-              //   }
-             },
+                //   if (callFrom == 'Login') {
+                //     Get.offAllNamed('/zip-code');
+                //   } else {
+                //     Get.offAllNamed('/create-profile');
+                //   }
+              },
               text: 'Submit',
               bgColor: redE2211C,
               textColor: Colors.white,
             ),
           ),
           const SizedBox(height: 20),
-          CommonText(
-            text: 'Resend Code',
-            decoration: TextDecoration.underline,
-            color: redE2211C,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
+          InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: CommonText(
+              text: 'Resend Code',
+              decoration: TextDecoration.underline,
+              color: redE2211C,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
           ),
           const SizedBox(height: 20),
           callFrom == 'Login'

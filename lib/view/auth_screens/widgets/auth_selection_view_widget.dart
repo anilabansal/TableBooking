@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthScreenViewWidget extends StatelessWidget {
-  AuthScreenViewWidget({Key? key}) : super(key: key);
+  const AuthScreenViewWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

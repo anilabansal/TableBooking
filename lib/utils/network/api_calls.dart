@@ -13,16 +13,15 @@ class ApiCalls extends GetConnect {
   //   imageFile.value = value;
   // }
 
-  /**
-   * This method is for get request to the server.
-   **/
+  /// This method is for get request to the server.
+
   Future<dynamic> callPostApi(Map<String, dynamic> body, String endPoint,
       {bool isToken = false,
-        String token = '',
-        // bool isFullUrl = false,
-        // String baseUrl,
-        isPayment = false,
-        bool isString = false}) async {
+      String token = '',
+      // bool isFullUrl = false,
+      // String baseUrl,
+      isPayment = false,
+      bool isString = false}) async {
     Map<String, String> withToken;
 
     withToken = {
@@ -65,17 +64,17 @@ class ApiCalls extends GetConnect {
   Future<dynamic> callPostApiWithFile(
       Map<String, dynamic> body, String endPoint,
       {bool isToken = false,
-        String token = '',
-        // bool isFullUrl = false,
-        // String baseUrl,
-        String? filename,
-        File? imageFile,
-        isPayment = false,
-        bool isString = false}) async {
+      String token = '',
+      // bool isFullUrl = false,
+      // String baseUrl,
+      String? filename,
+      File? imageFile,
+      isPayment = false,
+      bool isString = false}) async {
     Map<String, String> withToken;
 
     withToken = {
-      "Content-Type":"multipart/form-data",
+      "Content-Type": "multipart/form-data",
       'accept': 'text/plain',
       "Authorization": token,
     };
@@ -87,7 +86,7 @@ class ApiCalls extends GetConnect {
       // MultipartFile request = MultipartFile(imageFile, filename: filename!);
       FormData form = FormData({
         "body": body,
-        "file":MultipartFile(imageFile, filename: filename!),
+        "file": MultipartFile(imageFile, filename: filename!),
         // if (imageFile != null && imageFile.path != '') "file": request,
       });
       var response = await post(

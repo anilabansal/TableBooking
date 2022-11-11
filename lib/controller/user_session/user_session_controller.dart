@@ -44,5 +44,9 @@ class UserSessionController extends GetxController {
 
   void logOut() async {
     await box.erase();
+    setIsLogin(false);
+    Get.toNamed(
+      '/authentication',
+    );
   }
 }
