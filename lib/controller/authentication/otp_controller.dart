@@ -22,6 +22,9 @@ class OtpController extends GetxController {
     print(data);
     print('OTP Response ======> ${response.body}');
     if (response.body['response'] == 1) {
+      ShowToast.show(
+        msg: response.body['errorMessage'] ?? 'Please try again!',
+      );
       // userModel = UserDetailsModel.fromMap(response);
       userSession.setIsLogin(true);
       print(userSession.isLogin);
