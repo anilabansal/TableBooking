@@ -110,5 +110,5 @@ String infoIcon = "assets/images/home/info_icon.png";
 
 /// User Session Strings
 const isLogInString = 'isLogInString';
-const mobileNumber = 'mobileNumber';
+const mobileNumberString = 'mobileNumber';
 const tokenString = 'tokenString';
