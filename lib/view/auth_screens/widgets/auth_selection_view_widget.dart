@@ -4,15 +4,11 @@ import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
-import 'package:country_phone_code_picker/controller/country_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthScreenViewWidget extends StatelessWidget {
   AuthScreenViewWidget({Key? key}) : super(key: key);
-
-  // AuthViewController authController = Get.put(AuthViewController());
-  CountryController controller = Get.put(CountryController());
 
   @override
   Widget build(BuildContext context) {
