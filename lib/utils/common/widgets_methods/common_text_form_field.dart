@@ -53,7 +53,7 @@ class CommonTextFormField extends StatelessWidget {
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: fontWeight,
-        color: textLight868686,
+        color: black000000,
       ),
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
