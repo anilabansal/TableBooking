@@ -1,46 +1,34 @@
+import 'package:booking_table/controller/authentication/register_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/authentication/register_controller.dart';
-
 // PRIVACY POLICY & TERMS N CONDITIONS
- privacyPolicyNTerms() {
-  return Obx(() => Column(
+Column privacyPolicyNTerms() {
+  RegisterController controller = Get.find();
+  return Column(
     children: <Widget>[
       CommonSizedBox(height: 58),
       Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-            width: 18,
-            height: 18,
-            child: Checkbox(
-              value: Get.find<RegisterController>().termCheck.value,
+          Obx(() {
+            return Checkbox(
+              value: controller.isChecked.value,
               onChanged: (value) {
-                Get.find<RegisterController>().termCheck.value = value!;
+                controller.updateCheckbox();
               },
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3.0),
-              ),
-              side: MaterialStateBorderSide.resolveWith(
-                    (states) =>
-                const BorderSide(width: 1.0, color: redE2211C),
-              ),
               fillColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                    // if (states.contains(MaterialState.disabled)) {
-                    //   return Colors.red;
-                    // }
-                    //     if()
-                    return Colors.red;
-                  }),
-            ),
-          ),
-          const SizedBox(width: 13,),
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return Colors.white;
+                }
+                return Colors.red;
+              }),
+            );
+          }),
           Expanded(
             child: RichText(
               text: TextSpan(
@@ -92,8 +80,8 @@ import '../../../controller/authentication/register_controller.dart';
             ),
           ),
         ],
-      ),
+      ).paddingSymmetric(horizontal: 20),
       CommonSizedBox(height: 15),
     ],
-  ));
+  );
 }
