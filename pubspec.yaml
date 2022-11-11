@@ -40,7 +40,7 @@ dependencies:
   pinput:
   intl:
 #  toggle_switch: ^2.0.1
-  country_phone_code_picker: ^0.0.41
+#  country_phone_code_picker: ^0.0.41
   get_storage: ^2.0.3
 #  flutter_switch: ^0.3.2
   flutter_toggle_tab:
@@ -53,6 +53,8 @@ dependencies:
   country_picker: ^2.0.16
   staggered_grid_view_flutter: ^0.0.4
   credit_card_scanner: ^1.0.5
+  image_picker: ^0.8.6
+  flutter_svg: ^1.1.6
 
 
 dev_dependencies:
@@ -90,6 +92,7 @@ flutter:
      - assets/images/support/
      - assets/images/profile/
      - assets/images/home/
+     - assets/images/common/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
