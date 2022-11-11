@@ -23,9 +23,9 @@ Column privacyPolicyNTerms() {
               fillColor: MaterialStateProperty.resolveWith<Color>(
                   (Set<MaterialState> states) {
                 if (states.contains(MaterialState.disabled)) {
-                  return Colors.red;
+                  return Colors.white;
                 }
-                return Colors.white;
+                return Colors.red;
               }),
             );
           }),

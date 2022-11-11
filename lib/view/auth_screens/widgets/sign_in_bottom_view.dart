@@ -62,7 +62,10 @@ class SignInScreenBottomView extends StatelessWidget {
           child: CommonButton(
             onTap: () async {
               if (validateFields() != '') {
-                ShowToast.show(msg: validateFields());
+                ShowToast.show(
+                  msg: validateFields(),
+                  isError: true,
+                );
                 return;
               }
               const Center(child: CircularProgressIndicator());
@@ -238,6 +241,8 @@ class SignInScreenBottomView extends StatelessWidget {
     if (!GetUtils.isPhoneNumber(
         loginController.mobileNumber.value.text.trim())) {
       return 'please enter a valid phone number!'.toTitleCase();
+    } else if (registerController.isChecked == false) {
+      return 'You must Agree terms & condiitons'.toTitleCase();
     }
     return '';
   }
