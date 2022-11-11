@@ -278,7 +278,8 @@ class SignInScreenBottomView extends StatelessWidget {
     if (!GetUtils.isPhoneNumber(
         loginController.mobileNumber.value.text.trim())) {
       return 'please enter a valid phone number!'.toTitleCase();
-    } else if (registerController.isChecked == false) {
+    } else if (callFrom == 'Register' &&
+        registerController.isChecked == false) {
       return 'You must Agree terms & condiitons'.toTitleCase();
     }
     return '';
