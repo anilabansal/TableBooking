@@ -6,21 +6,23 @@ import 'package:get/get.dart';
 import '../common/common_strings.dart';
 
 class ApiCalls extends GetConnect {
-  var imageFile = File('').obs;
-  var imageUrl = ''.obs;
+  // var imageFile = File('').obs;
+  // var imageUrl = ''.obs;
+  //
+  // updateImageFile(File value) {
+  //   imageFile.value = value;
+  // }
 
-  updateImageFile(File value) {
-    imageFile.value = value;
-  }
-
-  /// This method is for get request to the server.
+  /**
+   * This method is for get request to the server.
+   **/
   Future<dynamic> callPostApi(Map<String, dynamic> body, String endPoint,
       {bool isToken = false,
-      String token = '',
-      // bool isFullUrl = false,
-      // String baseUrl,
-      isPayment = false,
-      bool isString = false}) async {
+        String token = '',
+        // bool isFullUrl = false,
+        // String baseUrl,
+        isPayment = false,
+        bool isString = false}) async {
     Map<String, String> withToken;
 
     withToken = {
@@ -31,6 +33,7 @@ class ApiCalls extends GetConnect {
         'API Request Header ------------------------------->\n ${jsonEncode(withToken)}');
     String url = '$baseURL/$endPoint';
     print('URL Request ------------------------------->\n $url');
+    print('API Request ------------------------------->\n ${(body)}');
     try {
       var response = await post(
         url,
@@ -55,32 +58,45 @@ class ApiCalls extends GetConnect {
     return;
   }
 
-  /// This method is for get request with multipart to the server.
+  /**
+   * This method is for get request with multipart to the server.
+   **/
+
   Future<dynamic> callPostApiWithFile(
       Map<String, dynamic> body, String endPoint,
       {bool isToken = false,
-      String token = '',
-      // bool isFullUrl = false,
-      // String baseUrl,
-      isPayment = false,
-      bool isString = false}) async {
+        String token = '',
+        // bool isFullUrl = false,
+        // String baseUrl,
+        String? filename,
+        File? imageFile,
+        isPayment = false,
+        bool isString = false}) async {
     Map<String, String> withToken;
 
     withToken = {
-      "Content-Type": "multipart/form-data",
+      "Content-Type":"multipart/form-data",
       'accept': 'text/plain',
-      "AuthToken": token,
+      "Authorization": token,
     };
     print(
         'API Request Header ------------------------------->\n ${jsonEncode(withToken)}');
     String url = '$baseURL/$endPoint';
     print('URL Request ------------------------------->\n $url');
     try {
+      // MultipartFile request = MultipartFile(imageFile, filename: filename!);
+      FormData form = FormData({
+        "body": body,
+        "file":MultipartFile(imageFile, filename: filename!),
+        // if (imageFile != null && imageFile.path != '') "file": request,
+      });
       var response = await post(
         url,
-        body,
+        form,
         headers: withToken,
       );
+      String finalResponse = response.body;
+
       print(
           'API response ------------------------------->\n ${response.statusCode}');
 
@@ -92,14 +108,20 @@ class ApiCalls extends GetConnect {
       print(
           'API request Header ------------------------------->\n ${response.headers}');
       print('Run Successfully!!!!!');
-      return response;
+      return jsonDecode(finalResponse);
+      // if (response.statusCode == 200) {
+      //   return jsonDecode(finalResponse);
+      // }
     } catch (e) {
       print("========> Responses Error ${e.toString()}");
     }
     return;
   }
 
-  /// This method is for get request
+  /**
+   * This method is for get request
+   **/
+
   Future<dynamic> callGetApi(String endPoint, {String token = ''}) async {
     try {
       print('token ------------------>\n $token');
