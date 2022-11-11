@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 // Base URL
 const baseURL = 'http://apitablebooking.harishparas.com';
 
-// Login Endpoints
 const logInEndPoint = 'api/Basic/EnterMobileNo';
 const signUpEndPoint = 'api/Basic/RegisterMobileNo';
 const submitOtp = 'api/Basic/OTPSubmit';
+const createProfileEndPoint = 'api/Basic/SignUp';
 
 ///    Common Fonts
 // Fonts
@@ -110,5 +110,5 @@ String infoIcon = "assets/images/home/info_icon.png";
 
 /// User Session Strings
 const isLogInString = 'isLogInString';
-const mobileNumberString = 'mobileNumber';
+const mobileNumber = 'mobileNumber';
 const tokenString = 'tokenString';

@@ -26,6 +26,7 @@ class CommonButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 50,
+        width: MediaQuery.of(context).size.width,
         //padding: const EdgeInsets.symmetric(vertical: 12),
         alignment: Alignment.center,
         decoration: BoxDecoration(
