@@ -117,9 +117,7 @@ class ApiCalls extends GetConnect {
     return;
   }
 
-  /**
-   * This method is for get request
-   **/
+  /// This method is for get request
 
   Future<dynamic> callGetApi(String endPoint, {String token = ''}) async {
     try {
