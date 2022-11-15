@@ -5,9 +5,12 @@ import 'package:intl/intl.dart';
 
 class CommonDatePicker extends StatelessWidget {
   final TextEditingController? controller;
+  final bool? enable;
+
   final Color? fillColor;
 
-  const CommonDatePicker({Key? key, this.controller, this.fillColor})
+  const CommonDatePicker(
+      {Key? key, this.enable, this.controller, this.fillColor})
       : super(key: key);
 
   @override
@@ -19,37 +22,60 @@ class CommonDatePicker extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
         color: fillColor,
       ),
-      child: CommonTextFormField(
-          controller: controller,
-          hintText: "DD-MM-YY",
-          filled: true,
-          suffixIcon: IconButton(
-            onPressed: () async {
-              DateTime? picked = await showDatePicker(
-                  builder: (context, child) {
-                    return Theme(
-                      data: Theme.of(context).copyWith(
-                        colorScheme: const ColorScheme.light(
-                          primary: redE2211C, // <-- SEE HERE
+      child: InkWell(
+        onTap: () async {
+          DateTime? picked = await showDatePicker(
+              builder: (context, child) {
+                return Theme(
+                  data: Theme.of(context).copyWith(
+                    colorScheme: const ColorScheme.light(
+                      primary: redE2211C, // <-- SEE HERE
+                    ),
+                  ),
+                  child: child!,
+                );
+              },
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1900),
+              lastDate: DateTime.now());
+          if (picked != null) {
+            controller!.text = DateFormat('dd/MM/yyyy').format(picked);
+          }
+        },
+        child: CommonTextFormField(
+            enable: enable,
+            controller: controller,
+            hintText: "DD-MM-YY",
+            filled: true,
+            suffixIcon: IconButton(
+              onPressed: () async {
+                DateTime? picked = await showDatePicker(
+                    builder: (context, child) {
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                          colorScheme: const ColorScheme.light(
+                            primary: redE2211C, // <-- SEE HERE
+                          ),
                         ),
-                      ),
-                      child: child!,
-                    );
-                  },
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(1900),
-                  lastDate: DateTime.now());
-              if (picked != null) {
-                controller!.text = DateFormat('dd-MM-yyyy').format(picked);
-              }
-            },
-            icon: const Icon(
-              Icons.calendar_month_outlined,
-              color: redE2211C,
-              size: 22,
-            ),
-          )),
+                        child: child!,
+                      );
+                    },
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now());
+                if (picked != null) {
+                  controller!.text = DateFormat('dd/MM/yyyy').format(picked);
+                }
+              },
+              icon: const Icon(
+                Icons.calendar_month_outlined,
+                color: redE2211C,
+                size: 22,
+              ),
+            )),
+      ),
     );
   }
 }

@@ -30,7 +30,8 @@ class OtpController extends GetxController {
       print(userSession.isLogin);
 
       // userSession.setMobileNumber('Test User');
-      // userSession.token(userModel.token.toString());
+      userSession.setUserToken(response.body['token'].toString());
+      print(userSession.token);
       return true;
     } else {
       ShowToast.show(

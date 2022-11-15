@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 class PhoneField extends StatefulWidget {
   final String? countryCode;
   final String? countryFlag;
+  final bool? enable;
+  final bool? isCreateProfile;
   final TextEditingController? phoneController;
   final Function(String)? onCodeChange;
   final Function(String)? onCountryFlag;
@@ -13,6 +15,8 @@ class PhoneField extends StatefulWidget {
 
   const PhoneField({
     Key? key,
+    this.enable,
+    this.isCreateProfile = false,
     this.phoneController,
     this.onCodeChange,
     this.countryCode,
@@ -43,16 +47,18 @@ class _PhoneFieldState extends State<PhoneField> {
           InkWell(
             onTap: () {
               // ///TODO: store code
-              showCountryPicker(
-                context: context,
-                showPhoneCode: true,
-                onSelect: (Country country) {
-                  // authenticationController.countryCode.value =
-                  //     country.phoneCode;
-                  widget.onCodeChange!(country.phoneCode);
-                  widget.onCountryFlag!(country.flagEmoji);
-                },
-              );
+              widget.isCreateProfile == false
+                  ? showCountryPicker(
+                      context: context,
+                      showPhoneCode: true,
+                      onSelect: (Country country) {
+                        // authenticationController.countryCode.value =
+                        //     country.phoneCode;
+                        widget.onCodeChange!(country.phoneCode);
+                        widget.onCountryFlag!(country.flagEmoji);
+                      },
+                    )
+                  : null;
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 15.0, right: 10.0),
@@ -82,6 +88,7 @@ class _PhoneFieldState extends State<PhoneField> {
           ),
           Expanded(
             child: CommonTextFormField(
+              enable: widget.enable,
               // inputFormatters: [
               //   LengthLimitingTextInputFormatter(10),
               // ],

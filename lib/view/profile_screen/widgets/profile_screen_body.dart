@@ -1,14 +1,14 @@
-import 'package:booking_table/controller/profile/profile_controller.dart';
-import 'package:booking_table/utils/common/toast_message.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_date_picker_widget.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_phone_field.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
-import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '/controller/profile/profile_controller.dart';
+import '/utils/common/toast_message.dart';
+import '/utils/common/widgets_methods/common_button.dart';
+import '/utils/common/widgets_methods/common_date_picker_widget.dart';
+import '/utils/common/widgets_methods/common_phone_field.dart';
+import '/utils/common/widgets_methods/common_text.dart';
+import '/utils/common/widgets_methods/common_text_form_field.dart';
+import '/utils/extensions/capitalization_strings.dart';
 import '../../../utils/common/common_strings.dart';
 import '../../../utils/common/widgets_methods/image_picker.dart';
 
@@ -191,16 +191,20 @@ class EditProfileScreenBody extends StatelessWidget {
                 //   hint: "23050 W Rd",
                 // ),
                 PhoneField(
-                  phoneController: profileController.mobileNumberController,
+                  isCreateProfile: true,
+                  enable: false,
+                  phoneController: profileController.mobileNumberControllerNew,
+                  // phoneController: profileController
+                  // .mobileNumberController,
                   countryCode: profileController.countryCode.value,
                   countryFlag: profileController.countryFlag.value,
-                  onCountryFlag: (value) {
-                    //   print('Country flag ---> ${value}');
-                    profileController.countryFlag.value = value;
-                  },
-                  onCodeChange: (value) {
-                    profileController.countryCode.value = value;
-                  },
+                  // onCountryFlag: (value) {
+                  //   //   print('Country flag ---> ${value}');
+                  //   profileController.countryFlag.value = value;
+                  // },
+                  // onCodeChange: (value) {
+                  //   profileController.countryCode.value = value;
+                  // },
                   textFieldColor: greyF4F4F4,
                 ),
 
@@ -217,6 +221,7 @@ class EditProfileScreenBody extends StatelessWidget {
                   height: 5.7,
                 ),
                 CommonDatePicker(
+                  enable: false,
                   controller: profileController.dateController,
                 ),
                 const SizedBox(
@@ -311,7 +316,7 @@ class EditProfileScreenBody extends StatelessWidget {
                     ? CommonButton(
                         onTap: () async {
                           print('button clicked');
-                          if (validateFields() == "") {
+                          if (validateFields() != "") {
                             ShowToast.show(
                               msg: validateFields(),
                               isError: true,
@@ -320,57 +325,53 @@ class EditProfileScreenBody extends StatelessWidget {
                           }
                           await profileController.createProfile(
                               body: {
-                                "FirstName": "sahil",
-                                // "FirstName":
-                                // profileController
-                                //     .firstNameController.text
-                                //     .trim(),
-                                "LastName": 'Kauhsal',
-                                // "LastName":
-                                // profileController
-                                //     .lastNameController.text
-                                //     .trim(),
-                                "Email": "ss",
-                                "MobileNo": 'ss',
-                                // "MobileNo":
-                                // profileController.countryCode.value +
-                                //     profileController
-                                //         .mobileNumberController.text
-                                //         .trim(),
-                                "Address": "address",
-                                // "Address":
-                                // profileController
-                                //           .streetAddressController.text
-                                //           .trim(),
-                                "DeviceToken": "1234",
-                                "DeviceType":
-                                    GetPlatform.isAndroid ? "Android" : "iOS",
-                                "DateofBirth": "dob",
-                                // "DateofBirth":
-                                //     profileController.dateController.text,
-                                "City": "city",
-                                // "City":
-                                // profileController.cityController.text
-                                //           .trim(),
-                                "State": "state",
-                                // "State":
-                                // profileController.stateController.text
-                                //           .trim(),
-                                "ZipCode": "zipcode",
-                                // "ZipCode":
-                                //     profileController.zipCodeController.text,
-                                "AuthenticationId": "s",
-                                "AuthenticationType": "s",
+                                // "userId": "19",
+                                // "roleId": "3",
+                                // "FirstName": "sahil",
+                                // "LastName": 'Kauhsal',
+                                // "Email": "ss@g.com",
+                                // "MobileNo": '+917066000016',
+                                // "Address": "address",
+                                // "DeviceToken": "1234",
+                                // "DeviceType":
+                                //     GetPlatform.isAndroid ? "Android" : "iOS",
+                                // "DateofBirth": "09/12/1999",
+                                // "City": "city",
+                                // "State": "state",
+                                // "ZipCode": "zipcode",
+                                // "AuthenticationId": "s",
+                                // "AuthenticationType": "s",
+                                "FirstName": profileController
+                                    .firstNameController.text
+                                    .trim(),
+                                "LastName": profileController
+                                    .lastNameController.text
+                                    .trim(),
+                                "MobileNo": profileController
+                                    .mobileNumberController.value.text
+                                    .trim(),
+                                "Address": profileController
+                                    .streetAddressController.text
+                                    .trim(),
+                                "DateofBirth":
+                                    profileController.dateController.text,
+                                "City": profileController.cityController.text
+                                    .trim(),
+                                "State": profileController.stateController.text
+                                    .trim(),
+                                "ZipCode":
+                                    profileController.zipCodeController.text,
                               },
                               endPoint: createProfileEndPoint,
-                              filename: "ProfilePic",
+                              // filename: "ProfilePic",
                               imageFile: profileController
                                   .createProfileImage.value).then(
                             (value) {
-                             
                               if (value) {
                                 print(
                                     profileController.createProfileImage.value);
+                                Get.toNamed('/zip-code');
+
                                 // showtoast
                               }
                             },
@@ -413,7 +414,7 @@ class EditProfileScreenBody extends StatelessWidget {
       return 'please select date!'.toTitleCase();
     } else if (profileController.zipCodeController.value.text.isEmpty) {
       return 'please enter your zip code!'.toTitleCase();
-    } else if (profileController.mobileNumberController.text.isEmpty) {
+    } else if (profileController.mobileNumberController.value.text.isEmpty) {
       return 'please enter your mobile Number!'.toTitleCase();
     }
     return '';
