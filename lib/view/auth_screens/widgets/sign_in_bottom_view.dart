@@ -151,15 +151,18 @@ class SignInScreenBottomView extends StatelessWidget {
                             }).then((value) {
                               // Get.back();
                               if (value) {
-                                Get.toNamed('/register/otp', arguments: [
-                                  {
-                                    'mobileNumber':
-                                        '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
-                                  },
-                                  {
-                                    'callFrom': "Register",
-                                  }
-                                ]);
+                                Get.toNamed(
+                                  '/register/otp',
+                                  arguments: [
+                                    {
+                                      'mobileNumber':
+                                          '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
+                                    },
+                                    {
+                                      'callFrom': "Register",
+                                    }
+                                  ],
+                                );
                               }
                             });
                     },
