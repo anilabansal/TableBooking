@@ -1,5 +1,6 @@
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
+import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -94,8 +95,8 @@ class _PhoneFieldState extends State<PhoneField> {
               // ],
               keyboardType: TextInputType.number,
               controller: widget.phoneController,
-              hintText: '+1 7700 900175',
-              fontSize: 20,
+              hintText: 'Enter your phone number'.toTitleCase(),
+              fontSize: 18,
             ),
           ),
         ],

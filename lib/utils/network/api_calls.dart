@@ -103,16 +103,15 @@ class ApiCalls extends GetConnect {
         String data = await response.stream.bytesToString();
         print('Api Response data --> ${data.toString()}');
         return jsonDecode(data);
-        // return true;
       } else {
-        print(response.reasonPhrase);
-        print('=====> Error ${response.reasonPhrase}');
+        ShowToast.show(
+          msg: '${response.reasonPhrase.toString()}',
+          isError: true,
+        );
+        print('<===== Error <====> ${response.reasonPhrase} ====>');
+        return false;
       }
     } catch (e) {
-      ShowToast.show(
-        msg: '====> Error MultiPart${e.toString()}',
-        isError: true,
-      );
       print("====> Error MultiPart${e.toString()}");
     }
   }

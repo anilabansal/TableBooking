@@ -6,8 +6,9 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   var mobileNumber = TextEditingController();
-  var countryCode = '1'.obs;
-  var countryFlag = '🇺🇸'.obs;
+  var countryCode = '91'.obs;
+  var countryFlag = '🇮🇳'.obs;
+  // var countryFlag = '🇺🇸'.obs;
   ApiCalls apiCall = ApiCalls();
 
   Future<bool> loginUser({Map<String, String>? data}) async {
@@ -28,16 +29,15 @@ class LoginController extends GetxController {
     //   );
     // }
     if (response.body['response'] == 1) {
-      ShowToast.show(
-        msg: response.body['errorMessage'],
-      );
+      // ShowToast.show(
+      //   msg: response.body['errorMessage'],
+      // );
       return true;
-    } else {
-      ShowToast.show(
-        msg: response.body['errorMessage'] ?? 'Please try again!',
-        isError: true,
-      );
     }
+    ShowToast.show(
+      msg: response.body['errorMessage'] ?? 'Please try again!',
+      isError: true,
+    );
     return false;
   }
 }

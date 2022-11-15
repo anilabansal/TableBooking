@@ -33,7 +33,7 @@ class ProfileController extends GetxController {
   final mobileNumberController = TextEditingController();
   final mobileNumberControllerNew = TextEditingController();
 
-  var countryCode = '1'.obs;
+  var countryCode = '91'.obs;
   var countryFlag = '🇺🇸'.obs;
   ApiCalls apiCall = ApiCalls();
   var createProfileImage = File('').obs;
@@ -56,30 +56,24 @@ class ProfileController extends GetxController {
           endPoint!,
           // filename: filename!,
           imageFile!,
-          token: userSession.token
+          token: 'l${userSession.token}'
           // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMzkiLCJleHAiOjE2Njg1ODUyMjAsImlzcyI6IlRlc3QuY29tIiwiYXVkIjoiVGVzdC5jb20ifQ.kOsK1K1dYmXDrVS8DdWE-_FvIcoc03DBxq6uXIuoIIw',
           );
 
       if (response['response'] == 1) {
-        ShowToast.show(
-          msg: response['errorMessage'] ?? 'Please try again!',
-          isError: true,
-        );
         return true;
       } else {
         ShowToast.show(
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
         );
+        return false;
       }
 
       //print('Response --------> ${jsonDecode(response)}');
 
     } catch (e) {
-      ShowToast.show(
-        msg: e.toString(),
-        isError: true,
-      );
+      print('Error --------> $e');
     }
     return false;
   }
