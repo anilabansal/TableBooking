@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RetaurantDetailsBody extends StatelessWidget {
-  const RetaurantDetailsBody({
+  RetaurantDetailsBody({
     Key? key,
     required TabController tabController,
     required this.restaurantController,
@@ -28,7 +28,7 @@ class RetaurantDetailsBody extends StatelessWidget {
         controller: ScrollController(keepScrollOffset: false),
         shrinkWrap: true,
         children: [
-          const RestaurantDetailTopScreen(),
+          RestaurantDetailTopScreen(),
           Obx(
             () => Center(
               child: TabBar(

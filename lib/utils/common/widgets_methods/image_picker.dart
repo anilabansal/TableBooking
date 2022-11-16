@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 class ImagePickerBottomSheet extends StatefulWidget {
   const ImagePickerBottomSheet({
     Key? key,
@@ -159,15 +158,15 @@ class _ImagePickerBottomSheetState extends State<ImagePickerBottomSheet>
 
   getFileCamera() async {
     // try {
-      _fileImage = (await _picker.pickImage(
-          source: ImageSource.camera,
-          imageQuality: 50,
-          maxHeight: 1000,
-          maxWidth: 1000));
+    _fileImage = (await _picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 50,
+        maxHeight: 1000,
+        maxWidth: 1000));
 
-      if (_fileImage != null) {
-        returnImage();
-      }
+    if (_fileImage != null) {
+      returnImage();
+    }
     // }
     // catch (e) {
     //   ShowToast.show(title: e.toString(), message: e.toString());

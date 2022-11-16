@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,8 @@ import '../../utils/common/widgets_methods/common_sized_box.dart';
 import '../../utils/common/widgets_methods/common_text.dart';
 
 class GetZipCodeView extends StatelessWidget {
-  const GetZipCodeView({Key? key}) : super(key: key);
-
+  HomeController controller = Get.find();
+  GetZipCodeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,16 +75,43 @@ class GetZipCodeView extends StatelessWidget {
             CommonSizedBox(
               height: 25,
             ),
-            CommonSizedBox(
-              height: 50,
-              width: 184,
-              child: CommonButton(
-                onTap: () {
-                  Get.toNamed('/home');
-                },
-                text: 'Search',
-                bgColor: Colors.red,
-                textColor: Colors.white,
+            InkWell(
+              onTap: () async {
+                print('Button clicked');
+                // await controller.getRestaurantDetailsUsingLatLon(
+                //   body: {
+                //     "Latitude": "30.713649330499276",
+                //     "Longitude": "76.69060936300099"
+                //   },
+                //   endPoint: zipCode,
+                // ).then((value) {
+                //   if (value) {
+                //     Get.toNamed('/home');
+                //   }
+                // });
+              },
+              child: CommonSizedBox(
+                height: 50,
+                width: 184,
+                child: CommonButton(
+                  onTap: () async {
+                    print('Button clicked');
+                    await controller.getRestaurantDetailsUsingLatLon(
+                      body: {
+                        "Latitude": "30.713649330499276",
+                        "Longitude": "76.69060936300099"
+                      },
+                      endPoint: zipCode,
+                    ).then((value) {
+                      if (value) {
+                        Get.toNamed('/home');
+                      }
+                    });
+                  },
+                  text: 'Search',
+                  bgColor: Colors.red,
+                  textColor: Colors.white,
+                ),
               ),
             ),
           ],

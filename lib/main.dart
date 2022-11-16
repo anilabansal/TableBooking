@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Table Booking',
-      initialRoute: '/',
+      initialRoute: '/zip-code',
       getPages: AppRoutes.appRoutes,
       initialBinding: AuthBindings(),
       theme: ThemeData(fontFamily: mainLaToFont),

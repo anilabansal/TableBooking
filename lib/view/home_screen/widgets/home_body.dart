@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({
+  HomeController controller = Get.find();
+  HomeBody({
     Key? key,
     required this.homeController,
   }) : super(key: key);

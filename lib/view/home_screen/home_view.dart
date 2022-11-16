@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import '../../controller/home/home_controller.dart';
 
 class HomeView extends StatelessWidget {
+  String latitude = "30.713649330499276";
+  String lonngitude = "76.69060936300099";
   HomeView({Key? key}) : super(key: key);
   HomeController homeController = Get.put(HomeController());
 
