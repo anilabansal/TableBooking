@@ -158,8 +158,9 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.zipCodeView, page: () => const GetZipCodeView(),
-      // binding: ,
+      name: RouteName.zipCodeView,
+      page: () => GetZipCodeView(),
+      binding: HomeBindings(),
     ),
     GetPage(
       name: RouteName.editProfile,
@@ -184,7 +185,7 @@ class AppRoutes {
     GetPage(
       name: RouteName.restaurantDetails,
       page: () => const RestaurantDetailView(),
-      // binding: ,
+      binding: HomeBindings(),
     ),
     GetPage(
       name: RouteName.preOrder,

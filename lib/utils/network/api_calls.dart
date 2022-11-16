@@ -17,7 +17,7 @@ class ApiCalls extends GetConnect {
 
   /// This method is for get request to the server.
 
-  Future<dynamic> callPostApi(Map<String, dynamic> body, String endPoint,
+  Future<dynamic> callPostApi(Map<String, dynamic>? body, String endPoint,
       {bool isToken = false,
       String token = '',
       // bool isFullUrl = false,
@@ -52,7 +52,7 @@ class ApiCalls extends GetConnect {
       print(
           'API request Header ------------------------------->\n ${response.headers}');
       print('Run Successfully!!!!!');
-      return response;
+      return response.body;
     } catch (e) {
       print("========> Responses Error ${e.toString()}");
     }
@@ -188,26 +188,26 @@ class ApiCalls extends GetConnect {
   //   }
   // }
 
-  /// This method is for get request
-
-  Future<dynamic> callGetApi(String endPoint, {String token = ''}) async {
-    try {
-      print('token ------------------>\n $token');
-      var response = await get(
-        '$baseURL/$endPoint',
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": token,
-        },
-      );
-      print('url ------------------>\n $baseURL/$endPoint');
-      String finalResponse = response.body;
-      print(
-          'endPoint API request header ------------------>\n ${jsonDecode(finalResponse)}');
-      print('endPoint API response ------------------>\n $finalResponse');
-      return jsonDecode(finalResponse);
-    } catch (e) {
-      print('$e');
-    }
-  }
+  // /// This method is for get request
+  //
+  // Future<dynamic> callGetApi(String endPoint, {String token = ''}) async {
+  //   try {
+  //     print('token ------------------>\n $token');
+  //     var response = await get(
+  //       '$baseURL/$endPoint',
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Authorization": token,
+  //       },
+  //     );
+  //     print('url ------------------>\n $baseURL/$endPoint');
+  //     String finalResponse = response.body;
+  //     print(
+  //         'endPoint API request header ------------------>\n ${jsonDecode(finalResponse)}');
+  //     print('endPoint API response ------------------>\n $finalResponse');
+  //     return jsonDecode(finalResponse);
+  //   } catch (e) {
+  //     print('$e');
+  //   }
+  // }
 }

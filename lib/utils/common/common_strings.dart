@@ -8,6 +8,11 @@ const logInEndPoint = 'api/Basic/EnterMobileNo';
 const signUpEndPoint = 'api/Basic/RegisterMobileNo';
 const submitOtp = 'api/Basic/OTPSubmit';
 const createProfileEndPoint = 'api/Basic/SignUp';
+const zipCode = 'api/Home/SearchLocation';
+const aboutUs = 'api/Home/AboutUsDetail';
+const gallery = 'api/Home/ViewRestaurantGallery';
+const menu = 'api/Home/RestaurantMenuDetail';
+const ratings = 'api/Home/RatingandReviews';
 
 ///    Common Fonts
 // Fonts

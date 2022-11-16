@@ -20,7 +20,7 @@ class AuthSelectionBody extends StatelessWidget {
             // TOP
             SizedBox(height: Get.height * 0.15),
             // Middle View
-            AuthScreenViewWidget(),
+            const AuthScreenViewWidget(),
             // Bottom
             Column(
               children: [
