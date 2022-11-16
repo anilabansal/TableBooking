@@ -1,41 +1,52 @@
+import 'package:booking_table/controller/restaurant_details/restaurant_details_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 
 class ReviewsTabScreen extends StatelessWidget {
   const ReviewsTabScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CommonText(
-          text: "300+ Reviews",
-          fontWeight: FontWeight.w700,
-          fontSize: 15,
-          color: black000000,
-        ),
-        const SizedBox(
-          height: 24,
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: 7,
-            shrinkWrap: true,
-            //physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return reviewsWidget(context);
-            },
-          ),
-        ),
-      ],
+    return GetBuilder<RestaurantDetailsController>(
+      builder: (controller) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CommonText(
+              text: "${controller.totalReviews.value} Reviews",
+              fontWeight: FontWeight.w700,
+              fontSize: 15,
+              color: black000000,
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: controller.rateReviewsRestaurantList.length,
+                shrinkWrap: true,
+                //physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return reviewsWidget(
+                    controller.rateReviewsRestaurantList[index].profilePic,
+                    controller.rateReviewsRestaurantList[index].ratingByName,
+                    controller.rateReviewsRestaurantList[index].rating,
+                    controller.rateReviewsRestaurantList[index].reviews,
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
-  reviewsWidget(context) {
+  reviewsWidget(profilePic, ratingByName, rating, reviews) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,11 +58,14 @@ class ReviewsTabScreen extends StatelessWidget {
             Container(
               width: 39,
               height: 39,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                      image:
-                          AssetImage("assets/images/home/profile_image.png"))),
+                    image: profilePic ??
+                        AssetImage(
+                          "assets/images/home/profile_image.png",
+                        ),
+                  )),
             ),
             const SizedBox(
               width: 10,
@@ -61,7 +75,7 @@ class ReviewsTabScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CommonText(
-                  text: "Roger",
+                  text: ratingByName ?? "Roger",
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: black0D0000,
@@ -71,7 +85,7 @@ class ReviewsTabScreen extends StatelessWidget {
                 ),
                 RatingBar.builder(
                   itemSize: 20,
-                  initialRating: 4,
+                  initialRating: rating,
                   minRating: 1,
                   direction: Axis.horizontal,
                   allowHalfRating: true,
@@ -91,9 +105,9 @@ class ReviewsTabScreen extends StatelessWidget {
           height: 13,
         ),
         SizedBox(
-          width: MediaQuery.of(context).size.width - 30,
+          width: Get.width - 30,
           child: CommonText(
-            text:
+            text: reviews ??
                 " It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.",
             fontSize: 15,
             fontWeight: FontWeight.w400,

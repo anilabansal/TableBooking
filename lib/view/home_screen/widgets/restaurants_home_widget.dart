@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 import '../../../controller/home/home_controller.dart';
 
 class RestaurantHomeScreen extends StatelessWidget {
-  const RestaurantHomeScreen({Key? key}) : super(key: key);
+  const RestaurantHomeScreen({
+    Key? key,
+  }) : super(key: key);
 
   // HomeController homeController = Get.find();
   @override
@@ -19,13 +21,15 @@ class RestaurantHomeScreen extends StatelessWidget {
             return ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 7,
+                itemCount: homeController.homeRestaurantList.value.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 15.0),
                     child: InkWell(
                       onTap: () {
-                        Get.toNamed('/restaurant-details');
+                        Get.toNamed('/restaurant-details', arguments: [
+                          {"restaurantId": index},
+                        ]);
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width,
@@ -62,7 +66,13 @@ class RestaurantHomeScreen extends StatelessWidget {
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
                                         image: DecorationImage(
-                                            image: AssetImage(restaurantImage),
+                                            image: AssetImage(
+                                              restaurantImage,
+                                            ),
+                                            //     homeController
+                                            //     .homeRestaurantList[index]
+                                            //     .restaurantPic
+                                            // ),
                                             fit: BoxFit.cover)),
                                   ),
                                   Positioned(
@@ -111,7 +121,9 @@ class RestaurantHomeScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CommonText(
-                                    text: "Rose’s Dine in & Blues",
+                                    text: homeController
+                                        .homeRestaurantList[index]
+                                        .restaurantName,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 20,
                                     color: black000000,
@@ -120,7 +132,8 @@ class RestaurantHomeScreen extends StatelessWidget {
                                     height: 5,
                                   ),
                                   CommonText(
-                                    text: "2 miles away",
+                                    text:
+                                        "${homeController.homeRestaurantList[index].distance.toString()} miles away",
                                     fontWeight: FontWeight.normal,
                                     fontSize: 15,
                                     color: grey868686,

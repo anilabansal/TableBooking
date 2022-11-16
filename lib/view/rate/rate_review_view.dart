@@ -1,5 +1,3 @@
-
-
 import 'package:booking_table/view/rate/widgets/rate_review_body.dart';
 import 'package:flutter/material.dart';
 

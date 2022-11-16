@@ -1,4 +1,5 @@
 import 'package:booking_table/controller/home/home_controller.dart';
+import 'package:booking_table/controller/restaurant_details/restaurant_details_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
@@ -7,7 +8,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 class RestaurantDetailTopScreen extends StatelessWidget {
-  const RestaurantDetailTopScreen({Key? key}) : super(key: key);
+  RestaurantDetailsController controller = Get.find();
+  RestaurantDetailTopScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,11 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                         height: 266,
                         child: Image.asset(
                           restaurantImage,
+
+                          // homeController
+                          //     .homeRestaurantList[controller.index.value]
+                          //     .restaurantPic
+                          //     .toString(),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -84,7 +91,10 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CommonText(
-                          text: "Venisa’s Kitchen",
+                          text: homeController
+                              .homeRestaurantList[controller.index.value]
+                              .restaurantName
+                              .toString(),
                           fontWeight: FontWeight.w700,
                           fontSize: 24,
                           color: black000000,
@@ -93,7 +103,8 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                           height: 5,
                         ),
                         CommonText(
-                          text: "2 miles away",
+                          text:
+                              "${homeController.homeRestaurantList[controller.index.value].distance.toString()} miles away",
                           color: textGrey868686,
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -116,8 +127,10 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.of(context).size.width - 55,
                               child: CommonText(
-                                text:
-                                    "6363 Montana Ave, El Paso, Texas, Montgo- mery, 35004",
+                                text: homeController
+                                    .homeRestaurantList[controller.index.value]
+                                    .address
+                                    .toString(),
                                 fontFamily: interFont,
                                 fontWeight: FontWeight.w400,
                                 color: textDark3F3E3E,
@@ -133,12 +146,15 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     RatingBar.builder(
                                       itemSize: 20,
-                                      initialRating: 4,
+                                      // initialRating:
+                                      //     homeController.homeRestaurantList[controller.index.value].,
                                       minRating: 1,
                                       direction: Axis.horizontal,
                                       allowHalfRating: true,
@@ -168,7 +184,11 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                   ],
                                 ),
                                 CommonText(
-                                  text: "Based on 300+ reviews",
+                                  /// Currently Null Please Uncomment if not  Null
+                                  text:
+                                      "${homeController.homeRestaurantList[controller.index.value].ratingCount.toString()} Ratings",
+                                  // text:
+                                  //      homeController.homeRestaurantList[controller.index.value].rating.toString(),
                                   fontSize: 15,
                                   fontWeight: FontWeight.w400,
                                   color: textDark3F3E3E,
