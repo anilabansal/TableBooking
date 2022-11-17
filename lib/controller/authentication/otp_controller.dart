@@ -36,12 +36,11 @@ class OtpController extends GetxController {
       isLoading.value = false;
 
       return true;
-    } else {
-      ShowToast.show(
-        msg: response['errorMessage'] ?? 'Please try again!',
-        isError: true,
-      );
     }
+    ShowToast.show(
+      msg: response['errorMessage'] ?? 'Please try again!',
+      isError: true,
+    );
     isLoading.value = false;
 
     return false;
