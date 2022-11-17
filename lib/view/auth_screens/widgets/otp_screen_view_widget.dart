@@ -25,129 +25,143 @@ class OtpScreenViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.only(top: 20),
-          ),
-          CommonText(
-            text: 'Enter the 4 digit code sent to',
-            fontWeight: FontWeight.w400,
-            fontSize: 18,
-            color: textDark3F3E3E,
-          ),
-          const SizedBox(height: 5),
-          CommonText(
-            text: mobileNumber.toString(),
-            // text: '+1-310-422-5076',
-            fontWeight: FontWeight.w500,
-            color: black000000,
-            fontSize: 22,
-          ),
-          const SizedBox(height: 40),
-          PinBoxWidget(),
-          const SizedBox(height: 38),
-          // Button
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: CommonButton(
-              onTap: () async {
-                if (controller.pinOutPut.value == "") {
-                  ShowToast.show(
-                      msg:
-                          'Please enter the 4 digit code sent to $mobileNumber');
-                  return;
-                }
-                var otp = int.parse(controller.pinOutPut.value);
+    return GetBuilder<OtpController>(
+      builder: (otpController) {
+        return SafeArea(
+          child: Column(
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.only(top: 20),
+              ),
+              CommonText(
+                text: 'Enter the 4 digit code sent to',
+                fontWeight: FontWeight.w400,
+                fontSize: 18,
+                color: textDark3F3E3E,
+              ),
+              const SizedBox(height: 5),
+              CommonText(
+                text: mobileNumber.toString(),
+                // text: '+1-310-422-5076',
+                fontWeight: FontWeight.w500,
+                color: black000000,
+                fontSize: 22,
+              ),
+              const SizedBox(height: 40),
+              PinBoxWidget(),
+              const SizedBox(height: 38),
+              // Button
+              otpController.isLoading.value == true
+                  ? Center(
+                      child: CircularProgressIndicator(
+                      color: redE2211C,
+                    ))
+                  : Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: CommonButton(
+                        onTap: () async {
+                          otpController.isLoading.value == true;
+                          if (otpController.pinOutPut.value == "") {
+                            ShowToast.show(
+                                msg:
+                                    'Please enter the 4 digit code sent to $mobileNumber');
+                            return;
+                          }
+                          var otp = int.parse(otpController.pinOutPut.value);
 
-                print("pinOutPut --->${controller.pinOutPut.value}");
-                // callFrom == 'Login'
-                //     ? await controller.enterLoginOTP(data: {
-                //         "otp": otp,
-                //         "mobileNumber": mobileNumber.toString(),
-                //       }).then(
-                //         (value) {
-                //           if (value) {
-                //             Get.offAllNamed('/zip-code');
-                //           }
-                //         },
-                //       )
-                //     : await controller.enterRegisterOTP(
-                //         data: {
-                //           "otp": otp,
-                //           "mobileNumber": mobileNumber.toString(),
-                //         },
-                //       ).then(
-                //         (value) {
-                //           if (value) {
-                //             Get.offAllNamed('/create-profile');
-                //           }
-                //         },
-                //       );
+                          print(
+                              "pinOutPut --->${otpController.pinOutPut.value}");
+                          // callFrom == 'Login'
+                          //     ? await controller.enterLoginOTP(data: {
+                          //         "otp": otp,
+                          //         "mobileNumber": mobileNumber.toString(),
+                          //       }).then(
+                          //         (value) {
+                          //           if (value) {
+                          //             Get.offAllNamed('/zip-code');
+                          //           }
+                          //         },
+                          //       )
+                          //     : await controller.enterRegisterOTP(
+                          //         data: {
+                          //           "otp": otp,
+                          //           "mobileNumber": mobileNumber.toString(),
+                          //         },
+                          //       ).then(
+                          //         (value) {
+                          //           if (value) {
+                          //             Get.offAllNamed('/create-profile');
+                          //           }
+                          //         },
+                          //       );
 
-                await controller.enterOTP(
-                  data: {
-                    "otp": otp,
-                    "mobileNumber": mobileNumber.toString(),
-                  },
-                ).then(
-                  (value) {
-                    if (value) {
-                      Get.offAllNamed('/create-profile', arguments: [
-                        {
-                          'mobileNumber': '$mobileNumber',
-                          'preFilledMobileNumber':
-                              loginController.mobileNumber.text,
-                          'countryCode': loginController.countryCode.value,
-                          'countryFlag': loginController.countryFlag.value,
-                          // '${loginController.mobileNumber.text.substring(3)}',
+                          await otpController.enterOTP(
+                            data: {
+                              "otp": otp,
+                              "mobileNumber": mobileNumber.toString(),
+                            },
+                          ).then(
+                            (value) {
+                              if (value) {
+                                Get.offAllNamed('/create-profile', arguments: [
+                                  {
+                                    'mobileNumber': '$mobileNumber',
+                                    'preFilledMobileNumber':
+                                        loginController.mobileNumber.text,
+                                    'countryCode':
+                                        loginController.countryCode.value,
+                                    'countryFlag':
+                                        loginController.countryFlag.value,
+                                    // '${loginController.mobileNumber.text.substring(3)}',
+                                  },
+                                ]);
+                              }
+                            },
+                          );
+                          // if (callFrom == 'Login') {
+                          //   Get.offAllNamed('/zip-code');
+                          // } else {
+                          //   Get.offAllNamed('/create-profile');
+                          // }
                         },
-                      ]);
-                    }
-                  },
-                );
-                //   if (callFrom == 'Login') {
-                //     Get.offAllNamed('/zip-code');
-                //   } else {
-                //     Get.offAllNamed('/create-profile');
-                //   }
-              },
-              text: 'Submit',
-              bgColor: redE2211C,
-              textColor: Colors.white,
-            ),
-          ),
-          const SizedBox(height: 20),
-          InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: CommonText(
-              text: 'Resend Code',
-              decoration: TextDecoration.underline,
-              color: redE2211C,
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          const SizedBox(height: 20),
-          callFrom == 'Login'
-              ? Container()
-              : InkWell(
-                  onTap: () {
-                    Get.toNamed('/register');
-                  },
-                  child: CommonText(
-                    text: 'Change Phone Number',
-                    decoration: TextDecoration.underline,
-                    color: black040404,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
+                        text: 'Submit',
+                        bgColor: redE2211C,
+                        textColor: Colors.white,
+                      ),
+                    ),
+
+              const SizedBox(height: 20),
+              InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: CommonText(
+                  text: 'Resend Code',
+                  decoration: TextDecoration.underline,
+                  color: redE2211C,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
                 ),
-        ],
-      ),
+              ),
+              const SizedBox(height: 20),
+              callFrom == 'Login'
+                  ? Container()
+                  : InkWell(
+                      onTap: () {
+                        Get.toNamed('/register');
+                      },
+                      child: CommonText(
+                        text: 'Change Phone Number',
+                        decoration: TextDecoration.underline,
+                        color: black040404,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+            ],
+          ),
+        );
+      },
     );
   }
 

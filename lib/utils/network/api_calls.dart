@@ -105,7 +105,7 @@ class ApiCalls extends GetConnect {
         return jsonDecode(data);
       } else {
         ShowToast.show(
-          msg: '${response.reasonPhrase.toString()}',
+          msg: response.reasonPhrase.toString(),
           isError: true,
         );
         print('<===== Error <====> ${response.reasonPhrase} ====>');

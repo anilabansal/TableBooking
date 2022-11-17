@@ -200,6 +200,7 @@ class AboutTabScreen extends StatelessWidget {
                 height: 10,
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CommonText(
                     text: "Phone Number:",
@@ -210,12 +211,14 @@ class AboutTabScreen extends StatelessWidget {
                   const SizedBox(
                     width: 12,
                   ),
-                  CommonText(
-                    text:
-                        controller.aboutUsRestaurantList[0].aboutUs.toString(),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: black0D0000,
+                  Expanded(
+                    child: CommonText(
+                      text: controller.aboutUsRestaurantList[0].aboutUs
+                          .toString(),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: black0D0000,
+                    ),
                   ),
                 ],
               ),

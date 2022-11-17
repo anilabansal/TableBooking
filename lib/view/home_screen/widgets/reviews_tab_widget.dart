@@ -61,10 +61,12 @@ class ReviewsTabScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: profilePic ??
+                    image:
+                        // profilePic
+                        //     ??
                         AssetImage(
-                          "assets/images/home/profile_image.png",
-                        ),
+                      "assets/images/home/profile_image.png",
+                    ),
                   )),
             ),
             const SizedBox(

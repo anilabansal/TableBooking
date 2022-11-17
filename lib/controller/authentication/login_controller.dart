@@ -8,6 +8,8 @@ class LoginController extends GetxController {
   var mobileNumber = TextEditingController();
   var countryCode = '91'.obs;
   var countryFlag = '🇮🇳'.obs;
+  var isLoading = false.obs;
+
   // var countryFlag = '🇺🇸'.obs;
   ApiCalls apiCall = ApiCalls();
 
@@ -18,7 +20,7 @@ class LoginController extends GetxController {
       // token: 'token',
     );
     print(data);
-    print('Login Response ======> ${response.body}');
+    // print('Login Response ======> ${response.body}');
     // if (response.body['response'] == 1 && response.body['data'] != null) {
     //   return true;
     // } else if (response.body['response'] == 1 &&
@@ -28,16 +30,20 @@ class LoginController extends GetxController {
     //     isError: true,
     //   );
     // }
-    if (response.body['response'] == 1) {
+    if (response['response'] == 1) {
       // ShowToast.show(
       //   msg: response.body['errorMessage'],
       // );
+      isLoading.value = false;
+
       return true;
     }
     ShowToast.show(
-      msg: response.body['errorMessage'] ?? 'Please try again!',
+      msg: response['errorMessage'] ?? 'Please try again!',
       isError: true,
     );
+    isLoading.value = false;
+
     return false;
   }
 }

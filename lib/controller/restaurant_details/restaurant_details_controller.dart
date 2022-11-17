@@ -2,6 +2,7 @@ import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/model/gallery_images/restaurant_image.dart';
 import 'package:booking_table/model/rate_and_review/rating_and_review_list.dart';
 import 'package:booking_table/model/restaurant_about_us/datum.dart';
+import 'package:booking_table/model/restaurant_details/data.dart';
 import 'package:booking_table/model/restaurant_menu/restaurant_menu_data.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
@@ -11,13 +12,24 @@ import 'package:get/get.dart';
 class RestaurantDetailsController extends GetxController {
   HomeController homeController = Get.find();
   ApiCalls apiCall = ApiCalls();
+  var detailsRestaurantList = RestaurantDetailsData().obs;
   var aboutUsRestaurantList = [].obs;
   var galleryImagesRestaurantList = [].obs;
   var menuHeaderRestaurantList = [].obs;
   var rateReviewsRestaurantList = [].obs;
   var totalReviews = "".obs;
+  var isLoading = true.obs;
 
   var index = 0.obs;
+
+  /// Favourite
+  var likedRestaurant = false.obs;
+  void updateRestaurantLike() {
+    likedRestaurant.value = !likedRestaurant.value;
+    // likedRestaurant.value = !likedRestaurant.value;
+    update();
+  }
+
   @override
   void onInit() async {
     // TODO: implement onInit
@@ -25,6 +37,10 @@ class RestaurantDetailsController extends GetxController {
     index.value = data[0]['restaurantId'].toInt();
     print("About US Index ====>  ${index.value}");
     print(data);
+
+    /// Restaurant Details
+    await restaurantDetails(body: {"restaurantId": index.value});
+    print("Restaurant Detais Data ====>  ${detailsRestaurantList.value}");
 
     /// About Us
     await restaurantDetailsAboutUs(body: {"restaurantId": index.value});
@@ -51,6 +67,33 @@ class RestaurantDetailsController extends GetxController {
     super.onInit();
   }
 
+  /// Restaurant Details
+  Future<dynamic> restaurantDetails({
+    dynamic body,
+  }) async {
+    try {
+      final response = await apiCall.callPostApi(body, restaurantDetail);
+      if (response['response'] == 1) {
+        detailsRestaurantList.value = RestaurantDetailsData.fromMap(
+            response['data'] as Map<String, dynamic>);
+
+        print(index.value);
+        isLoading.value = false;
+        return true;
+      } else {
+        ShowToast.show(
+          msg: response['errorMessage'] ?? 'Please try again!',
+          isError: true,
+        );
+        return false;
+      }
+    } catch (e) {
+      print('Error <--------> $e');
+    }
+    return false;
+  }
+
+  /// About Us
   Future<dynamic> restaurantDetailsAboutUs({
     dynamic body,
   }) async {
@@ -62,6 +105,7 @@ class RestaurantDetailsController extends GetxController {
             .toList();
 
         print(index.value);
+        isLoading.value = false;
 
         return true;
       } else {
@@ -89,6 +133,7 @@ class RestaurantDetailsController extends GetxController {
             .toList();
         print(index.value);
         print(galleryImagesRestaurantList.value);
+        isLoading.value = false;
 
         return true;
       } else {
@@ -121,6 +166,7 @@ class RestaurantDetailsController extends GetxController {
         update();
         print(
             "Item Name====>   ${menuHeaderRestaurantList[1].menu[1].itemName}");
+        isLoading.value = false;
 
         return true;
       } else {
@@ -150,6 +196,7 @@ class RestaurantDetailsController extends GetxController {
         print(index.value);
         update();
         print("Ratings <====>   ${rateReviewsRestaurantList.value}");
+        isLoading.value = false;
 
         return true;
       } else {

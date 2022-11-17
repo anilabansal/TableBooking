@@ -13,6 +13,7 @@ const aboutUs = 'api/Home/AboutUsDetail';
 const gallery = 'api/Home/ViewRestaurantGallery';
 const menu = 'api/Home/RestaurantMenuDetail';
 const ratings = 'api/Home/RatingandReviews';
+const restaurantDetail = 'api/Home/RestaurantDetail';
 
 ///    Common Fonts
 // Fonts

@@ -80,96 +80,103 @@ class SignInScreenBottomView extends StatelessWidget {
                   // Button
                   // LOGIN/REGISTER BUTTON
 
-                  CommonButton(
-                    onTap: () async {
-                      if (validateFields() != '') {
-                        ShowToast.show(
-                          msg: validateFields(),
-                          isError: true,
-                        );
-                        return;
-                      }
-                      const Center(child: CircularProgressIndicator());
+                  loginController.isLoading.value == true
+                      ? Center(
+                          child: CircularProgressIndicator(
+                          color: redE2211C,
+                        ))
+                      : CommonButton(
+                          onTap: () async {
+                            loginController.isLoading.value = true;
+                            if (validateFields() != '') {
+                              ShowToast.show(
+                                msg: validateFields(),
+                                isError: true,
+                              );
+                              return;
+                            }
 
-                      // if(callFrom=="Login"){
-                      //   Get.toNamed('/login/otp', arguments: [
-                      //     {
-                      //       'mobileNumber':
-                      //       '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
-                      //     },
-                      //     {
-                      //       'callFrom': "Login",
-                      //     }
-                      //   ]);
-                      // }else{
-                      //   Get.toNamed('/register/otp', arguments: [
-                      //     // {
-                      //     //   'mobileNumber':
-                      //     //   '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
-                      //     // },
-                      //     {
-                      //       'callFrom': "Register",
-                      //     }
-                      //   ]);
-                      // }
+                            // if(callFrom=="Login"){
+                            //   Get.toNamed('/login/otp', arguments: [
+                            //     {
+                            //       'mobileNumber':
+                            //       '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
+                            //     },
+                            //     {
+                            //       'callFrom': "Login",
+                            //     }
+                            //   ]);
+                            // }else{
+                            //   Get.toNamed('/register/otp', arguments: [
+                            //     // {
+                            //     //   'mobileNumber':
+                            //     //   '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
+                            //     // },
+                            //     {
+                            //       'callFrom': "Register",
+                            //     }
+                            //   ]);
+                            // }
 
-                      callFrom == 'Login'
-                          ? await loginController.loginUser(data: {
-                              "MobileNumber":
-                                  '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
-                              // "MobileNumber": '+917066000016',
-
-                              "Email": "",
-                              "AuthenticationId": "",
-                              "AuthenticationType": "",
-                              "DeviceToken": "sdgsgsgsg",
-                              "DeviceType":
-                                  GetPlatform.isAndroid ? "Android" : "iOS",
-                            }).then((value) {
-                              // Get.back();
-                              if (value) {
-                                Get.toNamed('/login/otp', arguments: [
-                                  {
-                                    'mobileNumber':
+                            callFrom == 'Login'
+                                ? await loginController.loginUser(data: {
+                                    "MobileNumber":
                                         '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
-                                  },
-                                  {
-                                    'callFrom': "Login",
-                                  }
-                                ]);
-                              }
-                            })
-                          : registerController.registerUser(data: {
-                              "MobileNumber":
-                                  '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
-                              "Email": "",
-                              "AuthenticationId": "",
-                              "AuthenticationType": "",
-                              "DeviceToken": "1234",
-                              "DeviceType":
-                                  GetPlatform.isAndroid ? "Android" : "iOS",
-                            }).then((value) {
-                              // Get.back();
-                              if (value) {
-                                Get.toNamed(
-                                  '/register/otp',
-                                  arguments: [
-                                    {
-                                      'mobileNumber':
-                                          '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
-                                    },
-                                    {
-                                      'callFrom': "Register",
+                                    // "MobileNumber": '+917066000016',
+
+                                    "Email": "",
+                                    "AuthenticationId": "",
+                                    "AuthenticationType": "",
+                                    "DeviceToken": "sdgsgsgsg",
+                                    "DeviceType": GetPlatform.isAndroid
+                                        ? "Android"
+                                        : "iOS",
+                                  }).then((value) {
+                                    // Get.back();
+                                    if (value) {
+                                      Get.toNamed('/login/otp', arguments: [
+                                        {
+                                          'mobileNumber':
+                                              '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
+                                        },
+                                        {
+                                          'callFrom': "Login",
+                                        }
+                                      ]);
                                     }
-                                  ],
-                                );
-                              }
-                            });
-                    },
-                    text: callFrom == 'Login' ? 'Sign In' : 'Sign Up',
-                    bgColor: redE2211C,
-                    textColor: Colors.white,
-                  ),
+                                  })
+                                : registerController.registerUser(data: {
+                                    "MobileNumber":
+                                        '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
+                                    "Email": "",
+                                    "AuthenticationId": "",
+                                    "AuthenticationType": "",
+                                    "DeviceToken": "1234",
+                                    "DeviceType": GetPlatform.isAndroid
+                                        ? "Android"
+                                        : "iOS",
+                                  }).then((value) {
+                                    // Get.back();
+                                    if (value) {
+                                      Get.toNamed(
+                                        '/register/otp',
+                                        arguments: [
+                                          {
+                                            'mobileNumber':
+                                                '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
+                                          },
+                                          {
+                                            'callFrom': "Register",
+                                          }
+                                        ],
+                                      );
+                                    }
+                                  });
+                          },
+                          text: callFrom == 'Login' ? 'Sign In' : 'Sign Up',
+                          bgColor: redE2211C,
+                          textColor: Colors.white,
+                        ),
 
                   CommonSizedBox(height: 20),
 

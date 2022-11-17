@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
@@ -101,7 +103,6 @@ class GetZipCodeView extends StatelessWidget {
                         "Latitude": "30.713649330499276",
                         "Longitude": "76.69060936300099"
                       },
-                      endPoint: zipCode,
                     ).then((value) {
                       if (value) {
                         Get.toNamed('/home');

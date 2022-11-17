@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
   var mobileNumber = TextEditingController();
+  var isLoading = true.obs;
   var isChecked = false.obs;
   void updateCheckbox() {
     isChecked.value = !isChecked.value;
@@ -22,6 +23,7 @@ class RegisterController extends GetxController {
     print(data);
     print('Register Response ======> ${response.body}');
     if (response.body['response'] == 1) {
+      isLoading.value = false;
       return true;
     } else {
       ShowToast.show(
