@@ -60,7 +60,7 @@ class OtpScreenViewWidget extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: CommonButton(
                         onTap: () async {
-                          otpController.isLoading.value == true;
+                          otpController.isLoading.value = true;
                           if (otpController.pinOutPut.value == "") {
                             ShowToast.show(
                                 msg:
