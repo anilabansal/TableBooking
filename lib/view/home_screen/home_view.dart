@@ -13,13 +13,16 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      key: homeController.drawerKey,
-      drawer: DrawerScreen(
-        controller: homeController,
-      ),
-      body: HomeBody(homeController: homeController),
+    return GetBuilder<HomeController>(
+      builder: (controller) {
+        return Scaffold(
+            backgroundColor: Colors.white,
+            key: homeController.drawerKey,
+            drawer: DrawerScreen(
+              controller: homeController,
+            ),
+            body: HomeBody(homeController: homeController));
+      },
     );
   }
 }

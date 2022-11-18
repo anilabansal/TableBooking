@@ -93,6 +93,8 @@ class SignInScreenBottomView extends StatelessWidget {
                                 msg: validateFields(),
                                 isError: true,
                               );
+                              loginController.isLoading.value = false;
+
                               return;
                             }
 

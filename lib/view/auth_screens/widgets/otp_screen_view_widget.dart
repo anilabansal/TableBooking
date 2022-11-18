@@ -52,7 +52,7 @@ class OtpScreenViewWidget extends StatelessWidget {
               const SizedBox(height: 38),
               // Button
               otpController.isLoading.value == true
-                  ? Center(
+                  ? const Center(
                       child: CircularProgressIndicator(
                       color: redE2211C,
                     ))

@@ -1,4 +1,3 @@
-import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/model/restaurant/restaurantlist.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
@@ -27,21 +26,7 @@ class HomeController extends GetxController {
   var restaurantFilter = true.obs;
   var homeRestaurantList = [].obs;
   var homeRestaurantCount = 0.obs;
-  var isLoading = true.obs;
-
-  @override
-  void onInit() async {
-    // TODO: implement onInit
-    await getRestaurantDetailsUsingLatLon(
-      body: {
-        "longitude": '76.69060936300099',
-        "latitude": '30.713649330499276'
-      },
-    );
-    print("Home Restaurnat List Value  ======>>>> ${homeRestaurantList.value}");
-    print(UserSessionController().isLogin);
-    super.onInit();
-  }
+  var isLoading = false.obs;
 
   void updateRestaurantLike() {
     likedRestaurant.value = !likedRestaurant.value;
@@ -49,7 +34,7 @@ class HomeController extends GetxController {
   }
 
   /// Get Restaurant Details using Latitude and Longitude.
-  Future<dynamic> getRestaurantDetailsUsingLatLon({
+  Future<bool> getRestaurantDetailsUsingLatLon({
     dynamic body,
   }) async {
     try {
@@ -62,9 +47,9 @@ class HomeController extends GetxController {
         print('Repsonse List=====> $homeRestaurantList');
         print('Total Restaurant List=====> $homeRestaurantCount');
         isLoading.value = false;
-
         return true;
       } else {
+        isLoading.value = false;
         ShowToast.show(
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
@@ -74,6 +59,8 @@ class HomeController extends GetxController {
     } catch (e) {
       print('Error --------> $e');
     }
+    isLoading.value = false;
+
     return false;
   }
 }

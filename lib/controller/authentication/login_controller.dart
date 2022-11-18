@@ -42,8 +42,8 @@ class LoginController extends GetxController {
       msg: response['errorMessage'] ?? 'Please try again!',
       isError: true,
     );
-    isLoading.value = false;
 
+    isLoading.value = false;
     return false;
   }
 }

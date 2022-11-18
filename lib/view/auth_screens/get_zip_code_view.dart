@@ -13,6 +13,7 @@ import '../../utils/common/widgets_methods/common_text.dart';
 class GetZipCodeView extends StatelessWidget {
   HomeController controller = Get.find();
   GetZipCodeView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,28 +93,38 @@ class GetZipCodeView extends StatelessWidget {
                 //   }
                 // });
               },
-              child: CommonSizedBox(
-                height: 50,
-                width: 184,
-                child: CommonButton(
-                  onTap: () async {
-                    print('Button clicked');
-                    await controller.getRestaurantDetailsUsingLatLon(
-                      body: {
-                        "Latitude": "30.713649330499276",
-                        "Longitude": "76.69060936300099"
-                      },
-                    ).then((value) {
-                      if (value) {
-                        Get.toNamed('/home');
-                      }
-                    });
-                  },
-                  text: 'Search',
-                  bgColor: Colors.red,
-                  textColor: Colors.white,
-                ),
-              ),
+              child: Obx(() {
+                return CommonSizedBox(
+                  height: 50,
+                  width: 184,
+                  child: controller.isLoading.value == true
+                      ? Center(
+                          child: CircularProgressIndicator(
+                          color: redE2211C,
+                        ))
+                      : CommonButton(
+                          onTap: () async {
+                            controller.isLoading.value = true;
+                            print('Button clicked');
+
+                            await controller.getRestaurantDetailsUsingLatLon(
+                              body: {
+                                "Latitude": "30.713649330499276",
+                                "Longitude": "76.69060936300099"
+                              },
+                            ).then((value) {
+                              if (value) {
+                                // controller.isLoading.value = false;
+                                Get.toNamed('/home');
+                              }
+                            });
+                          },
+                          text: 'Search',
+                          bgColor: Colors.red,
+                          textColor: Colors.white,
+                        ),
+                );
+              }),
             ),
           ],
         ),

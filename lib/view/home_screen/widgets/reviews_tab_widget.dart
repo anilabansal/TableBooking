@@ -1,5 +1,6 @@
 import 'package:booking_table/controller/restaurant_details/restaurant_details_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
+import 'package:booking_table/utils/common/no_data_found.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -12,36 +13,40 @@ class ReviewsTabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CommonText(
-              text: "${controller.totalReviews.value} Reviews",
-              fontWeight: FontWeight.w700,
-              fontSize: 15,
-              color: black000000,
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: controller.rateReviewsRestaurantList.length,
-                shrinkWrap: true,
-                //physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return reviewsWidget(
-                    controller.rateReviewsRestaurantList[index].profilePic,
-                    controller.rateReviewsRestaurantList[index].ratingByName,
-                    controller.rateReviewsRestaurantList[index].rating,
-                    controller.rateReviewsRestaurantList[index].reviews,
-                  );
-                },
-              ),
-            ),
-          ],
-        );
+        return controller.totalReviews.value != "0"
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CommonText(
+                    text: "${controller.totalReviews.value} Reviews",
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                    color: black000000,
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: controller.rateReviewsRestaurantList.length,
+                      shrinkWrap: true,
+                      //physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return reviewsWidget(
+                          controller
+                              .rateReviewsRestaurantList[index].profilePic,
+                          controller
+                              .rateReviewsRestaurantList[index].ratingByName,
+                          controller.rateReviewsRestaurantList[index].rating,
+                          controller.rateReviewsRestaurantList[index].reviews,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              )
+            : CommonNoDataFound();
       },
     );
   }

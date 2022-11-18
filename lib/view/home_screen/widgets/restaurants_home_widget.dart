@@ -1,4 +1,6 @@
+import 'package:booking_table/controller/restaurant_details/restaurant_details_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
+import 'package:booking_table/utils/common/no_data_found.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,13 +15,14 @@ class RestaurantHomeScreen extends StatelessWidget {
   HomeController homeController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        children: [
-          GetBuilder<HomeController>(builder: (homeController) {
-            return homeController.homeRestaurantList.value != null
-                ? ListView.builder(
+    return GetBuilder<RestaurantDetailsController>(
+        builder: (restaurantDetails) {
+      return homeController.homeRestaurantCount.value != null &&
+              homeController.homeRestaurantCount.value != 0
+          ? Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(children: [
+                ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: homeController.homeRestaurantList.value.length,
@@ -28,14 +31,28 @@ class RestaurantHomeScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 15.0),
                         child: InkWell(
                           onTap: () {
-                            Get.toNamed('/restaurant-details', arguments: [
-                              {
-                                "restaurantId": homeController
-                                    .homeRestaurantList
-                                    .value[index]
-                                    .restaurantId
-                              },
-                            ]);
+                            restaurantDetails.index.value = homeController
+                                .homeRestaurantList.value[index].restaurantId;
+                            print('Button clicked');
+
+                            restaurantDetails.restaurantDetails(body: {
+                              "restaurantId": homeController
+                                  .homeRestaurantList.value[index].restaurantId
+                            }).then((value) {
+                              // print(
+                              //     "Restaurant Detais Data ====>  ${detailsRestaurantList.value}");
+                              if (value) {
+                                // controller.isLoading.value = false;
+                                Get.toNamed('/restaurant-details', arguments: [
+                                  {
+                                    "restaurantId": homeController
+                                        .homeRestaurantList
+                                        .value[index]
+                                        .restaurantId
+                                  },
+                                ]);
+                              }
+                            });
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width,
@@ -63,8 +80,7 @@ class RestaurantHomeScreen extends StatelessWidget {
                                   child: Stack(
                                     children: [
                                       SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width,
+                                        width: Get.width,
                                         height: 150,
                                       ),
                                       Container(
@@ -160,14 +176,8 @@ class RestaurantHomeScreen extends StatelessWidget {
                         ),
                       );
                     })
-                : Center(
-                    child: CommonText(
-                      text: "No Data Found",
-                    ),
-                  );
-          })
-        ],
-      ),
-    );
+              ]))
+          : CommonNoDataFound();
+    });
   }
 }

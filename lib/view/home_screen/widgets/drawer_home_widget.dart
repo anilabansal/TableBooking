@@ -39,57 +39,59 @@ class DrawerScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
             child: Column(
               children: <Widget>[
-                Row(
-                  children: [
-                    Container(
-                      width: 68,
-                      height: 68,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: AssetImage(profileImage),
-                              fit: BoxFit.cover)),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CommonText(
-                          text: "Chaire Fiona",
-                          fontFamily: proximaNovaFont,
-                          fontWeight: FontWeight.w600,
-                          color: black000000,
-                          fontSize: 16,
-                        ),
-                        CommonText(
-                          text: "chaire_fione@gmail.com",
-                          fontFamily: proximaNovaFont,
-                          fontWeight: FontWeight.w400,
-                          color: black000000,
-                          fontSize: 14,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.toNamed('/edit-profile');
-                          },
-                          child: CommonText(
-                            text: "Edit Profile",
-                            fontFamily: proximaNovaFont,
-                            fontWeight: FontWeight.w400,
-                            color: redE2211C,
-                            fontSize: 12,
+                userSessionController.isLogin == true
+                    ? Row(
+                        children: [
+                          Container(
+                            width: 68,
+                            height: 68,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    image: AssetImage(profileImage),
+                                    fit: BoxFit.cover)),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CommonText(
+                                text: "Chaire Fiona",
+                                fontFamily: proximaNovaFont,
+                                fontWeight: FontWeight.w600,
+                                color: black000000,
+                                fontSize: 16,
+                              ),
+                              CommonText(
+                                text: "chaire_fione@gmail.com",
+                                fontFamily: proximaNovaFont,
+                                fontWeight: FontWeight.w400,
+                                color: black000000,
+                                fontSize: 14,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Get.toNamed('/edit-profile');
+                                },
+                                child: CommonText(
+                                  text: "Edit Profile",
+                                  fontFamily: proximaNovaFont,
+                                  fontWeight: FontWeight.w400,
+                                  color: redE2211C,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      )
+                    : Container(),
                 const SizedBox(
                   height: 28,
                 ),
@@ -109,41 +111,51 @@ class DrawerScreen extends StatelessWidget {
                   print('Home Button Clicked');
                   homeController.drawerKey.currentState!.closeDrawer();
                 }),
-                iconContainer(
-                    const Icon(
-                      Icons.favorite,
-                      color: redE2211C,
-                    ),
-                    "Favorites", () {
-                  Get.toNamed('/favourite');
-                }),
-                iconContainer(
-                    const Icon(
-                      Icons.book,
-                      color: redE2211C,
-                    ),
-                    "Reservations", () {
-                  Get.toNamed('/reservation');
-                }),
-                iconContainer(
-                    const Icon(
-                      Icons.wallet,
-                      color: redE2211C,
-                    ),
-                    "Payment Methods", () {
-                  Get.toNamed('/payment-method');
-                }),
-                iconContainer(
-                    const Icon(
-                      Icons.notifications,
-                      color: redE2211C,
-                    ),
-                    "Notifications", () {
-                  Get.toNamed('/notifications');
-                }),
-                const SizedBox(
-                  height: 10,
-                ),
+                userSessionController.isLogin == true
+                    ? iconContainer(
+                        const Icon(
+                          Icons.favorite,
+                          color: redE2211C,
+                        ),
+                        "Favorites", () {
+                        Get.toNamed('/favourite');
+                      })
+                    : Container(),
+                userSessionController.isLogin == true
+                    ? iconContainer(
+                        const Icon(
+                          Icons.book,
+                          color: redE2211C,
+                        ),
+                        "Reservations", () {
+                        Get.toNamed('/reservation');
+                      })
+                    : Container(),
+                userSessionController.isLogin == true
+                    ? iconContainer(
+                        const Icon(
+                          Icons.wallet,
+                          color: redE2211C,
+                        ),
+                        "Payment Methods", () {
+                        Get.toNamed('/payment-method');
+                      })
+                    : Container(),
+                userSessionController.isLogin == true
+                    ? iconContainer(
+                        const Icon(
+                          Icons.notifications,
+                          color: redE2211C,
+                        ),
+                        "Notifications", () {
+                        Get.toNamed('/notifications');
+                      })
+                    : Container(),
+                userSessionController.isLogin == true
+                    ? const SizedBox(
+                        height: 10,
+                      )
+                    : Container(),
                 Image.asset(lineImage),
                 const SizedBox(
                   height: 30,
@@ -157,9 +169,11 @@ class DrawerScreen extends StatelessWidget {
                 textAndIcon("Customer Support", () {
                   Get.toNamed('/support');
                 }),
-                textAndIcon("Logout", () {
-                  userSessionController.logOut();
-                }),
+                userSessionController.isLogin == true
+                    ? textAndIcon("Logout", () {
+                        userSessionController.logOut();
+                      })
+                    : Container(),
               ],
             ),
           ),

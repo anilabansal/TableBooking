@@ -154,7 +154,8 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                               null
                                           ? 0
                                           : controller.detailsRestaurantList
-                                              .value.rating!,
+                                              .value.rating!
+                                              .toDouble(),
                                       // minRating: 1,
                                       direction: Axis.horizontal,
                                       itemCount: 5,

@@ -26,41 +26,40 @@ class RestaurantDetailsController extends GetxController {
   var likedRestaurant = false.obs;
   void updateRestaurantLike() {
     likedRestaurant.value = !likedRestaurant.value;
-    // likedRestaurant.value = !likedRestaurant.value;
     update();
   }
 
   @override
   void onInit() async {
     // TODO: implement onInit
-    var data = Get.arguments;
-    index.value = data[0]['restaurantId'].toInt();
+    // var data = Get.arguments;
+    // index.value = data[0]['restaurantId'].toInt();
     print("About US Index ====>  ${index.value}");
-    print(data);
+    // print(data);
 
     /// Restaurant Details
-    await restaurantDetails(body: {"restaurantId": index.value});
-    print("Restaurant Detais Data ====>  ${detailsRestaurantList.value}");
+    // await restaurantDetails(body: {"restaurantId": index.value});
+    // print("Restaurant Detais Data ====>  ${detailsRestaurantList.value}");
 
-    /// About Us
-    await restaurantDetailsAboutUs(body: {"restaurantId": index.value});
-    print(
-        "Restaurant About US Data ====>  ${aboutUsRestaurantList[0].aboutUs}");
-
-    /// Gallery Images
-    await restaurantDetailsGalleryImages(body: {"restaurantId": index.value});
-    print(
-        "Restaurant Gallery Data ====>  ${galleryImagesRestaurantList.value}");
-
-    /// Menu
-    await restaurantDetailsMenu(body: {"restaurantId": index.value});
-    print("Restaurant Menu Data ====>  ${menuHeaderRestaurantList.value}");
+    // /// About Us
+    // await restaurantDetailsAboutUs(body: {"restaurantId": index.value});
     // print(
-    //     "Restaurant Menu Details Data ====>  ${menuDescriptionRestaurantList.value}");
-    /// Ratings
-    await restaurantDetailsRatings(body: {"restaurantId": index.value});
-    print("Restaurant Rating Data ====>  ${rateReviewsRestaurantList.value}");
-    print("Restaurant Total Review Data ====>  ${totalReviews.value}");
+    //     "Restaurant About US Data ====>  ${aboutUsRestaurantList[0].aboutUs}");
+    //
+    // /// Gallery Images
+    // await restaurantDetailsGalleryImages(body: {"restaurantId": index.value});
+    // print(
+    //     "Restaurant Gallery Data ====>  ${galleryImagesRestaurantList.value}");
+    //
+    // /// Menu
+    // await restaurantDetailsMenu(body: {"restaurantId": index.value});
+    // print("Restaurant Menu Data ====>  ${menuHeaderRestaurantList.value}");
+    // // print(
+    // //     "Restaurant Menu Details Data ====>  ${menuDescriptionRestaurantList.value}");
+    // /// Ratings
+    // await restaurantDetailsRatings(body: {"restaurantId": index.value});
+    // print("Restaurant Rating Data ====>  ${rateReviewsRestaurantList.value}");
+    // print("Restaurant Total Review Data ====>  ${totalReviews.value}");
 
     // print(
     //     "Restaurant Menu Details Data ====>  ${menuDescriptionRestaurantList.value}");
@@ -77,8 +76,30 @@ class RestaurantDetailsController extends GetxController {
         detailsRestaurantList.value = RestaurantDetailsData.fromMap(
             response['data'] as Map<String, dynamic>);
 
-        print(index.value);
-        isLoading.value = false;
+        print("INDEX VALUE =====>>>>  ${index.value}");
+
+        /// About Us
+        await restaurantDetailsAboutUs(body: {"restaurantId": index.value});
+        print(
+            "Restaurant About US Data ====>  ${aboutUsRestaurantList[0].aboutUs}");
+
+        /// Gallery Images
+        await restaurantDetailsGalleryImages(
+            body: {"restaurantId": index.value});
+        print(
+            "Restaurant Gallery Data ====>  ${galleryImagesRestaurantList.value}");
+
+        /// Menu
+        await restaurantDetailsMenu(body: {"restaurantId": index.value});
+        print("Restaurant Menu Data ====>  ${menuHeaderRestaurantList.value}");
+
+        /// Ratings
+        await restaurantDetailsRatings(body: {"restaurantId": index.value});
+        print(
+            "Restaurant Rating Data ====>  ${rateReviewsRestaurantList.value}");
+
+        print("Restaurant Total Review Data ====>  ${totalReviews.value}");
+
         return true;
       } else {
         ShowToast.show(
@@ -105,7 +126,6 @@ class RestaurantDetailsController extends GetxController {
             .toList();
 
         print(index.value);
-        isLoading.value = false;
 
         return true;
       } else {
@@ -113,11 +133,13 @@ class RestaurantDetailsController extends GetxController {
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
         );
+
         return false;
       }
     } catch (e) {
       print('Error --------> $e');
     }
+
     return false;
   }
 
@@ -133,19 +155,19 @@ class RestaurantDetailsController extends GetxController {
             .toList();
         print(index.value);
         print(galleryImagesRestaurantList.value);
-        isLoading.value = false;
-
         return true;
       } else {
         ShowToast.show(
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
         );
+
         return false;
       }
     } catch (e) {
       print('Error --------> $e');
     }
+
     return false;
   }
 
@@ -166,7 +188,6 @@ class RestaurantDetailsController extends GetxController {
         update();
         print(
             "Item Name====>   ${menuHeaderRestaurantList[1].menu[1].itemName}");
-        isLoading.value = false;
 
         return true;
       } else {
@@ -174,11 +195,13 @@ class RestaurantDetailsController extends GetxController {
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
         );
+
         return false;
       }
     } catch (e) {
       print('Error --------> $e');
     }
+
     return false;
   }
 
@@ -196,7 +219,6 @@ class RestaurantDetailsController extends GetxController {
         print(index.value);
         update();
         print("Ratings <====>   ${rateReviewsRestaurantList.value}");
-        isLoading.value = false;
 
         return true;
       } else {
@@ -204,11 +226,13 @@ class RestaurantDetailsController extends GetxController {
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
         );
+
         return false;
       }
     } catch (e) {
       print('Error --------> $e');
     }
+
     return false;
   }
 }

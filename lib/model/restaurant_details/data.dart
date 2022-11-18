@@ -11,8 +11,8 @@ class RestaurantDetailsData {
   String? contactNumber;
   String? email;
   int? distance;
-  double? rating;
-  int? ratingCount;
+  dynamic rating;
+  dynamic ratingCount;
   String? latitude;
   String? longitude;
   bool? isFavourite;
@@ -52,8 +52,8 @@ class RestaurantDetailsData {
         contactNumber: data['contactNumber'] as String?,
         email: data['email'] as String?,
         distance: data['distance'] as int?,
-        rating: data['rating'] as double?,
-        ratingCount: data['ratingCount'] as int?,
+        rating: data['rating'] as dynamic,
+        ratingCount: data['ratingCount'] as dynamic,
         latitude: data['latitude'] as String?,
         longitude: data['longitude'] as String?,
         isFavourite: data['isFavourite'] as bool?,
@@ -101,8 +101,8 @@ class RestaurantDetailsData {
     String? contactNumber,
     String? email,
     int? distance,
-    double? rating,
-    int? ratingCount,
+    dynamic rating,
+    dynamic ratingCount,
     String? latitude,
     String? longitude,
     bool? isFavourite,
