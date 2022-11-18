@@ -22,9 +22,9 @@ class OtpController extends GetxController {
     print(data);
     print('OTP Response ======> ${response}');
     if (response['response'] == 1) {
-      ShowToast.show(
-        msg: response['errorMessage'] ?? 'Please try again!',
-      );
+    //   ShowToast.show(
+    //     msg: response['errorMessage'] ?? 'Please try again!',
+    //   );
       userDetails.value = UserProfile.fromMap(response);
       userSession.setIsLogin(true);
       print(userSession.isLogin);
@@ -34,7 +34,30 @@ class OtpController extends GetxController {
       userSession.setUserToken(response['token'].toString());
       print(userSession.token);
       isLoading.value = false;
+      return true;
+    }
+    ShowToast.show(
+      msg: response['errorMessage'] ?? 'Please try again!',
+      isError: true,
+    );
+    isLoading.value = false;
 
+    return false;
+  }
+
+  Future<bool> resendOTP({Map<String, dynamic>? data}) async {
+    final response = await apiCall.callPostApi(
+      data!,
+      resendOtp,
+      // token: 'token',
+    );
+    print(data);
+    print('OTP Response ======> ${response}');
+    if (response['response'] == 1) {
+      ShowToast.show(
+        msg: response['otp'.toString()].toString(),
+      );
+      isLoading.value = false;
       return true;
     }
     ShowToast.show(

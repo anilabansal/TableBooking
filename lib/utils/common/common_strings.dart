@@ -7,6 +7,7 @@ const baseURL = 'http://apitablebooking.harishparas.com';
 const logInEndPoint = 'api/Basic/EnterMobileNo';
 const signUpEndPoint = 'api/Basic/RegisterMobileNo';
 const submitOtp = 'api/Basic/OTPSubmit';
+const resendOtp = 'api/Basic/ResendOTP';
 const createProfileEndPoint = 'api/Basic/SignUp';
 const zipCode = 'api/Home/SearchLocation';
 const aboutUs = 'api/Home/AboutUsDetail';

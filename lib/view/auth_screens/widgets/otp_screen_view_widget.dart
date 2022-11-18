@@ -116,6 +116,7 @@ class OtpScreenViewWidget extends StatelessWidget {
                                   },
                                 ]);
                               }
+                              controller.isLoading.value = false;
                             },
                           );
                           // if (callFrom == 'Login') {
@@ -132,8 +133,24 @@ class OtpScreenViewWidget extends StatelessWidget {
 
               const SizedBox(height: 20),
               InkWell(
-                onTap: () {
-                  Get.back();
+                onTap: () async {
+                  await otpController.resendOTP(data: {
+                    "MobileNumber": '$mobileNumber',
+                  }).then((value) {
+                    // Get.back();
+                    if (value) {
+                      // Get.toNamed('/login/otp', arguments: [
+                      //   {
+                      //     'mobileNumber':
+                      //     '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
+                      //   },
+                      //   {
+                      //     'callFrom': "Login",
+                      //   }
+                      // ]);
+                    }
+                  });
+                  // Get.back();
                 },
                 child: CommonText(
                   text: 'Resend Code',

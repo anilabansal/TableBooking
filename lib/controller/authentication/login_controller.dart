@@ -31,9 +31,9 @@ class LoginController extends GetxController {
     //   );
     // }
     if (response['response'] == 1) {
-      // ShowToast.show(
-      //   msg: response.body['errorMessage'],
-      // );
+      ShowToast.show(
+        msg: response['errorMessage'],
+      );
       isLoading.value = false;
 
       return true;
