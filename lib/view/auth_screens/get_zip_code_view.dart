@@ -1,14 +1,18 @@
+import 'package:booking_table/controller/location/location_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../utils/common/widgets_methods/common_button.dart';
 import '../../utils/common/widgets_methods/common_sized_box.dart';
 import '../../utils/common/widgets_methods/common_text.dart';
+import '../profile_screen/search_location.dart';
 
 class GetZipCodeView extends StatelessWidget {
-  const GetZipCodeView({Key? key}) : super(key: key);
+  GetZipCodeView({Key? key}) : super(key: key);
+  LocationController locationController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +68,18 @@ class GetZipCodeView extends StatelessWidget {
                 keyboardType: TextInputType.number,
                 filled: true,
                 hintText: 'Location',
-                suffixIcon: const Icon(
-                  Icons.place,
-                  color: Colors.black,
+                suffixIcon: InkWell(
+                  onTap: () {
+                    locationController.requestPermission().then((value) {
+                      if (value) {
+                        Get.to(() => const SearchLocation());
+                      }
+                    });
+                  },
+                  child: const Icon(
+                    Icons.place,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),

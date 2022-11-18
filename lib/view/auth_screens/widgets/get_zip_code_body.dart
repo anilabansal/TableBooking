@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/location/location_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
@@ -5,8 +6,10 @@ import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../profile_screen/search_location.dart';
+
 class GetZipCodeBody extends StatelessWidget {
-  const GetZipCodeBody({
+ const  GetZipCodeBody({
     Key? key,
   }) : super(key: key);
 

@@ -157,7 +157,7 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.zipCodeView, page: () => const GetZipCodeView(),
+      name: RouteName.zipCodeView, page: () =>  GetZipCodeView(),
       // binding: ,
     ),
     GetPage(
