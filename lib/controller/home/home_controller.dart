@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/model/restaurant/restaurantlist.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
@@ -15,6 +16,7 @@ class HomeController extends GetxController {
   }
 
   HomeController._internal();
+  UserSessionController userSessionController = Get.find();
 
   var selectedIndex = 0.obs;
   var longitude = '76.69060936300099'.obs;
@@ -38,7 +40,11 @@ class HomeController extends GetxController {
     dynamic body,
   }) async {
     try {
-      final response = await apiCall.callPostApi(body, zipCode);
+      final response = await apiCall.callPostApi(
+        body,
+        zipCode,
+        token: userSessionController.token,
+      );
       if (response['response'] == 1) {
         homeRestaurantList.value = (response['restaurantlist'])
             ?.map((e) => Restaurantlist.fromMap(e as Map<String, dynamic>))
