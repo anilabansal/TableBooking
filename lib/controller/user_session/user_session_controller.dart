@@ -8,16 +8,28 @@ class UserSessionController extends GetxController {
   final _isLogin = false.obs;
   final _token = ''.obs;
   final _mobileNumber = ''.obs;
+  final _userId = ''.obs;
+  final _isProfileCreated = false.obs;
+  final _fullName = ''.obs;
+  final _email = ''.obs;
 
   init() async {
     _isLogin.value = box.read(isLogInString) ?? false;
     _token.value = box.read(tokenString) ?? '';
+    _userId.value = box.read(userIdString) ?? '';
     _mobileNumber.value = box.read(mobileNumberString) ?? '';
+    _isProfileCreated.value = box.read(isProfileCreatedString) ?? false;
+    _fullName.value = box.read(fullNameString) ?? '';
+    _email.value = box.read(emailString) ?? '';
   }
 
   get isLogin => _isLogin.value;
   get token => _token.value;
+  get userId => _userId.value;
   get mobileNumber => _mobileNumber.value;
+  get isProfileCreated => _isProfileCreated.value;
+  get fullName => _fullName.value;
+  get email => _email.value;
 
   void setIsLogin(bool value) {
     _isLogin.value = value;
@@ -29,9 +41,29 @@ class UserSessionController extends GetxController {
     setPref(tokenString, value);
   }
 
+  void setUserId(String value) {
+    _userId.value = value;
+    setPref(userIdString, value);
+  }
+
   void setMobileNumber(String value) {
     _mobileNumber.value = value;
     setPref(mobileNumberString, value);
+  }
+
+  void setIsProfileCreated(bool value) {
+    _isProfileCreated.value = value;
+    setPref(isProfileCreatedString, value);
+  }
+
+  void setFullName(String value) {
+    _fullName.value = value;
+    setPref(fullNameString, value);
+  }
+
+  void setEmail(String value) {
+    _email.value = value;
+    setPref(emailString, value);
   }
 
   void setPref(String key, dynamic value) async {
@@ -42,7 +74,7 @@ class UserSessionController extends GetxController {
     await box.read(key);
   }
 
-  void logOut() async {
+  Future logOut() async {
     await box.erase();
     setIsLogin(false);
     Get.toNamed(
