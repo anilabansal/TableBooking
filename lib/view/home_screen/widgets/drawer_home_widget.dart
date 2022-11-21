@@ -65,7 +65,7 @@ class DrawerScreen extends StatelessWidget {
                         CommonText(
                           text: userSessionController.isLogin == false
                               ? "Guest User"
-                              : "Chaire Fiona",
+                              : userSessionController.fullName,
                           fontFamily: proximaNovaFont,
                           fontWeight: FontWeight.w600,
                           color: black000000,
@@ -77,7 +77,9 @@ class DrawerScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CommonText(
-                                    text: "chaire_fione@gmail.com",
+                                    text: userSessionController.email == ""
+                                        ? ""
+                                        : userSessionController.email,
                                     fontFamily: proximaNovaFont,
                                     fontWeight: FontWeight.w400,
                                     color: black000000,
