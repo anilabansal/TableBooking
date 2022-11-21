@@ -119,3 +119,7 @@ String infoIcon = "assets/images/home/info_icon.png";
 const isLogInString = 'isLogInString';
 const mobileNumberString = 'mobileNumber';
 const tokenString = 'tokenString';
+const userIdString = 'userIdString';
+const isProfileCreatedString = 'isProfileCreated';
+const fullNameString = 'fullName';
+const emailString = 'email';

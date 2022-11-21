@@ -46,7 +46,7 @@ class ReviewsTabScreen extends StatelessWidget {
                   ),
                 ],
               )
-            : CommonNoDataFound();
+            : const CommonNoDataFound();
       },
     );
   }
@@ -63,7 +63,7 @@ class ReviewsTabScreen extends StatelessWidget {
             Container(
               width: 39,
               height: 39,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     image:

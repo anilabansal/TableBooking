@@ -177,7 +177,7 @@ class RestaurantHomeScreen extends StatelessWidget {
                       );
                     })
               ]))
-          : CommonNoDataFound();
+          : const CommonNoDataFound();
     });
   }
 }

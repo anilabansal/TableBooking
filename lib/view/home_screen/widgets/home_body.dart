@@ -39,16 +39,20 @@ class HomeBody extends StatelessWidget {
                           },
                           child: Stack(
                             children: [
-                              Container(
-                                width: 49,
-                                height: 49,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                      image: AssetImage(profileImage),
-                                      fit: BoxFit.cover),
-                                ),
-                              ),
+                              userSessionController.isLogin == false
+                                  ? Icon(
+                                      Icons.person,
+                                      size: 50,
+                                    )
+                                  : Container(
+                                      width: 68,
+                                      height: 68,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                              image: AssetImage(profileImage),
+                                              fit: BoxFit.cover)),
+                                    ),
                               Positioned(
                                 bottom: 0,
                                 right: 0,
@@ -77,7 +81,7 @@ class HomeBody extends StatelessWidget {
                           children: [
                             CommonText(
                               text: userSessionController.isLogin == true
-                                  ? "Claire Fiona"
+                                  ? userSessionController.fullName
                                   : "Guest User",
                               color: black000000,
                               fontSize: 16,

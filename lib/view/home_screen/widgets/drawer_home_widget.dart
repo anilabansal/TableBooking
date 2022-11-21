@@ -1,5 +1,7 @@
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,10 +10,8 @@ import '../../../controller/home/home_controller.dart';
 
 class DrawerScreen extends StatelessWidget {
   var controller;
-
   UserSessionController userSessionController = Get.find();
   DrawerScreen({Key? key, required this.controller}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.find();
@@ -39,10 +39,14 @@ class DrawerScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
             child: Column(
               children: <Widget>[
-                userSessionController.isLogin == true
-                    ? Row(
-                        children: [
-                          Container(
+                Row(
+                  children: [
+                    userSessionController.isLogin == false
+                        ? Icon(
+                            Icons.person,
+                            size: 40,
+                          )
+                        : Container(
                             width: 68,
                             height: 68,
                             decoration: BoxDecoration(
@@ -51,47 +55,55 @@ class DrawerScreen extends StatelessWidget {
                                     image: AssetImage(profileImage),
                                     fit: BoxFit.cover)),
                           ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CommonText(
-                                text: "Chaire Fiona",
-                                fontFamily: proximaNovaFont,
-                                fontWeight: FontWeight.w600,
-                                color: black000000,
-                                fontSize: 16,
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CommonText(
+                          text: userSessionController.isLogin == false
+                              ? "Guest User"
+                              : "Chaire Fiona",
+                          fontFamily: proximaNovaFont,
+                          fontWeight: FontWeight.w600,
+                          color: black000000,
+                          fontSize: 16,
+                        ),
+                        userSessionController.isLogin == false
+                            ? Container()
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CommonText(
+                                    text: "chaire_fione@gmail.com",
+                                    fontFamily: proximaNovaFont,
+                                    fontWeight: FontWeight.w400,
+                                    color: black000000,
+                                    fontSize: 14,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      Get.toNamed('/edit-profile');
+                                    },
+                                    child: CommonText(
+                                      text: "Edit Profile",
+                                      fontFamily: proximaNovaFont,
+                                      fontWeight: FontWeight.w400,
+                                      color: redE2211C,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              CommonText(
-                                text: "chaire_fione@gmail.com",
-                                fontFamily: proximaNovaFont,
-                                fontWeight: FontWeight.w400,
-                                color: black000000,
-                                fontSize: 14,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Get.toNamed('/edit-profile');
-                                },
-                                child: CommonText(
-                                  text: "Edit Profile",
-                                  fontFamily: proximaNovaFont,
-                                  fontWeight: FontWeight.w400,
-                                  color: redE2211C,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      )
-                    : Container(),
+                      ],
+                    )
+                  ],
+                ),
                 const SizedBox(
                   height: 28,
                 ),
@@ -111,51 +123,49 @@ class DrawerScreen extends StatelessWidget {
                   print('Home Button Clicked');
                   homeController.drawerKey.currentState!.closeDrawer();
                 }),
-                userSessionController.isLogin == true
-                    ? iconContainer(
-                        const Icon(
-                          Icons.favorite,
-                          color: redE2211C,
-                        ),
-                        "Favorites", () {
-                        Get.toNamed('/favourite');
-                      })
-                    : Container(),
-                userSessionController.isLogin == true
-                    ? iconContainer(
-                        const Icon(
-                          Icons.book,
-                          color: redE2211C,
-                        ),
-                        "Reservations", () {
-                        Get.toNamed('/reservation');
-                      })
-                    : Container(),
-                userSessionController.isLogin == true
-                    ? iconContainer(
-                        const Icon(
-                          Icons.wallet,
-                          color: redE2211C,
-                        ),
-                        "Payment Methods", () {
-                        Get.toNamed('/payment-method');
-                      })
-                    : Container(),
-                userSessionController.isLogin == true
-                    ? iconContainer(
-                        const Icon(
-                          Icons.notifications,
-                          color: redE2211C,
-                        ),
-                        "Notifications", () {
-                        Get.toNamed('/notifications');
-                      })
-                    : Container(),
-                userSessionController.isLogin == true
-                    ? const SizedBox(
-                        height: 10,
-                      )
-                    : Container(),
+                iconContainer(
+                    const Icon(
+                      Icons.favorite,
+                      color: redE2211C,
+                    ),
+                    "Favorites", () {
+                  userSessionController.isLogin == false
+                      ? getXBuildDefaultDialog()
+                      : Get.toNamed('/favourite');
+                }),
+                iconContainer(
+                    const Icon(
+                      Icons.book,
+                      color: redE2211C,
+                    ),
+                    "Reservations", () {
+                  userSessionController.isLogin == false
+                      ? getXBuildDefaultDialog()
+                      : Get.toNamed('/reservation');
+                }),
+                iconContainer(
+                    const Icon(
+                      Icons.wallet,
+                      color: redE2211C,
+                    ),
+                    "Payment Methods", () {
+                  userSessionController.isLogin == false
+                      ? getXBuildDefaultDialog()
+                      : Get.toNamed('/payment-method');
+                }),
+                iconContainer(
+                    const Icon(
+                      Icons.notifications,
+                      color: redE2211C,
+                    ),
+                    "Notifications", () {
+                  userSessionController.isLogin == false
+                      ? getXBuildDefaultDialog()
+                      : Get.toNamed('/notifications');
+                }),
+                const SizedBox(
+                  height: 10,
+                ),
                 Image.asset(lineImage),
                 const SizedBox(
                   height: 30,
@@ -167,18 +177,91 @@ class DrawerScreen extends StatelessWidget {
                   Get.toNamed('/privacy-policy');
                 }),
                 textAndIcon("Customer Support", () {
-                  Get.toNamed('/support');
+                  userSessionController.isLogin == false
+                      ? getXBuildDefaultDialog()
+                      : Get.toNamed('/support');
                 }),
-                userSessionController.isLogin == true
-                    ? textAndIcon("Logout", () {
-                        userSessionController.logOut();
+                // userSessionController.isLogin == true
+                //     ?
+                userSessionController.isLogin == false
+                    ? Container()
+                    : textAndIcon("Logout", () async {
+                        // userSessionController.logOut();
+
+                        await getXBuildDefaultDialog(callFrom: "Logout");
                       })
-                    : Container(),
+                // : Container(),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  getXBuildDefaultDialog({callFrom}) async {
+    Get.defaultDialog(
+      title: callFrom == "Logout" ? "LOGOUT!" : "LOGIN!",
+      titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      content: Column(
+        children: [
+          Image.asset(
+            'assets/images/error.png',
+            height: 80,
+          ),
+          CommonSizedBox(
+            height: 15,
+          ),
+          CommonText(
+            fontSize: 16,
+            text: callFrom == "Logout"
+                ? 'Are you sure you want to logout?'
+                : "You're not logged In\nPlease login to continue..",
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+      radius: 0010,
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 5.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  height: 40,
+                  child: CommonButton(
+                    bgColor: redE2211C,
+                    text: callFrom == "Logout" ? "Confirm" : 'Login',
+                    textColor: Colors.white,
+                    onTap: () async {
+                      callFrom == "Logout"
+                          ? await userSessionController.logOut()
+                          : Get.toNamed('/login');
+                    },
+                  ),
+                ),
+              ),
+              CommonSizedBox(
+                width: 15,
+              ),
+              Expanded(
+                child: Container(
+                  height: 40,
+                  child: CommonButton(
+                    bgColor: redE2211C,
+                    text: 'Cancel',
+                    onTap: () {
+                      Get.back();
+                    },
+                    textColor: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

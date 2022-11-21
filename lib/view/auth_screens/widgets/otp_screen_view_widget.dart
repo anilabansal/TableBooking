@@ -103,18 +103,18 @@ class OtpScreenViewWidget extends StatelessWidget {
                           ).then(
                             (value) {
                               if (value) {
-                                Get.offAllNamed('/create-profile', arguments: [
-                                  {
-                                    'mobileNumber': '$mobileNumber',
-                                    'preFilledMobileNumber':
-                                        loginController.mobileNumber.text,
-                                    'countryCode':
-                                        loginController.countryCode.value,
-                                    'countryFlag':
-                                        loginController.countryFlag.value,
-                                    // '${loginController.mobileNumber.text.substring(3)}',
-                                  },
-                                ]);
+                                // Get.offAllNamed('/create-profile', arguments: [
+                                //   {
+                                //     'mobileNumber': '$mobileNumber',
+                                //     'preFilledMobileNumber':
+                                //         loginController.mobileNumber.text,
+                                //     'countryCode':
+                                //         loginController.countryCode.value,
+                                //     'countryFlag':
+                                //         loginController.countryFlag.value,
+                                //     // '${loginController.mobileNumber.text.substring(3)}',
+                                //   },
+                                // ]);
                               }
                               controller.isLoading.value = false;
                             },

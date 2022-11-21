@@ -254,7 +254,7 @@ class AboutTabScreen extends StatelessWidget {
                   ],
                 ),
               )
-            : CommonNoDataFound();
+            : const CommonNoDataFound();
       },
     );
   }

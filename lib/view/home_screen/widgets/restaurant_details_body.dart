@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RetaurantDetailsBody extends StatelessWidget {
-  RetaurantDetailsBody({
+  const RetaurantDetailsBody({
     Key? key,
     required TabController tabController,
     required this.restaurantController,
@@ -27,14 +27,14 @@ class RetaurantDetailsBody extends StatelessWidget {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
         return controller.detailsRestaurantList.value == null
-            ? CommonNoDataFound()
+            ? const CommonNoDataFound()
             : SafeArea(
                 child: ListView(
                   primary: false,
                   controller: ScrollController(keepScrollOffset: false),
                   shrinkWrap: true,
                   children: [
-                    RestaurantDetailTopScreen(),
+                    const RestaurantDetailTopScreen(),
                     Obx(
                       () => Center(
                         child: TabBar(
@@ -104,10 +104,10 @@ class RetaurantDetailsBody extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(20.0, 25, 20, 20),
                         child: TabBarView(
                             controller: _tabController,
-                            children: [
-                              const MenuTab(),
-                              const AboutTabScreen(),
-                              const ReviewsTabScreen(),
+                            children: const [
+                              MenuTab(),
+                              AboutTabScreen(),
+                              ReviewsTabScreen(),
                               GalleryTab()
                             ]),
                       ),

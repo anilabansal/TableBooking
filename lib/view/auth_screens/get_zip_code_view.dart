@@ -32,7 +32,7 @@ class GetZipCodeView extends StatelessWidget {
                 decoration: const BoxDecoration(),
                 child: userController.isLogin == true
                     ? Image.asset(zipcodeUserImage)
-                    : Icon(
+                    : const Icon(
                         Icons.person_outline,
                         size: 80,
                       ),
@@ -107,7 +107,7 @@ class GetZipCodeView extends StatelessWidget {
                   height: 50,
                   width: 184,
                   child: controller.isLoading.value == true
-                      ? Center(
+                      ? const Center(
                           child: CircularProgressIndicator(
                           color: redE2211C,
                         ))

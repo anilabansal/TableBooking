@@ -146,7 +146,7 @@ class MenuTab extends StatelessWidget {
                   ),
                 ],
               )
-            : CommonNoDataFound();
+            : const CommonNoDataFound();
       },
     );
   }

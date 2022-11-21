@@ -19,7 +19,7 @@ class ApiCalls extends GetConnect {
 
   Future<dynamic> callPostApi(Map<String, dynamic>? body, String endPoint,
       {bool isToken = false,
-      String token = '',
+      String? token,
       // bool isFullUrl = false,
       // String baseUrl,
       isPayment = false,
@@ -28,7 +28,7 @@ class ApiCalls extends GetConnect {
 
     withToken = {
       "Content-Type": "application/json",
-      "AuthToken": token,
+      "Authorization": "Bearer $token",
     };
     print(
         'API Request Header ------------------------------->\n ${jsonEncode(withToken)}');
@@ -59,11 +59,7 @@ class ApiCalls extends GetConnect {
     return;
   }
 
-  /**
-   * This method is for get request with multipart to the server.
-   * Using HTTP
-   **/
-
+  /// This method is for get request with multipart to the server.
   Future<dynamic> callMultipartWithFileAPI(
     Map<String, String> body,
     String endPoint,

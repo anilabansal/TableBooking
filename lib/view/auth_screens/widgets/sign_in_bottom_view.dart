@@ -81,7 +81,7 @@ class SignInScreenBottomView extends StatelessWidget {
                   // LOGIN/REGISTER BUTTON
 
                   loginController.isLoading.value == true
-                      ? Center(
+                      ? const Center(
                           child: CircularProgressIndicator(
                           color: redE2211C,
                         ))
