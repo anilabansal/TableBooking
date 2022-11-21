@@ -5,11 +5,15 @@ import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/network/api_calls.dart';
 import 'package:get/get.dart';
 
+import 'login_controller.dart';
+
 class OtpController extends GetxController {
   var pinOutPut = ''.obs;
   var userDetails = UserProfile().obs;
   ApiCalls apiCall = ApiCalls();
   var isLoading = false.obs;
+  var data1 = Get.arguments;
+  LoginController loginController = Get.find();
 
   UserSessionController userSession = Get.find();
 
@@ -17,22 +21,35 @@ class OtpController extends GetxController {
     final response = await apiCall.callPostApi(
       data!,
       submitOtp,
-      // token: 'token',
+      token: userSession.token,
     );
     print(data);
-    print('OTP Response ======> ${response}');
+    print('OTP Response ======> $response');
     if (response['response'] == 1) {
-    //   ShowToast.show(
-    //     msg: response['errorMessage'] ?? 'Please try again!',
-    //   );
-      userDetails.value = UserProfile.fromMap(response);
+      if (userSession.isProfileCreated) {
+        Get.toNamed('/zip-code');
+      } else {
+        Get.offAllNamed('/create-profile', arguments: [
+          {
+            'mobileNumber': data1[0]['mobileNumber'],
+            'preFilledMobileNumber': loginController.mobileNumber.text,
+            'countryCode': loginController.countryCode.value,
+            'countryFlag': loginController.countryFlag.value,
+            // '${loginController.mobileNumber.text.substring(3)}',
+          },
+        ]);
+      }
+
+      //   ShowToast.show(
+      //     msg: response['errorMessage'] ?? 'Please try again!',
+      //   );
+      // userDetails.value = UserProfile.fromMap(response);
       userSession.setIsLogin(true);
       print(userSession.isLogin);
-      print("User Detail Model ====>>>>  ${userDetails.value}");
+
+      // print("User Detail Model ====>>>>  ${userDetails.value}");
       //
-      userSession.setMobileNumber('Test User');
-      userSession.setUserToken(response['token'].toString());
-      print(userSession.token);
+
       isLoading.value = false;
       return true;
     }
@@ -52,7 +69,7 @@ class OtpController extends GetxController {
       // token: 'token',
     );
     print(data);
-    print('OTP Response ======> ${response}');
+    print('OTP Response ======> $response');
     if (response['response'] == 1) {
       ShowToast.show(
         msg: response['otp'.toString()].toString(),

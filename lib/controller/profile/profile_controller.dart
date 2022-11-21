@@ -56,11 +56,23 @@ class ProfileController extends GetxController {
           endPoint!,
           // filename: filename!,
           imageFile!,
-          token: 'l${userSession.token}'
+          token: '${userSession.token}'
           // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMzkiLCJleHAiOjE2Njg1ODUyMjAsImlzcyI6IlRlc3QuY29tIiwiYXVkIjoiVGVzdC5jb20ifQ.kOsK1K1dYmXDrVS8DdWE-_FvIcoc03DBxq6uXIuoIIw',
           );
 
       if (response['response'] == 1) {
+        userSession.setIsProfileCreated(response['isProfileCreated']);
+        userSession.setMobileNumber(response['mobileNumber'].toString());
+        userSession.setUserId(response['userId'].toString());
+        userSession.setFullName(response['fullName'].toString());
+        userSession.setUserId(response['userId'].toString());
+        userSession.setEmail(response['userId'].toString());
+
+        print("Full Name ${userSession.fullName}");
+        print("UserID ${userSession.userId}");
+        print("MobileNumber ${userSession.mobileNumber}");
+
+        print("IsProfileCreated ===>>> ${userSession.isProfileCreated}");
         return true;
       } else {
         ShowToast.show(
