@@ -167,7 +167,7 @@ class AppRoutes {
       page: () => ProfileView(
         callFrom: 'Edit',
       ),
-      // binding: ,
+      binding: ProfileBindings(),
     ),
     GetPage(
       name: RouteName.filterScreen, page: () => FilterView(),

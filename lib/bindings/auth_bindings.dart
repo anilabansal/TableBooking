@@ -10,9 +10,9 @@ class AuthBindings extends Bindings {
   void dependencies() {
     // TODO: implement dependencies
     Get.lazyPut<UserSessionController>(() => UserSessionController());
+    Get.lazyPut<SplashViewController>(() => SplashViewController());
     Get.lazyPut<LoginController>(() => LoginController());
     Get.lazyPut<RegisterController>(() => RegisterController());
-    Get.lazyPut<SplashViewController>(() => SplashViewController());
     // Get.lazyPut<CountryController>(() => CountryController());
     Get.lazyPut<OtpController>(() => OtpController());
   }

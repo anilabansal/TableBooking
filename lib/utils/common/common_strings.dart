@@ -15,6 +15,7 @@ const gallery = 'api/Home/ViewRestaurantGallery';
 const menu = 'api/Home/RestaurantMenuDetail';
 const ratings = 'api/Home/RatingandReviews';
 const restaurantDetail = 'api/Home/RestaurantDetail';
+const getProfileDetail = 'api/Basic/EditProfile';
 
 ///    Common Fonts
 // Fonts
@@ -119,6 +120,8 @@ String infoIcon = "assets/images/home/info_icon.png";
 const isLogInString = 'isLogInString';
 const mobileNumberString = 'mobileNumber';
 const tokenString = 'tokenString';
+const countryCodeString = 'countryCodeString';
+const countryFlagString = 'countryFlagString';
 const userIdString = 'userIdString';
 const isProfileCreatedString = 'isProfileCreated';
 const fullNameString = 'fullName';

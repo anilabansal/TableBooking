@@ -55,11 +55,14 @@ class SignInScreenBottomView extends StatelessWidget {
                     countryCode: loginController.countryCode.value,
                     countryFlag: loginController.countryFlag.value,
                     onCountryFlag: (value) {
-                      //   print('Country flag ---> ${value}');
                       loginController.countryFlag.value = value;
+                      print('Country flag ---> ${value}');
                     },
                     onCodeChange: (value) {
                       loginController.countryCode.value = value;
+                      print('Country Code ---> ${value}');
+                      print(
+                          'Country Code Controller Value ---> ${loginController.countryCode.value}');
                     },
                     textFieldColor: red0FE2211C,
                   ),
@@ -87,15 +90,13 @@ class SignInScreenBottomView extends StatelessWidget {
                         ))
                       : CommonButton(
                           onTap: () async {
-                            loginController.isLoading.value = true;
                             if (validateFields() != '') {
                               ShowToast.show(
                                 msg: validateFields(),
                                 isError: true,
                               );
-                              loginController.isLoading.value = false;
 
-                              return;
+                              return false;
                             }
 
                             // if(callFrom=="Login"){

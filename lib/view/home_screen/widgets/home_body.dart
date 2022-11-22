@@ -1,4 +1,5 @@
 import 'package:booking_table/controller/home/home_controller.dart';
+import 'package:booking_table/controller/profile/profile_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
@@ -18,6 +19,7 @@ class HomeBody extends StatelessWidget {
 
   final HomeController homeController;
   UserSessionController userSessionController = Get.find();
+  ProfileController profileController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class HomeBody extends StatelessWidget {
                           child: Stack(
                             children: [
                               userSessionController.isLogin == false
-                                  ? Icon(
+                                  ? const Icon(
                                       Icons.person,
                                       size: 50,
                                     )
@@ -81,7 +83,7 @@ class HomeBody extends StatelessWidget {
                           children: [
                             CommonText(
                               text: userSessionController.isLogin == true
-                                  ? userSessionController.fullName
+                                  ? "${profileController.userDetailsData.value.firstName} ${profileController.userDetailsData.value.lastName}"
                                   : "Guest User",
                               color: black000000,
                               fontSize: 16,

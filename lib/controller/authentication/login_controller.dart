@@ -1,4 +1,5 @@
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
+import 'package:booking_table/model/profile_details/profile_details/data.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/network/api_calls.dart';
@@ -9,7 +10,9 @@ class LoginController extends GetxController {
   var mobileNumber = TextEditingController();
   var countryCode = '91'.obs;
   var countryFlag = '🇮🇳'.obs;
+  var preFilledMobileNumber = "".obs;
   var isLoading = false.obs;
+  var userDetailsData = ProfileData().obs;
 
   // var countryFlag = '🇺🇸'.obs;
   ApiCalls apiCall = ApiCalls();
@@ -21,6 +24,7 @@ class LoginController extends GetxController {
       logInEndPoint,
       // token: 'token',
     );
+
     // print(data);
     // print('Login Response ======> ${response['token']}');
     // if (response.body['response'] == 1 && response.body['data'] != null) {
@@ -39,13 +43,20 @@ class LoginController extends GetxController {
       isLoading.value = false;
       userSession.setUserToken(response['token'].toString());
       userSession.setIsProfileCreated(response['isProfileCreated']);
-      userSession.setMobileNumber(response['mobileNumber'].toString());
-      userSession.setUserId(response['userId'].toString());
-      userSession.setFullName(response['fullName'].toString());
+      userSession.setCountryCode(countryCode.value);
+      userSession.setCountryFlag(countryFlag.value);
+      // userSession.setMobileNumber(preFilledMobileNumber.value);
 
-      print("Full Name ${userSession.fullName}");
-      print("UserID ${userSession.userId}");
-      print("MobileNumber ${userSession.mobileNumber}");
+      print("Country Code ====>> ${countryCode.value}");
+      print("User Details====>> ${userDetailsData.value}");
+      print("Number====>> ${mobileNumber.value}");
+      // userSession.setMobileNumber(response['mobileNumber'].toString());
+      // userSession.setUserId(response['userId'].toString());
+      // userSession.setFullName(response['fullName'].toString());
+
+      // print("Full Name ${userSession.fullName}");
+      // print("UserID ${userSession.userId}");
+      // print("MobileNumber ${userSession.mobileNumber}");
       print("TOKEN ===>>> ${userSession.token}");
       print("IsProfileCreated ===>>> ${userSession.isProfileCreated}");
       return true;

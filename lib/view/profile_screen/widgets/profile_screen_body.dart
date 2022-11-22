@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,14 +17,14 @@ class EditProfileScreenBody extends StatelessWidget {
   final String callFrom;
   final String mobileNumber;
   final ProfileController profileController;
+  final UserSessionController userSessionController = Get.find();
 
-  const EditProfileScreenBody({
+  EditProfileScreenBody({
     required this.callFrom,
     required this.mobileNumber,
     Key? key,
     required this.profileController,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -92,9 +93,9 @@ class EditProfileScreenBody extends StatelessWidget {
                               offset: Offset(0, 4),
                               color: Color.fromRGBO(192, 192, 192, 0.25))
                         ],
-                        image: const DecorationImage(
-                          image: AssetImage(
-                              "assets/images/profile/edit_profile_image.png"),
+                        image: DecorationImage(
+                          image: NetworkImage(profileController
+                              .userDetailsData.value.profileImage!),
                           fit: BoxFit.cover,
                         )),
                   ),
@@ -190,22 +191,64 @@ class EditProfileScreenBody extends StatelessWidget {
                 // const CommonTextField(
                 //   hint: "23050 W Rd",
                 // ),
-                PhoneField(
-                  isCreateProfile: true,
-                  enable: false,
-                  phoneController: profileController.mobileNumberControllerNew,
-                  // phoneController: profileController
-                  // .mobileNumberController,
-                  countryCode: profileController.countryCode.value,
-                  countryFlag: profileController.countryFlag.value,
-                  // onCountryFlag: (value) {
-                  //   //   print('Country flag ---> ${value}');
-                  //   profileController.countryFlag.value = value;
-                  // },
-                  // onCodeChange: (value) {
-                  //   profileController.countryCode.value = value;
-                  // },
-                  textFieldColor: greyF4F4F4,
+                callFrom == "Create Profile"
+                    ? PhoneField(
+                        isCreateProfile: true,
+                        enable: false,
+                        phoneController: userSessionController.mobileNumber,
+
+                        // phoneController: profileController
+                        // .mobileNumberController,
+                        countryCode: userSessionController.countryCode,
+                        countryFlag: userSessionController.countryFlag,
+                        // onCountryFlag: (value) {
+                        //   //   print('Country flag ---> ${value}');
+                        //   profileController.countryFlag.value = value;
+                        // },
+                        // onCodeChange: (value) {
+                        //   profileController.countryCode.value = value;
+                        // },
+                        textFieldColor: greyF4F4F4,
+                      )
+                    : PhoneField(
+                        isCreateProfile: true,
+                        enable: false,
+                        phoneController:
+                            profileController.mobileNumberController,
+
+                        // phoneController: profileController
+                        // .mobileNumberController,
+                        countryCode: profileController.countryCode.value,
+                        countryFlag: profileController.countryFlag.value,
+                        // onCountryFlag: (value) {
+                        //   //   print('Country flag ---> ${value}');
+                        //   profileController.countryFlag.value = value;
+                        // },
+                        // onCodeChange: (value) {
+                        //   profileController.countryCode.value = value;
+                        // },
+                        textFieldColor: greyF4F4F4,
+                      ),
+                const SizedBox(
+                  height: 20,
+                ),
+                CommonText(
+                  text: "Email",
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: black040404,
+                ),
+                const SizedBox(
+                  height: 5.7,
+                ),
+                // const CommonTextField(
+                //   hint: "23050 W Rd",
+                // ),
+                CommonTextFormField(
+                  hintText: "enter your email address".toTitleCase(),
+                  filled: true,
+                  fillColor: greyF4F4F4,
+                  controller: profileController.emailAddressController,
                 ),
 
                 const SizedBox(
@@ -242,6 +285,7 @@ class EditProfileScreenBody extends StatelessWidget {
                 CommonTextFormField(
                   hintText: "enter your street address".toTitleCase(),
                   filled: true,
+                  keyboardType: TextInputType.emailAddress,
                   fillColor: greyF4F4F4,
                   controller: profileController.streetAddressController,
                 ),
@@ -357,6 +401,9 @@ class EditProfileScreenBody extends StatelessWidget {
                                     profileController.dateController.text,
                                 "City": profileController.cityController.text
                                     .trim(),
+                                "Email": profileController
+                                    .emailAddressController.text
+                                    .trim(),
                                 "State": profileController.stateController.text
                                     .trim(),
                                 "ZipCode":
@@ -404,6 +451,9 @@ class EditProfileScreenBody extends StatelessWidget {
       return 'please enter your first name!'.toTitleCase();
     } else if (profileController.lastNameController.value.text.isEmpty) {
       return 'please enter your last name!'.toTitleCase();
+    } else if (GetUtils.isEmail(
+        profileController.emailAddressController.value.text.trim())) {
+      return 'please enter valid email!'.toTitleCase();
     } else if (profileController.stateController.value.text.isEmpty) {
       return 'please enter your state!'.toTitleCase();
     } else if (profileController.cityController.value.text.isEmpty) {

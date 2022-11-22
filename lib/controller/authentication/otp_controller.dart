@@ -1,5 +1,4 @@
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
-import 'package:booking_table/model/user_profile_model.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/network/api_calls.dart';
@@ -9,10 +8,9 @@ import 'login_controller.dart';
 
 class OtpController extends GetxController {
   var pinOutPut = ''.obs;
-  var userDetails = UserProfile().obs;
   ApiCalls apiCall = ApiCalls();
   var isLoading = false.obs;
-  var data1 = Get.arguments;
+  var mobileNumberData = Get.arguments;
   LoginController loginController = Get.find();
 
   UserSessionController userSession = Get.find();
@@ -26,19 +24,7 @@ class OtpController extends GetxController {
     print(data);
     print('OTP Response ======> $response');
     if (response['response'] == 1) {
-      if (userSession.isProfileCreated) {
-        Get.toNamed('/zip-code');
-      } else {
-        Get.offAllNamed('/create-profile', arguments: [
-          {
-            'mobileNumber': data1[0]['mobileNumber'],
-            'preFilledMobileNumber': loginController.mobileNumber.text,
-            'countryCode': loginController.countryCode.value,
-            'countryFlag': loginController.countryFlag.value,
-            // '${loginController.mobileNumber.text.substring(3)}',
-          },
-        ]);
-      }
+      print("ARGUMENTS OTP $mobileNumberData");
 
       //   ShowToast.show(
       //     msg: response['errorMessage'] ?? 'Please try again!',

@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/profile/profile_controller.dart';
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
@@ -11,6 +12,7 @@ import '../../../controller/home/home_controller.dart';
 class DrawerScreen extends StatelessWidget {
   var controller;
   UserSessionController userSessionController = Get.find();
+  ProfileController profileController = Get.find();
   DrawerScreen({Key? key, required this.controller}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -42,19 +44,38 @@ class DrawerScreen extends StatelessWidget {
                 Row(
                   children: [
                     userSessionController.isLogin == false
-                        ? Icon(
+                        ? const Icon(
                             Icons.person,
                             size: 40,
                           )
-                        : Container(
-                            width: 68,
-                            height: 68,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    image: AssetImage(profileImage),
-                                    fit: BoxFit.cover)),
-                          ),
+                        : profileController
+                                    .userDetailsData.value.profileImage !=
+                                ""
+                            ? Container(
+                                width: 68,
+                                height: 68,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image: NetworkImage(profileController
+                                                    .userDetailsData
+                                                    .value
+                                                    .profileImage ==
+                                                ""
+                                            ? profileController.userDetailsData
+                                                .value.profileImage!
+                                            : "https://i.picsum.photos/id/175/200/200.jpg?hmac=5rzD884Hqi9oWr_n5vg0XSc9f6yMlPotvKa8Y0cVzd4"),
+                                        fit: BoxFit.cover)),
+                              )
+                            : Container(
+                                width: 68,
+                                height: 68,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image: AssetImage(profileImage),
+                                        fit: BoxFit.cover)),
+                              ),
                     const SizedBox(
                       width: 15,
                     ),
@@ -65,7 +86,7 @@ class DrawerScreen extends StatelessWidget {
                         CommonText(
                           text: userSessionController.isLogin == false
                               ? "Guest User"
-                              : userSessionController.fullName,
+                              : "${profileController.userDetailsData.value.firstName} ${profileController.userDetailsData.value.lastName}",
                           fontFamily: proximaNovaFont,
                           fontWeight: FontWeight.w600,
                           color: black000000,
@@ -77,9 +98,12 @@ class DrawerScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CommonText(
-                                    text: userSessionController.email == ""
+                                    text: profileController
+                                                .userDetailsData.value.email ==
+                                            ""
                                         ? ""
-                                        : userSessionController.email,
+                                        : profileController
+                                            .userDetailsData.value.email,
                                     fontFamily: proximaNovaFont,
                                     fontWeight: FontWeight.w400,
                                     color: black000000,
@@ -89,8 +113,14 @@ class DrawerScreen extends StatelessWidget {
                                     height: 10,
                                   ),
                                   InkWell(
-                                    onTap: () {
-                                      Get.toNamed('/edit-profile');
+                                    onTap: () async {
+                                      await profileController
+                                          .getProfileDetails()
+                                          .then((value) {
+                                        if (value) {
+                                          Get.toNamed('/edit-profile');
+                                        }
+                                      });
                                     },
                                     child: CommonText(
                                       text: "Edit Profile",
@@ -204,7 +234,7 @@ class DrawerScreen extends StatelessWidget {
   getXBuildDefaultDialog({callFrom}) async {
     Get.defaultDialog(
       title: callFrom == "Logout" ? "LOGOUT!" : "LOGIN!",
-      titleStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      titleStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
       content: Column(
         children: [
           Image.asset(
@@ -230,7 +260,7 @@ class DrawerScreen extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: Container(
+                child: SizedBox(
                   height: 40,
                   child: CommonButton(
                     bgColor: redE2211C,
@@ -248,7 +278,7 @@ class DrawerScreen extends StatelessWidget {
                 width: 15,
               ),
               Expanded(
-                child: Container(
+                child: SizedBox(
                   height: 40,
                   child: CommonButton(
                     bgColor: redE2211C,
