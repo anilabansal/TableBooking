@@ -67,7 +67,7 @@ class UserSessionController extends GetxController {
     setPref(mobileNumberString, value);
   }
 
-  void setIsProfileCreated(bool value) {
+  void setIsProfileCreated(dynamic value) {
     _isProfileCreated.value = value;
     setPref(isProfileCreatedString, value);
   }

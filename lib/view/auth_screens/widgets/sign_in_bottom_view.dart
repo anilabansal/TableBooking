@@ -56,11 +56,11 @@ class SignInScreenBottomView extends StatelessWidget {
                     countryFlag: loginController.countryFlag.value,
                     onCountryFlag: (value) {
                       loginController.countryFlag.value = value;
-                      print('Country flag ---> ${value}');
+                      print('Country flag ---> $value');
                     },
                     onCodeChange: (value) {
                       loginController.countryCode.value = value;
-                      print('Country Code ---> ${value}');
+                      print('Country Code ---> $value');
                       print(
                           'Country Code Controller Value ---> ${loginController.countryCode.value}');
                     },
@@ -140,7 +140,7 @@ class SignInScreenBottomView extends StatelessWidget {
                                       Get.toNamed('/login/otp', arguments: [
                                         {
                                           'mobileNumber':
-                                              '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
+                                              '+${loginController.countryCode.value}${loginController.mobileNumber.value.text.trim()}',
                                         },
                                         {
                                           'callFrom': "Login",
@@ -207,7 +207,7 @@ class SignInScreenBottomView extends StatelessWidget {
                   CommonSizedBox(height: 20),
                   // GUEST BUTTON
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       Get.toNamed('/home');
                     },
                     child: Center(

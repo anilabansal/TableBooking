@@ -11,32 +11,31 @@ import '../../utils/common/toast_message.dart';
 import '../../utils/network/api_calls.dart';
 
 class ProfileController extends GetxController {
-  var data = Get.arguments;
-
   /// Initialization
   @override
   void onInit() async {
+    // mobileNumberController.text = userSession.mobileNumber.substring(3);
+
     // TODO: implement onInit
     await getProfileDetails();
-    print("Arguments ===>>>> $data");
-    // print(
-    //     "Country Code ===>> ${userDetailsData.value.mobileNo!.substring(1, 3)}");
 
-    firstNameController.text = userDetailsData.value.firstName!;
-    print("Init First Name ===> ${userDetailsData.value.firstName}");
-    lastNameController.text = userDetailsData.value.lastName!;
-    dateController.text = userDetailsData.value.dateofBirth!.substring(0, 10);
-    streetAddressController.text = userDetailsData.value.address!;
-    emailAddressController.text = userDetailsData.value.email!;
-    flagController.text = userSession.countryFlag;
-    countryCodeController.text = userSession.countryCode;
-    cityController.text = userDetailsData.value.city!;
-    print(
-        "Init Country COde Flad ===> ${flagController.text} ${countryCodeController.text}");
-    stateController.text = userDetailsData.value.state!;
-    zipCodeController.text = userDetailsData.value.zipCode!;
-    mobileNumberController.text = userDetailsData.value.mobileNo!.substring(3);
-    print('====> Token PROFILE ${userSession.token}');
+    if (userDetailsData.value.firstName != null) {
+      firstNameController.text = userDetailsData.value.firstName!;
+      lastNameController.text = userDetailsData.value.lastName!;
+      dateController.text = userDetailsData.value.dateofBirth!.substring(0, 10);
+      streetAddressController.text = userDetailsData.value.address!;
+      emailAddressController.text = userDetailsData.value.email!;
+      flagController.text = userSession.countryFlag;
+      countryCodeController.text = userSession.countryCode;
+      cityController.text = userDetailsData.value.city!;
+      stateController.text = userDetailsData.value.state!;
+      zipCodeController.text = userDetailsData.value.zipCode!;
+      mobileNumberController.text = userSession.mobileNumber;
+    } else {
+      flagController.text = userSession.countryFlag;
+      countryCodeController.text = userSession.countryCode;
+      mobileNumberController.text = userSession.mobileNumber;
+    }
     super.onInit();
   }
 
@@ -57,13 +56,14 @@ class ProfileController extends GetxController {
   var stateController = TextEditingController();
   var zipCodeController = TextEditingController();
   var mobileNumberController = TextEditingController();
-  var mobileNumberControllerNew = TextEditingController();
   var flagController = TextEditingController();
   var countryCodeController = TextEditingController();
 
   /// Variables
-  var countryCode = '91'.obs;
-  var countryFlag = '🇺🇸'.obs;
+  var countryCode = ''.obs;
+  // var countryCode = '91'.obs;
+  // var countryFlag = '🇺🇸'.obs;
+  var countryFlag = ''.obs;
   var userDetailsData = ProfileData().obs;
   var createProfileImage = File('').obs;
 
@@ -80,17 +80,16 @@ class ProfileController extends GetxController {
       String? filename}) async {
     try {
       final response = await apiCall.callMultipartWithFileAPI(
-          // body, endPoint!, imageFile!,
-          body!,
-          endPoint!,
-          // filename: filename!,
-          imageFile!,
-          token: '${userSession.token}'
-          // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMzkiLCJleHAiOjE2Njg1ODUyMjAsImlzcyI6IlRlc3QuY29tIiwiYXVkIjoiVGVzdC5jb20ifQ.kOsK1K1dYmXDrVS8DdWE-_FvIcoc03DBxq6uXIuoIIw',
-          );
+        body!,
+        endPoint!,
+        imageFile!,
+        token: userSession.token,
+      );
 
       if (response['response'] == 1) {
-        userSession.setIsProfileCreated(response['isProfileCreated']);
+        print(response['data']);
+        userSession.setIsProfileCreated(response['data']['isProfileCreated']);
+
         // ProfileData profile = ProfileData.fromMap(response['data']);
         // userDetailsData.value = profile;
         // print("User Details====>> ${userDetailsData.value}");
@@ -103,7 +102,7 @@ class ProfileController extends GetxController {
         // print("Full Name ${userSession.fullName}");
         // print("UserID ${userSession.userId}");
         // print("MobileNumber ${userSession.mobileNumber}");
-
+        ProfileController().getProfileDetails();
         print("IsProfileCreated ===>>> ${userSession.isProfileCreated}");
         return true;
       } else {
@@ -113,9 +112,6 @@ class ProfileController extends GetxController {
         );
         return false;
       }
-
-      //print('Response --------> ${jsonDecode(response)}');
-
     } catch (e) {
       print('Error --------> $e');
     }
@@ -126,20 +122,15 @@ class ProfileController extends GetxController {
   Future<dynamic> getProfileDetails({dynamic body}) async {
     try {
       final response = await apiCall.callPostApi(
-          // body, endPoint!, imageFile!,
-          body,
-          getProfileDetail,
-          // filename: filename!,
-
-          token: '${userSession.token}'
-          // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMzkiLCJleHAiOjE2Njg1ODUyMjAsImlzcyI6IlRlc3QuY29tIiwiYXVkIjoiVGVzdC5jb20ifQ.kOsK1K1dYmXDrVS8DdWE-_FvIcoc03DBxq6uXIuoIIw',
-          );
+        body,
+        getProfileDetail,
+        token: userSession.token,
+      );
 
       if (response['response'] == 1) {
         ProfileData profile = ProfileData.fromMap(response['data']);
         userDetailsData.value = profile;
         print("User Details from GET Details====>> ${userDetailsData.value}");
-        print("Arguments ===>>>> ${data}");
 
         print("User Details Name====>> ${userDetailsData.value.firstName}");
         return true;
@@ -150,9 +141,6 @@ class ProfileController extends GetxController {
         );
         return false;
       }
-
-      //print('Response --------> ${jsonDecode(response)}');
-
     } catch (e) {
       print('Error --------> $e');
     }

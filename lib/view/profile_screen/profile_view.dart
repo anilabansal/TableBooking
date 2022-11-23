@@ -8,10 +8,9 @@ import '../../controller/profile/profile_controller.dart';
 
 class ProfileView extends StatelessWidget {
   String callFrom;
-  String? mobileNumber;
+
   var data = Get.arguments;
-  ProfileView({Key? key, this.mobileNumber, required this.callFrom})
-      : super(key: key);
+  ProfileView({Key? key, required this.callFrom}) : super(key: key);
   final ProfileController profileController = Get.put(ProfileController());
 
   @override
@@ -22,10 +21,7 @@ class ProfileView extends StatelessWidget {
         text: callFrom == "Create Profile" ? "Create Profile" : "Edit Details",
       ),
       body: EditProfileScreenBody(
-          // mobileNumber: data[0]['mobileNumber']!,
-          mobileNumber: " data[0]['mobileNumber']!",
-          callFrom: callFrom,
-          profileController: profileController),
+          callFrom: callFrom, profileController: profileController),
     );
   }
 }

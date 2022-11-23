@@ -1,4 +1,6 @@
-import 'package:booking_table/bindings/auth_bindings.dart';
+import 'package:booking_table/controller/authentication/login_controller.dart';
+import 'package:booking_table/controller/authentication/otp_controller.dart';
+import 'package:booking_table/controller/authentication/register_controller.dart';
 import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/controller/profile/profile_controller.dart';
 import 'package:booking_table/controller/restaurant_details/restaurant_details_controller.dart';
@@ -12,11 +14,13 @@ class HomeBindings extends Bindings {
     Get.lazyPut<UserSessionController>(
       () => UserSessionController(),
     );
-    AuthBindings();
 
-    Get.lazyPut<HomeController>(() => HomeController());
+    Get.lazyPut<RegisterController>(() => RegisterController());
+    Get.lazyPut<LoginController>(() => LoginController());
+    Get.lazyPut<OtpController>(() => OtpController());
     Get.lazyPut<RestaurantDetailsController>(
         () => RestaurantDetailsController());
+    Get.lazyPut<HomeController>(() => HomeController());
     Get.lazyPut<ProfileController>(() => ProfileController());
   }
 }

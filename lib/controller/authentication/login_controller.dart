@@ -10,7 +10,6 @@ class LoginController extends GetxController {
   var mobileNumber = TextEditingController();
   var countryCode = '91'.obs;
   var countryFlag = '🇮🇳'.obs;
-  var preFilledMobileNumber = "".obs;
   var isLoading = false.obs;
   var userDetailsData = ProfileData().obs;
 
@@ -20,6 +19,7 @@ class LoginController extends GetxController {
 
   Future<bool> loginUser({Map<String, String>? data}) async {
     final response = await apiCall.callPostApi(
+      // isToken: false,
       data!,
       logInEndPoint,
       // token: 'token',
@@ -45,11 +45,11 @@ class LoginController extends GetxController {
       userSession.setIsProfileCreated(response['isProfileCreated']);
       userSession.setCountryCode(countryCode.value);
       userSession.setCountryFlag(countryFlag.value);
-      // userSession.setMobileNumber(preFilledMobileNumber.value);
+      userSession.setMobileNumber(mobileNumber.value.text);
 
       print("Country Code ====>> ${countryCode.value}");
       print("User Details====>> ${userDetailsData.value}");
-      print("Number====>> ${mobileNumber.value}");
+      print("User Session Number====>> ${userSession.mobileNumber}");
       // userSession.setMobileNumber(response['mobileNumber'].toString());
       // userSession.setUserId(response['userId'].toString());
       // userSession.setFullName(response['fullName'].toString());

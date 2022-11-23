@@ -16,7 +16,6 @@ class OtpScreenViewWidget extends StatelessWidget {
   LoginController loginController = Get.find();
   UserSessionController userSessionController = Get.find();
   final String? callFrom;
-  var mobileNumberData = Get.arguments;
 
   OtpScreenViewWidget({
     required this.callFrom,
@@ -112,16 +111,24 @@ class OtpScreenViewWidget extends StatelessWidget {
                                   Get.offAllNamed('/create-profile',
                                       arguments: [
                                         {
-                                          'mobileNumber': mobileNumberData[0]
-                                              ['mobileNumber'],
+                                          'mobileNumber': mobileNumber,
+                                        },
+                                        {
                                           'preFilledMobileNumber':
                                               loginController.mobileNumber.text,
+                                        },
+                                        {
                                           'countryCode':
                                               loginController.countryCode.value,
+                                        },
+                                        {
                                           'countryFlag':
                                               loginController.countryFlag.value,
-                                          // '${loginController.mobileNumber.text.substring(3)}',
                                         },
+                                        {
+                                          'callFrom': "Create Profile",
+                                        },
+                                        // '${loginController.mobileNumber.text.substring(3)}',
                                       ]);
                                 }
                               }

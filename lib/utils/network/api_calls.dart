@@ -30,6 +30,7 @@ class ApiCalls extends GetConnect {
       "Content-Type": "application/json",
       "Authorization": "Bearer $token",
     };
+
     print(
         'API Request Header ------------------------------->\n ${jsonEncode(withToken)}');
     String url = '$baseURL/$endPoint';
@@ -83,7 +84,7 @@ class ApiCalls extends GetConnect {
         http.MultipartRequest('POST', Uri.parse('$baseURL/$endPoint'));
     request.fields.addAll(body);
     request.files
-        .add(await http.MultipartFile.fromPath('Profile Pic', imageFile.path));
+        .add(await http.MultipartFile.fromPath('ProfilePic', imageFile.path));
     request.headers.addAll(headers);
 
     var response = await request.send();

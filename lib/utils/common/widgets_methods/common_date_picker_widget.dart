@@ -40,7 +40,7 @@ class CommonDatePicker extends StatelessWidget {
               firstDate: DateTime(1900),
               lastDate: DateTime.now());
           if (picked != null) {
-            controller!.text = DateFormat('dd/MM/yyyy').format(picked);
+            controller!.text = DateFormat('yyyy-MM-dd').format(picked);
           }
         },
         child: CommonTextFormField(
@@ -66,7 +66,7 @@ class CommonDatePicker extends StatelessWidget {
                     firstDate: DateTime(1900),
                     lastDate: DateTime.now());
                 if (picked != null) {
-                  controller!.text = DateFormat('dd/MM/yyyy').format(picked);
+                  controller!.text = DateFormat('yyyy-MM-dd').format(picked);
                 }
               },
               icon: const Icon(

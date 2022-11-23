@@ -25,7 +25,7 @@ class CommonText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text!,
+      text ?? "Empty",
       textAlign: textAlign,
       style: TextStyle(
         overflow: TextOverflow.clip,

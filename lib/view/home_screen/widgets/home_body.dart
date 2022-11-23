@@ -46,15 +46,22 @@ class HomeBody extends StatelessWidget {
                                       Icons.person,
                                       size: 50,
                                     )
-                                  : Container(
-                                      width: 68,
-                                      height: 68,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                              image: AssetImage(profileImage),
-                                              fit: BoxFit.cover)),
-                                    ),
+                                  : profileController.userDetailsData.value
+                                              .profileImage !=
+                                          null
+                                      ? ClipOval(
+                                          child: Image.network(
+                                            profileController.userDetailsData
+                                                .value.profileImage!,
+                                            height: 49,
+                                            width: 49,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        )
+                                      : const Icon(
+                                          Icons.person,
+                                          size: 40,
+                                        ),
                               Positioned(
                                 bottom: 0,
                                 right: 0,

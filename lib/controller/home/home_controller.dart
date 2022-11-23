@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/profile/profile_controller.dart';
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/model/restaurant/restaurantlist.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
@@ -53,6 +54,7 @@ class HomeController extends GetxController {
         print('Repsonse List=====> $homeRestaurantList');
         print('Total Restaurant List=====> $homeRestaurantCount');
         isLoading.value = false;
+        ProfileController().getProfileDetails();
         return true;
       } else {
         isLoading.value = false;

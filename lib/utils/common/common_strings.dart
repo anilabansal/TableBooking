@@ -16,6 +16,7 @@ const menu = 'api/Home/RestaurantMenuDetail';
 const ratings = 'api/Home/RatingandReviews';
 const restaurantDetail = 'api/Home/RestaurantDetail';
 const getProfileDetail = 'api/Basic/EditProfile';
+const updateProfileDetail = 'api/Basic/UpdateProfile';
 
 ///    Common Fonts
 // Fonts

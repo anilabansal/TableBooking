@@ -1,15 +1,17 @@
 // ignore_for_file: file_names
 
+import 'package:booking_table/controller/profile/profile_controller.dart';
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:get/get.dart';
 
 class SplashViewController extends GetxController {
   UserSessionController controller = Get.find();
+  ProfileController profileController = Get.find();
 
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
-    controller.init();
+    await controller.init();
     print('Splash Screen Init');
     print(controller.isLogin);
     super.onInit();
@@ -22,15 +24,14 @@ class SplashViewController extends GetxController {
   }
 
   Future<void> splashInit() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 3));
     if (controller.isLogin) {
-      Get.offAllNamed('/home');
-      // Get.offAllNamed('/create-profile');
-      // if (controller.isProfileCreated) {
-      //   Get.offAllNamed('/home');
-      // } else {
-      //   Get.offAllNamed('/create-profile');
-      // }
+      if (controller.isProfileCreated) {
+        await profileController.getProfileDetails();
+        await Get.offAllNamed('/home');
+      } else {
+        Get.offAllNamed('/create-profile');
+      }
       // Get.offAllNamed('/authentication');
     } else {
       Get.offAllNamed('/authentication');
