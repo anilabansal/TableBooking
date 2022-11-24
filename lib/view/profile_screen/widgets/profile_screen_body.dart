@@ -96,7 +96,7 @@ class EditProfileScreenBody extends StatelessWidget {
                           ],
                           // image: DecorationImage(
                           //   image: NetworkImage(profileController
-                          //       .userDetailsData.value.profileImage!),
+                          //       .userProfileData.value.profileImage!),
                           //   fit: BoxFit.cover,
                           // ),
                         ),
@@ -105,7 +105,7 @@ class EditProfileScreenBody extends StatelessWidget {
                                     ""
                                 ? Image.network(
                                     profileController
-                                        .userDetailsData.value.profileImage!,
+                                        .userProfileData.value.profileImage!,
                                     fit: BoxFit.cover,
                                   )
                                 : Image.file(
@@ -365,6 +365,7 @@ class EditProfileScreenBody extends StatelessWidget {
                     CommonTextFormField(
                       hintText: "enter your zipcode".toTitleCase(),
                       filled: true,
+                      keyboardType: TextInputType.number,
                       fillColor: greyF4F4F4,
                       controller: profileController.zipCodeController,
                     ),
@@ -420,7 +421,7 @@ class EditProfileScreenBody extends StatelessWidget {
                                   profileController.dateController.text,
                               "City":
                                   profileController.cityController.text.trim(),
-                              "emailId": profileController
+                              "Email": profileController
                                   .emailAddressController.text
                                   .trim(),
                               "State":
@@ -441,7 +442,7 @@ class EditProfileScreenBody extends StatelessWidget {
                           (value) async {
                             if (value) {
                               print(profileController.createProfileImage.value);
-                              await profileController.getProfileDetails();
+                              // await profileController.getProfileDetails();
                               callFrom == "Create Profile"
                                   ? Get.toNamed('/zip-code')
                                   : null;

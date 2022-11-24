@@ -11,7 +11,7 @@ class LoginController extends GetxController {
   var countryCode = '91'.obs;
   var countryFlag = '🇮🇳'.obs;
   var isLoading = false.obs;
-  var userDetailsData = ProfileData().obs;
+  var userProfileData = ProfileData().obs;
 
   // var countryFlag = '🇺🇸'.obs;
   ApiCalls apiCall = ApiCalls();
@@ -41,15 +41,19 @@ class LoginController extends GetxController {
         msg: response['errorMessage'],
       );
       isLoading.value = false;
-      userSession.setUserToken(response['token'].toString());
       userSession.setIsProfileCreated(response['isProfileCreated']);
       userSession.setCountryCode(countryCode.value);
       userSession.setCountryFlag(countryFlag.value);
       userSession.setMobileNumber(mobileNumber.value.text);
-
-      print("Country Code ====>> ${countryCode.value}");
-      print("User Details====>> ${userDetailsData.value}");
-      print("User Session Number====>> ${userSession.mobileNumber}");
+      userSession.setEmail(response['emailId']);
+      userSession.setUserId(response['userId'].toString());
+      userSession.setFullName(response['fullName']);
+      userSession.setProfilePic(response['ProfilePic'] ?? "");
+      // ProfileData profile = ProfileData.fromMap(response);
+      // userProfileData.value = profile;
+      // print("Country Code ====>> ${countryCode.value}");
+      // print("User Details====>> ${userDetailsData.value}");
+      print("User Session Number Login Page====>> ${userSession}");
       // userSession.setMobileNumber(response['mobileNumber'].toString());
       // userSession.setUserId(response['userId'].toString());
       // userSession.setFullName(response['fullName'].toString());
@@ -57,8 +61,9 @@ class LoginController extends GetxController {
       // print("Full Name ${userSession.fullName}");
       // print("UserID ${userSession.userId}");
       // print("MobileNumber ${userSession.mobileNumber}");
-      print("TOKEN ===>>> ${userSession.token}");
-      print("IsProfileCreated ===>>> ${userSession.isProfileCreated}");
+      // print("TOKEN ===>>> ${userSession.token}");
+      print(
+          "IsProfileCreated Login Page ===>>> ${userSession.isProfileCreated}");
       return true;
     }
     ShowToast.show(

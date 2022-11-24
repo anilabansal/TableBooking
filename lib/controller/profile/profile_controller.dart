@@ -14,22 +14,19 @@ class ProfileController extends GetxController {
   /// Initialization
   @override
   void onInit() async {
-    // mobileNumberController.text = userSession.mobileNumber.substring(3);
-
     // TODO: implement onInit
-    await getProfileDetails();
-
-    if (userDetailsData.value.firstName != null) {
-      firstNameController.text = userDetailsData.value.firstName!;
-      lastNameController.text = userDetailsData.value.lastName!;
-      dateController.text = userDetailsData.value.dateofBirth!.substring(0, 10);
-      streetAddressController.text = userDetailsData.value.address!;
-      emailAddressController.text = userDetailsData.value.email!;
+    print("Profile COntroller Initialization");
+    if (userProfileData.value.firstName != null) {
+      firstNameController.text = userProfileData.value.firstName!;
+      lastNameController.text = userProfileData.value.lastName!;
+      dateController.text = userProfileData.value.dateofBirth!.substring(0, 10);
+      streetAddressController.text = userProfileData.value.address!;
+      emailAddressController.text = userProfileData.value.email!;
       flagController.text = userSession.countryFlag;
       countryCodeController.text = userSession.countryCode;
-      cityController.text = userDetailsData.value.city!;
-      stateController.text = userDetailsData.value.state!;
-      zipCodeController.text = userDetailsData.value.zipCode!;
+      cityController.text = userProfileData.value.city!;
+      stateController.text = userProfileData.value.state!;
+      zipCodeController.text = userProfileData.value.zipCode!;
       mobileNumberController.text = userSession.mobileNumber;
     } else {
       flagController.text = userSession.countryFlag;
@@ -64,7 +61,7 @@ class ProfileController extends GetxController {
   // var countryCode = '91'.obs;
   // var countryFlag = '🇺🇸'.obs;
   var countryFlag = ''.obs;
-  var userDetailsData = ProfileData().obs;
+  var userProfileData = ProfileData().obs;
   var createProfileImage = File('').obs;
 
   /// Update Image File
@@ -88,11 +85,18 @@ class ProfileController extends GetxController {
 
       if (response['response'] == 1) {
         print(response['data']);
+
+        /// Set ISCREATE_PROFILE value to true
         userSession.setIsProfileCreated(response['data']['isProfileCreated']);
+        userSession.setEmail(response['data']['emailId'] ?? "No Email Found");
+        userSession.setUserId(response['data']['userId'].toString());
+        userSession.setFullName(
+            "${response['data']['firstName']} ${response['data']['lastName']}");
+        userSession.setProfilePic(response['data']['profilePic'] ?? "");
 
         // ProfileData profile = ProfileData.fromMap(response['data']);
-        // userDetailsData.value = profile;
-        // print("User Details====>> ${userDetailsData.value}");
+        // userProfileData.value = profile;
+        // print("User Details====>> ${userProfileData.value}");
         // userSession.setMobileNumber(response['mobileNumber'].toString());
         // userSession.setUserId(response['userId'].toString());
         // userSession.setFullName(response['fullName'].toString());
@@ -102,8 +106,8 @@ class ProfileController extends GetxController {
         // print("Full Name ${userSession.fullName}");
         // print("UserID ${userSession.userId}");
         // print("MobileNumber ${userSession.mobileNumber}");
-        ProfileController().getProfileDetails();
-        print("IsProfileCreated ===>>> ${userSession.isProfileCreated}");
+        // ProfileController().getProfileDetails();
+        print("IsProfileCreated Profile Controller ===>>> ${userSession}");
         return true;
       } else {
         ShowToast.show(
@@ -118,7 +122,7 @@ class ProfileController extends GetxController {
     return false;
   }
 
-  /// Get Profle Details
+  /// Get Profile Details
   Future<dynamic> getProfileDetails({dynamic body}) async {
     try {
       final response = await apiCall.callPostApi(
@@ -129,10 +133,19 @@ class ProfileController extends GetxController {
 
       if (response['response'] == 1) {
         ProfileData profile = ProfileData.fromMap(response['data']);
-        userDetailsData.value = profile;
-        print("User Details from GET Details====>> ${userDetailsData.value}");
+        userProfileData.value = profile;
+        userSession.setEmail(response['data']['emailId']);
+        userSession.setUserId(response['data']['userId'].toString());
+        userSession.setFullName(
+            "${response['data']['firstName']} ${response['data']['lastName']}");
+        userSession.setProfilePic(response['data']['profilePic'] ?? "");
+        onInit();
+        // print(
+        //     "User Details from Profile Controller  ====>> ${userProfileData.value}");
 
-        print("User Details Name====>> ${userDetailsData.value.firstName}");
+        print(
+            "User Details Name from Profile Controller====>> ${userProfileData.value.firstName}");
+
         return true;
       } else {
         ShowToast.show(

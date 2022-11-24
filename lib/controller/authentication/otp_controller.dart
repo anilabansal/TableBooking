@@ -7,14 +7,18 @@ import 'package:get/get.dart';
 import 'login_controller.dart';
 
 class OtpController extends GetxController {
+  /// Variables
   var pinOutPut = ''.obs;
-  ApiCalls apiCall = ApiCalls();
   var isLoading = false.obs;
-  var mobileNumberData = Get.arguments;
-  LoginController loginController = Get.find();
+  // var mobileNumberData = Get.arguments;
 
+  /// Controllers
+
+  ApiCalls apiCall = ApiCalls();
+  LoginController loginController = Get.find();
   UserSessionController userSession = Get.find();
 
+  /// SUBMIT OTP ON REGISTER & LOGIN SCREEN
   Future<bool> enterOTP({Map<String, dynamic>? data}) async {
     final response = await apiCall.callPostApi(
       data!,
@@ -24,14 +28,16 @@ class OtpController extends GetxController {
     print(data);
     print('OTP Response ======> $response');
     if (response['response'] == 1) {
-      print("ARGUMENTS OTP $mobileNumberData");
+      userSession.setUserToken(response['token'].toString());
 
-      //   ShowToast.show(
-      //     msg: response['errorMessage'] ?? 'Please try again!',
-      //   );
+      // print("ARGUMENTS OTP $mobileNumberData");
+
+      ShowToast.show(
+        msg: response['errorMessage'] ?? 'Please try again!',
+      );
       // userDetails.value = UserProfile.fromMap(response);
       userSession.setIsLogin(true);
-      print(userSession.isLogin);
+      print("Is USer Logge in on SUmit OTP ====>> ${userSession.isLogin}");
 
       // print("User Detail Model ====>>>>  ${userDetails.value}");
       //

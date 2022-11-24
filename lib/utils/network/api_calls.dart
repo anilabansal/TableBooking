@@ -83,11 +83,16 @@ class ApiCalls extends GetConnect {
     var request =
         http.MultipartRequest('POST', Uri.parse('$baseURL/$endPoint'));
     request.fields.addAll(body);
-    request.files
-        .add(await http.MultipartFile.fromPath('ProfilePic', imageFile.path));
+    if (imageFile.path != '') {
+      request.files
+          .add(await http.MultipartFile.fromPath('ProfilePic', imageFile.path));
+    }
+
     request.headers.addAll(headers);
 
     var response = await request.send();
+    print('Request Body ------------------>\n ${body.toString()}');
+
     print(
         'API response ------------------------------->\n ${response.statusCode}');
 

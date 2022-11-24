@@ -10,7 +10,7 @@ class Datum {
   dynamic officialWebsite;
   dynamic contactNumber;
   dynamic email;
-  int? distance;
+  dynamic distance;
   dynamic rating;
   int? ratingCount;
   dynamic latitude;
@@ -50,7 +50,7 @@ class Datum {
         officialWebsite: data['officialWebsite'] as dynamic,
         contactNumber: data['contactNumber'] as dynamic,
         email: data['email'] as dynamic,
-        distance: data['distance'] as int?,
+        distance: data['distance'] as dynamic,
         rating: data['rating'] as dynamic,
         ratingCount: data['ratingCount'] as int?,
         latitude: data['latitude'] as dynamic,
@@ -98,7 +98,7 @@ class Datum {
     dynamic officialWebsite,
     dynamic contactNumber,
     dynamic email,
-    int? distance,
+    dynamic distance,
     dynamic rating,
     int? ratingCount,
     dynamic latitude,

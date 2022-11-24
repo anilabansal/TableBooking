@@ -1,28 +1,45 @@
 import 'package:booking_table/controller/home/home_controller.dart';
+import 'package:booking_table/controller/restaurant_details/restaurant_details_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FavouriteBody extends StatelessWidget {
-  const FavouriteBody({
+  FavouriteBody({
     Key? key,
   }) : super(key: key);
 
+  RestaurantDetailsController restaurantDetails = Get.find();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (controller) {
       return Padding(
         padding: const EdgeInsets.all(15.0),
         child: ListView.builder(
-            itemCount: 35,
+            itemCount: controller.homeRestaurantList.length,
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 15.0),
                 // Button
                 child: InkWell(
                   onTap: () {
-                    Get.toNamed('/restaurant-details');
+                    restaurantDetails.restaurantDetails(body: {
+                      "restaurantId": controller
+                          .homeRestaurantList.value[index].restaurantId
+                    }).then((value) {
+                      // print(
+                      //     "Restaurant Detais Data ====>  ${detailsRestaurantList.value}");
+                      if (value) {
+                        // controller.isLoading.value = false;
+                        Get.toNamed('/restaurant-details', arguments: [
+                          {
+                            "restaurantId": controller
+                                .homeRestaurantList.value[index].restaurantId
+                          },
+                        ]);
+                      }
+                    });
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
@@ -58,7 +75,10 @@ class FavouriteBody extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
                                     image: DecorationImage(
-                                        image: AssetImage(restaurantImage),
+                                        image: NetworkImage(controller
+                                            .homeRestaurantList
+                                            .value[index]
+                                            .restaurantPic),
                                         fit: BoxFit.cover)),
                               ),
                               Positioned(
@@ -77,7 +97,9 @@ class FavouriteBody extends StatelessWidget {
                                         onPressed: () {
                                           controller.updateRestaurantLike();
                                         },
-                                        icon: controller.likedRestaurant.value
+                                        icon: controller
+                                                .homeRestaurantList[index]
+                                                .isFavourite
                                             ? const Icon(
                                                 Icons.favorite,
                                                 color: redE2211C,
@@ -105,7 +127,8 @@ class FavouriteBody extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CommonText(
-                                text: "Rose’s Dine in & Blues",
+                                text: controller.homeRestaurantList.value[index]
+                                    .restaurantName,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 20,
                                 color: black000000,
@@ -114,7 +137,8 @@ class FavouriteBody extends StatelessWidget {
                                 height: 5,
                               ),
                               CommonText(
-                                text: "2 miles away",
+                                text:
+                                    "${controller.homeRestaurantList.value[index].distance} miles away",
                                 fontWeight: FontWeight.normal,
                                 fontSize: 15,
                                 color: grey868686,

@@ -12,7 +12,7 @@ class AboutTabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
-        return controller.aboutUsRestaurantList.value != null
+        return controller.aboutUsRestaurantList.value.isNotEmpty
             ? SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,

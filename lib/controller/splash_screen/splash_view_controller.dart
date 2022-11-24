@@ -27,7 +27,6 @@ class SplashViewController extends GetxController {
     await Future.delayed(const Duration(seconds: 3));
     if (controller.isLogin) {
       if (controller.isProfileCreated) {
-        await profileController.getProfileDetails();
         await Get.offAllNamed('/home');
       } else {
         Get.offAllNamed('/create-profile');

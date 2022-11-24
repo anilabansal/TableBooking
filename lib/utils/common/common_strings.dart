@@ -17,6 +17,7 @@ const ratings = 'api/Home/RatingandReviews';
 const restaurantDetail = 'api/Home/RestaurantDetail';
 const getProfileDetail = 'api/Basic/EditProfile';
 const updateProfileDetail = 'api/Basic/UpdateProfile';
+const favRestaurantDetails = 'api/Home/AddFavourites';
 
 ///    Common Fonts
 // Fonts
@@ -127,3 +128,4 @@ const userIdString = 'userIdString';
 const isProfileCreatedString = 'isProfileCreated';
 const fullNameString = 'fullName';
 const emailString = 'email';
+const profilePicString = 'profilePicString';

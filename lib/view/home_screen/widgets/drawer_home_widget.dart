@@ -50,13 +50,10 @@ class DrawerScreen extends StatelessWidget {
                                 Icons.person,
                                 size: 40,
                               )
-                            : profileController
-                                        .userDetailsData.value.profileImage !=
-                                    null
+                            : userSessionController.profilePic != ""
                                 ? ClipOval(
                                     child: Image.network(
-                                      profileController
-                                          .userDetailsData.value.profileImage!,
+                                      userSessionController.profilePic,
                                       height: 49,
                                       width: 49,
                                       fit: BoxFit.fill,
@@ -76,7 +73,7 @@ class DrawerScreen extends StatelessWidget {
                             CommonText(
                               text: userSessionController.isLogin == false
                                   ? "Guest User"
-                                  : "${profileController.userDetailsData.value.firstName} ${profileController.userDetailsData.value.lastName}",
+                                  : userSessionController.fullName,
                               fontFamily: proximaNovaFont,
                               fontWeight: FontWeight.w600,
                               color: black000000,
@@ -89,8 +86,7 @@ class DrawerScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       CommonText(
-                                        text: profileController
-                                            .userDetailsData.value.email,
+                                        text: userSessionController.email,
                                         fontFamily: proximaNovaFont,
                                         fontWeight: FontWeight.w400,
                                         color: black000000,
@@ -103,8 +99,10 @@ class DrawerScreen extends StatelessWidget {
                                         onTap: () async {
                                           await profileController
                                               .getProfileDetails()
-                                              .then((value) {
+                                              .then((value) async {
                                             if (value) {
+                                              await profileController
+                                                  .getProfileDetails();
                                               Get.toNamed('/edit-profile');
                                             }
                                           });

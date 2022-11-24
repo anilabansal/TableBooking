@@ -17,13 +17,14 @@ class HomeBody extends StatelessWidget {
     required this.homeController,
   }) : super(key: key);
 
-  final HomeController homeController;
+  HomeController homeController;
   UserSessionController userSessionController = Get.find();
-  ProfileController profileController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => SafeArea(
+    return GetBuilder<ProfileController>(
+      builder: (profileController) {
+        return SafeArea(
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(0.0),
@@ -46,16 +47,20 @@ class HomeBody extends StatelessWidget {
                                       Icons.person,
                                       size: 50,
                                     )
-                                  : profileController.userDetailsData.value
+                                  : profileController.userProfileData.value
                                               .profileImage !=
                                           null
-                                      ? ClipOval(
-                                          child: Image.network(
-                                            profileController.userDetailsData
-                                                .value.profileImage!,
-                                            height: 49,
-                                            width: 49,
-                                            fit: BoxFit.fill,
+                                      ? CommonSizedBox(
+                                          height: 49,
+                                          width: 49,
+                                          child: ClipOval(
+                                            child: Image.network(
+                                              profileController.userProfileData
+                                                  .value.profileImage!,
+                                              height: 49,
+                                              width: 49,
+                                              fit: BoxFit.fill,
+                                            ),
                                           ),
                                         )
                                       : const Icon(
@@ -90,7 +95,7 @@ class HomeBody extends StatelessWidget {
                           children: [
                             CommonText(
                               text: userSessionController.isLogin == true
-                                  ? "${profileController.userDetailsData.value.firstName} ${profileController.userDetailsData.value.lastName}"
+                                  ? userSessionController.fullName
                                   : "Guest User",
                               color: black000000,
                               fontSize: 16,
@@ -229,6 +234,8 @@ class HomeBody extends StatelessWidget {
               ),
             ),
           ),
-        ));
+        );
+      },
+    );
   }
 }

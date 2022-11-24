@@ -28,11 +28,11 @@ class RegisterController extends GetxController {
     print(data);
     print('Register Response ======> $response');
     if (response['response'] == 1) {
-      userSession.setUserToken(response['token'].toString());
       userSession.setIsProfileCreated(response['isProfileCreated']);
       userSession.setCountryCode(countryCode.value);
       userSession.setCountryFlag(countryFlag.value);
-      userSession.setMobileNumber(response['mobileNumber'].toString());
+      userSession.setMobileNumber(mobileNumber.value.text);
+
       // userSession.setMobileNumber(response['mobileNumber'].toString());
       // userSession.setUserId(response['userId'].toString());
       // userSession.setFullName(response['fullName'].toString());
@@ -41,8 +41,9 @@ class RegisterController extends GetxController {
       // print("Full Name ${userSession.fullName}");
       // print("UserID ${userSession.userId}");
       // print("MobileNumber ${userSession.mobileNumber}");
-      print("TOKEN ===>>> ${userSession.token}");
-      print("IsProfileCreated ===>>> ${userSession.isProfileCreated}");
+      // print("TOKEN ===>>> ${userSession.token}");
+      print(
+          "IsProfileCreated REGISTER PAGE ===>>> ${userSession.isProfileCreated}");
       return true;
     } else {
       ShowToast.show(
