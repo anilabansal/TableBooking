@@ -50,6 +50,7 @@ class RestaurantHomeScreen extends StatelessWidget {
                                         .value[index]
                                         .restaurantId
                                   },
+                                  {"index": index},
                                 ]);
                               }
                             });
@@ -91,13 +92,13 @@ class RestaurantHomeScreen extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                             image: DecorationImage(
-                                                image: AssetImage(
-                                                  restaurantImage,
-                                                ),
-                                                //     homeController
-                                                //     .homeRestaurantList[index]
-                                                //     .restaurantPic
-                                                // ),
+                                                image: NetworkImage(
+                                                    // restaurantImage,
+                                                    // ),
+                                                    homeController
+                                                        .homeRestaurantList[
+                                                            index]
+                                                        .restaurantPic),
                                                 fit: BoxFit.cover)),
                                       ),
                                       Positioned(
@@ -117,7 +118,13 @@ class RestaurantHomeScreen extends StatelessWidget {
                                               child: IconButton(
                                                 onPressed: () {
                                                   homeController
-                                                      .updateRestaurantLike();
+                                                      .updateRestaurantLikeHome(
+                                                          index: index,
+                                                          restaurantId:
+                                                              homeController
+                                                                  .homeRestaurantList[
+                                                                      index]
+                                                                  .restaurantId);
                                                 },
                                                 icon: homeController
                                                         .homeRestaurantList[

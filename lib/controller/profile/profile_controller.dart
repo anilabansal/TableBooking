@@ -15,7 +15,7 @@ class ProfileController extends GetxController {
   @override
   void onInit() async {
     // TODO: implement onInit
-    print("Profile COntroller Initialization");
+    print("Profile Controller Initialization");
     if (userProfileData.value.firstName != null) {
       firstNameController.text = userProfileData.value.firstName!;
       lastNameController.text = userProfileData.value.lastName!;
@@ -65,11 +65,12 @@ class ProfileController extends GetxController {
   var createProfileImage = File('').obs;
 
   /// Update Image File
-  updateImageFile(File value) {
-    createProfileImage.value = value;
-  }
+  // updateImageFile(File value) async {
+  //   createProfileImage.value = value;
+  //   update();
+  // }
 
-  /// Create Profile
+  /// Create Profile & Update Profile
   Future<dynamic> createProfile(
       {dynamic body,
       String? endPoint,
@@ -88,11 +89,12 @@ class ProfileController extends GetxController {
 
         /// Set ISCREATE_PROFILE value to true
         userSession.setIsProfileCreated(response['data']['isProfileCreated']);
-        userSession.setEmail(response['data']['emailId'] ?? "No Email Found");
+        userSession.setEmail(response['data']['email']);
         userSession.setUserId(response['data']['userId'].toString());
         userSession.setFullName(
             "${response['data']['firstName']} ${response['data']['lastName']}");
-        userSession.setProfilePic(response['data']['profilePic'] ?? "");
+        userSession.setProfilePic(
+            "http://apitablebooking.harishparas.com/${response['data']['profilePic']}");
 
         // ProfileData profile = ProfileData.fromMap(response['data']);
         // userProfileData.value = profile;
@@ -103,17 +105,22 @@ class ProfileController extends GetxController {
         // userSession.setUserId(response['userId'].toString());
         // userSession.setEmail(response['email'].toString());
 
-        // print("Full Name ${userSession.fullName}");
-        // print("UserID ${userSession.userId}");
-        // print("MobileNumber ${userSession.mobileNumber}");
+        print("Email===>> ${response['data']['email']}");
+        print("UserID ===>> ${response['data']['userId']}");
+        print("ProfilePic ===>> ${response['data']['profilePic']}");
+        print(
+            "Full Name ===>> ${response['data']['firstName']} ${response['data']['lastName']}");
         // ProfileController().getProfileDetails();
-        print("IsProfileCreated Profile Controller ===>>> ${userSession}");
+        print(
+            "IsProfileCreated ===>>> ${response['data']['isProfileCreated']}");
+        update();
         return true;
       } else {
         ShowToast.show(
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
         );
+        update();
         return false;
       }
     } catch (e) {
@@ -134,17 +141,8 @@ class ProfileController extends GetxController {
       if (response['response'] == 1) {
         ProfileData profile = ProfileData.fromMap(response['data']);
         userProfileData.value = profile;
-        userSession.setEmail(response['data']['emailId']);
-        userSession.setUserId(response['data']['userId'].toString());
-        userSession.setFullName(
-            "${response['data']['firstName']} ${response['data']['lastName']}");
-        userSession.setProfilePic(response['data']['profilePic'] ?? "");
-        onInit();
-        // print(
-        //     "User Details from Profile Controller  ====>> ${userProfileData.value}");
 
-        print(
-            "User Details Name from Profile Controller====>> ${userProfileData.value.firstName}");
+        onInit();
 
         return true;
       } else {

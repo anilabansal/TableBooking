@@ -13,7 +13,7 @@ class ReviewsTabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
-        return controller.totalReviews.value != "0"
+        return controller.totalReviews.value != 0
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,

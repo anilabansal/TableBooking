@@ -53,6 +53,7 @@ class UserSessionController extends GetxController {
   void setProfilePic(String value) {
     _profilePic.value = value;
     setPref(profilePicString, value);
+    update();
   }
 
   void setCountryFlag(String value) {
@@ -83,11 +84,13 @@ class UserSessionController extends GetxController {
   void setFullName(String value) {
     _fullName.value = value;
     setPref(fullNameString, value);
+    update();
   }
 
   void setEmail(String value) {
     _email.value = value;
     setPref(emailString, value);
+    update();
   }
 
   void setPref(String key, dynamic value) async {

@@ -1,14 +1,19 @@
 import 'package:booking_table/controller/restaurant_details/restaurant_details_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
+import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RestaurantDetailTopScreen extends StatelessWidget {
-  const RestaurantDetailTopScreen({Key? key}) : super(key: key);
-
+  RestaurantDetailTopScreen({Key? key}) : super(key: key);
+  var data = Get.arguments;
+  // HomeController homeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(builder: (controller) {
@@ -23,13 +28,11 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 266,
-                        child: Image.asset(
-                          restaurantImage,
+                        child: Image.network(
+                          // restaurantImage,
 
-                          // homeController
-                          //     .homeRestaurantList[controller.index.value]
-                          //     .restaurantPic
-                          //     .toString(),
+                          controller.detailsRestaurantList.value.restaurantPic
+                              .toString(),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -191,7 +194,7 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                 CommonText(
                                   /// Currently Null Please Uncomment if not  Null
                                   text:
-                                      "${controller.detailsRestaurantList.value.ratingCount == null ? 0 : controller.detailsRestaurantList.value.ratingCount.toString()} Ratings",
+                                      "${controller.detailsRestaurantList.value.ratingCount} Ratings",
                                   // text:
                                   //      homeController.homeRestaurantList[controller.index.value].rating.toString(),
                                   fontSize: 15,
@@ -200,30 +203,87 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 10),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: red0FE2211C),
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    Icons.call_rounded,
-                                    color: redE2211C,
-                                    size: 15,
+                            Row(
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    // await FlutterPhoneDirectCaller.callNumber(controller.detailsRestaurantList.value.contactNumber)
+                                    controller.aboutUsRestaurantList[0]
+                                                .officialWebsite !=
+                                            null
+                                        ? await launchUrl(
+                                            Uri(
+                                                scheme: 'https',
+                                                host: controller
+                                                    .aboutUsRestaurantList[0]
+                                                    .officialWebsite),
+                                            mode:
+                                                LaunchMode.externalApplication,
+                                          )
+                                        : ShowToast.show(
+                                            isError: true,
+                                            msg: "No Website Found",
+                                          );
+                                  },
+                                  child: Container(
+                                    width: 35,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      // color: Colors.black,
+                                      color: black0F0D0000,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: SvgPicture.asset(
+                                          "assets/images/home/web.svg"),
+                                    ),
                                   ),
-                                  const SizedBox(
-                                    width: 8,
+                                ),
+                                CommonSizedBox(width: 5),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 14, vertical: 10),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: red0FE2211C),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      // await FlutterPhoneDirectCaller.callNumber(controller.detailsRestaurantList.value.contactNumber)
+                                      controller.aboutUsRestaurantList[0]
+                                                  .contactNumber !=
+                                              null
+                                          ? await launchUrl(Uri(
+                                              scheme: "tel",
+                                              path: controller
+                                                  .aboutUsRestaurantList[0]
+                                                  .contactNumber))
+                                          : ShowToast.show(
+                                              isError: true,
+                                              msg: "No Number Found",
+                                            );
+                                    },
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.call_rounded,
+                                          color: redE2211C,
+                                          size: 15,
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        CommonText(
+                                          text: "Call",
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                          color: redE2211C,
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                  CommonText(
-                                    text: "Call",
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                    color: redE2211C,
-                                  )
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -259,9 +319,11 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(0.0),
                   child: IconButton(
                     onPressed: () {
-                      controller.updateRestaurantLike();
+                      controller.updateRestaurantLikeRestaurantDetails(
+                          restaurantId: data[0]['restaurantId']);
                     },
-                    icon: controller.detailsRestaurantList.value.isFavourite!
+                    icon: controller.detailsRestaurantList.value.isFavourite ==
+                            true
                         ? const Icon(
                             Icons.favorite,
                             color: redE2211C,

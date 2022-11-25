@@ -42,18 +42,23 @@ class ApiCalls extends GetConnect {
         body,
         headers: withToken,
       );
-      print(
-          'API response ------------------------------->\n ${response.statusCode}');
+      if (response.statusCode == 200) {
+        print(
+            'API response ------------------------------->\n ${response.statusCode}');
 
-      print('API response ------------------------------->\n ${response.body}');
+        print(
+            'API response ------------------------------->\n ${response.body}');
 
-      print(
-          'API final body ------------------------------->\n ${response.body.toString()}');
+        print(
+            'API final body ------------------------------->\n ${response.body.toString()}');
 
-      print(
-          'API request Header ------------------------------->\n ${response.headers}');
-      print('Run Successfully!!!!!');
-      return response.body;
+        print(
+            'API request Header ------------------------------->\n ${response.headers}');
+        print('Run Successfully!!!!!');
+        return response.body;
+      } else {
+        print('<===== Error <====> ${response.hasError} ====>');
+      }
     } catch (e) {
       print("========> Responses Error ${e.toString()}");
     }

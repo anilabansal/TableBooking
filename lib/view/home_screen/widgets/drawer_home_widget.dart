@@ -10,13 +10,16 @@ import 'package:get/get.dart';
 import '../../../controller/home/home_controller.dart';
 
 class DrawerScreen extends StatelessWidget {
-  var controller;
   UserSessionController userSessionController = Get.find();
+  HomeController homeController = Get.find();
+
   // ProfileController profileController = Get.find();
-  DrawerScreen({Key? key, required this.controller}) : super(key: key);
+  DrawerScreen({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    HomeController homeController = Get.find();
     return GetBuilder<ProfileController>(
       builder: (profileController) {
         return Drawer(
@@ -30,7 +33,7 @@ class DrawerScreen extends StatelessWidget {
                 right: -6,
                 child: IconButton(
                   onPressed: () {
-                    homeController.drawerKey.currentState!.closeDrawer();
+                    homeController.drawerKey.currentState?.closeDrawer();
                   },
                   icon: const Icon(
                     Icons.close,
@@ -41,174 +44,184 @@ class DrawerScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      children: [
-                        userSessionController.isLogin == false
-                            ? const Icon(
-                                Icons.person,
-                                size: 40,
-                              )
-                            : userSessionController.profilePic != ""
-                                ? ClipOval(
-                                    child: Image.network(
-                                      userSessionController.profilePic,
-                                      height: 49,
-                                      width: 49,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  )
-                                : const Icon(
+                child: GetBuilder<UserSessionController>(
+                  builder: (_userSessionController) {
+                    return Column(
+                      children: <Widget>[
+                        Row(
+                          children: [
+                            _userSessionController.isLogin == false
+                                ? const Icon(
                                     Icons.person,
                                     size: 40,
-                                  ),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CommonText(
-                              text: userSessionController.isLogin == false
-                                  ? "Guest User"
-                                  : userSessionController.fullName,
-                              fontFamily: proximaNovaFont,
-                              fontWeight: FontWeight.w600,
-                              color: black000000,
-                              fontSize: 16,
-                            ),
-                            userSessionController.isLogin == false
-                                ? Container()
-                                : Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      CommonText(
-                                        text: userSessionController.email,
-                                        fontFamily: proximaNovaFont,
-                                        fontWeight: FontWeight.w400,
-                                        color: black000000,
-                                        fontSize: 14,
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      InkWell(
-                                        onTap: () async {
-                                          await profileController
-                                              .getProfileDetails()
-                                              .then((value) async {
-                                            if (value) {
-                                              await profileController
-                                                  .getProfileDetails();
-                                              Get.toNamed('/edit-profile');
-                                            }
-                                          });
-                                        },
-                                        child: CommonText(
-                                          text: "Edit Profile",
-                                          fontFamily: proximaNovaFont,
-                                          fontWeight: FontWeight.w400,
-                                          color: redE2211C,
-                                          fontSize: 12,
+                                  )
+                                : _userSessionController.profilePic != null
+                                    ? CommonSizedBox(
+                                        height: 49,
+                                        width: 49,
+                                        child: ClipOval(
+                                          child: Image.network(
+                                            _userSessionController.profilePic,
+                                            height: 49,
+                                            width: 49,
+                                            fit: BoxFit.fill,
+                                          ),
                                         ),
+                                      )
+                                    : const Icon(
+                                        Icons.person,
+                                        size: 40,
                                       ),
-                                    ],
-                                  ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CommonText(
+                                  text: _userSessionController.isLogin == false
+                                      ? "Guest User"
+                                      : _userSessionController.fullName,
+                                  fontFamily: proximaNovaFont,
+                                  fontWeight: FontWeight.w600,
+                                  color: black000000,
+                                  fontSize: 16,
+                                ),
+                                _userSessionController.isLogin == false
+                                    ? Container()
+                                    : Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CommonText(
+                                            text: _userSessionController.email,
+                                            fontFamily: proximaNovaFont,
+                                            fontWeight: FontWeight.w400,
+                                            color: black000000,
+                                            fontSize: 14,
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          InkWell(
+                                            onTap: () async {
+                                              await profileController
+                                                  .getProfileDetails()
+                                                  .then((value) async {
+                                                if (value) {
+                                                  await profileController
+                                                      .getProfileDetails();
+                                                  Get.toNamed('/edit-profile');
+                                                }
+                                              });
+                                            },
+                                            child: CommonText(
+                                              text: "Edit Profile",
+                                              fontFamily: proximaNovaFont,
+                                              fontWeight: FontWeight.w400,
+                                              color: redE2211C,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                              ],
+                            )
                           ],
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 28,
-                    ),
-                    Image.asset(
-                      lineImage,
-                    ),
-                    const SizedBox(
-                      height: 13,
-                    ),
-                    iconContainer(
-                        const Icon(
-                          Icons.home,
-                          color: redE2211C,
                         ),
-                        "Home", () {
-                      Get.toNamed('/home');
-                      print('Home Button Clicked');
-                      homeController.drawerKey.currentState!.closeDrawer();
-                    }),
-                    iconContainer(
-                        const Icon(
-                          Icons.favorite,
-                          color: redE2211C,
+                        const SizedBox(
+                          height: 28,
                         ),
-                        "Favorites", () {
-                      userSessionController.isLogin == false
-                          ? getXBuildDefaultDialog()
-                          : Get.toNamed('/favourite');
-                    }),
-                    iconContainer(
-                        const Icon(
-                          Icons.book,
-                          color: redE2211C,
+                        Image.asset(
+                          lineImage,
                         ),
-                        "Reservations", () {
-                      userSessionController.isLogin == false
-                          ? getXBuildDefaultDialog()
-                          : Get.toNamed('/reservation');
-                    }),
-                    iconContainer(
-                        const Icon(
-                          Icons.wallet,
-                          color: redE2211C,
+                        const SizedBox(
+                          height: 13,
                         ),
-                        "Payment Methods", () {
-                      userSessionController.isLogin == false
-                          ? getXBuildDefaultDialog()
-                          : Get.toNamed('/payment-method');
-                    }),
-                    iconContainer(
-                        const Icon(
-                          Icons.notifications,
-                          color: redE2211C,
+                        iconContainer(
+                            const Icon(
+                              Icons.home,
+                              color: redE2211C,
+                            ),
+                            "Home", () {
+                          Get.toNamed('/home');
+                          print('Home Button Clicked');
+                          homeController.drawerKey.currentState?.closeDrawer();
+                        }),
+                        iconContainer(
+                            const Icon(
+                              Icons.favorite,
+                              color: redE2211C,
+                            ),
+                            "Favorites", () async {
+                          await homeController.favRestaurantDetailList();
+                          userSessionController.isLogin == false
+                              ? getXBuildDefaultDialog()
+                              : Get.toNamed('/favourite');
+                        }),
+                        iconContainer(
+                            const Icon(
+                              Icons.book,
+                              color: redE2211C,
+                            ),
+                            "Reservations", () {
+                          userSessionController.isLogin == false
+                              ? getXBuildDefaultDialog()
+                              : Get.toNamed('/reservation');
+                        }),
+                        iconContainer(
+                            const Icon(
+                              Icons.wallet,
+                              color: redE2211C,
+                            ),
+                            "Payment Methods", () {
+                          userSessionController.isLogin == false
+                              ? getXBuildDefaultDialog()
+                              : Get.toNamed('/payment-method');
+                        }),
+                        iconContainer(
+                            const Icon(
+                              Icons.notifications,
+                              color: redE2211C,
+                            ),
+                            "Notifications", () {
+                          userSessionController.isLogin == false
+                              ? getXBuildDefaultDialog()
+                              : Get.toNamed('/notifications');
+                        }),
+                        const SizedBox(
+                          height: 10,
                         ),
-                        "Notifications", () {
-                      userSessionController.isLogin == false
-                          ? getXBuildDefaultDialog()
-                          : Get.toNamed('/notifications');
-                    }),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Image.asset(lineImage),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    textAndIcon("Terms & Conditions", () {
-                      Get.toNamed('/terms-and-conditions');
-                    }),
-                    textAndIcon("Legal & About", () {
-                      Get.toNamed('/privacy-policy');
-                    }),
-                    textAndIcon("Customer Support", () {
-                      userSessionController.isLogin == false
-                          ? getXBuildDefaultDialog()
-                          : Get.toNamed('/support');
-                    }),
-                    // userSessionController.isLogin == true
-                    //     ?
-                    userSessionController.isLogin == false
-                        ? Container()
-                        : textAndIcon("Logout", () async {
-                            // userSessionController.logOut();
+                        Image.asset(lineImage),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        textAndIcon("Terms & Conditions", () {
+                          Get.toNamed('/terms-and-conditions');
+                        }),
+                        textAndIcon("Legal & About", () {
+                          Get.toNamed('/privacy-policy');
+                        }),
+                        textAndIcon("Customer Support", () {
+                          userSessionController.isLogin == false
+                              ? getXBuildDefaultDialog()
+                              : Get.toNamed('/support');
+                        }),
+                        // userSessionController.isLogin == true
+                        //     ?
+                        userSessionController.isLogin == false
+                            ? Container()
+                            : textAndIcon("Logout", () async {
+                                // userSessionController.logOut();
 
-                            await getXBuildDefaultDialog(callFrom: "Logout");
-                          })
-                    // : Container(),
-                  ],
+                                await getXBuildDefaultDialog(
+                                    callFrom: "Logout");
+                              })
+                        // : Container(),
+                      ],
+                    );
+                  },
                 ),
               ),
             ],

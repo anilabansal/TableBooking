@@ -48,12 +48,12 @@ class LoginController extends GetxController {
       userSession.setEmail(response['emailId']);
       userSession.setUserId(response['userId'].toString());
       userSession.setFullName(response['fullName']);
-      userSession.setProfilePic(response['ProfilePic'] ?? "");
+      userSession.setProfilePic(response['profilePic'] ?? "");
       // ProfileData profile = ProfileData.fromMap(response);
       // userProfileData.value = profile;
       // print("Country Code ====>> ${countryCode.value}");
       // print("User Details====>> ${userDetailsData.value}");
-      print("User Session Number Login Page====>> ${userSession}");
+      print("User Session Number Login Page====>> $userSession");
       // userSession.setMobileNumber(response['mobileNumber'].toString());
       // userSession.setUserId(response['userId'].toString());
       // userSession.setFullName(response['fullName'].toString());

@@ -9,7 +9,7 @@ import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/network/api_calls.dart';
 import 'package:get/get.dart';
 
-import '../../model/restaurant_about_us/restaurant_about_us.dart';
+import '../../model/restaurant_about_us/restaurant_about_us_model.dart';
 
 class RestaurantDetailsController extends GetxController {
   HomeController homeController = Get.find();
@@ -22,52 +22,25 @@ class RestaurantDetailsController extends GetxController {
   var rateReviewsRestaurantList = [].obs;
   var totalReviews = "".obs;
   var isLoading = true.obs;
+  var selectedIndex = 0.obs;
 
   var index = 0.obs;
 
   /// Favourite
-  var likedRestaurant = false.obs;
-  void updateRestaurantLike() {
-    likedRestaurant.value = !likedRestaurant.value;
+  void updateRestaurantLikeRestaurantDetails({index, restaurantId}) async {
+    await homeController.favRestaurantUpdate(
+        body: {"restaurantId": restaurantId}).then((value) {
+      if (value) {
+        detailsRestaurantList.value.isFavourite =
+            !detailsRestaurantList.value.isFavourite!;
+        homeController.getRestaurantDetailsUsingLatLon();
+      } else {
+        return;
+      }
+    });
+
     update();
   }
-
-  // @override
-  // void onInit() async {
-  //   // TODO: implement onInit
-  //   // var data = Get.arguments;
-  //   // index.value = data[0]['restaurantId'].toInt();
-  //   print("About US Index ====>  ${index.value}");
-  //   // print(data);
-  //
-  //   /// Restaurant Details
-  //   // await restaurantDetails(body: {"restaurantId": index.value});
-  //   // print("Restaurant Detais Data ====>  ${detailsRestaurantList.value}");
-  //
-  //   // /// About Us
-  //   // await restaurantDetailsAboutUs(body: {"restaurantId": index.value});
-  //   // print(
-  //   //     "Restaurant About US Data ====>  ${aboutUsRestaurantList[0].aboutUs}");
-  //   //
-  //   // /// Gallery Images
-  //   // await restaurantDetailsGalleryImages(body: {"restaurantId": index.value});
-  //   // print(
-  //   //     "Restaurant Gallery Data ====>  ${galleryImagesRestaurantList.value}");
-  //   //
-  //   // /// Menu
-  //   // await restaurantDetailsMenu(body: {"restaurantId": index.value});
-  //   // print("Restaurant Menu Data ====>  ${menuHeaderRestaurantList.value}");
-  //   // // print(
-  //   // //     "Restaurant Menu Details Data ====>  ${menuDescriptionRestaurantList.value}");
-  //   // /// Ratings
-  //   // await restaurantDetailsRatings(body: {"restaurantId": index.value});
-  //   // print("Restaurant Rating Data ====>  ${rateReviewsRestaurantList.value}");
-  //   // print("Restaurant Total Review Data ====>  ${totalReviews.value}");
-  //
-  //   // print(
-  //   //     "Restaurant Menu Details Data ====>  ${menuDescriptionRestaurantList.value}");
-  //   super.onInit();
-  // }
 
   /// Restaurant Details
   Future<dynamic> restaurantDetails({
@@ -80,30 +53,20 @@ class RestaurantDetailsController extends GetxController {
         detailsRestaurantList.value = RestaurantDetailsData.fromMap(
             response['data'] as Map<String, dynamic>);
 
-        // print("INDEX VALUE =====>>>>  ${index.value}");
-
         /// About Us
         await restaurantDetailsAboutUs(body: {"restaurantId": index.value});
-        // print(
-        //     "Restaurant About US Data ====>  ${aboutUsRestaurantList[0].aboutUs}");
 
         /// Gallery Images
         await restaurantDetailsGalleryImages(
             body: {"restaurantId": index.value});
-        // print(
-        //     "Restaurant Gallery Data ====>  ${galleryImagesRestaurantList.value}");
 
         /// Menu
         await restaurantDetailsMenu(body: {"restaurantId": index.value});
-        // print("Restaurant Menu Data ====>  ${menuHeaderRestaurantList.value}");
 
         /// Ratings
         await restaurantDetailsRatings(body: {"restaurantId": index.value});
-        // print(
-        //     "Restaurant Rating Data ====>  ${rateReviewsRestaurantList.value}");
-        //
-        // print("Restaurant Total Review Data ====>  ${totalReviews.value}");
 
+        update();
         return true;
       } else {
         ShowToast.show(
@@ -163,8 +126,6 @@ class RestaurantDetailsController extends GetxController {
         galleryImagesRestaurantList.value = (response['restaurantImages'])
             ?.map((e) => RestaurantImage.fromMap(e as Map<String, dynamic>))
             .toList();
-        // print(index.value);
-        // print(galleryImagesRestaurantList.value);
         return true;
       } else {
         ShowToast.show(
@@ -192,12 +153,6 @@ class RestaurantDetailsController extends GetxController {
         menuHeaderRestaurantList.value = (response['data'])
             ?.map((e) => RestaurantMenuData.fromMap(e as Map<String, dynamic>))
             .toList();
-        // menuDescriptionRestaurantList.value = (response['data']['menu'])
-        //     ?.map((e) => Menu.fromMap(e as Map<String, dynamic>))
-        //     .toList();
-        // print(index.value);
-        // print(
-        //     "Item Name====>   ${menuHeaderRestaurantList[1].menu[1].itemName}");
 
         return true;
       } else {
@@ -227,8 +182,6 @@ class RestaurantDetailsController extends GetxController {
             ?.map((e) => RatingAndReviewList.fromMap(e as Map<String, dynamic>))
             .toList();
         totalReviews.value = response['totalReview'].toString();
-        // print(index.value);
-        // print("Ratings <====>   ${rateReviewsRestaurantList.value}");
 
         return true;
       } else {

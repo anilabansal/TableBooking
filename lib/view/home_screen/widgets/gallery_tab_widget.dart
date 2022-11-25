@@ -28,7 +28,7 @@ class GalleryTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
-        return controller.galleryImagesRestaurantList.value.isNotEmpty
+        return controller.galleryImagesRestaurantList.value != null
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +76,7 @@ class GalleryTab extends StatelessWidget {
                                   ),
                                 );
                               },
-                              child: Image.asset(
+                              child: Image.network(
                                 controller.galleryImagesRestaurantList[index]
                                     .restaurantImage,
                               )),

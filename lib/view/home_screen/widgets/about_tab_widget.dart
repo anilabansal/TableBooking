@@ -217,7 +217,8 @@ class AboutTabScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: CommonText(
-                            text: controller.aboutUsRestaurantList[0].aboutUs
+                            text: controller
+                                .aboutUsRestaurantList[0].contactNumber
                                 .toString(),
                             fontSize: 16,
                             fontWeight: FontWeight.w400,

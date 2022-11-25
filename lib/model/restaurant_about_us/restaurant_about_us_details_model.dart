@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class Datum {
+class RestaurantAboutUsDetails {
   int? restaurantId;
   dynamic restaurantName;
   dynamic restaurantPic;
@@ -17,7 +17,7 @@ class Datum {
   dynamic longitude;
   bool? isFavourite;
 
-  Datum({
+  RestaurantAboutUsDetails({
     this.restaurantId,
     this.restaurantName,
     this.restaurantPic,
@@ -40,7 +40,8 @@ class Datum {
     return 'Datum(restaurantId: $restaurantId, restaurantName: $restaurantName, restaurantPic: $restaurantPic, address: $address, zipCode: $zipCode, aboutUs: $aboutUs, officialWebsite: $officialWebsite, contactNumber: $contactNumber, email: $email, distance: $distance, rating: $rating, ratingCount: $ratingCount, latitude: $latitude, longitude: $longitude, isFavourite: $isFavourite)';
   }
 
-  factory Datum.fromMap(Map<String, dynamic> data) => Datum(
+  factory RestaurantAboutUsDetails.fromMap(Map<String, dynamic> data) =>
+      RestaurantAboutUsDetails(
         restaurantId: data['restaurantId'] as int?,
         restaurantName: data['restaurantName'] as dynamic,
         restaurantPic: data['restaurantPic'] as dynamic,
@@ -78,17 +79,18 @@ class Datum {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [Datum].
-  factory Datum.fromJson(String data) {
-    return Datum.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [RestaurantAboutUsDetails].
+  factory RestaurantAboutUsDetails.fromJson(String data) {
+    return RestaurantAboutUsDetails.fromMap(
+        json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [Datum] to a JSON string.
+  /// Converts [RestaurantAboutUsDetails] to a JSON string.
   String toJson() => json.encode(toMap());
 
-  Datum copyWith({
+  RestaurantAboutUsDetails copyWith({
     int? restaurantId,
     dynamic restaurantName,
     dynamic restaurantPic,
@@ -105,7 +107,7 @@ class Datum {
     dynamic longitude,
     bool? isFavourite,
   }) {
-    return Datum(
+    return RestaurantAboutUsDetails(
       restaurantId: restaurantId ?? this.restaurantId,
       restaurantName: restaurantName ?? this.restaurantName,
       restaurantPic: restaurantPic ?? this.restaurantPic,

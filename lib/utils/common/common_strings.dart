@@ -17,7 +17,8 @@ const ratings = 'api/Home/RatingandReviews';
 const restaurantDetail = 'api/Home/RestaurantDetail';
 const getProfileDetail = 'api/Basic/EditProfile';
 const updateProfileDetail = 'api/Basic/UpdateProfile';
-const favRestaurantDetails = 'api/Home/AddFavourites';
+const favRestaurantDetails = 'api/Home/FavouriteRestaurants';
+const favRestaurantUpdateString = 'api/Home/AddFavourites';
 
 ///    Common Fonts
 // Fonts
@@ -64,6 +65,7 @@ const Color greyB3F5F5F5 = Color(0xB3F5F5F5);
 //6% opacity
 const Color white0F000000 = Color(0x0F000000);
 const Color red0FE2211C = Color(0x0FE2211C);
+const Color black0F0D0000 = Color(0x0F0D0000);
 
 /// Image Assets Path
 // Splash Screen

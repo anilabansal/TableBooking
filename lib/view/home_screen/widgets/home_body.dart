@@ -1,5 +1,4 @@
 import 'package:booking_table/controller/home/home_controller.dart';
-import 'package:booking_table/controller/profile/profile_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
@@ -14,16 +13,12 @@ import '../../../controller/user_session/user_session_controller.dart';
 class HomeBody extends StatelessWidget {
   HomeBody({
     Key? key,
-    required this.homeController,
   }) : super(key: key);
-
-  HomeController homeController;
-  UserSessionController userSessionController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ProfileController>(
-      builder: (profileController) {
+    return GetBuilder<HomeController>(
+      builder: (homeController) {
         return SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -32,109 +27,112 @@ class HomeBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 5),
-                    child: Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            homeController.drawerKey.currentState!.openDrawer();
-                          },
-                          child: Stack(
-                            children: [
-                              userSessionController.isLogin == false
-                                  ? const Icon(
-                                      Icons.person,
-                                      size: 50,
-                                    )
-                                  : profileController.userProfileData.value
-                                              .profileImage !=
-                                          null
-                                      ? CommonSizedBox(
-                                          height: 49,
-                                          width: 49,
-                                          child: ClipOval(
-                                            child: Image.network(
-                                              profileController.userProfileData
-                                                  .value.profileImage!,
+                  GetBuilder<UserSessionController>(
+                    builder: (userSessionController) {
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 5),
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                homeController.drawerKey.currentState!
+                                    .openDrawer();
+                              },
+                              child: Stack(
+                                children: [
+                                  userSessionController.isLogin == false
+                                      ? const Icon(
+                                          Icons.person,
+                                          size: 50,
+                                        )
+                                      : userSessionController.profilePic != ""
+                                          ? CommonSizedBox(
                                               height: 49,
                                               width: 49,
-                                              fit: BoxFit.fill,
+                                              child: ClipOval(
+                                                child: Image.network(
+                                                  userSessionController
+                                                      .profilePic,
+                                                  height: 49,
+                                                  width: 49,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                              ),
+                                            )
+                                          : const Icon(
+                                              Icons.person,
+                                              size: 40,
                                             ),
-                                          ),
-                                        )
-                                      : const Icon(
-                                          Icons.person,
-                                          size: 40,
-                                        ),
-                              Positioned(
-                                bottom: 0,
-                                right: 0,
-                                child: Container(
-                                  width: 24,
-                                  height: 24,
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: white,
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 0,
+                                    child: Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: white,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Image.asset(drawerImage),
+                                      ),
+                                    ),
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Image.asset(drawerImage),
-                                  ),
-                                ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 13,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CommonText(
-                              text: userSessionController.isLogin == true
-                                  ? userSessionController.fullName
-                                  : "Guest User",
-                              color: black000000,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
                             ),
                             const SizedBox(
-                              height: 8,
+                              width: 13,
                             ),
-                            Row(
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Icon(
-                                  Icons.location_on,
-                                  color: black000000,
-                                  size: 14,
-                                ),
-                                CommonSizedBox(
-                                  width: 2,
-                                ),
                                 CommonText(
-                                  text: "Montgomery, 35004",
+                                  text: userSessionController.isLogin == true
+                                      ? userSessionController.fullName
+                                      : "Guest User",
                                   color: black000000,
                                   fontSize: 16,
-                                  fontWeight: FontWeight.normal,
+                                  fontWeight: FontWeight.bold,
                                 ),
                                 const SizedBox(
-                                  width: 10,
+                                  height: 8,
                                 ),
-                                const Icon(Icons.keyboard_arrow_down),
-                                // Image.asset(
-                                //   dropDownIconImage,
-                                //   width: 9,
-                                //   height: 12,
-                                // ),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.location_on,
+                                      color: black000000,
+                                      size: 14,
+                                    ),
+                                    CommonSizedBox(
+                                      width: 2,
+                                    ),
+                                    CommonText(
+                                      text: "Montgomery, 35004",
+                                      color: black000000,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    const Icon(Icons.keyboard_arrow_down),
+                                    // Image.asset(
+                                    //   dropDownIconImage,
+                                    //   width: 9,
+                                    //   height: 12,
+                                    // ),
+                                  ],
+                                ),
                               ],
-                            ),
+                            )
                           ],
-                        )
-                      ],
-                    ),
+                        ),
+                      );
+                    },
                   ),
                   const SearchBoxScreen(),
                   Padding(

@@ -165,8 +165,8 @@ class MenuTab extends StatelessWidget {
               width: 73,
               height: 75,
               child: Image.asset(
-                // itemImage,
-                "assets/images/home/restaurant_item.png",
+                itemImage,
+                // "assets/images/home/restaurant_item.png",
                 fit: BoxFit.cover,
               ),
             ),

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class Restaurantlist {
+class RestaurantList {
   int? restaurantId;
   String? restaurantName;
   String? restaurantPic;
@@ -17,7 +17,7 @@ class Restaurantlist {
   String? longitude;
   bool? isFavourite;
 
-  Restaurantlist({
+  RestaurantList({
     this.restaurantId,
     this.restaurantName,
     this.restaurantPic,
@@ -40,8 +40,8 @@ class Restaurantlist {
     return 'Restaurantlist(restaurantId: $restaurantId, restaurantName: $restaurantName, restaurantPic: $restaurantPic, address: $address, zipCode: $zipCode, aboutUs: $aboutUs, officialWebsite: $officialWebsite, contactNumber: $contactNumber, email: $email, distance: $distance, rating: $rating, ratingCount: $ratingCount, latitude: $latitude, longitude: $longitude, isFavourite: $isFavourite)';
   }
 
-  factory Restaurantlist.fromMap(Map<String, dynamic> data) {
-    return Restaurantlist(
+  factory RestaurantList.fromMap(Map<String, dynamic> data) {
+    return RestaurantList(
       restaurantId: data['restaurantId'] as int?,
       restaurantName: data['restaurantName'] as String?,
       restaurantPic: data['restaurantPic'] as String?,
@@ -80,17 +80,17 @@ class Restaurantlist {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [Restaurantlist].
-  factory Restaurantlist.fromJson(String data) {
-    return Restaurantlist.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [RestaurantList].
+  factory RestaurantList.fromJson(String data) {
+    return RestaurantList.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [Restaurantlist] to a JSON string.
+  /// Converts [RestaurantList] to a JSON string.
   String toJson() => json.encode(toMap());
 
-  Restaurantlist copyWith({
+  RestaurantList copyWith({
     int? restaurantId,
     String? restaurantName,
     String? restaurantPic,
@@ -107,7 +107,7 @@ class Restaurantlist {
     String? longitude,
     bool? isFavourite,
   }) {
-    return Restaurantlist(
+    return RestaurantList(
       restaurantId: restaurantId ?? this.restaurantId,
       restaurantName: restaurantName ?? this.restaurantName,
       restaurantPic: restaurantPic ?? this.restaurantPic,
