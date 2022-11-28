@@ -84,17 +84,17 @@ class RestaurantHomeScreen extends StatelessWidget {
                                                   .updateRestaurantLike();
                                             },
                                             icon: homeController
-                                                    .likedRestaurant.value
+                                                .likedRestaurant.value
                                                 ? const Icon(
-                                                    Icons.favorite,
-                                                    color: redE2211C,
-                                                    size: 18,
-                                                  )
+                                              Icons.favorite,
+                                              color: redE2211C,
+                                              size: 18,
+                                            )
                                                 : const Icon(
-                                                    Icons.favorite,
-                                                    color: greyCACACA,
-                                                    size: 18,
-                                                  ),
+                                              Icons.favorite,
+                                              color: greyCACACA,
+                                              size: 18,
+                                            ),
                                           ),
                                         ),
                                       ),

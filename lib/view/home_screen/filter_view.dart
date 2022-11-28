@@ -44,7 +44,7 @@ class FilterView extends StatelessWidget {
                   ),
                   CommonDatePicker(
                     controller: dateController,
-                    fillColor: greyF5F5F5,
+                    //fillColor: greyF5F5F5,
                   ),
                 ],
               ).paddingOnly(top: 15, left: 22, right: 22),
@@ -141,7 +141,7 @@ class FilterView extends StatelessWidget {
                       ),
                       // ignore: unrelated_type_equality_checks
                       typeServiceContainer(
-                          "To Go ", homeController.serviceType.value == "To Go "),
+                          "To Go", homeController.serviceType.value == "To Go"),
                     ],
                   ),
                   const SizedBox(
@@ -158,13 +158,13 @@ class FilterView extends StatelessWidget {
                         Expanded(
                           child: CommonText(
                             text: homeController.serviceType.value == "Full"
-                                ? "Order from server in restaurant"
+                                ? "Order with server in restaurant"
                                 : homeController.serviceType.value == "No"
-                                    ? "Pre order food and drink on the app as well as in restaurant. No server."
-                                    : homeController.serviceType.value ==
-                                            "To Go"
-                                        ? "You can take away your order as well."
-                                        : "Pre-order food and drink on the app and have a server in restaurant",
+                                ? "Pre-order food/drink and any add-ons in restaurant via the app. No server"
+                                : homeController.serviceType.value ==
+                                "To Go"
+                                ? "Order food/drink to go"
+                                : "Pre-order food/drink via the app and have a server in restaurant",
                             fontWeight: FontWeight.w400,
                             fontSize: 14,
                             color: textGrey868686,

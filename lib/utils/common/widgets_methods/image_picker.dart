@@ -159,6 +159,7 @@ class _ImagePickerBottomSheetState extends State<ImagePickerBottomSheet>
 
   getFileCamera() async {
     // try {
+
       _fileImage = (await _picker.pickImage(
           source: ImageSource.camera,
           imageQuality: 50,
@@ -168,6 +169,7 @@ class _ImagePickerBottomSheetState extends State<ImagePickerBottomSheet>
       if (_fileImage != null) {
         returnImage();
       }
+
     // }
     // catch (e) {
     //   ShowToast.show(title: e.toString(), message: e.toString());

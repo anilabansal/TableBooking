@@ -106,37 +106,37 @@ class BookingDetailsTab extends StatelessWidget {
           children: [
             callFrom == 'Upcoming'
                 ? Container(
-                    height: 25,
-                    width: 72,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(19),
-                      color: Colors.black,
-                    ),
-                    child: CommonText(
-                      text: 'Upcoming',
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      textAlign: TextAlign.center,
-                    ),
-                  )
+              height: 25,
+              width: 72,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(19),
+                color: Colors.black,
+              ),
+              child: CommonText(
+                text: 'Upcoming',
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                textAlign: TextAlign.center,
+              ),
+            )
                 : Container(
-                    height: 25,
-                    width: 72,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(19),
-                      color: Colors.green,
-                    ),
-                    child: CommonText(
-                      text: 'Completed',
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+              height: 25,
+              width: 72,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(19),
+                color: Colors.green,
+              ),
+              child: CommonText(
+                text: 'Completed',
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                textAlign: TextAlign.center,
+              ),
+            ),
             CommonSizedBox(
               height: 15,
             ),

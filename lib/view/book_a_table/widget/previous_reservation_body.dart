@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 class BookingDetailsBody extends StatelessWidget {
   final String callFrom;
 
- const BookingDetailsBody({
+  const BookingDetailsBody({
     required this.callFrom,
     Key? key,
   }) : super(key: key);
@@ -48,7 +48,7 @@ class BookingDetailsBody extends StatelessWidget {
                 ),
                 CommonText(
                   text:
-                      'Do not spice up the food as we are also having children.',
+                  'Do not spice up the food as we are also having children.',
                   color: black000000,
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
@@ -98,7 +98,7 @@ class BookingDetailsBody extends StatelessWidget {
                         Expanded(
                           child: CommonText(
                             text:
-                                'Order from server in restaurant.',
+                            'Order from server in restaurant.',
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             color: textLight868686,
@@ -147,86 +147,86 @@ class BookingDetailsBody extends StatelessWidget {
 
                     callFrom == 'Upcoming'
                         ? CommonSizedBox(
-                            height: 50,
-                            child: CommonButton(
-                              onTap: () {
-                                Get.toNamed('/reviews');
-                              },
-                              textColor: Colors.white,
-                              bgColor: redE2211C,
-                              text: 'Submit Review',
-                            ),
-                          )
+                      height: 50,
+                      child: CommonButton(
+                        onTap: () {
+                          Get.toNamed('/reviews');
+                        },
+                        textColor: Colors.white,
+                        bgColor: redE2211C,
+                        text: 'Submit Review',
+                      ),
+                    )
                         : Column(
-                            children: [
-                              Container(
-                                height: 1,
-                                width: Get.width,
-                                color: whiteE5E5E5,
-                              ),
-                              CommonSizedBox(
-                                height: 20,
-                              ),
-                              CommonText(
-                                text: 'Reviews',
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              CommonSizedBox(
-                                height: 20,
-                              ),
-                              CommonText(
-                                text:
-                                    'It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              CommonSizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    yellowStar,
-                                    height: 12,
-                                    width: 12,
-                                  ),
-                                  CommonSizedBox(
-                                    width: 5,
-                                  ),
-                                  Image.asset(
-                                    yellowStar,
-                                    height: 12,
-                                    width: 12,
-                                  ),
-                                  CommonSizedBox(
-                                    width: 5,
-                                  ),
-                                  Image.asset(
-                                    yellowStar,
-                                    height: 12,
-                                    width: 12,
-                                  ),
-                                  CommonSizedBox(
-                                    width: 5,
-                                  ),
-                                  Image.asset(
-                                    yellowStar,
-                                    height: 12,
-                                    width: 12,
-                                  ),
-                                  CommonSizedBox(
-                                    width: 5,
-                                  ),
-                                  Image.asset(
-                                    greyStar,
-                                    height: 12,
-                                    width: 12,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                      children: [
+                        Container(
+                          height: 1,
+                          width: Get.width,
+                          color: whiteE5E5E5,
+                        ),
+                        CommonSizedBox(
+                          height: 20,
+                        ),
+                        CommonText(
+                          text: 'Reviews',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        CommonSizedBox(
+                          height: 20,
+                        ),
+                        CommonText(
+                          text:
+                          'It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        CommonSizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          children: [
+                            Image.asset(
+                              yellowStar,
+                              height: 12,
+                              width: 12,
+                            ),
+                            CommonSizedBox(
+                              width: 5,
+                            ),
+                            Image.asset(
+                              yellowStar,
+                              height: 12,
+                              width: 12,
+                            ),
+                            CommonSizedBox(
+                              width: 5,
+                            ),
+                            Image.asset(
+                              yellowStar,
+                              height: 12,
+                              width: 12,
+                            ),
+                            CommonSizedBox(
+                              width: 5,
+                            ),
+                            Image.asset(
+                              yellowStar,
+                              height: 12,
+                              width: 12,
+                            ),
+                            CommonSizedBox(
+                              width: 5,
+                            ),
+                            Image.asset(
+                              greyStar,
+                              height: 12,
+                              width: 12,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                     CommonSizedBox(
                       height: 20,
                     ),

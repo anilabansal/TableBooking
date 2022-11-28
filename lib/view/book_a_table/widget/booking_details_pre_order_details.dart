@@ -181,7 +181,7 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
           CommonText(
             textAlign: TextAlign.left,
             text:
-                'This amount will be charge at booking confirmation\nand will be deduct on your total bill amount',
+            'This amount will be charge at booking confirmation\nand will be deduct on your total bill amount',
             fontSize: 10,
             color: textLight868686,
             fontWeight: FontWeight.w400,

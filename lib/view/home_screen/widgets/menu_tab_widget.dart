@@ -117,7 +117,7 @@ class MenuTab extends StatelessWidget {
                   width: MediaQuery.of(context).size.width - 130,
                   child: CommonText(
                     text:
-                        "Creamy Hot Tomato Sauce, Jalapeno with Mozzarella Cheese",
+                    "Creamy Hot Tomato Sauce, Jalapeno with Mozzarella Cheese",
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                     color: textDark3F3E3E,

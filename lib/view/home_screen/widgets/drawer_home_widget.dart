@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/home/home_controller.dart';
+import '../../../controller/user_session/user_session_controller.dart';
 
 class DrawerScreen extends StatelessWidget {
-  const DrawerScreen({Key? key}) : super(key: key);
-
+   DrawerScreen({Key? key}) : super(key: key);
+  UserSessionController userSession = Get.find();
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.find();
@@ -154,6 +155,7 @@ class DrawerScreen extends StatelessWidget {
                   Get.toNamed('/support');
                 }),
                 textAndIcon("Logout", () {
+                  userSession.setIsLogin(false);
                   Get.toNamed('/authentication');
                 }),
               ],

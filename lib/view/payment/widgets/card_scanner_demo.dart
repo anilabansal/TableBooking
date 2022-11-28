@@ -172,4 +172,4 @@
 //         validCardsToScanBeforeFinishingScan: validCardsToScanBeforeFinishingScan));
 //     super.setState(fn);
 //   }
-// }
+

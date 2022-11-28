@@ -51,7 +51,7 @@ class ReviewsTabScreen extends StatelessWidget {
                   shape: BoxShape.circle,
                   image: DecorationImage(
                       image:
-                          AssetImage("assets/images/home/profile_image.png"))),
+                      AssetImage("assets/images/home/profile_image.png"))),
             ),
             const SizedBox(
               width: 10,
@@ -94,7 +94,7 @@ class ReviewsTabScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width - 30,
           child: CommonText(
             text:
-                " It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.",
+            " It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.",
             fontSize: 15,
             fontWeight: FontWeight.w400,
             color: textDark3F3E3E,

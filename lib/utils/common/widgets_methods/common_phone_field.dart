@@ -1,11 +1,15 @@
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
+import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PhoneField extends StatefulWidget {
   final String? countryCode;
   final String? countryFlag;
+  final bool? enable;
+  final bool? isCreateProfile;
   final TextEditingController? phoneController;
   final Function(String)? onCodeChange;
   final Function(String)? onCountryFlag;
@@ -13,6 +17,8 @@ class PhoneField extends StatefulWidget {
 
   const PhoneField({
     Key? key,
+    this.enable,
+    this.isCreateProfile = false,
     this.phoneController,
     this.onCodeChange,
     this.countryCode,
@@ -43,7 +49,8 @@ class _PhoneFieldState extends State<PhoneField> {
           InkWell(
             onTap: () {
               // ///TODO: store code
-              showCountryPicker(
+              widget.isCreateProfile == false
+                  ? showCountryPicker(
                 context: context,
                 showPhoneCode: true,
                 onSelect: (Country country) {
@@ -52,7 +59,8 @@ class _PhoneFieldState extends State<PhoneField> {
                   widget.onCodeChange!(country.phoneCode);
                   widget.onCountryFlag!(country.flagEmoji);
                 },
-              );
+              )
+                  : null;
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 15.0, right: 10.0),
@@ -80,15 +88,40 @@ class _PhoneFieldState extends State<PhoneField> {
             color: textLight868686,
             height: 34,
           ),
+          // Expanded(
+          //   child: CommonTextFormField(
+          //     enable: widget.enable,
+          //     // inputFormatters: [
+          //     //   LengthLimitingTextInputFormatter(10),
+          //     // ],
+          //     keyboardType: TextInputType.number,
+          //     controller: widget.phoneController,
+          //     hintText: 'Enter your phone number'.toTitleCase(),
+          //     fontSize: 18,
+          //   ),
+          // ),
           Expanded(
-            child: CommonTextFormField(
-              // inputFormatters: [
-              //   LengthLimitingTextInputFormatter(10),
-              // ],
+            child: TextFormField(
+              enabled: widget.enable,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(10),
+              ],
               keyboardType: TextInputType.number,
               controller: widget.phoneController,
-              hintText: '+1 7700 900175',
-              fontSize: 20,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+                color: black000000,
+              ),
+              decoration:  InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Enter your phone number'.toTitleCase(),
+                hintStyle: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                  color: textGrey868686,
+                ),
+              ),
             ),
           ),
         ],

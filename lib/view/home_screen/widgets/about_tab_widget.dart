@@ -25,7 +25,7 @@ class AboutTabScreen extends StatelessWidget {
             width: MediaQuery.of(context).size.width - 30,
             child: CommonText(
               text:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nisl odio, feugiat quis odio ut, molestie varius dui. Curabitur laoreet dignissim purus, eu fermentum nunc laoreet et. Fusce efficitur ipsum augue, dapibus exposure Podio exposure quits. Ut effendi ipsum in metes aliquot vehicular.",
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nisl odio, feugiat quis odio ut, molestie varius dui. Curabitur laoreet dignissim purus, eu fermentum nunc laoreet et. Fusce efficitur ipsum augue, dapibus exposure Podio exposure quits. Ut effendi ipsum in metes aliquot vehicular.",
               fontSize: 16,
               fontWeight: FontWeight.w400,
               color: textDark3F3E3E,

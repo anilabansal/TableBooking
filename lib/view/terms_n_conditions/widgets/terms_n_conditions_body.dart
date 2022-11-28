@@ -36,7 +36,7 @@ class TermsNConditionBody extends StatelessWidget {
               fontSize: 16,
               fontWeight: FontWeight.w400,
               text:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium, dui sed pharetra congue, leo ipsum tincidunt nulla, a posuere lectus nulla lobortis metus. Mauris non efficitur ipsum. Phasellus et sollicitudin sapien. Donec malesuada est nisi, eget viverra mauris pulvinar commodo.',
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium, dui sed pharetra congue, leo ipsum tincidunt nulla, a posuere lectus nulla lobortis metus. Mauris non efficitur ipsum. Phasellus et sollicitudin sapien. Donec malesuada est nisi, eget viverra mauris pulvinar commodo.',
             ),
             CommonSizedBox(
               height: 20,

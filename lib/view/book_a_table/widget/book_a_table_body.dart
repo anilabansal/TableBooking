@@ -20,7 +20,7 @@ class BookATableBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => SingleChildScrollView(
+          () => SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -49,7 +49,7 @@ class BookATableBody extends StatelessWidget {
                       height: 15,
                     ),
                     const CommonDatePicker(
-                      fillColor: greyF5F5F5,
+                      //fillColor: greyF5F5F5,
                     )
                   ],
                 ).paddingOnly(
@@ -255,17 +255,17 @@ class BookATableBody extends StatelessWidget {
                           Expanded(
                             child: CommonText(
                               text: controller.serviceType.value == "Full"
-                                  ? "Order from server in restaurant"
+                                  ? "Order with server in restaurant"
                                   : controller.serviceType.value == "No"
-                                      ? "Pre order food and drink on the app as well as in restaurant. No server"
-                                      : controller.serviceType.value == "To Go"
-                                          ? "You can take away your order as well."
-                                          : "Pre-order food and drink on the app and have a server in restaurant",
+                                  ? "Pre-order food/drink and any add-ons in restaurant via the app. No server"
+                                  : controller.serviceType.value == "To Go"
+                                  ? "Order food/drink to go"
+                                  : "Pre-order food/drink via the app and have a server in restaurant",
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
                               color: textGrey868686,
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),

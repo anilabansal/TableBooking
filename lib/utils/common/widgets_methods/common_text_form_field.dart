@@ -45,7 +45,9 @@ class CommonTextFormField extends StatelessWidget {
     return TextFormField(
       onTap: onTap,
       enabled: enable,
+
       readOnly: readOnly??false,
+
       autovalidateMode: AutovalidateMode.always,
       keyboardType: keyboardType,
       // maxLength: maxLength,

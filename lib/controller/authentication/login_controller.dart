@@ -4,39 +4,43 @@ import 'package:booking_table/utils/network/api_calls.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../user_session/user_session_controller.dart';
+
 class LoginController extends GetxController {
   var mobileNumber = TextEditingController();
-  var countryCode = '1'.obs;
-  var countryFlag = '🇺🇸'.obs;
-  ApiCalls apiCall = ApiCalls();
+  var countryCode = '91'.obs;
+  var countryFlag = '🇮🇳'.obs;
+  var isLoading = false.obs;
 
+  // var countryFlag = '🇺🇸'.obs;
+  ApiCalls apiCall = ApiCalls();
+  UserSessionController userSession = Get.find();
   Future<bool> loginUser({Map<String, String>? data}) async {
     final response = await apiCall.callPostApi(
       data!,
       logInEndPoint,
-      // token: 'token',
     );
     print(data);
-    print('Login Response ======> ${response.body}');
-    // if (response.body['response'] == 1 && response.body['data'] != null) {
-    //   return true;
-    // } else if (response.body['response'] == 1 &&
-    //     response.body['address'] == null) {
-    //   ShowToast.show(
-    //     msg: 'User not Registered!!',
-    //     isError: true,
-    //   );
-    // }
-    if (response.body['response'] == 1) {
+
+    if (response['response'] == 1) {
       ShowToast.show(
-        msg: response.body['errorMessage'],
+        msg: "Otp Is ${response['otp'].toString()}",
       );
+      isLoading.value = false;
+      userSession.setIsProfileCreated(response['isProfileCreated']);
+      if(response['isProfileCreated']==true){
+        userSession.setIsLogin(true);
+      }
+      update();
       return true;
-    } else {
+    }
+   else{
       ShowToast.show(
-        msg: response.body['errorMessage'] ?? 'Please try again!',
+        msg: response['errorMessage'] ?? 'Please try again!',
         isError: true,
       );
+      isLoading.value = false;
+      update();
     }
     return false;
   }

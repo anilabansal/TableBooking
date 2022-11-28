@@ -30,7 +30,7 @@ class RetaurantDetailsBody extends StatelessWidget {
         children: [
           const RestaurantDetailTopScreen(),
           Obx(
-            () => Center(
+                () => Center(
               child: TabBar(
                   isScrollable: true,
                   controller: _tabController,
@@ -46,9 +46,9 @@ class RetaurantDetailsBody extends StatelessWidget {
                         text: "Menu",
                         fontSize: 16,
                         fontWeight:
-                            restaurantController.selectedIndex.value == 0
-                                ? FontWeight.w500
-                                : FontWeight.w400,
+                        restaurantController.selectedIndex.value == 0
+                            ? FontWeight.w500
+                            : FontWeight.w400,
                       ),
                     ),
                     Tab(
@@ -57,9 +57,9 @@ class RetaurantDetailsBody extends StatelessWidget {
                         text: "About",
                         fontSize: 16,
                         fontWeight:
-                            restaurantController.selectedIndex.value == 1
-                                ? FontWeight.w500
-                                : FontWeight.w400,
+                        restaurantController.selectedIndex.value == 1
+                            ? FontWeight.w500
+                            : FontWeight.w400,
                       ),
                     ),
                     Tab(
@@ -68,9 +68,9 @@ class RetaurantDetailsBody extends StatelessWidget {
                         text: "Reviews",
                         fontSize: 16,
                         fontWeight:
-                            restaurantController.selectedIndex.value == 2
-                                ? FontWeight.w500
-                                : FontWeight.w400,
+                        restaurantController.selectedIndex.value == 2
+                            ? FontWeight.w500
+                            : FontWeight.w400,
                       ),
                     ),
                     Tab(
@@ -79,9 +79,9 @@ class RetaurantDetailsBody extends StatelessWidget {
                         text: "Gallery",
                         fontSize: 16,
                         fontWeight:
-                            restaurantController.selectedIndex.value == 3
-                                ? FontWeight.w500
-                                : FontWeight.w400,
+                        restaurantController.selectedIndex.value == 3
+                            ? FontWeight.w500
+                            : FontWeight.w400,
                       ),
                     )
                   ]),

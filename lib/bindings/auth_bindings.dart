@@ -1,7 +1,6 @@
 import 'package:booking_table/controller/authentication/login_controller.dart';
 import 'package:booking_table/controller/authentication/otp_controller.dart';
 import 'package:booking_table/controller/authentication/register_controller.dart';
-import 'package:booking_table/controller/location/location_controller.dart';
 import 'package:booking_table/controller/splash_screen/splash_view_controller.dart';
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:get/get.dart';
@@ -16,6 +15,7 @@ class AuthBindings extends Bindings {
     Get.lazyPut<SplashViewController>(() => SplashViewController());
     // Get.lazyPut<CountryController>(() => CountryController());
     Get.lazyPut<OtpController>(() => OtpController());
-    Get.lazyPut<LocationController>(() =>LocationController());
+    // Get.lazyPut<LocationController>(() =>LocationController());
+
   }
 }

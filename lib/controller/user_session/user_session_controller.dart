@@ -11,14 +11,22 @@ class UserSessionController extends GetxController {
 
   init() async {
     _isLogin.value = box.read(isLogInString) ?? false;
+    print("loginValue --->${_isLogin.value}");
     _token.value = box.read(tokenString) ?? '';
     _mobileNumber.value = box.read(mobileNumberString) ?? '';
+   // _isProfileCreated.value = box.read(isProfileCreatedString)??false;
   }
 
   get isLogin => _isLogin.value;
   get token => _token.value;
   get mobileNumber => _mobileNumber.value;
+ final _isProfileCreated = false.obs;
+  get isProfileCreated => _isProfileCreated;
 
+  void setIsProfileCreated(bool value){
+    _isProfileCreated.value = value;
+    // setPref(isProfileCreatedString, value);
+  }
   void setIsLogin(bool value) {
     _isLogin.value = value;
     setPref(isLogInString, value);
@@ -26,6 +34,7 @@ class UserSessionController extends GetxController {
 
   void setUserToken(String value) {
     _token.value = value;
+    update();
     setPref(tokenString, value);
   }
 
@@ -44,5 +53,11 @@ class UserSessionController extends GetxController {
 
   void logOut() async {
     await box.erase();
+
+    setIsLogin(false);
+    Get.toNamed(
+      '/authentication',
+    );
+
   }
 }

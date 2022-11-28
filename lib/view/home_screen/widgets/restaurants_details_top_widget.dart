@@ -4,6 +4,7 @@ import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class RestaurantDetailTopScreen extends StatelessWidget {
@@ -130,7 +131,7 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                           height: 20,
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Column(
                               children: [
@@ -175,6 +176,20 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
+                           const Spacer(),
+                            Container(
+                              width: 35,
+                              height: 35,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: black0F0D0000),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SvgPicture.asset(
+                                    "assets/images/home/web.svg"),
+                              ),
+                            ),
+                            const SizedBox(width: 5,),
                             Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 14, vertical: 10),

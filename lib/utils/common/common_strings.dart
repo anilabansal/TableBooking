@@ -7,7 +7,15 @@ const baseURL = 'http://apitablebooking.harishparas.com';
 const logInEndPoint = 'api/Basic/EnterMobileNo';
 const signUpEndPoint = 'api/Basic/RegisterMobileNo';
 const submitOtp = 'api/Basic/OTPSubmit';
+const resendOtp = 'api/Basic/ResendOTP';
 const createProfileEndPoint = 'api/Basic/SignUp';
+
+const zipCode = 'api/Home/SearchLocation';
+const aboutUs = 'api/Home/AboutUsDetail';
+const gallery = 'api/Home/ViewRestaurantGallery';
+const menu = 'api/Home/RestaurantMenuDetail';
+const ratings = 'api/Home/RatingandReviews';
+const restaurantDetail = 'api/Home/RestaurantDetail';
 
 ///    Common Fonts
 // Fonts
@@ -54,6 +62,7 @@ const Color greyB3F5F5F5 = Color(0xB3F5F5F5);
 //6% opacity
 const Color white0F000000 = Color(0x0F000000);
 const Color red0FE2211C = Color(0x0FE2211C);
+const Color black0F0D0000 = Color(0x0F0D0000);
 
 /// Image Assets Path
 // Splash Screen
@@ -112,3 +121,4 @@ String infoIcon = "assets/images/home/info_icon.png";
 const isLogInString = 'isLogInString';
 const mobileNumberString = 'mobileNumber';
 const tokenString = 'tokenString';
+const isProfileCreatedString = 'isProfileCreated';

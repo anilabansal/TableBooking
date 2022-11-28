@@ -1,56 +1,158 @@
-import 'package:booking_table/utils/common/common_strings.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
+// import 'package:booking_table/utils/common/common_strings.dart';
+// import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
+// import 'package:flutter/material.dart';
+// import 'package:intl/intl.dart';
+//
+// class CommonDatePicker extends StatelessWidget {
+//   final TextEditingController? controller;
+//   final bool? enable;
+//
+//   final Color? fillColor;
+//
+//   const CommonDatePicker(
+//       {Key? key, this.enable, this.controller, this.fillColor})
+//       : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       // height: 45,
+//       width: MediaQuery.of(context).size.width,
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(5),
+//         color: fillColor,
+//       ),
+//       child: InkWell(
+//         onTap: () async {
+//           DateTime? picked = await showDatePicker(
+//               builder: (context, child) {
+//                 return Theme(
+//                   data: Theme.of(context).copyWith(
+//                     colorScheme: const ColorScheme.light(
+//                       primary: redE2211C, // <-- SEE HERE
+//                     ),
+//                   ),
+//                   child: child!,
+//                 );
+//               },
+//               context: context,
+//               initialDate: DateTime.now(),
+//               firstDate: DateTime(1900),
+//               lastDate: DateTime.now());
+//           if (picked != null) {
+//             controller!.text = DateFormat('yyyy-MM-dd').format(picked);
+//           }
+//         },
+//         child: CommonTextFormField(
+//             enable: enable,
+//             controller: controller,
+//             hintText: "DD-MM-YY",
+//             filled: true,
+//             suffixIcon: IconButton(
+//               onPressed: () async {
+//                 DateTime? picked = await showDatePicker(
+//                     builder: (context, child) {
+//                       return Theme(
+//                         data: Theme.of(context).copyWith(
+//                           colorScheme: const ColorScheme.light(
+//                             primary: redE2211C, // <-- SEE HERE
+//                           ),
+//                         ),
+//                         child: child!,
+//                       );
+//                     },
+//                     context: context,
+//                     initialDate: DateTime.now(),
+//                     firstDate: DateTime(1900),
+//                     lastDate: DateTime.now());
+//                 if (picked != null) {
+//                   controller!.text = DateFormat('yyyy-MM-dd').format(picked);
+//                 }
+//               },
+//               icon: const Icon(
+//                 Icons.calendar_month_outlined,
+//                 color: redE2211C,
+//                 size: 22,
+//               ),
+//             )),
+//       ),
+//     );
+//   }
+// }
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import '../common_strings.dart';
 
-class CommonDatePicker extends StatelessWidget {
+class CommonDatePicker extends StatefulWidget {
   final TextEditingController? controller;
-  final Color? fillColor;
 
-  const CommonDatePicker({Key? key, this.controller, this.fillColor})
-      : super(key: key);
+  const CommonDatePicker({Key? key, this.controller}) : super(key: key);
 
+  @override
+  State<CommonDatePicker> createState() => _CommonDatePickerState();
+}
+
+class _CommonDatePickerState extends State<CommonDatePicker> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 45,
+      height: 45,
       width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.only(left: 8, right: 5),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: fillColor,
-      ),
-      child: CommonTextFormField(
-          controller: controller,
-          hintText: "DD-MM-YY",
-          filled: true,
-          readOnly:true,
-          suffixIcon: IconButton(
-            onPressed: () async {
-              DateTime? picked = await showDatePicker(
-                  builder: (context, child) {
-                    return Theme(
-                      data: Theme.of(context).copyWith(
-                        colorScheme: const ColorScheme.light(
-                          primary: redE2211C, // <-- SEE HERE
-                        ),
-                      ),
-                      child: child!,
-                    );
-                  },
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(1900),
-                  lastDate: DateTime.now());
-              if (picked != null) {
-                controller!.text = DateFormat('dd-MM-yyyy').format(picked);
-              }
-            },
-            icon: const Icon(
-              Icons.calendar_month_outlined,
-              color: redE2211C,
-              size: 22,
+          borderRadius: BorderRadius.circular(5), color: greyF5F5F5),
+      child: TextFormField(
+        readOnly: true,
+        controller: widget.controller,
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          color: black000000,
+        ),
+        decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: "dd-mm-yy",
+            hintStyle: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w400,
+              color: textGrey868686,
             ),
-          )),
+            suffixIcon: IconButton(
+              onPressed: () async {
+                DateTime? picked = await showDatePicker(
+                    builder: (context, child) {
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                          colorScheme: const ColorScheme.light(
+                            primary: redE2211C, // <-- SEE HERE
+                            // onPrimary: Colors.redAccent, // <-- SEE HERE
+                            // onSurface: Colors.blueAccent, // <-- SEE HERE
+                          ),
+                          // textButtonTheme: TextButtonThemeData(
+                          //   style: TextButton.styleFrom(
+                          //     primary: Colors.red, // button text color
+                          //   ),
+                          // ),
+                        ),
+                        child: child!,
+                      );
+                    },
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now());
+                if (picked != null) {
+                  widget.controller!.text = "${picked.year.toString()}-${picked.month.toString()}-${picked.day.toString()}";
+                      // DateFormat('yyyy-MM-dd').format(picked);
+                }
+              },
+              icon: const Icon(
+                Icons.calendar_month_outlined,
+                color: redE2211C,
+                size: 25,
+              ),
+            )),
+      ),
     );
   }
 }
