@@ -115,7 +115,9 @@ class RestaurantHomeScreen extends StatelessWidget {
                                               padding:
                                                   const EdgeInsets.all(0.0),
                                               child: IconButton(
-                                                onPressed: () {
+                                                onPressed: () async {
+                                                  print(
+                                                      'Favorite Button Clicked');
                                                   homeController
                                                       .updateRestaurantLike();
                                                 },

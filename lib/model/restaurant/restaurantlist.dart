@@ -10,9 +10,9 @@ class Restaurantlist {
   dynamic officialWebsite;
   dynamic contactNumber;
   dynamic email;
-  int? distance;
+  dynamic distance;
   dynamic rating;
-  int? ratingCount;
+  dynamic ratingCount;
   String? latitude;
   String? longitude;
   bool? isFavourite;
@@ -51,9 +51,9 @@ class Restaurantlist {
       officialWebsite: data['officialWebsite'] as dynamic,
       contactNumber: data['contactNumber'] as dynamic,
       email: data['email'] as dynamic,
-      distance: data['distance'] as int?,
+      distance: data['distance'] as dynamic,
       rating: data['rating'] as dynamic,
-      ratingCount: data['ratingCount'] as int?,
+      ratingCount: data['ratingCount'] as dynamic,
       latitude: data['latitude'] as String?,
       longitude: data['longitude'] as String?,
       isFavourite: data['isFavourite'] as bool?,
@@ -100,9 +100,9 @@ class Restaurantlist {
     dynamic officialWebsite,
     dynamic contactNumber,
     dynamic email,
-    int? distance,
+    dynamic distance,
     dynamic rating,
-    int? ratingCount,
+    dynamic ratingCount,
     String? latitude,
     String? longitude,
     bool? isFavourite,
