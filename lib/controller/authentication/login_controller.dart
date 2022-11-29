@@ -22,7 +22,6 @@ class LoginController extends GetxController {
       // isToken: false,
       data!,
       logInEndPoint,
-      // token: 'token',
     );
 
     // print(data);
@@ -38,7 +37,7 @@ class LoginController extends GetxController {
     // }
     if (response['response'] == 1) {
       ShowToast.show(
-        msg: response['errorMessage'],
+        msg: "Otp Is ${response['otp'].toString()}",
       );
       isLoading.value = false;
       userSession.setIsProfileCreated(response['isProfileCreated']);
@@ -64,14 +63,16 @@ class LoginController extends GetxController {
       // print("TOKEN ===>>> ${userSession.token}");
       print(
           "IsProfileCreated Login Page ===>>> ${userSession.isProfileCreated}");
-      return true;
-    }
-    ShowToast.show(
-      msg: response['errorMessage'] ?? 'Please try again!',
-      isError: true,
-    );
 
-    isLoading.value = false;
+      return true;
+    } else {
+      ShowToast.show(
+        msg: response['errorMessage'] ?? 'Please try again!',
+        isError: true,
+      );
+      isLoading.value = false;
+      update();
+    }
     return false;
   }
 }

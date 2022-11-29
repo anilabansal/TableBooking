@@ -4,9 +4,9 @@ import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 
 class BookingDetailsTab extends StatelessWidget {
-  String callFrom;
+  final String callFrom;
 
-  BookingDetailsTab({
+  const BookingDetailsTab({
     required this.callFrom,
     Key? key,
   }) : super(key: key);
@@ -14,6 +14,7 @@ class BookingDetailsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         // BOOKING DEATIS TOP VIEW
@@ -61,24 +62,42 @@ class BookingDetailsTab extends StatelessWidget {
               fontSize: 15,
               fontWeight: FontWeight.w400,
             ),
-            CommonSizedBox(
-              height: 25,
-            ),
-            CommonText(
-              text: 'Type of Food',
-              color: textLight868686,
-              fontSize: 13,
-              fontWeight: FontWeight.w400,
-            ),
-            CommonSizedBox(
-              height: 5,
-            ),
-            CommonText(
-              color: black000000,
-              text: 'Continental',
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-            ),
+            // CommonSizedBox(
+            //   height: 25,
+            // ),
+            // CommonText(
+            //   text: 'Type of Food',
+            //   color: textLight868686,
+            //   fontSize: 13,
+            //   fontWeight: FontWeight.w400,
+            // ),
+            // CommonSizedBox(
+            //   height: 5,
+            // ),
+            // CommonText(
+            //   color: black000000,
+            //   text: 'Continental',
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.w400,
+            // ),
+            // CommonSizedBox(
+            //   height: 25,
+            // ),
+            // CommonText(
+            //   text: 'Tip',
+            //   color: textLight868686,
+            //   fontSize: 13,
+            //   fontWeight: FontWeight.w400,
+            // ),
+            // CommonSizedBox(
+            //   height: 5,
+            // ),
+            // CommonText(
+            //   color: black000000,
+            //   text: 'None',
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.w400,
+            // ),
           ],
         ),
         // BOOKING DEATIS BOTTOM VIEW
@@ -87,37 +106,37 @@ class BookingDetailsTab extends StatelessWidget {
           children: [
             callFrom == 'Upcoming'
                 ? Container(
-                    height: 25,
-                    width: 72,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(19),
-                      color: Colors.black,
-                    ),
-                    child: CommonText(
-                      text: 'Upcoming',
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      textAlign: TextAlign.center,
-                    ),
-                  )
+              height: 25,
+              width: 72,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(19),
+                color: Colors.black,
+              ),
+              child: CommonText(
+                text: 'Upcoming',
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                textAlign: TextAlign.center,
+              ),
+            )
                 : Container(
-                    height: 25,
-                    width: 72,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(19),
-                      color: Colors.green,
-                    ),
-                    child: CommonText(
-                      text: 'Completed',
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+              height: 25,
+              width: 72,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(19),
+                color: Colors.green,
+              ),
+              child: CommonText(
+                text: 'Completed',
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                textAlign: TextAlign.center,
+              ),
+            ),
             CommonSizedBox(
               height: 15,
             ),
@@ -154,24 +173,24 @@ class BookingDetailsTab extends StatelessWidget {
               fontSize: 15,
               fontWeight: FontWeight.w400,
             ),
-            CommonSizedBox(
-              height: 25,
-            ),
-            CommonText(
-              text: 'Tip',
-              color: textLight868686,
-              fontSize: 13,
-              fontWeight: FontWeight.w400,
-            ),
-            CommonSizedBox(
-              height: 5,
-            ),
-            CommonText(
-              color: black000000,
-              text: 'None',
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-            ),
+            // CommonSizedBox(
+            //   height: 25,
+            // ),
+            // CommonText(
+            //   text: 'Tip',
+            //   color: textLight868686,
+            //   fontSize: 13,
+            //   fontWeight: FontWeight.w400,
+            // ),
+            // CommonSizedBox(
+            //   height: 5,
+            // ),
+            // CommonText(
+            //   color: black000000,
+            //   text: 'None',
+            //   fontSize: 15,
+            //   fontWeight: FontWeight.w400,
+            // ),
           ],
         ),
       ],

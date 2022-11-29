@@ -9,6 +9,7 @@ const signUpEndPoint = 'api/Basic/RegisterMobileNo';
 const submitOtp = 'api/Basic/OTPSubmit';
 const resendOtp = 'api/Basic/ResendOTP';
 const createProfileEndPoint = 'api/Basic/SignUp';
+
 const zipCode = 'api/Home/SearchLocation';
 const aboutUs = 'api/Home/AboutUsDetail';
 const gallery = 'api/Home/ViewRestaurantGallery';
@@ -124,10 +125,12 @@ String infoIcon = "assets/images/home/info_icon.png";
 const isLogInString = 'isLogInString';
 const mobileNumberString = 'mobileNumber';
 const tokenString = 'tokenString';
+
 const countryCodeString = 'countryCodeString';
 const countryFlagString = 'countryFlagString';
 const userIdString = 'userIdString';
 const isProfileCreatedString = 'isProfileCreated';
 const fullNameString = 'fullName';
 const emailString = 'email';
+
 const profilePicString = 'profilePicString';

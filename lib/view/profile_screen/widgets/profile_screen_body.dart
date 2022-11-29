@@ -31,85 +31,85 @@ class EditProfileScreenBody extends StatelessWidget {
           children: [
             callFrom == 'Create Profile'
                 ? SizedBox(
-                    // height: 200,
-                    child: Stack(
-                      children: [
-                        Column(
-                          children: [
-                            Image.asset(createProfileBackGroundImage),
-                            SizedBox(
-                              width: Get.width,
-                              height: 50,
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                          //alignment: Alignment.bottomCenter,
-                          bottom: 0,
-                          left: MediaQuery.of(context).size.width * 0.3,
-                          right: MediaQuery.of(context).size.width * 0.3,
-                          top: 60,
-                          child: Container(
-                            margin: const EdgeInsets.only(top: 25),
-                            width: 123,
-                            height: 123,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(width: 10, color: white)),
-                            child: Container(
-                              width: 105,
-                              height: 103,
-                              color: red26E2211C,
-                              child: _profileController
-                                          .createProfileImage.value.path !=
-                                      ""
-                                  ? Image.file(
-                                      _profileController
-                                          .createProfileImage.value,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : const Icon(
-                                      Icons.person,
-                                      size: 70,
-                                      color: red4DE2211C,
-                                    ),
-                            ),
-                          ),
+              // height: 200,
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      Image.asset(createProfileBackGroundImage),
+                      SizedBox(
+                        width: Get.width,
+                        height: 50,
+                      ),
+                    ],
+                  ),
+                  Positioned(
+                    //alignment: Alignment.bottomCenter,
+                    bottom: 0,
+                    left: MediaQuery.of(context).size.width * 0.3,
+                    right: MediaQuery.of(context).size.width * 0.3,
+                    top: 60,
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 25),
+                      width: 123,
+                      height: 123,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(width: 10, color: white)),
+                      child: Container(
+                        width: 105,
+                        height: 103,
+                        color: red26E2211C,
+                        child: _profileController
+                            .createProfileImage.value.path !=
+                            ""
+                            ? Image.file(
+                          _profileController
+                              .createProfileImage.value,
+                          fit: BoxFit.cover,
                         )
-                      ],
+                            : const Icon(
+                          Icons.person,
+                          size: 70,
+                          color: red4DE2211C,
+                        ),
+                      ),
                     ),
                   )
+                ],
+              ),
+            )
                 : Center(
-                    child: Container(
-                      width: 105,
-                      height: 105,
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 9, color: white),
-                        borderRadius: BorderRadius.circular(3.0),
-                        boxShadow: const [
-                          BoxShadow(
-                              blurRadius: 9,
-                              offset: Offset(0, 4),
-                              color: Color.fromRGBO(192, 192, 192, 0.25))
-                        ],
-                        // image: DecorationImage(
-                        //   image: NetworkImage(_profileController
-                        //       .userProfileData.value.profileImage!),
-                        //   fit: BoxFit.cover,
-                        // ),
-                      ),
-                      child:
-                          _profileController.createProfileImage.value.path == ""
-                              ? Image.network(
-                                  userSessionController.profilePic,
-                                  fit: BoxFit.cover,
-                                )
-                              : Image.file(
-                                  _profileController.createProfileImage.value,
-                                  fit: BoxFit.cover,
-                                ),
-                    ),
-                  ),
+              child: Container(
+                width: 105,
+                height: 105,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 9, color: white),
+                  borderRadius: BorderRadius.circular(3.0),
+                  boxShadow: const [
+                    BoxShadow(
+                        blurRadius: 9,
+                        offset: Offset(0, 4),
+                        color: Color.fromRGBO(192, 192, 192, 0.25))
+                  ],
+                  // image: DecorationImage(
+                  //   image: NetworkImage(_profileController
+                  //       .userProfileData.value.profileImage!),
+                  //   fit: BoxFit.cover,
+                  // ),
+                ),
+                child:
+                _profileController.createProfileImage.value.path == ""
+                    ? Image.network(
+                  userSessionController.profilePic,
+                  fit: BoxFit.cover,
+                )
+                    : Image.file(
+                  _profileController.createProfileImage.value,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
             const SizedBox(
               height: 10,
             ),
@@ -203,43 +203,43 @@ class EditProfileScreenBody extends StatelessWidget {
                   // ),
                   callFrom == "Create Profile"
                       ? PhoneField(
-                          isCreateProfile: true,
-                          enable: false,
-                          phoneController:
-                              _profileController.mobileNumberController,
+                    isCreateProfile: true,
+                    enable: false,
+                    phoneController:
+                    _profileController.mobileNumberController,
 
-                          // phoneController: _profileController
-                          // .mobileNumberController,
-                          countryCode: userSessionController.countryCode,
-                          countryFlag: userSessionController.countryFlag,
-                          // onCountryFlag: (value) {
-                          //   //   print('Country flag ---> ${value}');
-                          //   _profileController.countryFlag.value = value;
-                          // },
-                          // onCodeChange: (value) {
-                          //   _profileController.countryCode.value = value;
-                          // },
-                          textFieldColor: greyF4F4F4,
-                        )
+                    // phoneController: _profileController
+                    // .mobileNumberController,
+                    countryCode: userSessionController.countryCode,
+                    countryFlag: userSessionController.countryFlag,
+                    // onCountryFlag: (value) {
+                    //   //   print('Country flag ---> ${value}');
+                    //   _profileController.countryFlag.value = value;
+                    // },
+                    // onCodeChange: (value) {
+                    //   _profileController.countryCode.value = value;
+                    // },
+                    textFieldColor: greyF4F4F4,
+                  )
                       : PhoneField(
-                          isCreateProfile: true,
-                          enable: false,
-                          phoneController:
-                              _profileController.mobileNumberController,
+                    isCreateProfile: true,
+                    enable: false,
+                    phoneController:
+                    _profileController.mobileNumberController,
 
-                          // phoneController: _profileController
-                          // .mobileNumberController,
-                          countryCode: userSessionController.countryCode,
-                          countryFlag: userSessionController.countryFlag,
-                          // onCountryFlag: (value) {
-                          //   //   print('Country flag ---> ${value}');
-                          //   _profileController.countryFlag.value = value;
-                          // },
-                          // onCodeChange: (value) {
-                          //   _profileController.countryCode.value = value;
-                          // },
-                          textFieldColor: greyF4F4F4,
-                        ),
+                    // phoneController: _profileController
+                    // .mobileNumberController,
+                    countryCode: userSessionController.countryCode,
+                    countryFlag: userSessionController.countryFlag,
+                    // onCountryFlag: (value) {
+                    //   //   print('Country flag ---> ${value}');
+                    //   _profileController.countryFlag.value = value;
+                    // },
+                    // onCodeChange: (value) {
+                    //   _profileController.countryCode.value = value;
+                    // },
+                    textFieldColor: greyF4F4F4,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -408,22 +408,22 @@ class EditProfileScreenBody extends StatelessWidget {
                                 .lastNameController.text
                                 .trim(),
                             "MobileNo":
-                                "+${userSessionController.countryCode}${_profileController.mobileNumberController.value.text.trim()}",
+                            "+${userSessionController.countryCode}${_profileController.mobileNumberController.value.text.trim()}",
                             // "+917066000014",
                             "Address": _profileController
                                 .streetAddressController.text
                                 .trim(),
                             "DateofBirth":
-                                _profileController.dateController.text,
+                            _profileController.dateController.text,
                             "City":
-                                _profileController.cityController.text.trim(),
+                            _profileController.cityController.text.trim(),
                             "Email": _profileController
                                 .emailAddressController.text
                                 .trim(),
                             "State":
-                                _profileController.stateController.text.trim(),
+                            _profileController.stateController.text.trim(),
                             "ZipCode":
-                                _profileController.zipCodeController.text,
+                            _profileController.zipCodeController.text,
                             "AuthenticationId": "fgs",
                             "AuthenticationType": "fg",
                             "DeviceToken": "gdfs",
@@ -434,8 +434,8 @@ class EditProfileScreenBody extends StatelessWidget {
                               : updateProfileDetail,
                           // filename: "ProfilePic",
                           imageFile:
-                              _profileController.createProfileImage.value).then(
-                        (value) async {
+                          _profileController.createProfileImage.value).then(
+                            (value) async {
                           if (value) {
                             _profileController.createProfileImage.value == "";
                             print(_profileController.createProfileImage.value);

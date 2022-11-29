@@ -1,10 +1,12 @@
 import 'package:booking_table/controller/home/home_controller.dart';
+import 'package:booking_table/controller/location/location_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/home_screen/widgets/map_home_widget.dart';
 import 'package:booking_table/view/home_screen/widgets/restaurants_home_widget.dart';
 import 'package:booking_table/view/home_screen/widgets/search_home_widget.dart';
+import 'package:booking_table/view/profile_screen/search_location.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -110,16 +112,48 @@ class HomeBody extends StatelessWidget {
                                     CommonSizedBox(
                                       width: 2,
                                     ),
-                                    CommonText(
-                                      text: "Montgomery, 35004",
-                                      color: black000000,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                                    Obx(() {
+                                      return SizedBox(
+                                        width: Get.width * 0.5,
+                                        child: CommonText(
+                                          overflow: TextOverflow.clip,
+                                          text: LocationController()
+                                                      .searchController
+                                                      .value
+                                                      .text ==
+                                                  null
+                                              ? LocationController()
+                                                  .currentAddress
+                                                  .value
+                                              : LocationController()
+                                                  .searchController
+                                                  .value
+                                                  .text,
+                                          color: black000000,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      );
+                                    }),
                                     const SizedBox(
                                       width: 10,
                                     ),
-                                    const Icon(Icons.keyboard_arrow_down),
+                                    InkWell(
+                                        onTap: () {
+                                          LocationController()
+                                              .requestPermission()
+                                              .then(
+                                            (value) {
+                                              print("Button");
+                                              if (value) {
+                                                Get.to(() =>
+                                                    const SearchLocation());
+                                              }
+                                            },
+                                          );
+                                        },
+                                        child: const Icon(
+                                            Icons.keyboard_arrow_down)),
                                     // Image.asset(
                                     //   dropDownIconImage,
                                     //   width: 9,

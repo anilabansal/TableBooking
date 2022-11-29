@@ -52,26 +52,26 @@ class DrawerScreen extends StatelessWidget {
                           children: [
                             _userSessionController.isLogin == false
                                 ? const Icon(
-                                    Icons.person,
-                                    size: 40,
-                                  )
+                              Icons.person,
+                              size: 40,
+                            )
                                 : _userSessionController.profilePic != null
-                                    ? CommonSizedBox(
-                                        height: 49,
-                                        width: 49,
-                                        child: ClipOval(
-                                          child: Image.network(
-                                            _userSessionController.profilePic,
-                                            height: 49,
-                                            width: 49,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                      )
-                                    : const Icon(
-                                        Icons.person,
-                                        size: 40,
-                                      ),
+                                ? CommonSizedBox(
+                              height: 49,
+                              width: 49,
+                              child: ClipOval(
+                                child: Image.network(
+                                  _userSessionController.profilePic,
+                                  height: 49,
+                                  width: 49,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            )
+                                : const Icon(
+                              Icons.person,
+                              size: 40,
+                            ),
                             const SizedBox(
                               width: 15,
                             ),
@@ -91,41 +91,41 @@ class DrawerScreen extends StatelessWidget {
                                 _userSessionController.isLogin == false
                                     ? Container()
                                     : Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CommonText(
-                                            text: _userSessionController.email,
-                                            fontFamily: proximaNovaFont,
-                                            fontWeight: FontWeight.w400,
-                                            color: black000000,
-                                            fontSize: 14,
-                                          ),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          InkWell(
-                                            onTap: () async {
-                                              await profileController
-                                                  .getProfileDetails()
-                                                  .then((value) async {
-                                                if (value) {
-                                                  await profileController
-                                                      .getProfileDetails();
-                                                  Get.toNamed('/edit-profile');
-                                                }
-                                              });
-                                            },
-                                            child: CommonText(
-                                              text: "Edit Profile",
-                                              fontFamily: proximaNovaFont,
-                                              fontWeight: FontWeight.w400,
-                                              color: redE2211C,
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ],
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    CommonText(
+                                      text: _userSessionController.email,
+                                      fontFamily: proximaNovaFont,
+                                      fontWeight: FontWeight.w400,
+                                      color: black000000,
+                                      fontSize: 14,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    InkWell(
+                                      onTap: () async {
+                                        await profileController
+                                            .getProfileDetails()
+                                            .then((value) async {
+                                          if (value) {
+                                            await profileController
+                                                .getProfileDetails();
+                                            Get.toNamed('/edit-profile');
+                                          }
+                                        });
+                                      },
+                                      child: CommonText(
+                                        text: "Edit Profile",
+                                        fontFamily: proximaNovaFont,
+                                        fontWeight: FontWeight.w400,
+                                        color: redE2211C,
+                                        fontSize: 12,
                                       ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             )
                           ],
@@ -213,11 +213,11 @@ class DrawerScreen extends StatelessWidget {
                         userSessionController.isLogin == false
                             ? Container()
                             : textAndIcon("Logout", () async {
-                                // userSessionController.logOut();
+                          // userSessionController.logOut();
 
-                                await getXBuildDefaultDialog(
-                                    callFrom: "Logout");
-                              })
+                          await getXBuildDefaultDialog(
+                              callFrom: "Logout");
+                        })
                         // : Container(),
                       ],
                     );

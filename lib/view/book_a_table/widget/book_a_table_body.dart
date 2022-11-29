@@ -20,7 +20,7 @@ class BookATableBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => SingleChildScrollView(
+          () => SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -49,7 +49,7 @@ class BookATableBody extends StatelessWidget {
                       height: 15,
                     ),
                     const CommonDatePicker(
-                      fillColor: greyF5F5F5,
+                      //fillColor: greyF5F5F5,
                     )
                   ],
                 ).paddingOnly(
@@ -234,7 +234,7 @@ class BookATableBody extends StatelessWidget {
                         ),
                         // ignore: unrelated_type_equality_checks
                         typeServiceContainer(
-                            "Go To", controller.serviceType.value == "Go To"),
+                            "To Go", controller.serviceType.value == "To Go"),
                       ],
                     ),
                     CommonSizedBox(
@@ -255,17 +255,17 @@ class BookATableBody extends StatelessWidget {
                           Expanded(
                             child: CommonText(
                               text: controller.serviceType.value == "Full"
-                                  ? "Traditional order when seated with a server"
+                                  ? "Order with server in restaurant"
                                   : controller.serviceType.value == "No"
-                                      ? "Pre order through the app, and then order everything through the app while at the restaurant."
-                                      : controller.serviceType.value == "Go To"
-                                          ? "You can take away your order as well."
-                                          : "Pre-Order your food and drink and still have a server in restaurant",
+                                  ? "Pre-order food/drink and any add-ons in restaurant via the app. No server"
+                                  : controller.serviceType.value == "To Go"
+                                  ? "Order food/drink to go"
+                                  : "Pre-order food/drink via the app and have a server in restaurant",
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
                               color: textGrey868686,
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),

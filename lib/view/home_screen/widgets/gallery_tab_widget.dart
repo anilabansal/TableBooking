@@ -30,64 +30,64 @@ class GalleryTab extends StatelessWidget {
       builder: (controller) {
         return controller.galleryImagesRestaurantList.value != null
             ? Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CommonText(
-                    text: "All Photos",
-                    fontWeight: FontWeight.w700,
-                    color: black000000,
-                    fontSize: 15,
-                  ),
-                  const SizedBox(
-                    height: 13,
-                  ),
-                  Expanded(
-                    child: StaggeredGridView.countBuilder(
-                      crossAxisCount: 4,
-                      shrinkWrap: true,
-                      mainAxisSpacing: 17,
-                      crossAxisSpacing: 17,
-                      //  physics: const NeverScrollableScrollPhysics(),
-                      itemCount: controller.galleryImagesRestaurantList.length,
-                      itemBuilder: (context, index) {
-                        return SizedBox(
-                          child: InkWell(
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (_) => BackdropFilter(
-                                    filter:
-                                        ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                                    child: AlertDialog(
-                                      insetPadding: EdgeInsets.zero,
-                                      backgroundColor: Colors.transparent,
-                                      content: SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: RestaurantImageZoomView(
-                                          restaurantImage: controller
-                                              .galleryImagesRestaurantList[
-                                                  index]
-                                              .restaurantImage,
-                                        ),
-                                      ),
-                                    ),
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CommonText(
+              text: "All Photos",
+              fontWeight: FontWeight.w700,
+              color: black000000,
+              fontSize: 15,
+            ),
+            const SizedBox(
+              height: 13,
+            ),
+            Expanded(
+              child: StaggeredGridView.countBuilder(
+                crossAxisCount: 4,
+                shrinkWrap: true,
+                mainAxisSpacing: 17,
+                crossAxisSpacing: 17,
+                //  physics: const NeverScrollableScrollPhysics(),
+                itemCount: controller.galleryImagesRestaurantList.length,
+                itemBuilder: (context, index) {
+                  return SizedBox(
+                    child: InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => BackdropFilter(
+                              filter:
+                              ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                              child: AlertDialog(
+                                insetPadding: EdgeInsets.zero,
+                                backgroundColor: Colors.transparent,
+                                content: SizedBox(
+                                  width:
+                                  MediaQuery.of(context).size.width,
+                                  child: RestaurantImageZoomView(
+                                    restaurantImage: controller
+                                        .galleryImagesRestaurantList[
+                                    index]
+                                        .restaurantImage,
                                   ),
-                                );
-                              },
-                              child: Image.network(
-                                controller.galleryImagesRestaurantList[index]
-                                    .restaurantImage,
-                              )),
-                        );
-                      },
-                      staggeredTileBuilder: (int index) =>
-                          StaggeredTile.count(2, index.isEven ? 2 : 2.5),
-                    ),
-                  )
-                ],
-              )
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        child: Image.network(
+                          controller.galleryImagesRestaurantList[index]
+                              .restaurantImage,
+                        )),
+                  );
+                },
+                staggeredTileBuilder: (int index) =>
+                    StaggeredTile.count(2, index.isEven ? 2 : 2.5),
+              ),
+            )
+          ],
+        )
             : const CommonNoDataFound();
       },
     );

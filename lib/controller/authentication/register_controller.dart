@@ -28,6 +28,9 @@ class RegisterController extends GetxController {
     print(data);
     print('Register Response ======> $response');
     if (response['response'] == 1) {
+      ShowToast.show(
+        msg: "Otp Is ${response['otp'].toString()}",
+      );
       userSession.setIsProfileCreated(response['isProfileCreated']);
       userSession.setCountryCode(countryCode.value);
       userSession.setCountryFlag(countryFlag.value);

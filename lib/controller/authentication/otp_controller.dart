@@ -10,6 +10,7 @@ class OtpController extends GetxController {
   /// Variables
   var pinOutPut = ''.obs;
   var isLoading = false.obs;
+  var resendLoading = false.obs;
   // var mobileNumberData = Get.arguments;
 
   /// Controllers
@@ -66,14 +67,14 @@ class OtpController extends GetxController {
       ShowToast.show(
         msg: response['otp'.toString()].toString(),
       );
-      isLoading.value = false;
+      resendLoading.value = false;
       return true;
     }
     ShowToast.show(
       msg: response['errorMessage'] ?? 'Please try again!',
       isError: true,
     );
-    isLoading.value = false;
+    resendLoading.value = false;
 
     return false;
   }

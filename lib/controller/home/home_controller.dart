@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/location/location_controller.dart';
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/model/restaurant/restaurant_list_model.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
@@ -22,10 +23,11 @@ class HomeController extends GetxController {
 
   HomeController._internal();
   UserSessionController userSessionController = Get.find();
+  LocationController locationController = Get.find();
 
   // var selectedIndex = 0.obs;
-  var longitude = '76.69060936300099'.obs;
-  var latitude = '30.713649330499276'.obs;
+  // var longitude = locationController.latLng.value.longitude.toString() ;
+  // var latitude = ;
   ApiCalls apiCall = ApiCalls();
   final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
   var serviceType = ''.obs;
@@ -73,8 +75,8 @@ class HomeController extends GetxController {
     try {
       final response = await apiCall.callPostApi(
         {
-          "longitude": '76.69060936300099',
-          "latitude": '30.713649330499276',
+          "longitude": locationController.latLng.value.longitude.toString(),
+          "latitude": locationController.latLng.value.latitude.toString(),
         },
         zipCode,
         token: userSessionController.token,

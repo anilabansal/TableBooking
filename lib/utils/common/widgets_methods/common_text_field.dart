@@ -51,8 +51,11 @@
 //         style: const TextStyle(
 //           fontSize: 14,
 //           fontWeight: FontWeight.w400,
+
+  //           color: black000000,
+
 //           color: black000000,
-//         ),
+
 //         decoration: InputDecoration(
 //           border: InputBorder.none,
 //           hintText: widget.hint,

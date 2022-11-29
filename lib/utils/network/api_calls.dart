@@ -24,11 +24,11 @@ class ApiCalls extends GetConnect {
 
   Future<dynamic> callPostApi(Map<String, dynamic>? body, String endPoint,
       {bool isToken = false,
-      String? token,
-      // bool isFullUrl = false,
-      // String baseUrl,
-      isPayment = false,
-      bool isString = false}) async {
+        String? token,
+        // bool isFullUrl = false,
+        // String baseUrl,
+        isPayment = false,
+        bool isString = false}) async {
     Map<String, String> withToken;
 
     withToken = {
@@ -71,7 +71,7 @@ class ApiCalls extends GetConnect {
         Get.defaultDialog(
           title: "Token Expired!",
           titleStyle:
-              const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           content: Column(
             children: [
               Image.asset(
@@ -84,7 +84,7 @@ class ApiCalls extends GetConnect {
               CommonText(
                 fontSize: 16,
                 text:
-                    "Your token has expired!\nPlease login again to continue..",
+                "Your token has expired!\nPlease login again to continue..",
                 textAlign: TextAlign.center,
               ),
             ],
@@ -93,7 +93,7 @@ class ApiCalls extends GetConnect {
           actions: [
             Padding(
               padding:
-                  const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 5.0),
+              const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 5.0),
               child: Row(
                 children: [
                   Expanded(
@@ -144,13 +144,13 @@ class ApiCalls extends GetConnect {
 
   /// This method is for get request with multipart to the server.
   Future<dynamic> callMultipartWithFileAPI(
-    Map<String, String> body,
-    String endPoint,
-    File imageFile, {
-    bool isToken = false,
-    String token = '',
-    bool isFullUrl = false,
-  }) async {
+      Map<String, String> body,
+      String endPoint,
+      File imageFile, {
+        bool isToken = false,
+        String token = '',
+        bool isFullUrl = false,
+      }) async {
     print('Request Body ------------------>\n ${body.toString()}');
     print('Request Image ------------------>\n ${imageFile.toString()}');
     print('url ------------------>\n $baseURL/$endPoint');
@@ -163,7 +163,7 @@ class ApiCalls extends GetConnect {
 
     print('Header ------------------>\n ${headers.toString()}');
     var request =
-        http.MultipartRequest('POST', Uri.parse('$baseURL/$endPoint'));
+    http.MultipartRequest('POST', Uri.parse('$baseURL/$endPoint'));
     request.fields.addAll(body);
     if (imageFile.path != '') {
       request.files
@@ -200,98 +200,98 @@ class ApiCalls extends GetConnect {
     }
   }
 
-  // Future<dynamic> callPostApiWithFile(
-  //     Map<String, dynamic> body, String endPoint,
-  //     {bool isToken = false,
-  //     String? token = '',
-  //     String? filename,
-  //     File? imageFile,
-  //     isPayment = false,
-  //     bool isString = false}) async {
-  //   Map<String, String> withToken;
-  //
-  //   withToken = {
-  //     // "Content-Type":
-  //     //     "multipart/form-data; boundary=<calculated when request is sent>",
-  //     // 'accept': 'text/plain',
-  //     "Authorization": 'Bearer $token',
-  //   };
-  //
-  //   print(
-  //       'API Request Header ------------------------------->\n ${jsonEncode(withToken)}');
-  //   String url = '$baseURL/$endPoint';
-  //   print('URL Request ------------------------------->\n $url');
-  //   final bodyListValues = "${body.values}:${body.keys}";
-  //   final bodyListKeys = body.keys.toList();
-  //   try {
-  //     // MultipartFile request = MultipartFile(imageFile, filename: filename!);
-  //     print("====> Body Keys ${body.keys}");
-  //
-  //     List<SignUpModal> list = body.entries
-  //         .map((entry) => SignUpModal(entry.key, entry.value))
-  //         .toList();
-  //
-  //     var form = FormData({
-  //       // "file": MultipartFile(imageFile!, filename: filename!),
-  //
-  //       // if (imageFile != null && imageFile.path != '') "file": request,
-  //     });
-  //
-  //     var response = await post(
-  //       url,
-  //       form,
-  //       headers: withToken,
-  //     );
-  //     // String finalResponse = response.body;
-  //     print(
-  //         "Body Keys ===> ${bodyListKeys} Body Values ===> ${bodyListValues}");
-  //     print("====> ${list.toString()}");
-  //     print("FormData ====> ${form.toString()}");
-  //
-  //     print(
-  //         'API Response Status Code ------------------------------->\n ${response.statusCode}');
-  //
-  //     print(
-  //         'API Response Body ------------------------------->\n ${response.body}');
-  //
-  //     print(
-  //         'API final body ------------------------------->\n ${response.body.toString()}');
-  //
-  //     print(
-  //         'API request Header ------------------------------->\n ${response.headers}');
-  //     print('Run Successfully!!!!!');
-  //     return response;
-  //     // if (response.statusCode == 200) {
-  //     //   return jsonDecode(finalResponse);
-  //     // }
-  //   } on Exception catch (e) {
-  //     print("========> Exception Error ${e.toString()}");
-  //   } catch (e) {
-  //     print('========> Error ${e.runtimeType.toString()}');
-  //     print('========> Error ${e.toString()}');
-  //   }
-  // }
+// Future<dynamic> callPostApiWithFile(
+//     Map<String, dynamic> body, String endPoint,
+//     {bool isToken = false,
+//     String? token = '',
+//     String? filename,
+//     File? imageFile,
+//     isPayment = false,
+//     bool isString = false}) async {
+//   Map<String, String> withToken;
+//
+//   withToken = {
+//     // "Content-Type":
+//     //     "multipart/form-data; boundary=<calculated when request is sent>",
+//     // 'accept': 'text/plain',
+//     "Authorization": 'Bearer $token',
+//   };
+//
+//   print(
+//       'API Request Header ------------------------------->\n ${jsonEncode(withToken)}');
+//   String url = '$baseURL/$endPoint';
+//   print('URL Request ------------------------------->\n $url');
+//   final bodyListValues = "${body.values}:${body.keys}";
+//   final bodyListKeys = body.keys.toList();
+//   try {
+//     // MultipartFile request = MultipartFile(imageFile, filename: filename!);
+//     print("====> Body Keys ${body.keys}");
+//
+//     List<SignUpModal> list = body.entries
+//         .map((entry) => SignUpModal(entry.key, entry.value))
+//         .toList();
+//
+//     var form = FormData({
+//       // "file": MultipartFile(imageFile!, filename: filename!),
+//
+//       // if (imageFile != null && imageFile.path != '') "file": request,
+//     });
+//
+//     var response = await post(
+//       url,
+//       form,
+//       headers: withToken,
+//     );
+//     // String finalResponse = response.body;
+//     print(
+//         "Body Keys ===> ${bodyListKeys} Body Values ===> ${bodyListValues}");
+//     print("====> ${list.toString()}");
+//     print("FormData ====> ${form.toString()}");
+//
+//     print(
+//         'API Response Status Code ------------------------------->\n ${response.statusCode}');
+//
+//     print(
+//         'API Response Body ------------------------------->\n ${response.body}');
+//
+//     print(
+//         'API final body ------------------------------->\n ${response.body.toString()}');
+//
+//     print(
+//         'API request Header ------------------------------->\n ${response.headers}');
+//     print('Run Successfully!!!!!');
+//     return response;
+//     // if (response.statusCode == 200) {
+//     //   return jsonDecode(finalResponse);
+//     // }
+//   } on Exception catch (e) {
+//     print("========> Exception Error ${e.toString()}");
+//   } catch (e) {
+//     print('========> Error ${e.runtimeType.toString()}');
+//     print('========> Error ${e.toString()}');
+//   }
+// }
 
-  // /// This method is for get request
-  //
-  // Future<dynamic> callGetApi(String endPoint, {String token = ''}) async {
-  //   try {
-  //     print('token ------------------>\n $token');
-  //     var response = await get(
-  //       '$baseURL/$endPoint',
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Authorization": token,
-  //       },
-  //     );
-  //     print('url ------------------>\n $baseURL/$endPoint');
-  //     String finalResponse = response.body;
-  //     print(
-  //         'endPoint API request header ------------------>\n ${jsonDecode(finalResponse)}');
-  //     print('endPoint API response ------------------>\n $finalResponse');
-  //     return jsonDecode(finalResponse);
-  //   } catch (e) {
-  //     print('$e');
-  //   }
-  // }
+// /// This method is for get request
+//
+// Future<dynamic> callGetApi(String endPoint, {String token = ''}) async {
+//   try {
+//     print('token ------------------>\n $token');
+//     var response = await get(
+//       '$baseURL/$endPoint',
+//       headers: {
+//         "Content-Type": "application/json",
+//         "Authorization": token,
+//       },
+//     );
+//     print('url ------------------>\n $baseURL/$endPoint');
+//     String finalResponse = response.body;
+//     print(
+//         'endPoint API request header ------------------>\n ${jsonDecode(finalResponse)}');
+//     print('endPoint API response ------------------>\n $finalResponse');
+//     return jsonDecode(finalResponse);
+//   } catch (e) {
+//     print('$e');
+//   }
+// }
 }

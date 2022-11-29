@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ReservationController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+
+    with  GetSingleTickerProviderStateMixin{
+
   late TabController tabController;
   final myTabs = [
     const Tab(

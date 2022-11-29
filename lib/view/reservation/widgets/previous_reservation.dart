@@ -184,7 +184,7 @@ class PreviousReservations extends StatelessWidget {
                             ),
                             child: CommonText(
                               color: Colors.white,
-                              text: 'Give Review',
+                              text: 'Submit Review',
                               textAlign: TextAlign.center,
                               fontSize: 14,
                               fontWeight: FontWeight.w500,

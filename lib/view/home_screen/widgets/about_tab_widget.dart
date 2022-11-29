@@ -1,9 +1,9 @@
-import 'package:booking_table/controller/restaurant_details/restaurant_details_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/no_data_found.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:booking_table/controller/restaurant_details/restaurant_details_controller.dart';
 
 class AboutTabScreen extends StatelessWidget {
   const AboutTabScreen({Key? key}) : super(key: key);
