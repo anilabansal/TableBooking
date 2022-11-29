@@ -7,11 +7,9 @@ class SearchBox extends StatefulWidget {
   final String? hintText;
   final Function()? callBack;
   final TextEditingController? destinationController;
-
   const SearchBox(
       {Key? key, this.hintText, this.callBack, this.destinationController})
       : super(key: key);
-
   @override
   State<SearchBox> createState() => _SearchBoxState();
 }
@@ -30,37 +28,38 @@ class _SearchBoxState extends State<SearchBox> {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
         child: GooglePlaceAutoCompleteTextField(
-            textEditingController: widget.destinationController!,
-            // textEditingController: locationController.searchController.value,
-            googleAPIKey: googleApiKey,
-            textStyle: const TextStyle(
+          textEditingController: widget.destinationController!,
+          // textEditingController: locationController.searchController.value,
+          googleAPIKey: googleApiKey,
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 14,
+            color: black000000,
+          ),
+          inputDecoration: InputDecoration(
+            hintText: widget.hintText.toString(),
+            border: InputBorder.none,
+            hintStyle: const TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 14,
               color: black000000,
             ),
-            inputDecoration: InputDecoration(
-              hintText: widget.hintText.toString(),
-              border: InputBorder.none,
-              hintStyle: const TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-                color: black000000,
+            suffixIcon: IconButton(
+              onPressed: () {
+                widget.destinationController!.clear();
+              },
+              icon: const Icon(
+                Icons.close,
+                //color: white,
               ),
-              suffixIcon: IconButton(
-                  onPressed: () {
-                    widget.destinationController!.clear();
-                  },
-                  icon: const Icon(
-                    Icons.close,
-                    //color: white,
-                  )),
             ),
-            itmClick: (Prediction prediction) {
-              print('onTap');
-              widget.destinationController!.text =
-                  prediction.description.toString();
-              widget.callBack!();
-            }),
+          ),
+          itmClick: (Prediction prediction) {
+            print('onTap');
+            widget.destinationController!.text = prediction.description.toString();
+            widget.callBack!();
+          },
+        ),
       ),
     );
   }

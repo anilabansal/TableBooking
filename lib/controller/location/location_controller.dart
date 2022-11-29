@@ -10,8 +10,7 @@ import '../home/modals/restaurant_list_modal.dart';
 import '../user_session/user_session_controller.dart';
 
 class LocationController extends GetxController {
-  static final LocationController locationController =
-      LocationController._internal();
+  static final LocationController locationController = LocationController._internal();
   factory LocationController() {
     return locationController;
   }
@@ -26,14 +25,13 @@ class LocationController extends GetxController {
   var currentAddress = ''.obs;
   var latLng  = const LatLng(0.0, 0.0).obs;
   var isLoading = false.obs;
+  var mapHomeLoading = true.obs;
   var cameraPosition = const CameraPosition(target:LatLng(0.0, 0.0)).obs;
   var homeRestaurantList = [].obs;
-
   void setLatLng(LatLng latLng) {
     searchLocationData = latLng;
     update();
   }
-
   Future<bool> requestPermission() async {
     final status = await Permission.location.request();
     print('Permission =-===> ${status.isGranted}');
@@ -42,16 +40,16 @@ class LocationController extends GetxController {
       latLng.value = LatLng(locationData!.latitude!, locationData!.longitude!);
       print(
           'location--->Lat-${locationData!.latitude} Long-${locationData!.longitude}');
-
       return true;
-    } else if (status.isPermanentlyDenied) {
+    }
+    else if (status.isPermanentlyDenied) {
       openAppSettings();
       return false;
-    } else {
+    }
+    else {
       return false;
     }
   }
-
 
   Future<bool> searchLocationApi({Map<String, String>? data}) async {
     final response = await apiCall.callPostApi(
@@ -75,7 +73,5 @@ class LocationController extends GetxController {
     }
     return false;
   }
-
-
 
 }

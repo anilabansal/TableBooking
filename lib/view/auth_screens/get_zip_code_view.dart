@@ -107,7 +107,7 @@ class _GetZipCodeViewState extends State<GetZipCodeView> {
                     ? const Center(
                         child: CircularProgressIndicator(
                         color: redE2211C,
-                      ))
+                      ),)
                     : CommonTextFormField(
                         readOnly: true,
                         controller: locationController.searchController.value,
