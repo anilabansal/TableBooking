@@ -24,9 +24,11 @@ class SplashViewController extends GetxController {
   Future<void> splashInit() async {
     await Future.delayed(const Duration(seconds: 2));
     if (controller.isLogin) {
+      Get.offAllNamed('/zip-code');
       // Get.offAllNamed('/create-profile');
-      Get.offAllNamed('/home');
+      // Get.offAllNamed('/home');
       // Get.offAllNamed('/authentication');
+
     } else {
       Get.offAllNamed('/authentication');
     }

@@ -17,9 +17,9 @@ class RestaurantHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(
         builder: (restaurantDetails) {
-      return homeController.homeRestaurantCount.value != null &&
+          return homeController.homeRestaurantCount.value != null &&
               homeController.homeRestaurantCount.value != 0
-          ? Padding(
+              ? Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(children: [
                 ListView.builder(
@@ -85,11 +85,11 @@ class RestaurantHomeScreen extends StatelessWidget {
                                       ),
                                       Container(
                                         width:
-                                            MediaQuery.of(context).size.width,
+                                        MediaQuery.of(context).size.width,
                                         height: 133,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(15),
+                                            BorderRadius.circular(15),
                                             image: DecorationImage(
                                                 image: AssetImage(
                                                   restaurantImage,
@@ -113,26 +113,26 @@ class RestaurantHomeScreen extends StatelessWidget {
                                           child: Center(
                                             child: Padding(
                                               padding:
-                                                  const EdgeInsets.all(0.0),
+                                              const EdgeInsets.all(0.0),
                                               child: IconButton(
                                                 onPressed: () {
                                                   homeController
                                                       .updateRestaurantLike();
                                                 },
                                                 icon: homeController
-                                                        .homeRestaurantList[
-                                                            index]
-                                                        .isFavourite
+                                                    .homeRestaurantList[
+                                                index]
+                                                    .isFavourite
                                                     ? const Icon(
-                                                        Icons.favorite,
-                                                        color: redE2211C,
-                                                        size: 18,
-                                                      )
+                                                  Icons.favorite,
+                                                  color: redE2211C,
+                                                  size: 18,
+                                                )
                                                     : const Icon(
-                                                        Icons.favorite,
-                                                        color: greyCACACA,
-                                                        size: 18,
-                                                      ),
+                                                  Icons.favorite,
+                                                  color: greyCACACA,
+                                                  size: 18,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -147,7 +147,7 @@ class RestaurantHomeScreen extends StatelessWidget {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       CommonText(
                                         text: homeController
@@ -162,7 +162,7 @@ class RestaurantHomeScreen extends StatelessWidget {
                                       ),
                                       CommonText(
                                         text:
-                                            "${homeController.homeRestaurantList[index].distance.toString()} miles away",
+                                        "${homeController.homeRestaurantList[index].distance.toString()} miles away",
                                         fontWeight: FontWeight.normal,
                                         fontSize: 15,
                                         color: grey868686,
@@ -177,7 +177,7 @@ class RestaurantHomeScreen extends StatelessWidget {
                       );
                     })
               ]))
-          : CommonNoDataFound();
-    });
+              : CommonNoDataFound();
+        });
   }
 }

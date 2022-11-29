@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../../utils/common/widgets_methods/progress_loader.dart';
 import '/controller/profile/profile_controller.dart';
 import '/utils/common/toast_message.dart';
 import '/utils/common/widgets_methods/common_button.dart';
@@ -16,14 +16,12 @@ class EditProfileScreenBody extends StatelessWidget {
   final String callFrom;
   final String mobileNumber;
   final ProfileController profileController;
-
   const EditProfileScreenBody({
     required this.callFrom,
     required this.mobileNumber,
     Key? key,
     required this.profileController,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -104,6 +102,7 @@ class EditProfileScreenBody extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
+              FocusScope.of(context).requestFocus(FocusNode());
               Future(
                 () => showModalBottomSheet(
                     context: context,
@@ -221,7 +220,7 @@ class EditProfileScreenBody extends StatelessWidget {
                   height: 5.7,
                 ),
                 CommonDatePicker(
-                  enable: false,
+                  //enable: false,
                   controller: profileController.dateController,
                 ),
                 const SizedBox(
@@ -315,7 +314,8 @@ class EditProfileScreenBody extends StatelessWidget {
                 callFrom == 'Create Profile'
                     ? CommonButton(
                         onTap: () async {
-                          print('button clicked');
+                          print(
+                              'button clicked----->${profileController.dateController.text}');
                           if (validateFields() != "") {
                             ShowToast.show(
                               msg: validateFields(),
@@ -323,54 +323,49 @@ class EditProfileScreenBody extends StatelessWidget {
                             );
                             return;
                           }
+                          ProgressDialog.showProgressDialog(context);
+                          profileController.isLoading.value = true;
                           await profileController.createProfile(
                               body: {
-                                // "userId": "19",
-                                // "roleId": "3",
-                                // "FirstName": "sahil",
-                                // "LastName": 'Kauhsal',
-                                // "Email": "ss@g.com",
-                                // "MobileNo": '+917066000016',
-                                // "Address": "address",
-                                // "DeviceToken": "1234",
-                                // "DeviceType":
-                                //     GetPlatform.isAndroid ? "Android" : "iOS",
-                                // "DateofBirth": "09/12/1999",
-                                // "City": "city",
-                                // "State": "state",
-                                // "ZipCode": "zipcode",
-                                // "AuthenticationId": "s",
-                                // "AuthenticationType": "s",
-                                "FirstName": profileController
+                                'FirstName': profileController
                                     .firstNameController.text
                                     .trim(),
-                                "LastName": profileController
+                                'LastName': profileController
                                     .lastNameController.text
                                     .trim(),
-                                "MobileNo": profileController
+                                'Email': '',
+                                'MobileNo': profileController
                                     .mobileNumberController.value.text
                                     .trim(),
-                                "Address": profileController
+                                'Address': profileController
                                     .streetAddressController.text
                                     .trim(),
-                                "DateofBirth":
+                                'DeviceToken': '',
+                                'DeviceType':
+                                    GetPlatform.isAndroid ? "Android" : "iOS",
+                                'DateofBirth':
+                                    //'2020-11-02',
                                     profileController.dateController.text,
-                                "City": profileController.cityController.text
+                                'City': profileController.cityController.text
                                     .trim(),
-                                "State": profileController.stateController.text
+                                'State': profileController.stateController.text
                                     .trim(),
-                                "ZipCode":
+                                'ZipCode':
                                     profileController.zipCodeController.text,
+                                'AuthenticationId': '',
+                                'AuthenticationType': ''
                               },
-                              endPoint: createProfileEndPoint,
+                              //  endPoint: createProfileEndPoint,
                               // filename: "ProfilePic",
                               imageFile: profileController
                                   .createProfileImage.value).then(
                             (value) {
+                              Navigator.pop(context);
                               if (value) {
+                                profileController.isLoading.value = false;
                                 print(
                                     profileController.createProfileImage.value);
-                                Get.toNamed('/zip-code');
+                                Get.offAllNamed('/zip-code');
 
                                 // showtoast
                               }
@@ -400,22 +395,28 @@ class EditProfileScreenBody extends StatelessWidget {
 
   /// validateFields
   validateFields() {
-    if (profileController.firstNameController.text.isEmpty) {
+    if (profileController.firstNameController.text.trim().isEmpty) {
       return 'please enter your first name!'.toTitleCase();
-    } else if (profileController.lastNameController.value.text.isEmpty) {
+    } else if (profileController.lastNameController.value.text.trim().isEmpty) {
       return 'please enter your last name!'.toTitleCase();
-    } else if (profileController.stateController.value.text.isEmpty) {
-      return 'please enter your state!'.toTitleCase();
-    } else if (profileController.cityController.value.text.isEmpty) {
-      return 'please enter your city!'.toTitleCase();
-    } else if (profileController.streetAddressController.value.text.isEmpty) {
-      return 'please enter your Street Address!'.toTitleCase();
+    } else if (profileController.mobileNumberController.value.text
+        .trim()
+        .isEmpty) {
+      return 'please enter your mobile Number!'.toTitleCase();
     } else if (profileController.dateController.value.text.isEmpty) {
       return 'please select date!'.toTitleCase();
-    } else if (profileController.zipCodeController.value.text.isEmpty) {
+    } else if (profileController.streetAddressController.value.text
+        .trim()
+        .isEmpty) {
+      return 'please enter your Street Address!'.toTitleCase();
+    } else if (profileController.cityController.value.text.trim().isEmpty) {
+      return 'please enter your city!'.toTitleCase();
+    } else if (profileController.stateController.value.text.trim().isEmpty) {
+      return 'please enter your state!'.toTitleCase();
+    } else if (profileController.zipCodeController.value.text.trim().isEmpty) {
       return 'please enter your zip code!'.toTitleCase();
-    } else if (profileController.mobileNumberController.value.text.isEmpty) {
-      return 'please enter your mobile Number!'.toTitleCase();
+    } else if (profileController.createProfileImage.value.path.isEmpty) {
+      return 'please upload profile image'.toTitleCase();
     }
     return '';
   }

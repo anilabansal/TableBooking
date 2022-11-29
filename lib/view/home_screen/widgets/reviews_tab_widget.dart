@@ -15,37 +15,37 @@ class ReviewsTabScreen extends StatelessWidget {
       builder: (controller) {
         return controller.totalReviews.value != "0"
             ? Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CommonText(
-                    text: "${controller.totalReviews.value} Reviews",
-                    fontWeight: FontWeight.w700,
-                    fontSize: 15,
-                    color: black000000,
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: controller.rateReviewsRestaurantList.length,
-                      shrinkWrap: true,
-                      //physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return reviewsWidget(
-                          controller
-                              .rateReviewsRestaurantList[index].profilePic,
-                          controller
-                              .rateReviewsRestaurantList[index].ratingByName,
-                          controller.rateReviewsRestaurantList[index].rating,
-                          controller.rateReviewsRestaurantList[index].reviews,
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              )
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CommonText(
+              text: "${controller.totalReviews.value} Reviews",
+              fontWeight: FontWeight.w700,
+              fontSize: 15,
+              color: black000000,
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: controller.rateReviewsRestaurantList.length,
+                shrinkWrap: true,
+                //physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return reviewsWidget(
+                    controller
+                        .rateReviewsRestaurantList[index].profilePic,
+                    controller
+                        .rateReviewsRestaurantList[index].ratingByName,
+                    controller.rateReviewsRestaurantList[index].rating,
+                    controller.rateReviewsRestaurantList[index].reviews,
+                  );
+                },
+              ),
+            ),
+          ],
+        )
             : CommonNoDataFound();
       },
     );
@@ -67,9 +67,9 @@ class ReviewsTabScreen extends StatelessWidget {
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     image:
-                        // profilePic
-                        //     ??
-                        AssetImage(
+                    // profilePic
+                    //     ??
+                    AssetImage(
                       "assets/images/home/profile_image.png",
                     ),
                   )),

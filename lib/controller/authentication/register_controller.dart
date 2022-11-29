@@ -6,8 +6,11 @@ import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
   var mobileNumber = TextEditingController();
+
   var isLoading = true.obs;
+
   var isChecked = false.obs;
+
   void updateCheckbox() {
     isChecked.value = !isChecked.value;
   }
@@ -21,14 +24,19 @@ class RegisterController extends GetxController {
       // token: 'token',
     );
     print(data);
-    print('Register Response ======> ${response.body}');
-    if (response.body['response'] == 1) {
+    // print('Register Response ======> ${response.body}');
+    if (response['response'] == 1) {
+      ShowToast.show(
+        msg: "Otp Is ${response['otp'].toString()}",
+      );
       isLoading.value = false;
+      update();
       return true;
     } else {
       ShowToast.show(
-          msg: response.body['errorMessage'] ?? 'Please try again!',
-          isError: true);
+          msg: response['errorMessage'] ?? 'Please try again!', isError: true);
+      isLoading.value = false;
+      update();
     }
     return false;
   }

@@ -22,7 +22,7 @@ class ProfileView extends StatelessWidget {
         text: callFrom == "Create Profile" ? "Create Profile" : "Edit Details",
       ),
       body: EditProfileScreenBody(
-          // mobileNumber: data[0]['mobileNumber']!,
+        // mobileNumber: data[0]['mobileNumber']!,
           mobileNumber: " data[0]['mobileNumber']!",
           callFrom: callFrom,
           profileController: profileController),

@@ -148,6 +148,24 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               CommonText(
+                text: 'Tip',
+                fontSize: 13,
+                fontWeight: FontWeight.w400,
+              ),
+              CommonText(
+                text: 'None',
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ],
+          ),
+          CommonSizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              CommonText(
                 text: 'Total Booking Amount',
                 fontSize: 13,
                 fontWeight: FontWeight.w400,
@@ -163,7 +181,7 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
           CommonText(
             textAlign: TextAlign.left,
             text:
-                'This amount will be charge at booking confirmation\nand will be deduct on your total bill amount',
+            'This amount will be charge at booking confirmation\nand will be deduct on your total bill amount',
             fontSize: 10,
             color: textLight868686,
             fontWeight: FontWeight.w400,

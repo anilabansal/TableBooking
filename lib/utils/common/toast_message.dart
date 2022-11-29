@@ -4,11 +4,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class ShowToast {
   static void show(
-      {String? msg,
+      {dynamic msg,
       bool isError = false,
       Toast toastLength = Toast.LENGTH_LONG}) {
     Fluttertoast.showToast(
-        msg: msg!,
+        msg: msg,
         toastLength: toastLength,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,

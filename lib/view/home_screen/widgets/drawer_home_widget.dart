@@ -41,56 +41,56 @@ class DrawerScreen extends StatelessWidget {
               children: <Widget>[
                 userSessionController.isLogin == true
                     ? Row(
-                        children: [
-                          Container(
-                            width: 68,
-                            height: 68,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    image: AssetImage(profileImage),
-                                    fit: BoxFit.cover)),
+                  children: [
+                    Container(
+                      width: 68,
+                      height: 68,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: AssetImage(profileImage),
+                              fit: BoxFit.cover)),
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CommonText(
+                          text: "Chaire Fiona",
+                          fontFamily: proximaNovaFont,
+                          fontWeight: FontWeight.w600,
+                          color: black000000,
+                          fontSize: 16,
+                        ),
+                        CommonText(
+                          text: "chaire_fione@gmail.com",
+                          fontFamily: proximaNovaFont,
+                          fontWeight: FontWeight.w400,
+                          color: black000000,
+                          fontSize: 14,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed('/edit-profile');
+                          },
+                          child: CommonText(
+                            text: "Edit Profile",
+                            fontFamily: proximaNovaFont,
+                            fontWeight: FontWeight.w400,
+                            color: redE2211C,
+                            fontSize: 12,
                           ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CommonText(
-                                text: "Chaire Fiona",
-                                fontFamily: proximaNovaFont,
-                                fontWeight: FontWeight.w600,
-                                color: black000000,
-                                fontSize: 16,
-                              ),
-                              CommonText(
-                                text: "chaire_fione@gmail.com",
-                                fontFamily: proximaNovaFont,
-                                fontWeight: FontWeight.w400,
-                                color: black000000,
-                                fontSize: 14,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Get.toNamed('/edit-profile');
-                                },
-                                child: CommonText(
-                                  text: "Edit Profile",
-                                  fontFamily: proximaNovaFont,
-                                  fontWeight: FontWeight.w400,
-                                  color: redE2211C,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      )
+                        ),
+                      ],
+                    )
+                  ],
+                )
                     : Container(),
                 const SizedBox(
                   height: 28,
@@ -113,48 +113,48 @@ class DrawerScreen extends StatelessWidget {
                 }),
                 userSessionController.isLogin == true
                     ? iconContainer(
-                        const Icon(
-                          Icons.favorite,
-                          color: redE2211C,
-                        ),
-                        "Favorites", () {
-                        Get.toNamed('/favourite');
-                      })
+                    const Icon(
+                      Icons.favorite,
+                      color: redE2211C,
+                    ),
+                    "Favorites", () {
+                  Get.toNamed('/favourite');
+                })
                     : Container(),
                 userSessionController.isLogin == true
                     ? iconContainer(
-                        const Icon(
-                          Icons.book,
-                          color: redE2211C,
-                        ),
-                        "Reservations", () {
-                        Get.toNamed('/reservation');
-                      })
+                    const Icon(
+                      Icons.book,
+                      color: redE2211C,
+                    ),
+                    "Reservations", () {
+                  Get.toNamed('/reservation');
+                })
                     : Container(),
                 userSessionController.isLogin == true
                     ? iconContainer(
-                        const Icon(
-                          Icons.wallet,
-                          color: redE2211C,
-                        ),
-                        "Payment Methods", () {
-                        Get.toNamed('/payment-method');
-                      })
+                    const Icon(
+                      Icons.wallet,
+                      color: redE2211C,
+                    ),
+                    "Payment Methods", () {
+                  Get.toNamed('/payment-method');
+                })
                     : Container(),
                 userSessionController.isLogin == true
                     ? iconContainer(
-                        const Icon(
-                          Icons.notifications,
-                          color: redE2211C,
-                        ),
-                        "Notifications", () {
-                        Get.toNamed('/notifications');
-                      })
+                    const Icon(
+                      Icons.notifications,
+                      color: redE2211C,
+                    ),
+                    "Notifications", () {
+                  Get.toNamed('/notifications');
+                })
                     : Container(),
                 userSessionController.isLogin == true
                     ? const SizedBox(
-                        height: 10,
-                      )
+                  height: 10,
+                )
                     : Container(),
                 Image.asset(lineImage),
                 const SizedBox(
@@ -171,8 +171,8 @@ class DrawerScreen extends StatelessWidget {
                 }),
                 userSessionController.isLogin == true
                     ? textAndIcon("Logout", () {
-                        userSessionController.logOut();
-                      })
+                  userSessionController.logOut();
+                })
                     : Container(),
               ],
             ),

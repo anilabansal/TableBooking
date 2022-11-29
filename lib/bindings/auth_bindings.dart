@@ -15,5 +15,7 @@ class AuthBindings extends Bindings {
     Get.lazyPut<SplashViewController>(() => SplashViewController());
     // Get.lazyPut<CountryController>(() => CountryController());
     Get.lazyPut<OtpController>(() => OtpController());
+    // Get.lazyPut<LocationController>(() =>LocationController());
+
   }
 }

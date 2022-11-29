@@ -4,11 +4,13 @@ import 'package:booking_table/controller/user_session/user_session_controller.da
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../../utils/common/common_strings.dart';
 import '../../utils/common/toast_message.dart';
 import '../../utils/network/api_calls.dart';
 
 class ProfileController extends GetxController {
   UserSessionController userSession = Get.find();
+  var isLoading = false.obs;
   @override
   void onInit() {
     // TODO: implement onInit
@@ -39,38 +41,42 @@ class ProfileController extends GetxController {
   var createProfileImage = File('').obs;
 
   /// Update Image File
-  updateImageFile(File value) {
-    createProfileImage.value = value;
-  }
+  // updateImageFile(File value) {
+  //   createProfileImage.value = value;
+  // }
 
   /// Create Profile
   Future<dynamic> createProfile(
-      {dynamic body,
-      String? endPoint,
-      File? imageFile,
-      String? filename}) async {
+      { Map<String, String>?  body,
+        // String? endPoint,
+        File? imageFile,
+        String? filename}) async {
     try {
-      final response = await apiCall.callMultipartWithFileAPI(
-          // body, endPoint!, imageFile!,
+      final response = await apiCall.callMultipartFileAPI(
+        // body, endPoint!, imageFile!,
           body!,
-          endPoint!,
-          // filename: filename!,
+          createProfileEndPoint,
+         // filename: filename!,
           imageFile!,
-          token: 'l${userSession.token}'
-          // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMzkiLCJleHAiOjE2Njg1ODUyMjAsImlzcyI6IlRlc3QuY29tIiwiYXVkIjoiVGVzdC5jb20ifQ.kOsK1K1dYmXDrVS8DdWE-_FvIcoc03DBxq6uXIuoIIw',
-          );
-
+          token: '${userSession.token}'
+        // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMzkiLCJleHAiOjE2Njg1ODUyMjAsImlzcyI6IlRlc3QuY29tIiwiYXVkIjoiVGVzdC5jb20ifQ.kOsK1K1dYmXDrVS8DdWE-_FvIcoc03DBxq6uXIuoIIw',
+      );
       if (response['response'] == 1) {
+        //userDetails.value = UserProfile.fromMap(response);
+        //userSession.setIsLogin(true);
+        print(userSession.isLogin);
+        // print("User Detail Model ====>>>>  ${userDetails.value}");
+        isLoading.value = false;
         return true;
       } else {
         ShowToast.show(
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
         );
+        isLoading.value = false;
         return false;
       }
 
-      //print('Response --------> ${jsonDecode(response)}');
 
     } catch (e) {
       print('Error --------> $e');

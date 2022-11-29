@@ -101,7 +101,7 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                         ),
                         CommonText(
                           text:
-                              "${controller.detailsRestaurantList.value.distance.toString()} miles away",
+                          "${controller.detailsRestaurantList.value.distance.toString()} miles away",
                           color: textGrey868686,
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -150,12 +150,12 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                     RatingBarIndicator(
                                       itemSize: 20,
                                       rating: controller.detailsRestaurantList
-                                                  .value.rating ==
-                                              null
+                                          .value.rating ==
+                                          null
                                           ? 0
                                           : controller.detailsRestaurantList
-                                              .value.rating!
-                                              .toDouble(),
+                                          .value.rating!
+                                          .toDouble(),
                                       // minRating: 1,
                                       direction: Axis.horizontal,
                                       itemCount: 5,
@@ -170,12 +170,12 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                     ),
                                     CommonText(
                                       text: controller.detailsRestaurantList
-                                                  .value.rating ==
-                                              null
+                                          .value.rating ==
+                                          null
                                           ? "0"
                                           : controller.detailsRestaurantList
-                                              .value.rating!
-                                              .toString(),
+                                          .value.rating!
+                                          .toString(),
                                       fontSize: 15,
                                       fontWeight: FontWeight.w700,
                                       color: black0D0000,
@@ -191,7 +191,7 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                 CommonText(
                                   /// Currently Null Please Uncomment if not  Null
                                   text:
-                                      "${controller.detailsRestaurantList.value.ratingCount == null ? 0 : controller.detailsRestaurantList.value.ratingCount.toString()} Ratings",
+                                  "${controller.detailsRestaurantList.value.ratingCount == null ? 0 : controller.detailsRestaurantList.value.ratingCount.toString()} Ratings",
                                   // text:
                                   //      homeController.homeRestaurantList[controller.index.value].rating.toString(),
                                   fontSize: 15,
@@ -263,15 +263,15 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                     },
                     icon: controller.detailsRestaurantList.value.isFavourite!
                         ? const Icon(
-                            Icons.favorite,
-                            color: redE2211C,
-                            size: 18,
-                          )
+                      Icons.favorite,
+                      color: redE2211C,
+                      size: 18,
+                    )
                         : const Icon(
-                            Icons.favorite,
-                            color: greyCACACA,
-                            size: 18,
-                          ),
+                      Icons.favorite,
+                      color: greyCACACA,
+                      size: 18,
+                    ),
                   ),
                 ),
               ),

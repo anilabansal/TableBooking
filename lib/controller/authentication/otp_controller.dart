@@ -9,10 +9,10 @@ class OtpController extends GetxController {
   var pinOutPut = ''.obs;
   var userDetails = UserProfile().obs;
   ApiCalls apiCall = ApiCalls();
-  var isLoading = false.obs;
 
   UserSessionController userSession = Get.find();
-
+  var isLoading = false.obs;
+  var resendLoading = false.obs;
   Future<bool> enterOTP({Map<String, dynamic>? data}) async {
     final response = await apiCall.callPostApi(
       data!,
@@ -25,16 +25,17 @@ class OtpController extends GetxController {
       ShowToast.show(
         msg: response['errorMessage'] ?? 'Please try again!',
       );
-      userDetails.value = UserProfile.fromMap(response);
-      userSession.setIsLogin(true);
-      print(userSession.isLogin);
-      print("User Detail Model ====>>>>  ${userDetails.value}");
+      //userDetails.value = UserProfile.fromMap(response);
+      // userSession.setIsLogin(true);
+      // print(userSession.isLogin);
+    //  print("User Detail Model ====>>>>  ${userDetails.value}");
       //
+      isLoading.value = false;
       userSession.setMobileNumber('Test User');
       userSession.setUserToken(response['token'].toString());
       print(userSession.token);
-      isLoading.value = false;
 
+      update();
       return true;
     }
     ShowToast.show(
@@ -46,33 +47,58 @@ class OtpController extends GetxController {
     return false;
   }
 
-  // Future<bool> enterRegisterOTP({Map<String, dynamic>? data}) async {
-  //   final response = await apiCall.callPostApi(
-  //     data!,
-  //     submitOtp,
-  //     // token: 'token',
-  //   );
-  //   print(data);
-  //   print('OTP Response ======> ${response.body}');
-  //   if (response.body['response'] == 1 &&
-  //       response.body['isProfileCreated'] == false) {
-  //     userModel = UserDetailsModel.fromMap(response);
-  //
-  //     print('=====> User Model$userModel');
-  //     userSession.setIsLogin(true);
-  //     // userSession.mobileNumber(userModel.mobileNumber.toString());
-  //     // userSession.token(userModel.token.toString());
-  //     return true;
-  //   } else if (response.body['response'] == 1 &&
-  //       response.body['isProfileCreated'] == true) {
-  //     ShowToast.show(
-  //         msg: 'user already exists!!!'.toTitleCase(), isError: true);
-  //   } else {
-  //     ShowToast.show(
-  //       msg: response.body['errorMessage'] ?? 'Please try again!',
-  //       isError: true,
-  //     );
-  //   }
-  //   return false;
-  // }
+
+  Future<bool> resendOTP({Map<String, dynamic>? data}) async {
+    final response = await apiCall.callPostApi(
+      data!,
+      resendOtp,
+      // token: 'token',
+    );
+    print(data);
+    print('OTP Response ======> ${response}');
+    if (response['response'] == 1) {
+      ShowToast.show(
+        msg: "Otp Is ${response['otp'].toString()}",
+      );
+
+      resendLoading.value = false;
+      return true;
+    }
+    ShowToast.show(
+      msg: response['errorMessage'] ?? 'Please try again!',
+      isError: true,
+    );
+    resendLoading.value = false;
+    return false;
+  }
+
+// Future<bool> enterRegisterOTP({Map<String, dynamic>? data}) async {
+//   final response = await apiCall.callPostApi(
+//     data!,
+//     submitOtp,
+//     // token: 'token',
+//   );
+//   print(data);
+//   print('OTP Response ======> ${response.body}');
+//   if (response.body['response'] == 1 &&
+//       response.body['isProfileCreated'] == false) {
+//     userModel = UserDetailsModel.fromMap(response);
+//
+//     print('=====> User Model$userModel');
+//     userSession.setIsLogin(true);
+//     // userSession.mobileNumber(userModel.mobileNumber.toString());
+//     // userSession.token(userModel.token.toString());
+//     return true;
+//   } else if (response.body['response'] == 1 &&
+//       response.body['isProfileCreated'] == true) {
+//     ShowToast.show(
+//         msg: 'user already exists!!!'.toTitleCase(), isError: true);
+//   } else {
+//     ShowToast.show(
+//       msg: response.body['errorMessage'] ?? 'Please try again!',
+//       isError: true,
+//     );
+//   }
+//   return false;
+// }
 }

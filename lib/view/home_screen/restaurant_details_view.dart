@@ -5,16 +5,13 @@ import 'package:get/get.dart';
 
 class RestaurantDetailView extends StatefulWidget {
   const RestaurantDetailView({Key? key}) : super(key: key);
-
   @override
   State<RestaurantDetailView> createState() => _RestaurantDetailScreenState();
 }
-
 class _RestaurantDetailScreenState extends State<RestaurantDetailView>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   HomeController restaurantController = Get.put(HomeController());
-
   @override
   void initState() {
     super.initState();
@@ -23,7 +20,6 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailView>
       restaurantController.selectedIndex.value = _tabController.index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

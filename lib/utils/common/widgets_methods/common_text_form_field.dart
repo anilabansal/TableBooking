@@ -19,6 +19,7 @@ class CommonTextFormField extends StatelessWidget {
   TextInputType? keyboardType;
   EdgeInsetsGeometry? contentPadding;
   FontWeight? fontWeight;
+  bool?readOnly;
   CommonTextFormField({
     this.hintText,
     this.enable,
@@ -35,6 +36,7 @@ class CommonTextFormField extends StatelessWidget {
     this.filled,
     this.fontWeight,
     this.maxLines,
+    this.readOnly,
     Key? key,
   }) : super(key: key);
 
@@ -43,6 +45,9 @@ class CommonTextFormField extends StatelessWidget {
     return TextFormField(
       onTap: onTap,
       enabled: enable,
+
+      readOnly: readOnly??false,
+
       autovalidateMode: AutovalidateMode.always,
       keyboardType: keyboardType,
       // maxLength: maxLength,
