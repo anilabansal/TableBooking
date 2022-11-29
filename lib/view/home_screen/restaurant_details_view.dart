@@ -1,4 +1,4 @@
-import 'package:booking_table/controller/home/home_controller.dart';
+import 'package:booking_table/controller/restaurant_details/restaurant_details_controller.dart';
 import 'package:booking_table/view/home_screen/widgets/restaurant_details_body.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,14 +13,14 @@ class RestaurantDetailView extends StatefulWidget {
 class _RestaurantDetailScreenState extends State<RestaurantDetailView>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  HomeController restaurantController = Get.put(HomeController());
+  RestaurantDetailsController controller = Get.find();
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
     _tabController.addListener(() {
-      restaurantController.selectedIndex.value = _tabController.index;
+      controller.selectedIndex.value = _tabController.index;
     });
   }
 
@@ -29,8 +29,8 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailView>
     return Scaffold(
       backgroundColor: Colors.white,
       body: RetaurantDetailsBody(
-          tabController: _tabController,
-          restaurantController: restaurantController),
+        tabController: _tabController,
+      ),
     );
   }
 }
