@@ -76,8 +76,9 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.favourite, page: () => const FavouriteView(),
-      // binding: ,
+      name: RouteName.favourite,
+      page: () => const FavouriteView(),
+      binding: HomeBindings(),
     ),
     GetPage(
       name: RouteName.notifications, page: () => NotificationView(),

@@ -164,7 +164,7 @@ class MenuTab extends StatelessWidget {
             SizedBox(
               width: 73,
               height: 75,
-              child: Image.asset(
+              child: Image.network(
                 itemImage,
                 // "assets/images/home/restaurant_item.png",
                 fit: BoxFit.cover,
@@ -178,7 +178,7 @@ class MenuTab extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CommonText(
-                  text: itemName ?? "Spicy Crunchy Chicken",
+                  text: itemName,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: black000000,
@@ -186,8 +186,7 @@ class MenuTab extends StatelessWidget {
                 SizedBox(
                   width: Get.width - 130,
                   child: CommonText(
-                    text: itemdescription ??
-                        "Creamy Hot Tomato Sauce, Jalapeno with Mozzarella Cheese",
+                    text: itemdescription,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                     color: textDark3F3E3E,
@@ -205,7 +204,7 @@ class MenuTab extends StatelessWidget {
                       color: textDark3F3E3E,
                     ),
                     CommonText(
-                      text: "\$ ${itemPrice ?? '45.98'} ",
+                      text: "\$ $itemPrice",
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: redE2211C,

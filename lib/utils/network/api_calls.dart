@@ -1,7 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
+import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,6 +18,7 @@ class ApiCalls extends GetConnect {
   // updateImageFile(File value) {
   //   imageFile.value = value;
   // }
+  UserSessionController userSessionController = Get.find();
 
   /// This method is for get request to the server.
 
@@ -56,8 +61,80 @@ class ApiCalls extends GetConnect {
             'API request Header ------------------------------->\n ${response.headers}');
         print('Run Successfully!!!!!');
         return response.body;
+      } else if (userSessionController.isLogin == true &&
+          response.statusText == "Unauthorized") {
+        // ShowToast.show(
+        //   msg: "${response.statusText}\nPlease Login Again!!!",
+        //   isError: true,
+        // );
+
+        Get.defaultDialog(
+          title: "Token Expired!",
+          titleStyle:
+              const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          content: Column(
+            children: [
+              Image.asset(
+                'assets/images/error.png',
+                height: 80,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              CommonText(
+                fontSize: 16,
+                text:
+                    "Your token has expired!\nPlease login again to continue..",
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+          radius: 0010,
+          actions: [
+            Padding(
+              padding:
+                  const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 5.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: 40,
+                      child: CommonButton(
+                        bgColor: redE2211C,
+                        text: 'Login',
+                        textColor: Colors.white,
+                        onTap: () async {
+                          await userSessionController.logOut();
+                          await Get.toNamed('/login');
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    child: SizedBox(
+                      height: 40,
+                      child: CommonButton(
+                        bgColor: redE2211C,
+                        text: 'Cancel',
+                        onTap: () {
+                          Get.back();
+                        },
+                        textColor: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+
+        // return false;
       } else {
-        print('<===== Error <====> ${response.hasError} ====>');
+        print('<===== Error <====> ${response.statusText} ====>');
       }
     } catch (e) {
       print("========> Responses Error ${e.toString()}");
