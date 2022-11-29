@@ -1,9 +1,22 @@
 // ignore_for_file: file_names
 
-import 'package:booking_table/view/auth_screens/auth_selection_view.dart';
+import 'package:booking_table/controller/profile/profile_controller.dart';
+import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:get/get.dart';
 
 class SplashViewController extends GetxController {
+  UserSessionController controller = Get.find();
+  ProfileController profileController = Get.find();
+
+  @override
+  void onInit() async {
+    // TODO: implement onInit
+    await controller.init();
+    print('Splash Screen Init');
+    print(controller.isLogin);
+    super.onInit();
+  }
+
   @override
   void onReady() {
     splashInit();
@@ -11,11 +24,23 @@ class SplashViewController extends GetxController {
   }
 
   Future<void> splashInit() async {
-    await Future.delayed(const Duration(seconds: 2));
-    // if () {
-    Get.offAll(() => const AuthSelectionView());
-    // } else {
-    //   Get.offAll(() => LoginView());
-    // }
+    await Future.delayed(const Duration(seconds: 3));
+    if (controller.isLogin) {
+      if (controller.isProfileCreated) {
+        await Get.offAllNamed('/home');
+      } else {
+        Get.offAllNamed('/create-profile');
+      }
+      // Get.offAllNamed('/authentication');
+    } else {
+      Get.offAllNamed('/authentication');
+    }
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    print('Splash Screen Close');
+    super.onClose();
   }
 }

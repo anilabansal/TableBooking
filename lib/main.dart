@@ -1,8 +1,16 @@
-import 'package:booking_table/view/splash_screen/splash_view.dart';
+import 'package:booking_table/bindings/auth_bindings.dart';
+import 'package:booking_table/controller/user_session/user_session_controller.dart';
+import 'package:booking_table/routes/app_routes.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
+  UserSessionController userSession = Get.put(UserSessionController());
+  userSession.init();
+
   runApp(const MyApp());
 }
 
@@ -11,11 +19,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      title: 'Flutter Demo',
-      home: Material(
-        child: SplashView(),
-      ),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Table Booking',
+      initialRoute: '/zip-code',
+      getPages: AppRoutes.appRoutes,
+      initialBinding: AuthBindings(),
+      theme: ThemeData(fontFamily: mainLaToFont),
     );
   }
 }

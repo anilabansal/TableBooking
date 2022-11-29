@@ -1,4 +1,4 @@
-import 'package:booking_table/utils/common/images_string.dart';
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreenTopView extends StatelessWidget {
@@ -8,10 +8,17 @@ class SignInScreenTopView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // BACKGROUND IMAGES
     return Stack(
       children: [
-        Image.asset(signInBackgroundLogo),
-        Image.asset(signInLogo),
+        Image.asset(
+          signInBackgroundLogo,
+          height: 247,
+        ),
+        Image.asset(
+          signInLogo,
+          height: 247,
+        ),
       ],
     );
   }
