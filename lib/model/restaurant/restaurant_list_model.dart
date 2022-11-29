@@ -1,23 +1,23 @@
 import 'dart:convert';
 
-class Datum {
+class RestaurantList {
   int? restaurantId;
-  dynamic restaurantName;
-  dynamic restaurantPic;
-  dynamic address;
+  String? restaurantName;
+  String? restaurantPic;
+  String? address;
   dynamic zipCode;
   dynamic aboutUs;
   dynamic officialWebsite;
   dynamic contactNumber;
   dynamic email;
-  int? distance;
+  dynamic distance;
   dynamic rating;
-  int? ratingCount;
-  dynamic latitude;
-  dynamic longitude;
+  dynamic ratingCount;
+  String? latitude;
+  String? longitude;
   bool? isFavourite;
 
-  Datum({
+  RestaurantList({
     this.restaurantId,
     this.restaurantName,
     this.restaurantPic,
@@ -37,26 +37,28 @@ class Datum {
 
   @override
   String toString() {
-    return 'Datum(restaurantId: $restaurantId, restaurantName: $restaurantName, restaurantPic: $restaurantPic, address: $address, zipCode: $zipCode, aboutUs: $aboutUs, officialWebsite: $officialWebsite, contactNumber: $contactNumber, email: $email, distance: $distance, rating: $rating, ratingCount: $ratingCount, latitude: $latitude, longitude: $longitude, isFavourite: $isFavourite)';
+    return 'Restaurantlist(restaurantId: $restaurantId, restaurantName: $restaurantName, restaurantPic: $restaurantPic, address: $address, zipCode: $zipCode, aboutUs: $aboutUs, officialWebsite: $officialWebsite, contactNumber: $contactNumber, email: $email, distance: $distance, rating: $rating, ratingCount: $ratingCount, latitude: $latitude, longitude: $longitude, isFavourite: $isFavourite)';
   }
 
-  factory Datum.fromMap(Map<String, dynamic> data) => Datum(
-        restaurantId: data['restaurantId'] as int?,
-        restaurantName: data['restaurantName'] as dynamic,
-        restaurantPic: data['restaurantPic'] as dynamic,
-        address: data['address'] as dynamic,
-        zipCode: data['zipCode'] as dynamic,
-        aboutUs: data['aboutUs'] as dynamic,
-        officialWebsite: data['officialWebsite'] as dynamic,
-        contactNumber: data['contactNumber'] as dynamic,
-        email: data['email'] as dynamic,
-        distance: data['distance'] as int?,
-        rating: data['rating'] as dynamic,
-        ratingCount: data['ratingCount'] as int?,
-        latitude: data['latitude'] as dynamic,
-        longitude: data['longitude'] as dynamic,
-        isFavourite: data['isFavourite'] as bool?,
-      );
+  factory RestaurantList.fromMap(Map<String, dynamic> data) {
+    return RestaurantList(
+      restaurantId: data['restaurantId'] as int?,
+      restaurantName: data['restaurantName'] as String?,
+      restaurantPic: data['restaurantPic'] as String?,
+      address: data['address'] as String?,
+      zipCode: data['zipCode'] as dynamic,
+      aboutUs: data['aboutUs'] as dynamic,
+      officialWebsite: data['officialWebsite'] as dynamic,
+      contactNumber: data['contactNumber'] as dynamic,
+      email: data['email'] as dynamic,
+      distance: data['distance'] as dynamic,
+      rating: data['rating'] as dynamic,
+      ratingCount: data['ratingCount'] as dynamic,
+      latitude: data['latitude'] as String?,
+      longitude: data['longitude'] as String?,
+      isFavourite: data['isFavourite'] as bool?,
+    );
+  }
 
   Map<String, dynamic> toMap() => {
         'restaurantId': restaurantId,
@@ -78,34 +80,34 @@ class Datum {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [Datum].
-  factory Datum.fromJson(String data) {
-    return Datum.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [RestaurantList].
+  factory RestaurantList.fromJson(String data) {
+    return RestaurantList.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [Datum] to a JSON string.
+  /// Converts [RestaurantList] to a JSON string.
   String toJson() => json.encode(toMap());
 
-  Datum copyWith({
+  RestaurantList copyWith({
     int? restaurantId,
-    dynamic restaurantName,
-    dynamic restaurantPic,
-    dynamic address,
+    String? restaurantName,
+    String? restaurantPic,
+    String? address,
     dynamic zipCode,
     dynamic aboutUs,
     dynamic officialWebsite,
     dynamic contactNumber,
     dynamic email,
-    int? distance,
+    dynamic distance,
     dynamic rating,
-    int? ratingCount,
-    dynamic latitude,
-    dynamic longitude,
+    dynamic ratingCount,
+    String? latitude,
+    String? longitude,
     bool? isFavourite,
   }) {
-    return Datum(
+    return RestaurantList(
       restaurantId: restaurantId ?? this.restaurantId,
       restaurantName: restaurantName ?? this.restaurantName,
       restaurantPic: restaurantPic ?? this.restaurantPic,

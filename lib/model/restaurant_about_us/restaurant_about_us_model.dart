@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'datum.dart';
+import 'restaurant_about_us_details_model.dart';
 
 class RestaurantAboutUs {
   int? response;
   String? errorMessage;
-  List<Datum>? data;
+  List<RestaurantAboutUsDetails>? data;
   dynamic token;
 
   RestaurantAboutUs({
@@ -25,7 +25,8 @@ class RestaurantAboutUs {
       response: data['response'] as int?,
       errorMessage: data['errorMessage'] as String?,
       data: (data['data'] as List<dynamic>?)
-          ?.map((e) => Datum.fromMap(e as Map<String, dynamic>))
+          ?.map((e) =>
+              RestaurantAboutUsDetails.fromMap(e as Map<String, dynamic>))
           .toList(),
       token: data['token'] as dynamic,
     );
@@ -53,7 +54,7 @@ class RestaurantAboutUs {
   RestaurantAboutUs copyWith({
     int? response,
     String? errorMessage,
-    List<Datum>? data,
+    List<RestaurantAboutUsDetails>? data,
     dynamic token,
   }) {
     return RestaurantAboutUs(

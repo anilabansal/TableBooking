@@ -17,7 +17,7 @@ class CommonNoDataFound extends StatelessWidget {
             'assets/images/error.png',
             height: 100,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           CommonText(

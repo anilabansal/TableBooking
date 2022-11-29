@@ -1,40 +1,72 @@
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
-import 'package:booking_table/model/user_profile_model.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/network/api_calls.dart';
 import 'package:get/get.dart';
 
-class OtpController extends GetxController {
-  var pinOutPut = ''.obs;
-  var userDetails = UserProfile().obs;
-  ApiCalls apiCall = ApiCalls();
-  var isLoading = false.obs;
+import 'login_controller.dart';
 
+class OtpController extends GetxController {
+  /// Variables
+  var pinOutPut = ''.obs;
+  var isLoading = false.obs;
+  // var mobileNumberData = Get.arguments;
+
+  /// Controllers
+
+  ApiCalls apiCall = ApiCalls();
+  LoginController loginController = Get.find();
   UserSessionController userSession = Get.find();
 
+  /// SUBMIT OTP ON REGISTER & LOGIN SCREEN
   Future<bool> enterOTP({Map<String, dynamic>? data}) async {
     final response = await apiCall.callPostApi(
       data!,
       submitOtp,
-      // token: 'token',
+      token: userSession.token,
     );
     print(data);
-    print('OTP Response ======> ${response}');
+    print('OTP Response ======> $response');
     if (response['response'] == 1) {
+      userSession.setUserToken(response['token'].toString());
+
+      // print("ARGUMENTS OTP $mobileNumberData");
+
       ShowToast.show(
         msg: response['errorMessage'] ?? 'Please try again!',
       );
-      userDetails.value = UserProfile.fromMap(response);
+      // userDetails.value = UserProfile.fromMap(response);
       userSession.setIsLogin(true);
-      print(userSession.isLogin);
-      print("User Detail Model ====>>>>  ${userDetails.value}");
-      //
-      userSession.setMobileNumber('Test User');
-      userSession.setUserToken(response['token'].toString());
-      print(userSession.token);
-      isLoading.value = false;
+      print("Is USer Logge in on SUmit OTP ====>> ${userSession.isLogin}");
 
+      // print("User Detail Model ====>>>>  ${userDetails.value}");
+      //
+
+      isLoading.value = false;
+      return true;
+    }
+    ShowToast.show(
+      msg: response['errorMessage'] ?? 'Please try again!',
+      isError: true,
+    );
+    isLoading.value = false;
+
+    return false;
+  }
+
+  Future<bool> resendOTP({Map<String, dynamic>? data}) async {
+    final response = await apiCall.callPostApi(
+      data!,
+      resendOtp,
+      // token: 'token',
+    );
+    print(data);
+    print('OTP Response ======> $response');
+    if (response['response'] == 1) {
+      ShowToast.show(
+        msg: response['otp'.toString()].toString(),
+      );
+      isLoading.value = false;
       return true;
     }
     ShowToast.show(

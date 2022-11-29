@@ -1,5 +1,4 @@
 import 'package:booking_table/bindings/auth_bindings.dart';
-import 'package:booking_table/bindings/profile_bindings.dart';
 import 'package:booking_table/view/auth_screens/auth_selection_view.dart';
 import 'package:booking_table/view/book_a_table/booking_details_view.dart';
 import 'package:booking_table/view/home_screen/filter_view.dart';
@@ -40,7 +39,7 @@ class AppRoutes {
     GetPage(
       name: RouteName.createProfile,
       page: () => ProfileView(callFrom: 'Create Profile'),
-      binding: ProfileBindings(),
+      binding: HomeBindings(),
     ),
     GetPage(
       name: RouteName.authSelectionScreen,
@@ -77,8 +76,9 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.favourite, page: () => const FavouriteView(),
-      // binding: ,
+      name: RouteName.favourite,
+      page: () => const FavouriteView(),
+      binding: HomeBindings(),
     ),
     GetPage(
       name: RouteName.notifications, page: () => NotificationView(),
@@ -167,7 +167,7 @@ class AppRoutes {
       page: () => ProfileView(
         callFrom: 'Edit',
       ),
-      // binding: ,
+      binding: HomeBindings(),
     ),
     GetPage(
       name: RouteName.filterScreen, page: () => FilterView(),

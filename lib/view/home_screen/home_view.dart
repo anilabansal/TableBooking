@@ -9,20 +9,14 @@ import '../../controller/home/home_controller.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
-  HomeController homeController = Get.find();
-
+  HomeController controller = Get.find();
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-      builder: (controller) {
-        return Scaffold(
-            backgroundColor: Colors.white,
-            key: homeController.drawerKey,
-            drawer: DrawerScreen(
-              controller: homeController,
-            ),
-            body: HomeBody(homeController: homeController));
-      },
+    return Scaffold(
+      backgroundColor: Colors.white,
+      key: controller.drawerKey,
+      drawer: DrawerScreen(),
+      body: HomeBody(),
     );
   }
 }

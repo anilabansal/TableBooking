@@ -21,7 +21,7 @@ class RestaurantZoomBody extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(6)),
                 border: Border.all(color: white, width: 9),
               ),
-              child: Image.asset(
+              child: Image.network(
                 imageUrl.toString(),
                 fit: BoxFit.fill,
               ),

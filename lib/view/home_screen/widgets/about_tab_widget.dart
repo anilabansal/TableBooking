@@ -12,7 +12,7 @@ class AboutTabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
-        return controller.aboutUsRestaurantList.value != null
+        return controller.aboutUsRestaurantList.value.isNotEmpty
             ? SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -217,7 +217,8 @@ class AboutTabScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: CommonText(
-                            text: controller.aboutUsRestaurantList[0].aboutUs
+                            text: controller
+                                .aboutUsRestaurantList[0].contactNumber
                                 .toString(),
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -254,7 +255,7 @@ class AboutTabScreen extends StatelessWidget {
                   ],
                 ),
               )
-            : CommonNoDataFound();
+            : const CommonNoDataFound();
       },
     );
   }

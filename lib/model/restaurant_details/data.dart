@@ -10,7 +10,7 @@ class RestaurantDetailsData {
   String? officialWebsite;
   String? contactNumber;
   String? email;
-  int? distance;
+  dynamic distance;
   dynamic rating;
   dynamic ratingCount;
   String? latitude;
@@ -51,7 +51,7 @@ class RestaurantDetailsData {
         officialWebsite: data['officialWebsite'] as String?,
         contactNumber: data['contactNumber'] as String?,
         email: data['email'] as String?,
-        distance: data['distance'] as int?,
+        distance: data['distance'] as dynamic,
         rating: data['rating'] as dynamic,
         ratingCount: data['ratingCount'] as dynamic,
         latitude: data['latitude'] as String?,
@@ -100,7 +100,7 @@ class RestaurantDetailsData {
     String? officialWebsite,
     String? contactNumber,
     String? email,
-    int? distance,
+    dynamic distance,
     dynamic rating,
     dynamic ratingCount,
     String? latitude,

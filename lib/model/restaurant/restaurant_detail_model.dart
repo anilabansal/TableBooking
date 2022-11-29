@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'restaurantlist.dart';
+import 'restaurant_list_model.dart';
 
 class RestaurantDetailModel {
   int? totalCount;
-  List<Restaurantlist>? restaurantlist;
+  List<RestaurantList>? restaurantlist;
   int? response;
   String? errorMessage;
   dynamic data;
@@ -28,7 +28,7 @@ class RestaurantDetailModel {
     return RestaurantDetailModel(
       totalCount: data['totalCount'] as int?,
       restaurantlist: (data['restaurantlist'] as List<dynamic>?)
-          ?.map((e) => Restaurantlist.fromMap(e as Map<String, dynamic>))
+          ?.map((e) => RestaurantList.fromMap(e as Map<String, dynamic>))
           .toList(),
       response: data['response'] as int?,
       errorMessage: data['errorMessage'] as String?,
@@ -61,7 +61,7 @@ class RestaurantDetailModel {
 
   RestaurantDetailModel copyWith({
     int? totalCount,
-    List<Restaurantlist>? restaurantlist,
+    List<RestaurantList>? restaurantlist,
     int? response,
     String? errorMessage,
     dynamic data,

@@ -23,7 +23,9 @@ AppBar appBarCommon({
     leadingWidth: 80,
     leading: InkWell(
       onTap: () {
-        Get.back();
+        Get.back(
+          canPop: true,
+        );
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

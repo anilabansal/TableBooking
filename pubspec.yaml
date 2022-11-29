@@ -43,6 +43,7 @@ dependencies:
 #  toggle_switch: ^2.0.1
 #  country_phone_code_picker: ^0.0.41
   get_storage: ^2.0.3
+  url_launcher: ^6.1.7
 #  flutter_switch: ^0.3.2
   flutter_toggle_tab:
   fluttertoast: ^8.1.1

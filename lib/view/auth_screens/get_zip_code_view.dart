@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:booking_table/controller/home/home_controller.dart';
+import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import '../../utils/common/widgets_methods/common_text.dart';
 
 class GetZipCodeView extends StatelessWidget {
   HomeController controller = Get.find();
+  UserSessionController userController = Get.find();
   GetZipCodeView({Key? key}) : super(key: key);
 
   @override
@@ -28,7 +30,12 @@ class GetZipCodeView extends StatelessWidget {
               width: 93,
               child: Container(
                 decoration: const BoxDecoration(),
-                child: Image.asset(zipcodeUserImage),
+                child: userController.isLogin == true
+                    ? Image.asset(zipcodeUserImage)
+                    : const Icon(
+                        Icons.person_outline,
+                        size: 80,
+                      ),
               ),
             ),
             CommonSizedBox(
@@ -44,11 +51,13 @@ class GetZipCodeView extends StatelessWidget {
             CommonSizedBox(
               height: 7,
             ),
-            CommonText(
-              text: 'Claire Fiona',
-              fontSize: 22,
-              fontWeight: FontWeight.w700,
-            ),
+            userController.isLogin == true
+                ? CommonText(
+                    text: 'Claire Fiona',
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                  )
+                : Container(),
             CommonSizedBox(
               height: 18,
             ),
@@ -98,7 +107,7 @@ class GetZipCodeView extends StatelessWidget {
                   height: 50,
                   width: 184,
                   child: controller.isLoading.value == true
-                      ? Center(
+                      ? const Center(
                           child: CircularProgressIndicator(
                           color: redE2211C,
                         ))

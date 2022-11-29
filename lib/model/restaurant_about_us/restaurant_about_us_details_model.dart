@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-class Restaurantlist {
+class RestaurantAboutUsDetails {
   int? restaurantId;
-  String? restaurantName;
-  String? restaurantPic;
-  String? address;
+  dynamic restaurantName;
+  dynamic restaurantPic;
+  dynamic address;
   dynamic zipCode;
   dynamic aboutUs;
   dynamic officialWebsite;
@@ -12,12 +12,12 @@ class Restaurantlist {
   dynamic email;
   dynamic distance;
   dynamic rating;
-  dynamic ratingCount;
-  String? latitude;
-  String? longitude;
+  int? ratingCount;
+  dynamic latitude;
+  dynamic longitude;
   bool? isFavourite;
 
-  Restaurantlist({
+  RestaurantAboutUsDetails({
     this.restaurantId,
     this.restaurantName,
     this.restaurantPic,
@@ -37,28 +37,27 @@ class Restaurantlist {
 
   @override
   String toString() {
-    return 'Restaurantlist(restaurantId: $restaurantId, restaurantName: $restaurantName, restaurantPic: $restaurantPic, address: $address, zipCode: $zipCode, aboutUs: $aboutUs, officialWebsite: $officialWebsite, contactNumber: $contactNumber, email: $email, distance: $distance, rating: $rating, ratingCount: $ratingCount, latitude: $latitude, longitude: $longitude, isFavourite: $isFavourite)';
+    return 'Datum(restaurantId: $restaurantId, restaurantName: $restaurantName, restaurantPic: $restaurantPic, address: $address, zipCode: $zipCode, aboutUs: $aboutUs, officialWebsite: $officialWebsite, contactNumber: $contactNumber, email: $email, distance: $distance, rating: $rating, ratingCount: $ratingCount, latitude: $latitude, longitude: $longitude, isFavourite: $isFavourite)';
   }
 
-  factory Restaurantlist.fromMap(Map<String, dynamic> data) {
-    return Restaurantlist(
-      restaurantId: data['restaurantId'] as int?,
-      restaurantName: data['restaurantName'] as String?,
-      restaurantPic: data['restaurantPic'] as String?,
-      address: data['address'] as String?,
-      zipCode: data['zipCode'] as dynamic,
-      aboutUs: data['aboutUs'] as dynamic,
-      officialWebsite: data['officialWebsite'] as dynamic,
-      contactNumber: data['contactNumber'] as dynamic,
-      email: data['email'] as dynamic,
-      distance: data['distance'] as dynamic,
-      rating: data['rating'] as dynamic,
-      ratingCount: data['ratingCount'] as dynamic,
-      latitude: data['latitude'] as String?,
-      longitude: data['longitude'] as String?,
-      isFavourite: data['isFavourite'] as bool?,
-    );
-  }
+  factory RestaurantAboutUsDetails.fromMap(Map<String, dynamic> data) =>
+      RestaurantAboutUsDetails(
+        restaurantId: data['restaurantId'] as int?,
+        restaurantName: data['restaurantName'] as dynamic,
+        restaurantPic: data['restaurantPic'] as dynamic,
+        address: data['address'] as dynamic,
+        zipCode: data['zipCode'] as dynamic,
+        aboutUs: data['aboutUs'] as dynamic,
+        officialWebsite: data['officialWebsite'] as dynamic,
+        contactNumber: data['contactNumber'] as dynamic,
+        email: data['email'] as dynamic,
+        distance: data['distance'] as dynamic,
+        rating: data['rating'] as dynamic,
+        ratingCount: data['ratingCount'] as int?,
+        latitude: data['latitude'] as dynamic,
+        longitude: data['longitude'] as dynamic,
+        isFavourite: data['isFavourite'] as bool?,
+      );
 
   Map<String, dynamic> toMap() => {
         'restaurantId': restaurantId,
@@ -80,21 +79,22 @@ class Restaurantlist {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [Restaurantlist].
-  factory Restaurantlist.fromJson(String data) {
-    return Restaurantlist.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [RestaurantAboutUsDetails].
+  factory RestaurantAboutUsDetails.fromJson(String data) {
+    return RestaurantAboutUsDetails.fromMap(
+        json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [Restaurantlist] to a JSON string.
+  /// Converts [RestaurantAboutUsDetails] to a JSON string.
   String toJson() => json.encode(toMap());
 
-  Restaurantlist copyWith({
+  RestaurantAboutUsDetails copyWith({
     int? restaurantId,
-    String? restaurantName,
-    String? restaurantPic,
-    String? address,
+    dynamic restaurantName,
+    dynamic restaurantPic,
+    dynamic address,
     dynamic zipCode,
     dynamic aboutUs,
     dynamic officialWebsite,
@@ -102,12 +102,12 @@ class Restaurantlist {
     dynamic email,
     dynamic distance,
     dynamic rating,
-    dynamic ratingCount,
-    String? latitude,
-    String? longitude,
+    int? ratingCount,
+    dynamic latitude,
+    dynamic longitude,
     bool? isFavourite,
   }) {
-    return Restaurantlist(
+    return RestaurantAboutUsDetails(
       restaurantId: restaurantId ?? this.restaurantId,
       restaurantName: restaurantName ?? this.restaurantName,
       restaurantPic: restaurantPic ?? this.restaurantPic,
