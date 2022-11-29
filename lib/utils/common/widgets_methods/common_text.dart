@@ -9,9 +9,11 @@ class CommonText extends StatelessWidget {
   double? fontSize;
   FontWeight? fontWeight;
   TextDecoration? decoration;
+  TextOverflow? overflow;
   String? fontFamily;
   TextAlign? textAlign;
   CommonText({
+    this.overflow,
     this.text,
     this.fontFamily,
     this.decoration,
@@ -27,7 +29,10 @@ class CommonText extends StatelessWidget {
     return Text(
       text ?? "Empty",
       textAlign: textAlign,
+      softWrap: false,
       style: TextStyle(
+        overflow: overflow,
+
         fontFamily: fontFamily ?? mainLaToFont,
         decoration: decoration,
         color: color,

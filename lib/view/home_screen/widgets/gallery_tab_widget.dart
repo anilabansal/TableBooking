@@ -14,7 +14,7 @@ import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 import '../restaurant_image_zoom_view.dart';
 
 class GalleryTab extends StatelessWidget {
-  GalleryTab({Key? key}) : super(key: key);
+  const GalleryTab({Key? key}) : super(key: key);
   // List<String> galleryImages = [
   //   "assets/images/home/restaurants_gallery_first_image.png",
   //   "assets/images/home/restaurants_gallery_second_image.png",
@@ -28,67 +28,67 @@ class GalleryTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
-        return controller.galleryImagesRestaurantList.value.isNotEmpty
+        return controller.galleryImagesRestaurantList.value != null
             ? Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CommonText(
-                    text: "All Photos",
-                    fontWeight: FontWeight.w700,
-                    color: black000000,
-                    fontSize: 15,
-                  ),
-                  const SizedBox(
-                    height: 13,
-                  ),
-                  Expanded(
-                    child: StaggeredGridView.countBuilder(
-                      crossAxisCount: 4,
-                      shrinkWrap: true,
-                      mainAxisSpacing: 17,
-                      crossAxisSpacing: 17,
-                      //  physics: const NeverScrollableScrollPhysics(),
-                      itemCount: controller.galleryImagesRestaurantList.length,
-                      itemBuilder: (context, index) {
-                        return SizedBox(
-                          child: InkWell(
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (_) => BackdropFilter(
-                                    filter:
-                                        ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                                    child: AlertDialog(
-                                      insetPadding: EdgeInsets.zero,
-                                      backgroundColor: Colors.transparent,
-                                      content: SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: RestaurantImageZoomView(
-                                          restaurantImage: controller
-                                              .galleryImagesRestaurantList[
-                                                  index]
-                                              .restaurantImage,
-                                        ),
-                                      ),
-                                    ),
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CommonText(
+              text: "All Photos",
+              fontWeight: FontWeight.w700,
+              color: black000000,
+              fontSize: 15,
+            ),
+            const SizedBox(
+              height: 13,
+            ),
+            Expanded(
+              child: StaggeredGridView.countBuilder(
+                crossAxisCount: 4,
+                shrinkWrap: true,
+                mainAxisSpacing: 17,
+                crossAxisSpacing: 17,
+                //  physics: const NeverScrollableScrollPhysics(),
+                itemCount: controller.galleryImagesRestaurantList.length,
+                itemBuilder: (context, index) {
+                  return SizedBox(
+                    child: InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => BackdropFilter(
+                              filter:
+                              ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                              child: AlertDialog(
+                                insetPadding: EdgeInsets.zero,
+                                backgroundColor: Colors.transparent,
+                                content: SizedBox(
+                                  width:
+                                  MediaQuery.of(context).size.width,
+                                  child: RestaurantImageZoomView(
+                                    restaurantImage: controller
+                                        .galleryImagesRestaurantList[
+                                    index]
+                                        .restaurantImage,
                                   ),
-                                );
-                              },
-                              child: Image.asset(
-                                controller.galleryImagesRestaurantList[index]
-                                    .restaurantImage,
-                              )),
-                        );
-                      },
-                      staggeredTileBuilder: (int index) =>
-                          StaggeredTile.count(2, index.isEven ? 2 : 2.5),
-                    ),
-                  )
-                ],
-              )
-            : CommonNoDataFound();
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        child: Image.network(
+                          controller.galleryImagesRestaurantList[index]
+                              .restaurantImage,
+                        )),
+                  );
+                },
+                staggeredTileBuilder: (int index) =>
+                    StaggeredTile.count(2, index.isEven ? 2 : 2.5),
+              ),
+            )
+          ],
+        )
+            : const CommonNoDataFound();
       },
     );
   }
