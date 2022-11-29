@@ -20,6 +20,7 @@ class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 }
+
 class _MyAppState extends State<MyApp> {
   LocationController locationController = Get.put(LocationController());
   @override
@@ -28,12 +29,13 @@ class _MyAppState extends State<MyApp> {
     locationController.requestPermission();
     // TODO: implement initState
   }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Table Booking',
-      initialRoute: '/',
+      initialRoute: '/zip-code',
       getPages: AppRoutes.appRoutes,
       initialBinding: AuthBindings(),
       theme: ThemeData(fontFamily: mainLaToFont),

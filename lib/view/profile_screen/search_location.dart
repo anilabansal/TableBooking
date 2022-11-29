@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/controller/location/location_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/view/profile_screen/widgets/search_location_box.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import '../../utils/common/widgets_methods/common_text.dart';
 
 class SearchLocation extends StatefulWidget {
@@ -34,6 +36,7 @@ class _SearchLocationState extends State<SearchLocation> {
       }
     });
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -41,6 +44,7 @@ class _SearchLocationState extends State<SearchLocation> {
     moveToCurrentLocation(locationController.locationData!.latitude!,
         locationController.locationData!.longitude!);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,14 +101,12 @@ class _SearchLocationState extends State<SearchLocation> {
                     locationController.searchController.value.text =
                         'name${placeMarks.first.name},locality${placeMarks.first.locality},sublocality${placeMarks.first.subLocality},administrativeArea${placeMarks.first.administrativeArea}';
 
-
                     print(
                         'Camera Position ---------> ${locationController.cameraPosition.value.target.latitude}');
                     print(
                         'Camera Position ---------> ${locationController.cameraPosition.value.target.longitude}');
                   }
                 },
-
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
@@ -155,7 +157,7 @@ class _SearchLocationState extends State<SearchLocation> {
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: InkWell(
-                          onTap: () {
+                          onTap: () async {
                             print(
                                 'Final location ---------> Address - ${locationController.searchController.value.text} \n LatLong ------> ${locationController.latLng.value.latitude}, ${locationController.latLng.value.longitude}');
                             // widget.callBack!(searchController.text,
@@ -163,8 +165,9 @@ class _SearchLocationState extends State<SearchLocation> {
 
                             // widget.callBack!(searchController.text,
                             //     _latLng!.latitude, _latLng!.longitude);
-
-                           Navigator.pop(context);
+                            await HomeController()
+                                .getRestaurantDetailsUsingLatLon();
+                            Navigator.pop(context);
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width,
