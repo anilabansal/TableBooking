@@ -15,6 +15,7 @@ class LoginController extends GetxController {
   // var countryFlag = '🇺🇸'.obs;
   ApiCalls apiCall = ApiCalls();
   UserSessionController userSession = Get.find();
+
   Future<bool> loginUser({Map<String, String>? data}) async {
     final response = await apiCall.callPostApi(
       data!,
@@ -28,20 +29,23 @@ class LoginController extends GetxController {
       );
       isLoading.value = false;
       userSession.setIsProfileCreated(response['isProfileCreated']);
-      if(response['isProfileCreated']==true){
+      if (response['isProfileCreated'] == true) {
         userSession.setIsLogin(true);
       }
-      update();
-      return true;
+
+    userSession.setProfilePic(response['profilePic'] ?? "");
+    update();
+    return true;
     }
-   else{
-      ShowToast.show(
-        msg: response['errorMessage'] ?? 'Please try again!',
-        isError: true,
-      );
-      isLoading.value = false;
-      update();
+    else{
+    ShowToast.show(
+    msg: response['errorMessage'] ?? 'Please try again!',
+    isError: true,
+    );
+    isLoading.value = false;
+    update();
     }
-    return false;
+    return
+    false;
   }
 }

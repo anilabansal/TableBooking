@@ -8,6 +8,7 @@ class UserSessionController extends GetxController {
   final _isLogin = false.obs;
   final _token = ''.obs;
   final _mobileNumber = ''.obs;
+  final _profilePic = ''.obs;
 
   init() async {
     _isLogin.value = box.read(isLogInString) ?? false;
@@ -15,6 +16,7 @@ class UserSessionController extends GetxController {
     _token.value = box.read(tokenString) ?? '';
     _mobileNumber.value = box.read(mobileNumberString) ?? '';
    // _isProfileCreated.value = box.read(isProfileCreatedString)??false;
+    _profilePic.value = box.read(profilePicString) ?? '';
   }
 
   get isLogin => _isLogin.value;
@@ -22,6 +24,7 @@ class UserSessionController extends GetxController {
   get mobileNumber => _mobileNumber.value;
  final _isProfileCreated = false.obs;
   get isProfileCreated => _isProfileCreated;
+  get profilePic => _profilePic.value;
 
   void setIsProfileCreated(bool value){
     _isProfileCreated.value = value;
@@ -41,6 +44,12 @@ class UserSessionController extends GetxController {
   void setMobileNumber(String value) {
     _mobileNumber.value = value;
     setPref(mobileNumberString, value);
+  }
+
+  void setProfilePic(String value) {
+    _profilePic.value = value;
+    setPref(profilePicString, value);
+    update();
   }
 
   void setPref(String key, dynamic value) async {

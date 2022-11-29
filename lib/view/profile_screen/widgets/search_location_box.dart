@@ -13,10 +13,8 @@ class SearchBox extends StatefulWidget {
   @override
   State<SearchBox> createState() => _SearchBoxState();
 }
-
 class _SearchBoxState extends State<SearchBox> {
   var googleApiKey = "AIzaSyBLVQD5gh9CP8C4_yrzuhvn06ZfhfFUODE";
-
   @override
   Widget build(BuildContext context) {
     return Container(

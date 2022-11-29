@@ -121,4 +121,4 @@ String infoIcon = "assets/images/home/info_icon.png";
 const isLogInString = 'isLogInString';
 const mobileNumberString = 'mobileNumber';
 const tokenString = 'tokenString';
-const isProfileCreatedString = 'isProfileCreated';
+const profilePicString = 'profilePicString';
