@@ -5,7 +5,6 @@ import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../utils/common/widgets_methods/common_app_bar.dart';
 import '../../utils/common/widgets_methods/common_button.dart';
 import '../../utils/common/widgets_methods/common_date_picker_widget.dart';
@@ -45,7 +44,7 @@ class FilterView extends StatelessWidget {
                   ),
                   CommonDatePicker(
                     controller: dateController,
-                    fillColor: greyF5F5F5,
+                    //fillColor: greyF5F5F5,
                   ),
                 ],
               ).paddingOnly(top: 15, left: 22, right: 22),
@@ -142,7 +141,7 @@ class FilterView extends StatelessWidget {
                       ),
                       // ignore: unrelated_type_equality_checks
                       typeServiceContainer(
-                          "Go To", homeController.serviceType.value == "Go To"),
+                          "To Go", homeController.serviceType.value == "To Go"),
                     ],
                   ),
                   const SizedBox(
@@ -159,13 +158,13 @@ class FilterView extends StatelessWidget {
                         Expanded(
                           child: CommonText(
                             text: homeController.serviceType.value == "Full"
-                                ? "Traditional order when seated with a server"
+                                ? "Order with server in restaurant"
                                 : homeController.serviceType.value == "No"
-                                    ? "Pre order through the app, and then order everything through the app while at the restaurant."
-                                    : homeController.serviceType.value ==
-                                            "Go To"
-                                        ? "You can take away your order as well."
-                                        : "Pre-Order your food and drink and still have a server in restaurant",
+                                ? "Pre-order food/drink and any add-ons in restaurant via the app. No server"
+                                : homeController.serviceType.value ==
+                                "To Go"
+                                ? "Order food/drink to go"
+                                : "Pre-order food/drink via the app and have a server in restaurant",
                             fontWeight: FontWeight.w400,
                             fontSize: 14,
                             color: textGrey868686,

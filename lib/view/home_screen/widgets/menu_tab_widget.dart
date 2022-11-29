@@ -146,7 +146,7 @@ class MenuTab extends StatelessWidget {
                   ),
                 ],
               )
-            : const CommonNoDataFound();
+            : CommonNoDataFound();
       },
     );
   }
@@ -164,9 +164,9 @@ class MenuTab extends StatelessWidget {
             SizedBox(
               width: 73,
               height: 75,
-              child: Image.network(
-                itemImage,
-                // "assets/images/home/restaurant_item.png",
+              child: Image.asset(
+                // itemImage,
+                "assets/images/home/restaurant_item.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -178,7 +178,7 @@ class MenuTab extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CommonText(
-                  text: itemName,
+                  text: itemName ?? "Spicy Crunchy Chicken",
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: black000000,
@@ -186,7 +186,8 @@ class MenuTab extends StatelessWidget {
                 SizedBox(
                   width: Get.width - 130,
                   child: CommonText(
-                    text: itemdescription,
+                    text: itemdescription ??
+                        "Creamy Hot Tomato Sauce, Jalapeno with Mozzarella Cheese",
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                     color: textDark3F3E3E,
@@ -204,7 +205,7 @@ class MenuTab extends StatelessWidget {
                       color: textDark3F3E3E,
                     ),
                     CommonText(
-                      text: "\$ $itemPrice",
+                      text: "\$ ${itemPrice ?? '45.98'} ",
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: redE2211C,

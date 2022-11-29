@@ -50,7 +50,6 @@ class RestaurantHomeScreen extends StatelessWidget {
                                         .value[index]
                                         .restaurantId
                                   },
-                                  {"index": index},
                                 ]);
                               }
                             });
@@ -92,13 +91,13 @@ class RestaurantHomeScreen extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                             image: DecorationImage(
-                                                image: NetworkImage(
-                                                    // restaurantImage,
-                                                    // ),
-                                                    homeController
-                                                        .homeRestaurantList[
-                                                            index]
-                                                        .restaurantPic),
+                                                image: AssetImage(
+                                                  restaurantImage,
+                                                ),
+                                                //     homeController
+                                                //     .homeRestaurantList[index]
+                                                //     .restaurantPic
+                                                // ),
                                                 fit: BoxFit.cover)),
                                       ),
                                       Positioned(
@@ -116,17 +115,9 @@ class RestaurantHomeScreen extends StatelessWidget {
                                               padding:
                                                   const EdgeInsets.all(0.0),
                                               child: IconButton(
-                                                onPressed: () async {
-                                                  print(
-                                                      'Favorite Button Clicked');
+                                                onPressed: () {
                                                   homeController
-                                                      .updateRestaurantLikeHome(
-                                                          index: index,
-                                                          restaurantId:
-                                                              homeController
-                                                                  .homeRestaurantList[
-                                                                      index]
-                                                                  .restaurantId);
+                                                      .updateRestaurantLike();
                                                 },
                                                 icon: homeController
                                                         .homeRestaurantList[
@@ -186,7 +177,7 @@ class RestaurantHomeScreen extends StatelessWidget {
                       );
                     })
               ]))
-          : const CommonNoDataFound();
+          : CommonNoDataFound();
     });
   }
 }

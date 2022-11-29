@@ -1,9 +1,6 @@
 import 'dart:io';
 
-import 'package:booking_table/controller/authentication/login_controller.dart';
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
-import 'package:booking_table/model/profile_details/profile_details/data.dart';
-import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -11,66 +8,42 @@ import '../../utils/common/toast_message.dart';
 import '../../utils/network/api_calls.dart';
 
 class ProfileController extends GetxController {
-  /// Initialization
+  UserSessionController userSession = Get.find();
   @override
-  void onInit() async {
+  void onInit() {
     // TODO: implement onInit
-    print("Profile Controller Initialization");
-    if (userProfileData.value.firstName != null) {
-      firstNameController.text = userProfileData.value.firstName!;
-      lastNameController.text = userProfileData.value.lastName!;
-      dateController.text = userProfileData.value.dateofBirth!.substring(0, 10);
-      streetAddressController.text = userProfileData.value.address!;
-      emailAddressController.text = userProfileData.value.email!;
-      flagController.text = userSession.countryFlag;
-      countryCodeController.text = userSession.countryCode;
-      cityController.text = userProfileData.value.city!;
-      stateController.text = userProfileData.value.state!;
-      zipCodeController.text = userProfileData.value.zipCode!;
-      mobileNumberController.text = userSession.mobileNumber;
-    } else {
-      flagController.text = userSession.countryFlag;
-      countryCodeController.text = userSession.countryCode;
-      mobileNumberController.text = userSession.mobileNumber;
-    }
+    var data = Get.arguments;
+    countryCode.value = data[0]['countryCode'];
+    countryFlag.value = data[0]['countryFlag'];
+    mobileNumberController.text = data[0]['mobileNumber'];
+    mobileNumberControllerNew.text = data[0]['preFilledMobileNumber'];
+    print(data);
+    print('====> Token PROFILE ${userSession.token}');
     super.onInit();
   }
 
-  /// View Controllers
-  UserSessionController userSession = Get.find();
-  LoginController loginController = Get.find();
+  /// Controllers
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final dateController = TextEditingController();
+  final streetAddressController = TextEditingController();
+  final cityController = TextEditingController();
+  final stateController = TextEditingController();
+  final zipCodeController = TextEditingController();
+  final mobileNumberController = TextEditingController();
+  final mobileNumberControllerNew = TextEditingController();
 
-  /// Network Calling
+  var countryCode = '91'.obs;
+  var countryFlag = '🇺🇸'.obs;
   ApiCalls apiCall = ApiCalls();
-
-  /// Text Editing Controllers
-  var firstNameController = TextEditingController();
-  var lastNameController = TextEditingController();
-  var dateController = TextEditingController();
-  var streetAddressController = TextEditingController();
-  var emailAddressController = TextEditingController();
-  var cityController = TextEditingController();
-  var stateController = TextEditingController();
-  var zipCodeController = TextEditingController();
-  var mobileNumberController = TextEditingController();
-  var flagController = TextEditingController();
-  var countryCodeController = TextEditingController();
-
-  /// Variables
-  var countryCode = ''.obs;
-  // var countryCode = '91'.obs;
-  // var countryFlag = '🇺🇸'.obs;
-  var countryFlag = ''.obs;
-  var userProfileData = ProfileData().obs;
   var createProfileImage = File('').obs;
 
   /// Update Image File
-  // updateImageFile(File value) async {
-  //   createProfileImage.value = value;
-  //   update();
-  // }
+  updateImageFile(File value) {
+    createProfileImage.value = value;
+  }
 
-  /// Create Profile & Update Profile
+  /// Create Profile
   Future<dynamic> createProfile(
       {dynamic body,
       String? endPoint,
@@ -78,72 +51,16 @@ class ProfileController extends GetxController {
       String? filename}) async {
     try {
       final response = await apiCall.callMultipartWithFileAPI(
-        body!,
-        endPoint!,
-        imageFile!,
-        token: userSession.token,
-      );
+          // body, endPoint!, imageFile!,
+          body!,
+          endPoint!,
+          // filename: filename!,
+          imageFile!,
+          token: 'l${userSession.token}'
+          // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImN0eSI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMzkiLCJleHAiOjE2Njg1ODUyMjAsImlzcyI6IlRlc3QuY29tIiwiYXVkIjoiVGVzdC5jb20ifQ.kOsK1K1dYmXDrVS8DdWE-_FvIcoc03DBxq6uXIuoIIw',
+          );
 
       if (response['response'] == 1) {
-        print(response['data']);
-
-        /// Set ISCREATE_PROFILE value to true
-        userSession.setIsProfileCreated(response['data']['isProfileCreated']);
-        userSession.setEmail(response['data']['email']);
-        userSession.setUserId(response['data']['userId'].toString());
-        userSession.setFullName(
-            "${response['data']['firstName']} ${response['data']['lastName']}");
-        userSession.setProfilePic(
-            "http://apitablebooking.harishparas.com/${response['data']['profilePic']}");
-
-        // ProfileData profile = ProfileData.fromMap(response['data']);
-        // userProfileData.value = profile;
-        // print("User Details====>> ${userProfileData.value}");
-        // userSession.setMobileNumber(response['mobileNumber'].toString());
-        // userSession.setUserId(response['userId'].toString());
-        // userSession.setFullName(response['fullName'].toString());
-        // userSession.setUserId(response['userId'].toString());
-        // userSession.setEmail(response['email'].toString());
-
-        print("Email===>> ${response['data']['email']}");
-        print("UserID ===>> ${response['data']['userId']}");
-        print("ProfilePic ===>> ${response['data']['profilePic']}");
-        print(
-            "Full Name ===>> ${response['data']['firstName']} ${response['data']['lastName']}");
-        // ProfileController().getProfileDetails();
-        print(
-            "IsProfileCreated ===>>> ${response['data']['isProfileCreated']}");
-        update();
-        return true;
-      } else {
-        ShowToast.show(
-          msg: response['errorMessage'] ?? 'Please try again!',
-          isError: true,
-        );
-        update();
-        return false;
-      }
-    } catch (e) {
-      print('Error --------> $e');
-    }
-    return false;
-  }
-
-  /// Get Profile Details
-  Future<dynamic> getProfileDetails({dynamic body}) async {
-    try {
-      final response = await apiCall.callPostApi(
-        body,
-        getProfileDetail,
-        token: userSession.token,
-      );
-
-      if (response['response'] == 1) {
-        ProfileData profile = ProfileData.fromMap(response['data']);
-        userProfileData.value = profile;
-
-        onInit();
-
         return true;
       } else {
         ShowToast.show(
@@ -152,6 +69,9 @@ class ProfileController extends GetxController {
         );
         return false;
       }
+
+      //print('Response --------> ${jsonDecode(response)}');
+
     } catch (e) {
       print('Error --------> $e');
     }

@@ -80,7 +80,7 @@ Column privacyPolicyNTerms() {
             ),
           ),
         ],
-      ).paddingSymmetric(horizontal: 20),
+      ),
       CommonSizedBox(height: 15),
     ],
   );

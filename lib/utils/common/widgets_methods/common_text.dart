@@ -28,7 +28,6 @@ class CommonText extends StatelessWidget {
       text ?? "Empty",
       textAlign: textAlign,
       style: TextStyle(
-        overflow: TextOverflow.clip,
         fontFamily: fontFamily ?? mainLaToFont,
         decoration: decoration,
         color: color,

@@ -14,7 +14,7 @@ import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 import '../restaurant_image_zoom_view.dart';
 
 class GalleryTab extends StatelessWidget {
-  const GalleryTab({Key? key}) : super(key: key);
+  GalleryTab({Key? key}) : super(key: key);
   // List<String> galleryImages = [
   //   "assets/images/home/restaurants_gallery_first_image.png",
   //   "assets/images/home/restaurants_gallery_second_image.png",
@@ -28,7 +28,7 @@ class GalleryTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
-        return controller.galleryImagesRestaurantList.value != null
+        return controller.galleryImagesRestaurantList.value.isNotEmpty
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +76,7 @@ class GalleryTab extends StatelessWidget {
                                   ),
                                 );
                               },
-                              child: Image.network(
+                              child: Image.asset(
                                 controller.galleryImagesRestaurantList[index]
                                     .restaurantImage,
                               )),
@@ -88,7 +88,7 @@ class GalleryTab extends StatelessWidget {
                   )
                 ],
               )
-            : const CommonNoDataFound();
+            : CommonNoDataFound();
       },
     );
   }

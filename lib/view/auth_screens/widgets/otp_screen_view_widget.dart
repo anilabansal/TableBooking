@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'package:booking_table/controller/authentication/login_controller.dart';
 import 'package:booking_table/controller/authentication/otp_controller.dart';
-import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
@@ -14,7 +13,6 @@ import 'package:pinput/pinput.dart';
 class OtpScreenViewWidget extends StatelessWidget {
   String? mobileNumber;
   LoginController loginController = Get.find();
-  UserSessionController userSessionController = Get.find();
   final String? callFrom;
 
   OtpScreenViewWidget({
@@ -105,34 +103,19 @@ class OtpScreenViewWidget extends StatelessWidget {
                           ).then(
                             (value) {
                               if (value) {
-                                if (userSessionController.isProfileCreated) {
-                                  Get.toNamed('/zip-code');
-                                } else {
-                                  Get.offAllNamed('/create-profile',
-                                      arguments: [
-                                        {
-                                          'mobileNumber': mobileNumber,
-                                        },
-                                        {
-                                          'preFilledMobileNumber':
-                                              loginController.mobileNumber.text,
-                                        },
-                                        {
-                                          'countryCode':
-                                              loginController.countryCode.value,
-                                        },
-                                        {
-                                          'countryFlag':
-                                              loginController.countryFlag.value,
-                                        },
-                                        {
-                                          'callFrom': "Create Profile",
-                                        },
-                                        // '${loginController.mobileNumber.text.substring(3)}',
-                                      ]);
-                                }
+                                Get.offAllNamed('/create-profile', arguments: [
+                                  {
+                                    'mobileNumber': '$mobileNumber',
+                                    'preFilledMobileNumber':
+                                        loginController.mobileNumber.text,
+                                    'countryCode':
+                                        loginController.countryCode.value,
+                                    'countryFlag':
+                                        loginController.countryFlag.value,
+                                    // '${loginController.mobileNumber.text.substring(3)}',
+                                  },
+                                ]);
                               }
-                              controller.isLoading.value = false;
                             },
                           );
                           // if (callFrom == 'Login') {
@@ -149,24 +132,8 @@ class OtpScreenViewWidget extends StatelessWidget {
 
               const SizedBox(height: 20),
               InkWell(
-                onTap: () async {
-                  await otpController.resendOTP(data: {
-                    "MobileNumber": '$mobileNumber',
-                  }).then((value) {
-                    // Get.back();
-                    if (value) {
-                      // Get.toNamed('/login/otp', arguments: [
-                      //   {
-                      //     'mobileNumber':
-                      //     '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
-                      //   },
-                      //   {
-                      //     'callFrom': "Login",
-                      //   }
-                      // ]);
-                    }
-                  });
-                  // Get.back();
+                onTap: () {
+                  Get.back();
                 },
                 child: CommonText(
                   text: 'Resend Code',

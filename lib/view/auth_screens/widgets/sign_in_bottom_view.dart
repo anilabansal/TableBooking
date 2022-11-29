@@ -15,8 +15,8 @@ import 'package:get/get.dart';
 import '../../../utils/common/widgets_methods/common_phone_field.dart';
 
 class SignInScreenBottomView extends StatelessWidget {
-  LoginController loginController;
-  RegisterController registerController;
+  LoginController loginController = Get.find();
+  RegisterController registerController = Get.find();
 
   String? callFrom;
 
@@ -51,28 +51,15 @@ class SignInScreenBottomView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   PhoneField(
-                    phoneController: callFrom == 'Login'
-                        ? loginController.mobileNumber
-                        : registerController.mobileNumber,
-                    countryCode: callFrom == 'Login'
-                        ? loginController.countryCode.value
-                        : registerController.countryCode.value,
-                    countryFlag: callFrom == 'Login'
-                        ? loginController.countryFlag.value
-                        : registerController.countryFlag.value,
+                    phoneController: loginController.mobileNumber,
+                    countryCode: loginController.countryCode.value,
+                    countryFlag: loginController.countryFlag.value,
                     onCountryFlag: (value) {
-                      callFrom == 'Login'
-                          ? loginController.countryFlag.value = value
-                          : registerController.countryFlag.value = value;
-                      print('Country flag ---> $value');
+                      //   print('Country flag ---> ${value}');
+                      loginController.countryFlag.value = value;
                     },
                     onCodeChange: (value) {
-                      callFrom == 'Login'
-                          ? loginController.countryCode.value = value
-                          : registerController.countryCode.value = value;
-                      print('Country Code ---> $value');
-                      print(
-                          'Country Code Controller Value ---> ${loginController.countryCode.value}');
+                      loginController.countryCode.value = value;
                     },
                     textFieldColor: red0FE2211C,
                   ),
@@ -94,19 +81,21 @@ class SignInScreenBottomView extends StatelessWidget {
                   // LOGIN/REGISTER BUTTON
 
                   loginController.isLoading.value == true
-                      ? const Center(
+                      ? Center(
                           child: CircularProgressIndicator(
                           color: redE2211C,
                         ))
                       : CommonButton(
                           onTap: () async {
+                            loginController.isLoading.value = true;
                             if (validateFields() != '') {
                               ShowToast.show(
                                 msg: validateFields(),
                                 isError: true,
                               );
+                              loginController.isLoading.value = false;
 
-                              return false;
+                              return;
                             }
 
                             // if(callFrom=="Login"){
@@ -150,7 +139,7 @@ class SignInScreenBottomView extends StatelessWidget {
                                       Get.toNamed('/login/otp', arguments: [
                                         {
                                           'mobileNumber':
-                                              '+${loginController.countryCode.value}${loginController.mobileNumber.value.text.trim()}',
+                                              '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
                                         },
                                         {
                                           'callFrom': "Login",
@@ -160,7 +149,7 @@ class SignInScreenBottomView extends StatelessWidget {
                                   })
                                 : registerController.registerUser(data: {
                                     "MobileNumber":
-                                        '+${registerController.countryCode.value}${registerController.mobileNumber.text.trim()}',
+                                        '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
                                     "Email": "",
                                     "AuthenticationId": "",
                                     "AuthenticationType": "",
@@ -176,7 +165,7 @@ class SignInScreenBottomView extends StatelessWidget {
                                         arguments: [
                                           {
                                             'mobileNumber':
-                                                '+${registerController.countryCode.value}${registerController.mobileNumber.text.trim()}',
+                                                '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
                                           },
                                           {
                                             'callFrom': "Register",
@@ -217,7 +206,7 @@ class SignInScreenBottomView extends StatelessWidget {
                   CommonSizedBox(height: 20),
                   // GUEST BUTTON
                   InkWell(
-                    onTap: () async {
+                    onTap: () {
                       Get.toNamed('/home');
                     },
                     child: Center(
@@ -299,9 +288,7 @@ class SignInScreenBottomView extends StatelessWidget {
   // validateFields() {
   validateFields() {
     if (!GetUtils.isPhoneNumber(
-            loginController.mobileNumber.value.text.trim()) &&
-        !GetUtils.isPhoneNumber(
-            registerController.mobileNumber.value.text.trim())) {
+        loginController.mobileNumber.value.text.trim())) {
       return 'please enter a valid phone number!'.toTitleCase();
     } else if (callFrom == 'Register' &&
         registerController.isChecked == false) {

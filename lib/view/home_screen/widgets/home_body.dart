@@ -13,13 +13,15 @@ import '../../../controller/user_session/user_session_controller.dart';
 class HomeBody extends StatelessWidget {
   HomeBody({
     Key? key,
+    required this.homeController,
   }) : super(key: key);
+
+  final HomeController homeController;
+  UserSessionController userSessionController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-      builder: (homeController) {
-        return SafeArea(
+    return Obx(() => SafeArea(
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(0.0),
@@ -27,112 +29,94 @@ class HomeBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GetBuilder<UserSessionController>(
-                    builder: (userSessionController) {
-                      return Padding(
-                        padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 5),
-                        child: Row(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                homeController.drawerKey.currentState!
-                                    .openDrawer();
-                              },
-                              child: Stack(
-                                children: [
-                                  userSessionController.isLogin == false
-                                      ? const Icon(
-                                          Icons.person,
-                                          size: 50,
-                                        )
-                                      : userSessionController.profilePic != ""
-                                          ? CommonSizedBox(
-                                              height: 49,
-                                              width: 49,
-                                              child: ClipOval(
-                                                child: Image.network(
-                                                  userSessionController
-                                                      .profilePic,
-                                                  height: 49,
-                                                  width: 49,
-                                                  fit: BoxFit.fill,
-                                                ),
-                                              ),
-                                            )
-                                          : const Icon(
-                                              Icons.person,
-                                              size: 40,
-                                            ),
-                                  Positioned(
-                                    bottom: 0,
-                                    right: 0,
-                                    child: Container(
-                                      width: 24,
-                                      height: 24,
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: white,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Image.asset(drawerImage),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 5),
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            homeController.drawerKey.currentState!.openDrawer();
+                          },
+                          child: Stack(
+                            children: [
+                              Container(
+                                width: 49,
+                                height: 49,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      image: AssetImage(profileImage),
+                                      fit: BoxFit.cover),
+                                ),
                               ),
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                child: Container(
+                                  width: 24,
+                                  height: 24,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: white,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Image.asset(drawerImage),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 13,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CommonText(
+                              text: userSessionController.isLogin == true
+                                  ? "Claire Fiona"
+                                  : "Guest User",
+                              color: black000000,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
                             const SizedBox(
-                              width: 13,
+                              height: 8,
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Row(
                               children: [
+                                const Icon(
+                                  Icons.location_on,
+                                  color: black000000,
+                                  size: 14,
+                                ),
+                                CommonSizedBox(
+                                  width: 2,
+                                ),
                                 CommonText(
-                                  text: userSessionController.isLogin == true
-                                      ? userSessionController.fullName
-                                      : "Guest User",
+                                  text: "Montgomery, 35004",
                                   color: black000000,
                                   fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.normal,
                                 ),
                                 const SizedBox(
-                                  height: 8,
+                                  width: 10,
                                 ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.location_on,
-                                      color: black000000,
-                                      size: 14,
-                                    ),
-                                    CommonSizedBox(
-                                      width: 2,
-                                    ),
-                                    CommonText(
-                                      text: "Montgomery, 35004",
-                                      color: black000000,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    const Icon(Icons.keyboard_arrow_down),
-                                    // Image.asset(
-                                    //   dropDownIconImage,
-                                    //   width: 9,
-                                    //   height: 12,
-                                    // ),
-                                  ],
-                                ),
+                                const Icon(Icons.keyboard_arrow_down),
+                                // Image.asset(
+                                //   dropDownIconImage,
+                                //   width: 9,
+                                //   height: 12,
+                                // ),
                               ],
-                            )
+                            ),
                           ],
-                        ),
-                      );
-                    },
+                        )
+                      ],
+                    ),
                   ),
                   const SearchBoxScreen(),
                   Padding(
@@ -232,8 +216,6 @@ class HomeBody extends StatelessWidget {
               ),
             ),
           ),
-        );
-      },
-    );
+        ));
   }
 }
