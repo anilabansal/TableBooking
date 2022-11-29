@@ -63,16 +63,15 @@ class ReviewsTabScreen extends StatelessWidget {
             Container(
               width: 39,
               height: 39,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image:
-                        // profilePic
-                        //     ??
-                        AssetImage(
-                      "assets/images/home/profile_image.png",
-                    ),
-                  )),
+                  image: DecorationImage(image: NetworkImage("${profilePic}")
+                      //     ??
+                      // AssetImage(
+                      // "assets/images/home/profile_image.png",
+                      // ),
+                      )),
+              // child: Image.network(profilePic),
             ),
             const SizedBox(
               width: 10,
@@ -82,7 +81,7 @@ class ReviewsTabScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CommonText(
-                  text: ratingByName ?? "Roger",
+                  text: ratingByName,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: black0D0000,
@@ -114,8 +113,7 @@ class ReviewsTabScreen extends StatelessWidget {
         SizedBox(
           width: Get.width - 30,
           child: CommonText(
-            text: reviews ??
-                " It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.",
+            text: reviews,
             fontSize: 15,
             fontWeight: FontWeight.w400,
             color: textDark3F3E3E,
