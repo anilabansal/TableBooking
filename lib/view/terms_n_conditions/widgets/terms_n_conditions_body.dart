@@ -1,103 +1,126 @@
-import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
-import 'package:flutter/material.dart';
+import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+import '../../../utils/common/common_strings.dart';
+
+// class TermsNConditionBody extends StatelessWidget {
+//   TermsNConditionBody({
+//     Key? key,
+//   }) : super(key: key);
+//
+//   PrivacyNTC controller = Get.find();
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     controller.termsConditionNPrivacyPolicy(endPoint: termsNConditionString);
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(horizontal: 20),
+//       child: SingleChildScrollView(
+//         child: Column(
+//           children: <Widget>[
+//             CommonText(
+//               text: 'Terms & Conditions',
+//               color: Colors.black,
+//               fontSize: 22,
+//               fontWeight: FontWeight.w600,
+//             ),
+//             CommonSizedBox(
+//               height: 20,
+//             ),
+//             Obx(() {
+//               return CommonText(
+//                 fontSize: 16,
+//                 fontWeight: FontWeight.w400,
+//                 text: controller.termsNConditons.value,
+//               );
+//             }),
+//             // CommonSizedBox(
+//             //   height: 20,
+//             // ),
+//             // CommonText(
+//             //   fontSize: 16,
+//             //   fontWeight: FontWeight.w400,
+//             //   text:
+//             //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium, dui sed pharetra congue, leo ipsum tincidunt nulla, a posuere lectus nulla lobortis metus. Mauris non efficitur ipsum. Phasellus et sollicitudin sapien. Donec malesuada est nisi, eget viverra mauris pulvinar commodo.',
+//             // ),
+//             // CommonSizedBox(
+//             //   height: 20,
+//             // ),
+//             // Row(
+//             //   // crossAxisAlignment: CrossAxisAlignment.center,
+//             //   children: [
+//             //     const Icon(
+//             //       Icons.circle,
+//             //       size: 10,
+//             //       color: Colors.yellow,
+//             //     ),
+//             //     CommonSizedBox(
+//             //       width: 12,
+//             //     ),
+//             //     Expanded(
+//             //       child: CommonText(
+//             //         fontSize: 16,
+//             //         fontWeight: FontWeight.w400,
+//             //         text:
+//             //             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium, dui.',
+//             //       ),
+//             //     ),
+//             //   ],
+//             // ),
+//             // CommonSizedBox(
+//             //   height: 20,
+//             // ),
+//             // Row(
+//             //   // crossAxisAlignment: CrossAxisAlignment.center,
+//             //   children: [
+//             //     const Icon(
+//             //       Icons.circle,
+//             //       size: 10,
+//             //       color: Colors.yellow,
+//             //     ),
+//             //     CommonSizedBox(
+//             //       width: 12,
+//             //     ),
+//             //     Expanded(
+//             //       child: CommonText(
+//             //         fontSize: 16,
+//             //         fontWeight: FontWeight.w400,
+//             //         text:
+//             //             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium, dui.',
+//             //       ),
+//             //     ),
+//             //   ],
+//             // ),
+//             // CommonSizedBox(
+//             //   height: 20,
+//             // ),
+//             // CommonText(
+//             //   text:
+//             //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium, dui sed pharetra congue, leo ipsum tincidunt nulla, a posuere lectus nulla lobortis metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium, dui sed pharetra congue, leo ipsum tincidunt nulla, a posuere lectus nulla lobortis metus. Mauris non efficitur ipsum. Phasellus et sollicitudin sapien. Donec malesuada est nisi, eget viverra mauris pulvinar commodo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium.',
+//             //   fontSize: 16,
+//             //   fontWeight: FontWeight.w400,
+//             // )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 class TermsNConditionBody extends StatelessWidget {
-  const TermsNConditionBody({
+  TermsNConditionBody({
     Key? key,
   }) : super(key: key);
+  final Completer<WebViewController> _controller =
+      Completer<WebViewController>();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            CommonText(
-              text: 'Terms & Conditions',
-              color: Colors.black,
-              fontSize: 22,
-              fontWeight: FontWeight.w600,
-            ),
-            CommonSizedBox(
-              height: 20,
-            ),
-            CommonText(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              text:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium, dui sed pharetra congue, leo ipsum tincidunt nulla, a posuere lectus nulla lobortis metus. Mauris non efficitur ipsum. Phasellus et sollicitudin sapien. Donec malesuada est nisi, eget viverra mauris pulvinar commodo.',
-            ),
-            CommonSizedBox(
-              height: 20,
-            ),
-            CommonText(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              text:
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium, dui sed pharetra congue, leo ipsum tincidunt nulla, a posuere lectus nulla lobortis metus. Mauris non efficitur ipsum. Phasellus et sollicitudin sapien. Donec malesuada est nisi, eget viverra mauris pulvinar commodo.',
-            ),
-            CommonSizedBox(
-              height: 20,
-            ),
-            Row(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.circle,
-                  size: 10,
-                  color: Colors.yellow,
-                ),
-                CommonSizedBox(
-                  width: 12,
-                ),
-                Expanded(
-                  child: CommonText(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    text:
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium, dui.',
-                  ),
-                ),
-              ],
-            ),
-            CommonSizedBox(
-              height: 20,
-            ),
-            Row(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.circle,
-                  size: 10,
-                  color: Colors.yellow,
-                ),
-                CommonSizedBox(
-                  width: 12,
-                ),
-                Expanded(
-                  child: CommonText(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    text:
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium, dui.',
-                  ),
-                ),
-              ],
-            ),
-            CommonSizedBox(
-              height: 20,
-            ),
-            CommonText(
-              text:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium, dui sed pharetra congue, leo ipsum tincidunt nulla, a posuere lectus nulla lobortis metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium, dui sed pharetra congue, leo ipsum tincidunt nulla, a posuere lectus nulla lobortis metus. Mauris non efficitur ipsum. Phasellus et sollicitudin sapien. Donec malesuada est nisi, eget viverra mauris pulvinar commodo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium.',
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-            )
-          ],
-        ),
-      ),
-    );
+    return WebView(
+        initialUrl: termsAndConditionUrl,
+        onWebViewCreated: (WebViewController webViewController) {
+          _controller.complete(webViewController);
+        });
   }
 }

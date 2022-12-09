@@ -10,6 +10,7 @@ import 'package:booking_table/utils/network/api_calls.dart';
 import 'package:get/get.dart';
 
 import '../../model/restaurant_about_us/restaurant_about_us_model.dart';
+import '../location/location_controller.dart';
 
 class RestaurantDetailsController extends GetxController {
   HomeController homeController = Get.find();
@@ -23,22 +24,32 @@ class RestaurantDetailsController extends GetxController {
   var totalReviews = "".obs;
   var isLoading = true.obs;
   var selectedIndex = 0.obs;
-
   var index = 0.obs;
+  LocationController locationController = Get.find();
+  /// update likes and unlike of restaurants on restaurant details screen
+  void updateRestaurantLikes(){
+    if(detailsRestaurantList.value.isFavourite == true){
+      detailsRestaurantList.value.isFavourite = false;
+    }
+    else if(detailsRestaurantList.value.isFavourite == false){
+      detailsRestaurantList.value.isFavourite = true;
+    }
+    update();
+  }
 
-  /// Favourite
+  /// Favourite i.e like and dislike api call
   void updateRestaurantLikeRestaurantDetails({index, restaurantId}) async {
     await homeController.favRestaurantUpdate(
         body: {"restaurantId": restaurantId}).then((value) {
       if (value) {
-        detailsRestaurantList.value.isFavourite =
-            !detailsRestaurantList.value.isFavourite!;
-        homeController.getRestaurantDetailsUsingLatLon();
+        homeController.getRestaurantDetailsUsingLatLon(body: {
+          'latitude': locationController.latLng.value.latitude.toString(),
+          'longitude': locationController.latLng.value.longitude.toString(),
+        });
       } else {
         return;
       }
     });
-
     update();
   }
 
@@ -53,19 +64,20 @@ class RestaurantDetailsController extends GetxController {
         detailsRestaurantList.value = RestaurantDetailsData.fromMap(
             response['data'] as Map<String, dynamic>);
 
-        /// About Us
-        await restaurantDetailsAboutUs(body: {"restaurantId": index.value});
+       //  / About Us
+       // await restaurantDetailsAboutUs(body: {"restaurantId": index.value});
 
-        /// Gallery Images
-        await restaurantDetailsGalleryImages(
-            body: {"restaurantId": index.value});
+        // /// Gallery Images
+        // await restaurantDetailsGalleryImages(
+        //   body: {"restaurantId": index.value},
+        // );
 
-        /// Menu
-        await restaurantDetailsMenu(body: {"restaurantId": index.value});
+       //  / Menu
+       // await restaurantDetailsMenu(body: {"restaurantId": index.value});
 
-        /// Ratings
-        await restaurantDetailsRatings(body: {"restaurantId": index.value});
-
+        // /// Ratings
+        // await restaurantDetailsRatings(body: {"restaurantId": index.value});
+        isLoading.value = false;
         update();
         return true;
       } else {
@@ -73,6 +85,7 @@ class RestaurantDetailsController extends GetxController {
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
         );
+        isLoading.value = false;
         return false;
       }
     } catch (e) {
@@ -98,14 +111,16 @@ class RestaurantDetailsController extends GetxController {
         // print(aboutUsRestaurantList.value);
 
         aboutUsRestaurantList.value = restaurantAboutUs.data!;
-
+        isLoading.value = false;
+        update();
         return true;
       } else {
         ShowToast.show(
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
         );
-
+        isLoading.value = false;
+        update();
         return false;
       }
     } catch (e) {
@@ -126,13 +141,16 @@ class RestaurantDetailsController extends GetxController {
         galleryImagesRestaurantList.value = (response['restaurantImages'])
             ?.map((e) => RestaurantImage.fromMap(e as Map<String, dynamic>))
             .toList();
+        isLoading.value = false;
+        update();
         return true;
       } else {
         ShowToast.show(
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
         );
-
+        isLoading.value = false;
+        update();
         return false;
       }
     } catch (e) {
@@ -148,19 +166,21 @@ class RestaurantDetailsController extends GetxController {
   }) async {
     try {
       final response = await apiCall.callPostApi(body, menu,
-          token: userSessionController.token);
+          token: userSessionController.token,);
       if (response['response'] == 1) {
         menuHeaderRestaurantList.value = (response['data'])
             ?.map((e) => RestaurantMenuData.fromMap(e as Map<String, dynamic>))
             .toList();
-
+        isLoading.value = false;
+        update();
         return true;
       } else {
         ShowToast.show(
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
         );
-
+        isLoading.value = false;
+        update();
         return false;
       }
     } catch (e) {
@@ -182,14 +202,16 @@ class RestaurantDetailsController extends GetxController {
             ?.map((e) => RatingAndReviewList.fromMap(e as Map<String, dynamic>))
             .toList();
         totalReviews.value = response['totalReview'].toString();
-
+        isLoading.value = false;
+        update();
         return true;
       } else {
         ShowToast.show(
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
         );
-
+        isLoading.value = false;
+        update();
         return false;
       }
     } catch (e) {

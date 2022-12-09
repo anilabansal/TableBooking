@@ -160,7 +160,8 @@ class AppRoutes {
     GetPage(
       name: RouteName.zipCodeView,
       page: () => GetZipCodeView(),
-      binding: HomeBindings(),
+     binding: HomeBindings(),
+     // binding: AuthBindings()
     ),
     GetPage(
       name: RouteName.editProfile,
@@ -184,7 +185,7 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteName.restaurantDetails,
-      page: () => const RestaurantDetailView(),
+      page: () =>  const RestaurantDetailView(  ),
       binding: HomeBindings(),
     ),
     GetPage(

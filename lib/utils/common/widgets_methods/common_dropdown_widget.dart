@@ -8,7 +8,6 @@ class CommonDropDown extends StatelessWidget {
   // final dynamic icon;
   final dynamic color;
   final Function(String)? onChange;
-
   const CommonDropDown(
       {Key? key,
       this.itemList,

@@ -22,6 +22,7 @@ class HomeController extends GetxController {
   }
 
   HomeController._internal();
+
   UserSessionController userSessionController = Get.find();
   LocationController locationController = Get.find();
 
@@ -37,35 +38,64 @@ class HomeController extends GetxController {
   var favRestaurantList = [].obs;
   var homeRestaurantCount = 0.obs;
   var isLoading = false.obs;
+  var mapHomeLoading = true.obs;
 
+/// update likes and unlike of restaurants on homeScreen
+  void updateRestaurantLikes(index){
+    if(homeRestaurantList[index].isFavourite == true){
+       homeRestaurantList[index].isFavourite = false;
+    }
+    else if(homeRestaurantList[index].isFavourite == false){
+      homeRestaurantList[index].isFavourite = true;
+    }
+    update();
+  }
+  /// Api call for likes and unlike restaurants on homeScreen
   void updateRestaurantLikeHome({index, restaurantId}) async {
-    await favRestaurantUpdate(body: {"restaurantId": restaurantId})
-        .then((value) {
+    await favRestaurantUpdate(
+      body: {
+        "restaurantId": restaurantId,
+      },
+    ).then((value) {
       if (value) {
-        homeRestaurantList[index].isFavourite =
-            !homeRestaurantList[index].isFavourite;
+        // homeRestaurantList[index].isFavourite =
+        //     !homeRestaurantList[index].isFavourite;
       } else {
         return;
       }
     });
-
     update();
   }
 
-  void updateRestaurantLikeFav({index, restaurantId}) async {
-    await favRestaurantUpdate(body: {"restaurantId": restaurantId})
-        .then((value) {
-      if (value) {
-        favRestaurantList[index].isFavourite =
-            !favRestaurantList[index].isFavourite;
-        favRestaurantList.removeAt(index);
-        getRestaurantDetailsUsingLatLon();
-      } else {
-        return;
-      }
-    });
+  /// update likes and dislikes of favourite screen
+  // void updateFavouriteRestaurantLikes(index){
+  //   if(favRestaurantList[index].isFavourite == true){
+  //     favRestaurantList[index].isFavourite = false;
+  //     // favRestaurantList.removeAt(index);
+  //   }
+  // //  update();
+  // }
 
-    update();
+  /// Api call for dislike of favourite list restaurants
+  void updateRestaurantLikeFav({index, restaurantId}) async {
+    await favRestaurantUpdate(body: {"restaurantId": restaurantId}).then(
+      (value) {
+        if (value) {
+          favRestaurantList[index].isFavourite =
+              !favRestaurantList[index].isFavourite;
+        favRestaurantList.removeAt(index);
+          getRestaurantDetailsUsingLatLon(
+            body: {
+              'latitude': locationController.latLng.value.latitude.toString(),
+              'longitude': locationController.latLng.value.longitude.toString(),
+            }
+          );
+        } else {
+          return;
+        }
+      },
+    );
+  // update();
   }
 
   /// Get Restaurant Details using Latitude and Longitude.
@@ -74,10 +104,11 @@ class HomeController extends GetxController {
   }) async {
     try {
       final response = await apiCall.callPostApi(
-        {
-          "longitude": locationController.latLng.value.longitude.toString(),
-          "latitude": locationController.latLng.value.latitude.toString(),
-        },
+        // {
+        //   "longitude": locationController.latLng.value.longitude.toString(),
+        //   "latitude": locationController.latLng.value.latitude.toString(),
+        // },
+        body,
         zipCode,
         token: userSessionController.token,
       );
@@ -108,13 +139,14 @@ class HomeController extends GetxController {
   }
 
   /// Favourite Restaurants List
-  Future<bool> favRestaurantDetailList() async {
+  Future<bool> favRestaurantDetailList({dynamic body}) async {
     try {
       final response = await apiCall.callPostApi(
-        {
-          'latitude': "76.69060936300099",
-          'longitude': "30.713649330499276",
-        },
+        // {
+        //   'latitude': "76.69060936300099",
+        //   'longitude': "30.713649330499276",
+        // },
+        body,
         favRestaurantDetails,
         token: userSessionController.token,
       );
@@ -124,6 +156,7 @@ class HomeController extends GetxController {
             .toList();
         print('Repsonse List=====> ${favRestaurantList.value}');
         print('Total Restaurant List=====> $favRestaurantList');
+
         isLoading.value = false;
         return true;
       } else {
@@ -141,7 +174,7 @@ class HomeController extends GetxController {
 
     return false;
   }
-
+/// to update like and dislike of favourite restaurants
   Future<bool> favRestaurantUpdate({dynamic body}) async {
     try {
       final response = await apiCall.callPostApi(

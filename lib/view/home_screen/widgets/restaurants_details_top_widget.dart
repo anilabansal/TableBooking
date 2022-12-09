@@ -13,6 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 class RestaurantDetailTopScreen extends StatelessWidget {
   RestaurantDetailTopScreen({Key? key}) : super(key: key);
   var data = Get.arguments;
+
   // HomeController homeController = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,6 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                         height: 266,
                         child: Image.network(
                           // restaurantImage,
-
                           controller.detailsRestaurantList.value.restaurantPic
                               .toString(),
                           fit: BoxFit.cover,
@@ -104,7 +104,7 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                         ),
                         CommonText(
                           text:
-                              "${controller.detailsRestaurantList.value.distance.toString()} miles away",
+                              "${(controller.detailsRestaurantList.value.distance * 0.6214).toStringAsFixed(2)} miles away",
                           color: textGrey868686,
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -124,9 +124,9 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                 color: black000000,
                               ),
                             ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width - 55,
+                            Expanded(
                               child: CommonText(
+                                softWrap: true,
                                 text: controller
                                     .detailsRestaurantList.value.address
                                     .toString(),
@@ -194,7 +194,7 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                 CommonText(
                                   /// Currently Null Please Uncomment if not  Null
                                   text:
-                                      "${controller.detailsRestaurantList.value.ratingCount} Ratings",
+                                      "Based on ${controller.detailsRestaurantList.value.ratingCount} reviews ",
                                   // text:
                                   //      homeController.homeRestaurantList[controller.index.value].rating.toString(),
                                   fontSize: 15,
@@ -216,7 +216,7 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                                 scheme: 'https',
                                                 host: controller
                                                     .aboutUsRestaurantList[0]
-                                                    .officialWebsite),
+                                                    .officialWebsite,),
                                             mode:
                                                 LaunchMode.externalApplication,
                                           )
@@ -319,8 +319,10 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(0.0),
                   child: IconButton(
                     onPressed: () {
+                      controller.updateRestaurantLikes();
                       controller.updateRestaurantLikeRestaurantDetails(
                           restaurantId: data[0]['restaurantId']);
+                      print("detail----${data[0]['restaurantId']}");
                     },
                     icon: controller.detailsRestaurantList.value.isFavourite ==
                             true

@@ -8,22 +8,19 @@ import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   var mobileNumber = TextEditingController();
-  var countryCode = '91'.obs;
-  var countryFlag = '🇮🇳'.obs;
+  var countryCode = '1'.obs;
+  var countryFlag = '🇺🇸'.obs;
   var isLoading = false.obs;
   var userProfileData = ProfileData().obs;
-
   // var countryFlag = '🇺🇸'.obs;
   ApiCalls apiCall = ApiCalls();
   UserSessionController userSession = Get.find();
-
   Future<bool> loginUser({Map<String, String>? data}) async {
     final response = await apiCall.callPostApi(
       // isToken: false,
       data!,
       logInEndPoint,
     );
-
     // print(data);
     // print('Login Response ======> ${response['token']}');
     // if (response.body['response'] == 1 && response.body['data'] != null) {
@@ -41,6 +38,9 @@ class LoginController extends GetxController {
       );
       isLoading.value = false;
       userSession.setIsProfileCreated(response['isProfileCreated']);
+      if(response['isProfileCreated']==true){
+        userSession.setIsLogin(true);
+      }
       userSession.setCountryCode(countryCode.value);
       userSession.setCountryFlag(countryFlag.value);
       userSession.setMobileNumber(mobileNumber.value.text);
@@ -56,14 +56,12 @@ class LoginController extends GetxController {
       // userSession.setMobileNumber(response['mobileNumber'].toString());
       // userSession.setUserId(response['userId'].toString());
       // userSession.setFullName(response['fullName'].toString());
-
       // print("Full Name ${userSession.fullName}");
       // print("UserID ${userSession.userId}");
       // print("MobileNumber ${userSession.mobileNumber}");
       // print("TOKEN ===>>> ${userSession.token}");
       print(
           "IsProfileCreated Login Page ===>>> ${userSession.isProfileCreated}");
-
       return true;
     } else {
       ShowToast.show(

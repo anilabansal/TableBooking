@@ -254,13 +254,14 @@ class BookATableBody extends StatelessWidget {
                           ),
                           Expanded(
                             child: CommonText(
+                              softWrap: true,
                               text: controller.serviceType.value == "Full"
                                   ? "Order with server in restaurant"
                                   : controller.serviceType.value == "No"
-                                  ? "Pre-order food/drink and any add-ons in restaurant via the app. No server"
+                                  ? "Pre order food and drink on the app as well as in restaurant. No server."
                                   : controller.serviceType.value == "To Go"
                                   ? "Order food/drink to go"
-                                  : "Pre-order food/drink via the app and have a server in restaurant",
+                                  : "Pre-order food and drink on the app and have a server in restaurant",
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
                               color: textGrey868686,

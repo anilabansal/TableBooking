@@ -51,8 +51,8 @@ class ApiCalls extends GetConnect {
         print(
             'API response ------------------------------->\n ${response.statusCode}');
 
-        print(
-            'API response ------------------------------->\n ${response.body}');
+        // print(
+        //     'API response ------------------------------->\n ${response.body}');
 
         print(
             'API final body ------------------------------->\n ${response.body.toString()}');
@@ -174,7 +174,7 @@ class ApiCalls extends GetConnect {
 
     var response = await request.send();
     print('Request Body ------------------>\n ${body.toString()}');
-
+     print("profile pic ----->${imageFile.path}");
     print(
         'API response ------------------------------->\n ${response.statusCode}');
 

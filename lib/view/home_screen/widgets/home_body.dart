@@ -4,6 +4,7 @@ import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/home_screen/widgets/map_home_widget.dart';
+import 'package:booking_table/view/home_screen/widgets/recent_location.dart';
 import 'package:booking_table/view/home_screen/widgets/restaurants_home_widget.dart';
 import 'package:booking_table/view/home_screen/widgets/search_home_widget.dart';
 import 'package:booking_table/view/profile_screen/search_location.dart';
@@ -11,11 +12,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/user_session/user_session_controller.dart';
+import '../../../utils/common/widgets_methods/common_dropdown_widget.dart';
 
 class HomeBody extends StatelessWidget {
   HomeBody({
     Key? key,
   }) : super(key: key);
+  LocationController locationController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,8 @@ class HomeBody extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 5),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             InkWell(
                               onTap: () {
@@ -112,48 +117,44 @@ class HomeBody extends StatelessWidget {
                                     CommonSizedBox(
                                       width: 2,
                                     ),
-                                    Obx(() {
-                                      return SizedBox(
-                                        width: Get.width * 0.5,
-                                        child: CommonText(
-                                          overflow: TextOverflow.clip,
-                                          text: LocationController()
-                                                      .searchController
-                                                      .value
-                                                      .text ==
-                                                  null
-                                              ? LocationController()
-                                                  .currentAddress
-                                                  .value
-                                              : LocationController()
-                                                  .searchController
-                                                  .value
-                                                  .text,
-                                          color: black000000,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      );
-                                    }),
+                                    Obx(
+                                      () {
+                                        return SizedBox(
+                                          width: Get.width * 0.5,
+                                          child: CommonText(
+                                            softWrap: true,
+                                            overflow: TextOverflow.clip,
+                                            text: locationController
+                                                    .searchController
+                                                    .value
+                                                    .text
+                                                    .isEmpty
+                                                ? locationController
+                                                    .currentAddress.value
+                                                    .toString()
+                                                : locationController
+                                                    .searchController
+                                                    .value
+                                                    .text,
+                                            color: black000000,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        );
+                                      },
+                                    ),
                                     const SizedBox(
                                       width: 10,
                                     ),
                                     InkWell(
-                                        onTap: () {
-                                          LocationController()
-                                              .requestPermission()
-                                              .then(
-                                            (value) {
-                                              print("Button");
-                                              if (value) {
-                                                Get.to(() =>
-                                                    const SearchLocation());
-                                              }
-                                            },
-                                          );
-                                        },
-                                        child: const Icon(
-                                            Icons.keyboard_arrow_down)),
+                                      onTap: () {
+                                        Get.to(() => RecentLocation());
+                                        print(
+                                            "recentSearchList ---->${userSessionController.recentSearchLocation.length}");
+                                      },
+                                      child:
+                                          const Icon(Icons.keyboard_arrow_down),
+                                    ),
                                     // Image.asset(
                                     //   dropDownIconImage,
                                     //   width: 9,
@@ -186,8 +187,9 @@ class HomeBody extends StatelessWidget {
                           width: 57,
                           height: 29,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: greyF4F4F4),
+                            borderRadius: BorderRadius.circular(4),
+                            color: greyF4F4F4,
+                          ),
                           child: Center(
                             child: Row(
                               children: [
@@ -197,6 +199,7 @@ class HomeBody extends StatelessWidget {
                                     onTap: () {
                                       homeController.restaurantFilter.value =
                                           true;
+                                      homeController.update();
                                     },
                                     child: Container(
                                       width: 24,
@@ -227,28 +230,33 @@ class HomeBody extends StatelessWidget {
                                 ),
                                 InkWell(
                                   onTap: () {
+                                    // homeController.updateRestaurantFilter(false);
                                     homeController.restaurantFilter.value =
                                         false;
+                                    homeController.update();
                                   },
                                   child: Container(
                                     width: 24,
                                     height: 25,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(4),
+                                      borderRadius: BorderRadius.circular(4),
+                                      color: homeController
+                                                  .restaurantFilter.value ==
+                                              false
+                                          ? black000000
+                                          : greyF4F4F4,
+                                    ),
+                                    child: Center(
+                                      child: Image.asset(
+                                        locationImage,
+                                        width: 14,
+                                        height: 14,
                                         color: homeController
                                                     .restaurantFilter.value ==
                                                 false
-                                            ? black000000
-                                            : greyF4F4F4),
-                                    child: Center(
-                                      child: Image.asset(locationImage,
-                                          width: 14,
-                                          height: 14,
-                                          color: homeController
-                                                      .restaurantFilter.value ==
-                                                  false
-                                              ? white
-                                              : greyC1C1C1),
+                                            ? white
+                                            : greyC1C1C1,
+                                      ),
                                     ),
                                   ),
                                 ),

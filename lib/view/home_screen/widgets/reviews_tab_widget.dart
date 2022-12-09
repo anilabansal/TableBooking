@@ -6,15 +6,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
-class ReviewsTabScreen extends StatelessWidget {
-  const ReviewsTabScreen({Key? key}) : super(key: key);
+class ReviewsTabScreen extends StatefulWidget {
+  final int? restaurantId;
+  const ReviewsTabScreen({Key? key,this.restaurantId}) : super(key: key);
 
+  @override
+  State<ReviewsTabScreen> createState() => _ReviewsTabScreenState();
+}
+
+class _ReviewsTabScreenState extends State<ReviewsTabScreen> {
+  RestaurantDetailsController restaurantsController = Get.find();
+  @override
+  void initState() {
+    // TODO: implement initState
+    loadAllReviews();
+    super.initState();
+  }
+loadAllReviews(){
+    restaurantsController.isLoading.value = true;
+  restaurantsController.restaurantDetailsRatings(
+    body: {
+      "RestaurantId": widget.restaurantId
+    }
+  ).then((value){
+    if(value){
+      restaurantsController.isLoading.value = false;
+    }
+  });
+}
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
-        return controller.totalReviews.value != 0
-            ? Column(
+        return controller.isLoading.value?
+            const Center(child: CircularProgressIndicator(color: redE2211C,)):
+          // controller.totalReviews.value != 0
+          //   ?
+          Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -28,7 +56,9 @@ class ReviewsTabScreen extends StatelessWidget {
                     height: 24,
                   ),
                   Expanded(
-                    child: ListView.builder(
+                    child: controller.rateReviewsRestaurantList.isEmpty?
+                    const CommonNoDataFound():
+                    ListView.builder(
                       itemCount: controller.rateReviewsRestaurantList.length,
                       shrinkWrap: true,
                       //physics: const NeverScrollableScrollPhysics(),
@@ -45,8 +75,8 @@ class ReviewsTabScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
-            : const CommonNoDataFound();
+              );
+           // : const CommonNoDataFound();
       },
     );
   }
@@ -112,7 +142,7 @@ class ReviewsTabScreen extends StatelessWidget {
           height: 13,
         ),
         SizedBox(
-          width: Get.width - 30,
+          //width: Get.width - 30,
           child: CommonText(
             text: reviews,
             fontSize: 15,

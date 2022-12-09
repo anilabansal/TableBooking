@@ -59,7 +59,7 @@ class FilterView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CommonText(
-                    text: "Time",
+                    text: "Choose Time",
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: black000000,

@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
+import '../location/modals/previous_locations_lat_lng.dart';
 
 class UserSessionController extends GetxController {
   GetStorage box = GetStorage();
@@ -16,6 +20,10 @@ class UserSessionController extends GetxController {
   final _email = ''.obs;
   final _profilePic = ''.obs;
 
+  // final _recentSearchLocation = <String>[].obs;
+
+  final _recentSearchLocation = <RecentSearch>[].obs;
+
   init() async {
     _isLogin.value = box.read(isLogInString) ?? false;
     _token.value = box.read(tokenString) ?? '';
@@ -27,18 +35,69 @@ class UserSessionController extends GetxController {
     _fullName.value = box.read(fullNameString) ?? '';
     _email.value = box.read(emailString) ?? '';
     _profilePic.value = box.read(profilePicString) ?? '';
+
+    // Map<int, String> map = box.read(recentSearchLocationString).asMap();
+    // List data = json.decode(box.read(recentSearchLocationString)).cast<String>().toList();
+
+    // _recentSearchLocation.value = _recentSearchLocation.value.isEmpty
+    //     ? []
+    //     : box.read(recentSearchLocationString).cast<String>().toList();
+
+    // print('Recent search -----> ${box.read(recentSearchLocationString)}');
+    // _recentSearchLocation.value = (box.read(recentSearchLocationString)??<RecentSearch>[]).cast<RecentSearch>().toList();
+    _recentSearchLocation.value = box.read(recentSearchLocationString) != null
+        ? List<RecentSearch>.from(box
+            .read(recentSearchLocationString)
+            .map((x) => RecentSearch.fromJson(x)))
+        : [];
   }
 
   get isLogin => _isLogin.value;
+
   get token => _token.value;
+
   get countryCode => _countryCode.value;
+
   get countryFlag => _countryFlag.value;
+
   get userId => _userId.value;
+
   get mobileNumber => _mobileNumber.value;
+
   get isProfileCreated => _isProfileCreated.value;
+
   get fullName => _fullName.value;
+
   get email => _email.value;
+
   get profilePic => _profilePic.value;
+
+  List<RecentSearch> get recentSearchLocation => _recentSearchLocation;
+
+  void setSearchLocation(String value, double latitude, double longitude) {
+    // RecentSearch temp = _recentSearchLocation.firstWhere(
+    //   (element) => element.address == value.trim(),
+    //   orElse: () => RecentSearch(
+    //     address: "",
+    //   ),
+    // );
+    // if (temp.address == "") {
+    _recentSearchLocation.add(
+      RecentSearch(
+        address: value,
+        lat: latitude,
+        long: longitude,
+        // address: "hudehieuwdhiweudhw",
+        // lat: 12.0,
+        // long: 33.0,
+        // address: "ernjgrejgoijtow",
+        // lat: 12.0,
+        // long: 33.0,
+      ),
+    );
+    // }
+    setPrefList(recentSearchLocationString, _recentSearchLocation);
+  }
 
   void setIsLogin(bool value) {
     _isLogin.value = value;
@@ -97,15 +156,24 @@ class UserSessionController extends GetxController {
     await box.write(key, value);
   }
 
+  void setPrefList(String key, List<RecentSearch> value) async {
+    // await box.write(key, value);
+    await box.write(key, value);
+  }
+
+  // saveListWithGetStorage(String storageKey, List<dynamic> storageValue) async {
+  //   await box.write( storageKey, value: jsonEncode(storageValue));}
+  // readWithGetStorage(String storageKey) => box.read(storageKey);
   getPref(String key) async {
     await box.read(key);
   }
 
   Future logOut() async {
-    await box.erase();
     setIsLogin(false);
-    Get.toNamed(
-      '/authentication',
-    );
+    await box.erase();
+    Get.offAllNamed('/authentication');
+    // Get.toNamed(
+    //   '/authentication',
+    // );
   }
 }

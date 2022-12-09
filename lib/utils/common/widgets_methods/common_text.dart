@@ -1,11 +1,10 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
 
 class CommonText extends StatelessWidget {
   String? text;
   Color? color;
+  bool? softWrap;
   double? fontSize;
   FontWeight? fontWeight;
   TextDecoration? decoration;
@@ -15,6 +14,7 @@ class CommonText extends StatelessWidget {
   CommonText({
     this.overflow,
     this.text,
+    this.softWrap,
     this.fontFamily,
     this.decoration,
     this.fontWeight,
@@ -27,9 +27,9 @@ class CommonText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text ?? "Empty",
+      text ?? "",
       textAlign: textAlign,
-      softWrap: false,
+      softWrap: softWrap ?? false,
       style: TextStyle(
         overflow: overflow,
 
@@ -43,3 +43,4 @@ class CommonText extends StatelessWidget {
     );
   }
 }
+

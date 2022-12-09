@@ -40,7 +40,7 @@ class BookingDetailsTab extends StatelessWidget {
             ),
             CommonText(
               color: black000000,
-              text: '24 may, 2022',
+              text: 'May 24, 2022',
               fontSize: 15,
               fontWeight: FontWeight.w400,
             ),
@@ -141,7 +141,7 @@ class BookingDetailsTab extends StatelessWidget {
               height: 15,
             ),
             CommonText(
-              text: 'Date',
+              text: 'Time',
               color: textLight868686,
               fontSize: 13,
               fontWeight: FontWeight.w400,
@@ -151,7 +151,7 @@ class BookingDetailsTab extends StatelessWidget {
             ),
             CommonText(
               color: black000000,
-              text: '24 may, 2022',
+              text: '09:00 PM (2 hrs)',
               fontSize: 15,
               fontWeight: FontWeight.w400,
             ),

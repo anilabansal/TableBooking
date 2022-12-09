@@ -52,8 +52,9 @@ class FilterResultBody extends StatelessWidget {
                     width: 57,
                     height: 29,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: greyF4F4F4),
+                      borderRadius: BorderRadius.circular(4),
+                      color: greyF4F4F4,
+                    ),
                     child: Center(
                       child: Row(
                         children: [
@@ -68,19 +69,21 @@ class FilterResultBody extends StatelessWidget {
                                 width: 24,
                                 height: 25,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: homeController.restaurantFilter.value
-                                        ? black000000
-                                        : greyF4F4F4),
-                                child: Center(
-                                    child: Image.asset(
-                                  menuImage,
-                                  width: 14,
-                                  height: 14,
+                                  borderRadius: BorderRadius.circular(4),
                                   color: homeController.restaurantFilter.value
-                                      ? white
-                                      : greyC1C1C1,
-                                )),
+                                      ? black000000
+                                      : greyF4F4F4,
+                                ),
+                                child: Center(
+                                  child: Image.asset(
+                                    menuImage,
+                                    width: 14,
+                                    height: 14,
+                                    color: homeController.restaurantFilter.value
+                                        ? white
+                                        : greyC1C1C1,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -92,26 +95,27 @@ class FilterResultBody extends StatelessWidget {
                             onTap: () {
                               homeController.restaurantFilter.value = false;
                               homeController.update();
+
                             },
                             child: Container(
                               width: 24,
                               height: 25,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  color:
-                                      homeController.restaurantFilter.value ==
-                                              false
-                                          ? black000000
-                                          : greyF4F4F4),
+                                borderRadius: BorderRadius.circular(4),
+                                color: homeController.restaurantFilter.value ==
+                                        false
+                                    ? black000000
+                                    : greyF4F4F4,
+                              ),
                               child: Center(
-                                  child: Image.asset(locationImage,
-                                      width: 14,
-                                      height: 14,
-                                      color: homeController
-                                                  .restaurantFilter.value ==
-                                              false
-                                          ? white
-                                          : greyC1C1C1)),
+                                child: Image.asset(
+                                  locationImage,
+                                  width: 14,
+                                  height: 14,
+                                  color:
+                                      homeController.restaurantFilter.value ==false ? white : greyC1C1C1,
+                                ),
+                              ),
                             ),
                           ),
                         ],

@@ -58,6 +58,7 @@ class _PhoneFieldState extends State<PhoneField> {
                   //     country.phoneCode;
                   widget.onCodeChange!(country.phoneCode);
                   widget.onCountryFlag!(country.flagEmoji);
+                  // print("countryFlag ---->${country.flagEmoji}");
                 },
               )
                   : null;

@@ -37,23 +37,25 @@ class OtpController extends GetxController {
         msg: response['errorMessage'] ?? 'Please try again!',
       );
       // userDetails.value = UserProfile.fromMap(response);
-      userSession.setIsLogin(true);
-      print("Is USer Logge in on SUmit OTP ====>> ${userSession.isLogin}");
+      // userSession.setIsLogin(true);
+      // print("Is USer Logge in on SUmit OTP ====>> ${userSession.isLogin}");
 
       // print("User Detail Model ====>>>>  ${userDetails.value}");
       //
 
-      isLoading.value = false;
+    //  isLoading.value = false;
       return true;
     }
     ShowToast.show(
       msg: response['errorMessage'] ?? 'Please try again!',
       isError: true,
     );
-    isLoading.value = false;
+   // isLoading.value = false;
 
     return false;
   }
+
+
 
   Future<bool> resendOTP({Map<String, dynamic>? data}) async {
     final response = await apiCall.callPostApi(

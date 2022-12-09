@@ -19,7 +19,7 @@ class FilterRestaurantScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 15.0),
                 child: InkWell(
                   onTap: () {
-                    Get.toNamed('/restaurant-details');
+                   // Get.toNamed('/restaurant-details');
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,

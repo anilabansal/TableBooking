@@ -33,7 +33,7 @@ class AuthSelectionView extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.toNamed('/home');
+                          Get.toNamed('/zip-code');
                         },
                         child: CommonText(
                           text: 'Continue as Guest',

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 class ProfileView extends StatelessWidget {
   String callFrom;
-
   ProfileView({Key? key, required this.callFrom}) : super(key: key);
 
   @override

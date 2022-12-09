@@ -31,7 +31,7 @@ class AuthSelectionBody extends StatelessWidget {
                 // Button
                 InkWell(
                   onTap: () {
-                    Get.toNamed('/home');
+                    Get.toNamed('/zip-code');
                   },
                   child: CommonText(
                     text: 'Continue as Guest',

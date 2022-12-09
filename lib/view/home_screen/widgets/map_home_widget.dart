@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/controller/location/location_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
@@ -9,22 +10,24 @@ class MapHomeScreen extends StatefulWidget {
   @override
   State<MapHomeScreen> createState() => _MapHomeScreenState();
 }
+
 class _MapHomeScreenState extends State<MapHomeScreen> {
   LocationController locationController = Get.find();
+  HomeController homeController = Get.find();
   Set<Marker> _marker = {};
   final List<LatLng> markerLocations = [];
   BitmapDescriptor? markerIcon;
 
   Future<bool> addMarkers() async {
     print("markerIcon");
-    locationController.mapHomeLoading.value = true;
+    homeController.mapHomeLoading.value = true;
     markerIcon = await BitmapDescriptor.fromAssetImage(
       const ImageConfiguration(
-        //devicePixelRatio: 4.5,
-        // size: Size(
-        //   8,
-        //   8,
-        // ),
+        devicePixelRatio: 4.5,
+        size: Size(
+          8,
+          8,
+        ),
       ),
       "assets/images/home/location_marker.png",
     );
@@ -32,21 +35,22 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
   }
 
   restaurantLatLng() {
-    for (int i = 0; i < locationController.homeRestaurantList.length; i++) {
+    for (int i = 0; i < homeController.homeRestaurantList.length; i++) {
       _marker.add(
         Marker(
           markerId: MarkerId(
-              locationController.homeRestaurantList[i].restaurantId.toString()),
+            homeController.homeRestaurantList[i].restaurantId.toString(),
+          ),
           position: LatLng(
-            double.parse(locationController.homeRestaurantList[i].latitude!),
-            double.parse(locationController.homeRestaurantList[i].longitude!),
+            double.parse(homeController.homeRestaurantList[i].latitude!),
+            double.parse(homeController.homeRestaurantList[i].longitude!),
           ),
           //icon: BitmapDescriptor.defaultMarker,
           icon: markerIcon!,
           infoWindow: InfoWindow(
-              title: locationController.homeRestaurantList[i].restaurantName,
+              title: homeController.homeRestaurantList[i].restaurantName,
               snippet:
-                  "${(locationController.homeRestaurantList[i].distance * 0.6214).toString()} miles away"),
+                  "${(homeController.homeRestaurantList[i].distance * 0.6214).toString()} miles away"),
         ),
       );
     }
@@ -55,13 +59,15 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    addMarkers().then((value) {
-      if (value) {
-        print("marker ---->true");
-        locationController.mapHomeLoading.value = false;
-        restaurantLatLng();
-      }
-    },);
+    addMarkers().then(
+      (value) {
+        if (value) {
+          print("marker ---->true");
+          homeController.mapHomeLoading.value = false;
+          restaurantLatLng();
+        }
+      },
+    );
     // restaurantLatLng();
     super.initState();
   }
@@ -69,7 +75,7 @@ class _MapHomeScreenState extends State<MapHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return locationController.mapHomeLoading.value
+      return homeController.mapHomeLoading.value
           ? const CircularProgressIndicator(
               color: redE2211C,
             )

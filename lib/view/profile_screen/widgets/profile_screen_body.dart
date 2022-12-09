@@ -1,11 +1,12 @@
+import 'dart:io';
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
+import 'package:booking_table/utils/common/widgets_methods/progress_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../../utils/common/widgets_methods/date_format_widget.dart';
 import '/controller/profile/profile_controller.dart';
 import '/utils/common/toast_message.dart';
 import '/utils/common/widgets_methods/common_button.dart';
-import '/utils/common/widgets_methods/common_date_picker_widget.dart';
 import '/utils/common/widgets_methods/common_phone_field.dart';
 import '/utils/common/widgets_methods/common_text.dart';
 import '/utils/common/widgets_methods/common_text_form_field.dart';
@@ -15,7 +16,6 @@ import '../../../utils/common/widgets_methods/image_picker.dart';
 
 class EditProfileScreenBody extends StatelessWidget {
   final String callFrom;
-
   ProfileController _profileController = Get.find();
   final UserSessionController userSessionController = Get.find();
 
@@ -23,6 +23,7 @@ class EditProfileScreenBody extends StatelessWidget {
     required this.callFrom,
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -31,85 +32,94 @@ class EditProfileScreenBody extends StatelessWidget {
           children: [
             callFrom == 'Create Profile'
                 ? SizedBox(
-              // height: 200,
-              child: Stack(
-                children: [
-                  Column(
-                    children: [
-                      Image.asset(createProfileBackGroundImage),
-                      SizedBox(
-                        width: Get.width,
-                        height: 50,
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                    //alignment: Alignment.bottomCenter,
-                    bottom: 0,
-                    left: MediaQuery.of(context).size.width * 0.3,
-                    right: MediaQuery.of(context).size.width * 0.3,
-                    top: 60,
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 25),
-                      width: 123,
-                      height: 123,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(width: 10, color: white)),
-                      child: Container(
-                        width: 105,
-                        height: 103,
-                        color: red26E2211C,
-                        child: _profileController
-                            .createProfileImage.value.path !=
-                            ""
-                            ? Image.file(
-                          _profileController
-                              .createProfileImage.value,
-                          fit: BoxFit.cover,
-                        )
-                            : const Icon(
-                          Icons.person,
-                          size: 70,
-                          color: red4DE2211C,
+                    // height: 200,
+                    child: Stack(
+                      children: [
+                        Column(
+                          children: [
+                            Image.asset(createProfileBackGroundImage),
+                            SizedBox(
+                              width: Get.width,
+                              height: 50,
+                            ),
+                          ],
                         ),
-                      ),
+                        Positioned(
+                          //alignment: Alignment.bottomCenter,
+                          bottom: 0,
+                          left: MediaQuery.of(context).size.width * 0.3,
+                          right: MediaQuery.of(context).size.width * 0.3,
+                          top: 60,
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 25),
+                            width: 123,
+                            height: 123,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(width: 10, color: white)),
+                            child: Container(
+                              width: 105,
+                              height: 103,
+                              color: red26E2211C,
+                              child: _profileController
+                                          .createProfileImage.value.path !=
+                                      ""
+                                  ? Image.file(
+                                      _profileController
+                                          .createProfileImage.value,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : const Icon(
+                                      Icons.person,
+                                      size: 70,
+                                      color: red4DE2211C,
+                                    ),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   )
-                ],
-              ),
-            )
                 : Center(
-              child: Container(
-                width: 105,
-                height: 105,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 9, color: white),
-                  borderRadius: BorderRadius.circular(3.0),
-                  boxShadow: const [
-                    BoxShadow(
-                        blurRadius: 9,
-                        offset: Offset(0, 4),
-                        color: Color.fromRGBO(192, 192, 192, 0.25))
-                  ],
-                  // image: DecorationImage(
-                  //   image: NetworkImage(_profileController
-                  //       .userProfileData.value.profileImage!),
-                  //   fit: BoxFit.cover,
-                  // ),
-                ),
-                child:
-                _profileController.createProfileImage.value.path == ""
-                    ? Image.network(
-                  userSessionController.profilePic,
-                  fit: BoxFit.cover,
-                )
-                    : Image.file(
-                  _profileController.createProfileImage.value,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+                    child: Container(
+                      width: 105,
+                      height: 105,
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 9, color: white),
+                        borderRadius: BorderRadius.circular(3.0),
+                        boxShadow: const [
+                          BoxShadow(
+                              blurRadius: 9,
+                              offset: Offset(0, 4),
+                              color: Color.fromRGBO(192, 192, 192, 0.25))
+                        ],
+                        // image: DecorationImage(
+                        //   image: NetworkImage(_profileController
+                        //       .userProfileData.value.profileImage!),
+                        //   fit: BoxFit.cover,
+                        // ),
+                      ),
+                      child:
+                          _profileController.createProfileImage.value.path == ""
+                              ? _profileController
+                                          .userProfileData.value.profileImage !=
+                                      null
+                                  ? Image.network(
+                                      _profileController
+                                          .userProfileData.value.profileImage
+                                          .toString(),
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset(
+                                      "assets/images/auth/user.png",
+                                      fit: BoxFit.fill,
+                                    )
+                              : Image.file(
+                                  _profileController.createProfileImage.value,
+                                  fit: BoxFit.cover,
+                                ),
+                    ),
+                  ),
             const SizedBox(
               height: 10,
             ),
@@ -129,7 +139,7 @@ class EditProfileScreenBody extends StatelessWidget {
               child: Center(
                 child: CommonText(
                   text: callFrom == 'Create Profile'
-                      ? "Upload Photo"
+                      ? "Upload Photo (optional)"
                       : "Change Photo",
                   fontWeight: FontWeight.w400,
                   fontSize: 16,
@@ -203,43 +213,44 @@ class EditProfileScreenBody extends StatelessWidget {
                   // ),
                   callFrom == "Create Profile"
                       ? PhoneField(
-                    isCreateProfile: true,
-                    enable: false,
-                    phoneController:
-                    _profileController.mobileNumberController,
+                          isCreateProfile: true,
+                          enable: false,
+                          phoneController: _profileController
+                              .mobileNumberControllerRegister.value,
+                          //  _profileController.mobileNumberController,
 
-                    // phoneController: _profileController
-                    // .mobileNumberController,
-                    countryCode: userSessionController.countryCode,
-                    countryFlag: userSessionController.countryFlag,
-                    // onCountryFlag: (value) {
-                    //   //   print('Country flag ---> ${value}');
-                    //   _profileController.countryFlag.value = value;
-                    // },
-                    // onCodeChange: (value) {
-                    //   _profileController.countryCode.value = value;
-                    // },
-                    textFieldColor: greyF4F4F4,
-                  )
+                          // phoneController: _profileController
+                          // .mobileNumberController,
+                          countryCode: userSessionController.countryCode,
+                          countryFlag: userSessionController.countryFlag,
+                          // onCountryFlag: (value) {
+                          //   //   print('Country flag ---> ${value}');
+                          //   _profileController.countryFlag.value = value;
+                          // },
+                          // onCodeChange: (value) {
+                          //   _profileController.countryCode.value = value;
+                          // },
+                          textFieldColor: greyF4F4F4,
+                        )
                       : PhoneField(
-                    isCreateProfile: true,
-                    enable: false,
-                    phoneController:
-                    _profileController.mobileNumberController,
+                          isCreateProfile: true,
+                          enable: false,
+                          phoneController:
+                              _profileController.mobileNumberController,
 
-                    // phoneController: _profileController
-                    // .mobileNumberController,
-                    countryCode: userSessionController.countryCode,
-                    countryFlag: userSessionController.countryFlag,
-                    // onCountryFlag: (value) {
-                    //   //   print('Country flag ---> ${value}');
-                    //   _profileController.countryFlag.value = value;
-                    // },
-                    // onCodeChange: (value) {
-                    //   _profileController.countryCode.value = value;
-                    // },
-                    textFieldColor: greyF4F4F4,
-                  ),
+                          // phoneController: _profileController
+                          // .mobileNumberController,
+                          countryCode: userSessionController.countryCode,
+                          countryFlag: userSessionController.countryFlag,
+                          // onCountryFlag: (value) {
+                          //   //   print('Country flag ---> ${value}');
+                          //   _profileController.countryFlag.value = value;
+                          // },
+                          // onCodeChange: (value) {
+                          //   _profileController.countryCode.value = value;
+                          // },
+                          textFieldColor: greyF4F4F4,
+                        ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -274,8 +285,11 @@ class EditProfileScreenBody extends StatelessWidget {
                   const SizedBox(
                     height: 5.7,
                   ),
-                  CommonDatePicker(
-                    enable: false,
+                  // CommonDatePicker(
+                  //   enable: false,
+                  //   controller: _profileController.dateController,
+                  // ),
+                  DateInputTextField(
                     controller: _profileController.dateController,
                   ),
                   const SizedBox(
@@ -383,66 +397,66 @@ class EditProfileScreenBody extends StatelessWidget {
                         );
                         return;
                       }
+                      ProgressDialog.showProgressDialog(context);
                       await _profileController.createProfile(
-                          body: {
-                            // "userId": "19",
-                            // "roleId": "3",
-                            // "FirstName": "sahil",
-                            // "LastName": 'Kauhsal',
-                            // "Email": "ss@g.com",
-                            // "MobileNo": '+917066000016',
-                            // "Address": "address",
-                            // "DeviceToken": "1234",
-                            // "DeviceType":
-                            //     GetPlatform.isAndroid ? "Android" : "iOS",
-                            // "DateofBirth": "09/12/1999",
-                            // "City": "city",
-                            // "State": "state",
-                            // "ZipCode": "zipcode",
-                            // "AuthenticationId": "s",
-                            // "AuthenticationType": "s",
-                            "FirstName": _profileController
-                                .firstNameController.text
-                                .trim(),
-                            "LastName": _profileController
-                                .lastNameController.text
-                                .trim(),
-                            "MobileNo":
-                            "+${userSessionController.countryCode}${_profileController.mobileNumberController.value.text.trim()}",
-                            // "+917066000014",
-                            "Address": _profileController
-                                .streetAddressController.text
-                                .trim(),
-                            "DateofBirth":
-                            _profileController.dateController.text,
-                            "City":
-                            _profileController.cityController.text.trim(),
-                            "Email": _profileController
-                                .emailAddressController.text
-                                .trim(),
-                            "State":
-                            _profileController.stateController.text.trim(),
-                            "ZipCode":
-                            _profileController.zipCodeController.text,
-                            "AuthenticationId": "fgs",
-                            "AuthenticationType": "fg",
-                            "DeviceToken": "gdfs",
-                            "DeviceType": "dfsgfgsd",
-                          },
-                          endPoint: callFrom == "Create Profile"
-                              ? createProfileEndPoint
-                              : updateProfileDetail,
-                          // filename: "ProfilePic",
-                          imageFile:
-                          _profileController.createProfileImage.value).then(
-                            (value) async {
+                        body: {
+                          "FirstName": _profileController
+                              .firstNameController.text
+                              .trim(),
+                          "LastName":
+                              _profileController.lastNameController.text.trim(),
+                          "MobileNo": callFrom == "Create Profile"
+                              ? "+${userSessionController.countryCode}${_profileController.mobileNumberControllerRegister.value.text.trim()}"
+                              : "+${userSessionController.countryCode}${_profileController.mobileNumberController.value.text.trim()}",
+                          "Address": _profileController
+                              .streetAddressController.text
+                              .trim(),
+                          "DateofBirth": _profileController.dateController.text,
+                          "City": _profileController.cityController.text.trim(),
+                          "Email": _profileController
+                              .emailAddressController.text
+                              .trim(),
+                          "State":
+                              _profileController.stateController.text.trim(),
+                          "ZipCode": _profileController.zipCodeController.text,
+                          "AuthenticationId": "fgs",
+                          "AuthenticationType": "fg",
+                          "DeviceToken": "gdfs",
+                          "DeviceType": "dfsgfgsd",
+                        },
+                        endPoint: callFrom == "Create Profile"
+                            ? createProfileEndPoint
+                            : updateProfileDetail,
+                        imageFile: _profileController.createProfileImage.value,
+                      ).then(
+                        (value) async {
                           if (value) {
-                            _profileController.createProfileImage.value == "";
+                            // _profileController.createProfileImage.value == "";
                             print(_profileController.createProfileImage.value);
                             // await _profileController.getProfileDetails();
-                            callFrom == "Create Profile"
-                                ? Get.toNamed('/zip-code')
-                                : Get.back();
+                            // callFrom == "Create Profile"
+                            //     ? Get.toNamed('/zip-code')
+                            //     : Get.back();
+                            if (callFrom == "Create Profile") {
+                              Get.toNamed('/zip-code');
+                            } else {
+                              // Get.offAllNamed('/home');
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            }
+                            _profileController.firstNameController.clear();
+                            _profileController.lastNameController.clear();
+                            _profileController
+                                .mobileNumberControllerRegister.value
+                                .clear();
+                            _profileController.dateController.clear();
+                            _profileController.streetAddressController.clear();
+                            _profileController.cityController.clear();
+                            _profileController.stateController.clear();
+                            _profileController.zipCodeController.clear();
+                            _profileController.createProfileImage.value =
+                                File('');
 
                             // showtoast
                           }
@@ -467,26 +481,41 @@ class EditProfileScreenBody extends StatelessWidget {
 
   /// validateFields
   validateFields() {
-    if (_profileController.firstNameController.text.isEmpty) {
+    if (_profileController.firstNameController.text.trim().isEmpty) {
       return 'please enter your first name!'.toTitleCase();
     } else if (_profileController.lastNameController.value.text.isEmpty) {
       return 'please enter your last name!'.toTitleCase();
     } else if (!GetUtils.isEmail(
         _profileController.emailAddressController.value.text.trim())) {
       return 'please enter valid email!'.toTitleCase();
-    } else if (_profileController.stateController.value.text.isEmpty) {
-      return 'please enter your state!'.toTitleCase();
-    } else if (_profileController.cityController.value.text.isEmpty) {
-      return 'please enter your city!'.toTitleCase();
-    } else if (_profileController.streetAddressController.value.text.isEmpty) {
-      return 'please enter your Street Address!'.toTitleCase();
-    } else if (_profileController.dateController.value.text.isEmpty) {
-      return 'please select date!'.toTitleCase();
-    } else if (_profileController.zipCodeController.value.text.isEmpty) {
-      return 'please enter your zip code!'.toTitleCase();
-    } else if (_profileController.mobileNumberController.value.text.isEmpty) {
-      return 'please enter your mobile Number!'.toTitleCase();
     }
+    // else if (_profileController.dateController.value.text.isEmpty) {
+    //   return 'please select date!'.toTitleCase();
+    // }
+    // else if(_profileController.dateController.text.toString()!= DateFormat("yyyy-MM-dd")){
+    //   return "please enter valid date of birth!".toTitleCase();
+    // }
+    // else if (!RegExp(r"((?:19|20)[0-2][0-2])-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])")
+    //     .hasMatch(_profileController.dateController.text.trim())) {
+    //   return "please enter valid date of birth!".toTitleCase();
+    // }
+    else if (!RegExp(r"^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$")
+        .hasMatch(_profileController.dateController.text.trim())) {
+      return "please enter valid date of birth!".toTitleCase();
+    } else if (_profileController.streetAddressController.value.text
+        .trim()
+        .isEmpty) {
+      return 'please enter your Street Address!'.toTitleCase();
+    } else if (_profileController.cityController.value.text.trim().isEmpty) {
+      return 'please enter your city!'.toTitleCase();
+    } else if (_profileController.stateController.value.text.trim().isEmpty) {
+      return 'please enter your state!'.toTitleCase();
+    } else if (_profileController.zipCodeController.value.text.trim().isEmpty) {
+      return 'please enter your zip code!'.toTitleCase();
+    }
+    // else if (_profileController.mobileNumberController.value.text.isEmpty) {
+    //   return 'please enter your mobile Number!'.toTitleCase();
+    // }
     return '';
   }
 }

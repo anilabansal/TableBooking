@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 class OtpView extends StatelessWidget {
   String? callFrom;
   var data = Get.arguments;
-
   OtpView({required this.callFrom, Key? key}) : super(key: key);
 
   @override

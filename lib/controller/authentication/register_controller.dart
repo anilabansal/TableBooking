@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
   var mobileNumber = TextEditingController();
-  var countryCode = '91'.obs;
-  var countryFlag = '🇮🇳'.obs;
+  var countryCode = '1'.obs;
+  var countryFlag = '🇺🇸'.obs;
 
   var isChecked = false.obs;
   void updateCheckbox() {
@@ -31,10 +31,10 @@ class RegisterController extends GetxController {
       ShowToast.show(
         msg: "Otp Is ${response['otp'].toString()}",
       );
-      userSession.setIsProfileCreated(response['isProfileCreated']);
+    //  userSession.setIsProfileCreated(response['isProfileCreated']);
       userSession.setCountryCode(countryCode.value);
       userSession.setCountryFlag(countryFlag.value);
-      userSession.setMobileNumber(mobileNumber.value.text);
+       userSession.setMobileNumber(mobileNumber.value.text);
 
       // userSession.setMobileNumber(response['mobileNumber'].toString());
       // userSession.setUserId(response['userId'].toString());

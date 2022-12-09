@@ -6,9 +6,7 @@ import 'package:intl/intl.dart';
 class CommonDatePicker extends StatelessWidget {
   final TextEditingController? controller;
   final bool? enable;
-
   final Color? fillColor;
-
   const CommonDatePicker(
       {Key? key, this.enable, this.controller, this.fillColor})
       : super(key: key);

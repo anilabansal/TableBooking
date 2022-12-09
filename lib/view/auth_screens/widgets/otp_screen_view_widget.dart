@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'package:booking_table/controller/authentication/login_controller.dart';
 import 'package:booking_table/controller/authentication/otp_controller.dart';
-import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
@@ -11,12 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../../controller/user_session/user_session_controller.dart';
 import '../../../utils/common/widgets_methods/progress_loader.dart';
 
 class OtpScreenViewWidget extends StatelessWidget {
   String? mobileNumber;
   LoginController loginController = Get.find();
-  UserSessionController userSessionController = Get.find();
   final String? callFrom;
 
   OtpScreenViewWidget({
@@ -63,34 +62,9 @@ class OtpScreenViewWidget extends StatelessWidget {
                   return;
                 }
                 var otp = int.parse(controller.pinOutPut.value);
-
                 print("pinOutPut --->${controller.pinOutPut.value}");
-                // callFrom == 'Login'
-                //     ? await controller.enterLoginOTP(data: {
-                //         "otp": otp,
-                //         "mobileNumber": mobileNumber.toString(),
-                //       }).then(
-                //         (value) {
-                //           if (value) {
-                //             Get.offAllNamed('/zip-code');
-                //           }
-                //         },
-                //       )
-                //     : await controller.enterRegisterOTP(
-                //         data: {
-                //           "otp": otp,
-                //           "mobileNumber": mobileNumber.toString(),
-                //         },
-                //       ).then(
-                //         (value) {
-                //           if (value) {
-                //             Get.offAllNamed('/create-profile');
-                //           }
-                //         },
-                //       );
                 ProgressDialog.showProgressDialog(context);
-                controller.isLoading.value = true;
-
+                // controller.isLoading.value = true;
                 await controller.enterOTP(
                   data: {
                     "otp": otp,
@@ -100,8 +74,7 @@ class OtpScreenViewWidget extends StatelessWidget {
                   (value) {
                     Navigator.pop(context);
                     if (value) {
-                      if (userSession.isProfileCreated.value) {
-                        controller.isLoading.value = false;
+                      if (userSession.isProfileCreated) {
                         Get.offAllNamed('/zip-code');
                       } else {
                         Get.offAllNamed(
@@ -121,11 +94,6 @@ class OtpScreenViewWidget extends StatelessWidget {
                     }
                   },
                 );
-                // if (callFrom == 'Login') {
-                //   Get.offAllNamed('/zip-code');
-                // } else {
-                //   Get.offAllNamed('/create-profile');
-                // }
               },
               text: 'Submit',
               bgColor: redE2211C,

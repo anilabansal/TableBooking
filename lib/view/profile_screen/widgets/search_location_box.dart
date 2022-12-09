@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_places_flutter/google_places_flutter.dart';
 import 'package:google_places_flutter/model/prediction.dart';
+import '../../../controller/location/location_controller.dart';
 import '../../../utils/common/common_strings.dart';
 
 class SearchBox extends StatefulWidget {
   final String? hintText;
   final Function()? callBack;
   final TextEditingController? destinationController;
+
   const SearchBox(
       {Key? key, this.hintText, this.callBack, this.destinationController})
       : super(key: key);
+
   @override
   State<SearchBox> createState() => _SearchBoxState();
 }
+
 class _SearchBoxState extends State<SearchBox> {
+  LocationController locationController = Get.find();
   var googleApiKey = "AIzaSyBLVQD5gh9CP8C4_yrzuhvn06ZfhfFUODE";
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,6 +53,7 @@ class _SearchBoxState extends State<SearchBox> {
             suffixIcon: IconButton(
               onPressed: () {
                 widget.destinationController!.clear();
+                // widget.hintText.toString() = '';
               },
               icon: const Icon(
                 Icons.close,
@@ -52,10 +61,50 @@ class _SearchBoxState extends State<SearchBox> {
               ),
             ),
           ),
+          isLatLngRequired: true,
+          getPlaceDetailWithLatLng: (Prediction prediction) {
+            // widget.destinationController!.text =
+            //     prediction.description.toString();
+
+            print("latlngonclick --->${widget.destinationController!.text}");
+            locationController.searchLatLng.value = LatLng(
+              double.parse(
+                prediction.lat.toString(),
+              ),
+              double.parse(
+                prediction.lng.toString(),
+              ),
+            );
+            widget.callBack!();
+            // widget.callBack!();
+            print("placeDetails----->${locationController.searchLatLng.value}");
+          },
           itmClick: (Prediction prediction) {
             print('onTap');
-            widget.destinationController!.text = prediction.description.toString();
-            widget.callBack!();
+            widget.destinationController!.text =
+                prediction.description.toString();
+            locationController.searchController.value.text =
+                prediction.description.toString();
+            // widget.callBack!();
+            // locationController.searchLatLng.value = LatLng(
+            //   double.parse(
+            //     prediction.lat.toString(),
+            //   ),
+            //   double.parse(
+            //     prediction.lng.toString(),
+            //   ),
+            // );
+            // locationController.searchPlaceId.value = prediction.placeId.toString();
+            widget.destinationController!.selection =
+                TextSelection.fromPosition(
+              TextPosition(offset: prediction.description!.length),
+            );
+            locationController.searchController.value.selection =
+                TextSelection.fromPosition(
+              TextPosition(offset: prediction.description!.length),
+            );
+            // print(
+            //     'locationController.searchLatLng.value ---->${prediction.lat}');
           },
         ),
       ),

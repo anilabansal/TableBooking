@@ -13,7 +13,7 @@ class FavouriteView extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       // BODY
-      body: FavouriteBody(),
+      body: const FavouriteBody(),
     );
   }
 }

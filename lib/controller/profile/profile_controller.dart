@@ -55,7 +55,7 @@ class ProfileController extends GetxController {
   var mobileNumberController = TextEditingController();
   var flagController = TextEditingController();
   var countryCodeController = TextEditingController();
-
+  var mobileNumberControllerRegister = TextEditingController().obs;
   /// Variables
   var countryCode = ''.obs;
   // var countryCode = '91'.obs;
@@ -88,14 +88,17 @@ class ProfileController extends GetxController {
         print(response['data']);
 
         /// Set ISCREATE_PROFILE value to true
-        userSession.setIsProfileCreated(response['data']['isProfileCreated']);
+      //  userSession.setIsProfileCreated(response['data']['isProfileCreated']);
+
         userSession.setEmail(response['data']['email']);
         userSession.setUserId(response['data']['userId'].toString());
         userSession.setFullName(
             "${response['data']['firstName']} ${response['data']['lastName']}");
+        // userSession.setProfilePic(
+        //     "http://apitablebooking.harishparas.com/${response['data']['profilePic']}");
         userSession.setProfilePic(
-            "http://apitablebooking.harishparas.com/${response['data']['profilePic']}");
-
+            response['data']['profilePic']??'');
+        userSession.setIsLogin(true);
         // ProfileData profile = ProfileData.fromMap(response['data']);
         // userProfileData.value = profile;
         // print("User Details====>> ${userProfileData.value}");

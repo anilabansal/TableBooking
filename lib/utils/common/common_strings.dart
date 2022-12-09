@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 /// API"s URLS
 // Base URL
 const baseURL = 'http://apitablebooking.harishparas.com';
+const privacyPolicyUrl = 'http://admintablebooking.harishparas.com/PrivacyPolicy';
+const termsAndConditionUrl ='http://admintablebooking.harishparas.com/TermsAndCondiotion';
 
 const logInEndPoint = 'api/Basic/EnterMobileNo';
 const signUpEndPoint = 'api/Basic/RegisterMobileNo';
@@ -134,3 +136,4 @@ const fullNameString = 'fullName';
 const emailString = 'email';
 
 const profilePicString = 'profilePicString';
+const recentSearchLocationString = 'recentSearchLocationString';

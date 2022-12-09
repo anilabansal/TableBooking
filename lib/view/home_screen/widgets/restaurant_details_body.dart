@@ -11,98 +11,113 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RetaurantDetailsBody extends StatelessWidget {
+  final int? restaurantId;
   RetaurantDetailsBody({
-    Key? key,
+    Key? key,this.restaurantId,
     required TabController tabController,
   })  : _tabController = tabController,
         super(key: key);
 
   final TabController _tabController;
+
   // HomeController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
-        return controller.detailsRestaurantList.value == null
-            ? const CommonNoDataFound()
-            : SafeArea(
-                child: ListView(
-                  primary: false,
-                  controller: ScrollController(keepScrollOffset: false),
-                  shrinkWrap: true,
-                  children: [
-                    RestaurantDetailTopScreen(),
-                    Center(
-                      child: TabBar(
-                          isScrollable: true,
-                          controller: _tabController,
-                          indicatorSize: TabBarIndicatorSize.label,
-                          indicatorWeight: 4.0,
-                          unselectedLabelColor: textGrey868686,
-                          indicatorColor: redE2211C,
-                          labelColor: black000000,
-                          tabs: [
-                            Tab(
-                              // text: "Menu",
-                              child: CommonText(
-                                text: "Menu",
-                                fontSize: 16,
-                                fontWeight: controller.selectedIndex.value == 0
-                                    ? FontWeight.w500
-                                    : FontWeight.w400,
-                              ),
-                            ),
-                            Tab(
-                              // text: "About",
-                              child: CommonText(
-                                text: "About",
-                                fontSize: 16,
-                                fontWeight: controller.selectedIndex.value == 1
-                                    ? FontWeight.w500
-                                    : FontWeight.w400,
-                              ),
-                            ),
-                            Tab(
-                              // text: "Reviews",
-                              child: CommonText(
-                                text: "Reviews",
-                                fontSize: 16,
-                                fontWeight: controller.selectedIndex.value == 2
-                                    ? FontWeight.w500
-                                    : FontWeight.w400,
-                              ),
-                            ),
-                            Tab(
-                              // text: "Gallery",
-                              child: CommonText(
-                                text: "Gallery",
-                                fontSize: 16,
-                                fontWeight: controller.selectedIndex.value == 3
-                                    ? FontWeight.w500
-                                    : FontWeight.w400,
-                              ),
-                            )
-                          ]),
+        return
+            // controller.detailsRestaurantList.value == null
+            //   ? const CommonNoDataFound()
+            //   :
+            controller.isLoading.value
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: redE2211C,
                     ),
-                    SizedBox(
-                      // height: double.maxFinite,
-                      height: MediaQuery.of(context).size.height - 100,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20.0, 25, 20, 20),
-                        child: TabBarView(
-                            controller: _tabController,
-                            children: const [
-                              MenuTab(),
-                              AboutTabScreen(),
-                              ReviewsTabScreen(),
-                              GalleryTab()
-                            ]),
-                      ),
-                    )
-                  ],
-                ),
-              );
+                  )
+                : SafeArea(
+                    child: ListView(
+                      primary: false,
+                      controller: ScrollController(keepScrollOffset: false),
+                      shrinkWrap: true,
+                      children: [
+                        RestaurantDetailTopScreen(),
+                        Center(
+                          child: TabBar(
+                              isScrollable: true,
+                              controller: _tabController,
+                              indicatorSize: TabBarIndicatorSize.label,
+                              indicatorWeight: 4.0,
+                              unselectedLabelColor: textGrey868686,
+                              indicatorColor: redE2211C,
+                              labelColor: black000000,
+                              tabs: [
+                                Tab(
+                                  // text: "Menu",
+                                  child: CommonText(
+                                    text: "Menu",
+                                    fontSize: 16,
+                                    fontWeight:
+                                        controller.selectedIndex.value == 0
+                                            ? FontWeight.w500
+                                            : FontWeight.w400,
+                                  ),
+                                ),
+                                Tab(
+                                  // text: "About",
+                                  child: CommonText(
+                                    text: "About",
+                                    fontSize: 16,
+                                    fontWeight:
+                                        controller.selectedIndex.value == 1
+                                            ? FontWeight.w500
+                                            : FontWeight.w400,
+                                  ),
+                                ),
+                                Tab(
+                                  // text: "Reviews",
+                                  child: CommonText(
+                                    text: "Reviews",
+                                    fontSize: 16,
+                                    fontWeight:
+                                        controller.selectedIndex.value == 2
+                                            ? FontWeight.w500
+                                            : FontWeight.w400,
+                                  ),
+                                ),
+                                Tab(
+                                  // text: "Gallery",
+                                  child: CommonText(
+                                    text: "Gallery",
+                                    fontSize: 16,
+                                    fontWeight:
+                                        controller.selectedIndex.value == 3
+                                            ? FontWeight.w500
+                                            : FontWeight.w400,
+                                  ),
+                                )
+                              ]),
+                        ),
+                        SizedBox(
+                          // height: double.maxFinite,
+                          height: MediaQuery.of(context).size.height - 100,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(20.0, 25, 20, 20),
+                            child: TabBarView(
+                                controller: _tabController,
+                                children:  [
+                                  MenuTab(restaurantId:restaurantId,),
+                                  AboutTabScreen(restaurantId:restaurantId ,),
+                                  ReviewsTabScreen(restaurantId:  restaurantId,),
+                                  GalleryTab(restaurantId: restaurantId,)
+                                ]),
+                          ),
+                        )
+                      ],
+                    ),
+                  );
       },
     );
   }
