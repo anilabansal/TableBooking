@@ -38,18 +38,6 @@ class RestaurantHomeScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 15.0),
                           child: InkWell(
                             onTap: () {
-                              // restaurantDetails.index.value = homeController
-                              //     .homeRestaurantList[index].restaurantId;
-                              // print('Button clicked');
-                              // restaurantDetails.restaurantDetails(body: {
-                              //   "restaurantId": homeController
-                              //       .homeRestaurantList[index].restaurantId
-                              // }).then(
-                              //   (value) {
-                              //     // print(
-                              //     //     "Restaurant Detais Data ====>  ${detailsRestaurantList.value}");
-                              //     if (value) {
-                              //       // controller.isLoading.value = false;
                               Get.toNamed(
                                 '/restaurant-details',
                                 arguments: [
@@ -59,9 +47,6 @@ class RestaurantHomeScreen extends StatelessWidget {
                                   },
                                 ],
                               );
-                              //     }
-                              //   },
-                              // );
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width,
@@ -114,15 +99,6 @@ class RestaurantHomeScreen extends StatelessWidget {
                                           right: 20,
                                           child: InkWell(
                                             onTap: () {
-                                              // homeController
-                                              //     .updateRestaurantLikes(index);
-                                              // homeController
-                                              //     .updateRestaurantLikeHome(
-                                              //   index: index,
-                                              //   restaurantId: homeController
-                                              //       .homeRestaurantList[index]
-                                              //       .restaurantId,
-                                              // );
                                               if (userSessionController
                                                   .isLogin) {
                                                 homeController
@@ -162,6 +138,7 @@ class RestaurantHomeScreen extends StatelessWidget {
                                                               index]
                                                           .isFavourite
                                                       ? const Icon(
+
                                                           Icons.favorite,
                                                           color: redE2211C,
                                                           size: 18,

@@ -35,7 +35,10 @@ class RegisterController extends GetxController {
       userSession.setCountryCode(countryCode.value);
       userSession.setCountryFlag(countryFlag.value);
        userSession.setMobileNumber(mobileNumber.value.text);
-
+    userSession.setIsProfileCreated(response['isProfileCreated']);
+      if(response['isProfileCreated']==true){
+        userSession.setIsLogin(true);
+      }
       // userSession.setMobileNumber(response['mobileNumber'].toString());
       // userSession.setUserId(response['userId'].toString());
       // userSession.setFullName(response['fullName'].toString());

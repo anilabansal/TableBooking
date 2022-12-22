@@ -11,6 +11,7 @@ const signUpEndPoint = 'api/Basic/RegisterMobileNo';
 const submitOtp = 'api/Basic/OTPSubmit';
 const resendOtp = 'api/Basic/ResendOTP';
 const createProfileEndPoint = 'api/Basic/SignUp';
+const socialLogInEndPoint = 'api/Basic/SocialLogin';
 
 const zipCode = 'api/Home/SearchLocation';
 const aboutUs = 'api/Home/AboutUsDetail';
@@ -22,7 +23,11 @@ const getProfileDetail = 'api/Basic/EditProfile';
 const updateProfileDetail = 'api/Basic/UpdateProfile';
 const favRestaurantDetails = 'api/Home/FavouriteRestaurants';
 const favRestaurantUpdateString = 'api/Home/AddFavourites';
-
+const savedCardDetailString = 'api/Home/UserCardList';
+const addCardDetailString = 'api/Home/SaveCreditCard';
+const typesFoodEndPoint = 'api/Home/TypeofFood';
+const filterSelectTime = 'api/Home/GetTime';
+const filterRestaurantEndPoint = 'api/Home/RestaurantListByFilter';
 ///    Common Fonts
 // Fonts
 const String mainLaToFont = 'LaTo';
@@ -127,6 +132,7 @@ String infoIcon = "assets/images/home/info_icon.png";
 const isLogInString = 'isLogInString';
 const mobileNumberString = 'mobileNumber';
 const tokenString = 'tokenString';
+const socialLoginString = 'socialLoginString';
 
 const countryCodeString = 'countryCodeString';
 const countryFlagString = 'countryFlagString';

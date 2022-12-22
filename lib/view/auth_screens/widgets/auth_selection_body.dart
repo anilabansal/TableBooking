@@ -1,3 +1,4 @@
+import 'package:booking_table/controller/profile/profile_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/auth_screens/widgets/auth_selection_view_widget.dart';
@@ -5,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthSelectionBody extends StatelessWidget {
-  const AuthSelectionBody({
+   AuthSelectionBody({
     Key? key,
   }) : super(key: key);
-
+  // ProfileController profileController = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
     return Center(

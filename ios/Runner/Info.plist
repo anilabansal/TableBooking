@@ -22,22 +22,48 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.250363232703-gvdu43ck122qjmbjvik074om87mbq0dd</string>
+				<string>fb450962570572175</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FacebookAppID</key>
+	<string>450962570572175</string>
+	<key>FacebookClientToken</key>
+	<string>bc64181678a8c74e5344d4cf7c778693</string>
+	<key>FacebookDisplayName</key>
+	<string>booking_table</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>sms</string>
 		<string>tel</string>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+       <string>fbshareextension</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
-    <dict>
-    	<key>NSAllowsArbitraryLoads</key>
-    	<true/>
-    	<key>NSAllowsArbitraryLoadsInWebContent</key>
-    	<true/>
-    </dict>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+		<key>FacebookAutoLogAppEventsEnabled</key>
+         <string>TRUE</string>
+         <key>FacebookAdvertiserIDCollectionEnabled</key>
+         <string>TRUE</string>
+	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>To capture photo please grant camera access</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

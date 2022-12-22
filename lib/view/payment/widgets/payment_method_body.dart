@@ -60,6 +60,7 @@ class PaymentMethodBody extends StatelessWidget {
               Expanded(
                 // width: MediaQuery.of(context).size.width - 60,
                 child: CommonText(
+                  softWrap: true,
                   text:
                       "You can add another credit card by simply scanning your card.",
                   fontWeight: FontWeight.w400,

@@ -34,7 +34,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailView>
         "RestaurantId": data[0]['restaurantId'],
       },
     ).then((value) {
-      print("succesfullcone!");
+       print("succesfullcone!");
      controller.isLoading.value = false;
     });
   }

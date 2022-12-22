@@ -14,7 +14,8 @@
 //   CardDetails? _cardDetails;
 //   CardScanOptions scanOptions = const CardScanOptions(
 //     scanCardHolderName: true,
-//   //  enableDebugLogs: true,
+//     scanExpiryDate:true,
+//     //  enableDebugLogs: true,
 //    // validCardsToScanBeforeFinishingScan: 5,
 //     possibleCardHolderNamePositions: [
 //       CardHolderNameScanPosition.belowCardNumber,
@@ -28,6 +29,7 @@
 //     setState(() {
 //       _cardDetails = cardDetails;
 //     });
+//     print("cards details");
 //   }
 //
 //   @override
@@ -47,12 +49,12 @@
 //               child: Text('scan card'),
 //             ),
 //             Text('$_cardDetails'),
-//             Expanded(
-//               child: OptionConfigureWidget(
-//                 initialOptions: scanOptions,
-//                 onScanOptionChanged: (newOptions) => scanOptions = newOptions,
-//               ),
-//             )
+//             // Expanded(
+//             //   child: OptionConfigureWidget(
+//             //     initialOptions: scanOptions,
+//             //     onScanOptionChanged: (newOptions) => scanOptions = newOptions,
+//             //   ),
+//             // ),
 //           ],
 //         ),
 //       ),

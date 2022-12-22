@@ -1,23 +1,29 @@
 import 'dart:convert';
 
+import 'restaurant_about_us_schedule_model.dart';
+
 class RestaurantAboutUsDetails {
-  int? restaurantId;
+  bool? isUserSubmitReview;
+  num? restaurantId;
   dynamic restaurantName;
   dynamic restaurantPic;
   dynamic address;
   dynamic zipCode;
-  dynamic aboutUs;
-  dynamic officialWebsite;
-  dynamic contactNumber;
-  dynamic email;
-  dynamic distance;
+  String? aboutUs;
+  String? officialWebsite;
+  String? contactNumber;
+  String? email;
+  num? distance;
   dynamic rating;
-  int? ratingCount;
+  num? ratingCount;
   dynamic latitude;
   dynamic longitude;
   bool? isFavourite;
+  dynamic reviewlist;
+  List<RestaurantAboutUsSchedule>? schedule;
 
   RestaurantAboutUsDetails({
+    this.isUserSubmitReview,
     this.restaurantId,
     this.restaurantName,
     this.restaurantPic,
@@ -33,49 +39,55 @@ class RestaurantAboutUsDetails {
     this.latitude,
     this.longitude,
     this.isFavourite,
+    this.reviewlist,
+    this.schedule,
   });
-
-  @override
-  String toString() {
-    return 'Datum(restaurantId: $restaurantId, restaurantName: $restaurantName, restaurantPic: $restaurantPic, address: $address, zipCode: $zipCode, aboutUs: $aboutUs, officialWebsite: $officialWebsite, contactNumber: $contactNumber, email: $email, distance: $distance, rating: $rating, ratingCount: $ratingCount, latitude: $latitude, longitude: $longitude, isFavourite: $isFavourite)';
-  }
 
   factory RestaurantAboutUsDetails.fromMap(Map<String, dynamic> data) =>
       RestaurantAboutUsDetails(
-        restaurantId: data['restaurantId'] as int?,
+        isUserSubmitReview: data['isUserSubmitReview'] as bool?,
+        restaurantId: data['restaurantId'] as num?,
         restaurantName: data['restaurantName'] as dynamic,
         restaurantPic: data['restaurantPic'] as dynamic,
         address: data['address'] as dynamic,
         zipCode: data['zipCode'] as dynamic,
-        aboutUs: data['aboutUs'] as dynamic,
-        officialWebsite: data['officialWebsite'] as dynamic,
-        contactNumber: data['contactNumber'] as dynamic,
-        email: data['email'] as dynamic,
-        distance: data['distance'] as dynamic,
+        aboutUs: data['aboutUs'] as String?,
+        officialWebsite: data['officialWebsite'] as String?,
+        contactNumber: data['contactNumber'] as String?,
+        email: data['email'] as String?,
+        distance: data['distance'] as num?,
         rating: data['rating'] as dynamic,
-        ratingCount: data['ratingCount'] as int?,
+        ratingCount: data['ratingCount'] as num?,
         latitude: data['latitude'] as dynamic,
         longitude: data['longitude'] as dynamic,
         isFavourite: data['isFavourite'] as bool?,
+        reviewlist: data['reviewlist'] as dynamic,
+        schedule: (data['schedule'] as List<dynamic>?)
+            ?.map((e) =>
+            RestaurantAboutUsSchedule.fromMap(e as Map<String, dynamic>))
+            .toList(),
       );
 
   Map<String, dynamic> toMap() => {
-        'restaurantId': restaurantId,
-        'restaurantName': restaurantName,
-        'restaurantPic': restaurantPic,
-        'address': address,
-        'zipCode': zipCode,
-        'aboutUs': aboutUs,
-        'officialWebsite': officialWebsite,
-        'contactNumber': contactNumber,
-        'email': email,
-        'distance': distance,
-        'rating': rating,
-        'ratingCount': ratingCount,
-        'latitude': latitude,
-        'longitude': longitude,
-        'isFavourite': isFavourite,
-      };
+    'isUserSubmitReview': isUserSubmitReview,
+    'restaurantId': restaurantId,
+    'restaurantName': restaurantName,
+    'restaurantPic': restaurantPic,
+    'address': address,
+    'zipCode': zipCode,
+    'aboutUs': aboutUs,
+    'officialWebsite': officialWebsite,
+    'contactNumber': contactNumber,
+    'email': email,
+    'distance': distance,
+    'rating': rating,
+    'ratingCount': ratingCount,
+    'latitude': latitude,
+    'longitude': longitude,
+    'isFavourite': isFavourite,
+    'reviewlist': reviewlist,
+    'schedule': schedule?.map((e) => e.toMap()).toList(),
+  };
 
   /// `dart:convert`
   ///
@@ -89,40 +101,4 @@ class RestaurantAboutUsDetails {
   ///
   /// Converts [RestaurantAboutUsDetails] to a JSON string.
   String toJson() => json.encode(toMap());
-
-  RestaurantAboutUsDetails copyWith({
-    int? restaurantId,
-    dynamic restaurantName,
-    dynamic restaurantPic,
-    dynamic address,
-    dynamic zipCode,
-    dynamic aboutUs,
-    dynamic officialWebsite,
-    dynamic contactNumber,
-    dynamic email,
-    dynamic distance,
-    dynamic rating,
-    int? ratingCount,
-    dynamic latitude,
-    dynamic longitude,
-    bool? isFavourite,
-  }) {
-    return RestaurantAboutUsDetails(
-      restaurantId: restaurantId ?? this.restaurantId,
-      restaurantName: restaurantName ?? this.restaurantName,
-      restaurantPic: restaurantPic ?? this.restaurantPic,
-      address: address ?? this.address,
-      zipCode: zipCode ?? this.zipCode,
-      aboutUs: aboutUs ?? this.aboutUs,
-      officialWebsite: officialWebsite ?? this.officialWebsite,
-      contactNumber: contactNumber ?? this.contactNumber,
-      email: email ?? this.email,
-      distance: distance ?? this.distance,
-      rating: rating ?? this.rating,
-      ratingCount: ratingCount ?? this.ratingCount,
-      latitude: latitude ?? this.latitude,
-      longitude: longitude ?? this.longitude,
-      isFavourite: isFavourite ?? this.isFavourite,
-    );
-  }
 }

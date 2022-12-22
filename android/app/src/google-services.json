@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "250363232703",
+    "project_id": "tablebooking-2b713",
+    "storage_bucket": "tablebooking-2b713.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250363232703:android:8dbb8ea5c14c299114610a",
+        "android_client_info": {
+          "package_name": "com.servrest.booking_table"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "250363232703-u7jjvg80qf58qjtectjo4jqoerot3ceu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-3A6nK8pd60BBmAUStIYoU1JC5MTC6x4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "250363232703-u7jjvg80qf58qjtectjo4jqoerot3ceu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

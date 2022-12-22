@@ -2,9 +2,9 @@ import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/home_screen/widgets/filter_restaurant_widget.dart';
-import 'package:booking_table/view/home_screen/widgets/map_home_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'filter_map_widget.dart';
 
 class FilterResultBody extends StatelessWidget {
   const FilterResultBody({
@@ -128,10 +128,10 @@ class FilterResultBody extends StatelessWidget {
             homeController.restaurantFilter.value
                 ?
                 // FILTERED RESULT
-                const FilterRestaurantScreen()
+                 FilterRestaurantScreen()
                 :
                 // MAP HOME SCREEN
-                const MapHomeScreen()
+                const FilterMapScreen()
           ],
         );
       }),

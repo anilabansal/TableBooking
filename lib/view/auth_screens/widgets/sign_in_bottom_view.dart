@@ -13,6 +13,7 @@ import 'package:booking_table/view/auth_screens/widgets/privacy_policy.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controller/location/location_controller.dart';
 import '../../../utils/common/widgets_methods/common_phone_field.dart';
 import '../../../utils/common/widgets_methods/progress_loader.dart';
 
@@ -28,7 +29,10 @@ class SignInScreenBottomView extends StatelessWidget {
     required this.callFrom,
     Key? key,
   }) : super(key: key);
-  ProfileController profileController = Get.put(ProfileController());
+
+  // ProfileController profileController = Get.put(ProfileController());
+  ProfileController profileController = Get.find();
+  LocationController locationController = Get.find();
 
   // AuthViewController controller = Get.put(AuthViewController());
   // Country? selectedCountry;
@@ -117,27 +121,6 @@ class SignInScreenBottomView extends StatelessWidget {
                     }
                     ProgressDialog.showProgressDialog(context);
                     loginController.isLoading.value = true;
-                    // if(callFrom=="Login"){
-                    //   Get.toNamed('/login/otp', arguments: [
-                    //     {
-                    //       'mobileNumber':
-                    //       '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
-                    //     },
-                    //     {
-                    //       'callFrom': "Login",
-                    //     }
-                    //   ]);
-                    // }else{
-                    //   Get.toNamed('/register/otp', arguments: [
-                    //     // {
-                    //     //   'mobileNumber':
-                    //     //   '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
-                    //     // },
-                    //     {
-                    //       'callFrom': "Register",
-                    //     }
-                    //   ]);
-                    // }
                     callFrom == 'Login'
                         ? await loginController.loginUser(data: {
                             "MobileNumber":
@@ -149,6 +132,11 @@ class SignInScreenBottomView extends StatelessWidget {
                             "DeviceToken": "sdgsgsgsg",
                             "DeviceType":
                                 GetPlatform.isAndroid ? "Android" : "iOS",
+                            "Latitude": locationController.latLng.value.latitude
+                                .toString(),
+                            "Longitude": locationController
+                                .latLng.value.longitude
+                                .toString()
                           }).then(
                             (value) {
                               // Get.back();
@@ -181,27 +169,34 @@ class SignInScreenBottomView extends StatelessWidget {
                             "DeviceToken": "1234",
                             "DeviceType":
                                 GetPlatform.isAndroid ? "Android" : "iOS",
-                          }).then((value) {
-                            Navigator.pop(context);
-                            loginController.isLoading.value = false;
-                            // Get.back();
-                            if (value) {
-                              Get.toNamed(
-                                '/register/otp',
-                                arguments: [
-                                  {
-                                    'mobileNumber':
-                                        '+${registerController.countryCode.value}${registerController.mobileNumber.text.trim()}',
-                                  },
-                                  {
-                                    'callFrom': "Register",
-                                  }
-                                ],
-                              );
-                              profileController.mobileNumberControllerRegister
-                                  .value = registerController.mobileNumber;
-                            }
-                          });
+                            "Latitude": locationController.latLng.value.latitude
+                                .toString(),
+                            "Longitude": locationController
+                                .latLng.value.longitude
+                                .toString()
+                          }).then(
+                            (value) {
+                              Navigator.pop(context);
+                              loginController.isLoading.value = false;
+                              // Get.back();
+                              if (value) {
+                                Get.toNamed(
+                                  '/register/otp',
+                                  arguments: [
+                                    {
+                                      'mobileNumber':
+                                          '+${registerController.countryCode.value}${registerController.mobileNumber.text.trim()}',
+                                    },
+                                    {
+                                      'callFrom': "Register",
+                                    }
+                                  ],
+                                );
+                                profileController.mobileNumberControllerRegister
+                                    .value = registerController.mobileNumber;
+                              }
+                            },
+                          );
                   },
                   text: callFrom == 'Login' ? 'Sign In' : 'Sign Up',
                   bgColor: redE2211C,

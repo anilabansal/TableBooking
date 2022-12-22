@@ -3,7 +3,8 @@ import 'package:booking_table/view/payment/widgets/add_card_details_body.dart';
 import 'package:flutter/material.dart';
 
 class AddCreditCardDetailsView extends StatelessWidget {
-  const AddCreditCardDetailsView({Key? key}) : super(key: key);
+  String? callFrom;
+  AddCreditCardDetailsView({this.callFrom, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,9 @@ class AddCreditCardDetailsView extends StatelessWidget {
       appBar: appBarCommon(
         text: 'Credit Card',
       ),
-      body: const AddCardDetailsBody(),
+      body: AddCardDetailsBody(
+        callFrom: callFrom ?? "",
+      ),
     );
   }
 }

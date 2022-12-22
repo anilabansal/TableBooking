@@ -35,16 +35,18 @@ class CommonDatePicker extends StatelessWidget {
               },
               context: context,
               initialDate: DateTime.now(),
-              firstDate: DateTime(1900),
-              lastDate: DateTime.now());
+              firstDate: DateTime.now(),
+              lastDate: DateTime.now().add(const Duration(days: 60)),
+          );
           if (picked != null) {
-            controller!.text = DateFormat('yyyy-MM-dd').format(picked);
+            controller!.text = DateFormat('dd/MM/yyyy').format(picked);
           }
         },
         child: CommonTextFormField(
             enable: enable,
             controller: controller,
-            hintText: "DD-MM-YY",
+            // hintText: "DD-MM-YY",
+            hintText: "DD/MM/YYYY",
             filled: true,
             suffixIcon: IconButton(
               onPressed: () async {

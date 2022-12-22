@@ -20,7 +20,7 @@ class NotificationBody extends StatelessWidget {
     return Column(
       children: <Widget>[
         Container(
-          height: 97,
+          // height: 97,
           decoration: BoxDecoration(
               color: whiteF8F8F8, borderRadius: BorderRadius.circular(7)),
           padding: const EdgeInsets.all(15),
@@ -62,6 +62,7 @@ class NotificationBody extends StatelessWidget {
                   ),
                   Expanded(
                     child: CommonText(
+                      softWrap: true,
                       text:
                           'You can make your toggle on/off for getting notifications',
                       color: textLight868686,

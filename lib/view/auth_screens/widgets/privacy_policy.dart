@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 // PRIVACY POLICY & TERMS N CONDITIONS
 Column privacyPolicyNTerms() {
   RegisterController controller = Get.find();
+
   return Column(
     children: <Widget>[
       CommonSizedBox(height: 58),

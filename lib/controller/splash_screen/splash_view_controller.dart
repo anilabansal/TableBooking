@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 class SplashViewController extends GetxController {
   UserSessionController controller = Get.find();
-  ProfileController profileController = Get.find();
+  //ProfileController profileController = Get.find();
 
   @override
   void onInit() async {

@@ -103,6 +103,7 @@ class _PhoneFieldState extends State<PhoneField> {
           // ),
           Expanded(
             child: TextFormField(
+              maxLines: 1,
               enabled: widget.enable,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(10),

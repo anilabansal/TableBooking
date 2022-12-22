@@ -2,13 +2,14 @@
 
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CommonTextFormField extends StatelessWidget {
   String? hintText;
   TextEditingController? controller;
   Function()? onTap;
   double? fontSize;
-  // int? maxLength;
+  int? maxLength;
   int? maxLines;
   Widget? suffixIcon;
   Color? color;
@@ -20,12 +21,14 @@ class CommonTextFormField extends StatelessWidget {
   EdgeInsetsGeometry? contentPadding;
   FontWeight? fontWeight;
   bool?readOnly;
+ Function(String)? onChange;
+  List<TextInputFormatter>? inputFormatters;
   CommonTextFormField({
     this.hintText,
     this.enable,
     this.onTap,
     this.controller,
-    // this.maxLength,
+    this.maxLength,
     this.suffixIcon,
     this.keyboardType,
     this.obscureText,
@@ -37,6 +40,8 @@ class CommonTextFormField extends StatelessWidget {
     this.fontWeight,
     this.maxLines,
     this.readOnly,
+    this.onChange,
+    this.inputFormatters,
     Key? key,
   }) : super(key: key);
 
@@ -49,10 +54,12 @@ class CommonTextFormField extends StatelessWidget {
       readOnly: readOnly??false,
       autovalidateMode: AutovalidateMode.always,
       keyboardType: keyboardType,
-      // maxLength: maxLength,
+      inputFormatters: inputFormatters,
+      maxLength: maxLength,
       maxLines: maxLines,
       controller: controller,
       cursorWidth: 1,
+      onChanged: onChange,
       // style: const TextStyle(fontSize: 20, color: black000000),
       style: TextStyle(
         fontSize: fontSize,

@@ -1,9 +1,7 @@
 import 'package:booking_table/controller/payment/card_scan_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 class CardScanPopUpBody extends StatelessWidget {
   const CardScanPopUpBody({
     Key? key,
@@ -27,17 +25,19 @@ class CardScanPopUpBody extends StatelessWidget {
         ),
         child: InkWell(
           onTap: () {
+            Navigator.pop(context);
             controller.scanCardDetails();
-            // Get.to(()=>const ScanCardScreen());
+          //  Get.to(() => const ScanCardScreen());
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Center(
-                  child: Image.asset(
-                scanCard,
-                height: 168,
-              )),
+                child: Image.asset(
+                  scanCard,
+                  height: 168,
+                ),
+              ),
             ],
           ),
         ),

@@ -30,4 +30,5 @@ class RouteName {
   static const filterScreen = '/filter-screen';
   static const paymentMethod = '/payment-method';
   static const restaurantDetails = '/restaurant-details';
+  // static const socialLoginProfile = ''
 }

@@ -110,17 +110,18 @@ class _SearchLocationState extends State<SearchLocation> {
                       print(
                           'Address ---------> ${placeMarks.first.toString()}');
                       if (GetPlatform.isAndroid) {
-                         locationController.searchController.value.text =
-                        "${placeMarks.first.name} ${placeMarks.first
-                             .locality} ${placeMarks.first
-                            .subLocality} ${placeMarks.first.administrativeArea}";
+                        locationController.searchController.value.text =
+                            "${placeMarks.first.name} ${placeMarks.first.locality} ${placeMarks.first.subLocality} ${placeMarks.first.administrativeArea}";
+                        // locationController.searchController.value.text =
+                        //     "${placeMarks.first.postalCode} ";
                       } else if (GetPlatform.isIOS) {
                         locationController
                             .searchController.value.text = placeMarks
                                 .first.street!.isNotEmpty
                             ? '${placeMarks.first.street} ${placeMarks.first.subAdministrativeArea} ${placeMarks.first.subLocality} ${placeMarks.first.locality} ${placeMarks.first.administrativeArea}'
                             : ' ${placeMarks.first.subAdministrativeArea} ${placeMarks.first.subLocality} ${placeMarks.first.locality} ${placeMarks.first.administrativeArea}';
-
+                        // locationController.searchController.value.text =
+                        //     '${placeMarks.first.postalCode} ';
                       }
 
                       // if (isSearch == false) {

@@ -39,6 +39,7 @@ class HomeController extends GetxController {
   var homeRestaurantCount = 0.obs;
   var isLoading = false.obs;
   var mapHomeLoading = true.obs;
+  var privacyLoading = true.obs;
 
 /// update likes and unlike of restaurants on homeScreen
   void updateRestaurantLikes(index){

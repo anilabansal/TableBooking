@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import '../../controller/location/location_controller.dart';
+import '../../controller/profile/profile_controller.dart';
 import '../../utils/common/widgets_methods/common_button.dart';
 import '../../utils/common/widgets_methods/common_sized_box.dart';
 import '../../utils/common/widgets_methods/common_text.dart';
@@ -24,7 +25,7 @@ class _GetZipCodeViewState extends State<GetZipCodeView> {
   HomeController controller = Get.find();
   LocationController locationController = Get.find();
   UserSessionController userController = Get.find();
-
+  //ProfileController profileController = Get.put(ProfileController());
   // _getAddressFromLatLng() async {
   //   locationController.isLoading.value = true;
   //   await locationController.requestPermission().then(
@@ -135,6 +136,7 @@ class _GetZipCodeViewState extends State<GetZipCodeView> {
                           ),
                         )
                       : CommonTextFormField(
+                 //   contentPadding: const EdgeInsets.only(top:10),
                           maxLines: 2,
                           readOnly: true,
                           controller: locationController.searchController.value,
@@ -185,6 +187,7 @@ class _GetZipCodeViewState extends State<GetZipCodeView> {
                           if (value) {
                             Get.offAllNamed('/home');
                             // Get.toNamed('/home');
+                            print("finalLocation ----->${locationController.searchController.value.text}");
                             locationController
                                     .searchController.value.text.isEmpty
                                 ? userController.setSearchLocation(
@@ -192,7 +195,8 @@ class _GetZipCodeViewState extends State<GetZipCodeView> {
                                     locationController.latLng.value.latitude,
                                     locationController.latLng.value.longitude,
                                   )
-                                : userController.setSearchLocation(
+                                :
+                            userController.setSearchLocation(
                                     locationController
                                         .searchController.value.text,
                                     locationController.latLng.value.latitude,

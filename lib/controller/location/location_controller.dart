@@ -30,7 +30,6 @@ class LocationController extends GetxController {
   var latLng = const LatLng(0.0, 0.0).obs;
   var isLoading = false.obs;
   var cameraPosition = const CameraPosition(target: LatLng(0.0, 0.0)).obs;
-
   var searchLatLng = const LatLng(0.0, 0.0).obs;
   var searchPlaceId = ''.obs;
 
@@ -66,15 +65,20 @@ class LocationController extends GetxController {
       print(
           'location--->Lat-${locationData!.latitude} Long-${locationData!.longitude}');
       List<Placemark> placemarks = await placemarkFromCoordinates(
-          locationData!.latitude, locationData!.longitude);
+        locationData!.latitude,
+        locationData!.longitude,
+      );
       Placemark place = placemarks[0];
       if (GetPlatform.isAndroid) {
         currentAddress.value =
             "${place.name} ${place.locality} ${place.subLocality} ${place.administrativeArea} ";
+        // currentAddress.value = "${place.postalCode} ";
       } else if (GetPlatform.isIOS) {
         currentAddress.value = place.street!.isNotEmpty
             ? "${place.street} ${place.subAdministrativeArea} ${place.subLocality} ${place.locality}  "
             : "${place.subAdministrativeArea} ${place.subLocality} ${place.locality} ${place.administrativeArea}  ";
+        // currentAddress.value = "${place.postalCode}  ";
+
       }
       // currentAddress.value =
       // "${place.name} ${place.locality} ${place.subLocality} ${place.administrativeArea} ";
@@ -85,10 +89,12 @@ class LocationController extends GetxController {
       // searchController.value.text = "${place.name},${place.locality},${place.subLocality},${place.administrativeArea}, ${place.country}";
       //  searchController.value.text = "${place.name} ${place.locality} ${place.subLocality} ${place.administrativeArea} ";
       return true;
-    } else if (status.isPermanentlyDenied) {
+    }
+    else if (status.isPermanentlyDenied) {
       openAppSettings();
       return false;
-    } else {
+    }
+    else {
       return false;
     }
   }

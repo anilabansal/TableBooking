@@ -102,7 +102,8 @@ class RestaurantDetailsController extends GetxController {
       final response = await apiCall.callPostApi(body, aboutUs,
           token: userSessionController.token);
 
-      RestaurantAboutUs restaurantAboutUs = RestaurantAboutUs.fromMap(response);
+      RestaurantAboutUsModel restaurantAboutUs =
+      RestaurantAboutUsModel.fromMap(response);
       if (restaurantAboutUs.response == 1) {
         // aboutUsRestaurantList.value = (response['data'])?.map((e) => Datum.fromMap(e as Map<String, dynamic>))
         //     .toList();

@@ -86,7 +86,7 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteName.addCardDetails,
-      page: () => const AddCreditCardDetailsView(),
+      page: () =>  AddCreditCardDetailsView(),
       // binding: ,
     ),
     GetPage(
@@ -94,12 +94,14 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.privacyPolicy, page: () => const PrivacyPolicyView(),
-      // binding: ,
+      name: RouteName.privacyPolicy,
+      page: () => const PrivacyPolicyView(),
+      binding:HomeBindings() ,
     ),
     GetPage(
       name: RouteName.termsNConditions,
       page: () => const TermsNConditionsView(),
+      binding: HomeBindings()
       // binding: ,
     ),
     GetPage(
@@ -159,7 +161,7 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteName.zipCodeView,
-      page: () => GetZipCodeView(),
+      page: () => const GetZipCodeView(),
      binding: HomeBindings(),
      // binding: AuthBindings()
     ),
@@ -171,7 +173,7 @@ class AppRoutes {
       binding: HomeBindings(),
     ),
     GetPage(
-      name: RouteName.filterScreen, page: () => FilterView(),
+      name: RouteName.filterScreen, page: () => const FilterView(),
       // binding: ,
     ),
     GetPage(

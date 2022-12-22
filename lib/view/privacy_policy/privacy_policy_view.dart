@@ -11,7 +11,7 @@ class PrivacyPolicyView extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: appBarCommon(),
       // BODY
-      body: const PrivacyPolicyBody(),
+      body:  PrivacyPolicyBody(),
     );
   }
 }

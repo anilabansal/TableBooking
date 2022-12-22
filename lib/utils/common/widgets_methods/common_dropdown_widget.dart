@@ -35,7 +35,6 @@ class CommonDropDown extends StatelessWidget {
             hintText!,
             style: const TextStyle(
               color: textLight868686,
-
               // fontSize: 14,
               // fontWeight: FontWeight.w400,
             ),
