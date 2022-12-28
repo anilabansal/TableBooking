@@ -23,6 +23,7 @@ class CommonTextFormField extends StatelessWidget {
   bool?readOnly;
  Function(String)? onChange;
   List<TextInputFormatter>? inputFormatters;
+  int?hintMaxLines;
   CommonTextFormField({
     this.hintText,
     this.enable,
@@ -42,6 +43,7 @@ class CommonTextFormField extends StatelessWidget {
     this.readOnly,
     this.onChange,
     this.inputFormatters,
+    this.hintMaxLines,
     Key? key,
   }) : super(key: key);
 
@@ -68,7 +70,8 @@ class CommonTextFormField extends StatelessWidget {
       ),
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
-        helperMaxLines: 3,
+       hintMaxLines:hintMaxLines ,
+       helperMaxLines: 3,
         //contentPadding: contentPadding ?? const EdgeInsets.only(left: 13, ),
         //contentPadding: contentPadding ?? EdgeInsets.zero,
         hintText: hintText,

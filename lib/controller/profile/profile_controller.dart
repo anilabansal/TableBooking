@@ -93,7 +93,6 @@ class ProfileController extends GetxController {
 
         /// Set ISCREATE_PROFILE value to true
         //  userSession.setIsProfileCreated(response['data']['isProfileCreated']);
-
         userSession.setEmail(response['data']['email']);
         userSession.setUserId(response['data']['userId'].toString());
         userSession.setFullName(

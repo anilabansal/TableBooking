@@ -10,18 +10,15 @@ import 'package:booking_table/view/home_screen/widgets/reviews_tab_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RetaurantDetailsBody extends StatelessWidget {
+class RestaurantDetailsBody extends StatelessWidget {
   final int? restaurantId;
-  RetaurantDetailsBody({
+  RestaurantDetailsBody({
     Key? key,this.restaurantId,
     required TabController tabController,
   })  : _tabController = tabController,
         super(key: key);
-
   final TabController _tabController;
-
   // HomeController controller = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(

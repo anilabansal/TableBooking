@@ -28,6 +28,12 @@ const addCardDetailString = 'api/Home/SaveCreditCard';
 const typesFoodEndPoint = 'api/Home/TypeofFood';
 const filterSelectTime = 'api/Home/GetTime';
 const filterRestaurantEndPoint = 'api/Home/RestaurantListByFilter';
+
+
+const bookTableAvailableTime = 'api/Home/GetRestaurantAvailableTime';
+const bookTableEndPoint = 'api/Home/BookTable';
+
+
 ///    Common Fonts
 // Fonts
 const String mainLaToFont = 'LaTo';

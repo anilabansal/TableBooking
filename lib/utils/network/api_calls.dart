@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
@@ -8,7 +7,6 @@ import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
 import '../common/common_strings.dart';
 
 class ApiCalls extends GetConnect {
@@ -22,13 +20,16 @@ class ApiCalls extends GetConnect {
 
   /// This method is for get request to the server.
 
-  Future<dynamic> callPostApi(Map<String, dynamic>? body, String endPoint,
-      {bool isToken = false,
-      String? token,
-      // bool isFullUrl = false,
-      // String baseUrl,
-      isPayment = false,
-      bool isString = false}) async {
+  Future<dynamic> callPostApi(
+    Map<String, dynamic>? body,
+    String endPoint, {
+    bool isToken = false,
+    String? token,
+    // bool isFullUrl = false,
+    // String baseUrl,
+    isPayment = false,
+    bool isString = false,
+  }) async {
     Map<String, String> withToken;
 
     withToken = {

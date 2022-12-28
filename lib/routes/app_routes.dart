@@ -39,37 +39,37 @@ class AppRoutes {
     GetPage(
       name: RouteName.createProfile,
       page: () => ProfileView(callFrom: 'Create Profile'),
-      binding: HomeBindings(),
+      binding: MainBindings(),
     ),
     GetPage(
       name: RouteName.authSelectionScreen,
       page: () => const AuthSelectionView(),
-      binding: AuthBindings(),
+      binding: MainBindings(),
     ),
     GetPage(
       name: RouteName.login,
       page: () => SignInView(callFrom: 'Login'),
-      binding: AuthBindings(),
+      binding: MainBindings(),
     ),
     GetPage(
       name: RouteName.register,
       page: () => SignInView(callFrom: 'Register'),
-      binding: AuthBindings(),
+      binding: MainBindings(),
     ),
     GetPage(
       name: RouteName.loginOTP,
       page: () => OtpView(callFrom: 'Login'),
-      binding: AuthBindings(),
+      binding: MainBindings(),
     ),
     GetPage(
       name: RouteName.registerOTP,
       page: () => OtpView(callFrom: 'Register'),
-      binding: AuthBindings(),
+      binding: MainBindings(),
     ),
     GetPage(
       name: RouteName.home,
       page: () => HomeView(),
-      binding: HomeBindings(),
+      binding: MainBindings(),
     ),
     GetPage(
       name: RouteName.support, page: () => const SupportView(),
@@ -78,7 +78,7 @@ class AppRoutes {
     GetPage(
       name: RouteName.favourite,
       page: () => const FavouriteView(),
-      binding: HomeBindings(),
+      binding: MainBindings(),
     ),
     GetPage(
       name: RouteName.notifications, page: () => NotificationView(),
@@ -96,12 +96,12 @@ class AppRoutes {
     GetPage(
       name: RouteName.privacyPolicy,
       page: () => const PrivacyPolicyView(),
-      binding:HomeBindings() ,
+      binding:MainBindings() ,
     ),
     GetPage(
       name: RouteName.termsNConditions,
       page: () => const TermsNConditionsView(),
-      binding: HomeBindings()
+      binding: MainBindings()
       // binding: ,
     ),
     GetPage(
@@ -150,7 +150,7 @@ class AppRoutes {
       page: () => BookATableView(
         callFrom: 'book',
       ),
-      // binding: ,
+      binding:MainBindings() ,
     ),
     GetPage(
       name: RouteName.editATable,
@@ -162,7 +162,7 @@ class AppRoutes {
     GetPage(
       name: RouteName.zipCodeView,
       page: () => const GetZipCodeView(),
-     binding: HomeBindings(),
+     binding: MainBindings(),
      // binding: AuthBindings()
     ),
     GetPage(
@@ -170,7 +170,7 @@ class AppRoutes {
       page: () => ProfileView(
         callFrom: 'Edit',
       ),
-      binding: HomeBindings(),
+      binding: MainBindings(),
     ),
     GetPage(
       name: RouteName.filterScreen, page: () => const FilterView(),
@@ -187,8 +187,8 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteName.restaurantDetails,
-      page: () =>  const RestaurantDetailView(  ),
-      binding: HomeBindings(),
+      page: () =>  const RestaurantDetailView(),
+      binding: MainBindings(),
     ),
     GetPage(
       name: RouteName.preOrder,

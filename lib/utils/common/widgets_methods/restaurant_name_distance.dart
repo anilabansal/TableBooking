@@ -5,9 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CommonRestaurantNameDistance extends StatelessWidget {
-  const CommonRestaurantNameDistance({
-    Key? key,
-  }) : super(key: key);
+  final String? restaurantName;
+  final String? restaurantPic;
+  final double? restaurantDistance;
+
+  const CommonRestaurantNameDistance(
+      {Key? key,
+      this.restaurantName,
+      this.restaurantPic,
+      this.restaurantDistance})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +37,22 @@ class CommonRestaurantNameDistance extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              bookATableImage,
-              height: 57,
-              width: 57,
-            ),
+            restaurantPic == null
+                ? Image.asset(
+                    bookATableImage,
+                    height: 57,
+                    width: 57,
+                  )
+                : Image.network(
+                    restaurantPic.toString(),
+                    height: 57,
+                    width: 57,
+                  ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CommonText(
-                  text: 'Venisa’s Kitchen',
+                  text: restaurantName,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
@@ -47,7 +60,7 @@ class CommonRestaurantNameDistance extends StatelessWidget {
                   height: 5,
                 ),
                 CommonText(
-                  text: '5 miles away',
+                  text: "${restaurantDistance.toString()} miles away",
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                   color: textLight868686,

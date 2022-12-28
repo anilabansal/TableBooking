@@ -28,6 +28,7 @@ class CommonText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text ?? "",
+      // text!,
       textAlign: textAlign,
       softWrap: softWrap ?? false,
       style: TextStyle(

@@ -6,7 +6,6 @@ import 'package:booking_table/view/payment/demo_stripe.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'controller/profile/profile_controller.dart';
 import 'controller/user_session/user_session_controller.dart';
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +35,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Table Booking',
       initialRoute: '/',
       getPages: AppRoutes.appRoutes,
-      initialBinding: AuthBindings(),
+      initialBinding: MainBindings(),
       theme: ThemeData(fontFamily: mainLaToFont),
      // home: PaymentStripeDemo(),
     );

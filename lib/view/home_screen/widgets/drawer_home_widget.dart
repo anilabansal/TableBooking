@@ -11,7 +11,6 @@ class DrawerScreen extends StatelessWidget {
   UserSessionController userSessionController = Get.find();
   HomeController homeController = Get.find();
 
-
   DrawerScreen({
     Key? key,
   }) : super(key: key);
@@ -24,7 +23,7 @@ class DrawerScreen extends StatelessWidget {
     //   },
     // );
     return Padding(
-      padding: const EdgeInsets.only(top:10.0),
+      padding: const EdgeInsets.only(top: 10.0),
       child: Drawer(
         backgroundColor: white,
         child: Stack(
@@ -55,26 +54,26 @@ class DrawerScreen extends StatelessWidget {
                         children: [
                           _userSessionController.isLogin == false
                               ? const Icon(
-                            Icons.person,
-                            size: 40,
-                          )
+                                  Icons.person,
+                                  size: 40,
+                                )
                               : _userSessionController.profilePic != ''
-                              ? CommonSizedBox(
-                            height: 49,
-                            width: 49,
-                            child: ClipOval(
-                              child: Image.network(
-                                _userSessionController.profilePic,
-                                height: 49,
-                                width: 49,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          )
-                              : const Icon(
-                            Icons.person,
-                            size: 40,
-                          ),
+                                  ? CommonSizedBox(
+                                      height: 49,
+                                      width: 49,
+                                      child: ClipOval(
+                                        child: Image.network(
+                                          _userSessionController.profilePic,
+                                          height: 49,
+                                          width: 49,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    )
+                                  : const Icon(
+                                      Icons.person,
+                                      size: 40,
+                                    ),
                           const SizedBox(
                             width: 15,
                           ),
@@ -94,42 +93,42 @@ class DrawerScreen extends StatelessWidget {
                               _userSessionController.isLogin == false
                                   ? Container()
                                   : Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  CommonText(
-                                    text: _userSessionController.email,
-                                    fontFamily: proximaNovaFont,
-                                    fontWeight: FontWeight.w400,
-                                    color: black000000,
-                                    fontSize: 14,
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  InkWell(
-                                    onTap: ()  {
-                                      // await profileController
-                                      //     .getProfileDetails()
-                                      //     .then((value) async {
-                                      //   if (value) {
-                                      //     await profileController
-                                      //         .getProfileDetails();
-                                      //     Get.toNamed('/edit-profile');
-                                      //   }
-                                      // });
-                                      Get.toNamed('/edit-profile');
-                                    },
-                                    child: CommonText(
-                                      text: "Edit Profile",
-                                      fontFamily: proximaNovaFont,
-                                      fontWeight: FontWeight.w400,
-                                      color: redE2211C,
-                                      fontSize: 12,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CommonText(
+                                          text: _userSessionController.email,
+                                          fontFamily: proximaNovaFont,
+                                          fontWeight: FontWeight.w400,
+                                          color: black000000,
+                                          fontSize: 14,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            // await profileController
+                                            //     .getProfileDetails()
+                                            //     .then((value) async {
+                                            //   if (value) {
+                                            //     await profileController
+                                            //         .getProfileDetails();
+                                            //     Get.toNamed('/edit-profile');
+                                            //   }
+                                            // });
+                                            Get.toNamed('/edit-profile');
+                                          },
+                                          child: CommonText(
+                                            text: "Edit Profile",
+                                            fontFamily: proximaNovaFont,
+                                            fontWeight: FontWeight.w400,
+                                            color: redE2211C,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
                             ],
                           )
                         ],
@@ -154,46 +153,54 @@ class DrawerScreen extends StatelessWidget {
                         homeController.drawerKey.currentState?.closeDrawer();
                       }),
                       iconContainer(
-                          const Icon(
-                            Icons.favorite,
-                            color: redE2211C,
-                          ),
-                          "Favorites", () async {
-                        //  await homeController.favRestaurantDetailList();
-                        userSessionController.isLogin == false
-                            ? getXBuildDefaultDialog()
-                            : Get.toNamed('/favourite');
-                      }),
+                        const Icon(
+                          Icons.favorite,
+                          color: redE2211C,
+                        ),
+                        "Favorites",
+                        () async {
+                          //  await homeController.favRestaurantDetailList();
+                          userSessionController.isLogin == false
+                              ? getXBuildDefaultDialog()
+                              : Get.toNamed('/favourite');
+                        },
+                      ),
                       iconContainer(
-                          const Icon(
-                            Icons.book,
-                            color: redE2211C,
-                          ),
-                          "Reservations", () {
-                        userSessionController.isLogin == false
-                            ? getXBuildDefaultDialog()
-                            : Get.toNamed('/reservation');
-                      }),
+                        const Icon(
+                          Icons.book,
+                          color: redE2211C,
+                        ),
+                        "Reservations",
+                        () {
+                          userSessionController.isLogin == false
+                              ? getXBuildDefaultDialog()
+                              : Get.toNamed('/reservation');
+                        },
+                      ),
                       iconContainer(
-                          const Icon(
-                            Icons.wallet,
-                            color: redE2211C,
-                          ),
-                          "Payment Method", () {
-                        userSessionController.isLogin == false
-                            ? getXBuildDefaultDialog()
-                            : Get.toNamed('/payment-method');
-                      }),
+                        const Icon(
+                          Icons.wallet,
+                          color: redE2211C,
+                        ),
+                        "Payment Method",
+                        () {
+                          userSessionController.isLogin == false
+                              ? getXBuildDefaultDialog()
+                              : Get.toNamed('/payment-method');
+                        },
+                      ),
                       iconContainer(
-                          const Icon(
-                            Icons.notifications,
-                            color: redE2211C,
-                          ),
-                          "Notifications", () {
-                        userSessionController.isLogin == false
-                            ? getXBuildDefaultDialog()
-                            : Get.toNamed('/notifications');
-                      }),
+                        const Icon(
+                          Icons.notifications,
+                          color: redE2211C,
+                        ),
+                        "Notifications",
+                        () {
+                          userSessionController.isLogin == false
+                              ? getXBuildDefaultDialog()
+                              : Get.toNamed('/notifications');
+                        },
+                      ),
                       const SizedBox(
                         height: 10,
                       ),
@@ -201,31 +208,40 @@ class DrawerScreen extends StatelessWidget {
                       const SizedBox(
                         height: 30,
                       ),
-                      textAndIcon("Terms & Conditions", () {
-                        Get.toNamed('/terms-and-conditions');
-                      }),
-                      textAndIcon("Legal & About", () {
-                        Get.toNamed('/privacy-policy');
-                      }),
-                      textAndIcon("Customer Support", () {
-                        userSessionController.isLogin == false
-                            ? getXBuildDefaultDialog()
-                            : Get.toNamed('/support');
-                      }),
+                      textAndIcon(
+                        "Terms & Conditions",
+                        () {
+                          Get.toNamed('/terms-and-conditions');
+                        },
+                      ),
+                      textAndIcon(
+                        "Legal & About",
+                        () {
+                          Get.toNamed('/privacy-policy');
+                        },
+                      ),
+                      textAndIcon(
+                        "Customer Support",
+                        () {
+                          userSessionController.isLogin == false
+                              ? getXBuildDefaultDialog()
+                              : Get.toNamed('/support');
+                        },
+                      ),
                       // userSessionController.isLogin == true
                       //     ?
                       userSessionController.isLogin == false
                           ? Container()
                           : textAndIcon(
-                        "Logout",
-                            () async {
-                          //  userSessionController.logOut();
+                              "Logout",
+                              () async {
+                                //  userSessionController.logOut();
 
-                          await getXBuildDefaultDialog(
-                            callFrom: "Logout",
-                          );
-                        },
-                      )
+                                await getXBuildDefaultDialog(
+                                  callFrom: "Logout",
+                                );
+                              },
+                            )
                       // : Container(),
                     ],
                   );

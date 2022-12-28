@@ -25,6 +25,7 @@ class FilterViewController extends GetxController {
   ApiCalls apiCall = ApiCalls();
   UserSessionController userSessionController = Get.find();
   var filterRestaurantList = <FilterRestaurant>[].obs;
+  var filterRestaurantCount = 0.obs;
 
   /// TypesOfFood
   var typesOfFoodFilterData = <TypesOfFood>[].obs;
@@ -63,12 +64,14 @@ class FilterViewController extends GetxController {
         token: userSessionController.token,
       );
       if (response["response"] == 1) {
-        filterRestaurantList.value = List<FilterRestaurant>.from(response["data"].map((e) =>FilterRestaurant.fromJson(e)));
+        if(response["data"]!= null){
+          filterRestaurantList.value = List<FilterRestaurant>.from(response["data"].map((e) =>FilterRestaurant.fromJson(e)));
+        }
+         filterRestaurantCount.value = response['count'];
         // isLoading.value = false;
         // update();
         return true;
       } else {
-
         ShowToast.show(
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,

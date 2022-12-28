@@ -123,7 +123,6 @@ class _SearchLocationState extends State<SearchLocation> {
                         // locationController.searchController.value.text =
                         //     '${placeMarks.first.postalCode} ';
                       }
-
                       // if (isSearch == false) {
                       // locationController.searchController.value.te
                       // "${placeMarks.first.name} ${placeMarks.first

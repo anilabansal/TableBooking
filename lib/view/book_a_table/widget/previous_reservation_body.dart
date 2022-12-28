@@ -23,7 +23,7 @@ class BookingDetailsBody extends StatelessWidget {
       child: Column(
         children: <Widget>[
           // HEADER
-          const CommonRestaurantNameDistance(),
+           CommonRestaurantNameDistance(),
           CommonSizedBox(
             height: 24,
           ),

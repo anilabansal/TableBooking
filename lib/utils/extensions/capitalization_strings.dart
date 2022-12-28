@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 extension StringCasingExtension on String {
   String toCapitalized() =>
       length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
@@ -5,4 +7,14 @@ extension StringCasingExtension on String {
       .split(' ')
       .map((str) => str.toCapitalized())
       .join(' ');
+}
+/// convert booking date in service summary
+extension BookingDate on String {
+  String convertBookingTimeToFormat() {
+    var goalDateTime = DateFormat("yyyy-MM-ddTHH:mm:ss").parse(this,true).toLocal();
+//var now = DateFormat().parse(widget.bookingdetails![0].bookingDate.toString());
+    var formatterDate = DateFormat('MMM d,y');
+    String formatGoalDateTime = formatterDate.format(goalDateTime);
+    return formatGoalDateTime;
+  }
 }

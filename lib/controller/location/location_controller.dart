@@ -70,10 +70,14 @@ class LocationController extends GetxController {
       );
       Placemark place = placemarks[0];
       if (GetPlatform.isAndroid) {
+        // searchController.value.text = "${place.name} ${place.locality} ${place.subLocality} ${place.administrativeArea} ";
         currentAddress.value =
             "${place.name} ${place.locality} ${place.subLocality} ${place.administrativeArea} ";
         // currentAddress.value = "${place.postalCode} ";
       } else if (GetPlatform.isIOS) {
+        // searchController.value.text = place.street!.isNotEmpty
+        //     ? "${place.street} ${place.subAdministrativeArea} ${place.subLocality} ${place.locality}  "
+        //     : "${place.subAdministrativeArea} ${place.subLocality} ${place.locality} ${place.administrativeArea}  ";
         currentAddress.value = place.street!.isNotEmpty
             ? "${place.street} ${place.subAdministrativeArea} ${place.subLocality} ${place.locality}  "
             : "${place.subAdministrativeArea} ${place.subLocality} ${place.locality} ${place.administrativeArea}  ";

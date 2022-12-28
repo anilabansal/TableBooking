@@ -4,13 +4,14 @@ import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/view/home_screen/widgets/filter_restaurant_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../controller/filter/filter_screen_controller.dart';
 import 'filter_map_widget.dart';
 
 class FilterResultBody extends StatelessWidget {
-  const FilterResultBody({
+   FilterResultBody({
     Key? key,
   }) : super(key: key);
-
+  FilterViewController filterViewController = Get.find();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -42,7 +43,7 @@ class FilterResultBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CommonText(
-                    text: "1 Restaurants",
+                    text: "${filterViewController.filterRestaurantCount.value} Restaurants",
                     fontFamily: interFont,
                     fontWeight: FontWeight.w500,
                     color: black000000,

@@ -24,7 +24,7 @@ class PreOrderBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CommonRestaurantNameDistance(),
+           CommonRestaurantNameDistance(),
           Container(
             margin: const EdgeInsets.only(bottom: 18.0, top: 26.0),
             height: 1,

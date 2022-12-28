@@ -18,7 +18,15 @@ class FilterRestaurantScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15.0),
-      child: ListView.builder(
+      child:filterViewController.filterRestaurantList.isEmpty?Center(
+        child: CommonText(
+          text: "No Restaurant Found! ",
+          fontSize: 22,
+          color: black000000,
+          fontWeight: FontWeight.w600,
+          textAlign: TextAlign.center,
+        ),
+      ): ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: filterViewController.filterRestaurantList.length,

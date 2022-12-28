@@ -137,10 +137,12 @@ class _GetZipCodeViewState extends State<GetZipCodeView> {
                         )
                       : CommonTextFormField(
                  //   contentPadding: const EdgeInsets.only(top:10),
-                          maxLines: 2,
+                          //maxLines: 2,
+                           maxLength: 250,
+                          hintMaxLines: 2,
                           readOnly: true,
                           controller: locationController.searchController.value,
-                          keyboardType: TextInputType.number,
+                        //  keyboardType: TextInputType.number,
                           filled: true,
                           hintText:
                               locationController.currentAddress.value == ''

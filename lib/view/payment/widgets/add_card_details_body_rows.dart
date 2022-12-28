@@ -1,5 +1,4 @@
 // ignore_for_file: must_be_immutable
-
 import 'package:booking_table/controller/card_details/add_card_details_controller.dart';
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
@@ -29,6 +28,8 @@ class AddCardDetailsBodySubDetails extends StatelessWidget {
   var cardHolderName = TextEditingController();
   var cardNumber = TextEditingController();
   var cardCVV = TextEditingController();
+  var data = Get.arguments;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -111,7 +112,7 @@ class AddCardDetailsBodySubDetails extends StatelessWidget {
                     ),
                     CommonTextFormField(
                       // enable: false,
-                      hintText: 'DD/MM',
+                      hintText: 'MM/YY',
                       keyboardType: TextInputType.number,
                       inputFormatters: [CardExpirationFormatter()],
                       controller: cardExpiryDate,
@@ -236,7 +237,6 @@ class AddCardDetailsBodySubDetails extends StatelessWidget {
           //   Button
           InkWell(
             onTap: () async {
-
               if (validateFields() != '') {
                 ShowToast.show(
                   msg: validateFields(),
@@ -244,10 +244,6 @@ class AddCardDetailsBodySubDetails extends StatelessWidget {
                 );
                 return;
               }
-              // var controllerDateParse = DateFormat('MM/yy')
-              //     .parse(controller.cardExpiryDate.value.text);
-              // var finalControllerDateParse =
-              //     DateFormat('MM/yyyy').format(controllerDateParse);
               ProgressDialog.showProgressDialog(context);
               controller.isLoading.value = true;
               await controller.savedCardListData(
@@ -265,31 +261,36 @@ class AddCardDetailsBodySubDetails extends StatelessWidget {
                   Navigator.pop(context);
                   controller.isLoading.value = false;
                   if (value) {
-                    Get.offAllNamed('/book-a-table');
-                    // controller.cardHolderName.clear();
-                    // controller.cardNumber.clear();
-                    // controller.cardCVV.clear();
-                    // controller.cardExpiryDate.clear();
-                    // controller.bankName.clear();
-                    // print(
-                    //     "====>>ControllerDateParse Data ====>> $controllerDateParse <<====");
-                    // print(
-                    //     "====>>Final Data ====>> $finalControllerDateParse <<====");
-                    // return false;
-                    // callFrom == "Payment Method"
-                    //     ? Get.offAndToNamed('/payment-method')
-                    //     : Get.toNamed('/book-a-table');
-                    // ShowToast.show(
-                    //   msg: 'Added Successfully',
-                    //   isError: false,
-                    // );
+                    Get.offAllNamed(
+                      '/book-a-table',
+                      arguments: [
+                        {
+                          "restaurantId": data[0]['restaurantId'],
+                          "restaurantName": data[0]["restaurantName"],
+                          "restaurantPic": data[0]["restaurantPic"],
+                          "restaurantDistance": data[0]["restaurantDistance"]
+                        },
+
+                      ],
+                    );
+                    print("restaurantId ----->${data[0]['restaurantId']}");
                   }
 
                   //   return false;
                   // Get.toNamed('/book-a-table');
                 },
               );
-              //Get.toNamed('/book-a-table');
+              // Get.offNamed(
+              //   '/book-a-table',
+              //   arguments: [
+              //     {
+              //       "restaurantId": data[0]['restaurantId'],
+              //       "restaurantName": data[0]["restaurantName"],
+              //       "restaurantPic": data[0]["restaurantPic"],
+              //       "restaurantDistance": data[0]["restaurantDistance"]
+              //     },
+              //   ],
+              // );
             },
             child: CommonButton(
               text: 'Save Card',
