@@ -44,9 +44,9 @@ class ApiCalls extends GetConnect {
     print('API Request ------------------------------->\n ${(body)}');
     try {
       var response = await post(
-        url,
-        body,
-        headers: withToken,
+       url,
+       body,
+      headers: withToken,
       );
       if (response.statusCode == 200) {
         print(
@@ -62,6 +62,9 @@ class ApiCalls extends GetConnect {
             'API request Header ------------------------------->\n ${response.headers}');
         print('Run Successfully!!!!!');
         return response.body;
+      }
+      else if(response.statusCode==401){
+        Get.offAllNamed('/authentication');
       }
       // else if (userSessionController.isLogin == true &&
       //     response.statusText == "Unauthorized") {

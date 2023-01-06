@@ -38,20 +38,20 @@ class RestaurantDetailsController extends GetxController {
   }
 
   /// Favourite i.e like and dislike api call
-  void updateRestaurantLikeRestaurantDetails({index, restaurantId}) async {
-    await homeController.favRestaurantUpdate(
-        body: {"restaurantId": restaurantId}).then((value) {
-      if (value) {
-        homeController.getRestaurantDetailsUsingLatLon(body: {
-          'latitude': locationController.latLng.value.latitude.toString(),
-          'longitude': locationController.latLng.value.longitude.toString(),
-        });
-      } else {
-        return;
-      }
-    });
-    update();
-  }
+  // void updateRestaurantLikeRestaurantDetails({index, restaurantId}) async {
+  //   await homeController.favRestaurantUpdate(
+  //       body: {"restaurantId": restaurantId}).then((value) {
+  //     if (value) {
+  //       homeController.getRestaurantDetailsUsingLatLon(body: {
+  //         'latitude': locationController.latLng.value.latitude.toString(),
+  //         'longitude': locationController.latLng.value.longitude.toString(),
+  //       });
+  //     } else {
+  //       return;
+  //     }
+  //   });
+  //   update();
+  // }
 
   /// Restaurant Details
   Future<dynamic> restaurantDetails({

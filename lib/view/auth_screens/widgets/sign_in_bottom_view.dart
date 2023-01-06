@@ -143,7 +143,7 @@ class SignInScreenBottomView extends StatelessWidget {
                               Navigator.pop(context);
                               loginController.isLoading.value = false;
                               if (value) {
-                                Get.toNamed(
+                                Get.offNamed(
                                   '/login/otp',
                                   arguments: [
                                     {
@@ -180,7 +180,7 @@ class SignInScreenBottomView extends StatelessWidget {
                               loginController.isLoading.value = false;
                               // Get.back();
                               if (value) {
-                                Get.toNamed(
+                                Get.offNamed(
                                   '/register/otp',
                                   arguments: [
                                     {

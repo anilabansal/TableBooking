@@ -10,7 +10,6 @@ class PopularItemsWidgets extends StatelessWidget {
     Key? key,
     required this.controller,
   }) : super(key: key);
-
   final PreOrderController controller;
 
   @override
@@ -62,14 +61,16 @@ class PopularItemsWidgets extends StatelessWidget {
                                     )),
                               ),
                             ),
-                            Obx(() => Expanded(
-                                  child: CommonText(
-                                    textAlign: TextAlign.center,
-                                    text: controller.count.value.toString(),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )),
+                            Obx(
+                              () => Expanded(
+                                child: CommonText(
+                                  textAlign: TextAlign.center,
+                                  text: controller.count.value.toString(),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
                             Expanded(
                               child: InkWell(
                                 onTap: () {

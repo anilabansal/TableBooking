@@ -32,7 +32,8 @@ const filterRestaurantEndPoint = 'api/Home/RestaurantListByFilter';
 
 const bookTableAvailableTime = 'api/Home/GetRestaurantAvailableTime';
 const bookTableEndPoint = 'api/Home/BookTable';
-
+const editBookTableEndPoint = 'api/Home/EditBookingDetail';
+const updateBookingEndPoint='api/Home/UpdateBookingDetail';
 
 ///    Common Fonts
 // Fonts

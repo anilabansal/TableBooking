@@ -107,8 +107,12 @@ class _PhoneFieldState extends State<PhoneField> {
               enabled: widget.enable,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(10),
+                FilteringTextInputFormatter.allow(
+                  RegExp('[0-9]'),
+                ),
               ],
-              keyboardType: TextInputType.number,
+              //keyboardType: TextInputType.number,
+              keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
               controller: widget.phoneController,
               style: const TextStyle(
                 fontSize: 14,

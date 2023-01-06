@@ -8,6 +8,7 @@ import 'package:booking_table/view/service_type/full_service_summary_view.dart';
 import 'package:booking_table/view/service_type/mid_service_summary_view.dart';
 import 'package:get/get.dart';
 
+import '../view/book_a_table/edit_booking.dart';
 import '/routes/route_name.dart';
 import '/view/auth_screens/get_zip_code_view.dart';
 import '/view/auth_screens/otp_view.dart';
@@ -154,8 +155,8 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteName.editATable,
-      page: () => BookATableView(
-        callFrom: 'edit',
+      page: () => const EditBooking(
+        //callFrom: 'edit',
       ),
       // binding: ,
     ),

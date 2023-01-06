@@ -2,11 +2,11 @@ import 'package:booking_table/bindings/auth_bindings.dart';
 import 'package:booking_table/controller/location/location_controller.dart';
 import 'package:booking_table/routes/app_routes.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
-import 'package:booking_table/view/payment/demo_stripe.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'controller/user_session/user_session_controller.dart';
+
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
   // Stripe.publishableKey = "pk_live_STu7MEuLIwnKoCjJ4acieuAw";
@@ -15,11 +15,14 @@ void main() async {
   userSession.init();
   runApp(const MyApp());
 }
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
+
 class _MyAppState extends State<MyApp> {
   LocationController locationController = Get.put(LocationController());
   @override
@@ -37,7 +40,7 @@ class _MyAppState extends State<MyApp> {
       getPages: AppRoutes.appRoutes,
       initialBinding: MainBindings(),
       theme: ThemeData(fontFamily: mainLaToFont),
-     // home: PaymentStripeDemo(),
+      // home: PreOrderView(),
     );
   }
 }

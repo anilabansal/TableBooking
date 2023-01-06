@@ -18,3 +18,14 @@ extension BookingDate on String {
     return formatGoalDateTime;
   }
 }
+
+/// convert booking date in edit table
+extension EditBookingDate on String {
+  String convertEditBookingDateToFormat() {
+    var goalDateTime = DateFormat("yyyy-MM-ddTHH:mm:ss").parse(this,true).toLocal();
+//var now = DateFormat().parse(widget.bookingdetails![0].bookingDate.toString());
+    var formatterDate = DateFormat('yyyy-MM-dd');
+    String formatGoalDateTime = formatterDate.format(goalDateTime);
+    return formatGoalDateTime;
+  }
+}

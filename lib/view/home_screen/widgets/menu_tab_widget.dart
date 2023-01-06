@@ -4,6 +4,7 @@ import 'package:booking_table/utils/common/no_data_found.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../utils/common/widgets_methods/common_text.dart';
+import '../../../utils/common/widgets_methods/shimmers/listing_shimmer_widget.dart';
 
 class MenuTab extends StatefulWidget {
   final int? restaurantId;
@@ -39,11 +40,12 @@ class _MenuTabState extends State<MenuTab> {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
         return controller.isLoading.value == true
-            ? const Center(
-                child: CircularProgressIndicator(
-                  color: redE2211C,
-                ),
-              )
+            ? const ShimmerCard()
+            // const Center(
+            //         child: CircularProgressIndicator(
+            //           color: redE2211C,
+            //         ),
+            //       )
             :
             // controller.menuHeaderRestaurantList.isNotEmpty
             //   ?

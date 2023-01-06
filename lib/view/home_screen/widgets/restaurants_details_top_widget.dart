@@ -10,12 +10,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../controller/home/home_controller.dart';
+
 class RestaurantDetailTopScreen extends StatelessWidget {
   RestaurantDetailTopScreen({Key? key}) : super(key: key);
 
   //var data = Get.arguments;
 
-  // HomeController homeController = Get.find();
+  HomeController homeController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(builder: (controller) {
@@ -30,12 +33,20 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 266,
-                        child: Image.network(
-                          // restaurantImage,
-                          controller.detailsRestaurantList.value.restaurantPic
-                              .toString(),
-                          fit: BoxFit.cover,
-                        ),
+                        child: controller.detailsRestaurantList.value
+                                    .restaurantPic ==
+                                null
+                            ? Image.asset(
+                                restaurantImage,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                // restaurantImage,
+                                controller
+                                    .detailsRestaurantList.value.restaurantPic
+                                    .toString(),
+                                fit: BoxFit.cover,
+                              ),
                       ),
                       InkWell(
                         onTap: () {
@@ -308,9 +319,16 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                 {
                                   "restaurantId": controller
                                       .detailsRestaurantList.value.restaurantId,
-                                  "restaurantName":controller.detailsRestaurantList.value.restaurantName,
-                                  "restaurantPic":controller.detailsRestaurantList.value.restaurantPic,
-                                  "restaurantDistance":controller.detailsRestaurantList.value.distance,
+                                  "restaurantName": controller
+                                      .detailsRestaurantList
+                                      .value
+                                      .restaurantName,
+                                  "restaurantPic": controller
+                                      .detailsRestaurantList
+                                      .value
+                                      .restaurantPic,
+                                  "restaurantDistance": controller
+                                      .detailsRestaurantList.value.distance,
                                 },
                               ],
                             );
@@ -341,11 +359,15 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                   child: IconButton(
                     onPressed: () {
                       controller.updateRestaurantLikes();
-                      controller.updateRestaurantLikeRestaurantDetails(
-                        // restaurantId: data[0]['restaurantId'],
-                        restaurantId:
-                            controller.detailsRestaurantList.value.restaurantId,
-                      );
+                      homeController.favRestaurantUpdate(body: {
+                        "restaurantId":
+                            controller.detailsRestaurantList.value.restaurantId
+                      });
+                      // controller.updateRestaurantLikeRestaurantDetails(
+                      //   // restaurantId: data[0]['restaurantId'],
+                      //   restaurantId:
+                      //       controller.detailsRestaurantList.value.restaurantId,
+                      // );
                       // print("detail----${data[0]['restaurantId']}");
                     },
                     icon: controller.detailsRestaurantList.value.isFavourite ==

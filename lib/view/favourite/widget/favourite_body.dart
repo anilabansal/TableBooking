@@ -6,6 +6,7 @@ import 'package:booking_table/utils/common/no_data_found.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../utils/common/widgets_methods/shimmers/common_shimmer_widget.dart';
 
 class FavouriteBody extends StatefulWidget {
   const FavouriteBody({
@@ -48,11 +49,12 @@ class _FavouriteBodyState extends State<FavouriteBody> {
         // GetBuilder<HomeController>(builder: (controller)
         Obx(() {
       return homeController.isLoading.value == true
-          ? const Center(
-              child: CircularProgressIndicator(
-                color: redE2211C,
-              ),
-            )
+          ? const CommonShimmerRestaurantCardWidget()
+          // const Center(
+          //         child: CircularProgressIndicator(
+          //           color: redE2211C,
+          //         ),
+          //       )
           :
           // controller.favRestaurantList.isNotEmpty
           //   ?
@@ -128,9 +130,15 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                             image: DecorationImage(
-                                              image: NetworkImage(homeController
-                                                  .favRestaurantList[index]
-                                                  .restaurantPic),
+                                              image: homeController
+                                                          .favRestaurantList[
+                                                              index]
+                                                          .restaurantPic ==
+                                                      null
+                                                  ? NetworkImage("")
+                                                  : NetworkImage(homeController
+                                                      .favRestaurantList[index]
+                                                      .restaurantPic),
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -201,7 +209,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                         ),
                                         CommonText(
                                           text:
-                                              "${(homeController.favRestaurantList[index].distance*0.6214).toString()} miles away",
+                                              "${(homeController.favRestaurantList[index].distance)} miles away",
                                           fontWeight: FontWeight.normal,
                                           fontSize: 15,
                                           color: grey868686,

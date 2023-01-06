@@ -7,6 +7,7 @@ import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
@@ -25,7 +26,6 @@ class OtpScreenViewWidget extends StatelessWidget {
   }) : super(key: key);
   OtpController controller = Get.find();
   UserSessionController userSession = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -75,9 +75,9 @@ class OtpScreenViewWidget extends StatelessWidget {
                     Navigator.pop(context);
                     if (value) {
                       if (userSession.isProfileCreated) {
-                        Get.offAllNamed('/zip-code');
+                        Get.offNamed('/zip-code');
                       } else {
-                        Get.offAllNamed(
+                        Get.offNamed(
                           '/create-profile',
                           // arguments: [
                           //   {
@@ -146,7 +146,7 @@ class OtpScreenViewWidget extends StatelessWidget {
               ? Container()
               : InkWell(
                   onTap: () {
-                    Get.toNamed('/register');
+                    Get.offNamed('/register');
                   },
                   child: CommonText(
                     text: 'Change Phone Number',
@@ -187,6 +187,13 @@ class PinBoxWidget extends StatelessWidget {
       ),
       child: Pinput(
         // controller: controller.otp,
+        keyboardType:
+            const TextInputType.numberWithOptions(signed: true, decimal: true),
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(
+            RegExp('[0-9]'),
+          ),
+        ],
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         defaultPinTheme: const PinTheme(

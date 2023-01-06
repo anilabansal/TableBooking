@@ -1,8 +1,6 @@
-// ignore_for_file: must_be_immutable
 import 'package:booking_table/controller/card_details/add_card_details_controller.dart';
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
-import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
@@ -13,12 +11,10 @@ import 'package:get/get.dart';
 import '../../../utils/common/widgets_methods/common_text_form_field.dart';
 import '../../../utils/common/widgets_methods/date_format_widget.dart';
 import '../../../utils/common/widgets_methods/progress_loader.dart';
-
 class AddCardDetailsBodySubDetails extends StatelessWidget {
   AddCardDetailsController controller = Get.find();
   String callFrom;
   UserSessionController userSessionController = Get.find();
-
   AddCardDetailsBodySubDetails({
     required this.callFrom,
     Key? key,
@@ -50,6 +46,7 @@ class AddCardDetailsBodySubDetails extends StatelessWidget {
             hintText: 'Enter Bank Name',
             filled: true,
             fillColor: whiteF4F4F4,
+            keyboardType: TextInputType.text,
           ),
           CommonSizedBox(
             height: 20,
@@ -67,6 +64,7 @@ class AddCardDetailsBodySubDetails extends StatelessWidget {
             hintText: 'Enter Card Holder Name',
             filled: true,
             fillColor: whiteF4F4F4,
+            keyboardType: TextInputType.text,
           ),
           CommonSizedBox(
             height: 20,
@@ -89,7 +87,7 @@ class AddCardDetailsBodySubDetails extends StatelessWidget {
             maxLength: 16,
             filled: true,
             fillColor: whiteF4F4F4,
-            keyboardType: TextInputType.number,
+            keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
           ),
           CommonSizedBox(
             height: 20,
@@ -113,7 +111,7 @@ class AddCardDetailsBodySubDetails extends StatelessWidget {
                     CommonTextFormField(
                       // enable: false,
                       hintText: 'MM/YY',
-                      keyboardType: TextInputType.number,
+                      keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
                       inputFormatters: [CardExpirationFormatter()],
                       controller: cardExpiryDate,
                       // suffixIcon: const Icon(Icons.arrow_drop_down),
@@ -237,60 +235,60 @@ class AddCardDetailsBodySubDetails extends StatelessWidget {
           //   Button
           InkWell(
             onTap: () async {
-              if (validateFields() != '') {
-                ShowToast.show(
-                  msg: validateFields(),
-                  isError: true,
-                );
-                return;
-              }
-              ProgressDialog.showProgressDialog(context);
-              controller.isLoading.value = true;
-              await controller.savedCardListData(
-                endPoint: addCardDetailString,
-                body: {
-                  "userId": userSessionController.userId,
-                  "CardHolderName": cardHolderName.text.trim(),
-                  "CardNumber": cardNumber.text.trim(),
-                  "CVVNumber": cardCVV.text.trim(),
-                  "ExpiryDate": cardExpiryDate.text.trim(),
-                  "BankName": bankName.text.trim(),
-                },
-              ).then(
-                (value) {
-                  Navigator.pop(context);
-                  controller.isLoading.value = false;
-                  if (value) {
-                    Get.offAllNamed(
-                      '/book-a-table',
-                      arguments: [
-                        {
-                          "restaurantId": data[0]['restaurantId'],
-                          "restaurantName": data[0]["restaurantName"],
-                          "restaurantPic": data[0]["restaurantPic"],
-                          "restaurantDistance": data[0]["restaurantDistance"]
-                        },
-
-                      ],
-                    );
-                    print("restaurantId ----->${data[0]['restaurantId']}");
-                  }
-
-                  //   return false;
-                  // Get.toNamed('/book-a-table');
-                },
-              );
-              // Get.offNamed(
-              //   '/book-a-table',
-              //   arguments: [
-              //     {
-              //       "restaurantId": data[0]['restaurantId'],
-              //       "restaurantName": data[0]["restaurantName"],
-              //       "restaurantPic": data[0]["restaurantPic"],
-              //       "restaurantDistance": data[0]["restaurantDistance"]
-              //     },
-              //   ],
+              // if (validateFields() != '') {
+              //   ShowToast.show(
+              //     msg: validateFields(),
+              //     isError: true,
+              //   );
+              //   return;
+              // }
+              // ProgressDialog.showProgressDialog(context);
+              // controller.isLoading.value = true;
+              // await controller.savedCardListData(
+              //   endPoint: addCardDetailString,
+              //   body: {
+              //     "userId": userSessionController.userId,
+              //     "CardHolderName": cardHolderName.text.trim(),
+              //     "CardNumber": cardNumber.text.trim(),
+              //     "CVVNumber": cardCVV.text.trim(),
+              //     "ExpiryDate": cardExpiryDate.text.trim(),
+              //     "BankName": bankName.text.trim(),
+              //   },
+              // ).then(
+              //   (value) {
+              //     Navigator.pop(context);
+              //     controller.isLoading.value = false;
+              //     if (value) {
+              //       Get.offNamed(
+              //         '/book-a-table',
+              //         arguments: [
+              //           {
+              //             "restaurantId": data[0]['restaurantId'],
+              //             "restaurantName": data[0]["restaurantName"],
+              //             "restaurantPic": data[0]["restaurantPic"],
+              //             "restaurantDistance": data[0]["restaurantDistance"]
+              //           },
+              //
+              //         ],
+              //       );
+              //       print("restaurantId ----->${data[0]['restaurantId']}");
+              //     }
+              //
+              //     //   return false;
+              //     // Get.toNamed('/book-a-table');
+              //   },
               // );
+              Get.offNamed(
+                '/book-a-table',
+                arguments: [
+                  {
+                    "restaurantId": data[0]['restaurantId'],
+                    "restaurantName": data[0]["restaurantName"],
+                    "restaurantPic": data[0]["restaurantPic"],
+                    "restaurantDistance": data[0]["restaurantDistance"]
+                  },
+                ],
+              );
             },
             child: CommonButton(
               text: 'Save Card',

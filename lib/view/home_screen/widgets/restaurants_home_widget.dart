@@ -87,14 +87,23 @@ class RestaurantHomeScreen extends StatelessWidget {
                                       height: 133,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                            homeController
-                                                .homeRestaurantList[index]
-                                                .restaurantPic,
-                                          ),
+                                        image: homeController
+                                                    .homeRestaurantList[index]
+                                                    .restaurantPic ==
+                                                null
+                                            ?DecorationImage(
+                                          image:
+                                          AssetImage(restaurantImage),
                                           fit: BoxFit.cover,
-                                        ),
+                                        ) : DecorationImage(
+                                                image: NetworkImage(
+                                                  homeController
+                                                      .homeRestaurantList[index]
+                                                      .restaurantPic,
+                                                ),
+                                                fit: BoxFit.cover,
+                                              )
+                                             ,
                                       ),
                                     ),
                                     Positioned(

@@ -41,16 +41,16 @@ class HomeController extends GetxController {
   var mapHomeLoading = true.obs;
   var privacyLoading = true.obs;
 
-/// update likes and unlike of restaurants on homeScreen
-  void updateRestaurantLikes(index){
-    if(homeRestaurantList[index].isFavourite == true){
-       homeRestaurantList[index].isFavourite = false;
-    }
-    else if(homeRestaurantList[index].isFavourite == false){
+  /// update likes and unlike of restaurants on homeScreen
+  void updateRestaurantLikes(index) {
+    if (homeRestaurantList[index].isFavourite == true) {
+      homeRestaurantList[index].isFavourite = false;
+    } else if (homeRestaurantList[index].isFavourite == false) {
       homeRestaurantList[index].isFavourite = true;
     }
     update();
   }
+
   /// Api call for likes and unlike restaurants on homeScreen
   void updateRestaurantLikeHome({index, restaurantId}) async {
     await favRestaurantUpdate(
@@ -84,19 +84,17 @@ class HomeController extends GetxController {
         if (value) {
           favRestaurantList[index].isFavourite =
               !favRestaurantList[index].isFavourite;
-        favRestaurantList.removeAt(index);
-          getRestaurantDetailsUsingLatLon(
-            body: {
-              'latitude': locationController.latLng.value.latitude.toString(),
-              'longitude': locationController.latLng.value.longitude.toString(),
-            }
-          );
+          favRestaurantList.removeAt(index);
+          getRestaurantDetailsUsingLatLon(body: {
+            'latitude': locationController.latLng.value.latitude.toString(),
+            'longitude': locationController.latLng.value.longitude.toString(),
+          });
         } else {
           return;
         }
       },
     );
-  // update();
+    // update();
   }
 
   /// Get Restaurant Details using Latitude and Longitude.
@@ -175,7 +173,8 @@ class HomeController extends GetxController {
 
     return false;
   }
-/// to update like and dislike of favourite restaurants
+
+  /// to update like and dislike of favourite restaurants
   Future<bool> favRestaurantUpdate({dynamic body}) async {
     try {
       final response = await apiCall.callPostApi(
@@ -184,6 +183,13 @@ class HomeController extends GetxController {
         token: userSessionController.token,
       );
       if (response['response'] == 1) {
+        homeController.getRestaurantDetailsUsingLatLon(
+          body: {
+            'latitude': locationController.latLng.value.latitude.toString(),
+            'longitude': locationController.latLng.value.longitude.toString(),
+          },
+        );
+        update();
         isLoading.value = false;
         return true;
       } else {

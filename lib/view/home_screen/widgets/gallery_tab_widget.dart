@@ -1,4 +1,3 @@
-// ignore_for_file: must_be_immutable
 import 'dart:ui';
 import 'package:booking_table/controller/restaurant_details/restaurant_details_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
@@ -6,17 +5,20 @@ import 'package:booking_table/utils/common/no_data_found.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
+import '../../../utils/common/widgets_methods/shimmers/grid_shimmer_widget.dart';
 import '../restaurant_image_zoom_view.dart';
 
 class GalleryTab extends StatefulWidget {
   final int? restaurantId;
+
   const GalleryTab({Key? key, this.restaurantId}) : super(key: key);
+
   @override
   State<GalleryTab> createState() => _GalleryTabState();
 }
+
 class _GalleryTabState extends State<GalleryTab> {
   RestaurantDetailsController restaurantsController = Get.find();
 
@@ -34,7 +36,8 @@ class _GalleryTabState extends State<GalleryTab> {
       if (value) {
         restaurantsController.isLoading.value = false;
       }
-    });
+    },
+    );
   }
 
   @override
@@ -42,10 +45,13 @@ class _GalleryTabState extends State<GalleryTab> {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
         return controller.isLoading.value
-            ? const Center(
-                child: CircularProgressIndicator(
-                color: redE2211C,
-              ))
+            ?
+        const GridShimmerCard()
+        // const Center(
+        //         child: CircularProgressIndicator(
+        //           color: redE2211C,
+        //         ),
+        //       )
             :
             // controller.galleryImagesRestaurantList.value != null
             //   ?
@@ -54,7 +60,9 @@ class _GalleryTabState extends State<GalleryTab> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CommonText(
-                    text: "All Photos",
+                    text: controller.galleryImagesRestaurantList.isEmpty
+                        ? ""
+                        : "All Photos",
                     fontWeight: FontWeight.w700,
                     color: black000000,
                     fontSize: 15,
@@ -67,6 +75,7 @@ class _GalleryTabState extends State<GalleryTab> {
                         ? const CommonNoDataFound()
                         : StaggeredGridView.countBuilder(
                             crossAxisCount: 4,
+                            // crossAxisCount: 2,
                             shrinkWrap: true,
                             mainAxisSpacing: 17,
                             crossAxisSpacing: 17,
@@ -76,35 +85,39 @@ class _GalleryTabState extends State<GalleryTab> {
                             itemBuilder: (context, index) {
                               return SizedBox(
                                 child: InkWell(
-                                    onTap: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (_) => BackdropFilter(
-                                          filter: ImageFilter.blur(
-                                              sigmaX: 2, sigmaY: 2),
-                                          child: AlertDialog(
-                                            insetPadding: EdgeInsets.zero,
-                                            backgroundColor: Colors.transparent,
-                                            content: SizedBox(
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              child: RestaurantImageZoomView(
-                                                restaurantImage: controller
-                                                    .galleryImagesRestaurantList[
-                                                        index]
-                                                    .restaurantImage,
-                                              ),
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (_) => BackdropFilter(
+                                        filter: ImageFilter.blur(
+                                          sigmaX: 2,
+                                          sigmaY: 2,
+                                        ),
+                                        child: AlertDialog(
+                                          insetPadding: EdgeInsets.zero,
+                                          backgroundColor: Colors.transparent,
+                                          content: SizedBox(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: RestaurantImageZoomView(
+                                              restaurantImage: controller
+                                                  .galleryImagesRestaurantList[
+                                                      index]
+                                                  .restaurantImage,
                                             ),
                                           ),
                                         ),
-                                      );
-                                    },
-                                    child: Image.network(
-                                      controller
-                                          .galleryImagesRestaurantList[index]
-                                          .restaurantImage,
-                                    )),
+                                      ),
+                                    );
+                                  },
+                                  child: Image.network(
+                                    controller
+                                        .galleryImagesRestaurantList[index]
+                                        .restaurantImage,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               );
                             },
                             staggeredTileBuilder: (int index) =>

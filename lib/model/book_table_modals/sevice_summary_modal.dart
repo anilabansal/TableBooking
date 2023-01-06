@@ -1,7 +1,6 @@
 // To parse this JSON data, do
 //
 //     final typesOfFood = typesOfFoodFromJson(jsonString);
-
 class ServiceSummary {
   ServiceSummary({
     this.bookingId,

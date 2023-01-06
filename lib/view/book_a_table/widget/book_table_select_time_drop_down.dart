@@ -6,11 +6,11 @@ import '../../../model/filter_select_time.dart';
 import '../../../utils/common/common_strings.dart';
 
 
-selectBookTableTime() {
+selectBookTableTime(hintText) {
   return GetBuilder<BookATableController>(builder: (bookTableController) {
     return InkWell(
       onTap: () {
-        bookTableController.selectTime.isEmpty
+        bookTableController.selectTimeList.isEmpty
             ? ShowToast.show(
                 msg: "Please Select Date First",
                 isError: true,
@@ -31,9 +31,10 @@ selectBookTableTime() {
             isExpanded: true,
             underline: const SizedBox(),
             borderRadius: BorderRadius.zero,
-            hint: const Text(
-              'Select Time',
-            ),
+            // hint: const Text(
+            //   'Select Time',
+            // ),
+            hint:hintText,
             icon: const Icon(
               Icons.arrow_drop_down,
               color: black000000,
@@ -45,8 +46,8 @@ selectBookTableTime() {
             },
             //value: _filterController.selectedFoodType,
             value: bookTableController.selectedBookTableTime,
-            items: bookTableController.selectTime.isNotEmpty
-                ? bookTableController.selectTime.map(
+            items: bookTableController.selectTimeList.isNotEmpty
+                ? bookTableController.selectTimeList.map(
                     (FilterSelectTime value) {
                       return DropdownMenuItem<FilterSelectTime>(
                         value: value,

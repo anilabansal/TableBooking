@@ -5,15 +5,14 @@ import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import '../../../utils/common/widgets_methods/shimmers/listing_shimmer_widget.dart';
 
 class ReviewsTabScreen extends StatefulWidget {
   final int? restaurantId;
-  const ReviewsTabScreen({Key? key,this.restaurantId}) : super(key: key);
-
+  const ReviewsTabScreen({Key? key, this.restaurantId}) : super(key: key);
   @override
   State<ReviewsTabScreen> createState() => _ReviewsTabScreenState();
 }
-
 class _ReviewsTabScreenState extends State<ReviewsTabScreen> {
   RestaurantDetailsController restaurantsController = Get.find();
   @override
@@ -22,32 +21,40 @@ class _ReviewsTabScreenState extends State<ReviewsTabScreen> {
     loadAllReviews();
     super.initState();
   }
-loadAllReviews(){
+  loadAllReviews() {
     restaurantsController.isLoading.value = true;
-  restaurantsController.restaurantDetailsRatings(
-    body: {
-      "RestaurantId": widget.restaurantId
-    }
-  ).then((value){
-    if(value){
-      restaurantsController.isLoading.value = false;
-    }
-  });
-}
+    restaurantsController.restaurantDetailsRatings(
+        body: {"RestaurantId": widget.restaurantId}).then(
+      (value) {
+        if (value) {
+          restaurantsController.isLoading.value = false;
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
-        return controller.isLoading.value?
-            const Center(child: CircularProgressIndicator(color: redE2211C,)):
-          // controller.totalReviews.value != 0
-          //   ?
-          Column(
+        return controller.isLoading.value
+            ? const ShimmerCard()
+            // const Center(
+            //         child: CircularProgressIndicator(
+            //           color: redE2211C,
+            //         ),
+            //       )
+            :
+            // controller.totalReviews.value != 0
+            //   ?
+            Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CommonText(
-                    text: "${controller.totalReviews.value} Reviews",
+                    text: controller.rateReviewsRestaurantList.isEmpty
+                        ? ""
+                        : "${controller.totalReviews.value} Reviews",
                     fontWeight: FontWeight.w700,
                     fontSize: 15,
                     color: black000000,
@@ -56,27 +63,30 @@ loadAllReviews(){
                     height: 24,
                   ),
                   Expanded(
-                    child: controller.rateReviewsRestaurantList.isEmpty?
-                    const CommonNoDataFound():
-                    ListView.builder(
-                      itemCount: controller.rateReviewsRestaurantList.length,
-                      shrinkWrap: true,
-                      //physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return reviewsWidget(
-                          controller
-                              .rateReviewsRestaurantList[index].profilePic,
-                          controller
-                              .rateReviewsRestaurantList[index].ratingByName,
-                          controller.rateReviewsRestaurantList[index].rating,
-                          controller.rateReviewsRestaurantList[index].reviews,
-                        );
-                      },
-                    ),
+                    child: controller.rateReviewsRestaurantList.isEmpty
+                        ? const CommonNoDataFound()
+                        : ListView.builder(
+                            itemCount:
+                                controller.rateReviewsRestaurantList.length,
+                            shrinkWrap: true,
+                            //physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return reviewsWidget(
+                                controller.rateReviewsRestaurantList[index]
+                                    .profilePic,
+                                controller.rateReviewsRestaurantList[index]
+                                    .ratingByName,
+                                controller
+                                    .rateReviewsRestaurantList[index].rating,
+                                controller
+                                    .rateReviewsRestaurantList[index].reviews,
+                              );
+                            },
+                          ),
                   ),
                 ],
               );
-           // : const CommonNoDataFound();
+        // : const CommonNoDataFound();
       },
     );
   }

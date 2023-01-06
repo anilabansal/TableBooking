@@ -52,7 +52,7 @@ class CommonTextFormField extends StatelessWidget {
     return TextFormField(
       onTap: onTap,
       enabled: enable,
-      textCapitalization :TextCapitalization.words,
+      textCapitalization :TextCapitalization.sentences,
       readOnly: readOnly??false,
       autovalidateMode: AutovalidateMode.always,
       keyboardType: keyboardType,
@@ -61,6 +61,7 @@ class CommonTextFormField extends StatelessWidget {
       maxLines: maxLines,
       controller: controller,
       cursorWidth: 1,
+      textInputAction: TextInputAction.done,
       onChanged: onChange,
       // style: const TextStyle(fontSize: 20, color: black000000),
       style: TextStyle(

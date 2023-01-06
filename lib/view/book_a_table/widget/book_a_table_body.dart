@@ -18,7 +18,8 @@ class BookATableBody extends StatelessWidget {
   BookATableBody({
     Key? key,
   }) : super(key: key);
-  final controller = Get.put(BookATableController());
+
+  // final controller = Get.put(BookATableController());
   final dateController = TextEditingController();
   var typesOfServicesController = TextEditingController();
   var partySizeController = TextEditingController();
@@ -73,6 +74,7 @@ class BookATableBody extends StatelessWidget {
                     BookTableDatePicker(
                       controller: dateController,
                       restaurantId: data[0]['restaurantId'],
+                      bookingId: 0,
                     ),
                   ],
                 ).paddingOnly(
@@ -111,26 +113,13 @@ class BookATableBody extends StatelessWidget {
                     //   fontSize: 16,
                     //   fontWeight: FontWeight.w400,
                     // ),
-                    selectBookTableTime(),
+                    selectBookTableTime(const Text('Select Time')),
                   ],
                 ).paddingOnly(
                   left: 20,
                   right: 20,
                 ),
 
-                // InkWell(
-                //   onTap: () async {
-                //     await controller.selectTime();
-                //     if (kDebugMode) {
-                //       print('Button Clicked');
-                //     }
-                //   },
-                //   child: CommonTextFormField(
-                //     enable: false,
-                //     controller: controller.bookingTime,
-                //     color: whiteF5F5F5,
-                //   ),
-                // ),
                 Container(
                   width: Get.width,
                   height: 1,
@@ -197,7 +186,7 @@ class BookATableBody extends StatelessWidget {
                           "Full",
                           "1",
                           // ignore: unrelated_type_equality_checks
-                          controller.serviceType.value == "1",
+                          bookingTable.serviceType.value == "1",
                         ),
                         const SizedBox(
                           width: 10,
@@ -206,7 +195,7 @@ class BookATableBody extends StatelessWidget {
                         typeServiceContainer(
                           "Mid",
                           "2",
-                          controller.serviceType.value == "2",
+                          bookingTable.serviceType.value == "2",
                         ),
                         const SizedBox(
                           width: 10,
@@ -215,7 +204,7 @@ class BookATableBody extends StatelessWidget {
                         typeServiceContainer(
                           "No",
                           "3",
-                          controller.serviceType.value == "3",
+                          bookingTable.serviceType.value == "3",
                         ),
                         const SizedBox(
                           width: 10,
@@ -224,7 +213,7 @@ class BookATableBody extends StatelessWidget {
                         typeServiceContainer(
                           "To Go",
                           "4",
-                          controller.serviceType.value == "4",
+                          bookingTable.serviceType.value == "4",
                         ),
                       ],
                     ),
@@ -232,7 +221,7 @@ class BookATableBody extends StatelessWidget {
                       height: 15,
                     ),
                     Visibility(
-                      visible: controller.serviceType.isNotEmpty,
+                      visible: bookingTable.serviceType.isNotEmpty,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -246,11 +235,11 @@ class BookATableBody extends StatelessWidget {
                           Expanded(
                             child: CommonText(
                               softWrap: true,
-                              text: controller.serviceType.value == "1"
+                              text: bookingTable.serviceType.value == "1"
                                   ? "Order with server in restaurant"
-                                  : controller.serviceType.value == "3"
+                                  : bookingTable.serviceType.value == "3"
                                       ? "Pre-order food/drink and any add-ons in restaurant via the app. No server"
-                                      : controller.serviceType.value == "4"
+                                      : bookingTable.serviceType.value == "4"
                                           ? "Order food/drink to go"
                                           : "Pre-order food/drink via the app and have a server in restaurant",
                               fontWeight: FontWeight.w400,
@@ -267,7 +256,7 @@ class BookATableBody extends StatelessWidget {
                     // Button
                     CommonButton(
                       onTap: () {
-                        if (bookingTable.selectTime.isNotEmpty) {
+                        if (bookingTable.selectTimeList.isNotEmpty) {
                           //  Get.toNamed('/full-service');
                           if (validateFields() != '') {
                             ShowToast.show(
@@ -295,7 +284,7 @@ class BookATableBody extends StatelessWidget {
                               Navigator.pop(context);
                               bookingTable.bookTableIsLoading.value = false;
                               if (value) {
-                                Get.offNamed(
+                                Get.toNamed(
                                   '/full-service',
                                   arguments: [
                                     {
@@ -311,12 +300,12 @@ class BookATableBody extends StatelessWidget {
                               }
                             },
                           );
-                        } else if (bookingTable.selectTime.isEmpty) {
+                        } else if (bookingTable.selectTimeList.isEmpty) {
                           return false;
                         }
                       },
                       textColor: Colors.white,
-                      bgColor: bookingTable.selectTime.isEmpty
+                      bgColor: bookingTable.selectTimeList.isEmpty
                           ? red26E2211C
                           : redE2211C,
                       text: 'Proceed',
@@ -343,9 +332,9 @@ class BookATableBody extends StatelessWidget {
     return Expanded(
       child: InkWell(
         onTap: () {
-          controller.serviceType.value = index;
+          bookingTable.serviceType.value = index;
           //controller.serviceType.value = text;
-          controller.update();
+          bookingTable.update();
           // isSelected = !isSelected;
         },
         child: Container(
@@ -370,12 +359,12 @@ class BookATableBody extends StatelessWidget {
   }
 
   validateFields() {
-    if (controller.selectedBookTableTime == null ||
-        controller.selectedBookTableTime == '') {
+    if (bookingTable.selectedBookTableTime == null ||
+        bookingTable.selectedBookTableTime == '') {
       return 'please select time!'.toTitleCase();
     } else if (partySizeController.text.trim().isEmpty) {
       return 'please enter party size!'.toTitleCase();
-    } else if (controller.serviceType.value.trim().isEmpty) {
+    } else if (bookingTable.serviceType.value.trim().isEmpty) {
       return "please select service type!".toTitleCase();
     }
     // else if (controller.selectedFoodType == null ||

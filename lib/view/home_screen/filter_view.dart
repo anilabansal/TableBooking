@@ -21,22 +21,18 @@ import '../../utils/common/widgets_methods/common_text.dart';
 
 class FilterView extends StatefulWidget {
   const FilterView({Key? key}) : super(key: key);
-
   @override
   State<FilterView> createState() => _FilterViewState();
 }
-
 class _FilterViewState extends State<FilterView> {
   HomeController homeController = Get.put(HomeController());
   final dateController = TextEditingController();
-
   // ReservationController reservationController = Get.find();
   FilterViewController filterViewController = Get.find();
   var typesOfServicesController = TextEditingController();
   var partySizeController = TextEditingController();
   UserSessionController userSessionController = Get.find();
   LocationController locationController = Get.find();
-
   @override
   void initState() {
     // TODO: implement initState
@@ -58,7 +54,6 @@ class _FilterViewState extends State<FilterView> {
       },
     );
   }
-
   // loadAllTimeList() {
   //   filterViewController.isSelectedTimeLoading.value = true;
   //   filterViewController.getAvailableTime(body: {
@@ -72,7 +67,6 @@ class _FilterViewState extends State<FilterView> {
   //     }
   //   });
   // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -319,101 +313,106 @@ class _FilterViewState extends State<FilterView> {
                               filterViewController.isLoading.value = true;
                               await filterViewController
                                   .filterSearchResults(
-                                      body: userSessionController.isLogin ==
-                                              true
-                                          ? {
-                                              "ServiceId": homeController
-                                                  .serviceType.value
-                                                  .trim(),
-                                              // "Date": dateController.value.text
-                                              //     .trim()
-                                              //     .toString(),
-                                              "Date": DateFormat('MM/dd/yyyy')
-                                                  .format(
-                                                      DateFormat('yyyy-MM-dd')
-                                                          .parse(dateController
-                                                              .value.text)),
-                                              // "Date": "01/12/2022",
-                                              "PartySize": partySizeController
-                                                  .value.text
-                                                  .trim()
-                                                  .toString(),
-                                              "StartTimeSlotId":
-                                                  DateFormat('HH:mm')
-                                                      .format(
-                                                        DateFormat("hh:mm a")
-                                                            .parse(
-                                                          filterViewController
-                                                              .selectedFilterTime!
-                                                              .startTime
-                                                              .toString(),
-                                                        ),
-                                                      )
-                                                      .toString(),
-                                              // "StartTimeSlotId": "4:00",
-                                              "EndTimeSlotId":
-                                                  DateFormat('HH:mm')
-                                                      .format(
-                                                        DateFormat("hh:mm a")
-                                                            .parse(
-                                                          filterViewController
-                                                              .selectedFilterTime!
-                                                              .endTime
-                                                              .toString(),
-                                                        ),
-                                                      )
-                                                      .toString(),
-                                              // "EndTimeSlotId": "5:00",
-                                              "FoodTypeId": filterViewController
-                                                  .selectedFoodType!.id,
-                                              // "ServiceId":1,
-                                              // "Date": "12/01/2022",
-                                              // "PartySize":4,
-                                              // "StartTimeSlotId":"4:00",
-                                              // "EndTimeSlotId":"5:00",
-                                              // "FoodTypeId":2
-                                            }
-                                          : {
-                                              "Latitude": locationController
-                                                  .latLng.value.latitude,
-                                              "Longitude": locationController
-                                                  .latLng.value.longitude,
-                                              "ServiceId": homeController
-                                                  .serviceType.value
-                                                  .trim(),
-                                              "Date": DateFormat('MM/dd/yyyy')
-                                                  .format(
-                                                  DateFormat('yyyy-MM-dd')
-                                                      .parse(dateController
-                                                      .value.text)),
-                                              "PartySize": partySizeController
-                                                  .value.text
-                                                  .trim()
-                                                  .toString(),
-                                              "StartTimeSlotId": DateFormat('HH:mm')
-                                                  .format(
-                                                DateFormat("hh:mm a")
-                                                    .parse(
-                                                  filterViewController
-                                                      .selectedFilterTime!
-                                                      .startTime
-                                                      .toString(),
-                                                ),
-                                              ).toString(),
-                                              "EndTimeSlotId":  DateFormat('HH:mm')
-                                                  .format(
-                                                DateFormat("hh:mm a")
-                                                    .parse(
-                                                  filterViewController
-                                                      .selectedFilterTime!
-                                                      .endTime
-                                                      .toString(),
-                                                ),
-                                              )
-                                                  .toString(),
-                                              "FoodTypeId": filterViewController
-                                                  .selectedFoodType!.id,
-                                            })
+                                body: userSessionController.isLogin == true
+                                    ? {
+                                        "ServiceId": homeController
+                                            .serviceType.value
+                                            .trim(),
+                                        // "Date": dateController.value.text
+                                        //     .trim()
+                                        //     .toString(),
+                                        "Date": DateFormat('MM/dd/yyyy').format(
+                                          DateFormat('yyyy-MM-dd')
+                                              .parse(dateController.value.text),
+                                        ),
+                                        // "Date": "01/12/2022",
+                                        "PartySize": partySizeController
+                                            .value.text
+                                            .trim()
+                                            .toString(),
+                                        "StartTimeSlotId": DateFormat('HH:mm')
+                                            .format(
+                                              DateFormat("hh:mm a").parse(
+                                                filterViewController
+                                                    .selectedFilterTime!
+                                                    .startTime
+                                                    .toString(),
+                                              ),
+                                            )
+                                            .toString(),
+                                        // "StartTimeSlotId": "4:00",
+                                        "EndTimeSlotId": DateFormat('HH:mm')
+                                            .format(
+                                              DateFormat("hh:mm a").parse(
+                                                filterViewController
+                                                    .selectedFilterTime!.endTime
+                                                    .toString(),
+                                              ),
+                                            )
+                                            .toString(),
+                                        // "EndTimeSlotId": "5:00",
+                                        // "FoodTypeId": filterViewController
+                                        //     .selectedFoodType!.id
+                                        //     .toString(),
+                                        "FoodTypeId": filterViewController
+                                                    .selectedFoodType ==
+                                                null
+                                            ? 0
+                                            : filterViewController
+                                                .selectedFoodType!.id
+                                                .toString(),
+                                        // "FoodTypeId":0,
+                                        // "ServiceId":1,
+                                        // "Date": "12/01/2022",
+                                        // "PartySize":4,
+                                        // "StartTimeSlotId":"4:00",
+                                        // "EndTimeSlotId":"5:00",
+                                        // "FoodTypeId":2
+                                      }
+                                    : {
+                                        "Latitude": locationController
+                                            .latLng.value.latitude,
+                                        "Longitude": locationController
+                                            .latLng.value.longitude,
+                                        "ServiceId": homeController
+                                            .serviceType.value
+                                            .trim(),
+                                        "Date": DateFormat('MM/dd/yyyy').format(
+                                          DateFormat('yyyy-MM-dd')
+                                              .parse(dateController.value.text),
+                                        ),
+                                        "PartySize": partySizeController
+                                            .value.text
+                                            .trim()
+                                            .toString(),
+                                        "StartTimeSlotId": DateFormat('HH:mm')
+                                            .format(
+                                              DateFormat("hh:mm a").parse(
+                                                filterViewController
+                                                    .selectedFilterTime!
+                                                    .startTime
+                                                    .toString(),
+                                              ),
+                                            )
+                                            .toString(),
+                                        "EndTimeSlotId": DateFormat('HH:mm')
+                                            .format(
+                                              DateFormat("hh:mm a").parse(
+                                                filterViewController
+                                                    .selectedFilterTime!.endTime
+                                                    .toString(),
+                                              ),
+                                            )
+                                            .toString(),
+                                        "FoodTypeId": filterViewController
+                                                    .selectedFoodType ==
+                                                null
+                                            ? 0
+                                            : filterViewController
+                                                .selectedFoodType!.id
+                                                .toString(),
+                                      },
+                              )
                                   .then(
                                 (value) {
                                   Navigator.pop(context);
@@ -485,10 +484,11 @@ class _FilterViewState extends State<FilterView> {
       return 'please enter party size!'.toTitleCase();
     } else if (homeController.serviceType.value.trim().isEmpty) {
       return "please select service type!".toTitleCase();
-    } else if (filterViewController.selectedFoodType == null ||
-        filterViewController.selectedFoodType == '') {
-      return "please select type of food!".toTitleCase();
     }
+    // else if (filterViewController.selectedFoodType == null ||
+    //     filterViewController.selectedFoodType == '') {
+    //   return "please select type of food!".toTitleCase();
+    // }
 
     // else if (_profileController.mobileNumberController.value.text.isEmpty) {
     //   return 'please enter your mobile Number!'.toTitleCase();

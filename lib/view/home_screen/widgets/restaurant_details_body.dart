@@ -97,8 +97,9 @@ class RestaurantDetailsBody extends StatelessWidget {
                               ]),
                         ),
                         SizedBox(
-                          // height: double.maxFinite,
-                          height: MediaQuery.of(context).size.height - 100,
+                    // height: double.maxFinite,
+                     height: MediaQuery.of(context).size.height-100,
+                         // height: MediaQuery.of(context).size.height*0.9,
                           child: Padding(
                             padding:
                                 const EdgeInsets.fromLTRB(20.0, 25, 20, 20),

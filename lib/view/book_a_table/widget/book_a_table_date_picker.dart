@@ -7,10 +7,11 @@ import '../../../utils/common/common_strings.dart';
 import '../../../utils/common/widgets_methods/common_text_form_field.dart';
 
 class BookTableDatePicker extends StatelessWidget {
+
   final TextEditingController? controller;
   final dynamic restaurantId;
-
-  BookTableDatePicker({Key? key, this.controller, this.restaurantId})
+  final int?bookingId;
+  BookTableDatePicker({Key? key, this.controller, this.restaurantId,this.bookingId})
       : super(key: key);
   BookATableController bookingTable = Get.find();
 
@@ -51,7 +52,7 @@ class BookTableDatePicker extends StatelessWidget {
         child: CommonTextFormField(
           enable: false,
           controller: controller,
-          hintText: "yyyy-MM-dd",
+          hintText: "yyyy-mm-dd",
           filled: true,
           suffixIcon: const Icon(
             Icons.calendar_month_outlined,
@@ -65,13 +66,14 @@ class BookTableDatePicker extends StatelessWidget {
 
   loadAllBookTime(context) {
     bookingTable.isTimeLoading.value = true;
-    bookingTable.selectTime.value = [];
+    bookingTable.selectTimeList.value = [];
     bookingTable.setSelectedBookTime(null);
     ProgressDialog.showProgressDialog(context);
     bookingTable.getAvailableBookingTime(body: {
       "RestaurantId": restaurantId,
       // "RestaurantId": "3",
       "BookingDate": controller!.text,
+      "BookingId":bookingId,
       // "BookingDate": controller!.text,
     }).then(
       (value) {

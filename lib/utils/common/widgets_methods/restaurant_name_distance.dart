@@ -37,17 +37,37 @@ class CommonRestaurantNameDistance extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            restaurantPic == null
-                ? Image.asset(
-                    bookATableImage,
-                    height: 57,
-                    width: 57,
-                  )
-                : Image.network(
-                    restaurantPic.toString(),
-                    height: 57,
-                    width: 57,
-                  ),
+            // restaurantPic == null
+            //     ? Image.asset(
+            //         bookATableImage,
+            //         height: 57,
+            //         width: 57,
+            //       )
+            //     // ? const SizedBox(
+            //     //     height: 57,
+            //     //     width: 57,
+            //     //   )
+            //     : Image.network(
+            //         restaurantPic.toString(),
+            //         height: 57,
+            //         width: 57,
+            //       ),
+            Container(
+              height: 57,
+              width: 57,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                image: restaurantPic == null
+                    ? const DecorationImage(
+                        image: AssetImage(bookATableImage),
+                        fit: BoxFit.cover,
+                      )
+                    : DecorationImage(
+                        image: NetworkImage(restaurantPic.toString()),
+                        fit: BoxFit.cover,
+                      ),
+              ),
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

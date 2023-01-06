@@ -34,7 +34,7 @@ class FullServiceSummaryView extends StatelessWidget {
             //const FullSummaryTopView(),
             // CommonSizedBox(height: 21),
             FullSummaryBookingDetailsView(
-              callFrom: callFrom,
+              // callFrom: callFrom,
             ),
             Container(
               width: Get.width,

@@ -118,6 +118,7 @@ class DrawerScreen extends StatelessWidget {
                                             //   }
                                             // });
                                             Get.toNamed('/edit-profile');
+
                                           },
                                           child: CommonText(
                                             text: "Edit Profile",

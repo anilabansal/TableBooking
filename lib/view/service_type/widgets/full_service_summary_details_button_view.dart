@@ -10,13 +10,14 @@ import 'package:intl/intl.dart';
 import '../../../controller/book_a_table/book_a_table_controller.dart';
 
 class FullSummaryBookingDetailsView extends StatelessWidget {
-  String? callFrom;
+  // String? callFrom;
 
   FullSummaryBookingDetailsView({
-    this.callFrom,
+    // this.callFrom,
     Key? key,
   }) : super(key: key);
   BookATableController bookATableController = Get.find();
+  var data = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -164,10 +165,15 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                                 "2"
                             ? 'Mid Service'
                             : bookATableController.serviceSummary!.serviceType
-                        .toString() ==
-                        "3"?'No Service':bookATableController.serviceSummary!.serviceType
-                        .toString() ==
-                        "4"?'To Go':'',
+                                        .toString() ==
+                                    "3"
+                                ? 'No Service'
+                                : bookATableController
+                                            .serviceSummary!.serviceType
+                                            .toString() ==
+                                        "4"
+                                    ? 'To Go'
+                                    : '',
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                     color: redE2211C,
@@ -189,20 +195,20 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                       Expanded(
                         child: CommonText(
                           softWrap: true,
-                          text:
-                          bookATableController.serviceSummary!.serviceType
-                              .toString() ==
-                              "1"
+                          text: bookATableController.serviceSummary!.serviceType
+                                      .toString() ==
+                                  "1"
                               ? "Order with server in restaurant"
                               : bookATableController.serviceSummary!.serviceType
-                              .toString() ==
-                              "3"
-                              ? "Pre-order food/drink and any add-ons in restaurant via the app. No server"
-                              : bookATableController.serviceSummary!.serviceType
-                              .toString()==
-                              "4"
-                              ? "Order food/drink to go"
-                              : "Pre-order food/drink via the app and have a server in restaurant",
+                                          .toString() ==
+                                      "3"
+                                  ? "Pre-order food/drink and any add-ons in restaurant via the app. No server"
+                                  : bookATableController
+                                              .serviceSummary!.serviceType
+                                              .toString() ==
+                                          "4"
+                                      ? "Order food/drink to go"
+                                      : "Pre-order food/drink via the app and have a server in restaurant",
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: textLight868686,
@@ -213,299 +219,310 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                   CommonSizedBox(
                     height: 24,
                   ),
-                  callFrom == 'Pre Order'
-                      ? Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CommonText(
-                                  text: 'Pre-Order',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: black000000,
+                  // callFrom == 'Pre Order'
+                  //     ? Column(
+                  //         children: [
+                  //           Row(
+                  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //             children: [
+                  //               CommonText(
+                  //                 text: 'Pre-Order',
+                  //                 fontSize: 16,
+                  //                 fontWeight: FontWeight.w500,
+                  //                 color: black000000,
+                  //               ),
+                  //               SizedBox(
+                  //                 height: 40,
+                  //                 width: 100,
+                  //                 child: CommonButton(
+                  //                   onTap: () {
+                  //                     Get.toNamed('pre-order');
+                  //                   },
+                  //                   text: 'Add More',
+                  //                   bgColor: redF2E6E6,
+                  //                   fontSize: 14,
+                  //                   textColor: redE2211C,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           CommonSizedBox(
+                  //             height: 20,
+                  //           ),
+                  //           Container(
+                  //             padding: const EdgeInsets.only(
+                  //               left: 10,
+                  //               right: 10,
+                  //               top: 13,
+                  //               bottom: 30,
+                  //             ),
+                  //             child: Column(
+                  //               children: [
+                  //                 Row(
+                  //                   mainAxisAlignment:
+                  //                       MainAxisAlignment.spaceBetween,
+                  //                   children: [
+                  //                     Column(
+                  //                       crossAxisAlignment:
+                  //                           CrossAxisAlignment.start,
+                  //                       children: [
+                  //                         CommonText(
+                  //                           fontWeight: FontWeight.w500,
+                  //                           text: 'Spicy Crunchy Chicken',
+                  //                           fontSize: 15,
+                  //                         ),
+                  //                         Row(
+                  //                           children: [
+                  //                             CommonText(
+                  //                               fontWeight: FontWeight.w500,
+                  //                               text: 'Quantity: ',
+                  //                               fontSize: 12,
+                  //                               color: textLight868686,
+                  //                             ),
+                  //                             CommonText(
+                  //                               fontWeight: FontWeight.w500,
+                  //                               text: '2',
+                  //                               fontSize: 12,
+                  //                               // color: textLight868686,
+                  //                             ),
+                  //                             CommonSizedBox(
+                  //                               width: 16,
+                  //                             ),
+                  //                             CommonText(
+                  //                               fontWeight: FontWeight.w500,
+                  //                               text: 'Price: ',
+                  //                               fontSize: 12,
+                  //                               color: textLight868686,
+                  //                             ),
+                  //                             CommonText(
+                  //                               fontWeight: FontWeight.w500,
+                  //                               text: '\$ 152.00',
+                  //                               fontSize: 12,
+                  //                               // color: textLight868686,
+                  //                             ),
+                  //                           ],
+                  //                         ),
+                  //                       ],
+                  //                     ),
+                  //                     const Icon(
+                  //                       Icons.close,
+                  //                       color: Colors.black,
+                  //                       size: 18,
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //                 Container(
+                  //                   margin: const EdgeInsets.only(
+                  //                       top: 15, bottom: 15),
+                  //                   width: Get.width,
+                  //                   height: 1,
+                  //                   color: whiteE5E5E5,
+                  //                 ),
+                  //                 Row(
+                  //                   mainAxisAlignment:
+                  //                       MainAxisAlignment.spaceBetween,
+                  //                   children: [
+                  //                     Column(
+                  //                       crossAxisAlignment:
+                  //                           CrossAxisAlignment.start,
+                  //                       children: [
+                  //                         CommonText(
+                  //                           fontWeight: FontWeight.w500,
+                  //                           text: 'Spicy Crunchy Chicken',
+                  //                           fontSize: 15,
+                  //                         ),
+                  //                         Row(
+                  //                           children: [
+                  //                             CommonText(
+                  //                               fontWeight: FontWeight.w500,
+                  //                               text: 'Quantity: ',
+                  //                               fontSize: 12,
+                  //                               color: textLight868686,
+                  //                             ),
+                  //                             CommonText(
+                  //                               fontWeight: FontWeight.w500,
+                  //                               text: '2',
+                  //                               fontSize: 12,
+                  //                               // color: textLight868686,
+                  //                             ),
+                  //                             CommonSizedBox(
+                  //                               width: 16,
+                  //                             ),
+                  //                             CommonText(
+                  //                               fontWeight: FontWeight.w500,
+                  //                               text: 'Price: ',
+                  //                               fontSize: 12,
+                  //                               color: textLight868686,
+                  //                             ),
+                  //                             CommonText(
+                  //                               fontWeight: FontWeight.w500,
+                  //                               text: '\$ 152.00',
+                  //                               fontSize: 12,
+                  //                               // color: textLight868686,
+                  //                             ),
+                  //                           ],
+                  //                         ),
+                  //                       ],
+                  //                     ),
+                  //                     const Icon(
+                  //                       Icons.close,
+                  //                       color: Colors.black,
+                  //                       size: 18,
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //                 Container(
+                  //                   margin: const EdgeInsets.only(
+                  //                     top: 15,
+                  //                     bottom: 15,
+                  //                   ),
+                  //                   width: Get.width,
+                  //                   height: 1,
+                  //                   color: whiteE5E5E5,
+                  //                 ),
+                  //
+                  //                 Row(
+                  //                   mainAxisAlignment:
+                  //                       MainAxisAlignment.spaceBetween,
+                  //                   children: <Widget>[
+                  //                     CommonText(
+                  //                       text: 'Total Amount',
+                  //                       fontSize: 13,
+                  //                       fontWeight: FontWeight.w400,
+                  //                     ),
+                  //                     CommonText(
+                  //                       text: '\$42.05',
+                  //                       fontSize: 12,
+                  //                       fontWeight: FontWeight.w600,
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //                 CommonSizedBox(
+                  //                   height: 5,
+                  //                 ),
+                  //                 Row(
+                  //                   mainAxisAlignment:
+                  //                       MainAxisAlignment.spaceBetween,
+                  //                   children: <Widget>[
+                  //                     CommonText(
+                  //                       text: 'Total Booking Amount',
+                  //                       fontSize: 13,
+                  //                       fontWeight: FontWeight.w400,
+                  //                     ),
+                  //                     CommonText(
+                  //                       text: '-\$100.00',
+                  //                       fontSize: 12,
+                  //                       color: redE2211C,
+                  //                       fontWeight: FontWeight.w600,
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //                 Container(
+                  //                   alignment: Alignment.centerLeft,
+                  //                   child: CommonText(
+                  //                     textAlign: TextAlign.left,
+                  //                     text:
+                  //                         'This amount will be charge at booking confirmation\nand will be deduct on your total bill amount',
+                  //                     fontSize: 10,
+                  //                     color: textLight868686,
+                  //                     fontWeight: FontWeight.w400,
+                  //                   ),
+                  //                 ),
+                  //                 CommonSizedBox(
+                  //                   height: 5,
+                  //                 ),
+                  //                 CommonSizedBox(
+                  //                   height: 15,
+                  //                 ),
+                  //                 Container(
+                  //                   height: 1,
+                  //                   width: Get.width,
+                  //                   color: whiteE5E5E5,
+                  //                 ),
+                  //                 CommonSizedBox(
+                  //                   height: 15,
+                  //                 ),
+                  //                 Row(
+                  //                   mainAxisAlignment:
+                  //                       MainAxisAlignment.spaceBetween,
+                  //                   children: <Widget>[
+                  //                     CommonText(
+                  //                       text: 'Grand Total',
+                  //                       fontSize: 13,
+                  //                       fontWeight: FontWeight.w400,
+                  //                     ),
+                  //                     CommonText(
+                  //                       text: '\$115.05',
+                  //                       fontSize: 12,
+                  //                       fontWeight: FontWeight.w600,
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //                 // Row(
+                  //                 //   mainAxisAlignment:
+                  //                 //       MainAxisAlignment.spaceBetween,
+                  //                 //   children: [
+                  //                 //     Column(
+                  //                 //       crossAxisAlignment:
+                  //                 //           CrossAxisAlignment.start,
+                  //                 //       children: [
+                  //                 //         CommonText(
+                  //                 //           fontWeight: FontWeight.w500,
+                  //                 //           text: 'Spicy Crunchy Chicken',
+                  //                 //           fontSize: 15,
+                  //                 //         ),
+                  //                 //         CommonText(
+                  //                 //           fontWeight: FontWeight.w500,
+                  //                 //           text: 'Quantity: 2',
+                  //                 //           fontSize: 12,
+                  //                 //           color: textLight868686,
+                  //                 //         ),
+                  //                 //       ],
+                  //                 //     ),
+                  //                 //     const Icon(
+                  //                 //       Icons.close,
+                  //                 //       color: Colors.black,
+                  //                 //       size: 18,
+                  //                 //     ),
+                  //                 //   ],
+                  //                 // ),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       )
+                  //     :
+                  Visibility(
+                          visible: bookATableController
+                                      .serviceSummary!.serviceType
+                                      .toString() ==
+                                  "1"
+                              ? false
+                              : true,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CommonText(
+                                text: 'Pre-Order',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: black000000,
+                              ),
+                              SizedBox(
+                                height: 40,
+                                width: 100,
+                                child: CommonButton(
+                                  onTap: () {
+                                    Get.toNamed('pre-order');
+                                  },
+                                  text: 'Place Order',
+                                  bgColor: redF2E6E6,
+                                  fontSize: 14,
+                                  textColor: redE2211C,
                                 ),
-                                SizedBox(
-                                  height: 40,
-                                  width: 100,
-                                  child: CommonButton(
-                                    onTap: () {
-                                      Get.toNamed('pre-order');
-                                    },
-                                    text: 'Add More',
-                                    bgColor: redF2E6E6,
-                                    fontSize: 14,
-                                    textColor: redE2211C,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            CommonSizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              padding: const EdgeInsets.only(
-                                left: 10,
-                                right: 10,
-                                top: 13,
-                                bottom: 30,
                               ),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CommonText(
-                                            fontWeight: FontWeight.w500,
-                                            text: 'Spicy Crunchy Chicken',
-                                            fontSize: 15,
-                                          ),
-                                          Row(
-                                            children: [
-                                              CommonText(
-                                                fontWeight: FontWeight.w500,
-                                                text: 'Quantity: ',
-                                                fontSize: 12,
-                                                color: textLight868686,
-                                              ),
-                                              CommonText(
-                                                fontWeight: FontWeight.w500,
-                                                text: '2',
-                                                fontSize: 12,
-                                                // color: textLight868686,
-                                              ),
-                                              CommonSizedBox(
-                                                width: 16,
-                                              ),
-                                              CommonText(
-                                                fontWeight: FontWeight.w500,
-                                                text: 'Price: ',
-                                                fontSize: 12,
-                                                color: textLight868686,
-                                              ),
-                                              CommonText(
-                                                fontWeight: FontWeight.w500,
-                                                text: '\$ 152.00',
-                                                fontSize: 12,
-                                                // color: textLight868686,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      const Icon(
-                                        Icons.close,
-                                        color: Colors.black,
-                                        size: 18,
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(
-                                        top: 15, bottom: 15),
-                                    width: Get.width,
-                                    height: 1,
-                                    color: whiteE5E5E5,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CommonText(
-                                            fontWeight: FontWeight.w500,
-                                            text: 'Spicy Crunchy Chicken',
-                                            fontSize: 15,
-                                          ),
-                                          Row(
-                                            children: [
-                                              CommonText(
-                                                fontWeight: FontWeight.w500,
-                                                text: 'Quantity: ',
-                                                fontSize: 12,
-                                                color: textLight868686,
-                                              ),
-                                              CommonText(
-                                                fontWeight: FontWeight.w500,
-                                                text: '2',
-                                                fontSize: 12,
-                                                // color: textLight868686,
-                                              ),
-                                              CommonSizedBox(
-                                                width: 16,
-                                              ),
-                                              CommonText(
-                                                fontWeight: FontWeight.w500,
-                                                text: 'Price: ',
-                                                fontSize: 12,
-                                                color: textLight868686,
-                                              ),
-                                              CommonText(
-                                                fontWeight: FontWeight.w500,
-                                                text: '\$ 152.00',
-                                                fontSize: 12,
-                                                // color: textLight868686,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      const Icon(
-                                        Icons.close,
-                                        color: Colors.black,
-                                        size: 18,
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(
-                                        top: 15, bottom: 15),
-                                    width: Get.width,
-                                    height: 1,
-                                    color: whiteE5E5E5,
-                                  ),
-
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      CommonText(
-                                        text: 'Total Amount',
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                      CommonText(
-                                        text: '\$42.05',
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ],
-                                  ),
-                                  CommonSizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      CommonText(
-                                        text: 'Total Booking Amount',
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                      CommonText(
-                                        text: '-\$100.00',
-                                        fontSize: 12,
-                                        color: redE2211C,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    alignment: Alignment.centerLeft,
-                                    child: CommonText(
-                                      textAlign: TextAlign.left,
-                                      text:
-                                          'This amount will be charge at booking confirmation\nand will be deduct on your total bill amount',
-                                      fontSize: 10,
-                                      color: textLight868686,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  CommonSizedBox(
-                                    height: 5,
-                                  ),
-                                  CommonSizedBox(
-                                    height: 15,
-                                  ),
-                                  Container(
-                                    height: 1,
-                                    width: Get.width,
-                                    color: whiteE5E5E5,
-                                  ),
-                                  CommonSizedBox(
-                                    height: 15,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      CommonText(
-                                        text: 'Grand Total',
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                      CommonText(
-                                        text: '\$115.05',
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ],
-                                  ),
-                                  // Row(
-                                  //   mainAxisAlignment:
-                                  //       MainAxisAlignment.spaceBetween,
-                                  //   children: [
-                                  //     Column(
-                                  //       crossAxisAlignment:
-                                  //           CrossAxisAlignment.start,
-                                  //       children: [
-                                  //         CommonText(
-                                  //           fontWeight: FontWeight.w500,
-                                  //           text: 'Spicy Crunchy Chicken',
-                                  //           fontSize: 15,
-                                  //         ),
-                                  //         CommonText(
-                                  //           fontWeight: FontWeight.w500,
-                                  //           text: 'Quantity: 2',
-                                  //           fontSize: 12,
-                                  //           color: textLight868686,
-                                  //         ),
-                                  //       ],
-                                  //     ),
-                                  //     const Icon(
-                                  //       Icons.close,
-                                  //       color: Colors.black,
-                                  //       size: 18,
-                                  //     ),
-                                  //   ],
-                                  // ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CommonText(
-                              text: 'Pre-Order',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: black000000,
-                            ),
-                            SizedBox(
-                              height: 40,
-                              width: 100,
-                              child: CommonButton(
-                                onTap: () {
-                                  Get.toNamed('pre-order');
-                                },
-                                text: 'Place Order',
-                                bgColor: redF2E6E6,
-                                fontSize: 14,
-                                textColor: redE2211C,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                   // CommonSizedBox(
                   //   height: 20,
@@ -535,7 +552,21 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.toNamed('/edit-a-table');
+                              Get.toNamed(
+                                '/edit-a-table',
+                                arguments: [
+                                  {
+                                    "restaurantId": bookATableController
+                                        .serviceSummary!.restaurantId,
+                                    "restaurantName": data[0]["restaurantName"],
+                                    "restaurantPic": data[0]["restaurantPic"],
+                                    "restaurantDistance": data[0]
+                                        ["restaurantDistance"],
+                                    "bookingId": bookATableController
+                                        .serviceSummary!.bookingId,
+                                  },
+                                ],
+                              );
                             },
                             child: CommonText(
                               text: 'Edit Your Booking',

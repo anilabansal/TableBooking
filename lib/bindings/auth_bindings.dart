@@ -21,7 +21,8 @@ class MainBindings extends Bindings {
     Get.lazyPut<LoginController>(() => LoginController());
     Get.lazyPut<RegisterController>(() => RegisterController());
     Get.lazyPut<OtpController>(() => OtpController());
-    Get.lazyPut<AddCardDetailsController>(() => AddCardDetailsController());
+    // Get.lazyPut<AddCardDetailsController>(() => AddCardDetailsController());
+    Get.put(AddCardDetailsController());
     //Get.lazyPut<ProfileController>(()=>ProfileController());
     Get.lazyPut<RestaurantDetailsController>(
             () => RestaurantDetailsController());
