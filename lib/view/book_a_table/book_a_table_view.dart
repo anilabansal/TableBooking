@@ -13,7 +13,7 @@ class BookATableView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appBarCommon(text: 'Book a Table'),
-      body: BookATableBody(),
+      body: const BookATableBody(),
     );
   }
 }

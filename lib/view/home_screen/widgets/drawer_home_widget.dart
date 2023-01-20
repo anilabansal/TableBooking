@@ -118,7 +118,6 @@ class DrawerScreen extends StatelessWidget {
                                             //   }
                                             // });
                                             Get.toNamed('/edit-profile');
-
                                           },
                                           child: CommonText(
                                             text: "Edit Profile",
@@ -237,7 +236,6 @@ class DrawerScreen extends StatelessWidget {
                               "Logout",
                               () async {
                                 //  userSessionController.logOut();
-
                                 await getXBuildDefaultDialog(
                                   callFrom: "Logout",
                                 );

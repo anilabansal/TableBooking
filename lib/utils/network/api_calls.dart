@@ -43,10 +43,15 @@ class ApiCalls extends GetConnect {
     print('URL Request ------------------------------->\n $url');
     print('API Request ------------------------------->\n ${(body)}');
     try {
-      var response = await post(
-       url,
-       body,
-      headers: withToken,
+      // var response = await post(
+      //  url,
+      //  body,
+      // headers: withToken,
+      // ).timeout(const Duration(seconds: 15));
+      final response = await http.post(
+        Uri.parse(url),
+        headers: withToken,
+        body: jsonEncode(body),
       );
       if (response.statusCode == 200) {
         print(
@@ -61,86 +66,12 @@ class ApiCalls extends GetConnect {
         print(
             'API request Header ------------------------------->\n ${response.headers}');
         print('Run Successfully!!!!!');
-        return response.body;
+        // return response.body;
+        return jsonDecode(response.body);
       }
       else if(response.statusCode==401){
         Get.offAllNamed('/authentication');
       }
-      // else if (userSessionController.isLogin == true &&
-      //     response.statusText == "Unauthorized") {
-      //   // ShowToast.show(
-      //   //   msg: "${response.statusText}\nPlease Login Again!!!",
-      //   //   isError: true,
-      //   // );
-      //
-      //   Get.defaultDialog(
-      //     title: "Token Expired!",
-      //     titleStyle:
-      //         const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-      //     content: Column(
-      //       children: [
-      //         Image.asset(
-      //           'assets/images/error.png',
-      //           height: 80,
-      //         ),
-      //         const SizedBox(
-      //           height: 15,
-      //         ),
-      //         CommonText(
-      //           fontSize: 16,
-      //           text:
-      //               "Your token has expired!\nPlease login again to continue..",
-      //           textAlign: TextAlign.center,
-      //         ),
-      //       ],
-      //     ),
-      //     radius: 0010,
-      //     actions: [
-      //       Padding(
-      //         padding:
-      //             const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 5.0),
-      //         child: Row(
-      //           children: [
-      //             Expanded(
-      //               child: SizedBox(
-      //                 height: 40,
-      //                 child: CommonButton(
-      //                   bgColor: redE2211C,
-      //                   text: 'Login',
-      //                   textColor: Colors.white,
-      //                   onTap: () async {
-      //                     await userSessionController.logOut();
-      //                     await Get.toNamed('/login');
-      //                   },
-      //                 ),
-      //               ),
-      //             ),
-      //             const SizedBox(
-      //               width: 15,
-      //             ),
-      //             Expanded(
-      //               child: SizedBox(
-      //                 height: 40,
-      //                 child: CommonButton(
-      //                   bgColor: redE2211C,
-      //                   text: 'Cancel',
-      //                   onTap: () {
-      //                     Get.back();
-      //                   },
-      //                   textColor: Colors.white,
-      //                 ),
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ],
-      //   );
-      //
-      //   // return false;
-      // } else {
-      //   print('<===== Error <====> ${response.statusText} ====>');
-      // }
     } catch (e) {
       print("========> Responses Error ${e.toString()}");
     }

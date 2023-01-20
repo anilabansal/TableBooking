@@ -7,6 +7,7 @@ import '../../../utils/common/common_strings.dart';
 
 class FilterMapScreen extends StatefulWidget {
   const FilterMapScreen({Key? key}) : super(key: key);
+
   @override
   State<FilterMapScreen> createState() => _FilterMapScreenState();
 }
@@ -17,6 +18,7 @@ class _FilterMapScreenState extends State<FilterMapScreen> {
   Set<Marker> _marker = {};
   final List<LatLng> markerLocations = [];
   BitmapDescriptor? markerIcon;
+
   Future<bool> addMarkers() async {
     filterViewController.filterMapIsLoading.value = true;
     markerIcon = await BitmapDescriptor.fromAssetImage(
@@ -31,6 +33,7 @@ class _FilterMapScreenState extends State<FilterMapScreen> {
     );
     return true;
   }
+
   filterRestaurantLatLng() {
     for (int i = 0; i < filterViewController.filterRestaurantList.length; i++) {
       _marker.add(
@@ -41,20 +44,24 @@ class _FilterMapScreenState extends State<FilterMapScreen> {
           ),
           position: LatLng(
             double.parse(
-                filterViewController.filterRestaurantList[i].latitude!),
+              filterViewController.filterRestaurantList[i].latitude!,
+            ),
             double.parse(
-                filterViewController.filterRestaurantList[i].longitude!),
+              filterViewController.filterRestaurantList[i].longitude!,
+            ),
           ),
           //icon: BitmapDescriptor.defaultMarker,
           icon: markerIcon!,
           infoWindow: InfoWindow(
-              title: filterViewController.filterRestaurantList[i].restaurantName,
-              snippet:
-              "${filterViewController.filterRestaurantList[i].distance.toString()} miles away"),
+            title: filterViewController.filterRestaurantList[i].restaurantName,
+            snippet:
+                "${filterViewController.filterRestaurantList[i].distance.toString()} miles away",
+          ),
         ),
       );
     }
   }
+
   @override
   void initState() {
     // TODO: implement initState

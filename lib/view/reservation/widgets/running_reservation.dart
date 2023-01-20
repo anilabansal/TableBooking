@@ -1,47 +1,55 @@
+import 'package:booking_table/controller/reservation/reservation_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PreviousReservations extends StatelessWidget {
-  const PreviousReservations({
+
+class RunningReservations extends StatelessWidget {
+  const RunningReservations({
     Key? key,
   }) : super(key: key);
 
+  // ReservationController reservationController = Get.find();
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 5,
-      itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () {
-            Get.toNamed('/previous-booking');
-          },
-          child: Padding(
-            //  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: white,
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: const [
-                    BoxShadow(
-                      offset: Offset(0, 4),
-                      color: Color.fromRGBO(0, 0, 0, 0.06),
-                      blurRadius: 10,
-                    )
-                  ]),
+    // reservationController.reservationDetailList();
+
+    return GetBuilder<ReservationController>(
+      builder: (controller) {
+        return
+            // !controller.isLoading.value
+            //   ? controller.reservationRunningRestaurantList.isNotEmpty
+            //   ?
+            ListView.builder(
+          itemCount: 2,
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () async {
+                await Get.toNamed('/running-booking');
+              },
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      // height: 138,
+                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: white,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(0, 4),
+                          color: Color.fromRGBO(0, 0, 0, 0.06),
+                          blurRadius: 10)
+                    ],
+                  ),
+                  child: Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: const EdgeInsets.all(10),
+                    child: SizedBox(
                       child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Column(
                             children: [
@@ -54,6 +62,10 @@ class PreviousReservations extends StatelessWidget {
                                     topRight: Radius.circular(6),
                                   ),
                                   image: DecorationImage(
+                                    // image: NetworkImage(controller
+                                    //     .reservationRunningRestaurantList
+                                    //     .value[index]
+                                    //     .restaurantPic),
                                     image: AssetImage(bookATableImage),
                                     fit: BoxFit.cover,
                                   ),
@@ -71,6 +83,10 @@ class PreviousReservations extends StatelessWidget {
                                 width: 98,
                                 alignment: Alignment.center,
                                 child: CommonText(
+                                  // text: controller
+                                  //     .reservationRunningRestaurantList
+                                  //     .value[index]
+                                  //     .serviceType,
                                   text: 'Full Service',
                                   fontSize: 10,
                                   fontWeight: FontWeight.w400,
@@ -82,19 +98,23 @@ class PreviousReservations extends StatelessWidget {
                           ),
                           Expanded(
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 15),
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   CommonText(
+                                    // text: controller
+                                    //     .reservationRunningRestaurantList
+                                    //     .value[index]
+                                    //     .restaurantName,
                                     text: 'Venisa’s Kitchen',
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
                                   ),
-                                  const SizedBox(
+                                  CommonSizedBox(
                                     height: 10,
                                   ),
                                   Row(
@@ -109,8 +129,8 @@ class PreviousReservations extends StatelessWidget {
                                           text:
                                               '6363 Montana Ave, El Paso, Texas, Montgo- mery, 35004',
                                           fontSize: 12,
-                                          fontFamily: interFont,
                                           fontWeight: FontWeight.w400,
+                                          fontFamily: interFont,
                                         ),
                                       ),
                                     ],
@@ -125,11 +145,13 @@ class PreviousReservations extends StatelessWidget {
                                       Row(
                                         children: <Widget>[
                                           const Icon(
+                                            size: 20,
                                             Icons.calendar_month,
                                             color: redE2211C,
-                                            size: 20,
                                           ),
                                           CommonText(
+                                            // text: formattedDate
+                                            //     .toString(),
                                             text: '24 July, 2022',
                                             fontSize: 12,
                                             fontWeight: FontWeight.w400,
@@ -145,6 +167,8 @@ class PreviousReservations extends StatelessWidget {
                                             size: 20,
                                           ),
                                           CommonText(
+                                            // text: formattedTime
+                                            //     .toString(),
                                             text: '09:30 PM',
                                             fontSize: 12,
                                             fontWeight: FontWeight.w400,
@@ -161,46 +185,14 @@ class PreviousReservations extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      height: 1,
-                      width: Get.width,
-                      color: whiteE5E5E5,
-                    ),
-                    Center(
-                      child: InkWell(
-                        onTap: () {
-                          Get.toNamed('/reviews');
-                        },
-                        child: Container(
-                          height: 40,
-                          width: 110,
-                          margin: const EdgeInsets.only(
-                            top: 8,
-                          ),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: redE2211C,
-                          ),
-                          child: CommonText(
-                            color: Colors.white,
-                            text: 'Submit Review',
-                            textAlign: TextAlign.center,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ),
+            );
+          },
         );
+        // : const CommonNoDataFound()
+        // : const ShimmerPreviousReservationWidget();
       },
     );
   }

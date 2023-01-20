@@ -25,7 +25,13 @@ class BookATableController extends GetxController {
   var updateTableBookIsLoading = true.obs;
   ServiceSummary?serviceSummary;
   BookingResponse?editBookingResponse;
-
+  /// update Order is added or not
+   updateOrderIsAdded(){
+     if(serviceSummary!.isOrderAdded==false){
+       serviceSummary!.isOrderAdded = true;
+     }
+     update();
+   }
   /// set selected book time
   FilterSelectTime? selectedBookTableTime;
   void setSelectedBookTime(value) {

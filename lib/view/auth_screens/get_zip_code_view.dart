@@ -4,10 +4,8 @@ import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
 import 'package:booking_table/utils/common/widgets_methods/progress_loader.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import '../../controller/location/location_controller.dart';
-import '../../controller/profile/profile_controller.dart';
 import '../../utils/common/widgets_methods/common_button.dart';
 import '../../utils/common/widgets_methods/common_sized_box.dart';
 import '../../utils/common/widgets_methods/common_text.dart';
@@ -15,7 +13,6 @@ import '../profile_screen/search_location.dart';
 
 class GetZipCodeView extends StatefulWidget {
   const GetZipCodeView({Key? key}) : super(key: key);
-
   @override
   State<GetZipCodeView> createState() => _GetZipCodeViewState();
 }

@@ -32,11 +32,12 @@ class _GalleryTabState extends State<GalleryTab> {
   loadAllGallery() {
     restaurantsController.isLoading.value = true;
     restaurantsController.restaurantDetailsGalleryImages(
-        body: {"RestaurantId": widget.restaurantId}).then((value) {
-      if (value) {
-        restaurantsController.isLoading.value = false;
-      }
-    },
+        body: {"RestaurantId": widget.restaurantId}).then(
+      (value) {
+        if (value) {
+          restaurantsController.isLoading.value = false;
+        }
+      },
     );
   }
 
@@ -45,13 +46,12 @@ class _GalleryTabState extends State<GalleryTab> {
     return GetBuilder<RestaurantDetailsController>(
       builder: (controller) {
         return controller.isLoading.value
-            ?
-        const GridShimmerCard()
-        // const Center(
-        //         child: CircularProgressIndicator(
-        //           color: redE2211C,
-        //         ),
-        //       )
+            ? const GridShimmerCard()
+            // const Center(
+            //         child: CircularProgressIndicator(
+            //           color: redE2211C,
+            //         ),
+            //       )
             :
             // controller.galleryImagesRestaurantList.value != null
             //   ?

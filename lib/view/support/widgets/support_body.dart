@@ -88,7 +88,8 @@ class SupportBody extends StatelessWidget {
                     filled: true,
                     fillColor: whiteF4F4F4,
                     hintText: 'Type Here...',
-                    maxLines: 5),
+                    maxLines: 5,
+                ),
                 CommonSizedBox(
                   height: 25,
                 ),

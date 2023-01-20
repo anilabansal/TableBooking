@@ -28,12 +28,14 @@ const addCardDetailString = 'api/Home/SaveCreditCard';
 const typesFoodEndPoint = 'api/Home/TypeofFood';
 const filterSelectTime = 'api/Home/GetTime';
 const filterRestaurantEndPoint = 'api/Home/RestaurantListByFilter';
+const partySizeEndPoint = 'api/Home/GetPartySize';
 
 
 const bookTableAvailableTime = 'api/Home/GetRestaurantAvailableTime';
 const bookTableEndPoint = 'api/Home/BookTable';
 const editBookTableEndPoint = 'api/Home/EditBookingDetail';
 const updateBookingEndPoint='api/Home/UpdateBookingDetail';
+const placeOrderEndPoint = 'api/Home/AddBookingOrder';
 
 ///    Common Fonts
 // Fonts
@@ -134,6 +136,8 @@ String forwardArrowImage = "assets/images/home/forward_arrow.png";
 //payment screen
 String cardImage = "assets/images/payment/card_icon.png";
 String infoIcon = "assets/images/home/info_icon.png";
+String googleIcon = "assets/images/payment/google_icon.png";
+String appleIcon = "assets/images/payment/apple-logo.png";
 
 /// User Session Strings
 const isLogInString = 'isLogInString';

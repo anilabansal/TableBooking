@@ -129,18 +129,25 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(15),
-                                            image: DecorationImage(
-                                              image: homeController
+                                            image: homeController
+                                                        .favRestaurantList[
+                                                            index]
+                                                        .restaurantPic ==
+                                                    null
+                                                ? DecorationImage(
+                                                    image: AssetImage(
+                                                        restaurantImage),
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : DecorationImage(
+                                                    image: NetworkImage(
+                                                      homeController
                                                           .favRestaurantList[
                                                               index]
-                                                          .restaurantPic ==
-                                                      null
-                                                  ? NetworkImage("")
-                                                  : NetworkImage(homeController
-                                                      .favRestaurantList[index]
-                                                      .restaurantPic),
-                                              fit: BoxFit.cover,
-                                            ),
+                                                          .restaurantPic,
+                                                    ),
+                                                    fit: BoxFit.cover,
+                                                  ),
                                           ),
                                         ),
                                         Positioned(
@@ -163,7 +170,7 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                               height: 33,
                                               decoration: const BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: greyF2F2F2),
+                                                  color: greyF2F2F2,),
                                               child: Center(
                                                 child: homeController
                                                         .favRestaurantList[

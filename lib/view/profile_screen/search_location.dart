@@ -1,4 +1,3 @@
-import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/controller/location/location_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/view/profile_screen/widgets/search_location_box.dart';
@@ -10,18 +9,14 @@ import '../../utils/common/widgets_methods/common_text.dart';
 
 class SearchLocation extends StatefulWidget {
   const SearchLocation({Key? key}) : super(key: key);
-
   @override
   State<SearchLocation> createState() => _SearchLocationState();
 }
-
 class _SearchLocationState extends State<SearchLocation> {
   // final searchController = TextEditingController();
   LocationController locationController = Get.find();
   GoogleMapController? _controller;
-
   bool isSearch = false;
-
   moveToCurrentLocation(double latitude, double longitude) {
     locationController.requestPermission().then(
       (value) {
@@ -38,7 +33,6 @@ class _SearchLocationState extends State<SearchLocation> {
       },
     );
   }
-
   @override
   void initState() {
     // TODO: implement initState
@@ -64,6 +58,8 @@ class _SearchLocationState extends State<SearchLocation> {
                   _controller = controller;
                 },
                 mapType: MapType.normal,
+
+
                 markers: {
                   Marker(
                     onTap: () async {
@@ -81,6 +77,7 @@ class _SearchLocationState extends State<SearchLocation> {
                 buildingsEnabled: false,
                 compassEnabled: false,
                 zoomControlsEnabled: false,
+                myLocationButtonEnabled:false,
                 onCameraMove: (CameraPosition cameraPosition) {
                   locationController.cameraPosition.value = cameraPosition;
                   locationController.latLng.value = LatLng(
@@ -111,15 +108,15 @@ class _SearchLocationState extends State<SearchLocation> {
                           'Address ---------> ${placeMarks.first.toString()}');
                       if (GetPlatform.isAndroid) {
                         locationController.searchController.value.text =
-                            "${placeMarks.first.name} ${placeMarks.first.locality} ${placeMarks.first.subLocality} ${placeMarks.first.administrativeArea}";
+                            "${placeMarks.first.name} ${placeMarks.first.locality}, ${placeMarks.first.subLocality} ${placeMarks.first.isoCountryCode} ${placeMarks.first.postalCode}";
                         // locationController.searchController.value.text =
                         //     "${placeMarks.first.postalCode} ";
                       } else if (GetPlatform.isIOS) {
                         locationController
                             .searchController.value.text = placeMarks
                                 .first.street!.isNotEmpty
-                            ? '${placeMarks.first.street} ${placeMarks.first.subAdministrativeArea} ${placeMarks.first.subLocality} ${placeMarks.first.locality} ${placeMarks.first.administrativeArea}'
-                            : ' ${placeMarks.first.subAdministrativeArea} ${placeMarks.first.subLocality} ${placeMarks.first.locality} ${placeMarks.first.administrativeArea}';
+                            ? '${placeMarks.first.street} ${placeMarks.first.subAdministrativeArea}, ${placeMarks.first.subLocality} ${placeMarks.first.locality} ${placeMarks.first.isoCountryCode} ${placeMarks.first.postalCode}'
+                            : ' ${placeMarks.first.subAdministrativeArea}, ${placeMarks.first.subLocality} ${placeMarks.first.locality} ${placeMarks.first.isoCountryCode} ${placeMarks.first.postalCode}';
                         // locationController.searchController.value.text =
                         //     '${placeMarks.first.postalCode} ';
                       }
@@ -180,7 +177,6 @@ class _SearchLocationState extends State<SearchLocation> {
                           // List<Location> locations = await locationFromAddress(
                           //   locationController.searchPlaceId.value,
                           // );
-
                           print("location ----->${locations}");
                           // locationController.latLng.value = LatLng(
                           //   locations.last.latitude,

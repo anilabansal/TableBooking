@@ -48,12 +48,12 @@ class _AboutTabScreenState extends State<AboutTabScreen> {
             //   ?
             controller.isLoading.value
                 ?
-            // const Center(
-            //         child: CircularProgressIndicator(
-            //           color: redE2211C,
-            //         ),
-            //       )
-            const AboutShimmer()
+                // const Center(
+                //         child: CircularProgressIndicator(
+                //           color: redE2211C,
+                //         ),
+                //       )
+                const AboutShimmer()
                 : controller.aboutUsRestaurantList.isNotEmpty
                     ? ListView(
                         primary: false,

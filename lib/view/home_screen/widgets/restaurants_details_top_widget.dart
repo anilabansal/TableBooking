@@ -4,6 +4,7 @@ import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
+import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../controller/home/home_controller.dart';
+import '../../../controller/user_session/user_session_controller.dart';
 
 class RestaurantDetailTopScreen extends StatelessWidget {
   RestaurantDetailTopScreen({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class RestaurantDetailTopScreen extends StatelessWidget {
   //var data = Get.arguments;
 
   HomeController homeController = Get.find();
+  UserSessionController userSessionController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -260,8 +263,9 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 14, vertical: 10),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: red0FE2211C),
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: red0FE2211C,
+                                  ),
                                   child: InkWell(
                                     onTap: () async {
                                       // await FlutterPhoneDirectCaller.callNumber(controller.detailsRestaurantList.value.contactNumber)
@@ -270,14 +274,15 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                                               null
                                           ? await launchUrl(
                                               Uri(
-                                                  scheme: "tel",
-                                                  // path: controller
-                                                  //     .aboutUsRestaurantList[0]
-                                                  //     .contactNumber,
-                                                  path: controller
-                                                      .detailsRestaurantList
-                                                      .value
-                                                      .contactNumber),
+                                                scheme: "tel",
+                                                // path: controller
+                                                //     .aboutUsRestaurantList[0]
+                                                //     .contactNumber,
+                                                path: controller
+                                                    .detailsRestaurantList
+                                                    .value
+                                                    .contactNumber,
+                                              ),
                                             )
                                           : ShowToast.show(
                                               isError: true,
@@ -313,25 +318,104 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                         ),
                         CommonButton(
                           onTap: () {
-                            Get.toNamed(
-                              '/add-card-details',
-                              arguments: [
-                                {
-                                  "restaurantId": controller
-                                      .detailsRestaurantList.value.restaurantId,
-                                  "restaurantName": controller
-                                      .detailsRestaurantList
-                                      .value
-                                      .restaurantName,
-                                  "restaurantPic": controller
-                                      .detailsRestaurantList
-                                      .value
-                                      .restaurantPic,
-                                  "restaurantDistance": controller
-                                      .detailsRestaurantList.value.distance,
-                                },
-                              ],
-                            );
+                            if (userSessionController.isLogin) {
+                              Get.toNamed(
+                                // '/add-card-details',
+                                '/book-a-table',
+                                arguments: [
+                                  {
+                                    "restaurantId": controller
+                                        .detailsRestaurantList
+                                        .value
+                                        .restaurantId,
+                                    "restaurantName": controller
+                                        .detailsRestaurantList
+                                        .value
+                                        .restaurantName,
+                                    "restaurantPic": controller
+                                        .detailsRestaurantList
+                                        .value
+                                        .restaurantPic,
+                                    "restaurantDistance": controller
+                                        .detailsRestaurantList.value.distance,
+                                  },
+                                ],
+                              );
+                            } else if (userSessionController.isLogin == false) {
+                              Get.defaultDialog(
+                                title: "LOGIN!",
+                                titleStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18),
+                                content: Column(
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/error.png',
+                                      height: 80,
+                                    ),
+                                    CommonSizedBox(
+                                      height: 15,
+                                    ),
+                                    CommonText(
+                                      fontSize: 16,
+                                      text:
+                                          "You're not logged In\nPlease login to continue..",
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                                radius: 0010,
+                                actions: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15.0, right: 15.0, bottom: 5.0),
+                                    // padding: const EdgeInsets.all(0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        // Expanded(
+                                        //   child:
+                                        SizedBox(
+                                          width: 80,
+                                          height: 40,
+                                          child: CommonButton(
+                                            bgColor: redE2211C,
+                                            text: 'Login',
+                                            textColor: Colors.white,
+                                            onTap: () async {
+                                              Get.offAllNamed(
+                                                  '/authentication');
+                                              // : Get.toNamed('/login');
+                                            },
+                                          ),
+                                        ),
+                                        // ),
+                                        CommonSizedBox(
+                                          width: 15,
+                                        ),
+                                        // Expanded(
+                                        //   child:
+                                        SizedBox(
+                                          width: 80,
+                                          height: 40,
+                                          child: CommonButton(
+                                            bgColor: redE2211C,
+                                            text: 'Cancel',
+                                            onTap: () {
+                                              Get.back();
+                                            },
+                                            textColor: Colors.white,
+                                          ),
+                                        ),
+                                        // ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }
                           },
                           text: "Book Now",
                           bgColor: redE2211C,
@@ -358,17 +442,20 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(0.0),
                   child: IconButton(
                     onPressed: () {
-                      controller.updateRestaurantLikes();
-                      homeController.favRestaurantUpdate(body: {
-                        "restaurantId":
-                            controller.detailsRestaurantList.value.restaurantId
-                      });
-                      // controller.updateRestaurantLikeRestaurantDetails(
-                      //   // restaurantId: data[0]['restaurantId'],
-                      //   restaurantId:
-                      //       controller.detailsRestaurantList.value.restaurantId,
-                      // );
-                      // print("detail----${data[0]['restaurantId']}");
+                      if (userSessionController.isLogin) {
+                        controller.updateRestaurantLikes();
+                        homeController.favRestaurantUpdate(
+                          body: {
+                            "restaurantId": controller
+                                .detailsRestaurantList.value.restaurantId
+                          },
+                        );
+                      } else {
+                        ShowToast.show(
+                          msg: "User not logged in!!!".toString().toTitleCase(),
+                          isError: true,
+                        );
+                      }
                     },
                     icon: controller.detailsRestaurantList.value.isFavourite ==
                             true

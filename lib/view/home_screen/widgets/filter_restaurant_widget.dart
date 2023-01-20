@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/filter/filter_screen_controller.dart';
 import '../../../controller/home/home_controller.dart';
+import '../../../utils/common/no_data_found.dart';
 import '../../../utils/common/toast_message.dart';
 
 class FilterRestaurantScreen extends StatelessWidget {
@@ -18,172 +19,170 @@ class FilterRestaurantScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15.0),
-      child:filterViewController.filterRestaurantList.isEmpty?Center(
-        child: CommonText(
-          text: "No Restaurant Found! ",
-          fontSize: 22,
-          color: black000000,
-          fontWeight: FontWeight.w600,
-          textAlign: TextAlign.center,
-        ),
-      ): ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: filterViewController.filterRestaurantList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 15.0),
-            child: InkWell(
-              onTap: () {
-                // Get.toNamed('/restaurant-details');
-                Get.toNamed(
-                  '/restaurant-details',
-                  arguments: [
-                    {
-                      "restaurantId": filterViewController
-                          .filterRestaurantList[index].restaurantId
+      child: filterViewController.filterRestaurantList.isEmpty
+          ? const CommonNoDataFound()
+          : ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: filterViewController.filterRestaurantList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 15.0),
+                  child: InkWell(
+                    onTap: () {
+                      // Get.toNamed('/restaurant-details');
+                      Get.toNamed(
+                        '/restaurant-details',
+                        arguments: [
+                          {
+                            "restaurantId": filterViewController
+                                .filterRestaurantList[index].restaurantId
+                          },
+                        ],
+                      );
                     },
-                  ],
-                );
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(
-                  color: white,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.06),
-                      blurRadius: 4.0,
-                      offset: Offset(0.0, 10),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 11.0,
-                        right: 11.0,
-                        top: 11.0,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      decoration: const BoxDecoration(
+                        color: white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          topLeft: Radius.circular(20),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.06),
+                            blurRadius: 4.0,
+                            offset: Offset(0.0, 10),
+                          ),
+                        ],
                       ),
-                      child: Stack(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: 150,
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 133,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                // image: AssetImage(restaurantImage),
-                                image: NetworkImage(
-                                  filterViewController
-                                      .filterRestaurantList[index].restaurantPic
-                                      .toString(),
-                                ),
-                                fit: BoxFit.cover,
-                              ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 11.0,
+                              right: 11.0,
+                              top: 11.0,
                             ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            right: 20,
-                            child: InkWell(
-                              onTap: () {
-                                if (userSessionController.isLogin) {
-                                  filterViewController
-                                      .updateFilterRestaurantLikes(index);
-                                  homeController.updateRestaurantLikeHome(
-                                    index: index,
-                                    restaurantId: filterViewController
-                                        .filterRestaurantList[index]
-                                        .restaurantId,
-                                  );
-                                } else {
-                                  ShowToast.show(
-                                    msg: "User not logged in!!!"
-                                        .toString()
-                                        .toTitleCase(),
-                                    isError: true,
-                                  );
-                                }
-                              },
-                              child: Container(
-                                width: 33,
-                                height: 33,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: greyF2F2F2,
+                            child: Stack(
+                              children: [
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 150,
                                 ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(0.0),
-                                    child: filterViewController
-                                                .filterRestaurantList[index]
-                                                .isFavourite ==
-                                            true
-                                        ? const Icon(
-                                            Icons.favorite,
-                                            color: redE2211C,
-                                            size: 18,
-                                          )
-                                        : const Icon(
-                                            Icons.favorite,
-                                            color: greyCACACA,
-                                            size: 18,
-                                          ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 133,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    image: DecorationImage(
+                                      // image: AssetImage(restaurantImage),
+                                      image: NetworkImage(
+                                        filterViewController
+                                            .filterRestaurantList[index]
+                                            .restaurantPic
+                                            .toString(),
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
-                              ),
+                                Positioned(
+                                  bottom: 0,
+                                  right: 20,
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (userSessionController.isLogin) {
+                                        filterViewController
+                                            .updateFilterRestaurantLikes(index);
+                                        homeController.updateRestaurantLikeHome(
+                                          index: index,
+                                          restaurantId: filterViewController
+                                              .filterRestaurantList[index]
+                                              .restaurantId,
+                                        );
+                                      } else {
+                                        ShowToast.show(
+                                          msg: "User not logged in!!!"
+                                              .toString()
+                                              .toTitleCase(),
+                                          isError: true,
+                                        );
+                                      }
+                                    },
+                                    child: Container(
+                                      width: 33,
+                                      height: 33,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: greyF2F2F2,
+                                      ),
+                                      child: Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(0.0),
+                                          child: filterViewController
+                                                      .filterRestaurantList[
+                                                          index]
+                                                      .isFavourite ==
+                                                  true
+                                              ? const Icon(
+                                                  Icons.favorite,
+                                                  color: redE2211C,
+                                                  size: 18,
+                                                )
+                                              : const Icon(
+                                                  Icons.favorite,
+                                                  color: greyCACACA,
+                                                  size: 18,
+                                                ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(11.0, 5, 11.0, 11.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CommonText(
+                                  text: filterViewController
+                                      .filterRestaurantList[index]
+                                      .restaurantName
+                                      .toString(),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                  color: black000000,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                CommonText(
+                                  text: filterViewController
+                                      .filterRestaurantList[index].distance
+                                      .toString(),
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 15,
+                                  color: grey868686,
+                                ),
+                              ],
                             ),
                           )
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(11.0, 5, 11.0, 11.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CommonText(
-                            text: filterViewController
-                                .filterRestaurantList[index].restaurantName
-                                .toString(),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20,
-                            color: black000000,
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          CommonText(
-                            text: filterViewController
-                                .filterRestaurantList[index].distance
-                                .toString(),
-                            fontWeight: FontWeight.normal,
-                            fontSize: 15,
-                            color: grey868686,
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 class RestaurantZoomBody extends StatelessWidget {
   String imageUrl;
+
   RestaurantZoomBody({Key? key, required this.imageUrl}) : super(key: key);
 
   @override

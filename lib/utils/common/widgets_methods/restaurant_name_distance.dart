@@ -80,7 +80,7 @@ class CommonRestaurantNameDistance extends StatelessWidget {
                   height: 5,
                 ),
                 CommonText(
-                  text: "${restaurantDistance.toString()} miles away",
+                  text: restaurantDistance==null?"":"${restaurantDistance.toString()} miles away",
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                   color: textLight868686,

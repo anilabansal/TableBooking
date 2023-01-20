@@ -9,6 +9,8 @@ class CommonButton extends StatelessWidget {
   Color? textColor;
   Icon? icon;
   double? fontSize;
+  double? height;
+  double? width;
 
   CommonButton({
     this.icon,
@@ -17,6 +19,8 @@ class CommonButton extends StatelessWidget {
     this.bgColor,
     this.fontSize,
     this.textColor,
+    this.height,
+    this.width,
     Key? key,
   }) : super(key: key);
 
@@ -25,8 +29,8 @@ class CommonButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
+        height:height ?? 50,
+        width: width ?? MediaQuery.of(context).size.width,
         //padding: const EdgeInsets.symmetric(vertical: 12),
         alignment: Alignment.center,
         decoration: BoxDecoration(

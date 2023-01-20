@@ -9,18 +9,23 @@ import '../../../utils/common/widgets_methods/shimmers/listing_shimmer_widget.da
 
 class ReviewsTabScreen extends StatefulWidget {
   final int? restaurantId;
+
   const ReviewsTabScreen({Key? key, this.restaurantId}) : super(key: key);
+
   @override
   State<ReviewsTabScreen> createState() => _ReviewsTabScreenState();
 }
+
 class _ReviewsTabScreenState extends State<ReviewsTabScreen> {
   RestaurantDetailsController restaurantsController = Get.find();
+
   @override
   void initState() {
     // TODO: implement initState
     loadAllReviews();
     super.initState();
   }
+
   loadAllReviews() {
     restaurantsController.isLoading.value = true;
     restaurantsController.restaurantDetailsRatings(

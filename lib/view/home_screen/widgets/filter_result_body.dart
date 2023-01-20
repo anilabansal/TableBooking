@@ -8,10 +8,11 @@ import '../../../controller/filter/filter_screen_controller.dart';
 import 'filter_map_widget.dart';
 
 class FilterResultBody extends StatelessWidget {
-   FilterResultBody({
+  FilterResultBody({
     Key? key,
   }) : super(key: key);
   FilterViewController filterViewController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -43,7 +44,8 @@ class FilterResultBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CommonText(
-                    text: "${filterViewController.filterRestaurantCount.value} Restaurants",
+                    text:
+                        "${filterViewController.filterRestaurantCount.value} Restaurants",
                     fontFamily: interFont,
                     fontWeight: FontWeight.w500,
                     color: black000000,
@@ -96,7 +98,6 @@ class FilterResultBody extends StatelessWidget {
                             onTap: () {
                               homeController.restaurantFilter.value = false;
                               homeController.update();
-
                             },
                             child: Container(
                               width: 24,
@@ -114,7 +115,10 @@ class FilterResultBody extends StatelessWidget {
                                   width: 14,
                                   height: 14,
                                   color:
-                                      homeController.restaurantFilter.value ==false ? white : greyC1C1C1,
+                                      homeController.restaurantFilter.value ==
+                                              false
+                                          ? white
+                                          : greyC1C1C1,
                                 ),
                               ),
                             ),
@@ -129,7 +133,7 @@ class FilterResultBody extends StatelessWidget {
             homeController.restaurantFilter.value
                 ?
                 // FILTERED RESULT
-                 FilterRestaurantScreen()
+                FilterRestaurantScreen()
                 :
                 // MAP HOME SCREEN
                 const FilterMapScreen()

@@ -2,11 +2,11 @@ import 'package:booking_table/controller/filter/filter_screen_controller.dart';
 import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
 import 'package:booking_table/utils/common/widgets_methods/progress_loader.dart';
 import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:booking_table/view/home_screen/widgets/filter_screen_date_picker.dart';
 import 'package:booking_table/view/home_screen/widgets/filter_select_time.dart';
+import 'package:booking_table/view/home_screen/widgets/party_size_drop_down.dart';
 import 'package:booking_table/view/home_screen/widgets/type_of_food_drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,9 +37,11 @@ class _FilterViewState extends State<FilterView> {
   void initState() {
     // TODO: implement initState
     loadFoodList();
+    loadAllPartySizeList();
     // loadAllTimeList();
     filterViewController.setSelected(null);
     filterViewController.setSelectedFilterTime(null);
+    filterViewController.setSelectedPartySize(null);
     homeController.serviceType.value = "0";
     super.initState();
   }
@@ -54,19 +56,14 @@ class _FilterViewState extends State<FilterView> {
       },
     );
   }
-  // loadAllTimeList() {
-  //   filterViewController.isSelectedTimeLoading.value = true;
-  //   filterViewController.getAvailableTime(body: {
-  //     //"Date":DateTime.now(),
-  //     "Date": DateFormat('yyyy-MM-dd  kk:mm').format(DateTime.now().toUtc())
-  //   }).then((value) {
-  //     if (value) {
-  //       filterViewController.isSelectedTimeLoading.value = false;
-  //       print(
-  //           "currentTime ----> ${DateFormat('yyyy-MM-dd kk:mm').format(DateTime.now().toUtc())}");
-  //     }
-  //   });
-  // }
+  loadAllPartySizeList(){
+    filterViewController.partySizeIsLoading.value = true;
+    filterViewController.getPartySize().then((value){
+      if(value){
+        filterViewController.partySizeIsLoading.value = false;
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +75,7 @@ class _FilterViewState extends State<FilterView> {
             return Obx(
               () {
                 return filterViewController.isTypeFoodLoading.value &&
-                        filterViewController.isSelectedTimeLoading.value
+                        filterViewController.partySizeIsLoading.value
                     ? const Center(
                         child: CircularProgressIndicator(
                           color: redE2211C,
@@ -157,12 +154,13 @@ class _FilterViewState extends State<FilterView> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              CommonTextFormField(
-                                hintText: "None".toTitleCase(),
-                                filled: true,
-                                fillColor: greyF4F4F4,
-                                controller: partySizeController,
-                              ),
+                              // CommonTextFormField(
+                              //   hintText: "None".toTitleCase(),
+                              //   filled: true,
+                              //   fillColor: greyF4F4F4,
+                              //   controller: partySizeController,
+                              // ),
+                              const PartySizeDropDown(),
                             ],
                           ).paddingOnly(left: 22, right: 22),
                           const SizedBox(
@@ -237,6 +235,7 @@ class _FilterViewState extends State<FilterView> {
                                     ),
                                     Expanded(
                                       child: CommonText(
+                                        softWrap: true,
                                         text: homeController
                                                     .serviceType.value ==
                                                 "1"
@@ -244,7 +243,7 @@ class _FilterViewState extends State<FilterView> {
                                             : homeController
                                                         .serviceType.value ==
                                                     "3"
-                                                ? "Pre-order food/drink and any add-ons in restaurant via the app. No server"
+                                                ? "Pre order food and drink on the app as well as in restaurant. No server."
                                                 : homeController.serviceType
                                                             .value ==
                                                         "4"
@@ -322,14 +321,15 @@ class _FilterViewState extends State<FilterView> {
                                         //     .trim()
                                         //     .toString(),
                                         "Date": DateFormat('MM/dd/yyyy').format(
-                                          DateFormat('yyyy-MM-dd')
+                                          DateFormat('dd-MM-yyyy')
                                               .parse(dateController.value.text),
                                         ),
                                         // "Date": "01/12/2022",
-                                        "PartySize": partySizeController
-                                            .value.text
-                                            .trim()
-                                            .toString(),
+                                        // "PartySize": partySizeController
+                                        //     .value.text
+                                        //     .trim()
+                                        //     .toString(),
+                                  "PartySize": filterViewController.selectedPartySize!.number.toString(),
                                         "StartTimeSlotId": DateFormat('HH:mm')
                                             .format(
                                               DateFormat("hh:mm a").parse(
@@ -378,12 +378,15 @@ class _FilterViewState extends State<FilterView> {
                                             .serviceType.value
                                             .trim(),
                                         "Date": DateFormat('MM/dd/yyyy').format(
-                                          DateFormat('yyyy-MM-dd')
+                                          DateFormat('dd-MM-yyyy')
                                               .parse(dateController.value.text),
                                         ),
-                                        "PartySize": partySizeController
-                                            .value.text
-                                            .trim()
+                                        // "PartySize": partySizeController
+                                        //     .value.text
+                                        //     .trim()
+                                        //     .toString(),
+                                  "PartySize": filterViewController
+                                            .selectedPartySize!.number
                                             .toString(),
                                         "StartTimeSlotId": DateFormat('HH:mm')
                                             .format(
@@ -480,8 +483,8 @@ class _FilterViewState extends State<FilterView> {
     } else if (filterViewController.selectedFilterTime == null ||
         filterViewController.selectedFilterTime == '') {
       return 'please select time!'.toTitleCase();
-    } else if (partySizeController.text.trim().isEmpty) {
-      return 'please enter party size!'.toTitleCase();
+    } else if (filterViewController.selectedPartySize==null||filterViewController.selectedPartySize=='') {
+      return 'please select party size!'.toTitleCase();
     } else if (homeController.serviceType.value.trim().isEmpty) {
       return "please select service type!".toTitleCase();
     }

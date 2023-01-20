@@ -91,19 +91,19 @@ class RestaurantHomeScreen extends StatelessWidget {
                                                     .homeRestaurantList[index]
                                                     .restaurantPic ==
                                                 null
-                                            ?DecorationImage(
-                                          image:
-                                          AssetImage(restaurantImage),
-                                          fit: BoxFit.cover,
-                                        ) : DecorationImage(
+                                            ? DecorationImage(
+                                                image:
+                                                    AssetImage(restaurantImage),
+                                                fit: BoxFit.cover,
+                                              )
+                                            : DecorationImage(
                                                 image: NetworkImage(
                                                   homeController
                                                       .homeRestaurantList[index]
                                                       .restaurantPic,
                                                 ),
                                                 fit: BoxFit.cover,
-                                              )
-                                             ,
+                                              ),
                                       ),
                                     ),
                                     Positioned(

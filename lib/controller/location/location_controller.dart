@@ -39,22 +39,6 @@ class LocationController extends GetxController {
     update();
   }
 
-  // Future<bool> requestPermission() async {
-  //   final status = await Permission.location.request();
-  //   print('Permission =-===> ${status.isGranted}');
-  //   if (status.isGranted) {
-  //     locationData = await Location().getLocation();
-  //     latLng.value = LatLng(locationData!.latitude!, locationData!.longitude!);
-  //     print(
-  //         'location--->Lat-${locationData!.latitude} Long-${locationData!.longitude}');
-  //     return true;
-  //   } else if (status.isPermanentlyDenied) {
-  //     openAppSettings();
-  //     return false;
-  //   } else {
-  //     return false;
-  //   }
-  // }
   /// request permission for current location
   Future<bool> requestPermission() async {
     final status = await Permission.location.request();
@@ -69,24 +53,25 @@ class LocationController extends GetxController {
         locationData!.longitude,
       );
       Placemark place = placemarks[0];
+      print(
+          'Address ---------> ${placemarks.first.toString()}');
       if (GetPlatform.isAndroid) {
         // searchController.value.text = "${place.name} ${place.locality} ${place.subLocality} ${place.administrativeArea} ";
         currentAddress.value =
-            "${place.name} ${place.locality} ${place.subLocality} ${place.administrativeArea} ";
+            "${place.name} ${place.locality}, ${place.subLocality} ${place.isoCountryCode} ${place.postalCode} ";
         // currentAddress.value = "${place.postalCode} ";
       } else if (GetPlatform.isIOS) {
         // searchController.value.text = place.street!.isNotEmpty
         //     ? "${place.street} ${place.subAdministrativeArea} ${place.subLocality} ${place.locality}  "
         //     : "${place.subAdministrativeArea} ${place.subLocality} ${place.locality} ${place.administrativeArea}  ";
         currentAddress.value = place.street!.isNotEmpty
-            ? "${place.street} ${place.subAdministrativeArea} ${place.subLocality} ${place.locality}  "
-            : "${place.subAdministrativeArea} ${place.subLocality} ${place.locality} ${place.administrativeArea}  ";
+            ? "${place.street} ${place.subAdministrativeArea}, ${place.subLocality} ${place.locality} ${place.postalCode} "
+            : "${place.subAdministrativeArea} ${place.subLocality}, ${place.locality} ${place.administrativeArea} ${place.postalCode}  ";
         // currentAddress.value = "${place.postalCode}  ";
 
       }
       // currentAddress.value =
       // "${place.name} ${place.locality} ${place.subLocality} ${place.administrativeArea} ";
-
       // userSession.setSearchLocation(currentAddress.value);
       // currentAddress.value =
       // "${place.name},${place.locality},${place.subLocality},${place.administrativeArea}, ${place.country}";
@@ -103,27 +88,6 @@ class LocationController extends GetxController {
     }
   }
 
-// Future<bool> searchLocationApi({Map<String, String>? data}) async {
-//   final response = await apiCall.callPostApi(
-//     data!,
-//     zipCode,
-//     token: '${userSession.token}'
-//   );
-//   print(data);
-//
-//   if (response['response'] == 1) {
-//     homeRestaurantList.value = (response['restaurantlist'])
-//         ?.map((e) => RestaurantList.fromMap(e as Map<String, dynamic>))
-//         .toList();
-//     return true;
-//   }
-//   else{
-//     ShowToast.show(
-//       msg: response['errorMessage'] ?? 'Please try again!',
-//       isError: true,
-//     );
-//   }
-//   return false;
-// }
+
 
 }

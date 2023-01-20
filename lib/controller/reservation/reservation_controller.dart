@@ -15,12 +15,13 @@ class ReservationController extends GetxController
       // ),
       text: 'Upcoming',
     ),
+    const Tab(text: 'Current'),
     const Tab(text: 'Previous'),
   ];
   @override
   void onInit() {
     // TODO: implement onInit
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
     super.onInit();
   }
 }

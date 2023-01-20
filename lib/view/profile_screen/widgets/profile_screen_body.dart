@@ -17,6 +17,7 @@ import '../../../utils/common/widgets_methods/image_picker.dart';
 
 class EditProfileScreenBody extends StatefulWidget {
   final String callFrom;
+
   const EditProfileScreenBody({
     required this.callFrom,
     Key? key,
@@ -62,9 +63,13 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
               _profileController.userProfileData.value.firstName!;
           lastNameController.text =
               _profileController.userProfileData.value.lastName!;
+          // dateController.text = _profileController
+          //     .userProfileData.value.dateofBirth!
+          //     .substring(0, 10);
           dateController.text = _profileController
               .userProfileData.value.dateofBirth!
-              .substring(0, 10);
+              .convertEditProfileDateBirthToFormat();
+
           streetAddressController.text =
               _profileController.userProfileData.value.address!;
           emailAddressController.text =
@@ -159,9 +164,15 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                               borderRadius: BorderRadius.circular(3.0),
                               boxShadow: const [
                                 BoxShadow(
-                                    blurRadius: 9,
-                                    offset: Offset(0, 4),
-                                    color: Color.fromRGBO(192, 192, 192, 0.25))
+                                  blurRadius: 9,
+                                  offset: Offset(0, 4),
+                                  color: Color.fromRGBO(
+                                    192,
+                                    192,
+                                    192,
+                                    0.25,
+                                  ),
+                                ),
                               ],
                             ),
                             child: _profileController
@@ -191,17 +202,21 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                   ),
                   InkWell(
                     onTap: () {
-                      Future(() async {
-                        await showModalBottomSheet(
-                            context: context,
-                            backgroundColor: Colors.transparent,
-                            builder: (context) {
-                              return const ImagePickerBottomSheet();
-                            }).then((value) {
-                          _profileController.createProfileImage.value =
-                              value.file;
-                        });
-                      });
+                      Future(
+                        () async {
+                          await showModalBottomSheet(
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              builder: (context) {
+                                return const ImagePickerBottomSheet();
+                              }).then(
+                            (value) {
+                              _profileController.createProfileImage.value =
+                                  value.file;
+                            },
+                          );
+                        },
+                      );
                     },
                     child: Center(
                       child: CommonText(
@@ -233,9 +248,6 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                         const SizedBox(
                           height: 5.7,
                         ),
-                        // const CommonTextField(
-                        //   hint: "Chaire",
-                        // ),
                         CommonTextFormField(
                           hintText: "Enter Your First name".toTitleCase(),
                           filled: true,
@@ -400,10 +412,10 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                         // ),
                         CommonTextFormField(
                           controller: dateController,
-                          hintText: "yyyy-mm-dd",
+                          hintText: "mm-dd-yyyy",
                           maxLines: 1,
-                         // maxLength: 1,
-                          keyboardType:TextInputType.number,
+                          // maxLength: 1,
+                          keyboardType: TextInputType.number,
                           inputFormatters: [
                             DateTextFormatter(),
                           ],
@@ -427,7 +439,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                         CommonTextFormField(
                           hintText: "enter your street address".toTitleCase(),
                           filled: true,
-                        keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.text,
                           fillColor: greyF4F4F4,
                           controller: streetAddressController,
                           // controller:
@@ -484,7 +496,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                         ),
 
                         CommonText(
-                          text: "Zipcode",
+                          text: "Zip Code",
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: black040404,
@@ -627,10 +639,16 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
     //     .hasMatch(_profileController.dateController.text.trim())) {
     //   return "please enter valid date of birth!".toTitleCase();
     // }
-    else if (!RegExp(r"^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$")
+    else if (!RegExp(
+            r"^(0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])[-](19|20)[0-9]{2}")
         .hasMatch(dateController.text.trim())) {
       return "please enter valid date of birth!".toTitleCase();
-    } else if (streetAddressController.value.text.trim().isEmpty) {
+    }
+    // else if (!RegExp(r"^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$")
+    //     .hasMatch(dateController.text.trim())) {
+    //   return "please enter valid date of birth!".toTitleCase();
+    // }
+    else if (streetAddressController.value.text.trim().isEmpty) {
       return 'please enter your Street Address!'.toTitleCase();
     } else if (cityController.value.text.trim().isEmpty) {
       return 'please enter your city!'.toTitleCase();

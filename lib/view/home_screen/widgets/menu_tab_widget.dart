@@ -2,6 +2,7 @@ import 'package:booking_table/controller/restaurant_details/restaurant_details_c
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/no_data_found.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:get/get.dart';
 import '../../../utils/common/widgets_methods/common_text.dart';
 import '../../../utils/common/widgets_methods/shimmers/listing_shimmer_widget.dart';
@@ -17,22 +18,30 @@ class MenuTab extends StatefulWidget {
 
 class _MenuTabState extends State<MenuTab> {
   RestaurantDetailsController restaurantsController = Get.find();
+  final _controller = ValueNotifier<bool>(false);
 
   @override
   void initState() {
     super.initState();
     // TODO: implement initState
-    loadAllMenuDetail();
+    loadAllMenuDetail(false);
+    _controller.addListener(() {
+      loadAllMenuDetail(_controller.value);
+    });
   }
 
-  loadAllMenuDetail() {
+  loadAllMenuDetail(isOffer) {
     restaurantsController.isLoading.value = true;
-    restaurantsController.restaurantDetailsMenu(
-        body: {"RestaurantId": widget.restaurantId}).then((value) {
-      if (value) {
-        restaurantsController.isLoading.value = false;
-      }
-    });
+    restaurantsController.restaurantDetailsMenu(body: {
+      "RestaurantId": widget.restaurantId,
+      "isOfferItem": isOffer,
+    }).then(
+      (value) {
+        if (value) {
+          restaurantsController.isLoading.value = false;
+        }
+      },
+    );
   }
 
   @override
@@ -41,15 +50,7 @@ class _MenuTabState extends State<MenuTab> {
       builder: (controller) {
         return controller.isLoading.value == true
             ? const ShimmerCard()
-            // const Center(
-            //         child: CircularProgressIndicator(
-            //           color: redE2211C,
-            //         ),
-            //       )
-            :
-            // controller.menuHeaderRestaurantList.isNotEmpty
-            //   ?
-            Column(
+            : Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -61,26 +62,9 @@ class _MenuTabState extends State<MenuTab> {
                                 ScrollController(keepScrollOffset: false),
                             shrinkWrap: true,
                             children: [
-                              //Recommended starts from here
-                              // CommonText(
-                              //   text: controller.menuRestaurantList[0].categoryName
-                              //       .toString(),
-                              //   // text: "Recommended",
-                              //   fontWeight: FontWeight.w700,
-                              //   fontSize: 15,
-                              //   color: black000000,
-                              // ),
                               const SizedBox(
                                 height: 12,
                               ),
-                              // ListView.builder(
-                              //   itemCount: 4,
-                              //   shrinkWrap: true,
-                              //   physics: const NeverScrollableScrollPhysics(),
-                              //   itemBuilder: (context, index) {
-                              //     return restaurantItem(context);
-                              //   },
-                              // ),
                               ListView.builder(
                                 itemCount:
                                     controller.menuHeaderRestaurantList.length,
@@ -91,15 +75,47 @@ class _MenuTabState extends State<MenuTab> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      CommonText(
-                                        text: controller
-                                            .menuHeaderRestaurantList[index]
-                                            .categoryName
-                                            .toString(),
-                                        // text: "Recommended",
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 15,
-                                        color: black000000,
+                                      Row(
+                                        children: [
+                                          CommonText(
+                                            text: controller
+                                                .menuHeaderRestaurantList[index]
+                                                .categoryName
+                                                .toString(),
+                                            // text: "Recommended",
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 15,
+                                            color: black000000,
+                                          ),
+                                          const Spacer(),
+                                          Visibility(
+                                            visible: index == 0 ? true : false,
+                                            child: Row(
+                                              children: [
+                                                CommonText(
+                                                  text: "Special Offers",
+                                                  color: textDark3F3E3E,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                                const SizedBox(
+                                                  width: 8,
+                                                ),
+                                                AdvancedSwitch(
+                                                  width: 31.0,
+                                                  height: 16.0,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  inactiveColor:
+                                                      const Color(0xFFD9D9D9),
+                                                  controller: _controller,
+                                                  activeColor: redE2211C,
+                                                  // padding: 8.0,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       const SizedBox(
                                         height: 15,
@@ -107,7 +123,7 @@ class _MenuTabState extends State<MenuTab> {
                                       ListView.builder(
                                         itemCount: controller
                                             .menuHeaderRestaurantList[index]
-                                            .menu
+                                            .menu!
                                             .length,
                                         shrinkWrap: true,
                                         physics:
@@ -116,28 +132,87 @@ class _MenuTabState extends State<MenuTab> {
                                           return restaurantItem(
                                             controller
                                                 .menuHeaderRestaurantList[index]
-                                                .menu[i]
+                                                .menu![i]
                                                 .itemImage
                                                 .toString(),
                                             controller
-                                                .menuHeaderRestaurantList[index]
-                                                .menu[i]
-                                                .itemName
-                                                .toString(),
+                                                        .menuHeaderRestaurantList[
+                                                            index]
+                                                        .menu![i]
+                                                        .itemName ==
+                                                    null
+                                                ? ""
+                                                : controller
+                                                    .menuHeaderRestaurantList[
+                                                        index]
+                                                    .menu![i]
+                                                    .itemName
+                                                    .toString(),
                                             controller
-                                                .menuHeaderRestaurantList[index]
-                                                .menu[i]
-                                                .itemPrice
-                                                .toString(),
+                                                        .menuHeaderRestaurantList[
+                                                            index]
+                                                        .menu![i]
+                                                        .itemPrice ==
+                                                    null
+                                                ? ""
+                                                : controller
+                                                    .menuHeaderRestaurantList[
+                                                        index]
+                                                    .menu![i]
+                                                    .itemPrice
+                                                    .toString(),
                                             controller
-                                                .menuHeaderRestaurantList[index]
-                                                .menu[i]
-                                                .itemdescription
-                                                .toString(),
-                                            // "controller.",
-                                            // "controller.",
-                                            // "controller.",
-                                            // "controller.",
+                                                        .menuHeaderRestaurantList[
+                                                            index]
+                                                        .menu![i]
+                                                        .itemdescription ==
+                                                    null
+                                                ? ""
+                                                : controller
+                                                    .menuHeaderRestaurantList[
+                                                        index]
+                                                    .menu![i]
+                                                    .itemdescription
+                                                    .toString(),
+                                            controller
+                                                        .menuHeaderRestaurantList[
+                                                            index]
+                                                        .menu![i]
+                                                        .offerTitle ==
+                                                    null
+                                                ? ""
+                                                : controller
+                                                    .menuHeaderRestaurantList[
+                                                        index]
+                                                    .menu![i]
+                                                    .offerTitle
+                                                    .toString(),
+                                            controller
+                                                        .menuHeaderRestaurantList[
+                                                            index]
+                                                        .menu![i]
+                                                        .isOfferItem ==
+                                                    true
+                                                ? true
+                                                : false,
+                                          controller
+                                                    .menuHeaderRestaurantList[
+                                                        index]
+                                                    .menu![i]
+                                                    .isOfferItem  ,
+                                            controller
+                                                        .menuHeaderRestaurantList[
+                                                            index]
+                                                        .menu![i]
+                                                        .offerPrice ==
+                                                    null
+                                                ? ""
+                                                : controller
+                                                    .menuHeaderRestaurantList[
+                                                        index]
+                                                    .menu![i]
+                                                    .offerPrice
+                                                    .toString(),
                                           );
                                         },
                                       ),
@@ -148,47 +223,6 @@ class _MenuTabState extends State<MenuTab> {
                               const SizedBox(
                                 height: 30,
                               ),
-
-                              //Main course starts from here
-                              // CommonText(
-                              //   text: "Main Course",
-                              //   fontWeight: FontWeight.w700,
-                              //   fontSize: 15,
-                              //   color: black000000,
-                              // ),
-                              // const SizedBox(
-                              //   height: 12,
-                              // ),
-                              // ListView.builder(
-                              //   itemCount: 6,
-                              //   shrinkWrap: true,
-                              //   physics: const NeverScrollableScrollPhysics(),
-                              //   itemBuilder: (context, index) {
-                              //     return restaurantItem(context);
-                              //   },
-                              // ),
-                              //
-                              // //sweets starts from here
-                              // CommonText(
-                              //   text: "Sweets",
-                              //   fontWeight: FontWeight.w700,
-                              //   fontSize: 15,
-                              //   color: black000000,
-                              // ),
-                              // const SizedBox(
-                              //   height: 12,
-                              // ),
-                              // ListView.builder(
-                              //   itemCount: 2,
-                              //   shrinkWrap: true,
-                              //   physics: const NeverScrollableScrollPhysics(),
-                              //   itemBuilder: (context, index) {
-                              //     return restaurantItem(context);
-                              //   },
-                              // ),
-                              // const SizedBox(
-                              //   height: 12,
-                              // ),
                             ],
                           )
                         : const CommonNoDataFound(),
@@ -205,6 +239,10 @@ class _MenuTabState extends State<MenuTab> {
     itemName,
     itemPrice,
     itemDescription,
+    offerTitle,
+    visibility,
+    isOfferItem,
+    offerPrice,
   ) {
     return Column(
       children: [
@@ -226,11 +264,39 @@ class _MenuTabState extends State<MenuTab> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CommonText(
-                  text: itemName,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: black000000,
+                Row(
+                  children: [
+                    CommonText(
+                      text: itemName,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: black000000,
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Visibility(
+                      visible: visibility,
+                      child: Container(
+                        // width: 80,
+                        // height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: red0FE2211C),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CommonText(
+                              text: offerTitle,
+                              fontWeight: FontWeight.w500,
+                              color: black0D0000,
+                              fontSize: 8,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
                 SizedBox(
                   width: Get.width - 130,
@@ -253,12 +319,33 @@ class _MenuTabState extends State<MenuTab> {
                       fontWeight: FontWeight.w400,
                       color: textDark3F3E3E,
                     ),
-                    CommonText(
-                      text: "\$ $itemPrice",
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: redE2211C,
-                    ),
+                    isOfferItem == false
+                        ? CommonText(
+                            text: "\$ $itemPrice",
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: redE2211C,
+                          )
+                        : Row(
+                            children: [
+                              CommonText(
+                                text: "\$ $offerPrice",
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: redE2211C,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              CommonText(
+                                text: "\$ $itemPrice",
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: grey868686,
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                            ],
+                          ),
                   ],
                 ),
               ],

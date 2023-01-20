@@ -79,12 +79,21 @@ class DateTextFormatter extends TextInputFormatter {
       // if ((i == 1 || i == 3) && i != value.length - 1) {
       //   newString += seperator;
       // }
+      if (i == 1 && i != value.length - 1) {
+        newString += seperator;
+      }
       if (i == 3 && i != value.length - 1) {
         newString += seperator;
       }
-      if (i == 5 && i != value.length - 1) {
+      if (i == 8 && i != value.length - 1) {
         newString += seperator;
       }
+      // if (i == 3 && i != value.length - 1) {
+      //   newString += seperator;
+      // }
+      // if (i == 5 && i != value.length - 1) {
+      //   newString += seperator;
+      // }
     }
     //profileController.dateController.text = newString.toString();
     return newString;

@@ -1,6 +1,6 @@
 import 'package:booking_table/bindings/auth_bindings.dart';
 import 'package:booking_table/view/auth_screens/auth_selection_view.dart';
-import 'package:booking_table/view/book_a_table/booking_details_view.dart';
+import 'package:booking_table/view/reservation/widgets/booking_details_view.dart';
 import 'package:booking_table/view/home_screen/filter_view.dart';
 import 'package:booking_table/view/home_screen/restaurant_details_view.dart';
 import 'package:booking_table/view/profile_screen/profile_view.dart';
@@ -127,11 +127,11 @@ class AppRoutes {
       page: () => FullServiceSummaryView(callFrom: 'Pre Order'),
       // binding: ,
     ),
-    GetPage(
-      name: RouteName.midService,
-      page: () => MidServiceSummaryView(),
-      // binding: ,
-    ),
+    // GetPage(
+    //   name: RouteName.midService,
+    //   page: () => MidServiceSummaryView(),
+    //   // binding: ,
+    // ),
     GetPage(
       name: RouteName.preOrder, page: () => PreOrderView(),
       // binding: ,
@@ -144,6 +144,11 @@ class AppRoutes {
     GetPage(
       name: RouteName.bookingDetailsPrevious,
       page: () => BookingDetailsView(callFrom: 'Previous'),
+      // binding: ,
+    ),
+    GetPage(
+      name: RouteName.bookingDetailsRunning,
+      page: () => BookingDetailsView(callFrom: 'Running'),
       // binding: ,
     ),
     GetPage(

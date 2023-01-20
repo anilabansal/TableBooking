@@ -12,12 +12,15 @@ import 'package:get/get.dart';
 
 class RestaurantDetailsBody extends StatelessWidget {
   final int? restaurantId;
+
   RestaurantDetailsBody({
-    Key? key,this.restaurantId,
+    Key? key,
+    this.restaurantId,
     required TabController tabController,
   })  : _tabController = tabController,
         super(key: key);
   final TabController _tabController;
+
   // HomeController controller = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -97,19 +100,27 @@ class RestaurantDetailsBody extends StatelessWidget {
                               ]),
                         ),
                         SizedBox(
-                    // height: double.maxFinite,
-                     height: MediaQuery.of(context).size.height-100,
-                         // height: MediaQuery.of(context).size.height*0.9,
+                          // height: double.maxFinite,
+                          height: MediaQuery.of(context).size.height - 100,
+                          // height: MediaQuery.of(context).size.height*0.9,
                           child: Padding(
                             padding:
                                 const EdgeInsets.fromLTRB(20.0, 25, 20, 20),
                             child: TabBarView(
                                 controller: _tabController,
-                                children:  [
-                                  MenuTab(restaurantId:restaurantId,),
-                                  AboutTabScreen(restaurantId:restaurantId ,),
-                                  ReviewsTabScreen(restaurantId:  restaurantId,),
-                                  GalleryTab(restaurantId: restaurantId,)
+                                children: [
+                                  MenuTab(
+                                    restaurantId: restaurantId,
+                                  ),
+                                  AboutTabScreen(
+                                    restaurantId: restaurantId,
+                                  ),
+                                  ReviewsTabScreen(
+                                    restaurantId: restaurantId,
+                                  ),
+                                  GalleryTab(
+                                    restaurantId: restaurantId,
+                                  )
                                 ]),
                           ),
                         )

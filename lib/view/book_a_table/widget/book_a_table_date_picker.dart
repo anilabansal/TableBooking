@@ -7,11 +7,12 @@ import '../../../utils/common/common_strings.dart';
 import '../../../utils/common/widgets_methods/common_text_form_field.dart';
 
 class BookTableDatePicker extends StatelessWidget {
-
   final TextEditingController? controller;
   final dynamic restaurantId;
-  final int?bookingId;
-  BookTableDatePicker({Key? key, this.controller, this.restaurantId,this.bookingId})
+  final int? bookingId;
+
+  BookTableDatePicker(
+      {Key? key, this.controller, this.restaurantId, this.bookingId})
       : super(key: key);
   BookATableController bookingTable = Get.find();
 
@@ -45,14 +46,15 @@ class BookTableDatePicker extends StatelessWidget {
             lastDate: DateTime.now().add(const Duration(days: 60)),
           );
           if (picked != null) {
-            controller!.text = DateFormat('yyyy-MM-dd').format(picked);
+            // controller!.text = DateFormat('yyyy-MM-dd').format(picked);
+            controller!.text = DateFormat('MM-dd-yyyy').format(picked);
             loadAllBookTime(context);
           }
         },
         child: CommonTextFormField(
           enable: false,
           controller: controller,
-          hintText: "yyyy-mm-dd",
+          hintText: "mm-dd-yyyy",
           filled: true,
           suffixIcon: const Icon(
             Icons.calendar_month_outlined,
@@ -72,8 +74,10 @@ class BookTableDatePicker extends StatelessWidget {
     bookingTable.getAvailableBookingTime(body: {
       "RestaurantId": restaurantId,
       // "RestaurantId": "3",
-      "BookingDate": controller!.text,
-      "BookingId":bookingId,
+      "BookingDate": DateFormat('yyyy-MM-dd').format(
+        DateFormat('MM-dd-yyyy').parse(controller!.text),
+      ),
+      "BookingId": bookingId,
       // "BookingDate": controller!.text,
     }).then(
       (value) {

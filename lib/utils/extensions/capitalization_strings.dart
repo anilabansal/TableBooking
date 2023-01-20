@@ -29,3 +29,14 @@ extension EditBookingDate on String {
     return formatGoalDateTime;
   }
 }
+
+/// convert d.o.b in edit profile
+extension EditProfileDateBirth on String {
+  String convertEditProfileDateBirthToFormat() {
+    var dateBirthTime = DateFormat("yyyy-MM-ddTHH:mm:ss").parse(this,true).toLocal();
+//var now = DateFormat().parse(widget.bookingdetails![0].bookingDate.toString());
+    var formatterDate = DateFormat('MM-dd-yyyy');
+    String formatGoalDateTime = formatterDate.format(dateBirthTime);
+    return formatGoalDateTime;
+  }
+}
