@@ -169,8 +169,9 @@ class _FavouriteBodyState extends State<FavouriteBody> {
                                               width: 33,
                                               height: 33,
                                               decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: greyF2F2F2,),
+                                                shape: BoxShape.circle,
+                                                color: greyF2F2F2,
+                                              ),
                                               child: Center(
                                                 child: homeController
                                                         .favRestaurantList[

@@ -14,15 +14,18 @@ class PreOrderView extends StatefulWidget {
   const PreOrderView({
     Key? key,
   }) : super(key: key);
+
   @override
   State<PreOrderView> createState() => _PreOrderViewState();
 }
+
 class _PreOrderViewState extends State<PreOrderView> {
   // PreOrderController controller = Get.put(PreOrderController());
   RestaurantDetailsController restaurantsController = Get.find();
   BookATableController bookATableController = Get.find();
   var data = Get.arguments;
-@override
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -59,25 +62,26 @@ class _PreOrderViewState extends State<PreOrderView> {
             ),
             GetBuilder<RestaurantDetailsController>(
               builder: (controller) {
-                return Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GetBuilder<BookATableController>(
-                          builder: (bookATableController) {
-                        return ListView(
-                          primary: false,
-                          controller: ScrollController(keepScrollOffset: false),
-                          shrinkWrap: true,
+                return controller.menuHeaderRestaurantList.isEmpty
+                    ? const CommonNoDataFound()
+                    : Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            controller.menuHeaderRestaurantList.isEmpty
-                                ? const CommonNoDataFound()
-                                : ListView.builder(
+                            GetBuilder<BookATableController>(
+                                builder: (bookATableController) {
+                              return ListView(
+                                primary: false,
+                                controller:
+                                    ScrollController(keepScrollOffset: false),
+                                shrinkWrap: true,
+                                children: [
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  ListView.builder(
                                     itemCount: controller
                                         .menuHeaderRestaurantList.length,
                                     shrinkWrap: true,
@@ -311,6 +315,7 @@ class _PreOrderViewState extends State<PreOrderView> {
                                                           Row(
                                                             children: [
                                                               CommonText(
+                                                                softWrap: true,
                                                                 text: controller
                                                                             .menuHeaderRestaurantList[
                                                                                 index]
@@ -348,12 +353,14 @@ class _PreOrderViewState extends State<PreOrderView> {
                                                                     Container(
                                                                   // width: 80,
                                                                   // height: 50,
-                                                                  decoration: BoxDecoration(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10),
-                                                                      color:
-                                                                          red0FE2211C),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            10),
+                                                                    color:
+                                                                        red0FE2211C,
+                                                                  ),
                                                                   child: Center(
                                                                     child:
                                                                         Padding(
@@ -420,7 +427,8 @@ class _PreOrderViewState extends State<PreOrderView> {
                                                                 color:
                                                                     textDark3F3E3E,
                                                               ),
-                                                              controller .menuHeaderRestaurantList[
+                                                              controller
+                                                                          .menuHeaderRestaurantList[
                                                                               index]
                                                                           .menu![
                                                                               i]
@@ -484,24 +492,24 @@ class _PreOrderViewState extends State<PreOrderView> {
                                       );
                                     },
                                   ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            CommonButton(
-                              onTap: () {
-                                bookATableController.updateOrderIsAdded();
-                                Get.back();
-                              },
-                              text: 'Add',
-                              bgColor: redE2211C,
-                              textColor: Colors.white,
-                            ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  CommonButton(
+                                    onTap: () {
+                                      bookATableController.updateOrderIsAdded();
+                                      Get.back();
+                                    },
+                                    text: 'Add',
+                                    bgColor: redE2211C,
+                                    textColor: Colors.white,
+                                  ),
+                                ],
+                              );
+                            })
                           ],
-                        );
-                      })
-                    ],
-                  ),
-                );
+                        ),
+                      );
               },
             ),
           ],

@@ -4,7 +4,9 @@ import 'package:booking_table/view/service_type/widgets/full_service_summary_bot
 import 'package:booking_table/view/service_type/widgets/full_service_summary_details_button_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controller/book_a_table/book_a_table_controller.dart';
 import '../../utils/common/common_strings.dart';
+import '../../utils/common/no_data_found.dart';
 import '../../utils/common/widgets_methods/restaurant_name_distance.dart';
 
 class FullServiceSummaryView extends StatelessWidget {
@@ -13,7 +15,8 @@ class FullServiceSummaryView extends StatelessWidget {
     this.callFrom,
     Key? key,
   }) : super(key: key);
-  SummaryController controller = Get.put(SummaryController());
+  // SummaryController controller = Get.put(SummaryController());
+  BookATableController bookATableController = Get.find();
   var data = Get.arguments;
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,9 @@ class FullServiceSummaryView extends StatelessWidget {
       //   callFrom: callFrom,
       // ),
       body: SingleChildScrollView(
-        child: Column(
+        child:
+        bookATableController.serviceSummary==null?const Center(child: CommonNoDataFound()):
+        Column(
           children: [
              CommonRestaurantNameDistance(
               restaurantName: data[0]['restaurantName'],

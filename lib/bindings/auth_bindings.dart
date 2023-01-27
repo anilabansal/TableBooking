@@ -10,7 +10,9 @@ import '../controller/book_a_table/book_a_table_controller.dart';
 import '../controller/card_details/add_card_details_controller.dart';
 import '../controller/filter/filter_screen_controller.dart';
 import '../controller/home/home_controller.dart';
+import '../controller/payment/credit_card_controller.dart';
 import '../controller/restaurant_details/restaurant_details_controller.dart';
+import '../controller/support/customer_support_controller.dart';
 
 class MainBindings extends Bindings {
   @override
@@ -31,5 +33,7 @@ class MainBindings extends Bindings {
     Get.put(LocationController());
     Get.put(FilterViewController());
     Get.lazyPut<BookATableController>(() => BookATableController());
+    Get.lazyPut<CreditCardController>(() => CreditCardController());
+    Get.lazyPut<SupportController>(() => SupportController());
   }
 }

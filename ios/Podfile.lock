@@ -130,6 +130,8 @@ PODS:
   - nanopb/encode (2.30909.0)
   - path_provider_ios (0.0.1):
     - Flutter
+  - pay_ios (0.0.1):
+    - Flutter
   - permission_handler_apple (9.0.4):
     - Flutter
   - PromisesObjC (2.1.1)
@@ -138,6 +140,42 @@ PODS:
     - Flutter
   - smart_auth (0.0.1):
     - Flutter
+  - Stripe (23.1.1):
+    - StripeApplePay (= 23.1.1)
+    - StripeCore (= 23.1.1)
+    - StripePayments (= 23.1.1)
+    - StripePaymentsUI (= 23.1.1)
+    - StripeUICore (= 23.1.1)
+  - stripe_ios (0.0.1):
+    - Flutter
+    - Stripe (~> 23.1.0)
+    - StripeApplePay (~> 23.1.0)
+    - StripeFinancialConnections (~> 23.1.0)
+    - StripePayments (~> 23.1.0)
+    - StripePaymentSheet (~> 23.1.0)
+    - StripePaymentsUI (~> 23.1.0)
+  - StripeApplePay (23.1.1):
+    - StripeCore (= 23.1.1)
+  - StripeCore (23.1.1)
+  - StripeFinancialConnections (23.1.1):
+    - StripeCore (= 23.1.1)
+    - StripeUICore (= 23.1.1)
+  - StripePayments (23.1.1):
+    - StripeCore (= 23.1.1)
+    - StripePayments/Stripe3DS2 (= 23.1.1)
+  - StripePayments/Stripe3DS2 (23.1.1):
+    - StripeCore (= 23.1.1)
+  - StripePaymentSheet (23.1.1):
+    - StripeApplePay (= 23.1.1)
+    - StripeCore (= 23.1.1)
+    - StripePayments (= 23.1.1)
+    - StripePaymentsUI (= 23.1.1)
+  - StripePaymentsUI (23.1.1):
+    - StripeCore (= 23.1.1)
+    - StripePayments (= 23.1.1)
+    - StripeUICore (= 23.1.1)
+  - StripeUICore (23.1.1):
+    - StripeCore (= 23.1.1)
   - Toast (4.0.0)
   - url_launcher_ios (0.0.1):
     - Flutter
@@ -159,9 +197,11 @@ DEPENDENCIES:
   - libphonenumber (from `.symlinks/plugins/libphonenumber/ios`)
   - libphonenumber_plugin (from `.symlinks/plugins/libphonenumber_plugin/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
+  - pay_ios (from `.symlinks/plugins/pay_ios/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
   - smart_auth (from `.symlinks/plugins/smart_auth/ios`)
+  - stripe_ios (from `.symlinks/plugins/stripe_ios/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
@@ -193,6 +233,14 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
+    - Stripe
+    - StripeApplePay
+    - StripeCore
+    - StripeFinancialConnections
+    - StripePayments
+    - StripePaymentSheet
+    - StripePaymentsUI
+    - StripeUICore
     - Toast
 
 EXTERNAL SOURCES:
@@ -224,12 +272,16 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/libphonenumber_plugin/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
+  pay_ios:
+    :path: ".symlinks/plugins/pay_ios/ios"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   sign_in_with_apple:
     :path: ".symlinks/plugins/sign_in_with_apple/ios"
   smart_auth:
     :path: ".symlinks/plugins/smart_auth/ios"
+  stripe_ios:
+    :path: ".symlinks/plugins/stripe_ios/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
   webview_flutter_wkwebview:
@@ -274,11 +326,21 @@ SPEC CHECKSUMS:
   MLKitVision: 96c96571190b7f63eddf4a12068ce8a8689e0d2c
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
+  pay_ios: 8c7beb9c61d885f3f51b61f75f8793023fc8843a
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   Protobuf: 120350fc38646e2dedc26f49ecba778184ea1de2
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   smart_auth: 4bedbc118723912d0e45a07e8ab34039c19e04f2
+  Stripe: ff389e265eeffb891b871b62b2fa644e30e69338
+  stripe_ios: 728603d6aa71a76f00dd05e202cba7d5b357a4be
+  StripeApplePay: 4413b4f21c0206094df20775aa5e8e063b9c8b5d
+  StripeCore: 6318dff8f7e42125c6e8b671ac54a6e82804705a
+  StripeFinancialConnections: 3586b42043921d46eadf59bb0dcd2ac17ff109f2
+  StripePayments: 7e903765860f1cc914041069edc9cf5e202f5ef7
+  StripePaymentSheet: 49602fb474a86e7624a082f256fd786b2eac80cb
+  StripePaymentsUI: e4b2be5b5b5edb774fc8667a71429194c39ce2a4
+  StripeUICore: 149ba9dda3f48dff829d2ebb2e3d455bc59dc0ed
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
   webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f

@@ -2,7 +2,6 @@ import 'package:booking_table/controller/restaurant_details/restaurant_details_c
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/no_data_found.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:get/get.dart';
 import '../../../utils/common/widgets_methods/common_text.dart';
 import '../../../utils/common/widgets_methods/shimmers/listing_shimmer_widget.dart';
@@ -24,17 +23,17 @@ class _MenuTabState extends State<MenuTab> {
   void initState() {
     super.initState();
     // TODO: implement initState
-    loadAllMenuDetail(false);
-    _controller.addListener(() {
-      loadAllMenuDetail(_controller.value);
-    });
+    loadAllMenuDetail();
+    // _controller.addListener(() {
+    //   loadAllMenuDetail(_controller.value);
+    // });
   }
 
-  loadAllMenuDetail(isOffer) {
+  loadAllMenuDetail() {
     restaurantsController.isLoading.value = true;
     restaurantsController.restaurantDetailsMenu(body: {
       "RestaurantId": widget.restaurantId,
-      "isOfferItem": isOffer,
+      "isOfferItem": true,
     }).then(
       (value) {
         if (value) {
@@ -87,34 +86,34 @@ class _MenuTabState extends State<MenuTab> {
                                             fontSize: 15,
                                             color: black000000,
                                           ),
-                                          const Spacer(),
-                                          Visibility(
-                                            visible: index == 0 ? true : false,
-                                            child: Row(
-                                              children: [
-                                                CommonText(
-                                                  text: "Special Offers",
-                                                  color: textDark3F3E3E,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                                const SizedBox(
-                                                  width: 8,
-                                                ),
-                                                AdvancedSwitch(
-                                                  width: 31.0,
-                                                  height: 16.0,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  inactiveColor:
-                                                      const Color(0xFFD9D9D9),
-                                                  controller: _controller,
-                                                  activeColor: redE2211C,
-                                                  // padding: 8.0,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                          // const Spacer(),
+                                          // Visibility(
+                                          //   visible: index == 0 ? true : false,
+                                          //   child: Row(
+                                          //     children: [
+                                          //       CommonText(
+                                          //         text: "Special Offers",
+                                          //         color: textDark3F3E3E,
+                                          //         fontSize: 14,
+                                          //         fontWeight: FontWeight.w500,
+                                          //       ),
+                                          //       const SizedBox(
+                                          //         width: 8,
+                                          //       ),
+                                          //       AdvancedSwitch(
+                                          //         width: 31.0,
+                                          //         height: 16.0,
+                                          //         borderRadius:
+                                          //             BorderRadius.circular(5),
+                                          //         inactiveColor:
+                                          //             const Color(0xFFD9D9D9),
+                                          //         controller: _controller,
+                                          //         activeColor: redE2211C,
+                                          //         // padding: 8.0,
+                                          //       ),
+                                          //     ],
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                       const SizedBox(

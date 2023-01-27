@@ -125,7 +125,7 @@ class _AboutTabScreenState extends State<AboutTabScreen> {
                                                     .openingHour
                                                     .toString() !=
                                                 "null"
-                                            ? "${DateFormat('h:mm a').format(DateFormat('h:mm:ss').parse(controller.aboutUsRestaurantList[0].schedule[index].openingHour.toString()))}- ${DateFormat('h:mm a').format(DateFormat('h:mm:ss').parse(controller.aboutUsRestaurantList[0].schedule[index].closingHour.toString()))}"
+                                            ? "${DateFormat('h:mm a').format(DateFormat('H:mm:ss').parse(controller.aboutUsRestaurantList[0].schedule[index].openingHour.toString()))}- ${DateFormat('h:mm a').format(DateFormat('H:mm:ss').parse(controller.aboutUsRestaurantList[0].schedule[index].closingHour.toString()))}"
                                             : "---",
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,

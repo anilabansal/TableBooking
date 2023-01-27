@@ -76,7 +76,8 @@ dependencies:
   flutter_keychain: ^2.2.1
   shimmer: ^2.0.0
   lottie: ^2.1.0
-#  flutter_stripe: ^7.0.0
+  flutter_stripe: ^7.0.0
+  pay: ^1.1.0
 
 
 dev_dependencies:

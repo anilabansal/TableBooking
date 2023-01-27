@@ -30,6 +30,7 @@ class ServiceSummary {
     this.ratings,
     this.userBookingOrder,
     this.isOrderAdded,
+    this.slotId,
   });
 
   int? bookingId;
@@ -59,6 +60,7 @@ class ServiceSummary {
   List<dynamic>? ratings;
   List<dynamic>? userBookingOrder;
   bool? isOrderAdded;
+  int?slotId;
 
   factory ServiceSummary.fromJson(Map<String, dynamic> json) => ServiceSummary(
         bookingId: json["bookingId"],
@@ -89,6 +91,7 @@ class ServiceSummary {
         userBookingOrder:
             List<dynamic>.from(json["userBookingOrder"].map((x) => x)),
         isOrderAdded: false,
+      slotId :json['slotId'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -119,5 +122,6 @@ class ServiceSummary {
         "ratings": List<dynamic>.from(ratings!.map((x) => x)),
         "userBookingOrder": List<dynamic>.from(userBookingOrder!.map((x) => x)),
         "isOrderAdded": isOrderAdded,
+    "slotId":slotId,
       };
 }

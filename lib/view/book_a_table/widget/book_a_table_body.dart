@@ -354,20 +354,32 @@ class _BookATableBodyState extends State<BookATableBody> {
                                             .clear();
                                         restaurantDetailsController
                                             .subTotalPrice = 0.0;
+                                        for (int i = 0;
+                                            i <
+                                                restaurantDetailsController
+                                                    .menuHeaderRestaurantList
+                                                    .length;
+                                            i++) {
+                                          for (int j = 0;
+                                              j <
+                                                  restaurantDetailsController
+                                                      .menuHeaderRestaurantList[
+                                                          i]
+                                                      .menu!
+                                                      .length;
+                                              j++) {
+                                            restaurantDetailsController
+                                                .menuHeaderRestaurantList[i]
+                                                .menu![j]
+                                                .quantity = 0;
+                                            print(
+                                                'quantityCount---->${restaurantDetailsController.menuHeaderRestaurantList[i].menu![j].quantity}');
+                                          }
+                                        }
                                         // restaurantDetailsController
-                                        //     .menuHeaderRestaurantList[
-                                        //         restaurantDetailsController
-                                        //             .menuHeaderRestaurantList
-                                        //             .length]
-                                        //     .menu![restaurantDetailsController
-                                        //         .menuHeaderRestaurantList[
-                                        //             restaurantDetailsController
-                                        //                 .menuHeaderRestaurantList
-                                        //                 .length]
-                                        //         .menu!
-                                        //         .length]
-                                        //     .quantity = 0;
-
+                                        //     .menuHeaderRestaurantList
+                                        //     .map((element) => element.menu!
+                                        //         .map((e) => e.quantity = 0));
                                         print(
                                             'cartList---->${restaurantDetailsController.cartItemsList.length}');
                                       },

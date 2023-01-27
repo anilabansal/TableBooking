@@ -5,9 +5,7 @@ import 'package:booking_table/view/home_screen/filter_view.dart';
 import 'package:booking_table/view/home_screen/restaurant_details_view.dart';
 import 'package:booking_table/view/profile_screen/profile_view.dart';
 import 'package:booking_table/view/service_type/full_service_summary_view.dart';
-import 'package:booking_table/view/service_type/mid_service_summary_view.dart';
 import 'package:get/get.dart';
-
 import '../view/book_a_table/edit_booking.dart';
 import '/routes/route_name.dart';
 import '/view/auth_screens/get_zip_code_view.dart';
@@ -26,7 +24,6 @@ import '/view/service_type/pre_order_view.dart';
 import '/view/splash_screen/splash_view.dart';
 import '/view/support/support_view.dart';
 import '/view/terms_n_conditions/terms_n_conditions_view.dart';
-import '../bindings/home_bindings.dart';
 import '../view/home_screen/filter_result_view.dart';
 import '../view/payment/payment_method_view.dart';
 
@@ -73,7 +70,7 @@ class AppRoutes {
       binding: MainBindings(),
     ),
     GetPage(
-      name: RouteName.support, page: () => const SupportView(),
+      name: RouteName.support, page: () =>  SupportView(),
       // binding: ,
     ),
     GetPage(
@@ -91,7 +88,7 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.paymentDone, page: () => const PaymentDoneView(),
+      name: RouteName.paymentDone, page: () =>  PaymentDoneView(),
       // binding: ,
     ),
     GetPage(
@@ -110,7 +107,7 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.paymentDone, page: () => const PaymentDoneView(),
+      name: RouteName.paymentDone, page: () =>  PaymentDoneView(),
       // binding: ,
     ),
     GetPage(
@@ -133,7 +130,7 @@ class AppRoutes {
     //   // binding: ,
     // ),
     GetPage(
-      name: RouteName.preOrder, page: () => PreOrderView(),
+      name: RouteName.preOrder, page: () => const PreOrderView(),
       // binding: ,
     ),
     GetPage(
@@ -198,7 +195,7 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteName.preOrder,
-      page: () => PreOrderView(),
+      page: () => const PreOrderView(),
       // binding: ,
     ),
   ];
