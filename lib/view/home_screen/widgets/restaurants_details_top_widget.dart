@@ -319,6 +319,7 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                         CommonButton(
                           onTap: () {
                             if (userSessionController.isLogin) {
+
                               Get.toNamed(
                                 // '/add-card-details',
                                 '/book-a-table',

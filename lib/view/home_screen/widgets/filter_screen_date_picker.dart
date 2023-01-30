@@ -79,6 +79,8 @@ class FilterScreenDatePicker extends StatelessWidget {
 
   loadAllTimeList() {
     filterViewController.isSelectedTimeLoading.value = true;
+    filterViewController.selectTime.value = [];
+    filterViewController.setSelectedFilterTime(null);
     filterViewController.getAvailableTime(
       body: {
         //"Date":DateTime.now(),

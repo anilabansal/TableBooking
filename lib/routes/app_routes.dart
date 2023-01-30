@@ -112,7 +112,7 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteName.reservation, page: () => const ReservationView(),
-      // binding: ,
+      binding:MainBindings() ,
     ),
     GetPage(
       name: RouteName.fullService,

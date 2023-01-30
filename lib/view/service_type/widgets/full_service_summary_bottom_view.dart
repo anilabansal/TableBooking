@@ -325,24 +325,43 @@ class FullSummaryBottomView extends StatelessWidget {
                 if (controller.selectPaymentMode.value == "Pay At Restaurant") {
                   controller.confirmBookIsLoading.value = true;
                   ProgressDialog.showProgressDialog(context);
-                  controller.confirmBookingApiCall(body: {
+                  controller.confirmBookingApiCall(body:
+                  {
                     "BookingId": 0,
-                    "Items": jsonEncode(restaurantsController.cartItemsList),
+                    //"Items": jsonEncode(restaurantsController.cartItemsList),
+                    // "Items": jsonEncode(restaurantsController.cartItemsList.map((e) => e.toJson()).toList()).toString(),
+                    "Items":jsonDecode(jsonEncode(restaurantsController.cartItemsList)),
                     "SpecialEvent": specialEventController.text.trim().isEmpty
                         ? ""
                         : specialEventController.text.trim(),
                     "PaymentTypeId": 4,
                     "Tip": tipAmountToAdded,
                     "RestaurantId": controller.serviceSummary!.restaurantId,
-                    "BookingDate": controller.serviceSummary!.bookingDate,
+                    "BookingDate": controller.serviceSummary!.bookingDate.toString(),
                     "PartySize": controller.serviceSummary!.partySize,
                     "ServiceType": controller.serviceSummary!.serviceType,
-                    "BookingTime": controller.serviceSummary!.bookingTime,
+                    "BookingTime": controller.serviceSummary!.bookingTime.toString(),
                     "SpecialRequest": allergiesController.text.trim().isEmpty
                         ? ""
                         : allergiesController.text.trim(),
                     "SlotId": controller.serviceSummary!.slotId,
-                  }).then((value) {
+                  }
+                  // {
+                  //   "BookingId": 0,
+                  //   "Items": [],
+                  //   "SpecialEvent":"" ,
+                  //   "PaymentTypeId": 4,
+                  //   "Tip": 0.0,
+                  //   "RestaurantId": 14,
+                  //   "BookingDate": "2023-01-30T00:00:00",
+                  //   "PartySize": 3,
+                  //   "ServiceTyp": 1,
+                  //   "BookingTime": "15:00:00",
+                  //   "SpecialRequest": "",
+                  //   "SlotId": 99
+                  //
+                  // }
+                  ).then((value) {
                     controller.confirmBookIsLoading.value = false;
                     Navigator.pop(context);
                     if (value) {

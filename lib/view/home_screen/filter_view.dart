@@ -160,7 +160,7 @@ class _FilterViewState extends State<FilterView> {
                               //   fillColor: greyF4F4F4,
                               //   controller: partySizeController,
                               // ),
-                              const PartySizeDropDown(),
+                               const PartySizeDropDown(),
                             ],
                           ).paddingOnly(left: 22, right: 22),
                           const SizedBox(
@@ -320,8 +320,8 @@ class _FilterViewState extends State<FilterView> {
                                         // "Date": dateController.value.text
                                         //     .trim()
                                         //     .toString(),
-                                        "Date": DateFormat('MM/dd/yyyy').format(
-                                          DateFormat('dd-MM-yyyy')
+                                        "Date": DateFormat('yyyy-MM-dd').format(
+                                          DateFormat('MM-dd-yyyy')
                                               .parse(dateController.value.text),
                                         ),
                                         // "Date": "01/12/2022",
@@ -377,7 +377,7 @@ class _FilterViewState extends State<FilterView> {
                                         "ServiceId": homeController
                                             .serviceType.value
                                             .trim(),
-                                        "Date": DateFormat('MM/dd/yyyy').format(
+                                        "Date": DateFormat('yyyy-MM-dd').format(
                                           DateFormat('dd-MM-yyyy')
                                               .parse(dateController.value.text),
                                         ),

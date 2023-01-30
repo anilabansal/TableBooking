@@ -1,14 +1,15 @@
 import 'package:booking_table/model/book_table_modals/party_size_list_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../controller/book_a_table/book_a_table_controller.dart';
 import '../../../controller/filter/filter_screen_controller.dart';
 import '../../../utils/common/common_strings.dart';
 
-class PartySizeDropDown extends StatelessWidget {
-  const PartySizeDropDown({Key? key}) : super(key: key);
+class BookTablePartySizeDropDown extends StatelessWidget {
+  const BookTablePartySizeDropDown({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<FilterViewController>(builder: (filterViewController) {
+    return GetBuilder<BookATableController>(builder: (bookTableController) {
       return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
@@ -32,18 +33,18 @@ class PartySizeDropDown extends StatelessWidget {
               size: 25,
             ),
             onChanged: (newValue) {
-              filterViewController.setSelectedPartySize(newValue);
+              bookTableController.setBookTableSelectedPartySize(newValue);
               print(newValue);
             },
             //value: _filterController.selectedFoodType,
-            value: filterViewController.selectedPartySize,
-            items: filterViewController.partySize.isNotEmpty
-                ? filterViewController.partySize.map((PartySize value) {
-                    return DropdownMenuItem<PartySize>(
-                      value: value,
-                      child: Text(value.number!.toString()),
-                    );
-                  }).toList()
+            value: bookTableController.selectedBookTablePartySize,
+            items: bookTableController.bookTablePartySize.isNotEmpty
+                ? bookTableController.bookTablePartySize.map((PartySize value) {
+              return DropdownMenuItem<PartySize>(
+                value: value,
+                child: Text(value.number!.toString()),
+              );
+            }).toList()
                 : []),
       );
     });

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import '../../model/book_table_modals/edit_booking.dart';
+import '../../model/book_table_modals/party_size_list_modal.dart';
 import '../../model/book_table_modals/sevice_summary_modal.dart';
 import '../../model/filter_select_time.dart';
 import '../../utils/common/common_strings.dart';
@@ -26,9 +27,16 @@ class BookATableController extends GetxController {
   var addTip = "".obs;
   var selectPaymentMode = "".obs;
   var confirmBookIsLoading = true.obs;
+   var bookTablePartySizeIsLoading = true.obs;
   dynamic tipAmount;
   ServiceSummary?serviceSummary;
   BookingResponse?editBookingResponse;
+  var bookTablePartySize = <PartySize>[].obs;
+  PartySize?selectedBookTablePartySize;
+  void setBookTableSelectedPartySize(value){
+    selectedBookTablePartySize = value;
+    update();
+  }
 
   /// update Order is added or not
    updateOrderIsAdded(){
@@ -154,7 +162,7 @@ class BookATableController extends GetxController {
     return false;
   }
 /// confirm booking
-  Future<bool> confirmBookingApiCall({body}) async {
+  Future<bool> confirmBookingApiCall({Map<String,dynamic>? body}) async {
     try {
       final response = await apiCall.callPostApi(
         body,
@@ -162,6 +170,37 @@ class BookATableController extends GetxController {
         token: userSessionController.token,
       );
       if (response["response"] == 1) {
+        return true;
+      } else {
+        ShowToast.show(
+          msg: response['errorMessage'] ?? 'Please try again!',
+          isError: true,
+        );
+        return false;
+      }
+    } catch (e) {
+      print('Error --------> $e');
+    }
+    //  isLoading.value = false;
+    return false;
+  }
+
+  ///party size api call
+  Future<bool> getBookTablePartySize() async {
+    try {
+      final response = await apiCall.callPostApi(
+        {},
+        partySizeEndPoint,
+        token: userSessionController.token,
+      );
+      if (response["response"] == 1) {
+        if (response["data"] != null) {
+          bookTablePartySize.value = List<PartySize>.from(
+            response["data"].map(
+                  (x) => PartySize.fromJson(x),
+            ),
+          );
+        }
         return true;
       } else {
         ShowToast.show(

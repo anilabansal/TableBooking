@@ -40,6 +40,9 @@ const confirmBookingEndPoint = 'api/Home/ConfirmBookingDetail';
 
 const contactUsEndPoint = 'api/Basic/SaveContactUs';
 const restaurantBookingListEndPoint = 'api/Home/RestaurantBookingList';
+const restaurantBookingDetailEndPoint = 'api/Home/BookingDetail';
+
+
 ///    Common Fonts
 // Fonts
 const String mainLaToFont = 'LaTo';

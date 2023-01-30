@@ -5,12 +5,35 @@ import 'package:booking_table/utils/common/widgets_methods/common_app_bar.dart';
 import 'package:booking_table/view/reservation/widgets/previous_reservation.dart';
 import 'package:booking_table/view/reservation/widgets/reservation_body.dart';
 import 'package:booking_table/view/reservation/widgets/running_reservation.dart';
-import 'package:booking_table/view/reservation/widgets/upcoming_reservation.dart';
+import 'package:booking_table/view/reservation/widgets/upcoming_previous_running_reservation_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ReservationView extends StatelessWidget {
+class ReservationView extends StatefulWidget {
   const ReservationView({Key? key}) : super(key: key);
+
+  @override
+  State<ReservationView> createState() => _ReservationViewState();
+}
+
+class _ReservationViewState extends State<ReservationView> {
+  ReservationController reservationController = Get.find();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    uploadReservationRestaurantList();
+    super.initState();
+  }
+
+  uploadReservationRestaurantList() {
+    reservationController.bookRestaurantIsLoading.value = true;
+    reservationController.reservationBookingRestaurantsApiCall().then((value) {
+      if (value) {
+        reservationController.bookRestaurantIsLoading.value = false;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,42 +43,69 @@ class ReservationView extends StatelessWidget {
       appBar: appBarCommon(
         text: 'Reservations',
       ),
-     // body: ReservationViewBody(controller: controller),
-      body:  Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Container(
-              width: Get.width,
-              decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: greyEAEAEA),
-              ),
-              padding: const EdgeInsets.all(3),
-              child: TabBar(
-                controller: controller.tabController,
-                indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6), color: black0D0000),
-                tabs: controller.myTabs,
-                labelStyle:
-                const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                unselectedLabelColor: textLight868686,
-              ),
-            ),
-          ),
-          //  const SizedBox(height: 20,),
-          Expanded(
-            child: TabBarView(
-              controller: controller.tabController,
-              children: const [
-                UpComingReservations(),
-                RunningReservations(),
-                PreviousReservations(),
-              ],
-            ),
-          ),
-        ],
+      // body: ReservationViewBody(controller: controller),
+      body: Obx(
+        () {
+          return reservationController.bookRestaurantIsLoading.value
+              ?
+          const Center(
+                  child: CircularProgressIndicator(
+                    color: redE2211C,
+                  ),
+                )
+              : Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Container(
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                          color: white,
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(color: greyEAEAEA),
+                        ),
+                        padding: const EdgeInsets.all(3),
+                        child: TabBar(
+                          controller: controller.tabController,
+                          indicator: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6),
+                              color: black0D0000),
+                          tabs: controller.myTabs,
+                          labelStyle: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w400),
+                          unselectedLabelColor: textLight868686,
+                        ),
+                      ),
+                    ),
+                    //  const SizedBox(height: 20,),
+                    Expanded(
+                      child: TabBarView(
+                        controller: controller.tabController,
+                        children: [
+                          UpComingPreviousRunningReservations(
+                            bookRestaurantList: reservationController
+                                .bookingRestaurantList!.upcominglist,
+                            callFrom: "upComing",
+                          ),
+                          UpComingPreviousRunningReservations(
+                            bookRestaurantList: reservationController
+                                .bookingRestaurantList!.runninglist,
+                            callFrom: 'running',
+                          ),
+                          UpComingPreviousRunningReservations(
+                            bookRestaurantList: reservationController
+                                .bookingRestaurantList!.previouslist,
+                            callFrom: 'previous',
+                          ),
+                          // RunningReservations(),
+                          // RunningReservations(),
+                          // PreviousReservations(),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+        },
       ),
     );
   }

@@ -80,7 +80,7 @@ class CreditCardController extends GetxController {
         ProgressDialog.showProgressDialog(context);
         bookATableController.confirmBookingApiCall(body: {
           "BookingId": 0,
-          "Items": jsonEncode(restaurantDetailsController.cartItemsList),
+          "Items": jsonDecode(jsonEncode(restaurantDetailsController.cartItemsList)),
           "SpecialEvent": specialEvent,
           "PaymentTypeId": 1,
           "Tip": tipAmount,

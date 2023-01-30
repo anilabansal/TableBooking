@@ -9,7 +9,7 @@ class SupportController extends GetxController
 {
   ApiCalls apiCall = ApiCalls();
   UserSessionController userSessionController = Get.find();
-
+var contactUsLoading = true.obs;
 
   /// customer support api call
   Future<dynamic> contactUstApiCall({
@@ -22,6 +22,9 @@ class SupportController extends GetxController
         token: userSessionController.token,
       );
       if (response['response'] == 1) {
+        ShowToast.show(
+          msg: response['errorMessage'] ,
+        );
         return true;
       } else {
         ShowToast.show(

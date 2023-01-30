@@ -14,6 +14,7 @@ import '../../../controller/restaurant_details/restaurant_details_controller.dar
 import '../../../utils/common/toast_message.dart';
 import '../../home_screen/widgets/party_size_drop_down.dart';
 import 'book_a_table_date_picker.dart';
+import 'book_a_table_party_size.dart';
 import 'book_table_select_time_drop_down.dart';
 
 class BookATableBody extends StatefulWidget {
@@ -33,21 +34,22 @@ class _BookATableBodyState extends State<BookATableBody> {
   var data = Get.arguments;
   BookATableController bookingTable = Get.find();
   RestaurantDetailsController restaurantDetailsController = Get.find();
-  FilterViewController filterViewController = Get.find();
+  // FilterViewController filterViewController = Get.find();
 
   @override
   void initState() {
     // TODO: implement initState
     loadAllPartySizeList();
-    filterViewController.setSelectedPartySize(null);
+    // filterViewController.setSelectedPartySize(null);
+  bookingTable.setBookTableSelectedPartySize(null);
     super.initState();
   }
 
   loadAllPartySizeList() {
-    filterViewController.partySizeIsLoading.value = true;
-    filterViewController.getPartySize().then((value) {
+    bookingTable.bookTablePartySizeIsLoading.value = true;
+    bookingTable.getBookTablePartySize().then((value) {
       if (value) {
-        filterViewController.partySizeIsLoading.value = false;
+        bookingTable.bookTablePartySizeIsLoading.value = false;
       }
     });
   }
@@ -63,7 +65,7 @@ class _BookATableBodyState extends State<BookATableBody> {
             // bookingTable.selectTime.isEmpty
             //          ? Text("No table available!")
             //          :
-            filterViewController.partySizeIsLoading.value
+            bookingTable.bookTablePartySizeIsLoading.value
                 ? const Center(
                     child: CircularProgressIndicator(
                       color: redE2211C,
@@ -187,7 +189,8 @@ class _BookATableBodyState extends State<BookATableBody> {
                               //   fillColor: greyF5F5F5,
                               //   controller: partySizeController,
                               // ),
-                              const PartySizeDropDown(),
+                              //  PartySizeDropDown(),
+                              BookTablePartySizeDropDown()
                             ],
                           ).paddingOnly(
                             left: 20,
@@ -315,9 +318,12 @@ class _BookATableBodyState extends State<BookATableBody> {
                                       // "BookingDate": dateController.text,
                                       //   "BookingTime":bookingTable.selectedBookTableTime!.startTime,
                                       // "PartySize": partySizeController.text.trim(),
-                                      "PartySize": filterViewController
-                                          .selectedPartySize!.number
-                                          .toString(),
+                                      "PartySize": bookingTable.selectedBookTablePartySize!.number.toString(),
+                                          // .selectedPartySize!.number
+                                          // .toString(),
+                                      // "PartySize": filterViewController
+                                      //     .selectedPartySize!.number
+                                      //     .toString(),
                                       "ServiceType":
                                           bookingTable.serviceType.value,
                                       "BookingTime": DateFormat('HH:mm').format(
@@ -451,8 +457,8 @@ class _BookATableBodyState extends State<BookATableBody> {
     // else if (partySizeController.text.trim().isEmpty) {
     //   return 'please enter party size!'.toTitleCase();
     // }
-    else if (filterViewController.selectedPartySize == null ||
-        filterViewController.selectedPartySize == '') {
+    else if (bookingTable.selectedBookTablePartySize == null ||
+        bookingTable.selectedBookTablePartySize == '') {
       return 'please select party size!'.toTitleCase();
     } else if (bookingTable.serviceType.value.trim().isEmpty) {
       return "please select service type!".toTitleCase();

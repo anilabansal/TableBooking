@@ -1,5 +1,6 @@
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_app_bar.dart';
+import 'package:booking_table/utils/common/widgets_methods/progress_loader.dart';
 import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -118,29 +119,34 @@ var commentController = TextEditingController();
                        fontSize: 18,
                        bgColor: redE2211C,
                        textColor: Colors.white,
-                       // onTap: (){
-                       //   if (validation() != '') {
-                       //     ShowToast.show(
-                       //       msg: validation(),
-                       //       isError: true,
-                       //     );
-                       //     return false;
-                       //   }
-                       //   else{
-                       //     supportController.contactUstApiCall(
-                       //       body: {
-                       //         "Email":emailTextController.text.trim(),
-                       //         "Topic":topicController.text.trim(),
-                       //         "Comment":commentController.text.trim()
-                       //       }
-                       //     ).then((value) {
-                       //       if(value){
-                       //
-                       //       }
-                       //     }
-                       //     );
-                       //   }
-                       // },
+                       onTap: (){
+                         if (validation() != '') {
+                           ShowToast.show(
+                             msg: validation(),
+                             isError: true,
+                           );
+                           return false;
+                         }
+                         else{
+                           supportController.contactUsLoading.value = true;
+                           ProgressDialog.showProgressDialog(context);
+                           supportController.contactUstApiCall(
+                             body: {
+                               "Email":emailTextController.text.trim(),
+                               "Topic":topicController.text.trim(),
+                               "Comment":commentController.text.trim(),
+                             }
+                           ).then((value) {
+                             supportController.contactUsLoading.value = false;
+                             Navigator.pop(context);
+                             if(value){
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                             }
+                           }
+                           );
+                         }
+                       },
                      ),
                      CommonSizedBox(
                        height: 20,

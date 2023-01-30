@@ -2,7 +2,7 @@
 // import 'package:booking_table/utils/common/common_strings.dart';
 //
 // import 'package:booking_table/view/reservation/widgets/previous_reservation.dart';
-// import 'package:booking_table/view/reservation/widgets/upcoming_reservation.dart';
+// import 'package:booking_table/view/reservation/widgets/upcoming_previous_running_reservation_list.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 //
