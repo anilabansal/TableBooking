@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:booking_table/controller/home/home_controller.dart';
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/model/gallery_images/restaurant_image.dart';
@@ -12,7 +10,6 @@ import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/network/api_calls.dart';
 import 'package:get/get.dart';
-
 import '../../model/restaurant_about_us/restaurant_about_us_model.dart';
 import '../../model/restaurant_menu/Cart_model.dart';
 import '../location/location_controller.dart';

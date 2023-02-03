@@ -57,363 +57,365 @@ class _BookATableBodyState extends State<BookATableBody> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => SingleChildScrollView(
-        child:
-            // bookingTable.isTimeLoading.value
-            //     ? const CircularProgressIndicator()
-            //     :
-            // bookingTable.selectTime.isEmpty
-            //          ? Text("No table available!")
-            //          :
-            bookingTable.bookTablePartySizeIsLoading.value
-                ? const Center(
-                    child: CircularProgressIndicator(
-                      color: redE2211C,
-                    ),
-                  )
-                : Column(
+      () {
+        return
+          bookingTable.bookTablePartySizeIsLoading.value
+              ? const Center(
+            child: CircularProgressIndicator(
+              color: redE2211C,
+            ),
+          )
+              :
+          SingleChildScrollView(
+          child:
+        Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CommonRestaurantNameDistance(
+                restaurantName: data[0]['restaurantName'],
+                restaurantDistance: data[0]['restaurantDistance'],
+                restaurantPic: data[0]['restaurantPic'],
+              ),
+              Container(
+                width: Get.width,
+                height: 1,
+                color: whiteE5E5E5,
+              ).paddingOnly(
+                top: 20,
+                bottom: 20,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Date
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CommonRestaurantNameDistance(
-                        restaurantName: data[0]['restaurantName'],
-                        restaurantDistance: data[0]['restaurantDistance'],
-                        restaurantPic: data[0]['restaurantPic'],
+                      CommonText(
+                        text: 'Date',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
                       ),
-                      Container(
-                        width: Get.width,
-                        height: 1,
-                        color: whiteE5E5E5,
-                      ).paddingOnly(
-                        top: 20,
-                        bottom: 20,
+                      CommonSizedBox(
+                        height: 15,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Date
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CommonText(
-                                text: 'Date',
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              CommonSizedBox(
-                                height: 15,
-                              ),
-                              // const CommonDatePicker(
-                              //   //fillColor: greyF5F5F5,
-                              // )
-                              BookTableDatePicker(
-                                controller: dateController,
-                                restaurantId: data[0]['restaurantId'],
-                                bookingId: 0,
-                              ),
-                            ],
-                          ).paddingOnly(
-                            left: 20,
-                            right: 20,
-                          ),
-                          Container(
-                            width: Get.width,
-                            height: 1,
-                            color: whiteE5E5E5,
-                          ).paddingOnly(
-                            top: 20,
-                            bottom: 20,
-                            left: 0,
-                            right: 0,
-                          ),
-                          // Time
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CommonText(
-                                text: 'Time',
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              CommonSizedBox(
-                                height: 15,
-                              ),
-                              // const CommonTextField(
-                              //   hint: "09:00 PM",
-                              // ),
-                              // CommonTextFormField(
-                              //   hintText: "09:00 PM",
-                              //   filled: true,
-                              //   fillColor: greyF5F5F5,
-                              //   fontSize: 16,
-                              //   fontWeight: FontWeight.w400,
-                              // ),
-                              selectBookTableTime(const Text('Select Time')),
-                            ],
-                          ).paddingOnly(
-                            left: 20,
-                            right: 20,
-                          ),
+                      // const CommonDatePicker(
+                      //   //fillColor: greyF5F5F5,
+                      // )
+                      BookTableDatePicker(
+                        controller: dateController,
+                        restaurantId: data[0]['restaurantId'],
+                        bookingId: 0,
+                      ),
+                    ],
+                  ).paddingOnly(
+                    left: 20,
+                    right: 20,
+                  ),
+                  Container(
+                    width: Get.width,
+                    height: 1,
+                    color: whiteE5E5E5,
+                  ).paddingOnly(
+                    top: 20,
+                    bottom: 20,
+                    left: 0,
+                    right: 0,
+                  ),
+                  // Time
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CommonText(
+                        text: 'Time',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      CommonSizedBox(
+                        height: 15,
+                      ),
+                      // const CommonTextField(
+                      //   hint: "09:00 PM",
+                      // ),
+                      // CommonTextFormField(
+                      //   hintText: "09:00 PM",
+                      //   filled: true,
+                      //   fillColor: greyF5F5F5,
+                      //   fontSize: 16,
+                      //   fontWeight: FontWeight.w400,
+                      // ),
+                      selectBookTableTime(const Text('Select Time')),
+                    ],
+                  ).paddingOnly(
+                    left: 20,
+                    right: 20,
+                  ),
 
-                          Container(
-                            width: Get.width,
-                            height: 1,
-                            color: whiteE5E5E5,
-                          ).paddingOnly(
-                            top: 20,
-                            bottom: 20,
+                  Container(
+                    width: Get.width,
+                    height: 1,
+                    color: whiteE5E5E5,
+                  ).paddingOnly(
+                    top: 20,
+                    bottom: 20,
+                  ),
+                  // Party SIze
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CommonText(
+                        text: 'Party Size',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      CommonSizedBox(
+                        height: 15,
+                      ),
+                      // CommonTextFormField(
+                      //   controller: controller.partySize,
+                      //   color: whiteF5F5F5,
+                      //   keyboardType: TextInputType.number,
+                      //   maxLength: 2,
+                      // ),
+                      // const CommonTextField(
+                      //   hint: "",
+                      // ),
+                      // CommonTextFormField(
+                      //   hintText: "5",
+                      //   filled: true,
+                      //   fillColor: greyF5F5F5,
+                      //   controller: partySizeController,
+                      // ),
+                      //  PartySizeDropDown(),
+                      BookTablePartySizeDropDown()
+                    ],
+                  ).paddingOnly(
+                    left: 20,
+                    right: 20,
+                  ),
+                  Container(
+                    width: Get.width,
+                    height: 1,
+                    color: whiteE5E5E5,
+                  ).paddingOnly(
+                    top: 20,
+                    bottom: 20,
+                  ),
+                  //  Field Four
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CommonText(
+                        text: 'Types of Services',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      CommonSizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          typeServiceContainer(
+                            "Full",
+                            "1",
+                            // ignore: unrelated_type_equality_checks
+                            bookingTable.serviceType.value == "1",
                           ),
-                          // Party SIze
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CommonText(
-                                text: 'Party Size',
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              CommonSizedBox(
-                                height: 15,
-                              ),
-                              // CommonTextFormField(
-                              //   controller: controller.partySize,
-                              //   color: whiteF5F5F5,
-                              //   keyboardType: TextInputType.number,
-                              //   maxLength: 2,
-                              // ),
-                              // const CommonTextField(
-                              //   hint: "",
-                              // ),
-                              // CommonTextFormField(
-                              //   hintText: "5",
-                              //   filled: true,
-                              //   fillColor: greyF5F5F5,
-                              //   controller: partySizeController,
-                              // ),
-                              //  PartySizeDropDown(),
-                              BookTablePartySizeDropDown()
-                            ],
-                          ).paddingOnly(
-                            left: 20,
-                            right: 20,
+                          const SizedBox(
+                            width: 10,
                           ),
-                          Container(
-                            width: Get.width,
-                            height: 1,
-                            color: whiteE5E5E5,
-                          ).paddingOnly(
-                            top: 20,
-                            bottom: 20,
+                          // ignore: unrelated_type_equality_checks
+                          typeServiceContainer(
+                            "Mid",
+                            "2",
+                            bookingTable.serviceType.value == "2",
                           ),
-                          //  Field Four
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CommonText(
-                                text: 'Types of Services',
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              CommonSizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                children: [
-                                  typeServiceContainer(
-                                    "Full",
-                                    "1",
-                                    // ignore: unrelated_type_equality_checks
-                                    bookingTable.serviceType.value == "1",
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  // ignore: unrelated_type_equality_checks
-                                  typeServiceContainer(
-                                    "Mid",
-                                    "2",
-                                    bookingTable.serviceType.value == "2",
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  // ignore: unrelated_type_equality_checks
-                                  typeServiceContainer(
-                                    "No",
-                                    "3",
-                                    bookingTable.serviceType.value == "3",
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  // ignore: unrelated_type_equality_checks
-                                  typeServiceContainer(
-                                    "To Go",
-                                    "4",
-                                    bookingTable.serviceType.value == "4",
-                                  ),
-                                ],
-                              ),
-                              CommonSizedBox(
-                                height: 15,
-                              ),
-                              Visibility(
-                                visible: bookingTable.serviceType.isNotEmpty,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Icon(
-                                      Icons.error,
-                                      color: Colors.red,
-                                    ),
-                                    CommonSizedBox(
-                                      width: 10,
-                                    ),
-                                    Expanded(
-                                      child: CommonText(
-                                        softWrap: true,
-                                        text: bookingTable.serviceType.value ==
-                                                "1"
-                                            ? "Order with server in restaurant"
-                                            : bookingTable.serviceType.value ==
-                                                    "3"
-                                                ? "Pre order food and drink on the app as well as in restaurant. No server."
-                                                : bookingTable.serviceType
-                                                            .value ==
-                                                        "4"
-                                                    ? "Order food/drink to go"
-                                                    : "Pre-order food/drink via the app and have a server in restaurant",
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                        color: textGrey868686,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              CommonSizedBox(
-                                height: 31,
-                              ),
-                              // Button
-                              CommonButton(
-                                onTap: () {
-                                  if (bookingTable.selectTimeList.isNotEmpty) {
-                                    //  Get.toNamed('/full-service');
-                                    if (validateFields() != '') {
-                                      ShowToast.show(
-                                        msg: validateFields(),
-                                        isError: true,
-                                      );
-                                      return false;
-                                    }
-                                    ProgressDialog.showProgressDialog(context);
-                                    bookingTable.bookTableIsLoading.value =
-                                        true;
-                                    bookingTable.bookTableApiCall(body: {
-                                      "RestaurantId": data[0]['restaurantId'],
-                                      "BookingDate":
-                                          DateFormat('yyyy-MM-dd').format(
-                                        DateFormat('MM-dd-yyyy')
-                                            .parse(dateController.value.text),
-                                      ),
-                                      // "BookingDate": dateController.text,
-                                      //   "BookingTime":bookingTable.selectedBookTableTime!.startTime,
-                                      // "PartySize": partySizeController.text.trim(),
-                                      "PartySize": bookingTable.selectedBookTablePartySize!.number.toString(),
-                                          // .selectedPartySize!.number
-                                          // .toString(),
-                                      // "PartySize": filterViewController
-                                      //     .selectedPartySize!.number
-                                      //     .toString(),
-                                      "ServiceType":
-                                          bookingTable.serviceType.value,
-                                      "BookingTime": DateFormat('HH:mm').format(
-                                        DateFormat("hh:mm a").parse(
-                                          bookingTable
-                                              .selectedBookTableTime!.startTime
-                                              .toString(),
-                                        ),
-                                      ),
-                                    }).then(
-                                      (value) {
-                                        Navigator.pop(context);
-                                        bookingTable.bookTableIsLoading.value =
-                                            false;
-                                        if (value) {
-                                          Get.toNamed(
-                                            '/full-service',
-                                            arguments: [
-                                              {
-                                                "restaurantId": data[0]
-                                                    ['restaurantId'],
-                                                "restaurantName": data[0]
-                                                    ["restaurantName"],
-                                                "restaurantPic": data[0]
-                                                    ["restaurantPic"],
-                                                "restaurantDistance": data[0]
-                                                    ["restaurantDistance"],
-                                              }
-                                            ],
-                                          );
-                                        }
-                                        restaurantDetailsController
-                                            .cartItemsList
-                                            .clear();
-                                        restaurantDetailsController
-                                            .subTotalPrice = 0.0;
-                                        for (int i = 0;
-                                            i <
-                                                restaurantDetailsController
-                                                    .menuHeaderRestaurantList
-                                                    .length;
-                                            i++) {
-                                          for (int j = 0;
-                                              j <
-                                                  restaurantDetailsController
-                                                      .menuHeaderRestaurantList[
-                                                          i]
-                                                      .menu!
-                                                      .length;
-                                              j++) {
-                                            restaurantDetailsController
-                                                .menuHeaderRestaurantList[i]
-                                                .menu![j]
-                                                .quantity = 0;
-                                            print(
-                                                'quantityCount---->${restaurantDetailsController.menuHeaderRestaurantList[i].menu![j].quantity}');
-                                          }
-                                        }
-                                        // restaurantDetailsController
-                                        //     .menuHeaderRestaurantList
-                                        //     .map((element) => element.menu!
-                                        //         .map((e) => e.quantity = 0));
-                                        print(
-                                            'cartList---->${restaurantDetailsController.cartItemsList.length}');
-                                      },
-                                    );
-                                  } else if (bookingTable
-                                      .selectTimeList.isEmpty) {
-                                    return false;
-                                  }
-                                },
-                                textColor: Colors.white,
-                                bgColor: bookingTable.selectTimeList.isEmpty
-                                    ? red26E2211C
-                                    : redE2211C,
-                                text: 'Proceed',
-                              ),
-                              CommonSizedBox(
-                                height: 31,
-                              ),
-                            ],
-                          ).paddingOnly(
-                            left: 20,
-                            right: 20,
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          // ignore: unrelated_type_equality_checks
+                          typeServiceContainer(
+                            "No",
+                            "3",
+                            bookingTable.serviceType.value == "3",
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          // ignore: unrelated_type_equality_checks
+                          typeServiceContainer(
+                            "To Go",
+                            "4",
+                            bookingTable.serviceType.value == "4",
                           ),
                         ],
                       ),
+                      CommonSizedBox(
+                        height: 15,
+                      ),
+                      Visibility(
+                        visible: bookingTable.serviceType.isNotEmpty,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Icons.error,
+                              color: Colors.red,
+                            ),
+                            CommonSizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: CommonText(
+                                softWrap: true,
+                                text: bookingTable.serviceType.value ==
+                                    "1"
+                                    ? "Order with server in restaurant"
+                                    : bookingTable.serviceType.value ==
+                                    "3"
+                                    ? "Pre order food and drink on the app as well as in restaurant. No server."
+                                    : bookingTable.serviceType
+                                    .value ==
+                                    "4"
+                                    ? "Order food/drink to go"
+                                    : "Pre-order food/drink via the app and have a server in restaurant",
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                                color: textGrey868686,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      CommonSizedBox(
+                        height: 31,
+                      ),
+                      // Button
+                      CommonButton(
+                        onTap: () {
+                          if (bookingTable.selectTimeList.isNotEmpty) {
+                            //  Get.toNamed('/full-service');
+                            if (validateFields() != '') {
+                              ShowToast.show(
+                                msg: validateFields(),
+                                isError: true,
+                              );
+                              return false;
+                            }
+                            ProgressDialog.showProgressDialog(context);
+                            bookingTable.bookTableIsLoading.value =
+                            true;
+                            bookingTable.bookTableApiCall(body: {
+                              "RestaurantId": data[0]['restaurantId'],
+                              "BookingDate":
+                              DateFormat('yyyy-MM-dd').format(
+                                DateFormat('MM-dd-yyyy')
+                                    .parse(dateController.value.text),
+                              ),
+                              // "BookingDate": dateController.text,
+                              //   "BookingTime":bookingTable.selectedBookTableTime!.startTime,
+                              // "PartySize": partySizeController.text.trim(),
+                              "PartySize": bookingTable.selectedBookTablePartySize!.number.toString(),
+                              // .selectedPartySize!.number
+                              // .toString(),
+                              // "PartySize": filterViewController
+                              //     .selectedPartySize!.number
+                              //     .toString(),
+                              "ServiceType":
+                              bookingTable.serviceType.value,
+                              "BookingTime": DateFormat('HH:mm').format(
+                                DateFormat("hh:mm a").parse(
+                                  bookingTable
+                                      .selectedBookTableTime!.startTime
+                                      .toString(),
+                                ),
+                              ),
+                            }).then(
+                                  (value) {
+                                Navigator.pop(context);
+                                bookingTable.bookTableIsLoading.value =
+                                false;
+                                if (value) {
+                                  Get.toNamed(
+                                    '/full-service',
+                                    arguments: [
+                                      {
+                                        "restaurantId": data[0]
+                                        ['restaurantId'],
+                                        "restaurantName": data[0]
+                                        ["restaurantName"],
+                                        "restaurantPic": data[0]
+                                        ["restaurantPic"],
+                                        "restaurantDistance": data[0]
+                                        ["restaurantDistance"],
+                                      }
+                                    ],
+                                  );
+                                }
+                                restaurantDetailsController
+                                    .cartItemsList
+                                    .clear();
+                                restaurantDetailsController
+                                    .subTotalPrice = 0.0;
+                                for (int i = 0;
+                                i <
+                                    restaurantDetailsController
+                                        .menuHeaderRestaurantList
+                                        .length;
+                                i++) {
+                                  for (int j = 0;
+                                  j <
+                                      restaurantDetailsController
+                                          .menuHeaderRestaurantList[
+                                      i]
+                                          .menu!
+                                          .length;
+                                  j++) {
+                                    restaurantDetailsController
+                                        .menuHeaderRestaurantList[i]
+                                        .menu![j]
+                                        .quantity = 0;
+                                    print(
+                                        'quantityCount---->${restaurantDetailsController.menuHeaderRestaurantList[i].menu![j].quantity}');
+                                  }
+                                }
+
+                                bookingTable.addTip.value = '';
+                                bookingTable.selectPaymentMode.value = '';
+                                // restaurantDetailsController
+                                //     .menuHeaderRestaurantList
+                                //     .map((element) => element.menu!
+                                //         .map((e) => e.quantity = 0));
+                                print(
+                                    'cartList---->${restaurantDetailsController.cartItemsList.length}');
+                              },
+                            );
+                          } else if (bookingTable
+                              .selectTimeList.isEmpty) {
+                            return false;
+                          }
+                        },
+                        textColor: Colors.white,
+                        bgColor: bookingTable.selectTimeList.isEmpty
+                            ? red26E2211C
+                            : redE2211C,
+                        text: 'Proceed',
+                      ),
+                      CommonSizedBox(
+                        height: 31,
+                      ),
                     ],
+                  ).paddingOnly(
+                    left: 20,
+                    right: 20,
                   ),
-      ),
+                ],
+              ),
+            ],
+          ),
+        );
+      }
+
     );
 
     // );

@@ -30,7 +30,7 @@ class RatingAndReviewList {
       restaurantName: data['restaurantName'] as dynamic,
       ratingByName: data['ratingByName'] as dynamic,
       ratedOnDate: data['ratedOnDate'] as String?,
-      rating: data['rating'] as double?,
+      rating:data['rating']!=null? data['rating'] as double?:0.0,
       reviews: data['reviews'] as String?,
       profilePic: data['profilePic'] as dynamic,
     );

@@ -85,16 +85,7 @@ class _SearchBoxState extends State<SearchBox> {
                 prediction.description.toString();
             locationController.searchController.value.text =
                 prediction.description.toString();
-            // widget.callBack!();
-            // locationController.searchLatLng.value = LatLng(
-            //   double.parse(
-            //     prediction.lat.toString(),
-            //   ),
-            //   double.parse(
-            //     prediction.lng.toString(),
-            //   ),
-            // );
-            // locationController.searchPlaceId.value = prediction.placeId.toString();
+
             widget.destinationController!.selection =
                 TextSelection.fromPosition(
               TextPosition(offset: prediction.description!.length),
@@ -103,8 +94,7 @@ class _SearchBoxState extends State<SearchBox> {
                 TextSelection.fromPosition(
               TextPosition(offset: prediction.description!.length),
             );
-            // print(
-            //     'locationController.searchLatLng.value ---->${prediction.lat}');
+            FocusScope.of(context).unfocus();
           },
         ),
       ),

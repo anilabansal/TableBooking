@@ -1,8 +1,8 @@
-// import 'package:booking_table/controller/reservation/reservation_controller.dart';
+// import 'package:booking_table/controller/reservation & rating/reservation_controller.dart';
 // import 'package:booking_table/utils/common/common_strings.dart';
 //
-// import 'package:booking_table/view/reservation/widgets/previous_reservation.dart';
-// import 'package:booking_table/view/reservation/widgets/upcoming_previous_running_reservation_list.dart';
+// import 'package:booking_table/view/reservation & rating/widgets/previous_reservation.dart';
+// import 'package:booking_table/view/reservation & rating/widgets/upcoming_previous_running_reservation_list.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 //

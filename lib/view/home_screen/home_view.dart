@@ -45,8 +45,8 @@ class HomeView extends StatelessWidget {
                 },
               );
             },
-            child: SingleChildScrollView(
-              child: SafeArea(
+            child: SafeArea(
+              child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(0.0),
                   child: Column(

@@ -3,8 +3,8 @@
 // import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 // import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 // import 'package:booking_table/utils/common/widgets_methods/restaurant_name_distance.dart';
-// import 'package:booking_table/view/reservation/widgets/booking_details_pre_order_details.dart';
-// import 'package:booking_table/view/reservation/widgets/booking_details_tab.dart';
+// import 'package:booking_table/view/reservation & rating/widgets/booking_details_pre_order_details.dart';
+// import 'package:booking_table/view/reservation & rating/widgets/booking_details_tab.dart';
 // import 'package:booking_table/view/book_a_table/widget/booking_table_payment_details.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';

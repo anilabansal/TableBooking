@@ -6,7 +6,7 @@ import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../location/modals/previous_locations_lat_lng.dart';
+import '../../model/location/previous_locations_lat_lng.dart';
 
 class UserSessionController extends GetxController {
   GetStorage box = GetStorage();

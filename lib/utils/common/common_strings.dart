@@ -41,7 +41,8 @@ const confirmBookingEndPoint = 'api/Home/ConfirmBookingDetail';
 const contactUsEndPoint = 'api/Basic/SaveContactUs';
 const restaurantBookingListEndPoint = 'api/Home/RestaurantBookingList';
 const restaurantBookingDetailEndPoint = 'api/Home/BookingDetail';
-
+const submitReviewEndPoint = 'api/Home/GiveRatingandReview';
+const addMoreReservationMenuEndPoint = 'api/Home/AddMoreMenuScreen';
 
 ///    Common Fonts
 // Fonts
@@ -139,12 +140,14 @@ String locationImage = "assets/images/home/location_filter_image.png";
 String mapImage = "assets/images/home/map_image.png";
 String drawerImage = "assets/images/home/drawer_image.png";
 String forwardArrowImage = "assets/images/home/forward_arrow.png";
+String restaurantItem =    "assets/images/home/restaurant_item.png";
 //payment screen
 String cardImage = "assets/images/payment/card_icon.png";
 String infoIcon = "assets/images/home/info_icon.png";
 String googleIcon = "assets/images/payment/google_icon.png";
 String appleIcon = "assets/images/payment/apple-logo.png";
 String appleBlackLogo = "assets/images/payment/apple_black_logo.png";
+
 
 /// User Session Strings
 const isLogInString = 'isLogInString';

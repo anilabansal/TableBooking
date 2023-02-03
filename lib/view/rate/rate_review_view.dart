@@ -1,15 +1,22 @@
-import 'package:flutter/foundation.dart';
+import 'package:booking_table/utils/common/widgets_methods/progress_loader.dart';
+import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import '../../controller/reservation & rating/reservation_controller.dart';
 import '../../utils/common/common_strings.dart';
+import '../../utils/common/toast_message.dart';
 import '../../utils/common/widgets_methods/common_button.dart';
 import '../../utils/common/widgets_methods/common_sized_box.dart';
 import '../../utils/common/widgets_methods/common_text.dart';
 import '../../utils/common/widgets_methods/common_text_form_field.dart';
 
 class RateReviewView extends StatelessWidget {
-  const RateReviewView({Key? key}) : super(key: key);
+  RateReviewView({Key? key}) : super(key: key);
+  ReservationController reservationController = Get.find();
+  var data = Get.arguments;
+  var reviewController = TextEditingController();
+  var ratingGiven;
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +47,30 @@ class RateReviewView extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 20,),
-              Image.asset(
-                bookATableImage,
+              const SizedBox(
+                height: 20,
+              ),
+              // data[0]["restaurantPic"]==null?
+              // Image.asset(
+              //     bookATableImage,
+              //     height: 112,
+              //     width: 112,
+              //   ),
+              Container(
                 height: 112,
                 width: 112,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  image: data[0]["restaurantPic"] == null
+                      ? const DecorationImage(
+                          image: AssetImage(bookATableImage),
+                          fit: BoxFit.cover,
+                        )
+                      : DecorationImage(
+                          image: NetworkImage(data[0]["restaurantPic"]),
+                          fit: BoxFit.cover,
+                        ),
+                ),
               ),
               CommonSizedBox(
                 height: 30,
@@ -59,7 +85,7 @@ class RateReviewView extends StatelessWidget {
                 height: 6,
               ),
               CommonText(
-                text: 'Honeycomb Restaurant',
+                text: data[0]["restaurantName"],
                 color: black000000,
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
@@ -77,8 +103,8 @@ class RateReviewView extends StatelessWidget {
                 height: 15,
               ),
               RatingBar.builder(
-                initialRating: 3,
-                minRating: 0,
+                initialRating: 0,
+                minRating: 1,
                 direction: Axis.horizontal,
                 allowHalfRating: true,
                 itemCount: 5,
@@ -90,10 +116,12 @@ class RateReviewView extends StatelessWidget {
                   color: Colors.amber,
                 ),
                 onRatingUpdate: (rating) {
-                  if (kDebugMode) {
-                    print(rating);
-                    print(Get.height);
-                  }
+                  // if (kDebugMode) {
+                  //   print("rating--->$rating");
+                  //   print(Get.height);
+                  // }
+                  ratingGiven = rating;
+                  print("rating--->$ratingGiven");
                 },
               ),
               CommonSizedBox(
@@ -113,6 +141,7 @@ class RateReviewView extends StatelessWidget {
                 filled: true,
                 fillColor: whiteF5F5F5,
                 maxLines: 10,
+                controller: reviewController,
               ).paddingSymmetric(
                 horizontal: 22,
               ),
@@ -121,8 +150,39 @@ class RateReviewView extends StatelessWidget {
               ),
               CommonButton(
                 onTap: () {
-                  // Get.toNamed('/home');
-                  Get.toNamed('/previous-booking');
+                  if (validation() != '') {
+                    ShowToast.show(
+                      msg: validation(),
+                      isError: true,
+                    );
+                  } else {
+                    reservationController.isReviewSubmittedLoader.value = true;
+                    ProgressDialog.showProgressDialog(context);
+                    reservationController.submitReviewApiCall(body: {
+                      "RatingToRestaurantId": data[0]["restaurantId"],
+                      ""
+                          "BookingId": data[0]["bookingId"],
+                      "Rating": ratingGiven,
+                      "Reviews": reviewController.text.trim() == null ||
+                              reviewController.text.trim() == ''
+                          ? ""
+                          : reviewController.text.trim()
+                    }).then((value) {
+                      reservationController.isReviewSubmittedLoader.value =
+                          false;
+                      Navigator.pop(context);
+
+                      if (value) {
+                        Get.offNamed(
+                          '/previous-booking',
+                          arguments: [
+                            {"BookingId": data[0]["bookingId"]}
+                          ],
+                        );
+                        reservationController.reservationBookingRestaurantsApiCall();
+                      }
+                    });
+                  }
                 },
                 text: 'Submit',
                 bgColor: redE2211C,
@@ -133,5 +193,17 @@ class RateReviewView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  validation() {
+    if (ratingGiven == 0.0 || ratingGiven == null) {
+      return 'please give rating!'.toTitleCase();
+    }
+   else if (reviewController.text.trim().isEmpty) {
+      return 'please give review!'.toTitleCase();
+    }
+    else {
+      return '';
+    }
   }
 }

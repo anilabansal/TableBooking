@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:booking_table/controller/location/location_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/view/profile_screen/widgets/search_location_box.dart';
@@ -9,14 +11,17 @@ import '../../utils/common/widgets_methods/common_text.dart';
 
 class SearchLocation extends StatefulWidget {
   const SearchLocation({Key? key}) : super(key: key);
+
   @override
   State<SearchLocation> createState() => _SearchLocationState();
 }
+
 class _SearchLocationState extends State<SearchLocation> {
   // final searchController = TextEditingController();
   LocationController locationController = Get.find();
   GoogleMapController? _controller;
-  bool isSearch = false;
+  // bool isSearch = false;
+
   moveToCurrentLocation(double latitude, double longitude) {
     locationController.requestPermission().then(
       (value) {
@@ -33,6 +38,16 @@ class _SearchLocationState extends State<SearchLocation> {
       },
     );
   }
+
+  void timer() {
+    Timer.periodic(const Duration(seconds: 5), (Timer t) {
+      locationController.isSearchMap.value = false;
+      // setState(() {
+      //   isSearch = false;
+      // });
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -58,8 +73,6 @@ class _SearchLocationState extends State<SearchLocation> {
                   _controller = controller;
                 },
                 mapType: MapType.normal,
-
-
                 markers: {
                   Marker(
                     onTap: () async {
@@ -71,13 +84,13 @@ class _SearchLocationState extends State<SearchLocation> {
                   ),
                 },
                 onTap: (v) {
-                  isSearch = false;
-                  //locationController.isSearch.value = false;
+                  // isSearch = false;
+                  locationController.isSearchMap.value = false;
                 },
                 buildingsEnabled: false,
                 compassEnabled: false,
                 zoomControlsEnabled: false,
-                myLocationButtonEnabled:false,
+                myLocationButtonEnabled: false,
                 onCameraMove: (CameraPosition cameraPosition) {
                   locationController.cameraPosition.value = cameraPosition;
                   locationController.latLng.value = LatLng(
@@ -89,7 +102,7 @@ class _SearchLocationState extends State<SearchLocation> {
                 onCameraIdle: () async {
                   ///Get the location here
                   if (locationController.cameraPosition.value != null) {
-                    if (isSearch == false) {
+                    if (locationController.isSearchMap.value == false) {
                       locationController.setLatLng(
                         LatLng(
                           locationController
@@ -108,24 +121,16 @@ class _SearchLocationState extends State<SearchLocation> {
                           'Address ---------> ${placeMarks.first.toString()}');
                       if (GetPlatform.isAndroid) {
                         locationController.searchController.value.text =
-                            "${placeMarks.first.name} ${placeMarks.first.locality}, ${placeMarks.first.subLocality} ${placeMarks.first.isoCountryCode} ${placeMarks.first.postalCode}";
+                            "${placeMarks.first.street} ${placeMarks.first.locality}, ${placeMarks.first.administrativeArea} ${placeMarks.first.postalCode}";
                         // locationController.searchController.value.text =
                         //     "${placeMarks.first.postalCode} ";
                       } else if (GetPlatform.isIOS) {
-                        locationController
-                            .searchController.value.text = placeMarks
-                                .first.street!.isNotEmpty
-                            ? '${placeMarks.first.street} ${placeMarks.first.subAdministrativeArea}, ${placeMarks.first.subLocality} ${placeMarks.first.locality} ${placeMarks.first.isoCountryCode} ${placeMarks.first.postalCode}'
-                            : ' ${placeMarks.first.subAdministrativeArea}, ${placeMarks.first.subLocality} ${placeMarks.first.locality} ${placeMarks.first.isoCountryCode} ${placeMarks.first.postalCode}';
+                        locationController.searchController.value.text =
+                            "${placeMarks.first.street} ${placeMarks.first.locality}, ${placeMarks.first.administrativeArea} ${placeMarks.first.postalCode}";
                         // locationController.searchController.value.text =
                         //     '${placeMarks.first.postalCode} ';
                       }
-                      // if (isSearch == false) {
-                      // locationController.searchController.value.te
-                      // "${placeMarks.first.name} ${placeMarks.first
-                      //     .locality} ${placeMarks.first
-                      //     .subLocality} ${placeMarks.first.administrativeArea}";
-                      // }
+
                       print(
                           'Camera Position ---------> ${locationController.cameraPosition.value.target.latitude}');
                       print(
@@ -170,30 +175,30 @@ class _SearchLocationState extends State<SearchLocation> {
                         destinationController:
                             locationController.searchController.value,
                         callBack: () async {
-                          isSearch = true;
-                          List<Location> locations = await locationFromAddress(
-                            locationController.searchController.value.text,
-                          );
-                          // List<Location> locations = await locationFromAddress(
-                          //   locationController.searchPlaceId.value,
-                          // );
-                          print("location ----->${locations}");
-                          // locationController.latLng.value = LatLng(
-                          //   locations.last.latitude,
-                          //   locations.last.longitude,
-                          // );
-                          locationController.latLng.value = LatLng(
-                            locationController.searchLatLng.value.latitude,
-                            locationController.searchLatLng.value.longitude,
-                          );
-                          // moveToCurrentLocation(
-                          //   locations.last.latitude,
-                          //   locations.last.longitude,
-                          // );
-                          moveToCurrentLocation(
-                            locationController.searchLatLng.value.latitude,
-                            locationController.searchLatLng.value.longitude,
-                          );
+                          // setState(() {
+                          //   isSearch = true;
+                          // });
+                          locationController.isSearchMap.value = true;
+                          if (locationController.isSearchMap.value == true) {
+                            timer();
+                            List<Location> locations =
+                                await locationFromAddress(
+                              locationController.searchController.value.text,
+                            );
+                            print("location ----->${locations}");
+
+                            locationController.latLng.value = LatLng(
+                              locationController.searchLatLng.value.latitude,
+                              locationController.searchLatLng.value.longitude,
+                            );
+
+                            moveToCurrentLocation(
+                              locationController.searchLatLng.value.latitude,
+                              locationController.searchLatLng.value.longitude,
+                            );
+
+                          }
+
                           // print(
                           //     'Search Lat Long ---------> Latitude - ${locations.first.latitude}, Longitude - ${locations.first.longitude}');
                           print(
@@ -213,6 +218,9 @@ class _SearchLocationState extends State<SearchLocation> {
                             //     _latLng!.latitude, _latLng!.longitude);
                             // await HomeController()
                             //     .getRestaurantDetailsUsingLatLon();
+                            if (locationController.isSearchMap.value) {
+                              return;
+                            }
                             Navigator.pop(context);
                           },
                           child: Container(
@@ -222,14 +230,17 @@ class _SearchLocationState extends State<SearchLocation> {
                               borderRadius: BorderRadius.circular(25),
                               color: redE2211C,
                             ),
-                            child: Center(
-                              child: CommonText(
-                                text: "Use This location",
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: white,
-                              ),
-                            ),
+                            child: locationController.isSearchMap.value == true
+                                ? const Center(
+                                    child: CircularProgressIndicator(color: white,))
+                                : Center(
+                                    child: CommonText(
+                                      text: "Use This location",
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: white,
+                                    ),
+                                  ),
                           ),
                         ),
                       ),

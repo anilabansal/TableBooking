@@ -7,7 +7,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapHomeScreen extends StatefulWidget {
   const MapHomeScreen({Key? key}) : super(key: key);
-
   @override
   State<MapHomeScreen> createState() => _MapHomeScreenState();
 }

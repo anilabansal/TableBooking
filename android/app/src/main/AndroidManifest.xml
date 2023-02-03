@@ -24,6 +24,8 @@
         android:label="Table Booking"
         android:name="${applicationName}"
         android:usesCleartextTraffic="true"
+        android:allowBackup="false"
+        android:fullBackupOnly="false"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

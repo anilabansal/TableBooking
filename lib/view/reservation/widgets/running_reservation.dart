@@ -1,4 +1,4 @@
-// import 'package:booking_table/controller/reservation/reservation_controller.dart';
+// import 'package:booking_table/controller/reservation & rating/reservation_controller.dart';
 // import 'package:booking_table/utils/common/common_strings.dart';
 // import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 // import 'package:booking_table/utils/common/widgets_methods/common_text.dart';

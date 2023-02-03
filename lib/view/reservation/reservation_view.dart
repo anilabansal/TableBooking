@@ -1,31 +1,25 @@
-import 'package:booking_table/controller/reservation/reservation_controller.dart';
-import 'package:booking_table/utils/common/common_strings.dart';
 
+import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_app_bar.dart';
-import 'package:booking_table/view/reservation/widgets/previous_reservation.dart';
-import 'package:booking_table/view/reservation/widgets/reservation_body.dart';
-import 'package:booking_table/view/reservation/widgets/running_reservation.dart';
 import 'package:booking_table/view/reservation/widgets/upcoming_previous_running_reservation_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controller/reservation & rating/reservation_controller.dart';
+import '../../utils/common/widgets_methods/shimmers/common_shimmer_widget.dart';
 
 class ReservationView extends StatefulWidget {
   const ReservationView({Key? key}) : super(key: key);
-
   @override
   State<ReservationView> createState() => _ReservationViewState();
 }
-
 class _ReservationViewState extends State<ReservationView> {
   ReservationController reservationController = Get.find();
-
   @override
   void initState() {
     // TODO: implement initState
     uploadReservationRestaurantList();
     super.initState();
   }
-
   uploadReservationRestaurantList() {
     reservationController.bookRestaurantIsLoading.value = true;
     reservationController.reservationBookingRestaurantsApiCall().then((value) {
@@ -48,11 +42,12 @@ class _ReservationViewState extends State<ReservationView> {
         () {
           return reservationController.bookRestaurantIsLoading.value
               ?
-          const Center(
-                  child: CircularProgressIndicator(
-                    color: redE2211C,
-                  ),
-                )
+          const ShimmerReservationDetailsWidget()
+          // const Center(
+          //         child: CircularProgressIndicator(
+          //           color: redE2211C,
+          //         ),
+          //       )
               : Column(
                   children: [
                     Padding(
@@ -84,17 +79,17 @@ class _ReservationViewState extends State<ReservationView> {
                         children: [
                           UpComingPreviousRunningReservations(
                             bookRestaurantList: reservationController
-                                .bookingRestaurantList!.upcominglist,
+                                .bookingRestaurantList.value.upcominglist,
                             callFrom: "upComing",
                           ),
                           UpComingPreviousRunningReservations(
                             bookRestaurantList: reservationController
-                                .bookingRestaurantList!.runninglist,
+                                .bookingRestaurantList.value.runninglist,
                             callFrom: 'running',
                           ),
                           UpComingPreviousRunningReservations(
                             bookRestaurantList: reservationController
-                                .bookingRestaurantList!.previouslist,
+                                .bookingRestaurantList.value.previouslist,
                             callFrom: 'previous',
                           ),
                           // RunningReservations(),

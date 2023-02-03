@@ -37,21 +37,6 @@ class CommonRestaurantNameDistance extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // restaurantPic == null
-            //     ? Image.asset(
-            //         bookATableImage,
-            //         height: 57,
-            //         width: 57,
-            //       )
-            //     // ? const SizedBox(
-            //     //     height: 57,
-            //     //     width: 57,
-            //     //   )
-            //     : Image.network(
-            //         restaurantPic.toString(),
-            //         height: 57,
-            //         width: 57,
-            //       ),
             Container(
               height: 57,
               width: 57,
@@ -80,6 +65,7 @@ class CommonRestaurantNameDistance extends StatelessWidget {
                   height: 5,
                 ),
                 CommonText(
+                  // text: restaurantDistance==null?"":"${restaurantDistance.toString()} miles away",
                   text: restaurantDistance==null?"":"${restaurantDistance.toString()} miles away",
                   fontSize: 15,
                   fontWeight: FontWeight.w400,

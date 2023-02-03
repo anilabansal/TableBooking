@@ -1,15 +1,21 @@
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
+import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+
+import '../../../controller/reservation & rating/reservation_controller.dart';
 
 class BookingDetailsTab extends StatelessWidget {
   final String callFrom;
 
-  const BookingDetailsTab({
+  BookingDetailsTab({
     required this.callFrom,
     Key? key,
   }) : super(key: key);
+  ReservationController reservationController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -25,54 +31,54 @@ class BookingDetailsTab extends StatelessWidget {
             const Spacer(),
             callFrom == 'Upcoming'
                 ? Container(
-              height: 25,
-              width: 72,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(19),
-                color: Colors.black,
-              ),
-              child: CommonText(
-                text: 'Upcoming',
-                color: Colors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                textAlign: TextAlign.center,
-              ),
-            )
+                    height: 25,
+                    width: 72,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(19),
+                      color: Colors.black,
+                    ),
+                    child: CommonText(
+                      text: 'Upcoming',
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      textAlign: TextAlign.center,
+                    ),
+                  )
                 : callFrom == 'Running'
-                ? Container(
-              height: 25,
-              width: 72,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(19),
-                color: red26E2211C,
-              ),
-              child: CommonText(
-                text: 'In-Process',
-                color: redE2211C,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                textAlign: TextAlign.center,
-              ),
-            )
-                : Container(
-              height: 25,
-              width: 72,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(19),
-                color: Colors.green,
-              ),
-              child: CommonText(
-                text: 'Completed',
-                color: Colors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                textAlign: TextAlign.center,
-              ),
-            ),
+                    ? Container(
+                        height: 25,
+                        width: 72,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(19),
+                          color: red26E2211C,
+                        ),
+                        child: CommonText(
+                          text: 'In-Process',
+                          color: redE2211C,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    : Container(
+                        height: 25,
+                        width: 72,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(19),
+                          color: Colors.green,
+                        ),
+                        child: CommonText(
+                          text: 'Completed',
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
           ],
         ),
         CommonSizedBox(
@@ -105,7 +111,8 @@ class BookingDetailsTab extends StatelessWidget {
                 ),
                 CommonText(
                   color: black000000,
-                  text: 'May 24, 2022',
+                  text:
+                      '${(reservationController.bookRestaurantDetails!.bookinglistresponse.bookingDate)!.convertBookingTimeToFormat()}',
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                 ),
@@ -123,7 +130,8 @@ class BookingDetailsTab extends StatelessWidget {
                 ),
                 CommonText(
                   color: black000000,
-                  text: '2 Members',
+                  text:
+                      '${reservationController.bookRestaurantDetails!.bookinglistresponse.partySize} Members',
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                 ),
@@ -144,7 +152,8 @@ class BookingDetailsTab extends StatelessWidget {
                 ),
                 CommonText(
                   color: black000000,
-                  text: '09:00 PM (2 hrs)',
+                  text:
+                      '${DateFormat('h:mm a').format(DateFormat('HH:mm:ss').parse(reservationController.bookRestaurantDetails!.bookinglistresponse.bookingTime.toString()))}',
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                 ),
@@ -162,7 +171,7 @@ class BookingDetailsTab extends StatelessWidget {
                 ),
                 CommonText(
                   color: black000000,
-                  text: 'Anniversary',
+                  text: reservationController.bookRestaurantDetails!.bookinglistresponse.specialOccasion!=""?reservationController.bookRestaurantDetails!.bookinglistresponse.specialOccasion.toString():"None",
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                 ),

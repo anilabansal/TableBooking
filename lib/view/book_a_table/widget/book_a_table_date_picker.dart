@@ -71,7 +71,8 @@ class BookTableDatePicker extends StatelessWidget {
     bookingTable.selectTimeList.value = [];
     bookingTable.setSelectedBookTime(null);
     ProgressDialog.showProgressDialog(context);
-    bookingTable.getAvailableBookingTime(body: {
+    bookingTable.getAvailableBookingTime(context,
+        body: {
       "RestaurantId": restaurantId,
       // "RestaurantId": "3",
       "BookingDate": DateFormat('yyyy-MM-dd').format(
@@ -81,9 +82,9 @@ class BookTableDatePicker extends StatelessWidget {
       // "BookingDate": controller!.text,
     }).then(
       (value) {
-        Navigator.pop(context);
+        bookingTable.isTimeLoading.value = false;
         if (value) {
-          bookingTable.isTimeLoading.value = false;
+          Navigator.pop(context);
         }
       },
     );

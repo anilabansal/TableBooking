@@ -135,19 +135,35 @@ class _ReviewsTabScreenState extends State<ReviewsTabScreen> {
                 const SizedBox(
                   height: 8,
                 ),
-                RatingBar.builder(
-                  itemSize: 20,
-                  initialRating: rating,
-                  minRating: 1,
+                // RatingBar.builder(
+                //   itemSize: 20,
+                //   initialRating: rating,
+                //   minRating: 0,
+                //   direction: Axis.horizontal,
+                //   allowHalfRating: true,
+                //   itemCount: 5,
+                //   //itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                //   itemBuilder: (context, _) => const Icon(
+                //     Icons.star,
+                //     color: Colors.amber,
+                //   ),
+                //   onRatingUpdate: (rating) {},
+                // ),
+                RatingBarIndicator(
+                  //   minRating: 0,
+                  itemSize: 15,
                   direction: Axis.horizontal,
-                  allowHalfRating: true,
+
                   itemCount: 5,
-                  //itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  itemBuilder: (context, _) => const Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                  ),
-                  onRatingUpdate: (rating) {},
+                  itemPadding: const EdgeInsets
+                      .symmetric(
+                      horizontal: 4.0),
+                  itemBuilder: (context, _) =>
+                      const Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                  rating: rating,
                 ),
               ],
             ),

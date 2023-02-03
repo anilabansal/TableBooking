@@ -4,24 +4,19 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 import '../../utils/network/api_calls.dart';
 import '../user_session/user_session_controller.dart';
 
 class LocationController extends GetxController {
   static final LocationController locationController =
       LocationController._internal();
-
   factory LocationController() {
     return locationController;
   }
-
   LocationController._internal();
-
   ApiCalls apiCall = ApiCalls();
   UserSessionController userSession = Get.find();
   final searchController = TextEditingController().obs;
-
   // var location = Location();
   // LocationData? locationData;
   Position? locationData;
@@ -32,7 +27,7 @@ class LocationController extends GetxController {
   var cameraPosition = const CameraPosition(target: LatLng(0.0, 0.0)).obs;
   var searchLatLng = const LatLng(0.0, 0.0).obs;
   var searchPlaceId = ''.obs;
-
+var isSearchMap = false.obs;
   /// set latLng
   void setLatLng(LatLng latLng) {
     searchLocationData = latLng;
@@ -51,32 +46,20 @@ class LocationController extends GetxController {
       List<Placemark> placemarks = await placemarkFromCoordinates(
         locationData!.latitude,
         locationData!.longitude,
+          // 34.114130,-118.462750,
+          // 34.11413683567844	,-118.46275616437198
       );
       Placemark place = placemarks[0];
       print(
           'Address ---------> ${placemarks.first.toString()}');
       if (GetPlatform.isAndroid) {
-        // searchController.value.text = "${place.name} ${place.locality} ${place.subLocality} ${place.administrativeArea} ";
         currentAddress.value =
-            "${place.name} ${place.locality}, ${place.subLocality} ${place.isoCountryCode} ${place.postalCode} ";
-        // currentAddress.value = "${place.postalCode} ";
-      } else if (GetPlatform.isIOS) {
-        // searchController.value.text = place.street!.isNotEmpty
-        //     ? "${place.street} ${place.subAdministrativeArea} ${place.subLocality} ${place.locality}  "
-        //     : "${place.subAdministrativeArea} ${place.subLocality} ${place.locality} ${place.administrativeArea}  ";
-        currentAddress.value = place.street!.isNotEmpty
-            ? "${place.street} ${place.subAdministrativeArea}, ${place.subLocality} ${place.locality} ${place.postalCode} "
-            : "${place.subAdministrativeArea} ${place.subLocality}, ${place.locality} ${place.administrativeArea} ${place.postalCode}  ";
-        // currentAddress.value = "${place.postalCode}  ";
+            "${place.street} ${place.locality}, ${place.administrativeArea} ${place.postalCode}";
 
+      } else if (GetPlatform.isIOS) {
+        currentAddress.value = "${place.street} ${place.locality}, ${place.administrativeArea} ${place.postalCode}";
       }
-      // currentAddress.value =
-      // "${place.name} ${place.locality} ${place.subLocality} ${place.administrativeArea} ";
-      // userSession.setSearchLocation(currentAddress.value);
-      // currentAddress.value =
-      // "${place.name},${place.locality},${place.subLocality},${place.administrativeArea}, ${place.country}";
-      // searchController.value.text = "${place.name},${place.locality},${place.subLocality},${place.administrativeArea}, ${place.country}";
-      //  searchController.value.text = "${place.name} ${place.locality} ${place.subLocality} ${place.administrativeArea} ";
+
       return true;
     }
     else if (status.isPermanentlyDenied) {
@@ -87,7 +70,5 @@ class LocationController extends GetxController {
       return false;
     }
   }
-
-
 
 }

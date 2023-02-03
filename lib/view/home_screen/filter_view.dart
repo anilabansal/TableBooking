@@ -21,18 +21,22 @@ import '../../utils/common/widgets_methods/common_text.dart';
 
 class FilterView extends StatefulWidget {
   const FilterView({Key? key}) : super(key: key);
+
   @override
   State<FilterView> createState() => _FilterViewState();
 }
+
 class _FilterViewState extends State<FilterView> {
   HomeController homeController = Get.put(HomeController());
   final dateController = TextEditingController();
+
   // ReservationController reservationController = Get.find();
   FilterViewController filterViewController = Get.find();
   var typesOfServicesController = TextEditingController();
   var partySizeController = TextEditingController();
   UserSessionController userSessionController = Get.find();
   LocationController locationController = Get.find();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -56,32 +60,36 @@ class _FilterViewState extends State<FilterView> {
       },
     );
   }
-  loadAllPartySizeList(){
+
+  loadAllPartySizeList() {
     filterViewController.partySizeIsLoading.value = true;
-    filterViewController.getPartySize().then((value){
-      if(value){
+    filterViewController.getPartySize().then((value) {
+      if (value) {
         filterViewController.partySizeIsLoading.value = false;
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appBarCommon(text: "Filter"),
-      body: SingleChildScrollView(
-        child: GetBuilder<HomeController>(
-          builder: (homeController) {
-            return Obx(
-              () {
-                return filterViewController.isTypeFoodLoading.value &&
-                        filterViewController.partySizeIsLoading.value
-                    ? const Center(
-                        child: CircularProgressIndicator(
-                          color: redE2211C,
-                        ),
-                      )
-                    : Column(
+      body: Obx(
+        () {
+          return
+            filterViewController.isTypeFoodLoading.value &&
+                filterViewController.partySizeIsLoading.value
+                ? const Center(
+              child: CircularProgressIndicator(
+                color: redE2211C,
+              ),
+            )
+                :
+            SingleChildScrollView(
+            child: GetBuilder<HomeController>(
+              builder: (homeController) {
+                return  Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -98,11 +106,6 @@ class _FilterViewState extends State<FilterView> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              // CommonDatePicker(
-                              //   enable: false,
-                              //   controller: dateController,
-                              //   //fillColor: greyF5F5F5,
-                              // ),
                               FilterScreenDatePicker(
                                 enable: false,
                                 //controller: filterViewController.dateController,
@@ -160,7 +163,7 @@ class _FilterViewState extends State<FilterView> {
                               //   fillColor: greyF4F4F4,
                               //   controller: partySizeController,
                               // ),
-                               const PartySizeDropDown(),
+                              const PartySizeDropDown(),
                             ],
                           ).paddingOnly(left: 22, right: 22),
                           const SizedBox(
@@ -329,7 +332,9 @@ class _FilterViewState extends State<FilterView> {
                                         //     .value.text
                                         //     .trim()
                                         //     .toString(),
-                                  "PartySize": filterViewController.selectedPartySize!.number.toString(),
+                                        "PartySize": filterViewController
+                                            .selectedPartySize!.number
+                                            .toString(),
                                         "StartTimeSlotId": DateFormat('HH:mm')
                                             .format(
                                               DateFormat("hh:mm a").parse(
@@ -385,7 +390,7 @@ class _FilterViewState extends State<FilterView> {
                                         //     .value.text
                                         //     .trim()
                                         //     .toString(),
-                                  "PartySize": filterViewController
+                                        "PartySize": filterViewController
                                             .selectedPartySize!.number
                                             .toString(),
                                         "StartTimeSlotId": DateFormat('HH:mm')
@@ -439,9 +444,9 @@ class _FilterViewState extends State<FilterView> {
                         ],
                       );
               },
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -483,7 +488,8 @@ class _FilterViewState extends State<FilterView> {
     } else if (filterViewController.selectedFilterTime == null ||
         filterViewController.selectedFilterTime == '') {
       return 'please select time!'.toTitleCase();
-    } else if (filterViewController.selectedPartySize==null||filterViewController.selectedPartySize=='') {
+    } else if (filterViewController.selectedPartySize == null ||
+        filterViewController.selectedPartySize == '') {
       return 'please select party size!'.toTitleCase();
     } else if (homeController.serviceType.value.trim().isEmpty) {
       return "please select service type!".toTitleCase();

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart';
@@ -28,7 +27,6 @@ class FullSummaryBottomView extends StatelessWidget {
   var allergiesController = TextEditingController();
   dynamic tipAmountToAdded;
   dynamic totalAmountToPay;
-
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -52,7 +50,7 @@ class FullSummaryBottomView extends StatelessWidget {
                 CommonTextFormField(
                   fillColor: whiteF5F5F5,
                   filled: true,
-                  hintText: 'Anniversary',
+                  hintText: 'Type Here...',
                   controller: specialEventController,
                 ),
               ],
@@ -346,21 +344,6 @@ class FullSummaryBottomView extends StatelessWidget {
                         : allergiesController.text.trim(),
                     "SlotId": controller.serviceSummary!.slotId,
                   }
-                  // {
-                  //   "BookingId": 0,
-                  //   "Items": [],
-                  //   "SpecialEvent":"" ,
-                  //   "PaymentTypeId": 4,
-                  //   "Tip": 0.0,
-                  //   "RestaurantId": 14,
-                  //   "BookingDate": "2023-01-30T00:00:00",
-                  //   "PartySize": 3,
-                  //   "ServiceTyp": 1,
-                  //   "BookingTime": "15:00:00",
-                  //   "SpecialRequest": "",
-                  //   "SlotId": 99
-                  //
-                  // }
                   ).then((value) {
                     controller.confirmBookIsLoading.value = false;
                     Navigator.pop(context);
@@ -514,7 +497,14 @@ class FullSummaryBottomView extends StatelessWidget {
     if (controller.serviceSummary!.serviceType.toString() != '1' &&
         restaurantsController.cartItemsList.isEmpty) {
       return 'please place order!'.toTitleCase();
-    } else if (controller.addTip.value == '') {
+    }
+   else if (specialEventController.text.isNotEmpty && specialEventController.text.trim().isEmpty) {
+       return 'please enter valid special event!'.toTitleCase();
+    }
+    else if (allergiesController.text.isNotEmpty && allergiesController.text.trim().isEmpty) {
+      return 'please enter valid special request!'.toTitleCase();
+    }
+    else if (controller.addTip.value == '') {
       return 'please select tip to be added'.toTitleCase();
     } else if (controller.addTip.value == "Custom" &&
         tipController.text.trim().isEmpty) {

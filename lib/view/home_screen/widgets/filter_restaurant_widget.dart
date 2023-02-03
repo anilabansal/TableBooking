@@ -166,9 +166,9 @@ class FilterRestaurantScreen extends StatelessWidget {
                                   height: 5,
                                 ),
                                 CommonText(
-                                  text: filterViewController
+                                  text: "${filterViewController
                                       .filterRestaurantList[index].distance
-                                      .toString(),
+                                      .toString()} miles away",
                                   fontWeight: FontWeight.normal,
                                   fontSize: 15,
                                   color: grey868686,

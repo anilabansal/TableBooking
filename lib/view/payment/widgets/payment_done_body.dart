@@ -103,7 +103,7 @@
 //             width: 205,
 //             child: CommonButton(
 //               onTap: () {
-//                 Get.toNamed('/reservation');
+//                 Get.toNamed('/reservation & rating');
 //               },
 //               text: 'Continue',
 //               textColor: Colors.white,

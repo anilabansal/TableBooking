@@ -455,7 +455,7 @@ class ShimmerReservationDetailsWidget extends StatelessWidget {
     return ListView.builder(
         shrinkWrap: true,
         // physics: const NeverScrollableScrollPhysics(),
-        itemCount: 1,
+        itemCount: 8,
         itemBuilder: (context, snapshot) {
           return Padding(
             //  padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -509,7 +509,7 @@ class ShimmerReservationDetailsWidget extends StatelessWidget {
                                 MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
-                                    height: 20,
+                                    height: 10,
                                     width: 50,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(03),
@@ -527,6 +527,17 @@ class ShimmerReservationDetailsWidget extends StatelessWidget {
                                       color: Colors.black.withOpacity(0.04),
                                     ),
                                   ),
+                                  CommonSizedBox(
+                                    height: 10,
+                                  ),
+                                  Container(
+                                    height: 10,
+                                    width: 200,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(03),
+                                      color: Colors.black.withOpacity(0.04),
+                                    ),
+                                  ),
                                 ],
                               ).paddingOnly(left: 11.0),
                             ],
@@ -537,18 +548,18 @@ class ShimmerReservationDetailsWidget extends StatelessWidget {
                       CommonSizedBox(
                         height: 24,
                       ),
-                      SizedBox(
-                        height: Get.height * 0.6,
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            color: redE2211C.withOpacity(0.4),
-                          ),
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: Get.height * 0.6,
+                      //   child: Center(
+                      //     child: CircularProgressIndicator(
+                      //       color: redE2211C.withOpacity(0.4),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
-              ));
+              ),);
         });
   }
 }

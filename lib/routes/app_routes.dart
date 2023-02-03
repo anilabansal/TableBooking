@@ -4,6 +4,7 @@ import 'package:booking_table/view/reservation/widgets/booking_details_view.dart
 import 'package:booking_table/view/home_screen/filter_view.dart';
 import 'package:booking_table/view/home_screen/restaurant_details_view.dart';
 import 'package:booking_table/view/profile_screen/profile_view.dart';
+import 'package:booking_table/view/reservation/widgets/order_more_screen.dart';
 import 'package:booking_table/view/service_type/full_service_summary_view.dart';
 import 'package:get/get.dart';
 import '../view/book_a_table/edit_booking.dart';
@@ -103,7 +104,7 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.reviews, page: () => const RateReviewView(),
+      name: RouteName.reviews, page: () =>  RateReviewView(),
       // binding: ,
     ),
     GetPage(
@@ -198,5 +199,8 @@ class AppRoutes {
       page: () => const PreOrderView(),
       // binding: ,
     ),
+    GetPage(name: RouteName.orderMoreFoodReservation, page:()=> const ReservationOrderMore(),
+      binding: MainBindings(),
+    )
   ];
 }

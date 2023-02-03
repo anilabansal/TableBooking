@@ -64,7 +64,7 @@ class NotificationBody extends StatelessWidget {
                     child: CommonText(
                       softWrap: true,
                       text:
-                          'You can make your toggle on/off for getting notifications',
+                          'Turn on if you would like to receive notifications regarding your reservation.',
                       color: textLight868686,
                       fontWeight: FontWeight.w400,
                       fontSize: 14,

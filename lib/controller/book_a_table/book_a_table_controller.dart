@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../model/book_table_modals/edit_booking.dart';
 import '../../model/book_table_modals/party_size_list_modal.dart';
@@ -5,6 +6,7 @@ import '../../model/book_table_modals/sevice_summary_modal.dart';
 import '../../model/filter_select_time.dart';
 import '../../utils/common/common_strings.dart';
 import '../../utils/common/toast_message.dart';
+import '../../utils/common/widgets_methods/alert_dialog.dart';
 import '../../utils/network/api_calls.dart';
 import '../user_session/user_session_controller.dart';
 
@@ -54,7 +56,7 @@ class BookATableController extends GetxController {
   }
 
   /// book table select time api call
-  Future<bool> getAvailableBookingTime({body}) async {
+  Future<bool> getAvailableBookingTime(context, {body}) async {
     try {
       final response = await apiCall.callPostApi(
         body,
@@ -69,10 +71,13 @@ class BookATableController extends GetxController {
         }
         return true;
       } else {
-        ShowToast.show(
-          msg: response['errorMessage'] ?? 'Please try again!',
-          isError: true,
-        );
+        Navigator.pop(context);
+        commonRestaurantAlertDialog(context,response['errorMessage']);
+        // ShowToast.show(
+        //   msg: response['errorMessage'] ?? 'Please try again!',
+        //   isError: true,
+        // );
+        update();
         return false;
       }
     } catch (e) {

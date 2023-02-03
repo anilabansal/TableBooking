@@ -11,7 +11,7 @@ import '../controller/card_details/add_card_details_controller.dart';
 import '../controller/filter/filter_screen_controller.dart';
 import '../controller/home/home_controller.dart';
 import '../controller/payment/credit_card_controller.dart';
-import '../controller/reservation/reservation_controller.dart';
+import '../controller/reservation & rating/reservation_controller.dart';
 import '../controller/restaurant_details/restaurant_details_controller.dart';
 import '../controller/support/customer_support_controller.dart';
 
