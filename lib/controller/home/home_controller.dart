@@ -40,6 +40,23 @@ class HomeController extends GetxController {
   var isLoading = false.obs;
   var mapHomeLoading = true.obs;
   var privacyLoading = true.obs;
+  var searchQuery = ''.obs;
+
+  bool isLoadingResto = true;
+
+  onSearchRestaurant(String value) {
+    searchQuery.value = value;
+    update();
+  }
+
+  updateLoading(value) {
+    if (value && !isLoadingResto) {
+      isLoadingResto = true;
+    } else {
+      isLoadingResto = false;
+    }
+    update();
+  }
 
   /// update likes and unlike of restaurants on homeScreen
   void updateRestaurantLikes(index) {
@@ -88,6 +105,7 @@ class HomeController extends GetxController {
           getRestaurantDetailsUsingLatLon(body: {
             'latitude': locationController.latLng.value.latitude.toString(),
             'longitude': locationController.latLng.value.longitude.toString(),
+            "RestaurantName": "",
           });
         } else {
           return;
@@ -119,6 +137,7 @@ class HomeController extends GetxController {
         print('Repsonse List=====> $homeRestaurantList');
         print('Total Restaurant List=====> $homeRestaurantCount');
         isLoading.value = false;
+        isLoadingResto = false;
         update();
         return true;
       } else {
@@ -127,12 +146,15 @@ class HomeController extends GetxController {
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
         );
+        isLoadingResto = false;
+        update();
         return false;
       }
     } catch (e) {
       print('Error --------> $e');
     }
-    isLoading.value = false;
+    isLoadingResto = false;
+    update();
 
     return false;
   }
@@ -187,6 +209,7 @@ class HomeController extends GetxController {
           body: {
             'latitude': locationController.latLng.value.latitude.toString(),
             'longitude': locationController.latLng.value.longitude.toString(),
+            "RestaurantName": "",
           },
         );
         update();
@@ -207,8 +230,4 @@ class HomeController extends GetxController {
 
     return false;
   }
-
-
-
-
 }

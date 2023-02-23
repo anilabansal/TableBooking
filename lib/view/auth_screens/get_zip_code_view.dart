@@ -136,7 +136,7 @@ class _GetZipCodeViewState extends State<GetZipCodeView> {
                  //   contentPadding: const EdgeInsets.only(top:10),
                           //maxLines: 2,
                            maxLength: 250,
-                          hintMaxLines: 2,
+                          hintMaxLines: 3,
                           readOnly: true,
                           controller: locationController.searchController.value,
                         //  keyboardType: TextInputType.number,
@@ -179,7 +179,8 @@ class _GetZipCodeViewState extends State<GetZipCodeView> {
                           "Latitude": locationController.latLng.value.latitude
                               .toString(),
                           "Longitude": locationController.latLng.value.longitude
-                              .toString()
+                              .toString(),
+                          "RestaurantName":""
                         },
                       ).then(
                         (value) {

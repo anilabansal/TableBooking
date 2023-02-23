@@ -18,6 +18,7 @@ class LoginController extends GetxController {
   ApiCalls apiCall = ApiCalls();
   UserSessionController userSession = Get.find();
   var authLoading = true.obs;
+  // var deviceToken = ''.obs;
 
   /// login api call
   Future<bool> loginUser({Map<String, String>? data}) async {

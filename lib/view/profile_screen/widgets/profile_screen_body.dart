@@ -17,18 +17,16 @@ import '../../../utils/common/widgets_methods/image_picker.dart';
 
 class EditProfileScreenBody extends StatefulWidget {
   final String callFrom;
-
   const EditProfileScreenBody({
     required this.callFrom,
     Key? key,
   }) : super(key: key);
-
   @override
   State<EditProfileScreenBody> createState() => _EditProfileScreenBodyState();
 }
 
 class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
-  ProfileController _profileController = Get.find();
+ final ProfileController _profileController = Get.find();
 
   //  ProfileController _profileController = Get.put(ProfileController());
   final UserSessionController userSessionController = Get.find();
@@ -583,6 +581,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                                     Navigator.pop(context);
                                     Navigator.pop(context);
                                   }
+                                  _profileController.createProfileImage.value = File('');
                                   // _profileController.firstNameController
                                   //     .clear();
                                   // _profileController.lastNameController.clear();

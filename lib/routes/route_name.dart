@@ -32,5 +32,8 @@ class RouteName {
   static const paymentMethod = '/payment-method';
   static const restaurantDetails = '/restaurant-details';
   static const orderMoreFoodReservation = '/order-more-reservations';
+  static const toGoOrderMenu = '/to-go-order-menu';
+  static const bookingConfirmPayment = '/booking-payment-method';
+  static const orderMoreConfirmPayment = '/confirm-booking-payment-method';
   // static const socialLoginProfile = ''
 }

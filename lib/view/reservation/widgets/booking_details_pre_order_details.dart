@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/reservation & rating/reservation_controller.dart';
 
-
 class BookingDetailsPreOrderDetails extends StatelessWidget {
   BookingDetailsPreOrderDetails({
     Key? key,
@@ -14,184 +13,254 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(9),
-        color: whiteF8F8F8,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Visibility(
-            visible: reservationController.bookRestaurantDetails!
-                            .bookinglistresponse.serviceType
-                            .toString() ==
-                        "Full Service" ||
-                    reservationController.bookRestaurantDetails!
-                        .bookinglistresponse.orderlistdetail!.isEmpty
-                ? false
-                : true,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListView.builder(
-            itemCount:reservationController.bookRestaurantDetails!
-                .bookinglistresponse.orderlistdetail!.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index){
-                  return Column(
-                    children: [
-                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Visibility(
+      visible: reservationController.bookRestaurantDetails!
+          .bookinglistresponse.serviceType
+          .toString() ==
+          "Full Service" ||
+          reservationController.bookRestaurantDetails!
+              .bookinglistresponse.orderlistdetail!.isEmpty
+          ? false
+          : true,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(9),
+          color: whiteF8F8F8,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ListView.builder(
+                itemCount: reservationController.bookRestaurantDetails!
+                    .bookinglistresponse.orderlistdetail!.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Column(children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CommonText(
+                          text: reservationController
+                              .bookRestaurantDetails!
+                              .bookinglistresponse
+                              .orderlistdetail![index]
+                              .itemName,
+                          color: black0D0000,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        CommonText(
+                          text:
+                              'X${reservationController.bookRestaurantDetails!.bookinglistresponse.orderlistdetail![index].itemQuantity.toString()}',
+                          color: grey868686,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        CommonText(
+                          text:
+                              '\$${reservationController.bookRestaurantDetails!.bookinglistresponse.orderlistdetail![index].itemTotalPrice!.toStringAsFixed(2)}',
+                          color: black0D0000,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ],
+                    ),
+                    CommonSizedBox(
+                      height: 5,
+                    ),
+                    Visibility(
+                      visible: reservationController
+                              .bookRestaurantDetails!
+                              .bookinglistresponse
+                              .orderlistdetail![index]
+                              .addOns!
+                              .isNotEmpty
+                          ? true
+                          : false,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CommonText(
-                           text:reservationController.bookRestaurantDetails!
-                               .bookinglistresponse.orderlistdetail![index].itemName ,
-                            color:
-                            black0D0000,
-                            fontSize: 13,
-                            fontWeight:
-                            FontWeight
-                                .w400,
-                          ),
-
-                          CommonText(
-                            text:'X${reservationController.bookRestaurantDetails!
-                                .bookinglistresponse.orderlistdetail![index].itemQuantity.toString()}' ,
-                            color:
-                            grey868686,
+                            text: "Ingredients:",
+                            color: textGrey868686,
                             fontSize: 12,
-                            fontWeight:
-                            FontWeight
-                                .w400,
+                            fontWeight: FontWeight.w500,
                           ),
-                          CommonText(
-                            text:reservationController.bookRestaurantDetails!
-                                .bookinglistresponse.orderlistdetail![index].itemTotalPrice.toString() ,
-                            color:
-                            black0D0000,
-                            fontSize: 12,
-                            fontWeight:
-                            FontWeight
-                                .w400,
-                          ),
-
+                          Wrap(children: [
+                            SizedBox(
+                              width:
+                                  MediaQuery.of(context).size.width * 0.5,
+                              height: 20,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: reservationController
+                                      .bookRestaurantDetails!
+                                      .bookinglistresponse
+                                      .orderlistdetail![index]
+                                      .addOns!
+                                      .length,
+                                  shrinkWrap: true,
+                                  physics:
+                                      const NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context, i) {
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CommonText(
+                                          softWrap: true,
+                                          text:
+                                              " ${reservationController.bookRestaurantDetails!.bookinglistresponse.orderlistdetail![index].addOns![i].addOnName}",
+                                          color: black0D0000,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        Visibility(
+                                          visible: i !=
+                                                  (reservationController
+                                                          .bookRestaurantDetails!
+                                                          .bookinglistresponse
+                                                          .orderlistdetail![
+                                                              index]
+                                                          .addOns!
+                                                          .length -
+                                                      1)
+                                              ? true
+                                              : false,
+                                          child: CommonText(
+                                            text: ",",
+                                            color: black0D0000,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }),
+                            ),
+                          ])
                         ],
                       ),
-
-                          ]);
-
-                } ),
-
-                CommonSizedBox(
-                  height: 13,
+                    ),
+                  ]);
+                }),
+            CommonSizedBox(
+              height: 13,
+            ),
+            Container(
+              height: 1,
+              width: Get.width,
+              color: whiteE5E5E5,
+            ),
+            CommonSizedBox(
+              height: 13,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                CommonText(
+                  text: 'Tip',
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
                 ),
-                Container(
-                  height: 1,
-                  width: Get.width,
-                  color: whiteE5E5E5,
+                CommonText(
+                  text: reservationController
+                          .bookRestaurantDetails!.bookinglistresponse.tip!
+                          .endsWith('%')
+                      ? '${reservationController.bookRestaurantDetails!.bookinglistresponse.tip}'
+                      : '\$${reservationController.bookRestaurantDetails!.bookinglistresponse.tip}',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
                 ),
-                CommonSizedBox(
-                  height: 13,
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                CommonText(
+                  text: 'Total Amount',
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
                 ),
-                Row(
+                CommonText(
+                  text:
+                      '\$${reservationController.bookRestaurantDetails!.bookinglistresponse.totalAmount!.toStringAsFixed(2)}',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ],
+            ),
+
+            Visibility(
+             visible:reservationController.bookRestaurantDetails!.bookinglistresponse.toGoTotalAmount==0.0?false:true ,
+              child: Padding(
+                padding: const EdgeInsets.only(top:8.0),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     CommonText(
-                      text: 'Total Amount',
+                      text: 'To Go TotalAmount',
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
                     ),
                     CommonText(
-                      text: '\$${reservationController.bookRestaurantDetails!
-                          .bookinglistresponse.totalAmount}',
+                      text:
+                      '\$${reservationController.bookRestaurantDetails!.bookinglistresponse.toGoTotalAmount!.toStringAsFixed(2)}',
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
                   ],
                 ),
-                CommonSizedBox(
-                  height: 5,
+              ),
+            ),
+            CommonSizedBox(
+              height: 15,
+            ),
+            Container(
+              height: 1,
+              width: Get.width,
+              color: whiteE5E5E5,
+            ),
+            CommonSizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CommonText(
+                      softWrap: true,
+                      text: 'Grand Total ',
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    CommonText(
+                      softWrap: true,
+                      text: '(ToGO TotalAmount + TotalAmount) ',
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ],
+                ),
+                CommonText(
+                  text:
+                      '\$${(reservationController.bookRestaurantDetails!.bookinglistresponse.toGoTotalAmount!+reservationController.bookRestaurantDetails!.bookinglistresponse.totalAmount!).toStringAsFixed(2)}',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
                 ),
               ],
             ),
-          ),
-
-          /// TotalBookingAmount , tip if paid ,and grandTotal to be visible for all service type
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CommonText(
-                    text: 'Total Booking Amount',
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  CommonText(
-                    text: '+\$100.00',
-                    fontSize: 12,
-                    color: redE2211C,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ],
-              ),
-              CommonText(
-                textAlign: TextAlign.left,
-                text:
-                    'This amount will be charge at booking confirmation\nand will be deduct on your total bill amount',
-                fontSize: 10,
-                color: textLight868686,
-                fontWeight: FontWeight.w400,
-              ),
-              CommonSizedBox(
-                height: 5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CommonText(
-                    text: 'Tip',
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  CommonText(
-                    text: '\$${reservationController.bookRestaurantDetails!.bookinglistresponse.tip}',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ],
-              ),
-              CommonSizedBox(
-                height: 15,
-              ),
-              Container(
-                height: 1,
-                width: Get.width,
-                color: whiteE5E5E5,
-              ),
-              CommonSizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CommonText(
-                    text: 'Grand Total',
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  CommonText(
-                    text: '\$${reservationController.bookRestaurantDetails!.bookinglistresponse.grandTotal}',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ],
-              ),
-            ],
-          )
-        ],
+            CommonSizedBox(
+              height: 20,
+            ),
+          ],
+        ),
       ),
     );
   }

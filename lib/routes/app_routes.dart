@@ -8,6 +8,7 @@ import 'package:booking_table/view/reservation/widgets/order_more_screen.dart';
 import 'package:booking_table/view/service_type/full_service_summary_view.dart';
 import 'package:get/get.dart';
 import '../view/book_a_table/edit_booking.dart';
+import '../view/reservation/widgets/to_go_menu_view.dart';
 import '/routes/route_name.dart';
 import '/view/auth_screens/get_zip_code_view.dart';
 import '/view/auth_screens/otp_view.dart';
@@ -71,7 +72,7 @@ class AppRoutes {
       binding: MainBindings(),
     ),
     GetPage(
-      name: RouteName.support, page: () =>  SupportView(),
+      name: RouteName.support, page: () => SupportView(),
       // binding: ,
     ),
     GetPage(
@@ -85,35 +86,36 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteName.addCardDetails,
-      page: () =>  AddCreditCardDetailsView(),
+      page: () => AddCreditCardDetailsView(),
       // binding: ,
     ),
     GetPage(
-      name: RouteName.paymentDone, page: () =>  PaymentDoneView(),
+      name: RouteName.paymentDone, page: () => PaymentDoneView(),
       // binding: ,
     ),
     GetPage(
       name: RouteName.privacyPolicy,
       page: () => const PrivacyPolicyView(),
-      binding:MainBindings() ,
+      binding: MainBindings(),
     ),
     GetPage(
-      name: RouteName.termsNConditions,
-      page: () => const TermsNConditionsView(),
-      binding: MainBindings()
+        name: RouteName.termsNConditions,
+        page: () => const TermsNConditionsView(),
+        binding: MainBindings()
+        // binding: ,
+        ),
+    GetPage(
+      name: RouteName.reviews, page: () => RateReviewView(),
       // binding: ,
     ),
     GetPage(
-      name: RouteName.reviews, page: () =>  RateReviewView(),
+      name: RouteName.paymentDone, page: () => PaymentDoneView(),
       // binding: ,
     ),
     GetPage(
-      name: RouteName.paymentDone, page: () =>  PaymentDoneView(),
-      // binding: ,
-    ),
-    GetPage(
-      name: RouteName.reservation, page: () => const ReservationView(),
-      binding:MainBindings() ,
+      name: RouteName.reservation,
+      page: () => const ReservationView(),
+      binding: MainBindings(),
     ),
     GetPage(
       name: RouteName.fullService,
@@ -154,20 +156,20 @@ class AppRoutes {
       page: () => BookATableView(
         callFrom: 'book',
       ),
-      binding:MainBindings() ,
+      binding: MainBindings(),
     ),
     GetPage(
       name: RouteName.editATable,
       page: () => const EditBooking(
-        //callFrom: 'edit',
-      ),
+          //callFrom: 'edit',
+          ),
       // binding: ,
     ),
     GetPage(
       name: RouteName.zipCodeView,
       page: () => const GetZipCodeView(),
-     binding: MainBindings(),
-     // binding: AuthBindings()
+      binding: MainBindings(),
+      // binding: AuthBindings()
     ),
     GetPage(
       name: RouteName.editProfile,
@@ -186,12 +188,22 @@ class AppRoutes {
       // binding: ,
     ),
     GetPage(
-      name: RouteName.paymentMethod, page: () => const PaymentMethodView(),
+      name: RouteName.paymentMethod,
+      page: () => const PaymentMethodView(callFrom: 'Drawer'),
+      binding: MainBindings(),
       // binding: ,
     ),
+
+    GetPage(
+      name: RouteName.bookingConfirmPayment,
+      page: () => const PaymentMethodView(callFrom: 'ConfirmBooking'),
+      binding: MainBindings(),
+    ),
+    GetPage(name: RouteName.orderMoreConfirmPayment,  page: () => const PaymentMethodView(callFrom: 'OrderMore'),
+      binding: MainBindings(),),
     GetPage(
       name: RouteName.restaurantDetails,
-      page: () =>  const RestaurantDetailView(),
+      page: () => const RestaurantDetailView(),
       binding: MainBindings(),
     ),
     GetPage(
@@ -199,8 +211,11 @@ class AppRoutes {
       page: () => const PreOrderView(),
       // binding: ,
     ),
-    GetPage(name: RouteName.orderMoreFoodReservation, page:()=> const ReservationOrderMore(),
+    GetPage(
+      name: RouteName.orderMoreFoodReservation,
+      page: () => const ReservationOrderMore(),
       binding: MainBindings(),
-    )
+    ),
+    GetPage(name: RouteName.toGoOrderMenu, page: () => ToGoMenuView())
   ];
 }

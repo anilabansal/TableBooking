@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:booking_table/controller/location/location_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/view/profile_screen/widgets/search_location_box.dart';
@@ -120,15 +119,15 @@ class _SearchLocationState extends State<SearchLocation> {
                       print(
                           'Address ---------> ${placeMarks.first.toString()}');
                       if (GetPlatform.isAndroid) {
-                        locationController.searchController.value.text =
-                            "${placeMarks.first.street} ${placeMarks.first.locality}, ${placeMarks.first.administrativeArea} ${placeMarks.first.postalCode}";
                         // locationController.searchController.value.text =
-                        //     "${placeMarks.first.postalCode} ";
+                        //     "${placeMarks.first.street} ${placeMarks.first.locality}, \n${placeMarks.first.administrativeArea} ${placeMarks.first.postalCode}";
+                        locationController.searchController.value.text =
+                            "${placeMarks.first.postalCode} ";
                       } else if (GetPlatform.isIOS) {
-                        locationController.searchController.value.text =
-                            "${placeMarks.first.street} ${placeMarks.first.locality}, ${placeMarks.first.administrativeArea} ${placeMarks.first.postalCode}";
                         // locationController.searchController.value.text =
-                        //     '${placeMarks.first.postalCode} ';
+                        //     "${placeMarks.first.street} ${placeMarks.first.locality}, \n${placeMarks.first.administrativeArea} ${placeMarks.first.postalCode}";
+                        locationController.searchController.value.text =
+                            '${placeMarks.first.postalCode} ';
                       }
 
                       print(
@@ -203,7 +202,7 @@ class _SearchLocationState extends State<SearchLocation> {
                           //     'Search Lat Long ---------> Latitude - ${locations.first.latitude}, Longitude - ${locations.first.longitude}');
                           print(
                               'Search Lat Long ---------> Latitude - ${locationController.searchLatLng.value.latitude}, Longitude - ${locationController.searchLatLng.value.longitude}, location----${locationController.searchController.value.text}');
-                        },
+                        }
                       ),
                       const Spacer(),
                       Align(

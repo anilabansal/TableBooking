@@ -70,7 +70,14 @@ class ApiCalls extends GetConnect {
         return jsonDecode(response.body);
       }
       else if(response.statusCode==401){
-        Get.offAllNamed('/authentication');
+        Future.delayed(const Duration(seconds: 1), ()async{
+          userSessionController.setIsLogin(false);
+          userSessionController.setSocialLogin(false);
+          userSessionController.setUserToken("");
+          await userSessionController.box.erase();
+          Get.offAllNamed('/authentication');
+        });
+
       }
     } catch (e) {
       print("========> Responses Error ${e.toString()}");

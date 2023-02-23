@@ -1,4 +1,46 @@
-import 'dart:convert';
+class CardList {
+  List<UserCardlist>? userCardlist;
+  int? response;
+  String? errorMessage;
+  String? data;
+  int? count;
+  String? token;
+
+  CardList(
+      {this.userCardlist,
+        this.response,
+        this.errorMessage,
+        this.data,
+        this.count,
+        this.token});
+
+  CardList.fromJson(Map<String, dynamic> json) {
+    if (json['userCardlist'] != null) {
+      userCardlist = <UserCardlist>[];
+      json['userCardlist'].forEach((v) {
+        userCardlist!.add(new UserCardlist.fromJson(v));
+      });
+    }
+    response = json['response'];
+    errorMessage = json['errorMessage'];
+    data = json['data'];
+    count = json['count'];
+    token = json['token'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.userCardlist != null) {
+      data['userCardlist'] = this.userCardlist!.map((v) => v.toJson()).toList();
+    }
+    data['response'] = this.response;
+    data['errorMessage'] = this.errorMessage;
+    data['data'] = this.data;
+    data['count'] = this.count;
+    data['token'] = this.token;
+    return data;
+  }
+}
 
 class UserCardlist {
   int? userId;
@@ -9,70 +51,34 @@ class UserCardlist {
   String? expiryDate;
   String? bankName;
 
-  UserCardlist({
-    this.userId,
-    this.cardId,
-    this.cardHolderName,
-    this.cardNumber,
-    this.cvvNumber,
-    this.expiryDate,
-    this.bankName,
-  });
+  UserCardlist(
+      {this.userId,
+        this.cardId,
+        this.cardHolderName,
+        this.cardNumber,
+        this.cvvNumber,
+        this.expiryDate,
+        this.bankName});
 
-  @override
-  String toString() {
-    return 'UserCardlist(userId: $userId, cardId: $cardId, cardHolderName: $cardHolderName, cardNumber: $cardNumber, cvvNumber: $cvvNumber, expiryDate: $expiryDate, bankName: $bankName)';
+  UserCardlist.fromJson(Map<String, dynamic> json) {
+    userId = json['userId'];
+    cardId = json['cardId'];
+    cardHolderName = json['cardHolderName'];
+    cardNumber = json['cardNumber'];
+    cvvNumber = json['cvvNumber'];
+    expiryDate = json['expiryDate'];
+    bankName = json['bankName'];
   }
 
-  factory UserCardlist.fromMap(Map<String, dynamic> data) => UserCardlist(
-    userId: data['userId'] as int?,
-    cardId: data['cardId'] as int?,
-    cardHolderName: data['cardHolderName'] as String?,
-    cardNumber: data['cardNumber'] as String?,
-    cvvNumber: data['cvvNumber'] as String?,
-    expiryDate: data['expiryDate'] as String?,
-    bankName: data['bankName'] as String?,
-  );
-
-  Map<String, dynamic> toMap() => {
-    'userId': userId,
-    'cardId': cardId,
-    'cardHolderName': cardHolderName,
-    'cardNumber': cardNumber,
-    'cvvNumber': cvvNumber,
-    'expiryDate': expiryDate,
-    'bankName': bankName,
-  };
-
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [UserCardlist].
-  factory UserCardlist.fromJson(String data) {
-    return UserCardlist.fromMap(json.decode(data) as Map<String, dynamic>);
-  }
-
-  /// `dart:convert`
-  ///
-  /// Converts [UserCardlist] to a JSON string.
-  String toJson() => json.encode(toMap());
-
-  UserCardlist copyWith({
-    int? userId,
-    int? cardId,
-    String? cardHolderName,
-    String? cardNumber,
-    String? cvvNumber,
-    String? expiryDate,
-    String? bankName,
-  }) {
-    return UserCardlist(
-      userId: userId ?? this.userId,
-      cardId: cardId ?? this.cardId,
-      cardHolderName: cardHolderName ?? this.cardHolderName,
-      cardNumber: cardNumber ?? this.cardNumber,
-      cvvNumber: cvvNumber ?? this.cvvNumber,
-      expiryDate: expiryDate ?? this.expiryDate,
-      bankName: bankName ?? this.bankName,
-    );
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['userId'] = this.userId;
+    data['cardId'] = this.cardId;
+    data['cardHolderName'] = this.cardHolderName;
+    data['cardNumber'] = this.cardNumber;
+    data['cvvNumber'] = this.cvvNumber;
+    data['expiryDate'] = this.expiryDate;
+    data['bankName'] = this.bankName;
+    return data;
   }
 }

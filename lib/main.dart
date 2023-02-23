@@ -7,13 +7,21 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'controller/user_session/user_session_controller.dart';
-
+//
+// Future<void> _messageHandler(RemoteMessage message) async {
+//   await Firebase.initializeApp();
+//   print('background message ==========> ${message.notification!.body}');
+// }
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
   // Stripe.publishableKey = "pk_live_STu7MEuLIwnKoCjJ4acieuAw";
   await GetStorage.init();
   UserSessionController userSession = Get.put(UserSessionController());
   userSession.init();
+  // await Firebase.initializeApp();
+  // FCMService().init();
+  // FirebaseMessaging.onBackgroundMessage(_messageHandler);
+  // await LocalNotificationService().init();
   Stripe.publishableKey =
   "pk_test_v6mQmgIwxFEq26Byof5rsyIQ";
   // Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
@@ -28,11 +36,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
   LocationController locationController = Get.put(LocationController());
   @override
   void initState() {
     super.initState();
     locationController.requestPermission();
+    // FCMService().getFCMToken();
+    // FCMService().showForGroundMessage();
     // TODO: implement initState
   }
   @override

@@ -27,25 +27,25 @@ class HomeView extends StatelessWidget {
       // body: HomeBody(),
       body: GetBuilder<HomeController>(
         builder: (homeController) {
-          return RefreshIndicator(
-            color:redE2211C,
-            onRefresh: () {
-              return Future.delayed(
-                const Duration(seconds: 1),
-                    () async{
-              await homeController.getRestaurantDetailsUsingLatLon(
-                    body: {
-                      "Latitude": locationController.latLng.value.latitude
-                          .toString(),
-                      "Longitude": locationController.latLng.value.longitude
-                          .toString()
-                    },
-                  );
-                  // homeController.update();
-                },
-              );
-            },
-            child: SafeArea(
+          return SafeArea(
+            child: RefreshIndicator(
+              color:redE2211C,
+              onRefresh: () {
+                return Future.delayed(
+                  const Duration(seconds: 1),
+                      () async{
+                    await homeController.getRestaurantDetailsUsingLatLon(
+                      body: {
+                        "Latitude": locationController.latLng.value.latitude
+                            .toString(),
+                        "Longitude": locationController.latLng.value.longitude
+                            .toString(),
+                        "RestaurantName":"",
+                      },
+                    );
+                  },
+                );
+              },
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(0.0),
@@ -190,7 +190,7 @@ class HomeView extends StatelessWidget {
                           );
                         },
                       ),
-                      const SearchBoxScreen(),
+                       SearchBoxScreen(),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15.0, 0, 15, 0),
                         child: Row(

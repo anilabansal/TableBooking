@@ -1,5 +1,4 @@
 import 'package:booking_table/utils/common/common_strings.dart';
-import 'package:booking_table/utils/common/no_data_found.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +26,26 @@ class RestaurantHomeScreen extends StatelessWidget {
       padding: const EdgeInsets.all(15.0),
       child: Column(
         children: [
+          homeController.isLoadingResto ?
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const[
+               SizedBox(
+                width: 30,
+                height: 30,
+                child: CircularProgressIndicator(color: redE2211C,),
+              ),
+            ],
+          ) :
           homeController.homeRestaurantList.isEmpty
-              ? const CommonNoDataFound()
+              ?  Center(
+                child: CommonText(
+            text: "No Data Found!!",
+            color: redE2211C,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+              )
               : ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),

@@ -383,7 +383,7 @@ class _FilterViewState extends State<FilterView> {
                                             .serviceType.value
                                             .trim(),
                                         "Date": DateFormat('yyyy-MM-dd').format(
-                                          DateFormat('dd-MM-yyyy')
+                                          DateFormat('MM-dd-yyyy')
                                               .parse(dateController.value.text),
                                         ),
                                         // "PartySize": partySizeController

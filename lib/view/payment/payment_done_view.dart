@@ -10,7 +10,7 @@ import '../reservation/reservation_view.dart';
 
 class PaymentDoneView extends StatelessWidget {
   final String? paymentMode;
-  final dynamic amountPayed;
+  final double? amountPayed;
    PaymentDoneView({Key? key,this.paymentMode,this.amountPayed}) : super(key: key);
    var data = Get.arguments;
   @override
@@ -91,7 +91,7 @@ class PaymentDoneView extends StatelessWidget {
                   ),
                    TextSpan(
                     // text: '\$${data[0]["amountPayed"]}',
-                     text: "\$${amountPayed.toString()}",
+                     text: "\$${amountPayed!.toStringAsFixed(2)}",
                     style: const TextStyle(
                       color: black000000,
                       fontSize: 14,

@@ -12,6 +12,7 @@ import 'package:booking_table/utils/network/api_calls.dart';
 import 'package:get/get.dart';
 import '../../model/restaurant_about_us/restaurant_about_us_model.dart';
 import '../../model/restaurant_menu/Cart_model.dart';
+import '../../model/restaurant_menu/add_on_ingredient_list.dart';
 import '../location/location_controller.dart';
 
 class RestaurantDetailsController extends GetxController {
@@ -23,6 +24,8 @@ class RestaurantDetailsController extends GetxController {
   var galleryImagesRestaurantList = [].obs;
   var menuHeaderRestaurantList = <RestaurantMenuData>[].obs;
   var rateReviewsRestaurantList = [].obs;
+  var addOnMenuIngredientList = <AddOnIngredientList>[].obs;
+  var addOnIsLoading = true.obs;
   var totalReviews = "".obs;
   var isLoading = true.obs;
   var selectedIndex = 0.obs;
@@ -31,6 +34,10 @@ class RestaurantDetailsController extends GetxController {
   LocationController locationController = Get.find();
   List<Cart> cartItemsList = [];
   double? subTotalPrice = 0.0;
+  List<IngredientTypes> selectedIngredient = [];
+  List<AddOns> addOnIngredients = [];
+
+  double? addOnPrices = 0.0;
 
   /// update likes and unlike of restaurants on restaurant details screen
   void updateRestaurantLikes() {
@@ -61,54 +68,103 @@ class RestaurantDetailsController extends GetxController {
     var list = cartItemsList.where((element) =>
         element.ItemId ==
         menuHeaderRestaurantList[index].menu![subIndex].itemId);
+    List<AddOns> _listAddOn = [];
+    _listAddOn.addAll(addOnIngredients);
+
     if (list.isEmpty) {
-      cartItemsList.add(
-        Cart(
-          ItemId: menuHeaderRestaurantList[index].menu![subIndex].itemId,
-          ItemQuantity:
-              menuHeaderRestaurantList[index].menu![subIndex].quantity!,
-          ItemTotalPrice:
-              menuHeaderRestaurantList[index].menu![subIndex].itemPrice! *
-                  menuHeaderRestaurantList[index].menu![subIndex].quantity!,
-          itemName: menuHeaderRestaurantList[index].menu![subIndex].itemName,
-          categoryId: menuHeaderRestaurantList[index].categoryId,
-          isOfferItem:
-              menuHeaderRestaurantList[index].menu![subIndex].isOfferItem,
-          offerPrice:
-              menuHeaderRestaurantList[index].menu![subIndex].offerPrice! *
-                  menuHeaderRestaurantList[index].menu![subIndex].quantity!,
-          offerTitle:
-              menuHeaderRestaurantList[index].menu![subIndex].offerTitle,
-        ),
-      );
-    } else {
-      cartItemsList[cartItemsList.indexWhere((element) =>
-          element.ItemId ==
-          menuHeaderRestaurantList[index].menu![subIndex].itemId)] = Cart(
+      /// first time when particular itemId is not added in cart ---> to add itemPrice and add on price
+      double? addOnItemPrices =
+          (menuHeaderRestaurantList[index].menu![subIndex].itemPrice! +
+              addOnPrices!);
+
+      /// first time when particular itemId is not added in cart ---> to add offerPrice and add on price
+      double? addOfferPrices =
+          (menuHeaderRestaurantList[index].menu![subIndex].offerPrice! +
+              addOnPrices!);
+
+      /// created variable of Cart type
+      Cart cart = Cart(
         ItemId: menuHeaderRestaurantList[index].menu![subIndex].itemId,
         ItemQuantity: menuHeaderRestaurantList[index].menu![subIndex].quantity!,
-        ItemTotalPrice:
-            menuHeaderRestaurantList[index].menu![subIndex].itemPrice! *
-                menuHeaderRestaurantList[index].menu![subIndex].quantity!,
+        ItemlPriceSingleQuantity:
+            (menuHeaderRestaurantList[index].menu![subIndex].itemPrice!),
         itemName: menuHeaderRestaurantList[index].menu![subIndex].itemName,
         categoryId: menuHeaderRestaurantList[index].categoryId,
         isOfferItem:
             menuHeaderRestaurantList[index].menu![subIndex].isOfferItem,
         offerPrice:
-            menuHeaderRestaurantList[index].menu![subIndex].offerPrice! *
-                menuHeaderRestaurantList[index].menu![subIndex].quantity!,
+            (menuHeaderRestaurantList[index].menu![subIndex].offerPrice!),
         offerTitle: menuHeaderRestaurantList[index].menu![subIndex].offerTitle,
+        ItemTotalPrice:
+            menuHeaderRestaurantList[index].menu![subIndex].isOfferItem == true
+                ? menuHeaderRestaurantList[index].menu![subIndex].offerPrice! *
+                    menuHeaderRestaurantList[index].menu![subIndex].quantity!
+                : menuHeaderRestaurantList[index].menu![subIndex].itemPrice! *
+                    menuHeaderRestaurantList[index].menu![subIndex].quantity!,
+        addOnPrice: addOnItemPrices,
+        addOns: _listAddOn,
+        addOnPriceQuantity: addOnItemPrices,
+        addOnOfferPrice: addOfferPrices,
+        addOnOfferQuantity: addOfferPrices,
       );
+
+      /// in cartItemList list added the cart
+      cartItemsList.add(cart);
+
+      /// once particular AddOns price  is added first time after that addOn price is zero so, that when at another itemId , addOns  are added firstly addOnPrice is not included
+      addOnPrices = 0.0;
+    } else {
+      /// in else case at same itemId we have updated firstly added cart
+      Cart cart = list.first;
+      cart.ItemQuantity =
+          menuHeaderRestaurantList[index].menu![subIndex].quantity!;
+      cart.ItemTotalPrice =
+          menuHeaderRestaurantList[index].menu![subIndex].isOfferItem == true
+              ? menuHeaderRestaurantList[index].menu![subIndex].offerPrice! *
+                  menuHeaderRestaurantList[index].menu![subIndex].quantity!
+              : menuHeaderRestaurantList[index].menu![subIndex].itemPrice! *
+                  menuHeaderRestaurantList[index].menu![subIndex].quantity!;
+
+      /// first we will check if addon list in cart is empty or not at particular ItemId which is already in cart then we will multiply addOnPriceQuantity with quantity
+      if (cart.addOns!.isNotEmpty) {
+        /// if addon list in cart is not empty, therefore addOnPriceQuality is updated , if quantity is increased
+        cart.addOnPriceQuantity = cart.addOnPrice! *
+            menuHeaderRestaurantList[index].menu![subIndex].quantity!;
+
+        /// if addon list in cart is not empty, therefore addOnOfferQuality is updated , if quantity is increased
+        cart.addOnOfferQuantity = cart.addOnOfferPrice! *
+            menuHeaderRestaurantList[index].menu![subIndex].quantity!;
+      } else {
+        double? addOnItemPrices =
+            (menuHeaderRestaurantList[index].menu![subIndex].itemPrice! +
+                    addOnPrices!) *
+                menuHeaderRestaurantList[index].menu![subIndex].quantity!;
+        double? addOfferPrices =
+            (menuHeaderRestaurantList[index].menu![subIndex].offerPrice! +
+                    addOnPrices!) *
+                menuHeaderRestaurantList[index].menu![subIndex].quantity!;
+        cart.addOnPriceQuantity = addOnItemPrices;
+        cart.addOnOfferQuantity = addOfferPrices;
+      }
+
+      /// updating cart at same itemId
+      cartItemsList[cartItemsList.indexWhere((element) =>
+          element.ItemId ==
+          menuHeaderRestaurantList[index].menu![subIndex].itemId)] = cart;
     }
-    menuHeaderRestaurantList[index].menu![subIndex].isOfferItem == false
-        ? subTotalPriceCalculation(
-            menuHeaderRestaurantList[index].menu![subIndex].itemPrice)
-        : subTotalPriceCalculation(
-            menuHeaderRestaurantList[index].menu![subIndex].offerPrice);
+
+    /// after adding items in cart and updating cart at same itemId we will overall calculate subTotalPrice
+    Cart cartParticularItem = cartItemsList.firstWhere((element) =>
+        element.ItemId ==
+        menuHeaderRestaurantList[index].menu![subIndex].itemId);
+    cartParticularItem.isOfferItem == true
+        ? subTotalPriceCalculation(cartParticularItem.addOnOfferPrice)
+        : subTotalPriceCalculation(cartParticularItem.addOnPrice);
     print('subTotal--->$subTotalPrice');
-    print(
-        'cartList---->${cartItemsList.length},${cartItemsList[cartItemsList.length - 1].ItemId},${cartItemsList[cartItemsList.length - 1].ItemQuantity},${cartItemsList[cartItemsList.length - 1].ItemTotalPrice}');
-    print('encodeCart${jsonEncode(cartItemsList)}');
+
+    print('encodeCart${jsonDecode(jsonEncode(cartItemsList))}');
+    addOnIngredients.clear();
+
     update();
   }
 
@@ -116,65 +172,115 @@ class RestaurantDetailsController extends GetxController {
   void deleteQuantity(int index, int subIndex) {
     final currentQuantity =
         menuHeaderRestaurantList[index].menu![subIndex].quantity;
-    if (currentQuantity == 0) {
-      currentQuantity == 0;
-      // cartItemsList[index].quantity =
-      //     menuHeaderRestaurantList[index].menu![subIndex].quantity;
+    menuHeaderRestaurantList[index].menu![subIndex].quantity =
+        currentQuantity! - 1;
+
+    /// if at particular itemId in cart is having quantity 1 , if its quantity is decreased then that quantity will be zero , so that itemId can be deleted from cart
+    if (menuHeaderRestaurantList[index].menu![subIndex].quantity! < 0) {
+      menuHeaderRestaurantList[index].menu![subIndex].quantity = 0;
     } else {
-      menuHeaderRestaurantList[index].menu![subIndex].quantity =
-          currentQuantity! - 1;
+      /// first time check itemId in cart
       var list = cartItemsList.where((element) =>
           element.ItemId ==
           menuHeaderRestaurantList[index].menu![subIndex].itemId);
+      double? addOnItemPrices =
+          (menuHeaderRestaurantList[index].menu![subIndex].itemPrice! +
+              addOnPrices!);
+      double? addOfferPrices =
+          (menuHeaderRestaurantList[index].menu![subIndex].offerPrice! +
+              addOnPrices!);
       if (list.isEmpty) {
-        cartItemsList.remove(
-          Cart(
-            ItemId: menuHeaderRestaurantList[index].menu![subIndex].itemId,
-            ItemQuantity:
-                menuHeaderRestaurantList[index].menu![subIndex].quantity!,
-            ItemTotalPrice:
-                menuHeaderRestaurantList[index].menu![subIndex].itemPrice! *
-                    menuHeaderRestaurantList[index].menu![subIndex].quantity!,
-            itemName: menuHeaderRestaurantList[index].menu![subIndex].itemName,
-            categoryId: menuHeaderRestaurantList[index].categoryId,
-            isOfferItem:
-                menuHeaderRestaurantList[index].menu![subIndex].isOfferItem,
-            offerPrice:
-                menuHeaderRestaurantList[index].menu![subIndex].offerPrice! *
-                    menuHeaderRestaurantList[index].menu![subIndex].quantity!,
-            offerTitle:
-                menuHeaderRestaurantList[index].menu![subIndex].offerTitle,
-          ),
-        );
-      } else {
-        cartItemsList[cartItemsList.indexWhere((element) =>
-            element.ItemId ==
-            menuHeaderRestaurantList[index].menu![subIndex].itemId)] = Cart(
+        /// created Cart type variable
+        Cart cart = Cart(
           ItemId: menuHeaderRestaurantList[index].menu![subIndex].itemId,
           ItemQuantity:
               menuHeaderRestaurantList[index].menu![subIndex].quantity!,
-          ItemTotalPrice:
-              menuHeaderRestaurantList[index].menu![subIndex].itemPrice! *
-                  menuHeaderRestaurantList[index].menu![subIndex].quantity!,
+          ItemlPriceSingleQuantity:
+              menuHeaderRestaurantList[index].menu![subIndex].itemPrice!,
           itemName: menuHeaderRestaurantList[index].menu![subIndex].itemName,
           categoryId: menuHeaderRestaurantList[index].categoryId,
           isOfferItem:
               menuHeaderRestaurantList[index].menu![subIndex].isOfferItem,
           offerPrice:
-              menuHeaderRestaurantList[index].menu![subIndex].offerPrice! *
-                  menuHeaderRestaurantList[index].menu![subIndex].quantity!,
+              menuHeaderRestaurantList[index].menu![subIndex].offerPrice!,
           offerTitle:
               menuHeaderRestaurantList[index].menu![subIndex].offerTitle,
+          addOnPrice: addOnItemPrices,
+          addOnPriceQuantity: addOnItemPrices,
+          addOnOfferPrice: addOfferPrices,
+          addOnOfferQuantity: addOfferPrices,
+          ItemTotalPrice: menuHeaderRestaurantList[index]
+                      .menu![subIndex]
+                      .isOfferItem ==
+                  true
+              ? menuHeaderRestaurantList[index].menu![subIndex].offerPrice! *
+                  menuHeaderRestaurantList[index].menu![subIndex].quantity!
+              : menuHeaderRestaurantList[index].menu![subIndex].itemPrice! *
+                  menuHeaderRestaurantList[index].menu![subIndex].quantity!,
         );
+        cartItemsList.remove(cart);
+      } else {
+        /// in else case if itemId already existed , to update quantity and price on decrease of quantity
+        Cart cart = list.first;
+        cart.ItemQuantity =
+            menuHeaderRestaurantList[index].menu![subIndex].quantity!;
+        cart.ItemTotalPrice =
+            menuHeaderRestaurantList[index].menu![subIndex].isOfferItem == true
+                ? menuHeaderRestaurantList[index].menu![subIndex].offerPrice! *
+                    menuHeaderRestaurantList[index].menu![subIndex].quantity!
+                : menuHeaderRestaurantList[index].menu![subIndex].itemPrice! *
+                    menuHeaderRestaurantList[index].menu![subIndex].quantity!;
+        /// according to addOn list is empty or not in cart, prices are updated according to quantity
+        if (cart.addOns!.isNotEmpty) {
+          cart.addOnPriceQuantity = cart.addOnPrice! *
+              menuHeaderRestaurantList[index].menu![subIndex].quantity!;
+          cart.addOnOfferQuantity = cart.addOnOfferPrice! *
+              menuHeaderRestaurantList[index].menu![subIndex].quantity!;
+        } else {
+          double? addOnItemPrices =
+              (menuHeaderRestaurantList[index].menu![subIndex].itemPrice! +
+                      addOnPrices!) *
+                  menuHeaderRestaurantList[index].menu![subIndex].quantity!;
+          double? addOfferPrices =
+              (menuHeaderRestaurantList[index].menu![subIndex].offerPrice! +
+                      addOnPrices!) *
+                  menuHeaderRestaurantList[index].menu![subIndex].quantity!;
+          //     cart.addOnPrice= addOnItemPrices;
+          cart.addOnPriceQuantity = addOnItemPrices;
+          cart.addOnOfferQuantity = cart.addOnOfferPrice! *
+              menuHeaderRestaurantList[index].menu![subIndex].quantity!;
+        }
+        /// updated cart on already added itemId in cart
+        cartItemsList[cartItemsList.indexWhere((element) =>
+            element.ItemId ==
+            menuHeaderRestaurantList[index].menu![subIndex].itemId)] = cart;
+        /// In cart if particular itemQuantity is zero , to remove itemId from cart
+        if (cart.ItemQuantity == 0) {
+          print("zero");
+          cartItemsList.removeWhere((element) => element.ItemQuantity == 0);
+
+          /// if quantity of particular item is 1 and on one deduction item will be removed from cart and subTotalPrice will be updated
+          cart.isOfferItem == true
+              ? subTotalPriceAfterRemoving(cart.addOnOfferPrice)
+              : subTotalPriceAfterRemoving(cart.addOnPrice);
+          print('subTotal--->$subTotalPrice');
+        }
       }
-      menuHeaderRestaurantList[index].menu![subIndex].isOfferItem == false
-          ? subTotalPriceAfterRemoving(
-              menuHeaderRestaurantList[index].menu![subIndex].itemPrice)
-          : subTotalPriceAfterRemoving(
-              menuHeaderRestaurantList[index].menu![subIndex].offerPrice);
-      print('subTotal--->$subTotalPrice');
-      print(
-          'cartList---->${cartItemsList.length},${cartItemsList[cartItemsList.length - 1].ItemId},${cartItemsList[cartItemsList.length - 1].ItemQuantity},${cartItemsList[cartItemsList.length - 1].ItemTotalPrice}');
+
+      /// after adding items in cart and updating cart at same itemId we will overall calculate subTotalPrice
+      var cartItem = cartItemsList.where((element) =>
+          element.ItemId ==
+          menuHeaderRestaurantList[index].menu![subIndex].itemId);
+      if (cartItem.isNotEmpty) {
+        Cart cartParticularItem = cartItemsList.firstWhere((element) =>
+            element.ItemId ==
+            menuHeaderRestaurantList[index].menu![subIndex].itemId);
+        cartParticularItem.isOfferItem == true
+            ? subTotalPriceAfterRemoving(cartParticularItem.addOnOfferPrice)
+            : subTotalPriceAfterRemoving(cartParticularItem.addOnPrice);
+        print('subTotal--->$subTotalPrice');
+      }
+
       print('encodeCart${jsonEncode(cartItemsList)}');
     }
     update();
@@ -185,9 +291,12 @@ class RestaurantDetailsController extends GetxController {
     ///find the object at particular itemId
     Cart cartParticularItem =
         cartItemsList.firstWhere((element) => element.ItemId == value);
+    // cartParticularItem.isOfferItem == true
+    //     ? subTotalPriceAfterRemoving(cartParticularItem.offerPrice)
+    //     : subTotalPriceAfterRemoving(cartParticularItem.ItemTotalPrice);
     cartParticularItem.isOfferItem == true
-        ? subTotalPriceAfterRemoving(cartParticularItem.offerPrice)
-        : subTotalPriceAfterRemoving(cartParticularItem.ItemTotalPrice);
+        ? subTotalPriceAfterRemoving(cartParticularItem.addOnOfferQuantity)
+        : subTotalPriceAfterRemoving(cartParticularItem.addOnPriceQuantity);
     print('subTotal--->$subTotalPrice');
 
     /// matched the menuCategoryId with the CartCategoryId
@@ -214,6 +323,37 @@ class RestaurantDetailsController extends GetxController {
     cartItemsList.removeAt(index);
     update();
     print('encodeCart${jsonEncode(cartItemsList)}');
+  }
+
+  /// setSelected ingredient of particular item
+  setSelectedIngredient(IngredientTypes value, itemId, index, subIndex) {
+    AddOns data = AddOns(
+        ingredientName: value.name!,
+        addOnPrice: value.amount!,
+        ItemAddOnId: value.addOnId);
+    addOnIngredients.add(data);
+    if (addOnIngredients.contains(data)) {
+      addOnPrices = addOnPrices! + value.amount!;
+    }
+    selectedIngredient.add(value);
+    // ingredientNames =  selectedIngredient.map((e) => e.name).toString();
+    update();
+  }
+
+  /// check selected Ingredient Is added to List or not
+  checkIngredientContains(IngredientTypes value) {
+    return selectedIngredient.contains(value);
+  }
+
+  /// if selected ingredient is already in list then remove it on tap
+  removeSelectedIngredient(IngredientTypes value) {
+    addOnIngredients.remove(AddOns(
+        ingredientName: value.name!,
+        addOnPrice: value.amount!,
+        ItemAddOnId: value.addOnId));
+    selectedIngredient.remove(value);
+    addOnPrices = addOnPrices! - value.amount!;
+    update();
   }
 
   /// Restaurant Details
@@ -399,6 +539,41 @@ class RestaurantDetailsController extends GetxController {
           isError: true,
         );
         update();
+        return false;
+      }
+    } catch (e) {
+      print('Error --------> $e');
+    }
+
+    return false;
+  }
+
+  /// add - on- ingredients menu api call
+  Future<dynamic> addOnIngredientMenuApiCall({
+    dynamic body,
+  }) async {
+    try {
+      final response = await apiCall.callPostApi(
+        body,
+        addOnListEndPoint,
+        token: userSessionController.token,
+      );
+      if (response['response'] == 1) {
+        // menuHeaderRestaurantList.value = (response['data'])
+        //     ?.map((e) => RestaurantMenuData.fromMap(e as Map<String, dynamic>))
+        //     .toList();
+        if (response['data'] != null) {
+          addOnMenuIngredientList.value = List<AddOnIngredientList>.from(
+              response['data'].map((x) => AddOnIngredientList.fromJson(x)));
+        }
+
+        return true;
+      } else {
+        ShowToast.show(
+          msg: response['errorMessage'] ?? 'Please try again!',
+          isError: true,
+        );
+        isLoading.value = false;
         return false;
       }
     } catch (e) {

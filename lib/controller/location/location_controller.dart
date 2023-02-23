@@ -53,11 +53,13 @@ var isSearchMap = false.obs;
       print(
           'Address ---------> ${placemarks.first.toString()}');
       if (GetPlatform.isAndroid) {
-        currentAddress.value =
-            "${place.street} ${place.locality}, ${place.administrativeArea} ${place.postalCode}";
+        // currentAddress.value =
+        //     "${place.street} ${place.locality}, \n${place.administrativeArea} ${place.postalCode}";
+        currentAddress.value = "${place.postalCode}";
 
       } else if (GetPlatform.isIOS) {
-        currentAddress.value = "${place.street} ${place.locality}, ${place.administrativeArea} ${place.postalCode}";
+        // currentAddress.value = "${place.street} ${place.locality}, \n${place.administrativeArea} ${place.postalCode}";
+        currentAddress.value = "${place.postalCode}";
       }
 
       return true;

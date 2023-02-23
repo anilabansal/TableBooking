@@ -1,4 +1,3 @@
-import 'package:booking_table/controller/service_type/summary_controller.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_app_bar.dart';
 import 'package:booking_table/view/service_type/widgets/full_service_summary_bottom_view.dart';
 import 'package:booking_table/view/service_type/widgets/full_service_summary_details_button_view.dart';

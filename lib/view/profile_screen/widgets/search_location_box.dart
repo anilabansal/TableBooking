@@ -81,19 +81,20 @@ class _SearchBoxState extends State<SearchBox> {
           },
           itmClick: (Prediction prediction) {
             print('onTap');
+
             widget.destinationController!.text =
                 prediction.description.toString();
-            locationController.searchController.value.text =
-                prediction.description.toString();
+            // locationController.searchController.value.text =
+            //     prediction.description.toString();
 
             widget.destinationController!.selection =
                 TextSelection.fromPosition(
               TextPosition(offset: prediction.description!.length),
             );
-            locationController.searchController.value.selection =
-                TextSelection.fromPosition(
-              TextPosition(offset: prediction.description!.length),
-            );
+            // locationController.searchController.value.selection =
+            //     TextSelection.fromPosition(
+            //   TextPosition(offset: prediction.description!.length),
+            // );
             FocusScope.of(context).unfocus();
           },
         ),

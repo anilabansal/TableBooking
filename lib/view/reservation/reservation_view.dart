@@ -64,7 +64,7 @@ class _ReservationViewState extends State<ReservationView> {
                           controller: controller.tabController,
                           indicator: BoxDecoration(
                               borderRadius: BorderRadius.circular(6),
-                              color: black0D0000),
+                              color: black0D0000,),
                           tabs: controller.myTabs,
                           labelStyle: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w400),

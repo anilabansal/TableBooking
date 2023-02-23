@@ -5,6 +5,7 @@ import 'package:booking_table/utils/common/widgets_methods/common_sized_box.dart
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:booking_table/utils/common/widgets_methods/progress_loader.dart';
 import 'package:booking_table/utils/extensions/capitalization_strings.dart';
+import 'package:booking_table/view/service_type/widgets/payment_mode_body.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/book_a_table/book_a_table_controller.dart';
@@ -20,13 +21,14 @@ class FullSummaryBottomView extends StatelessWidget {
     Key? key,
   }) : super(key: key);
   BookATableController controller = Get.find();
-  CreditCardController creditCardController = Get.put(CreditCardController());
+  // CreditCardController creditCardController = Get.put(CreditCardController());
   RestaurantDetailsController restaurantsController = Get.find();
   var tipController = TextEditingController();
   var specialEventController = TextEditingController();
   var allergiesController = TextEditingController();
-  dynamic tipAmountToAdded;
-  dynamic totalAmountToPay;
+
+  // dynamic tipAmountToAdded;
+  // dynamic totalAmountToPay;
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -100,373 +102,298 @@ class FullSummaryBottomView extends StatelessWidget {
           ),
 
           /// ADD A TIP
-          Padding(
-            padding: const EdgeInsets.all(15),
+          Visibility(
+            visible:controller.serviceSummary!.serviceType.toString() == '1'?false:true ,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CommonText(
-                  textAlign: TextAlign.left,
-                  text: 'Add Tip',
-                  color: black000000,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
-                CommonSizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    addTipContainer(
-                      "\$10",
-                      // ignore: unrelated_type_equality_checks
-                      controller.addTip.value == "\$10",
-                      12.0,
-                      10.0,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    // ignore: unrelated_type_equality_checks
-                    addTipContainer(
-                      "\$15",
-                      controller.addTip.value == "\$15",
-                      12.0,
-                      15.0,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    // ignore: unrelated_type_equality_checks
-                    addTipContainer(
-                      "\$20",
-                      controller.addTip.value == "\$20",
-                      12.0,
-                      20.0,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    // ignore: unrelated_type_equality_checks
-                    addTipContainer(
-                      "Custom",
-                      controller.addTip.value == "Custom",
-                      10.0,
-                      0,
-                      // double.tryParse(tipController.text.toString()),
-                      // double.tryParse(tipController.text.toString().trim()),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    addTipContainer(
-                      "None",
-                      controller.addTip.value == "None",
-                      12.0,
-                      0.0,
-                    ),
-                  ],
-                ),
-                CommonSizedBox(
-                  height: 15,
-                ),
-                Visibility(
-                  visible: controller.addTip.value == 'Custom' ? true : false,
-                  child: CommonTextFormField(
-                    hintText: 'Enter Amount',
-                    fillColor: whiteF5F5F5,
-                    filled: true,
-                    controller: tipController,
-                  ),
-                ),
-                // CommonSizedBox(
-                //   height: 41,
-                // ),
-              ],
-            ),
-          ),
-          Container(
-            width: Get.width,
-            height: 1,
-            color: whiteE5E5E5,
-          ).paddingOnly(
-            top: 5,
-            bottom: 5,
-          ),
-
-          /// Payment Method
-          Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CommonText(
-                  textAlign: TextAlign.left,
-                  text: 'Select Payment Mode',
-                  color: black000000,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
-                CommonSizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    selectPaymentContainer(
-                      image: Visibility(
-                        visible: false,
-                        child: Image.asset(
-                          venmoLogo,
-                          height: 16,
-                          width: 16,
-                        ),
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CommonText(
+                        textAlign: TextAlign.left,
+                        text: 'Add Tip',
+                        color: black000000,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
                       ),
-                      'Credit Card',
-                      onTap: () {
-                        controller.selectPaymentMode.value = "Credit Card";
-                      },
-                      isSelected:
-                          controller.selectPaymentMode.value == "Credit Card",
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    selectPaymentContainer(
-                      image: Image.asset(
-                        controller.selectPaymentMode.value == "Apple"
-                            ? appleIcon
-                            : appleBlackLogo,
-                        height: 16,
-                        width: 16,
+                      CommonSizedBox(
+                        height: 20,
                       ),
-                      'Apple',
-                      onTap: () {
-                        controller.selectPaymentMode.value = "Apple";
-                      },
-                      isSelected: controller.selectPaymentMode.value == "Apple",
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    selectPaymentContainer(
-                        image: Image.asset(
-                          googleIcon,
-                          height: 16,
-                          width: 16,
-                        ),
-                        'Pay', onTap: () {
-                      controller.selectPaymentMode.value = "Pay";
-                    }, isSelected: controller.selectPaymentMode.value == "Pay"),
-                  ],
-                ),
-                CommonSizedBox(
-                  height: 18,
-                ),
-                // selectPaymentContainer( "Pay At Restaurant")
-                InkWell(
-                  onTap: () {
-                    controller.selectPaymentMode.value = "Pay At Restaurant";
-                  },
-                  child: Container(
-                    height: 32,
-                    width: 137,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: controller.selectPaymentMode.value ==
-                              "Pay At Restaurant"
-                          ? black0D0000
-                          : greyF8F8F8,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: CommonText(
-                      textAlign: TextAlign.center,
-                      text: 'Pay At Restaurant',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                      color: controller.selectPaymentMode.value ==
-                              "Pay At Restaurant"
-                          ? white
-                          : greyA2A2A2,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+                      Row(
+                        children: [
+                          addTipContainer(
+                            "10%",
+                            // ignore: unrelated_type_equality_checks
+                            controller.addTip.value == "10%",
+                            12.0,
 
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15.0, 30, 15, 15),
-            child: CommonButton(
-              onTap: () {
-                if (confirmBookingValidation() != '') {
-                  ShowToast.show(
-                    msg: confirmBookingValidation(),
-                    isError: true,
-                  );
-                  return false;
-                }
-
-                /// total tipAmountToAdded
-                tipAmountToAdded = controller.addTip.value == 'Custom'
-                    ? tipController.text.isEmpty || tipController.text == null
-                        ? 0.0
-                        : double.tryParse(tipController.text.toString())
-                    : controller.tipAmount;
-
-                /// totalAmountToPay
-                totalAmountToPay = restaurantsController.subTotalPrice! +
-                    controller.serviceSummary!.bookingConfirmationAmount +
-                    controller.tipAmount;
-
-                /// if payment mode is pay at restaurant , then directly api call on confirm button else show dialog and then hit api
-                if (controller.selectPaymentMode.value == "Pay At Restaurant") {
-                  controller.confirmBookIsLoading.value = true;
-                  ProgressDialog.showProgressDialog(context);
-                  controller.confirmBookingApiCall(body:
-                  {
-                    "BookingId": 0,
-                    //"Items": jsonEncode(restaurantsController.cartItemsList),
-                    // "Items": jsonEncode(restaurantsController.cartItemsList.map((e) => e.toJson()).toList()).toString(),
-                    "Items":jsonDecode(jsonEncode(restaurantsController.cartItemsList)),
-                    "SpecialEvent": specialEventController.text.trim().isEmpty
-                        ? ""
-                        : specialEventController.text.trim(),
-                    "PaymentTypeId": 4,
-                    "Tip": tipAmountToAdded,
-                    "RestaurantId": controller.serviceSummary!.restaurantId,
-                    "BookingDate": controller.serviceSummary!.bookingDate.toString(),
-                    "PartySize": controller.serviceSummary!.partySize,
-                    "ServiceType": controller.serviceSummary!.serviceType,
-                    "BookingTime": controller.serviceSummary!.bookingTime.toString(),
-                    "SpecialRequest": allergiesController.text.trim().isEmpty
-                        ? ""
-                        : allergiesController.text.trim(),
-                    "SlotId": controller.serviceSummary!.slotId,
-                  }
-                  ).then((value) {
-                    controller.confirmBookIsLoading.value = false;
-                    Navigator.pop(context);
-                    if (value) {
-                      // Get.off('/payment-done');
-                      //   Get.offNamed('/payment-done');
-                      // Get.offAllNamed('/payment-done',);
-                      ShowToast.show(
-                        msg: 'Table Book Successfully!',
-                      );
-                      // Get.offNamed('/reservation');
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const ReservationView(),
+                              "10%",
+                             10.0,
                           ),
-                          (Route<dynamic> route) => route.isFirst);
-                    }
-                  });
-                } else {
-                  /// alert dialog
-                  commonAlertDialog(
-                    context,
-                    restaurantsController.subTotalPrice! +
-                        controller.serviceSummary!.bookingConfirmationAmount +
-                        tipAmountToAdded,
-                    () {
-                      ///on tap of ok button in alert dialog to make payment
-                      if (controller.selectPaymentMode.value == "Credit Card") {
-                        Navigator.pop(context);
-                        ProgressDialog.showProgressDialog(context);
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          // ignore: unrelated_type_equality_checks
+                          addTipContainer(
+                            "15%",
+                            controller.addTip.value == "15%",
+                            12.0,
 
-                        // Navigator.pop(context);
-                        // controller.selectPaymentMode.value == "Credit Card"
-                        //     ?
-                        creditCardController.makePayment(
-                          context,
-                          amount: '${totalAmountToPay.toInt()}',
-                          currency: 'USD',
-                          tipAmount: tipAmountToAdded,
-                          restaurantId: controller.serviceSummary!.restaurantId,
-                          bookingDate: controller.serviceSummary!.bookingDate,
-                          partySize: controller.serviceSummary!.partySize,
-                          serviceType: controller.serviceSummary!.serviceType,
-                          bookingTime: controller.serviceSummary!.bookingTime,
-                          specialEvent:
-                              specialEventController.text.trim().isEmpty
-                                  ? ""
-                                  : specialEventController.text.trim(),
-                          specialRequest:
-                              allergiesController.text.trim().isEmpty
-                                  ? ""
-                                  : allergiesController.text.trim(),
-                          slotId: controller.serviceSummary!.slotId,
-                        );
-                        // : null;
-                      } else {
-                        Navigator.pop(context);
-                        // return;
-                      }
-                    },
-                  );
-                }
-              },
-              text: 'Confirm Booking',
-              textColor: Colors.white,
-              bgColor: redE2211C,
+                              "15%",
+                            15.0,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          // ignore: unrelated_type_equality_checks
+                          addTipContainer(
+                            "20%",
+                            controller.addTip.value == "20%",
+                            12.0,
+
+                              "20%",
+                            20.0,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          // ignore: unrelated_type_equality_checks
+                          addTipContainer(
+                            "Custom",
+                            controller.addTip.value == "Custom",
+                            10.0,
+
+                              "Custom",
+                            0,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          addTipContainer(
+                            "None",
+                            controller.addTip.value == "None",
+                            12.0,
+                              "None",
+                            0.0,
+                          ),
+                        ],
+                      ),
+                      CommonSizedBox(
+                        height: 15,
+                      ),
+
+                      Visibility(
+                        visible: controller.addTip.value == 'Custom' ? true : false,
+                        child: CommonTextFormField(
+                          hintText: 'Enter Amount',
+                          fillColor: whiteF5F5F5,
+                          filled: true,
+                          controller: tipController,
+                        ),
+                      ),
+                      CommonSizedBox(
+                        height: 15,
+                      ),
+                      Visibility(
+                        visible:controller.addTip.value == "10%"||controller.addTip.value == "15%"||controller.addTip.value == "20%" ,
+                        child: CommonText(
+                          text: "+\$${((controller.tipAmount*restaurantsController.subTotalPrice!)/100)}",
+                          color: redE2211C,
+                          fontSize: 15,
+
+                        ),
+                      ),
+                      // CommonSizedBox(
+                      //   height: 41,
+                      // ),
+                    ],
+                  ),
+                ),
+                Container(
+                  width: Get.width,
+                  height: 1,
+                  color: whiteE5E5E5,
+                ).paddingOnly(
+                  top: 5,
+                  bottom: 5,
+                ),
+                /// Payment Method
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CommonText(
+                        textAlign: TextAlign.left,
+                        // text: 'Select Payment Mode',
+                        text: 'Payment Mode',
+                        color: black000000,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      const Spacer(),
+                      CommonText(
+                        textAlign: TextAlign.left,
+                        text: 'Credit Card',
+                        color: greyA2A2A2,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+
+                      // CommonSizedBox(
+                      //   height: 20,
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     selectPaymentContainer(
+                      //       image: Visibility(
+                      //         visible: false,
+                      //         child: Image.asset(
+                      //           venmoLogo,
+                      //           height: 16,
+                      //           width: 16,
+                      //         ),
+                      //       ),
+                      //       'Credit Card',
+                      //       onTap: () {
+                      //         controller.selectPaymentMode.value = "Credit Card";
+                      //       },
+                      //       isSelected:
+                      //           controller.selectPaymentMode.value == "Credit Card",
+                      //     ),
+                      //     const SizedBox(
+                      //       width: 12,
+                      //     ),
+                      //     selectPaymentContainer(
+                      //       image: Image.asset(
+                      //         controller.selectPaymentMode.value == "Apple"
+                      //             ? appleIcon
+                      //             : appleBlackLogo,
+                      //         height: 16,
+                      //         width: 16,
+                      //       ),
+                      //       'Apple',
+                      //       onTap: () {
+                      //         controller.selectPaymentMode.value = "Apple";
+                      //       },
+                      //       isSelected: controller.selectPaymentMode.value == "Apple",
+                      //     ),
+                      //     const SizedBox(
+                      //       width: 12,
+                      //     ),
+                      //     selectPaymentContainer(
+                      //       image: Image.asset(
+                      //         googleIcon,
+                      //         height: 16,
+                      //         width: 16,
+                      //       ),
+                      //       'Pay',
+                      //       onTap: () {
+                      //         controller.selectPaymentMode.value = "Pay";
+                      //       },
+                      //       isSelected: controller.selectPaymentMode.value == "Pay",
+                      //     ),
+                      //   ],
+                      // ),
+                      // CommonSizedBox(
+                      //   height: 18,
+                      // ),
+                      // // selectPaymentContainer( "Pay At Restaurant")
+                      // InkWell(
+                      //   onTap: () {
+                      //     controller.selectPaymentMode.value = "Pay At Restaurant";
+                      //   },
+                      //   child: Container(
+                      //     height: 32,
+                      //     width: 137,
+                      //     alignment: Alignment.center,
+                      //     decoration: BoxDecoration(
+                      //       color: controller.selectPaymentMode.value ==
+                      //               "Pay At Restaurant"
+                      //           ? black0D0000
+                      //           : greyF8F8F8,
+                      //       borderRadius: BorderRadius.circular(4),
+                      //     ),
+                      //     child: CommonText(
+                      //       textAlign: TextAlign.center,
+                      //       text: 'Pay At Restaurant',
+                      //       fontSize: 15,
+                      //       fontWeight: FontWeight.w400,
+                      //       color: controller.selectPaymentMode.value ==
+                      //               "Pay At Restaurant"
+                      //           ? white
+                      //           : greyA2A2A2,
+                      //     ),
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-          // CommonSizedBox(
-          //   height: 30,
-          // ),
+
+
+
+          PaymentMode(
+            customTipController: tipController,
+            specialEventController: specialEventController,
+            allergiesController: allergiesController,
+          )
         ],
       ),
     );
   }
 
-  /// payment mode container
-  selectPaymentContainer(iconText, {image, onTap, isSelected}) {
-    return Expanded(
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          height: 32,
-          width: 82,
-          decoration: BoxDecoration(
-            color: isSelected ? black0D0000 : greyF8F8F8,
-            borderRadius: BorderRadius.circular(4),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(right: 0.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // const Icon(
-                //   Icons.apple,
-                //   color: white,
-                // ),
-                image,
-                CommonSizedBox(
-                  width: 8,
-                ),
-                CommonText(
-                  text: iconText,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                  color: isSelected ? white : greyA2A2A2,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // /// payment mode container
+  // selectPaymentContainer(iconText, {image, onTap, isSelected}) {
+  //   return Expanded(
+  //     child: InkWell(
+  //       onTap: onTap,
+  //       child: Container(
+  //         height: 32,
+  //         width: 82,
+  //         decoration: BoxDecoration(
+  //           color: isSelected ? black0D0000 : greyF8F8F8,
+  //           borderRadius: BorderRadius.circular(4),
+  //         ),
+  //         child: Padding(
+  //           padding: const EdgeInsets.only(right: 0.0),
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: [
+  //               // const Icon(
+  //               //   Icons.apple,
+  //               //   color: white,
+  //               // ),
+  //               image,
+  //               CommonSizedBox(
+  //                 width: 8,
+  //               ),
+  //               CommonText(
+  //                 text: iconText,
+  //                 fontSize: 15,
+  //                 fontWeight: FontWeight.w400,
+  //                 color: isSelected ? white : greyA2A2A2,
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   /// add tip container
-  addTipContainer(text, isSelected, fontSize, tipAmount) {
+  addTipContainer(text, isSelected, fontSize, selectedValue,tipAmount) {
     return Expanded(
       child: InkWell(
         onTap: () {
-          controller.addTip.value = text;
+       //   controller.addTip.value = text;
+      controller.addTip.value = selectedValue;
           controller.tipAmount = tipAmount;
           // isSelected = !isSelected;
         },
@@ -492,26 +419,5 @@ class FullSummaryBottomView extends StatelessWidget {
     );
   }
 
-  /// validation
-  confirmBookingValidation() {
-    if (controller.serviceSummary!.serviceType.toString() != '1' &&
-        restaurantsController.cartItemsList.isEmpty) {
-      return 'please place order!'.toTitleCase();
-    }
-   else if (specialEventController.text.isNotEmpty && specialEventController.text.trim().isEmpty) {
-       return 'please enter valid special event!'.toTitleCase();
-    }
-    else if (allergiesController.text.isNotEmpty && allergiesController.text.trim().isEmpty) {
-      return 'please enter valid special request!'.toTitleCase();
-    }
-    else if (controller.addTip.value == '') {
-      return 'please select tip to be added'.toTitleCase();
-    } else if (controller.addTip.value == "Custom" &&
-        tipController.text.trim().isEmpty) {
-      return 'please add tip amount'.toTitleCase();
-    } else if (controller.selectPaymentMode.value == '') {
-      return 'please select payment mode'.toTitleCase();
-    }
-    return '';
-  }
+
 }

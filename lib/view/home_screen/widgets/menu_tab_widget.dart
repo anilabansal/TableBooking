@@ -158,8 +158,8 @@ class _MenuTabState extends State<MenuTab> {
                                                     .menuHeaderRestaurantList[
                                                         index]
                                                     .menu![i]
-                                                    .itemPrice
-                                                    .toString(),
+                                                    .itemPrice!
+                                                    .toStringAsFixed(2),
                                             controller
                                                         .menuHeaderRestaurantList[
                                                             index]

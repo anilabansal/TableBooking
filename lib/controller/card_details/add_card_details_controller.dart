@@ -6,87 +6,124 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../model/saved_card_details/saved_card_details.dart';
+import '../../model/saved_card_details/user_cardlist.dart';
 
 class AddCardDetailsController extends GetxController {
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    savedCardList();
-    super.onInit();
-  }
+
 
   var selectedCardDate = DateTime.now().obs;
 
   var isLoading = true.obs;
   var isChecked = false.obs;
+  var isUserCardListIsLoading = true.obs;
+
   void updateCheckbox() {
     isChecked.value = !isChecked.value;
   }
 
-  var savedCardList = [].obs;
+  //
+  // var savedCardList = [].obs;
   ApiCalls apiCall = ApiCalls();
   UserSessionController userSessionController = Get.find();
+  var userAllCardList = CardList().obs;
 
-  // Select Date
-  // selectDate() async {
-  //   final DateTime? pickedDate = await showDatePicker(
-  //     context: Get.context!,
-  //     initialDatePickerMode: DatePickerMode.year,
-  //     initialEntryMode: DatePickerEntryMode.calendarOnly,
-  //     initialDate: selectedCardDate.value,
-  //     firstDate: DateTime.now(),
-  //     lastDate: DateTime(3000),
-  //   );
-  //   if (pickedDate != null && pickedDate != selectedCardDate.value) {
-  //     selectedCardDate.value = pickedDate;
-  //     cardExpiryDate.text =
-  //         DateFormat('M-yy').format(selectedCardDate.value).toString();
-  //   } else if (cardExpiryDate.text.isEmpty) {
-  //     cardExpiryDate.text =
-  //         DateFormat('M-yy').format(DateTime.now()).toString();
-  //   }
-  // }
+  UserCardlist ? cardSelected;
 
-  /// Saved Card Detail List
-  Future<dynamic> savedCardListData({
+  ///set Selected Card for payment
+  void setSelectedCard(UserCardlist value){
+    cardSelected = value;
+    update();
+  }
+
+  /// Saved Card Detail api
+  Future<dynamic> savedCardData({
     dynamic body,
-    endPoint,
+    // endPoint,
   }) async {
     try {
       final response = await apiCall.callPostApi(
         body,
+
+        addCardDetailString,
+        token: userSessionController.token,
+      );
+      if (response['response'] == 1) {
+        ShowToast.show(
+          msg: 'Card Added SuccessFully!!'
+          // msg: response['errorMessage'],
+        );
+        isLoading.value = false;
+        return true;
+      } else {
+        isLoading.value = false;
+        ShowToast.show(
+          msg: response['errorMessage'] ?? 'Please try again!',
+          isError: true,
+        );
+        return false;
+      }
+    } catch (e) {
+      print('Error --------> $e');
+    }
+    isLoading.value = false;
+
+    return false;
+  }
+
+  /// card list
+  Future<dynamic> savedCardListDataApi() async {
+    try {
+      final response = await apiCall.callPostApi(
+        {},
         // endPoint ?? savedCardDetailString,
-        endPoint,
+        savedCardListString,
         token: userSessionController.token,
       );
 
-      // SavedCardDetails savedCardListApiData =
-      // SavedCardDetails.fromMap(response);
 
-      // if (endPoint == null
-      //     ? savedCardListApiData.response == 1
-      //     : response['response'] == 1) {
-      //   // aboutUsRestaurantList.value = (response['data'])?.map((e) => Datum.fromMap(e as Map<String, dynamic>))
-      //   //     .toList();
-      //   //
-      //   // print(index.value);
-      //   // print(aboutUsRestaurantList.value);
-      //   endPoint == null
-      //       ? savedCardList.value = savedCardListApiData.userCardlist!
-      //       : null;
-      //   isLoading.value = false;
-      //  // update();
-      //   return true;
-      // }
-    if(response['response'] == 1){
-      ShowToast.show(
-        msg: response['errorMessage'],
-      );
-      isLoading.value = false;
-      return true;
+      if (response['response'] == 1) {
+        userAllCardList.value = CardList.fromJson(response);
+        return true;
+      } else {
+
+        ShowToast.show(
+          msg: response['errorMessage'] ?? 'Please try again!',
+          isError: true,
+        );
+        return false;
+      }
+    } catch (e) {
+      print('Error --------> $e');
     }
-      else {
-        isLoading.value = false;
+    isLoading.value = false;
+
+    return false;
+  }
+
+
+  /// remove of card
+  Future<dynamic> removeCardAPi({
+     body,
+    // endPoint,
+  }) async {
+    try {
+      final response = await apiCall.callPostApi(
+        body,
+
+        removeCardFromListString,
+        token: userSessionController.token,
+      );
+
+
+      if (response['response'] == 1) {
+
+        ShowToast.show(
+          msg: response['errorMessage'],
+        );
+
+        return true;
+      } else {
+
         ShowToast.show(
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,

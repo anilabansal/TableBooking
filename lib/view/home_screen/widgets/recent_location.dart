@@ -44,7 +44,8 @@ class RecentLocation extends StatelessWidget {
                               userSession.recentSearchLocation[index].lat,
                           "Longitude": userSession
                               .recentSearchLocation[index].long
-                              .toString()
+                              .toString(),
+                          "RestaurantName":"",
                         },
                       ).then(
                         (value) {

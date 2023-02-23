@@ -14,12 +14,31 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../../controller/authentication/login_controller.dart';
 import '../../../utils/common/widgets_methods/progress_loader.dart';
+import '../../../utils/services/fcm_service.dart';
 
-class AuthScreenViewWidget extends StatelessWidget {
+class AuthScreenViewWidget extends StatefulWidget {
   AuthScreenViewWidget({Key? key}) : super(key: key);
+
+  @override
+  State<AuthScreenViewWidget> createState() => _AuthScreenViewWidgetState();
+}
+
+class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
   LoginController loginController = Get.find();
+
   UserSessionController userController = Get.find();
 
+  @override
+  void initState() {
+    // FCMService().getFCMToken().then((value) {
+    //   loginController.deviceToken.value = value!;
+    //   // setState(() {
+    //   //   deviceTokenStr = value;
+    //   // });
+    //   print('Token -----> $value}');
+    // });
+    // super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -283,7 +302,7 @@ class AuthScreenViewWidget extends StatelessWidget {
         "City": "",
         "State": "",
         "ZipCode": "",
-        "DeviceToken": "zsfsf",
+        "DeviceToken":'1234' ,
         "DeviceType": GetPlatform.isAndroid ? "Android" : "iOS",
         "AuthenticationType":authenticationType,
         "AuthenticationId": authenticationId,

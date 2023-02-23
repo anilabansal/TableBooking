@@ -78,6 +78,9 @@ dependencies:
   lottie: ^2.1.0
   flutter_stripe: ^7.0.0
   pay: ^1.1.0
+#  firebase_messaging:
+#  flutter_local_notifications: ^9.9.1
+#  flutter_local_notifications: ^13.0.0
 
 
 dev_dependencies:

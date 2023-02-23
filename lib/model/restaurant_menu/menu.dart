@@ -1,3 +1,5 @@
+import 'package:booking_table/model/restaurant_menu/Cart_model.dart';
+
 class Menu {
   int? itemId;
   String? itemName;
@@ -11,8 +13,8 @@ class Menu {
   String? startDate;
   String? endDate;
   int? quantity;
-
-
+  bool? isAddOnAdded;
+  List<AddOns>? addOns;
   Menu(
       {this.itemId,
         this.itemName,
@@ -25,7 +27,10 @@ class Menu {
         this.offerPrice,
         this.startDate,
         this.endDate,
-        this.quantity});
+        this.quantity,
+        this.isAddOnAdded,
+        this.addOns
+      });
 
   Menu.fromJson(Map<String, dynamic> json) {
     itemId = json['itemId'];
@@ -40,6 +45,7 @@ class Menu {
     startDate = json['startDate'];
     endDate = json['endDate'];
     quantity =0;
+    isAddOnAdded = json['isAddOnAdded'];
   }
 
   Map<String, dynamic> toJson() {
@@ -56,6 +62,7 @@ class Menu {
     data['startDate'] = this.startDate;
     data['endDate'] = this.endDate;
     data["quantity"] =this.quantity;
+    data['isAddOnAdded'] = this.isAddOnAdded;
     return data;
   }
 }

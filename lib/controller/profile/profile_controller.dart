@@ -67,7 +67,7 @@ class ProfileController extends GetxController {
   var userProfileData = ProfileData().obs;
   var createProfileImage = File('').obs;
   var editProfileLoader = true.obs;
-
+  // var  deviceToken  = ''.obs;
   /// Update Image File
   // updateImageFile(File value) async {
   //   createProfileImage.value = value;

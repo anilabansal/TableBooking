@@ -30,7 +30,7 @@ class BookATableController extends GetxController {
   var selectPaymentMode = "".obs;
   var confirmBookIsLoading = true.obs;
    var bookTablePartySizeIsLoading = true.obs;
-  dynamic tipAmount;
+  dynamic tipAmount = 0.0;
   ServiceSummary?serviceSummary;
   BookingResponse?editBookingResponse;
   var bookTablePartySize = <PartySize>[].obs;
@@ -100,7 +100,8 @@ class BookATableController extends GetxController {
          serviceSummary = ServiceSummary.fromJson(response["data"]);
        }
         return true;
-      } else {
+      }
+      else {
         ShowToast.show(
           msg: response['errorMessage'] ?? 'Please try again!',
           isError: true,
@@ -140,6 +141,7 @@ class BookATableController extends GetxController {
     //  isLoading.value = false;
     return false;
   }
+
 /// update book table api call
   Future<bool> updateBookTableApiCall({body}) async {
     try {
@@ -166,6 +168,7 @@ class BookATableController extends GetxController {
     //  isLoading.value = false;
     return false;
   }
+
 /// confirm booking
   Future<bool> confirmBookingApiCall({Map<String,dynamic>? body}) async {
     try {

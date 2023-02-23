@@ -23,8 +23,12 @@ const getProfileDetail = 'api/Basic/EditProfile';
 const updateProfileDetail = 'api/Basic/UpdateProfile';
 const favRestaurantDetails = 'api/Home/FavouriteRestaurants';
 const favRestaurantUpdateString = 'api/Home/AddFavourites';
-const savedCardDetailString = 'api/Home/UserCardList';
+
+
+const savedCardListString = 'api/Home/UserCardList';
 const addCardDetailString = 'api/Home/SaveCreditCard';
+const removeCardFromListString = 'api/Home/RemoveUserCreditCard';
+
 const typesFoodEndPoint = 'api/Home/TypeofFood';
 const filterSelectTime = 'api/Home/GetTime';
 const filterRestaurantEndPoint = 'api/Home/RestaurantListByFilter';
@@ -43,6 +47,12 @@ const restaurantBookingListEndPoint = 'api/Home/RestaurantBookingList';
 const restaurantBookingDetailEndPoint = 'api/Home/BookingDetail';
 const submitReviewEndPoint = 'api/Home/GiveRatingandReview';
 const addMoreReservationMenuEndPoint = 'api/Home/AddMoreMenuScreen';
+
+const addOnListEndPoint = 'api/Home/GetAddOnList';
+const orderMoreConfirmationEndPoint = 'api/Home/OrderMore';
+
+const toGoMenuEndPoint = 'api/Home/ToGoServiceMenuDetail';
+const toGoOrderMoreEndPoint = 'api/Home/ToGoServiceAddMoreMenuScreen';
 
 ///    Common Fonts
 // Fonts

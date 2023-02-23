@@ -1,12 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:booking_table/controller/profile/profile_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
 import '../../model/location/previous_locations_lat_lng.dart';
+
 
 class UserSessionController extends GetxController {
   GetStorage box = GetStorage();
@@ -167,6 +163,7 @@ class UserSessionController extends GetxController {
 
     setIsLogin(false);
     setSocialLogin(false);
+    setUserToken("");
     await box.erase();
     Get.offAllNamed('/authentication');
     // Get.toNamed(

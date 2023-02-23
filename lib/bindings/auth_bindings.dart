@@ -12,6 +12,7 @@ import '../controller/filter/filter_screen_controller.dart';
 import '../controller/home/home_controller.dart';
 import '../controller/payment/credit_card_controller.dart';
 import '../controller/reservation & rating/reservation_controller.dart';
+import '../controller/reservation & rating/to_go_reservation_controller.dart';
 import '../controller/restaurant_details/restaurant_details_controller.dart';
 import '../controller/support/customer_support_controller.dart';
 
@@ -37,5 +38,7 @@ class MainBindings extends Bindings {
     Get.lazyPut<CreditCardController>(() => CreditCardController());
     Get.lazyPut<SupportController>(() => SupportController());
     Get.lazyPut<ReservationController>(() => ReservationController());
+    Get.lazyPut<ToGoReservationController>(() => ToGoReservationController());
+    // Get.put(ReservationController());
   }
 }

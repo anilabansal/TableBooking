@@ -69,7 +69,7 @@ class Bookinglistresponse {
      this.totalAmount,
      this.tip,
      this.grandTotal,
-    // required this.preBookingConfirmationAmount,
+     this.preBookingConfirmationAmount,
      this.bookingId,
     // this.userId,
     // this.latitude,
@@ -84,6 +84,8 @@ class Bookinglistresponse {
      this.isFavourite,
     // this.paymentStatus,
     this.reviewList,
+    this.gotoorderlistdetail,
+    this.toGoTotalAmount
   });
 
   bool? isUserSubmitReview;
@@ -103,7 +105,7 @@ class Bookinglistresponse {
   double? totalAmount;
   String? tip;
   double? grandTotal;
-  // int preBookingConfirmationAmount;
+  double? preBookingConfirmationAmount;
   int? bookingId;
   // dynamic userId;
   // double? latitude;
@@ -117,6 +119,9 @@ class Bookinglistresponse {
   // double? ratingCount;
   bool? isFavourite;
   ReviewList? reviewList;
+  List<Orderlistdetail>? gotoorderlistdetail;
+  double?toGoTotalAmount;
+
   // dynamic paymentStatus;
   // List<dynamic> reviewList;
 
@@ -138,7 +143,7 @@ class Bookinglistresponse {
     totalAmount: json["totalAmount"]!=null?json["totalAmount"].toDouble():0.0,
     tip: json["tip"],
     grandTotal: json["grandTotal"]!=null?json["grandTotal"].toDouble():0.0,
-    // preBookingConfirmationAmount: json["preBookingConfirmationAmount"],
+    // preBookingConfirmationAmount: json["preBookingConfirmationAmount"].toDouble(),
     bookingId: json["bookingId"],
     // userId: json["userId"],
     // latitude: json["latitude"]!=null?json["latitude"].toDouble():0.0,
@@ -153,6 +158,8 @@ class Bookinglistresponse {
     isFavourite: json["isFavourite"],
     // paymentStatus: json["paymentStatus"],
     reviewList:json["reviewList"]!=null? ReviewList.fromJson(json["reviewList"]):null,
+    gotoorderlistdetail: List<Orderlistdetail>.from(json["gotoorderlistdetail"].map((x) => Orderlistdetail.fromJson(x))),
+      toGoTotalAmount:json['toGoTotalAmount'].toDouble()
   );
 
   Map<String, dynamic> toJson() => {
@@ -173,7 +180,7 @@ class Bookinglistresponse {
     "totalAmount": totalAmount,
     "tip": tip,
     "grandTotal": grandTotal,
-    // "preBookingConfirmationAmount": preBookingConfirmationAmount,
+    "preBookingConfirmationAmount": preBookingConfirmationAmount,
     "bookingId": bookingId,
     // "userId": userId,
     // "latitude": latitude,
@@ -188,6 +195,8 @@ class Bookinglistresponse {
     "isFavourite": isFavourite,
     // "paymentStatus": paymentStatus,
   "reviewList": reviewList!.toJson(),
+    "gotoorderlistdetail": List<dynamic>.from(gotoorderlistdetail!.map((x) => x.toJson())),
+    "toGoTotalAmount":toGoTotalAmount
   };
 }
 
@@ -198,6 +207,8 @@ class Orderlistdetail {
      this.itemName,
      this.itemQuantity,
      this.itemTotalPrice,
+    this.addOns,
+
   });
 
   int? bookingOrderId;
@@ -205,6 +216,7 @@ class Orderlistdetail {
   String? itemName;
   int? itemQuantity;
   double? itemTotalPrice;
+  List<AddOn>? addOns;
 
   factory Orderlistdetail.fromJson(Map<String, dynamic> json) => Orderlistdetail(
     bookingOrderId: json["bookingOrderId"],
@@ -212,6 +224,7 @@ class Orderlistdetail {
     itemName: json["itemName"],
     itemQuantity: json["itemQuantity"],
     itemTotalPrice: json["itemTotalPrice"]!=null? json["itemTotalPrice"].toDouble():0.0,
+    addOns: List<AddOn>.from(json["addOns"].map((x) => AddOn.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -220,6 +233,7 @@ class Orderlistdetail {
     "itemName": itemName,
     "itemQuantity": itemQuantity,
     "itemTotalPrice": itemTotalPrice,
+    "addOns": List<dynamic>.from(addOns!.map((x) => x.toJson())),
   };
 }
 
@@ -260,5 +274,37 @@ class ReviewList {
     // "ratingToRestaurantId": ratingToRestaurantId,
     // "ratingById": ratingById,
     // "bookingId": bookingId,
+  };
+}
+
+class AddOn {
+  AddOn({
+    this.itemName,
+     this.price,
+    this.addOnType,
+     this.addOnId,
+     this.addOnName,
+  });
+
+  dynamic itemName;
+  double? price;
+  dynamic addOnType;
+  int? addOnId;
+  String? addOnName;
+
+  factory AddOn.fromJson(Map<String, dynamic> json) => AddOn(
+    itemName: json["itemName"],
+    price: json["price"].toDouble(),
+    addOnType: json["addOnType"],
+    addOnId: json["addOnId"],
+    addOnName: json["addOnName"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "itemName": itemName,
+    "price": price,
+    "addOnType": addOnType,
+    "addOnId": addOnId,
+    "addOnName": addOnName,
   };
 }

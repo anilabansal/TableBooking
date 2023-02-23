@@ -9,10 +9,8 @@ import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../../controller/filter/filter_screen_controller.dart';
 import '../../../controller/restaurant_details/restaurant_details_controller.dart';
 import '../../../utils/common/toast_message.dart';
-import '../../home_screen/widgets/party_size_drop_down.dart';
 import 'book_a_table_date_picker.dart';
 import 'book_a_table_party_size.dart';
 import 'book_table_select_time_drop_down.dart';
@@ -357,6 +355,8 @@ class _BookATableBodyState extends State<BookATableBody> {
                                     .clear();
                                 restaurantDetailsController
                                     .subTotalPrice = 0.0;
+                                restaurantDetailsController.addOnPrices=0.0;
+                                /// to clear quantity added in cart
                                 for (int i = 0;
                                 i <
                                     restaurantDetailsController
@@ -379,13 +379,10 @@ class _BookATableBodyState extends State<BookATableBody> {
                                         'quantityCount---->${restaurantDetailsController.menuHeaderRestaurantList[i].menu![j].quantity}');
                                   }
                                 }
-
+                              /// to clear ingredient added in cart
+                                restaurantDetailsController.selectedIngredient.clear();
                                 bookingTable.addTip.value = '';
                                 bookingTable.selectPaymentMode.value = '';
-                                // restaurantDetailsController
-                                //     .menuHeaderRestaurantList
-                                //     .map((element) => element.menu!
-                                //         .map((e) => e.quantity = 0));
                                 print(
                                     'cartList---->${restaurantDetailsController.cartItemsList.length}');
                               },

@@ -3,7 +3,7 @@ import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 /// alert dialog on payment screen
-commonAlertDialog(context,amount,okOnTap) {
+commonAlertDialog(context,double?amount,okOnTap) {
   return showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -31,7 +31,7 @@ commonAlertDialog(context,amount,okOnTap) {
                 const SizedBox(height: 20,),
                 Center(
                   child: CommonText(
-                    text: "\$$amount",
+                    text: "\$${amount!.toStringAsFixed(2)}",
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
                     color: black040404,

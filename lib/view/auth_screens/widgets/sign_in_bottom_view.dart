@@ -16,8 +16,9 @@ import 'package:get/get.dart';
 import '../../../controller/location/location_controller.dart';
 import '../../../utils/common/widgets_methods/common_phone_field.dart';
 import '../../../utils/common/widgets_methods/progress_loader.dart';
+import '../../../utils/services/fcm_service.dart';
 
-class SignInScreenBottomView extends StatelessWidget {
+class SignInScreenBottomView extends StatefulWidget {
   LoginController loginController;
   RegisterController registerController;
 
@@ -30,12 +31,28 @@ class SignInScreenBottomView extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<SignInScreenBottomView> createState() => _SignInScreenBottomViewState();
+}
+
+class _SignInScreenBottomViewState extends State<SignInScreenBottomView> {
   // ProfileController profileController = Get.put(ProfileController());
   ProfileController profileController = Get.find();
+
   LocationController locationController = Get.find();
 
-  // AuthViewController controller = Get.put(AuthViewController());
-  // Country? selectedCountry;
+  @override
+  void initState() {
+    // FCMService().getFCMToken().then((value) {
+    //   profileController.deviceToken.value = value!;
+    //   // setState(() {
+    //   //   deviceTokenStr = value;
+    //   // });
+    //   print('Token -----> $value}');
+    // });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -43,7 +60,7 @@ class SignInScreenBottomView extends StatelessWidget {
         children: [
           // HEADER
           CommonText(
-            text: callFrom == 'Login'
+            text: widget.callFrom == 'Login'
                 ? 'Enter Mobile Number'
                 : 'Create Your Free Account',
             fontSize: 24,
@@ -59,28 +76,28 @@ class SignInScreenBottomView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 PhoneField(
-                  phoneController: callFrom == 'Login'
-                      ? loginController.mobileNumber
-                      : registerController.mobileNumber,
-                  countryCode: callFrom == 'Login'
-                      ? loginController.countryCode.value
-                      : registerController.countryCode.value,
-                  countryFlag: callFrom == 'Login'
-                      ? loginController.countryFlag.value
-                      : registerController.countryFlag.value,
+                  phoneController: widget.callFrom == 'Login'
+                      ? widget.loginController.mobileNumber
+                      : widget.registerController.mobileNumber,
+                  countryCode: widget.callFrom == 'Login'
+                      ? widget.loginController.countryCode.value
+                      : widget.registerController.countryCode.value,
+                  countryFlag: widget.callFrom == 'Login'
+                      ? widget.loginController.countryFlag.value
+                      : widget.registerController.countryFlag.value,
                   onCountryFlag: (value) {
                     print('Country flag ---> $value');
-                    callFrom == 'Login'
-                        ? loginController.countryFlag.value = value
-                        : registerController.countryFlag.value = value;
+                    widget.callFrom == 'Login'
+                        ? widget.loginController.countryFlag.value = value
+                        : widget.registerController.countryFlag.value = value;
                   },
                   onCodeChange: (value) {
-                    callFrom == 'Login'
-                        ? loginController.countryCode.value = value
-                        : registerController.countryCode.value = value;
+                    widget.callFrom == 'Login'
+                        ? widget.loginController.countryCode.value = value
+                        : widget.registerController.countryCode.value = value;
                     print('Country Code ---> $value');
                     print(
-                        'Country Code Controller Value ---> ${loginController.countryCode.value}');
+                        'Country Code Controller Value ---> ${widget.loginController.countryCode.value}');
                   },
                   textFieldColor: red0FE2211C,
                 ),
@@ -95,7 +112,7 @@ class SignInScreenBottomView extends StatelessWidget {
                   ),
                 ),
 
-                callFrom == 'Login'
+                widget.callFrom == 'Login'
                     ? CommonSizedBox(height: 40)
                     : privacyPolicyNTerms(),
                 // Button
@@ -120,16 +137,17 @@ class SignInScreenBottomView extends StatelessWidget {
                       return false;
                     }
                     ProgressDialog.showProgressDialog(context);
-                    loginController.isLoading.value = true;
-                    callFrom == 'Login'
-                        ? await loginController.loginUser(data: {
+                    widget.loginController.isLoading.value = true;
+                    widget.callFrom == 'Login'
+                        ? await widget.loginController.loginUser(data: {
                             "MobileNumber":
-                                '+${loginController.countryCode.value}${loginController.mobileNumber.text.trim()}',
+                                '+${widget.loginController.countryCode.value}${widget.loginController.mobileNumber.text.trim()}',
                             // "MobileNumber": '+917066000016',
                             "Email": "",
                             "AuthenticationId": "",
                             "AuthenticationType": "",
-                            "DeviceToken": "sdgsgsgsg",
+                            // "DeviceToken": "sdgsgsgsg",
+                            "DeviceToken": "1234",
                             "DeviceType":
                                 GetPlatform.isAndroid ? "Android" : "iOS",
                             "Latitude": locationController.latLng.value.latitude
@@ -141,31 +159,33 @@ class SignInScreenBottomView extends StatelessWidget {
                             (value) {
                               // Get.back();
                               Navigator.pop(context);
-                              loginController.isLoading.value = false;
+                              widget.loginController.isLoading.value = false;
                               if (value) {
                                 Get.offNamed(
                                   '/login/otp',
                                   arguments: [
                                     {
                                       'mobileNumber':
-                                          '+${loginController.countryCode.value}${loginController.mobileNumber.value.text.trim()}',
+                                          '+${widget.loginController.countryCode.value}${widget.loginController.mobileNumber.value.text.trim()}',
                                     },
                                     {
                                       'callFrom': "Login",
                                     }
                                   ],
                                 );
-                                profileController.mobileNumberControllerRegister
-                                    .value = loginController.mobileNumber;
+                                profileController
+                                        .mobileNumberControllerRegister.value =
+                                    widget.loginController.mobileNumber;
                               }
                             },
                           )
-                        : registerController.registerUser(data: {
+                        : widget.registerController.registerUser(data: {
                             "MobileNumber":
-                                '+${registerController.countryCode.value}${registerController.mobileNumber.text.trim()}',
+                                '+${widget.registerController.countryCode.value}${widget.registerController.mobileNumber.text.trim()}',
                             "Email": "",
                             "AuthenticationId": "",
                             "AuthenticationType": "",
+                            // "DeviceToken": "1234",
                             "DeviceToken": "1234",
                             "DeviceType":
                                 GetPlatform.isAndroid ? "Android" : "iOS",
@@ -177,7 +197,7 @@ class SignInScreenBottomView extends StatelessWidget {
                           }).then(
                             (value) {
                               Navigator.pop(context);
-                              loginController.isLoading.value = false;
+                              widget.loginController.isLoading.value = false;
                               // Get.back();
                               if (value) {
                                 Get.offNamed(
@@ -185,20 +205,21 @@ class SignInScreenBottomView extends StatelessWidget {
                                   arguments: [
                                     {
                                       'mobileNumber':
-                                          '+${registerController.countryCode.value}${registerController.mobileNumber.text.trim()}',
+                                          '+${widget.registerController.countryCode.value}${widget.registerController.mobileNumber.text.trim()}',
                                     },
                                     {
                                       'callFrom': "Register",
                                     }
                                   ],
                                 );
-                                profileController.mobileNumberControllerRegister
-                                    .value = registerController.mobileNumber;
+                                profileController
+                                        .mobileNumberControllerRegister.value =
+                                    widget.registerController.mobileNumber;
                               }
                             },
                           );
                   },
-                  text: callFrom == 'Login' ? 'Sign In' : 'Sign Up',
+                  text: widget.callFrom == 'Login' ? 'Sign In' : 'Sign Up',
                   bgColor: redE2211C,
                   textColor: Colors.white,
                 ),
@@ -251,12 +272,12 @@ class SignInScreenBottomView extends StatelessWidget {
 
   validateFields() {
     if (!GetUtils.isPhoneNumber(
-            loginController.mobileNumber.value.text.trim()) &&
+            widget.loginController.mobileNumber.value.text.trim()) &&
         !GetUtils.isPhoneNumber(
-            registerController.mobileNumber.value.text.trim())) {
+            widget.registerController.mobileNumber.value.text.trim())) {
       return 'please enter a valid phone number!'.toTitleCase();
-    } else if (callFrom == 'Register' &&
-        registerController.isChecked == false) {
+    } else if (widget.callFrom == 'Register' &&
+        widget.registerController.isChecked == false) {
       return 'Please Accept The Terms & Conditions'.toTitleCase();
     }
     return '';

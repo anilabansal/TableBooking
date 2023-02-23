@@ -40,6 +40,9 @@ class Menu {
   double? offerPrice;
   String? startDate;
   String? endDate;
+  bool?isAddOnAdded;
+  int? newAddedQuantity;
+  List<AddedAddOns>? addedAddOns=[];
 
   Menu(
       {this.itemId,
@@ -53,11 +56,15 @@ class Menu {
         this.offerTitle,
         this.offerPrice,
         this.startDate,
-        this.endDate});
+        this.endDate,
+        this.isAddOnAdded,
+        this.newAddedQuantity,
+        this.addedAddOns,
+      });
 
   Menu.fromJson(Map<String, dynamic> json) {
-    itemId = json['itemId'];
-    itemName = json['itemName'];
+    itemId = json['itemId'] ?? 0;
+    itemName = json['itemName'] ?? "";
     categoryName = json['categoryName'];
     itemPrice = json['itemPrice'].toDouble();
     itemdescription = json['itemdescription'];
@@ -68,6 +75,14 @@ class Menu {
     offerPrice = json['offerPrice'].toDouble();
     startDate = json['startDate'];
     endDate = json['endDate'];
+    isAddOnAdded = json['isAddOnAdded'];
+    newAddedQuantity = 0;
+    if (json['addedAddOns'] != null) {
+      addedAddOns = <AddedAddOns>[];
+      json['addedAddOns'].forEach((v) {
+        addedAddOns!.add( AddedAddOns.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -84,6 +99,43 @@ class Menu {
     data['offerPrice'] = this.offerPrice;
     data['startDate'] = this.startDate;
     data['endDate'] = this.endDate;
+    data['isAddOnAdded'] = this.isAddOnAdded;
+    data['newAddedQuantity'] = this.newAddedQuantity;
+    if (this.addedAddOns != null) {
+      data['addedAddOns'] = this.addedAddOns!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+class AddedAddOns {
+  String? itemName;
+  double? price;
+  String? addOnType;
+  int? addOnId;
+  String? addOnName;
+
+  AddedAddOns(
+      {this.itemName,
+        this.price,
+        this.addOnType,
+        this.addOnId,
+        this.addOnName});
+
+  AddedAddOns.fromJson(Map<String, dynamic> json) {
+    itemName = json['itemName'];
+    price = json['price'].toDouble();
+    addOnType = json['addOnType'];
+    addOnId = json['addOnId'];
+    addOnName = json['addOnName'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['itemName'] = this.itemName;
+    data['price'] = this.price;
+    data['addOnType'] = this.addOnType;
+    data['addOnId'] = this.addOnId;
+    data['addOnName'] = this.addOnName;
     return data;
   }
 }
