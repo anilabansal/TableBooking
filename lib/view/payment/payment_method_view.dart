@@ -228,6 +228,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
       "SpecialRequest": data[0]["allergiesController"],
       "SlotId": data[0]["slotId"],
       "CardId":addCardDetailsController.cardSelected!.cardId,
+      "StatusId":data[0]["StatusId"],
     }).then((value) {
       bookATableController.confirmBookIsLoading.value = false;
       Navigator.pop(context);

@@ -82,6 +82,7 @@ class PaymentMode extends StatelessWidget {
                   ? ""
                   : allergiesController!.text.trim(),
               "SlotId": controller.serviceSummary!.slotId,
+              "StatusId":controller.serviceSummary!.statusId,
               "CardId":0,
             }
             ).then((value) {
@@ -125,6 +126,7 @@ class PaymentMode extends StatelessWidget {
                       "slotId": controller.serviceSummary!.slotId,
                       "totalAmount":totalAmountToPay,
                       "serviceType": controller.serviceSummary!.serviceType,
+                      "StatusId":controller.serviceSummary!.statusId,
                     }
                   ],
                 );
