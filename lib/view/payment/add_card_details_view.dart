@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../controller/card_details/add_card_details_controller.dart';
+import '../../controller/payment/card_scan_controller.dart';
 import '../../controller/user_session/user_session_controller.dart';
 import '../../utils/common/common_strings.dart';
 import '../../utils/common/toast_message.dart';
@@ -17,16 +18,13 @@ import '../../utils/common/widgets_methods/progress_loader.dart';
 
 class AddCreditCardDetailsView extends StatelessWidget {
   String? callFrom;
+
   AddCreditCardDetailsView({this.callFrom, Key? key}) : super(key: key);
-  var cardExpiryDate = TextEditingController();
-  var bankName = TextEditingController();
-  var cardHolderName = TextEditingController();
-  var cardNumber = TextEditingController();
-  var cardCVV = TextEditingController();
-  // var data = Get.arguments;
+
   AddCardDetailsController controller = Get.find();
   UserSessionController userSessionController = Get.find();
-  AddCardDetailsController addCardDetailsController = Get.find();
+  CardScanController cardScanController = Get.put(CardScanController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,10 +37,43 @@ class AddCreditCardDetailsView extends StatelessWidget {
       // ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 53),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              InkWell(
+                onTap: () {
+                  cardScanController.scanCardDetails();
+
+                  //cardHolderName.text = cardScanController.cardInfoDetails!.cardHolderName;
+                },
+                child: Center(
+                  child: Container(
+                    width: 188,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: black0D0000,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 0,
+                        vertical: 10,
+                      ),
+                      child: Center(
+                        child: CommonText(
+                          text: "Scan Card",
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              CommonSizedBox(
+                height: 25,
+              ),
               CommonText(
                 text: 'Bank Name',
                 fontSize: 14,
@@ -52,7 +83,7 @@ class AddCreditCardDetailsView extends StatelessWidget {
                 height: 6,
               ),
               CommonTextFormField(
-                controller: bankName,
+                controller: cardScanController.bankName,
                 hintText: 'Enter Bank Name',
                 filled: true,
                 fillColor: whiteF4F4F4,
@@ -70,8 +101,10 @@ class AddCreditCardDetailsView extends StatelessWidget {
                 height: 6,
               ),
               CommonTextFormField(
-                controller: cardHolderName,
-                hintText: 'Enter Card Holder Name',
+                controller: cardScanController.cardHolderName,
+                hintText: cardScanController.cardHolderName.text.trim().isEmpty
+                    ? 'Enter Card Holder Name'
+                    : cardScanController.cardHolderName.text.trim(),
                 filled: true,
                 fillColor: whiteF4F4F4,
                 keyboardType: TextInputType.text,
@@ -89,15 +122,20 @@ class AddCreditCardDetailsView extends StatelessWidget {
                 height: 6,
               ),
               CommonTextFormField(
-                controller: cardNumber,
-                hintText: 'Enter Card Number',
+                controller: cardScanController.cardNumber,
+                hintText: cardScanController.cardNumber.text.trim().isEmpty
+                    ? 'Enter Card Number'
+                    : cardScanController.cardNumber.text.trim(),
                 // validator: (value) {
                 //   return value!.length < 17 ? 'Invalid Card Number' : null;
                 // },
                 maxLength: 16,
                 filled: true,
                 fillColor: whiteF4F4F4,
-                keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  signed: true,
+                  decimal: true,
+                ),
               ),
               CommonSizedBox(
                 height: 20,
@@ -121,9 +159,12 @@ class AddCreditCardDetailsView extends StatelessWidget {
                         CommonTextFormField(
                           // enable: false,
                           hintText: 'MM/YY',
-                          keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
+                          keyboardType: const TextInputType.numberWithOptions(
+                            signed: true,
+                            decimal: true,
+                          ),
                           inputFormatters: [CardExpirationFormatter()],
-                          controller: cardExpiryDate,
+                          controller: cardScanController.cardExpiryDate,
                           // suffixIcon: const Icon(Icons.arrow_drop_down),
                           filled: true,
                           maxLength: 5,
@@ -152,7 +193,7 @@ class AddCreditCardDetailsView extends StatelessWidget {
                           height: 6,
                         ),
                         CommonTextFormField(
-                          controller: cardCVV,
+                          controller: cardScanController.cardCVV,
                           maxLength: 3,
                           hintText: '***',
                           keyboardType: TextInputType.number,
@@ -180,12 +221,12 @@ class AddCreditCardDetailsView extends StatelessWidget {
                         controller.updateCheckbox();
                       },
                       fillColor: MaterialStateProperty.resolveWith<Color>(
-                              (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.disabled)) {
-                              return Colors.white;
-                            }
-                            return Colors.red;
-                          }),
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.disabled)) {
+                          return Colors.white;
+                        }
+                        return Colors.red;
+                      }),
                     );
                   }),
                   Expanded(
@@ -194,8 +235,8 @@ class AddCreditCardDetailsView extends StatelessWidget {
                         children: [
                           const TextSpan(
                               text: 'I agree with all ',
-                              style:
-                              TextStyle(color: textDark3F3E3E, fontSize: 14)),
+                              style: TextStyle(
+                                  color: textDark3F3E3E, fontSize: 14)),
                           TextSpan(
                             text: 'Terms & Conditions',
                             style: const TextStyle(
@@ -245,10 +286,6 @@ class AddCreditCardDetailsView extends StatelessWidget {
               //   Button
               InkWell(
                 onTap: () async {
-                  var controllerDateParse = DateFormat('MM/yy')
-                      .parse(cardExpiryDate.text.trim());
-                  var finalControllerDateParse =
-                      DateFormat('MM/yyyy').format(controllerDateParse);
                   if (validateFields() != '') {
                     ShowToast.show(
                       msg: validateFields(),
@@ -258,32 +295,30 @@ class AddCreditCardDetailsView extends StatelessWidget {
                   }
                   ProgressDialog.showProgressDialog(context);
                   controller.isLoading.value = true;
+                  var controllerDateParse = DateFormat('MM/yy')
+                      .parse(cardScanController.cardExpiryDate.text.trim());
+                  var finalControllerDateParse =
+                      DateFormat('MM/yyyy').format(controllerDateParse);
                   await controller.savedCardData(
-
                     body: {
                       "userId": userSessionController.userId,
-                      "CardHolderName": cardHolderName.text.trim(),
-                      "CardNumber": cardNumber.text.trim(),
-                      "CVVNumber": cardCVV.text.trim(),
-                      "ExpiryDate":finalControllerDateParse,
-                      "BankName": bankName.text.trim(),
+                      "CardHolderName":
+                          cardScanController.cardHolderName.text.trim(),
+                      "CardNumber": cardScanController.cardNumber.text.trim(),
+                      "CVVNumber": cardScanController.cardCVV.text.trim(),
+                      "ExpiryDate": finalControllerDateParse,
+                      "BankName": cardScanController.bankName.text.trim(),
                     },
                   ).then(
-                        (value) {
+                    (value) {
                       Navigator.pop(context);
                       controller.isLoading.value = false;
                       if (value) {
                         Navigator.pop(context);
-                        addCardDetailsController
-                            .isUserCardListIsLoading
-                            .value = true;
-                        addCardDetailsController
-                            .savedCardListDataApi()
-                            .then((value) {
+                        controller.isUserCardListIsLoading.value = true;
+                        controller.savedCardListDataApi().then((value) {
                           if (value) {
-                            addCardDetailsController
-                                .isUserCardListIsLoading
-                                .value = false;
+                            controller.isUserCardListIsLoading.value = false;
                           }
                         });
                       }
@@ -292,7 +327,6 @@ class AddCreditCardDetailsView extends StatelessWidget {
                       // Get.toNamed('/book-a-table');
                     },
                   );
-
                 },
                 child: CommonButton(
                   text: 'Save Card',
@@ -306,16 +340,17 @@ class AddCreditCardDetailsView extends StatelessWidget {
       ),
     );
   }
+
   validateFields() {
-    if (bankName.text.trim().isEmpty) {
+    if (cardScanController.bankName.text.trim().isEmpty) {
       return 'Please enter a valid bank name!'.toTitleCase();
-    } else if (cardHolderName.text.trim().isEmpty) {
+    } else if (cardScanController.cardHolderName.text.trim().isEmpty) {
       return 'Please enter a valid name!'.toTitleCase();
-    } else if (cardNumber.text.trim().length < 16) {
+    } else if (cardScanController.cardNumber.text.trim().length < 16) {
       return 'Please enter a valid card number!'.toTitleCase();
-    } else if (cardExpiryDate.text.trim().isEmpty) {
+    } else if (cardScanController.cardExpiryDate.text.trim().isEmpty) {
       return 'Please enter a valid card expiry date!'.toTitleCase();
-    } else if (cardCVV.text.trim().isEmpty) {
+    } else if (cardScanController.cardCVV.text.trim().isEmpty) {
       return 'please enter a valid CVV!'.toTitleCase();
     } else if (controller.isChecked == false) {
       return 'Please Accept The Terms & Conditions'.toTitleCase();

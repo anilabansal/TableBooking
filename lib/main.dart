@@ -2,6 +2,7 @@ import 'package:booking_table/bindings/auth_bindings.dart';
 import 'package:booking_table/controller/location/location_controller.dart';
 import 'package:booking_table/routes/app_routes.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
+import 'package:booking_table/view/payment/widgets/card_scan_pop_up_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
@@ -55,7 +56,7 @@ class _MyAppState extends State<MyApp> {
       getPages: AppRoutes.appRoutes,
       initialBinding: MainBindings(),
       theme: ThemeData(fontFamily: mainLaToFont),
-      // home: PreOrderView(),
+      // home: CardScanPopUpBody(),
     );
   }
 }

@@ -16,10 +16,13 @@ import '../../utils/common/widgets_methods/progress_loader.dart';
 
 class PaymentMethodView extends StatefulWidget {
   final String? callFrom;
+
   const PaymentMethodView({Key? key, this.callFrom}) : super(key: key);
+
   @override
   State<PaymentMethodView> createState() => _PaymentMethodViewState();
 }
+
 class _PaymentMethodViewState extends State<PaymentMethodView> {
   AddCardDetailsController addCardDetailsController = Get.find();
 
@@ -41,10 +44,8 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
 
   BookATableController bookATableController = Get.find();
   RestaurantDetailsController restaurantDetailsController = Get.find();
-  ToGoReservationController toGoReservationController =
-  Get.find();
-  ReservationController reservationController =
-  Get.find();
+  ToGoReservationController toGoReservationController = Get.find();
+  ReservationController reservationController = Get.find();
   var data = Get.arguments;
 
   @override
@@ -54,16 +55,16 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
       appBar: appBarCommon(text: "Payment Method"),
       // body: const PaymentMethodBody(),
       body: Obx(() {
-        return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: addCardDetailsController.isUserCardListIsLoading.value
-                ? const Center(
-                    child: CircularProgressIndicator(
-                      color: redE2211C,
-                    ),
-                  )
-                : Column(
+        return addCardDetailsController.isUserCardListIsLoading.value
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: redE2211C,
+                ),
+              )
+            : SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -160,7 +161,9 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
                             color: black0D0000,
                           ),
                           const Spacer(),
-                          widget.callFrom == 'Drawer'||addCardDetailsController.userAllCardList.value.userCardlist!.isEmpty
+                          widget.callFrom == 'Drawer' ||
+                                  addCardDetailsController.userAllCardList.value
+                                      .userCardlist!.isEmpty
                               ? Container()
                               : InkWell(
                                   onTap: () {
@@ -171,10 +174,10 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
                                           isError: true
                                           // msg: response['errorMessage'],
                                           );
-                                    } else if(widget.callFrom =='ConfirmBooking') {
+                                    } else if (widget.callFrom ==
+                                        'ConfirmBooking') {
                                       confirmBookingApiCall(context);
-                                    }
-                                    else if(widget.callFrom =='OrderMore'){
+                                    } else if (widget.callFrom == 'OrderMore') {
                                       orderMoreBookingApiCall(context);
                                     }
                                   },
@@ -204,8 +207,8 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
                       CardListView()
                     ],
                   ),
-          ),
-        );
+                ),
+              );
       }),
     );
   }
@@ -227,8 +230,8 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
       "BookingTime": data[0]["bookingTime"],
       "SpecialRequest": data[0]["allergiesController"],
       "SlotId": data[0]["slotId"],
-      "CardId":addCardDetailsController.cardSelected!.cardId,
-      "StatusId":data[0]["StatusId"],
+      "CardId": addCardDetailsController.cardSelected!.cardId,
+      "StatusId": data[0]["StatusId"],
     }).then((value) {
       bookATableController.confirmBookIsLoading.value = false;
       Navigator.pop(context);
@@ -249,23 +252,23 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
     });
   }
 
-  orderMoreBookingApiCall(context){
+  orderMoreBookingApiCall(context) {
     reservationController.orderMoreConfirmationIsLoading.value = true;
     ProgressDialog.showProgressDialog(context);
     reservationController.orderMoreConfirmationApiCall(body: {
       "BookingId": data[0]["bookingId"],
-      "Items":
-      jsonDecode(jsonEncode(reservationController.cartNewItemsList)),
-      "ToGoItems":
-      jsonDecode(jsonEncode(toGoReservationController.toGoCart)),
+      "Items": jsonDecode(jsonEncode(reservationController.cartNewItemsList)),
+      "ToGoItems": jsonDecode(jsonEncode(toGoReservationController.toGoCart)),
       "PaymentTypeId": 1,
       "TipAmount": reservationController
-          .bookRestaurantDetails!.bookinglistresponse.tip!
-          .endsWith('%')
+              .bookRestaurantDetails!.bookinglistresponse.tip!
+              .endsWith('%')
           ? reservationController.tipAddedOrderMore
           : 0.0,
-      "Amount":reservationController.subTotalPrice+reservationController.tipAddedOrderMore + toGoReservationController.toGoSubTotalPrice,
-      "CardId":addCardDetailsController.cardSelected!.cardId,
+      "Amount": reservationController.subTotalPrice +
+          reservationController.tipAddedOrderMore +
+          toGoReservationController.toGoSubTotalPrice,
+      "CardId": addCardDetailsController.cardSelected!.cardId,
     }).then((value) {
       reservationController.orderMoreConfirmationIsLoading.value = false;
       Navigator.pop(context);
@@ -277,10 +280,12 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
             MaterialPageRoute(
               builder: (BuildContext context) => PaymentDoneView(
                 paymentMode: "Credit Card",
-                amountPayed: reservationController.subTotalPrice+reservationController.tipAddedOrderMore + toGoReservationController.toGoSubTotalPrice,
+                amountPayed: reservationController.subTotalPrice +
+                    reservationController.tipAddedOrderMore +
+                    toGoReservationController.toGoSubTotalPrice,
               ),
             ),
-                (Route<dynamic> route) => route.isFirst);
+            (Route<dynamic> route) => route.isFirst);
       }
     });
   }

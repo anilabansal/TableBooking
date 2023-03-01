@@ -7,7 +7,7 @@ import Foundation
 
 import firebase_core
 import geolocator_apple
-import path_provider_macos
+import path_provider_foundation
 import sign_in_with_apple
 import smart_auth
 import url_launcher_macos

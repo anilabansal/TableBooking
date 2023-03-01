@@ -18,7 +18,7 @@ class PaymentMode extends StatelessWidget {
   final TextEditingController? allergiesController;
   PaymentMode({Key? key,this.customTipController,this.specialEventController,this.allergiesController}) : super(key: key);
   BookATableController controller = Get.find();
-  CreditCardController creditCardController = Get.put(CreditCardController());
+  //CreditCardController creditCardController = Get.put(CreditCardController());
   RestaurantDetailsController restaurantsController = Get.find();
   dynamic tipAmountToAdded;
   dynamic totalAmountToPay;
