@@ -49,13 +49,15 @@ class OrderMorePaymentMode extends StatelessWidget {
                     false;
                 Navigator.pop(context);
                 if (value) {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            const ReservationView(),
-                      ),
-                      (Route<dynamic> route) => route.isFirst);
+                  Navigator.pop(context);
+                  // Navigator.pushAndRemoveUntil(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (BuildContext context) =>
+                  //       const ReservationView(),
+                  //     ),
+                  //         (Route<dynamic> route) => route.isFirst);
+
                 }
               });
             } else {

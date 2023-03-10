@@ -63,6 +63,7 @@ class ServiceSummary {
   int?slotId;
 
 
+
   factory ServiceSummary.fromJson(Map<String, dynamic> json) => ServiceSummary(
         bookingId: json["bookingId"],
         bookingDate: json["bookingDate"],

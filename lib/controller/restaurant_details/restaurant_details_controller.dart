@@ -31,6 +31,7 @@ class RestaurantDetailsController extends GetxController {
   var selectedIndex = 0.obs;
   var index = 0.obs;
   var placeOrderIsLoading = true.obs;
+  // double? totalAmountToPay = 0.00;
   LocationController locationController = Get.find();
   List<Cart> cartItemsList = [];
   double? subTotalPrice = 0.0;

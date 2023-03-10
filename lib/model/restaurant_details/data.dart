@@ -16,6 +16,8 @@ class RestaurantDetailsData {
   String? latitude;
   String? longitude;
   bool? isFavourite;
+  String? availableStartDate;
+  String? availableEndDate;
 
   RestaurantDetailsData({
     this.restaurantId,
@@ -33,31 +35,34 @@ class RestaurantDetailsData {
     this.latitude,
     this.longitude,
     this.isFavourite,
+    this.availableStartDate,
+    this.availableEndDate,
   });
 
   @override
   String toString() {
-    return 'Data(restaurantId: $restaurantId, restaurantName: $restaurantName, restaurantPic: $restaurantPic, address: $address, zipCode: $zipCode, aboutUs: $aboutUs, officialWebsite: $officialWebsite, contactNumber: $contactNumber, email: $email, distance: $distance, rating: $rating, ratingCount: $ratingCount, latitude: $latitude, longitude: $longitude, isFavourite: $isFavourite)';
+    return 'Data(restaurantId: $restaurantId, restaurantName: $restaurantName, restaurantPic: $restaurantPic, address: $address, zipCode: $zipCode, aboutUs: $aboutUs, officialWebsite: $officialWebsite, contactNumber: $contactNumber, email: $email, distance: $distance, rating: $rating, ratingCount: $ratingCount, latitude: $latitude, longitude: $longitude, isFavourite: $isFavourite, availableStartDate: $availableStartDate,availableEndDate : $availableEndDate,)';
   }
 
   factory RestaurantDetailsData.fromMap(Map<String, dynamic> data) =>
       RestaurantDetailsData(
-        restaurantId: data['restaurantId'] as int?,
-        restaurantName: data['restaurantName'] as String?,
-        restaurantPic: data['restaurantPic'] as String?,
-        address: data['address'] as String?,
-        zipCode: data['zipCode'] as String?,
-        aboutUs: data['aboutUs'] as String?,
-        officialWebsite: data['officialWebsite'] as String?,
-        contactNumber: data['contactNumber'] as String?,
-        email: data['email'] as String?,
-        distance: data['distance'] as dynamic,
-        rating: data['rating'] as dynamic,
-        ratingCount: data['ratingCount'] as dynamic,
-        latitude: data['latitude'] as String?,
-        longitude: data['longitude'] as String?,
-        isFavourite: data['isFavourite'] as bool?,
-      );
+          restaurantId: data['restaurantId'] as int?,
+          restaurantName: data['restaurantName'] as String?,
+          restaurantPic: data['restaurantPic'] as String?,
+          address: data['address'] as String?,
+          zipCode: data['zipCode'] as String?,
+          aboutUs: data['aboutUs'] as String?,
+          officialWebsite: data['officialWebsite'] as String?,
+          contactNumber: data['contactNumber'] as String?,
+          email: data['email'] as String?,
+          distance: data['distance'] as dynamic,
+          rating: data['rating'] as dynamic,
+          ratingCount: data['ratingCount'] as dynamic,
+          latitude: data['latitude'] as String?,
+          longitude: data['longitude'] as String?,
+          isFavourite: data['isFavourite'] as bool?,
+          availableStartDate: data['availableStartDate'] as String?,
+          availableEndDate: data['availableEndDate'] as String?);
 
   Map<String, dynamic> toMap() => {
         'restaurantId': restaurantId,
@@ -75,6 +80,8 @@ class RestaurantDetailsData {
         'latitude': latitude,
         'longitude': longitude,
         'isFavourite': isFavourite,
+        'availableStartDate': availableStartDate,
+        'availableEndDate': availableEndDate,
       };
 
   /// `dart:convert`

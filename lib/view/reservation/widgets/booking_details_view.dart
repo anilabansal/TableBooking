@@ -137,8 +137,9 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
       ),
       body: Obx(() {
         return
-            //reservationController.bookedRestaurantDetailsLoading.value && reservationController.orderMoreItemIsLoading.value &&
-            reservationController.orderMoreItemIsLoading.value
+            // reservationController.bookedRestaurantDetailsLoading.value && reservationController.orderMoreItemIsLoading.value &&
+            //reservationController.orderMoreItemIsLoading.value == true
+          reservationController.bookedRestaurantDetailsLoading.value
                 ? const Center(
                     child: CircularProgressIndicator(
                       color: redE2211C,
@@ -203,7 +204,7 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
                               ),
                               Visibility(
                                 visible: widget.callFrom == 'Previous'
-                                    // ||widget.callFrom=='Upcoming'
+                                    ||widget.callFrom=='Upcoming'
                                     ? false
                                     : true,
                                 child: ToGoView(
@@ -396,7 +397,9 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
                                     height: 15,
                                   ),
                                   // Pre Order Details
-                                  BookingDetailsPreOrderDetails(),
+                                  BookingDetailsPreOrderDetails(
+                                    callFrom:widget.callFrom ,
+                                  ),
                                   // CommonSizedBox(
                                   //   height: 20,
                                   // ),

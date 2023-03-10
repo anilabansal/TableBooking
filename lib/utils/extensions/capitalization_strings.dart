@@ -40,3 +40,16 @@ extension EditProfileDateBirth on String {
     return formatGoalDateTime;
   }
 }
+
+
+/// convert  availableStartDate and availableEndDate of restaurant
+
+extension AvailableStartEndDate on String {
+  DateTime convertAvailableStartEndDateFormat() {
+    DateTime availableStartEndDate = DateFormat("yyyy-MM-ddTHH:mm:ss").parse(this);
+    String convertAvailableStartEndDate = DateFormat("yyyy-MM-dd").format(availableStartEndDate);
+    DateTime convertedAvailableDates = DateFormat("yyyy,MM,dd").parse(convertAvailableStartEndDate);
+
+    return convertedAvailableDates;
+  }
+}

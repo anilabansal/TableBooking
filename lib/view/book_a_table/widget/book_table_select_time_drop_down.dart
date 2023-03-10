@@ -51,13 +51,14 @@ selectBookTableTime(hintText) {
                     (FilterSelectTime value) {
                       return DropdownMenuItem<FilterSelectTime>(
                         value: value,
-                        child:  Row(
-                          children: [
-                            Text(value.startTime!),
-                            const Text("-"),
-                            Text(value.endTime!),
-                          ],
-                        ),
+                        child: Text(value.startTime!),
+                        // child:  Row(
+                        //   children: [
+                        //     Text(value.startTime!),
+                        //     const Text("-"),
+                        //     Text(value.endTime!),
+                        //   ],
+                        // ),
                         // child: Row(
                         //   children: [
                         //     // Checkbox(

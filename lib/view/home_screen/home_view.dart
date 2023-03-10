@@ -1,5 +1,4 @@
 // ignore_for_file: must_be_immutable
-
 import 'package:booking_table/view/home_screen/widgets/drawer_home_widget.dart';
 import 'package:booking_table/view/home_screen/widgets/map_home_widget.dart';
 import 'package:booking_table/view/home_screen/widgets/recent_location.dart';
@@ -18,6 +17,7 @@ class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
   HomeController controller = Get.find();
   LocationController locationController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,24 +29,20 @@ class HomeView extends StatelessWidget {
         builder: (homeController) {
           return SafeArea(
             child: RefreshIndicator(
-              color:redE2211C,
-              onRefresh: () {
-                return Future.delayed(
-                  const Duration(seconds: 1),
-                      () async{
-                    await homeController.getRestaurantDetailsUsingLatLon(
-                      body: {
-                        "Latitude": locationController.latLng.value.latitude
-                            .toString(),
-                        "Longitude": locationController.latLng.value.longitude
-                            .toString(),
-                        "RestaurantName":"",
-                      },
-                    );
+              color: redE2211C,
+              onRefresh: () async{
+                await homeController.getRestaurantDetailsUsingLatLon(
+                  body: {
+                    "Latitude":
+                    locationController.latLng.value.latitude.toString(),
+                    "Longitude": locationController.latLng.value.longitude
+                        .toString(),
+                    "RestaurantName": "",
                   },
                 );
               },
               child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
                 child: Padding(
                   padding: const EdgeInsets.all(0.0),
                   child: Column(
@@ -70,27 +66,28 @@ class HomeView extends StatelessWidget {
                                     children: [
                                       userSessionController.isLogin == false
                                           ? const Icon(
-                                        Icons.person,
-                                        size: 50,
-                                      )
-                                          : userSessionController.profilePic != ""
-                                          ? CommonSizedBox(
-                                        height: 49,
-                                        width: 49,
-                                        child: ClipOval(
-                                          child: Image.network(
-                                            userSessionController
-                                                .profilePic,
-                                            height: 49,
-                                            width: 49,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                      )
-                                          : const Icon(
-                                        Icons.person,
-                                        size: 40,
-                                      ),
+                                              Icons.person,
+                                              size: 50,
+                                            )
+                                          : userSessionController.profilePic !=
+                                                  ""
+                                              ? CommonSizedBox(
+                                                  height: 49,
+                                                  width: 49,
+                                                  child: ClipOval(
+                                                    child: Image.network(
+                                                      userSessionController
+                                                          .profilePic,
+                                                      height: 49,
+                                                      width: 49,
+                                                      fit: BoxFit.fill,
+                                                    ),
+                                                  ),
+                                                )
+                                              : const Icon(
+                                                  Icons.person,
+                                                  size: 40,
+                                                ),
                                       Positioned(
                                         bottom: 0,
                                         right: 0,
@@ -118,9 +115,10 @@ class HomeView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CommonText(
-                                      text: userSessionController.isLogin == true
-                                          ? userSessionController.fullName
-                                          : "Guest User",
+                                      text:
+                                          userSessionController.isLogin == true
+                                              ? userSessionController.fullName
+                                              : "Guest User",
                                       color: black000000,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -139,24 +137,24 @@ class HomeView extends StatelessWidget {
                                           width: 2,
                                         ),
                                         Obx(
-                                              () {
+                                          () {
                                             return SizedBox(
                                               width: Get.width * 0.5,
                                               child: CommonText(
                                                 softWrap: true,
                                                 overflow: TextOverflow.clip,
                                                 text: locationController
-                                                    .searchController
-                                                    .value
-                                                    .text
-                                                    .isEmpty
+                                                        .searchController
+                                                        .value
+                                                        .text
+                                                        .isEmpty
                                                     ? locationController
-                                                    .currentAddress.value
-                                                    .toString()
+                                                        .currentAddress.value
+                                                        .toString()
                                                     : locationController
-                                                    .searchController
-                                                    .value
-                                                    .text,
+                                                        .searchController
+                                                        .value
+                                                        .text,
                                                 color: black000000,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.normal,
@@ -173,8 +171,8 @@ class HomeView extends StatelessWidget {
                                             print(
                                                 "recentSearchList ---->${userSessionController.recentSearchLocation.length}");
                                           },
-                                          child:
-                                          const Icon(Icons.keyboard_arrow_down),
+                                          child: const Icon(
+                                              Icons.keyboard_arrow_down),
                                         ),
                                         // Image.asset(
                                         //   dropDownIconImage,
@@ -190,7 +188,7 @@ class HomeView extends StatelessWidget {
                           );
                         },
                       ),
-                       SearchBoxScreen(),
+                      SearchBoxScreen(),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15.0, 0, 15, 0),
                         child: Row(
@@ -198,7 +196,7 @@ class HomeView extends StatelessWidget {
                           children: [
                             CommonText(
                               text:
-                              "${homeController.homeRestaurantCount.value.toString()} Restaurants",
+                                  "${homeController.homeRestaurantCount.value.toString()} Restaurants",
                               fontFamily: interFont,
                               fontWeight: FontWeight.w500,
                               color: black000000,
@@ -218,8 +216,8 @@ class HomeView extends StatelessWidget {
                                       padding: const EdgeInsets.all(0.0),
                                       child: InkWell(
                                         onTap: () {
-                                          homeController.restaurantFilter.value =
-                                          true;
+                                          homeController
+                                              .restaurantFilter.value = true;
                                           homeController.update();
                                         },
                                         child: Container(
@@ -227,18 +225,18 @@ class HomeView extends StatelessWidget {
                                           height: 25,
                                           decoration: BoxDecoration(
                                               borderRadius:
-                                              BorderRadius.circular(4),
+                                                  BorderRadius.circular(4),
                                               color: homeController
-                                                  .restaurantFilter.value
+                                                      .restaurantFilter.value
                                                   ? black000000
-                                                  : greyF4F4F4),
+                                                  : greyF4F4F4,),
                                           child: Center(
                                             child: Image.asset(
                                               menuImage,
                                               width: 14,
                                               height: 14,
                                               color: homeController
-                                                  .restaurantFilter.value
+                                                      .restaurantFilter.value
                                                   ? white
                                                   : greyC1C1C1,
                                             ),
@@ -253,17 +251,18 @@ class HomeView extends StatelessWidget {
                                       onTap: () {
                                         // homeController.updateRestaurantFilter(false);
                                         homeController.restaurantFilter.value =
-                                        false;
+                                            false;
                                         homeController.update();
                                       },
                                       child: Container(
                                         width: 24,
                                         height: 25,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(4),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
                                           color: homeController
-                                              .restaurantFilter.value ==
-                                              false
+                                                      .restaurantFilter.value ==
+                                                  false
                                               ? black000000
                                               : greyF4F4F4,
                                         ),
@@ -273,8 +272,9 @@ class HomeView extends StatelessWidget {
                                             width: 14,
                                             height: 14,
                                             color: homeController
-                                                .restaurantFilter.value ==
-                                                false
+                                                        .restaurantFilter
+                                                        .value ==
+                                                    false
                                                 ? white
                                                 : greyC1C1C1,
                                           ),

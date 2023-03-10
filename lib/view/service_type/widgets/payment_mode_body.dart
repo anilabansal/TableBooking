@@ -3,7 +3,6 @@ import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/book_a_table/book_a_table_controller.dart';
-import '../../../controller/payment/credit_card_controller.dart';
 import '../../../controller/restaurant_details/restaurant_details_controller.dart';
 import '../../../utils/common/common_strings.dart';
 import '../../../utils/common/toast_message.dart';
@@ -38,9 +37,10 @@ class PaymentMode extends StatelessWidget {
             return false;
           }
            ///grandTotal (items added total Amount ) Amount
-          grandTotal = restaurantsController.subTotalPrice!;
-          /// total tipAmountToAdded
+          grandTotal = restaurantsController.subTotalPrice!  +  controller.serviceSummary!.bookingConfirmationAmount ;
 
+
+          /// total tipAmountToAdded
           tipAmountToAdded = controller.addTip.value == 'Custom'
               ? customTipController!.text.isEmpty || customTipController!.text == null
               ? 0.0
@@ -52,16 +52,16 @@ class PaymentMode extends StatelessWidget {
           tipPercentageCalculatedToAdded = controller.addTip.value == 'Custom'
               ? customTipController!.text.isEmpty || customTipController!.text == null
               ? 0.0
-              : double.tryParse(customTipController!.text.toString()):controller.serviceSummary!.serviceType.toString() == '1' ?0.0: ((controller.tipAmount*grandTotal)/100);
+              : double.tryParse(customTipController!.text.toString()):controller.serviceSummary!.serviceType.toString() == '1' ?0.0: ((controller.tipAmount!*grandTotal)/100);
 
           /// totalAmountToPay
-          totalAmountToPay = restaurantsController.subTotalPrice! +
-              // controller.serviceSummary!.bookingConfirmationAmount +
-              tipPercentageCalculatedToAdded;
+          totalAmountToPay = restaurantsController.subTotalPrice! + tipPercentageCalculatedToAdded!+
+              controller.serviceSummary!.bookingConfirmationAmount ;
+
 
           /// payment mode is only credit card
           /// in case if service type is full straight confirm booking api will be hit
-          if(controller.serviceSummary!.serviceType.toString() =='1'){
+          if(controller.serviceSummary!.serviceType.toString() =='1'  ||  controller.selectPaymentMode.value == 'Pay At Restaurant'){
             controller.confirmBookIsLoading.value = true;
             ProgressDialog.showProgressDialog(context);
             controller.confirmBookingApiCall(body:
@@ -160,9 +160,9 @@ class PaymentMode extends StatelessWidget {
         customTipController!.text.trim().isEmpty) {
       return 'please add tip amount'.toTitleCase();
     }
-    // else if (controller.selectPaymentMode.value == '') {
-    //   return 'please select payment mode'.toTitleCase();
-    // }
+    else if (controller.serviceSummary!.serviceType.toString() != '1' && controller.selectPaymentMode.value == '') {
+      return 'please select payment mode'.toTitleCase();
+    }
     return '';
   }
 }

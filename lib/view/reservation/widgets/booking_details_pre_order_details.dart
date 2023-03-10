@@ -6,8 +6,9 @@ import 'package:get/get.dart';
 import '../../../controller/reservation & rating/reservation_controller.dart';
 
 class BookingDetailsPreOrderDetails extends StatelessWidget {
+  final String? callFrom;
   BookingDetailsPreOrderDetails({
-    Key? key,
+    Key? key,this.callFrom
   }) : super(key: key);
   ReservationController reservationController = Get.find();
 
@@ -163,6 +164,21 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 CommonText(
+                  text: 'Tax',
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+                CommonText(
+                  text:'\$${reservationController.bookRestaurantDetails!.bookinglistresponse.tax!.toStringAsFixed(2)}',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                CommonText(
                   text: 'Tip',
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -242,7 +258,7 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
                     ),
                     CommonText(
                       softWrap: true,
-                      text: '(ToGO TotalAmount + TotalAmount) ',
+                      text:callFrom == "Running"? '(ToGO TotalAmount + TotalAmount) ':'' ,
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
                     ),
@@ -256,9 +272,9 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
                 ),
               ],
             ),
-            CommonSizedBox(
-              height: 20,
-            ),
+            // CommonSizedBox(
+            //   height: 20,
+            // ),
           ],
         ),
       ),

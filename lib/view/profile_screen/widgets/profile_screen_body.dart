@@ -17,16 +17,18 @@ import '../../../utils/common/widgets_methods/image_picker.dart';
 
 class EditProfileScreenBody extends StatefulWidget {
   final String callFrom;
+
   const EditProfileScreenBody({
     required this.callFrom,
     Key? key,
   }) : super(key: key);
+
   @override
   State<EditProfileScreenBody> createState() => _EditProfileScreenBodyState();
 }
 
 class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
- final ProfileController _profileController = Get.find();
+  final ProfileController _profileController = Get.find();
 
   //  ProfileController _profileController = Get.put(ProfileController());
   final UserSessionController userSessionController = Get.find();
@@ -573,15 +575,33 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                                   // callFrom == "Create Profile"
                                   //     ? Get.toNamed('/zip-code')
                                   //     : Get.back();
-                                  if (widget.callFrom == "Create Profile") {
-                                    Get.toNamed('/zip-code');
-                                  } else {
+                                  if (widget.callFrom == "Create Profile" &&
+                                      userSessionController
+                                              .saveGuestUserNavigateScreen !=
+                                          'Book-now') {
+                                    Get.offNamedUntil('/zip-code', (route) => false);
+                                    //Get.offNamed('/zip-code');
+                                  } else if (widget.callFrom ==
+                                          "Create Profile" &&
+                                      userSessionController
+                                              .saveGuestUserNavigateScreen ==
+                                          'Book-now') {
+
+                                    Get.offAllNamed(
+                                      '/restaurant-details',
+                                      arguments: [
+                                        {"restaurantId": userSessionController.saveRestaurantId},
+                                      ],
+                                    );
+                                  }
+                                  else {
                                     // Get.offAllNamed('/home');
                                     Navigator.pop(context);
                                     Navigator.pop(context);
                                     Navigator.pop(context);
                                   }
-                                  _profileController.createProfileImage.value = File('');
+                                  _profileController.createProfileImage.value =
+                                      File('');
                                   // _profileController.firstNameController
                                   //     .clear();
                                   // _profileController.lastNameController.clear();

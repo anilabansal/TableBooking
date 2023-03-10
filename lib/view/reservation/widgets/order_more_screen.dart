@@ -291,7 +291,7 @@ class _ReservationOrderMoreState extends State<ReservationOrderMore> {
                                                                           false
                                                                       ? CommonText(
                                                                           text:
-                                                                              "\$ ${controller.reservationOrderMoreMenu[index].menu![i].itemPrice == null ? "" : controller.reservationOrderMoreMenu[index].menu![i].itemPrice.toString()}",
+                                                                              "\$ ${controller.reservationOrderMoreMenu[index].menu![i].itemPrice == null ? "" : controller.reservationOrderMoreMenu[index].menu![i].itemPrice!.toStringAsFixed(2)}",
                                                                           fontSize:
                                                                               12,
                                                                           fontWeight:
@@ -302,7 +302,7 @@ class _ReservationOrderMoreState extends State<ReservationOrderMore> {
                                                                       : Row(
                                                                           children: [
                                                                             CommonText(
-                                                                              text: "\$ ${controller.reservationOrderMoreMenu[index].menu![i].offerPrice == null ? "" : controller.reservationOrderMoreMenu[index].menu![i].offerPrice.toString()}",
+                                                                              text: "\$ ${controller.reservationOrderMoreMenu[index].menu![i].offerPrice == null ? "" : controller.reservationOrderMoreMenu[index].menu![i].offerPrice!.toStringAsFixed(2)}",
                                                                               fontSize: 12,
                                                                               fontWeight: FontWeight.w500,
                                                                               color: redE2211C,
@@ -311,7 +311,7 @@ class _ReservationOrderMoreState extends State<ReservationOrderMore> {
                                                                               width: 5,
                                                                             ),
                                                                             CommonText(
-                                                                              text: "\$ ${controller.reservationOrderMoreMenu[index].menu![i].itemPrice == null ? "" : controller.reservationOrderMoreMenu[index].menu![i].itemPrice.toString()}",
+                                                                              text: "\$ ${controller.reservationOrderMoreMenu[index].menu![i].itemPrice == null ? "" : controller.reservationOrderMoreMenu[index].menu![i].itemPrice!.toStringAsFixed(2)}",
                                                                               fontSize: 12,
                                                                               fontWeight: FontWeight.w500,
                                                                               color: grey868686,

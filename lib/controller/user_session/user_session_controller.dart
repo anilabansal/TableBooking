@@ -17,6 +17,8 @@ class UserSessionController extends GetxController {
   final _email = ''.obs;
   final _profilePic = ''.obs;
   final _isSocialLogin = false.obs;
+  final _saveGuestUserNavigateScreen = ''.obs;
+  final _saveRestaurantId = 0.obs;
 
   // final _recentSearchLocation = <String>[].obs;
 
@@ -64,6 +66,18 @@ class UserSessionController extends GetxController {
   List<RecentSearch> get recentSearchLocation => _recentSearchLocation;
 
   get isSocialLogin => _isSocialLogin.value;
+
+  get saveGuestUserNavigateScreen => _saveGuestUserNavigateScreen.value;
+
+  get saveRestaurantId => _saveRestaurantId.value;
+
+  void setGuestUserNavigateScreen(value){
+    _saveGuestUserNavigateScreen.value = value;
+  }
+
+  void restaurantIdIfGuestUser(value){
+    _saveRestaurantId.value = value;
+  }
 
   void setSocialLogin(bool value){
     _isSocialLogin.value = value;
@@ -166,6 +180,7 @@ class UserSessionController extends GetxController {
     setUserToken("");
     await box.erase();
     Get.offAllNamed('/authentication');
+    setGuestUserNavigateScreen("");
     // Get.toNamed(
     //   '/authentication',
     // );

@@ -1,5 +1,4 @@
 import 'package:booking_table/utils/common/common_strings.dart';
-import 'package:booking_table/utils/common/widgets_methods/common_text_form_field.dart';
 import 'package:booking_table/utils/extensions/capitalization_strings.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +74,7 @@ class _PhoneFieldState extends State<PhoneField> {
                     style: const TextStyle(
                         color: black000000,
                         fontSize: 16,
-                        fontWeight: FontWeight.normal),
+                        fontWeight: FontWeight.normal,),
                   ),
                 ),
               ),

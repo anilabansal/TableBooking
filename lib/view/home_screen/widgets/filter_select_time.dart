@@ -48,14 +48,15 @@ selectFilterTime() {
                 ? filterViewController.selectTime.map((FilterSelectTime value) {
                     return DropdownMenuItem<FilterSelectTime>(
                       value: value,
-                      child: Row(
-                        children: [
-                          Text(value.startTime!),
-                          //  const SizedBox(width: 8,),
-                          const Text("-"),
-                          Text(value.endTime!),
-                        ],
-                      ),
+                      child:  Text(value.startTime!),
+                      // child: Row(
+                      //   children: [
+                      //     Text(value.startTime!),
+                      //     //  const SizedBox(width: 8,),
+                      //     const Text("-"),
+                      //     Text(value.endTime!),
+                      //   ],
+                      // ),
                     );
                   }).toList()
                 : []),

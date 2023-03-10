@@ -47,6 +47,7 @@ class _PreOrderViewState extends State<PreOrderView> {
           });
         },
         child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -70,7 +70,7 @@ class CardListView extends StatelessWidget {
                                                 .value
                                                 .userCardlist![index]
                                             ? red4DE2211C: white0F000000,
-                                        offset: const Offset(-2, -2)),
+                                        offset: const Offset(-2, -2),),
                                   ]),
                               child: Padding(
                                   padding: const EdgeInsets.all(20.0),
@@ -96,33 +96,15 @@ class CardListView extends StatelessWidget {
                                       const SizedBox(
                                         width: 14,
                                       ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CommonText(
-                                            text: addCardDetailsController
-                                                .userAllCardList
-                                                .value
-                                                .userCardlist![index]
-                                                .cardNumber,
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w600,
-                                            color: black0D0000,
-                                          ),
-                                          CommonText(
-                                            text: addCardDetailsController
-                                                .userAllCardList
-                                                .value
-                                                .userCardlist![index]
-                                                .bankName,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
-                                            color: textDark3F3E3E,
-                                          ),
-                                        ],
+                                      CommonText(
+                                        text: addCardDetailsController
+                                            .userAllCardList
+                                            .value
+                                            .userCardlist![index]
+                                            .cardNumber,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                        color: black0D0000,
                                       ),
                                       const Spacer(),
                                       InkWell(

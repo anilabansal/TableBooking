@@ -1,4 +1,3 @@
-
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_app_bar.dart';
 import 'package:booking_table/view/reservation/widgets/upcoming_previous_running_reservation_list.dart';
@@ -9,17 +8,21 @@ import '../../utils/common/widgets_methods/shimmers/common_shimmer_widget.dart';
 
 class ReservationView extends StatefulWidget {
   const ReservationView({Key? key}) : super(key: key);
+
   @override
   State<ReservationView> createState() => _ReservationViewState();
 }
+
 class _ReservationViewState extends State<ReservationView> {
   ReservationController reservationController = Get.find();
+
   @override
   void initState() {
     // TODO: implement initState
-    uploadReservationRestaurantList();
     super.initState();
+    uploadReservationRestaurantList();
   }
+
   uploadReservationRestaurantList() {
     reservationController.bookRestaurantIsLoading.value = true;
     reservationController.reservationBookingRestaurantsApiCall().then((value) {
@@ -41,13 +44,12 @@ class _ReservationViewState extends State<ReservationView> {
       body: Obx(
         () {
           return reservationController.bookRestaurantIsLoading.value
-              ?
-          const ShimmerReservationDetailsWidget()
-          // const Center(
-          //         child: CircularProgressIndicator(
-          //           color: redE2211C,
-          //         ),
-          //       )
+              ? const ShimmerReservationDetailsWidget()
+              // const Center(
+              //         child: CircularProgressIndicator(
+              //           color: redE2211C,
+              //         ),
+              //       )
               : Column(
                   children: [
                     Padding(
@@ -63,8 +65,9 @@ class _ReservationViewState extends State<ReservationView> {
                         child: TabBar(
                           controller: controller.tabController,
                           indicator: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6),
-                              color: black0D0000,),
+                            borderRadius: BorderRadius.circular(6),
+                            color: black0D0000,
+                          ),
                           tabs: controller.myTabs,
                           labelStyle: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w400),

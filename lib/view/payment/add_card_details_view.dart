@@ -74,24 +74,24 @@ class AddCreditCardDetailsView extends StatelessWidget {
               CommonSizedBox(
                 height: 25,
               ),
-              CommonText(
-                text: 'Bank Name',
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-              CommonSizedBox(
-                height: 6,
-              ),
-              CommonTextFormField(
-                controller: cardScanController.bankName,
-                hintText: 'Enter Bank Name',
-                filled: true,
-                fillColor: whiteF4F4F4,
-                keyboardType: TextInputType.text,
-              ),
-              CommonSizedBox(
-                height: 20,
-              ),
+              // CommonText(
+              //   text: 'Bank Name',
+              //   fontSize: 14,
+              //   fontWeight: FontWeight.w400,
+              // ),
+              // CommonSizedBox(
+              //   height: 6,
+              // ),
+              // CommonTextFormField(
+              //   controller: cardScanController.bankName,
+              //   hintText: 'Enter Bank Name',
+              //   filled: true,
+              //   fillColor: whiteF4F4F4,
+              //   keyboardType: TextInputType.text,
+              // ),
+              // CommonSizedBox(
+              //   height: 20,
+              // ),
               CommonText(
                 text: 'Card Holder Name',
                 fontSize: 14,
@@ -307,7 +307,7 @@ class AddCreditCardDetailsView extends StatelessWidget {
                       "CardNumber": cardScanController.cardNumber.text.trim(),
                       "CVVNumber": cardScanController.cardCVV.text.trim(),
                       "ExpiryDate": finalControllerDateParse,
-                      "BankName": cardScanController.bankName.text.trim(),
+                      "BankName": "",
                     },
                   ).then(
                     (value) {
@@ -342,9 +342,10 @@ class AddCreditCardDetailsView extends StatelessWidget {
   }
 
   validateFields() {
-    if (cardScanController.bankName.text.trim().isEmpty) {
-      return 'Please enter a valid bank name!'.toTitleCase();
-    } else if (cardScanController.cardHolderName.text.trim().isEmpty) {
+    // if (cardScanController.bankName.text.trim().isEmpty) {
+    //   return 'Please enter a valid bank name!'.toTitleCase();
+    // } else
+      if (cardScanController.cardHolderName.text.trim().isEmpty) {
       return 'Please enter a valid name!'.toTitleCase();
     } else if (cardScanController.cardNumber.text.trim().length < 16) {
       return 'Please enter a valid card number!'.toTitleCase();

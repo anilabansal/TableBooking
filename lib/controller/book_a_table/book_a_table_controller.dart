@@ -30,15 +30,20 @@ class BookATableController extends GetxController {
   var selectPaymentMode = "".obs;
   var confirmBookIsLoading = true.obs;
    var bookTablePartySizeIsLoading = true.obs;
-  dynamic tipAmount = 0.0;
+  double? tipAmount = 0.00;
+  RxDouble tipAmountAddedToAddedInTotalPrice = 0.0.obs;
   ServiceSummary?serviceSummary;
   BookingResponse?editBookingResponse;
   var bookTablePartySize = <PartySize>[].obs;
   PartySize?selectedBookTablePartySize;
+
+  /// set party size
   void setBookTableSelectedPartySize(value){
     selectedBookTablePartySize = value;
     update();
   }
+
+
 
   /// update Order is added or not
    updateOrderIsAdded(){

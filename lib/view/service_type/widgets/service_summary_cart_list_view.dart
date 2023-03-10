@@ -281,44 +281,10 @@ class ServiceSummaryCartView extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    // Row(
-                    //   children: [
-                    //     CommonText(
-                    //       text: "Total Amount",
-                    //       fontSize: 13,
-                    //       fontWeight: FontWeight.w600,
-                    //       color: black0D0000,
-                    //     ),
-                    //     const Spacer(),
-                    //     CommonText(
-                    //       text:
-                    //       "\$ ${restaurantsController.subTotalPrice!.toStringAsFixed(2)}",
-                    //       // text: totalPrice.toString(),
-                    //       // text: ,
-                    //       fontSize: 13,
-                    //       fontWeight: FontWeight.w600,
-                    //       color: black0D0000,
-                    //     ),
-                    //   ],
-                    // ),
-                    // const SizedBox(
-                    //   height: 8,
-                    // ),
-                    // const SizedBox(
-                    //   height: 8,
-                    // ),
-                    // Container(
-                    //   width: Get.width,
-                    //   height: 1,
-                    //   color: whiteE5E5E5,
-                    // ),
-                    // const SizedBox(
-                    //   height: 15,
-                    // ),
                     Row(
                       children: [
                         CommonText(
-                          text: "Grand Total",
+                          text: "Tax",
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: black0D0000,
@@ -326,7 +292,41 @@ class ServiceSummaryCartView extends StatelessWidget {
                         const Spacer(),
                         CommonText(
                           text:
-                              "\$ ${(restaurantsController.subTotalPrice!).toStringAsFixed(2)}",
+                          "\$ ${bookATableController.serviceSummary!.bookingConfirmationAmount.toStringAsFixed(2)}",
+                          // text: totalPrice.toString(),
+                          // text: ,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: black0D0000,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Container(
+                      width: Get.width,
+                      height: 1,
+                      color: whiteE5E5E5,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      children: [
+                        CommonText(
+                          text: "Total Amount",
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: black0D0000,
+                        ),
+                        const Spacer(),
+                        CommonText(
+                          text:
+                              "\$ ${(restaurantsController.subTotalPrice! + bookATableController.serviceSummary!.bookingConfirmationAmount).toStringAsFixed(2)}",
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: black0D0000,

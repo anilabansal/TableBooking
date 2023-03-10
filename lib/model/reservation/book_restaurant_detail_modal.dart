@@ -85,7 +85,8 @@ class Bookinglistresponse {
     // this.paymentStatus,
     this.reviewList,
     this.gotoorderlistdetail,
-    this.toGoTotalAmount
+    this.toGoTotalAmount,
+    this.tax,
   });
 
   bool? isUserSubmitReview;
@@ -121,6 +122,7 @@ class Bookinglistresponse {
   ReviewList? reviewList;
   List<Orderlistdetail>? gotoorderlistdetail;
   double?toGoTotalAmount;
+  double?tax;
 
   // dynamic paymentStatus;
   // List<dynamic> reviewList;
@@ -159,7 +161,8 @@ class Bookinglistresponse {
     // paymentStatus: json["paymentStatus"],
     reviewList:json["reviewList"]!=null? ReviewList.fromJson(json["reviewList"]):null,
     gotoorderlistdetail: List<Orderlistdetail>.from(json["gotoorderlistdetail"].map((x) => Orderlistdetail.fromJson(x))),
-      toGoTotalAmount:json['toGoTotalAmount'].toDouble()
+      toGoTotalAmount:json['toGoTotalAmount'].toDouble(),
+      tax :json["tax"].toDouble(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -196,7 +199,8 @@ class Bookinglistresponse {
     // "paymentStatus": paymentStatus,
   "reviewList": reviewList!.toJson(),
     "gotoorderlistdetail": List<dynamic>.from(gotoorderlistdetail!.map((x) => x.toJson())),
-    "toGoTotalAmount":toGoTotalAmount
+    "toGoTotalAmount":toGoTotalAmount,
+    "tax":tax,
   };
 }
 
