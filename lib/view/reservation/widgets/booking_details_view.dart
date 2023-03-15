@@ -204,7 +204,13 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
                               ),
                               Visibility(
                                 visible: widget.callFrom == 'Previous'
-                                    ||widget.callFrom=='Upcoming'
+                                    ||widget.callFrom=='Upcoming'||
+                                    reservationController
+                                        .bookRestaurantDetails!
+                                        .bookinglistresponse
+                                        .serviceType
+                                        .toString() ==
+                                        "To Go"
                                     ? false
                                     : true,
                                 child: ToGoView(

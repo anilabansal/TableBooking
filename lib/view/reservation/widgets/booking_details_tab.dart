@@ -91,6 +91,7 @@ class BookingDetailsTab extends StatelessWidget {
             // BOOKING DETAILS TOP VIEW
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 // CommonText(
                 //   text: 'Booking Details',
@@ -119,27 +120,64 @@ class BookingDetailsTab extends StatelessWidget {
                 CommonSizedBox(
                   height: 25,
                 ),
-                CommonText(
-                  text: 'Party Size',
-                  color: textLight868686,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                ),
-                CommonSizedBox(
-                  height: 5,
-                ),
-                CommonText(
-                  color: black000000,
-                  text:
-                      '${reservationController.bookRestaurantDetails!.bookinglistresponse.partySize} Members',
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                ),
+                reservationController.bookRestaurantDetails!.bookinglistresponse
+                            .serviceType
+                            .toString() ==
+                        "To Go"
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CommonText(
+                            text: 'Special Occasion',
+                            color: textLight868686,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          CommonSizedBox(
+                            height: 5,
+                          ),
+                          CommonText(
+                            color: black000000,
+                            text: reservationController.bookRestaurantDetails!
+                                        .bookinglistresponse.specialOccasion !=
+                                    ""
+                                ? reservationController.bookRestaurantDetails!
+                                    .bookinglistresponse.specialOccasion
+                                    .toString()
+                                : "None",
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          CommonText(
+                            text: 'Party Size',
+                            color: textLight868686,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          CommonSizedBox(
+                            height: 5,
+                          ),
+                          CommonText(
+                            color: black000000,
+                            text:
+                                '${reservationController.bookRestaurantDetails!.bookinglistresponse.partySize} Members',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ],
+                      ),
               ],
             ),
             // BOOKING DEATIS BOTTOM VIEW
+
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CommonText(
                   text: 'Time',
@@ -160,21 +198,42 @@ class BookingDetailsTab extends StatelessWidget {
                 CommonSizedBox(
                   height: 25,
                 ),
-                CommonText(
-                  text: 'Special Occasion',
-                  color: textLight868686,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                ),
-                CommonSizedBox(
-                  height: 5,
-                ),
-                CommonText(
-                  color: black000000,
-                  text: reservationController.bookRestaurantDetails!.bookinglistresponse.specialOccasion!=""?reservationController.bookRestaurantDetails!.bookinglistresponse.specialOccasion.toString():"None",
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                ),
+                Visibility(
+                  visible: reservationController.bookRestaurantDetails!
+                              .bookinglistresponse.serviceType
+                              .toString() ==
+                          "To Go"
+                      ? false
+                      : true,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CommonText(
+                        text: 'Special Occasion',
+                        color: textLight868686,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      CommonSizedBox(
+                        height: 5,
+                      ),
+                      CommonText(
+                        color: black000000,
+                        text: reservationController.bookRestaurantDetails!
+                                    .bookinglistresponse.specialOccasion !=
+                                ""
+                            ? reservationController.bookRestaurantDetails!
+                                .bookinglistresponse.specialOccasion
+                                .toString()
+                            : "None",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ],
+                  ),
+                )
+
                 // CommonSizedBox(
                 //   height: 25,
                 // ),

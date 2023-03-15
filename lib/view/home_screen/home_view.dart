@@ -30,13 +30,13 @@ class HomeView extends StatelessWidget {
           return SafeArea(
             child: RefreshIndicator(
               color: redE2211C,
-              onRefresh: () async{
+              onRefresh: () async {
                 await homeController.getRestaurantDetailsUsingLatLon(
                   body: {
                     "Latitude":
-                    locationController.latLng.value.latitude.toString(),
-                    "Longitude": locationController.latLng.value.longitude
-                        .toString(),
+                        locationController.latLng.value.latitude.toString(),
+                    "Longitude":
+                        locationController.latLng.value.longitude.toString(),
                     "RestaurantName": "",
                   },
                 );
@@ -224,12 +224,13 @@ class HomeView extends StatelessWidget {
                                           width: 24,
                                           height: 25,
                                           decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              color: homeController
-                                                      .restaurantFilter.value
-                                                  ? black000000
-                                                  : greyF4F4F4,),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            color: homeController
+                                                    .restaurantFilter.value
+                                                ? black000000
+                                                : greyF4F4F4,
+                                          ),
                                           child: Center(
                                             child: Image.asset(
                                               menuImage,

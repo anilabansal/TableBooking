@@ -258,7 +258,7 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
                     ),
                     CommonText(
                       softWrap: true,
-                      text:callFrom == "Running"? '(ToGO TotalAmount + TotalAmount) ':'' ,
+                      text:callFrom == "Running"? '(To Go TotalAmount + TotalAmount) ':'' ,
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
                     ),

@@ -14,9 +14,7 @@ class SearchBoxScreen extends StatefulWidget {
 
 class _SearchBoxScreenState extends State<SearchBoxScreen> {
   final TextEditingController searchController = TextEditingController();
-
   HomeController homeController = Get.find();
-
   LocationController locationController = Get.find();
 
   @override

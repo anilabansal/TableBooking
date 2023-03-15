@@ -111,21 +111,31 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                     CommonSizedBox(
                       height: 25,
                     ),
-                    CommonText(
-                      text: 'Party Size',
-                      color: textLight868686,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    CommonSizedBox(
-                      height: 5,
-                    ),
-                    CommonText(
-                      color: black000000,
-                      text:
-                          '${bookATableController.serviceSummary!.partySize} Members',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
+                    Visibility(
+                      visible:bookATableController
+                          .serviceSummary!.serviceType
+                          .toString() ==
+                          "4"?false:true ,
+                      child: Column(
+                        children: [
+                          CommonText(
+                            text: 'Party Size',
+                            color: textLight868686,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          CommonSizedBox(
+                            height: 5,
+                          ),
+                          CommonText(
+                            color: black000000,
+                            text:
+                                '${bookATableController.serviceSummary!.partySize} Members',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ],
+                      ),
                     ),
                     CommonSizedBox(
                       height: 20,
@@ -231,7 +241,7 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                             ? false
                             : true,
                         child: Padding(
-                          padding: const EdgeInsets.only(top:10.0),
+                          padding: const EdgeInsets.only(top: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -250,7 +260,8 @@ class FullSummaryBookingDetailsView extends StatelessWidget {
                                       '/pre-order',
                                       arguments: [
                                         {
-                                          "restaurantId": data[0]['restaurantId'],
+                                          "restaurantId": data[0]
+                                              ['restaurantId'],
                                           "restaurantName": data[0]
                                               ["restaurantName"],
                                           "restaurantPic": data[0]
