@@ -48,7 +48,7 @@ class ServiceSummary {
   dynamic tip;
   dynamic paymentTypeId;
   dynamic cardId;
-  dynamic bookingConfirmationAmount;
+  int? bookingConfirmationAmount;
   dynamic totalAmount;
   dynamic statusId;
   String? bookingTime;
@@ -80,7 +80,7 @@ class ServiceSummary {
         tip: json["tip"],
         paymentTypeId: json["paymentTypeId"],
         cardId: json["cardId"],
-        bookingConfirmationAmount: json["bookingConfirmationAmount"],
+        bookingConfirmationAmount: json["bookingConfirmationAmount"].toInt(),
         totalAmount: json["totalAmount"],
         statusId: json["statusId"],
         bookingTime: json["bookingTime"],

@@ -40,9 +40,12 @@ class OrderMorePaymentMode extends StatelessWidget {
                         .endsWith('%')
                     ? reservationController.tipAddedOrderMore
                     : 0.0,
-                "Amount": reservationController.subTotalPrice +
-                    reservationController.tipAddedOrderMore +
-                    toGoReservationController.toGoSubTotalPrice,
+                // "Amount": reservationController.subTotalPrice +
+                //     reservationController.tipAddedOrderMore +
+                //     toGoReservationController.toGoSubTotalPrice,
+                "Amount": reservationController.totalAmountOrderMore! +
+                    reservationController.tipAddedOrderMore! +
+                    toGoReservationController.toGoGrandTotalAmount!,
                 "CardId": 0,
               }).then((value) {
                 reservationController.orderMoreConfirmationIsLoading.value =
@@ -64,12 +67,13 @@ class OrderMorePaymentMode extends StatelessWidget {
               /// alert dialog
               commonAlertDialog(
                 context,
-                // restaurantsController.subTotalPrice! +
-                //     controller.serviceSummary!.bookingConfirmationAmount +
-                //     double.parse(tipPercentageCalculatedToAdded),
-                reservationController.subTotalPrice +
-                    reservationController.tipAddedOrderMore +
-                    toGoReservationController.toGoSubTotalPrice!,
+                //
+                // reservationController.subTotalPrice +
+                //     reservationController.tipAddedOrderMore +
+                //     toGoReservationController.toGoSubTotalPrice!,
+                reservationController.totalAmountOrderMore! +
+                    reservationController.tipAddedOrderMore! +
+                    toGoReservationController.toGoGrandTotalAmount!,
                 () {
                   ///on tap of ok button in alert dialog to make payment
                   Navigator.pop(context);

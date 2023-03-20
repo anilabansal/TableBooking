@@ -27,7 +27,11 @@ class ReservationController extends GetxController
   List<Cart> cartNewItemsList = [];
   List<IngredientTypes> selectedIngredient = [];
   List<AddOns> addOnIngredients = [];
-dynamic tipAddedOrderMore = 0.0 ;
+double? tipAddedOrderMore = 0.0 ;
+ double? taxAddedOrderMore = 0.0;
+ ///totalAmountOrderMore i.e items subTotal price + tax
+ double?totalAmountOrderMore = 0.0;
+
   double? addOnPrices = 0.0;
  dynamic subTotalPrice = 0.0;
   // dynamic newAddedPrice = 0.0;

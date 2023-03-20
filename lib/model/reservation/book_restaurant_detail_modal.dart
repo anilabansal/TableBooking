@@ -122,7 +122,7 @@ class Bookinglistresponse {
   ReviewList? reviewList;
   List<Orderlistdetail>? gotoorderlistdetail;
   double?toGoTotalAmount;
-  double?tax;
+  int?tax;
 
   // dynamic paymentStatus;
   // List<dynamic> reviewList;
@@ -162,7 +162,7 @@ class Bookinglistresponse {
     reviewList:json["reviewList"]!=null? ReviewList.fromJson(json["reviewList"]):null,
     gotoorderlistdetail: List<Orderlistdetail>.from(json["gotoorderlistdetail"].map((x) => Orderlistdetail.fromJson(x))),
       toGoTotalAmount:json['toGoTotalAmount'].toDouble(),
-      tax :json["tax"].toDouble(),
+      tax :json["tax"].toInt(),
   );
 
   Map<String, dynamic> toJson() => {

@@ -27,6 +27,12 @@ class ToGoReservationController extends GetxController{
   List<IngredientTypes> selectedIngredient = [];
   var addOnMenuIngredientList = <AddOnIngredientList>[].obs;
 
+  /// to calculate tax on togo total amount
+  double? toGoTaxAdded = 0.0;
+
+  /// toGoTotalAmount i.e calculated tax on totalAmount of items + totalAmountOf item
+  double? toGoGrandTotalAmount = 0.0;
+
   /// toGoSubTotal price calculations
   toGoSubTotalPriceCalculation(itemTotalPrice) {
     toGoSubTotalPrice = toGoSubTotalPrice! + itemTotalPrice;

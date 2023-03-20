@@ -159,6 +159,24 @@ class ToGoBookedItemsView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       CommonText(
+                        text: 'Tax',
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      CommonText(
+                        text: '${reservationController.bookRestaurantDetails!.bookinglistresponse.tax!.toString()}%',
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ],
+                  ),
+                  CommonSizedBox(
+                    height: 13,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      CommonText(
                         text: 'Total Amount',
                         fontSize: 13,
                         fontWeight: FontWeight.w400,

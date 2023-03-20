@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../controller/reservation & rating/reservation_controller.dart';
 import '../../../utils/common/common_strings.dart';
 import '../../../utils/common/widgets_methods/common_text.dart';

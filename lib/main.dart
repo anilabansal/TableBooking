@@ -36,7 +36,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   LocationController locationController = Get.put(LocationController());
   @override
   void initState() {

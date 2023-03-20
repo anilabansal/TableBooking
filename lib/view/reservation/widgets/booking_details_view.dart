@@ -410,11 +410,11 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
                                   //   height: 20,
                                   // ),
 
-                                  Container(
-                                    height: 1,
-                                    width: Get.width,
-                                    color: whiteE5E5E5,
-                                  ),
+                                  // Container(
+                                  //   height: 1,
+                                  //   width: Get.width,
+                                  //   color: whiteE5E5E5,
+                                  // ),
                                   CommonSizedBox(
                                     height: 20,
                                   ),

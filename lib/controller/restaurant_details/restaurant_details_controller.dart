@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import '../../model/restaurant_about_us/restaurant_about_us_model.dart';
 import '../../model/restaurant_menu/Cart_model.dart';
 import '../../model/restaurant_menu/add_on_ingredient_list.dart';
+import '../book_a_table/book_a_table_controller.dart';
 import '../location/location_controller.dart';
 
 class RestaurantDetailsController extends GetxController {
@@ -39,6 +40,9 @@ class RestaurantDetailsController extends GetxController {
   List<AddOns> addOnIngredients = [];
 
   double? addOnPrices = 0.0;
+
+  /// grandTotal amount (tax + total itemsAdded Price)
+  double? grandTotal = 0.0;
 
   /// update likes and unlike of restaurants on restaurant details screen
   void updateRestaurantLikes() {

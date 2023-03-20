@@ -189,22 +189,23 @@ class FullSummaryBottomView extends StatelessWidget {
                           fillColor: whiteF5F5F5,
                           filled: true,
                           controller: tipController,
-                          keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
+                          keyboardType: const TextInputType.numberWithOptions(
+                              signed: true, decimal: true),
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                               RegExp('[0-9]'),
                             ),
                           ],
-                          onChange: (value){
-                            if(tipController.text.trim().isEmpty){
-                              controller.tipAmountAddedToAddedInTotalPrice.value = 0.0;
+                          onChange: (value) {
+                            if (tipController.text.trim().isEmpty) {
+                              controller.tipAmountAddedToAddedInTotalPrice
+                                  .value = 0.0;
+                            } else {
+                              controller
+                                      .tipAmountAddedToAddedInTotalPrice.value =
+                                  double.tryParse(
+                                      tipController.text.trim().toString())!;
                             }
-                            else{
-                              controller.tipAmountAddedToAddedInTotalPrice.value =
-                                  double.tryParse(tipController.text.trim().toString())!;
-                            }
-
-
                           },
                         ),
                       ),
@@ -219,7 +220,7 @@ class FullSummaryBottomView extends StatelessWidget {
                           // text:
                           //     "\$${((controller.tipAmount! * (restaurantsController.subTotalPrice! + controller.serviceSummary!.bookingConfirmationAmount)) / 100).toStringAsFixed(2)}",
                           text:
-                              "+\$${controller.tipAmountAddedToAddedInTotalPrice!.value.toStringAsFixed(2)}",
+                              "+\$${controller.tipAmountAddedToAddedInTotalPrice.value.toStringAsFixed(2)}",
                           color: redE2211C,
                           fontSize: 15,
                         ),
@@ -229,24 +230,27 @@ class FullSummaryBottomView extends StatelessWidget {
                         //     controller.addTip.value == "15%" ||
                         //     controller.addTip.value == "20%" ||
                         //     tipController.text.trim().isNotEmpty,
-                        visible:controller.addTip.value == ''?false:true ,
+                        visible: controller.addTip.value == '' ? false : true,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(mainAxisAlignment: MainAxisAlignment.start,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 children: [
                                   CommonText(
-                                    text: "Grand Total",
+                                    text: "Total Amount To Pay",
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
                                     color: black0D0000,
                                   ),
                                   const Spacer(),
                                   CommonText(
+                                    // text:
+                                    //     "\$ ${(restaurantsController.subTotalPrice! + controller.serviceSummary!.bookingConfirmationAmount! + controller.tipAmountAddedToAddedInTotalPrice.value).toStringAsFixed(2)}",
                                     text:
-                                        "\$ ${(restaurantsController.subTotalPrice! + controller.serviceSummary!.bookingConfirmationAmount + controller.tipAmountAddedToAddedInTotalPrice!.value).toStringAsFixed(2)}",
+                                        "\$${(restaurantsController.grandTotal! + controller.tipAmountAddedToAddedInTotalPrice.value).toStringAsFixed(2)}",
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
                                     color: black0D0000,
@@ -254,7 +258,7 @@ class FullSummaryBottomView extends StatelessWidget {
                                 ],
                               ),
                               CommonText(
-                                text: "(Total Amount + Tip)",
+                                text: "( GrandTotal Amount + Tip)",
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
                                 color: black0D0000,
@@ -379,27 +383,27 @@ class FullSummaryBottomView extends StatelessWidget {
           //   controller.addTip.value = text;
           controller.addTip.value = selectedValue;
           controller.tipAmount = tipAmount;
-          // controller.tipAmountAddedToAddedInTotalPrice = ((controller
-          //             .tipAmount! *
-          //         (restaurantsController.subTotalPrice! +
-          //             controller.serviceSummary!.bookingConfirmationAmount)) /
-          //     100);
-          // if (selectedValue == "Custom" &&
-          //     tipController.text.trim().isNotEmpty) {
-          //   controller.tipAmountAddedToAddedInTotalPrice.value =
-          //       double.tryParse(tipController.text.toString())!;
-          // } else
-            if (selectedValue == "None") {
+          tipController.clear();
+          if (selectedValue == "None") {
             controller.tipAmountAddedToAddedInTotalPrice.value = 0.00;
-          } else if(controller.addTip.value == "10%" ||
-                controller.addTip.value == "15%" ||
-                controller.addTip.value == "20%") {
-            controller.tipAmountAddedToAddedInTotalPrice.value = ((controller
-                        .tipAmount! *
-                    (restaurantsController.subTotalPrice! +
-                        controller.serviceSummary!.bookingConfirmationAmount)) /
-                100);
           }
+          else if (controller.addTip.value =="Custom" && tipController.text.trim().isEmpty) {
+            controller.tipAmountAddedToAddedInTotalPrice
+                .value = 0.0;
+          }
+          else if (controller.addTip.value == "10%" ||
+              controller.addTip.value == "15%" ||
+              controller.addTip.value == "20%") {
+            // controller.tipAmountAddedToAddedInTotalPrice.value = ((controller
+            //             .tipAmount! *
+            //         (restaurantsController.subTotalPrice! +
+            //             controller.serviceSummary!.bookingConfirmationAmount!)) /
+            //     100);
+            controller.tipAmountAddedToAddedInTotalPrice.value =
+                (controller.tipAmount! * restaurantsController.grandTotal!) /
+                    100;
+          }
+
 
           // isSelected = !isSelected;
         },
@@ -424,5 +428,4 @@ class FullSummaryBottomView extends StatelessWidget {
       ),
     );
   }
-
 }

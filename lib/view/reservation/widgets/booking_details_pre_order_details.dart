@@ -11,7 +11,6 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
     Key? key,this.callFrom
   }) : super(key: key);
   ReservationController reservationController = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return Visibility(
@@ -169,31 +168,13 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
                 CommonText(
-                  text:'\$${reservationController.bookRestaurantDetails!.bookinglistresponse.tax!.toStringAsFixed(2)}',
+                  text:'${reservationController.bookRestaurantDetails!.bookinglistresponse.tax!.toString()}%',
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                CommonText(
-                  text: 'Tip',
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                ),
-                CommonText(
-                  text: reservationController
-                          .bookRestaurantDetails!.bookinglistresponse.tip!
-                          .endsWith('%')
-                      ? '${reservationController.bookRestaurantDetails!.bookinglistresponse.tip}'
-                      : '\$${reservationController.bookRestaurantDetails!.bookinglistresponse.tip}',
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
-              ],
-            ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -210,29 +191,47 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
                 ),
               ],
             ),
-
-            Visibility(
-             visible:reservationController.bookRestaurantDetails!.bookinglistresponse.toGoTotalAmount==0.0?false:true ,
-              child: Padding(
-                padding: const EdgeInsets.only(top:8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    CommonText(
-                      text: 'To Go TotalAmount',
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    CommonText(
-                      text:
-                      '\$${reservationController.bookRestaurantDetails!.bookinglistresponse.toGoTotalAmount!.toStringAsFixed(2)}',
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                CommonText(
+                  text: 'Tip',
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
                 ),
-              ),
+                CommonText(
+                  text: reservationController
+                      .bookRestaurantDetails!.bookinglistresponse.tip!
+                      .endsWith('%')
+                      ? '${reservationController.bookRestaurantDetails!.bookinglistresponse.tip}'
+                      : '\$${reservationController.bookRestaurantDetails!.bookinglistresponse.tip}',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ],
             ),
+            // Visibility(
+            //  visible:reservationController.bookRestaurantDetails!.bookinglistresponse.toGoTotalAmount==0.0?false:true ,
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(top:8.0),
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: <Widget>[
+            //         CommonText(
+            //           text: 'To Go TotalAmount',
+            //           fontSize: 13,
+            //           fontWeight: FontWeight.w400,
+            //         ),
+            //         CommonText(
+            //           text:
+            //           '\$${reservationController.bookRestaurantDetails!.bookinglistresponse.toGoTotalAmount!.toStringAsFixed(2)}',
+            //           fontSize: 12,
+            //           fontWeight: FontWeight.w600,
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             CommonSizedBox(
               height: 15,
             ),
@@ -256,17 +255,18 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
                     ),
-                    CommonText(
-                      softWrap: true,
-                      text:callFrom == "Running"? '(To Go TotalAmount + TotalAmount) ':'' ,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    // CommonText(
+                    //   softWrap: true,
+                    //   text:callFrom == "Running"? '(To Go TotalAmount + TotalAmount) ':'' ,
+                    //   fontSize: 13,
+                    //   fontWeight: FontWeight.w400,
+                    // ),
                   ],
                 ),
                 CommonText(
-                  text:
-                      '\$${(reservationController.bookRestaurantDetails!.bookinglistresponse.toGoTotalAmount!+reservationController.bookRestaurantDetails!.bookinglistresponse.totalAmount!).toStringAsFixed(2)}',
+                  // text:
+                  //     '\$${(reservationController.bookRestaurantDetails!.bookinglistresponse.toGoTotalAmount!+reservationController.bookRestaurantDetails!.bookinglistresponse.totalAmount!).toStringAsFixed(2)}',
+                  text: "\$${reservationController.bookRestaurantDetails!.bookinglistresponse.grandTotal!.toStringAsFixed(2)}",
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),

@@ -9,11 +9,33 @@ import 'order_more_payment.dart';
 
 class AddMoreScreen extends StatelessWidget {
   final int? bookingId;
-   AddMoreScreen({Key? key,this.bookingId, }) : super(key: key);
-   ReservationController reservationController = Get.find();
+
+  AddMoreScreen({
+    Key? key,
+    this.bookingId,
+  }) : super(key: key);
+  ReservationController reservationController = Get.find();
+
   @override
   Widget build(BuildContext context) {
-    reservationController.tipAddedOrderMore = reservationController.bookRestaurantDetails!.bookinglistresponse.tip!.endsWith('%')? ((reservationController.subTotalPrice!.toDouble()*double.parse(reservationController.bookRestaurantDetails!.bookinglistresponse.tip!.replaceAll('%', '')))/100): 0.0;
+    reservationController.taxAddedOrderMore =
+        ((reservationController.subTotalPrice!.toDouble() *
+                reservationController
+                    .bookRestaurantDetails!.bookinglistresponse.tax!
+                    .toDouble()) /
+            100);
+    reservationController.totalAmountOrderMore =
+        reservationController.subTotalPrice +
+            reservationController.taxAddedOrderMore;
+    reservationController.tipAddedOrderMore = reservationController
+            .bookRestaurantDetails!.bookinglistresponse.tip!
+            .endsWith('%')
+        ? ((reservationController.totalAmountOrderMore! *
+                double.parse(reservationController
+                    .bookRestaurantDetails!.bookinglistresponse.tip!
+                    .replaceAll('%', ''))) /
+            100)
+        : 0.0;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,9 +59,7 @@ class AddMoreScreen extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(9),
-              color: greyF8F8F8
-          ),
+              borderRadius: BorderRadius.circular(9), color: greyF8F8F8),
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
@@ -47,34 +67,24 @@ class AddMoreScreen extends StatelessWidget {
                 ListView.builder(
                     itemCount: reservationController.cartNewItemsList.length,
                     shrinkWrap: true,
-                    physics:
-                    const NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
                           Row(
                             children: [
                               Column(
-                                mainAxisAlignment:
-                                MainAxisAlignment
-                                    .start,
-                                crossAxisAlignment:
-                                CrossAxisAlignment
-                                    .start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     children: [
                                       CommonText(
-                                        text:
-                                        reservationController.cartNewItemsList[
-                                        index]
-                                            .itemName,
-                                        color:
-                                        black0D0000,
+                                        text: reservationController
+                                            .cartNewItemsList[index].itemName,
+                                        color: black0D0000,
                                         fontSize: 15,
-                                        fontWeight:
-                                        FontWeight
-                                            .w500,
+                                        fontWeight: FontWeight.w500,
                                       ),
                                       const SizedBox(
                                         width: 8,
@@ -84,166 +94,142 @@ class AddMoreScreen extends StatelessWidget {
                                   Row(
                                     children: [
                                       CommonText(
-                                        text:
-                                        "Quantity:",
-                                        color:
-                                        textGrey868686,
+                                        text: "Quantity:",
+                                        color: textGrey868686,
                                         fontSize: 12,
-                                        fontWeight:
-                                        FontWeight
-                                            .w500,
+                                        fontWeight: FontWeight.w500,
                                       ),
                                       CommonText(
                                         text:
-                                        " ${reservationController.cartNewItemsList[index].ItemQuantity}",
-                                        color:
-                                        black0D0000,
+                                            " ${reservationController.cartNewItemsList[index].ItemQuantity}",
+                                        color: black0D0000,
                                         fontSize: 12,
-                                        fontWeight:
-                                        FontWeight
-                                            .w500,
+                                        fontWeight: FontWeight.w500,
                                       ),
                                       const SizedBox(
                                         width: 16,
                                       ),
                                       CommonText(
                                         text: "Price:",
-                                        color:
-                                        textGrey868686,
+                                        color: textGrey868686,
                                         fontSize: 12,
-                                        fontWeight:
-                                        FontWeight
-                                            .w500,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                      reservationController.cartNewItemsList[
-                                      index]
-                                          .isOfferItem ==
-                                          false
-                                          ?
-                                      CommonText(
-                                        text:
-                                        " ${reservationController.cartNewItemsList[index].addOnPriceQuantity!.toStringAsFixed(2)}",
-                                        color:
-                                        black0D0000,
-                                        fontSize:
-                                        12,
-                                        fontWeight:
-                                        FontWeight
-                                            .w500,
-                                      )
+                                      reservationController
+                                                  .cartNewItemsList[index]
+                                                  .isOfferItem ==
+                                              false
+                                          ? CommonText(
+                                              text:
+                                                  " ${reservationController.cartNewItemsList[index].addOnPriceQuantity!.toStringAsFixed(2)}",
+                                              color: black0D0000,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                            )
                                           : Row(
-                                        children: [
-                                          CommonText(
-                                            text:
-                                            "\$ ${reservationController.cartNewItemsList[index].addOnOfferQuantity!.toStringAsFixed(2)}",
-                                            fontSize:
-                                            12,
-                                            fontWeight:
-                                            FontWeight.w500,
-                                            color:
-                                            redE2211C,
-                                          ),
-                                          const SizedBox(
-                                            width:
-                                            5,
-                                          ),
-                                          CommonText(
-                                            text:
-                                            "\$ ${reservationController.cartNewItemsList[index].addOnPriceQuantity.toString()}",
-                                            fontSize:
-                                            12,
-                                            fontWeight:
-                                            FontWeight.w500,
-                                            color:
-                                            grey868686,
-                                            decoration:
-                                            TextDecoration.lineThrough,
-                                          ),
-                                        ],
-                                      ),
+                                              children: [
+                                                CommonText(
+                                                  text:
+                                                      "\$ ${reservationController.cartNewItemsList[index].addOnOfferQuantity!.toStringAsFixed(2)}",
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: redE2211C,
+                                                ),
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                                CommonText(
+                                                  text:
+                                                      "\$ ${reservationController.cartNewItemsList[index].addOnPriceQuantity.toString()}",
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: grey868686,
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                ),
+                                              ],
+                                            ),
                                     ],
                                   ),
-
                                   CommonSizedBox(
                                     height: 5,
                                   ),
-
                                   Visibility(
-                                    visible:
-                                    reservationController.cartNewItemsList[index]
-                                        .addOns!
-                                        .isNotEmpty
+                                    visible: reservationController
+                                            .cartNewItemsList[index]
+                                            .addOns!
+                                            .isNotEmpty
                                         ? true
                                         : false,
-                                    child: Row(  mainAxisAlignment:
-                                    MainAxisAlignment.start,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         CommonText(
-                                          text:
-                                          "Ingredients:",
-                                          color:
-                                          textGrey868686,
+                                          text: "Ingredients:",
+                                          color: textGrey868686,
                                           fontSize: 12,
-                                          fontWeight:
-                                          FontWeight.w500,
+                                          fontWeight: FontWeight.w500,
                                         ),
-                                        Wrap(
-                                            children: [
-                                              SizedBox(
-                                              width:MediaQuery.of(context).size.width*0.5,
-                                              height: 20,
-                                              child:
-                                              ListView.builder(
-                                                  scrollDirection: Axis.horizontal,
-                                                  itemCount:
-                                                  reservationController.cartNewItemsList[index]
-                                                      .addOns!
-                                                      .length,
-                                                  shrinkWrap: true,
-                                                  physics:
-                                                  const NeverScrollableScrollPhysics(),
-                                                  itemBuilder:
-                                                      (context, i) {
-                                                    return Row( mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                      crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                      children: [
-                                                        CommonText(
-                                                          softWrap: true,
-                                                          text:
-                                                          " ${ reservationController.cartNewItemsList[index]
-                                                              .addOns![i].ingredientName}",
-                                                          color:
-                                                          black0D0000,
-                                                          fontSize:
-                                                          12,
+                                        Wrap(children: [
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.5,
+                                            height: 20,
+                                            child: ListView.builder(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount: reservationController
+                                                    .cartNewItemsList[index]
+                                                    .addOns!
+                                                    .length,
+                                                shrinkWrap: true,
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
+                                                itemBuilder: (context, i) {
+                                                  return Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      CommonText(
+                                                        softWrap: true,
+                                                        text:
+                                                            " ${reservationController.cartNewItemsList[index].addOns![i].ingredientName}",
+                                                        color: black0D0000,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                      Visibility(
+                                                        visible: i !=
+                                                                (reservationController
+                                                                        .cartNewItemsList[
+                                                                            index]
+                                                                        .addOns!
+                                                                        .length -
+                                                                    1)
+                                                            ? true
+                                                            : false,
+                                                        child: CommonText(
+                                                          text: ",",
+                                                          color: black0D0000,
+                                                          fontSize: 12,
                                                           fontWeight:
-                                                          FontWeight
-                                                              .w500,
+                                                              FontWeight.w500,
                                                         ),
-                                                        Visibility(
-                                                          visible: i!=( reservationController.cartNewItemsList[index]
-                                                              .addOns!.length-1)?true:false,
-                                                          child: CommonText(
-                                                            text:
-                                                            ",",
-                                                            color:
-                                                            black0D0000,
-                                                            fontSize:
-                                                            12,
-                                                            fontWeight:
-                                                            FontWeight
-                                                                .w500,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  }),
-                                            ),]
-                                        )
+                                                      ),
+                                                    ],
+                                                  );
+                                                }),
+                                          ),
+                                        ])
                                       ],
                                     ),
                                   ),
@@ -252,21 +238,16 @@ class AddMoreScreen extends StatelessWidget {
                               const Spacer(),
                               InkWell(
                                 onTap: () {
-                                  reservationController
-                                      .removeItemAtIndex(
-                                      reservationController.cartNewItemsList[
-                                      index]
-                                          .ItemId,
+                                  reservationController.removeItemAtIndex(
+                                      reservationController
+                                          .cartNewItemsList[index].ItemId,
                                       index);
-
                                 },
                                 child: Container(
                                   width: 27,
                                   height: 27,
-                                  decoration:
-                                  const BoxDecoration(
-                                    shape:
-                                    BoxShape.circle,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
                                     color: white,
                                   ),
                                   child: const Icon(
@@ -287,16 +268,18 @@ class AddMoreScreen extends StatelessWidget {
                         ],
                       );
                     }),
-                Visibility(
-                  visible:reservationController.bookRestaurantDetails!.bookinglistresponse.tip!.endsWith('%') ,
-                  child: Column(children: [
+
+                ///ToDo: to add tax percentage
+                Column(
+                  children: [
                     const SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
                         CommonText(
-                          text: "Tip (${reservationController.bookRestaurantDetails!.bookinglistresponse.tip})",
+                          text:
+                              "Tax (${reservationController.bookRestaurantDetails!.bookinglistresponse.tax}%)",
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: black0D0000,
@@ -304,7 +287,7 @@ class AddMoreScreen extends StatelessWidget {
                         const Spacer(),
                         CommonText(
                           text:
-                          "\$${reservationController.tipAddedOrderMore.toString()}",
+                              "\$${reservationController.taxAddedOrderMore!.toStringAsFixed(2)}",
                           // text: totalPrice.toString(),
                           // text: ,
                           fontSize: 13,
@@ -316,12 +299,73 @@ class AddMoreScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      width: Get.width,
-                      height: 1,
-                      color: whiteE5E5E5,
+                    Row(
+                      children: [
+                        CommonText(
+                          text: "Total Amount",
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: black0D0000,
+                        ),
+                        const Spacer(),
+                        CommonText(
+                          text:
+                              "\$${reservationController.totalAmountOrderMore!.toStringAsFixed(2)}",
+                          // text: totalPrice.toString(),
+                          // text: ,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: black0D0000,
+                        ),
+                      ],
                     ),
-                  ],),
+                    // Container(
+                    //   width: Get.width,
+                    //   height: 1,
+                    //   color: whiteE5E5E5,
+                    // ),
+                  ],
+                ),
+                Visibility(
+                  visible: reservationController
+                      .bookRestaurantDetails!.bookinglistresponse.tip!
+                      .endsWith('%'),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          CommonText(
+                            text:
+                                "Tip (${reservationController.bookRestaurantDetails!.bookinglistresponse.tip})",
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: black0D0000,
+                          ),
+                          const Spacer(),
+                          CommonText(
+                            text:
+                                "\$${reservationController.tipAddedOrderMore!.toStringAsFixed(2)}",
+                            // text: totalPrice.toString(),
+                            // text: ,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: black0D0000,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: Get.width,
+                        height: 1,
+                        color: whiteE5E5E5,
+                      ),
+                    ],
+                  ),
                 ),
 
                 const SizedBox(
@@ -330,7 +374,7 @@ class AddMoreScreen extends StatelessWidget {
                 Row(
                   children: [
                     CommonText(
-                      text: "Total Amount",
+                      text: "Grand Total",
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                       color: black0D0000,
@@ -338,7 +382,7 @@ class AddMoreScreen extends StatelessWidget {
                     const Spacer(),
                     CommonText(
                       text:
-                      "\$ ${(reservationController.subTotalPrice!+reservationController.tipAddedOrderMore).toStringAsFixed(2)}",
+                          "\$${(reservationController.totalAmountOrderMore! + reservationController.tipAddedOrderMore!).toStringAsFixed(2)}",
                       // text: totalPrice.toString(),
                       // text: ,
                       fontSize: 13,
@@ -349,7 +393,6 @@ class AddMoreScreen extends StatelessWidget {
                 ),
               ],
             ),
-
           ),
         ),
         CommonSizedBox(
@@ -366,6 +409,7 @@ class AddMoreScreen extends StatelessWidget {
         CommonSizedBox(
           height: 12,
         ),
+
         /// Payment Method
         // Column(
         //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -475,46 +519,45 @@ class AddMoreScreen extends StatelessWidget {
         //   bgColor: redE2211C,
         //   text: 'Complete & Pay',
         // ),
-
-      ],);
-
+      ],
+    );
   }
-  // /// payment mode container
-  // selectPaymentContainer(iconText, {image, onTap, isSelected}) {
-  //   return Expanded(
-  //     child: InkWell(
-  //       onTap: onTap,
-  //       child: Container(
-  //         height: 32,
-  //         width: 82,
-  //         decoration: BoxDecoration(
-  //           color: isSelected ? black0D0000 : greyF8F8F8,
-  //           borderRadius: BorderRadius.circular(4),
-  //         ),
-  //         child: Padding(
-  //           padding: const EdgeInsets.only(right: 0.0),
-  //           child: Row(
-  //             mainAxisAlignment: MainAxisAlignment.center,
-  //             children: [
-  //               // const Icon(
-  //               //   Icons.apple,
-  //               //   color: white,
-  //               // ),
-  //               image,
-  //               CommonSizedBox(
-  //                 width: 8,
-  //               ),
-  //               CommonText(
-  //                 text: iconText,
-  //                 fontSize: 15,
-  //                 fontWeight: FontWeight.w400,
-  //                 color: isSelected ? white : greyA2A2A2,
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+// /// payment mode container
+// selectPaymentContainer(iconText, {image, onTap, isSelected}) {
+//   return Expanded(
+//     child: InkWell(
+//       onTap: onTap,
+//       child: Container(
+//         height: 32,
+//         width: 82,
+//         decoration: BoxDecoration(
+//           color: isSelected ? black0D0000 : greyF8F8F8,
+//           borderRadius: BorderRadius.circular(4),
+//         ),
+//         child: Padding(
+//           padding: const EdgeInsets.only(right: 0.0),
+//           child: Row(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               // const Icon(
+//               //   Icons.apple,
+//               //   color: white,
+//               // ),
+//               image,
+//               CommonSizedBox(
+//                 width: 8,
+//               ),
+//               CommonText(
+//                 text: iconText,
+//                 fontSize: 15,
+//                 fontWeight: FontWeight.w400,
+//                 color: isSelected ? white : greyA2A2A2,
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     ),
+//   );
+// }
 }

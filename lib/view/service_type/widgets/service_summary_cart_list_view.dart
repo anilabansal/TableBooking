@@ -14,6 +14,7 @@ class ServiceSummaryCartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    restaurantsController.grandTotal = ((restaurantsController.subTotalPrice! * bookATableController.serviceSummary!.bookingConfirmationAmount!.toDouble())/100 )+ restaurantsController.subTotalPrice!;
     return Visibility(
       visible: restaurantsController.cartItemsList.isNotEmpty,
       child: Padding(
@@ -284,7 +285,7 @@ class ServiceSummaryCartView extends StatelessWidget {
                     Row(
                       children: [
                         CommonText(
-                          text: "Tax",
+                          text: "Total Amount",
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: black0D0000,
@@ -292,9 +293,7 @@ class ServiceSummaryCartView extends StatelessWidget {
                         const Spacer(),
                         CommonText(
                           text:
-                          "\$ ${bookATableController.serviceSummary!.bookingConfirmationAmount.toStringAsFixed(2)}",
-                          // text: totalPrice.toString(),
-                          // text: ,
+                              "\$${(restaurantsController.subTotalPrice!).toStringAsFixed(2)}",
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: black0D0000,
@@ -318,7 +317,7 @@ class ServiceSummaryCartView extends StatelessWidget {
                     Row(
                       children: [
                         CommonText(
-                          text: "Total Amount",
+                          text: "Tax",
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: black0D0000,
@@ -326,7 +325,43 @@ class ServiceSummaryCartView extends StatelessWidget {
                         const Spacer(),
                         CommonText(
                           text:
-                              "\$ ${(restaurantsController.subTotalPrice! + bookATableController.serviceSummary!.bookingConfirmationAmount).toStringAsFixed(2)}",
+                              "${bookATableController.serviceSummary!.bookingConfirmationAmount.toString()}%",
+                          // text: totalPrice.toString(),
+                          // text: ,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: black0D0000,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            CommonText(
+                              text: "Grand Total",
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: black0D0000,
+                            ),
+                            const Spacer(),
+                            CommonText(
+                              // text:
+                              // "\$ ${(restaurantsController.subTotalPrice! * bookATableController.serviceSummary!.bookingConfirmationAmount!.toDouble())/100}",
+                            text: "\$${(restaurantsController.grandTotal! ).toStringAsFixed(2)}",
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: black0D0000,
+                            ),
+                          ],
+                        ),
+                        CommonText(
+                          text: "(Total Amount + Tax)",
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: black0D0000,

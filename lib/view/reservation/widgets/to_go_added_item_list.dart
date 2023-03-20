@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../../controller/reservation & rating/reservation_controller.dart';
 import '../../../controller/reservation & rating/to_go_reservation_controller.dart';
 import '../../../utils/common/common_strings.dart';
 import '../../../utils/common/widgets_methods/common_sized_box.dart';
@@ -8,10 +8,14 @@ import '../../../utils/common/widgets_methods/common_text.dart';
 
 class ToGoAddedItemView extends StatelessWidget {
    ToGoAddedItemView({Key? key}) : super(key: key);
- // ToGoReservationController toGoReservationController = Get.find();
+  //ToGoReservationController toGoController = Get.find();
+   ReservationController reservationController = Get.find();
   @override
   Widget build(BuildContext context) {
+
     return GetBuilder<ToGoReservationController>(builder: (toGoReservationController) {
+      toGoReservationController.toGoTaxAdded = (reservationController.bookRestaurantDetails!.bookinglistresponse.tax!.toDouble() * toGoReservationController.toGoSubTotalPrice!)/100;
+      toGoReservationController.toGoGrandTotalAmount = toGoReservationController.toGoTaxAdded! + toGoReservationController.toGoSubTotalPrice;
         return Visibility(
           visible:toGoReservationController.toGoCart.isNotEmpty?true:false ,
           child: Column(
@@ -305,7 +309,7 @@ class ToGoAddedItemView extends StatelessWidget {
                           const Spacer(),
                           CommonText(
                             text:
-                            "\$ ${toGoReservationController.toGoSubTotalPrice!.toStringAsFixed(2)}",
+                            "\$${toGoReservationController.toGoSubTotalPrice!.toStringAsFixed(2)}",
                             // text: totalPrice.toString(),
                             // text: ,
                             fontSize: 13,
@@ -313,6 +317,64 @@ class ToGoAddedItemView extends StatelessWidget {
                             color: black0D0000,
                           ),
                         ],
+                      ),
+
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          CommonText(
+                            text: "Tax(${reservationController.bookRestaurantDetails!.bookinglistresponse.tax!.toString()}%)",
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: black0D0000,
+                          ),
+                          const Spacer(),
+                          CommonText(
+                            text:   "\$${toGoReservationController.toGoTaxAdded!.toStringAsFixed(2)}",
+
+                            // text: totalPrice.toString(),
+                            // text: ,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: black0D0000,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: Get.width,
+                        height: 1,
+                        color: whiteE5E5E5,
+                      ),
+
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          CommonText(
+                            text: "Grand Total",
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: black0D0000,
+                          ),
+                          const Spacer(),
+                          CommonText(
+                            text:"\$${toGoReservationController.toGoGrandTotalAmount!.toStringAsFixed(2)}",
+                            // text: totalPrice.toString(),
+                            // text: ,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: black0D0000,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
                       ),
                     ],
                   ),

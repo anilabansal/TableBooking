@@ -20,9 +20,9 @@ class PaymentMode extends StatelessWidget {
   //CreditCardController creditCardController = Get.put(CreditCardController());
   RestaurantDetailsController restaurantsController = Get.find();
   dynamic tipAmountToAdded;
-  dynamic totalAmountToPay;
-  dynamic grandTotal;
-  dynamic tipPercentageCalculatedToAdded;
+  //dynamic totalAmountToPay;
+  // dynamic grandTotal;
+  //dynamic tipPercentageCalculatedToAdded;
   @override
   Widget build(BuildContext context) {
     return  Padding(
@@ -36,8 +36,8 @@ class PaymentMode extends StatelessWidget {
             );
             return false;
           }
-           ///grandTotal (items added total Amount ) Amount
-          grandTotal = restaurantsController.subTotalPrice!  +  controller.serviceSummary!.bookingConfirmationAmount ;
+          //  ///grandTotal (items added total Amount ) Amount
+          // grandTotal = restaurantsController.subTotalPrice!  +  controller.serviceSummary!.bookingConfirmationAmount! ;
 
 
           /// total tipAmountToAdded
@@ -48,15 +48,15 @@ class PaymentMode extends StatelessWidget {
               : controller.addTip.value.toString();
 
 
-          /// total amount after percentage calculation of tip
-          tipPercentageCalculatedToAdded = controller.addTip.value == 'Custom'
-              ? customTipController!.text.isEmpty || customTipController!.text == null
-              ? 0.0
-              : double.tryParse(customTipController!.text.toString()):controller.serviceSummary!.serviceType.toString() == '1' ?0.0: ((controller.tipAmount!*grandTotal)/100);
+        //  /// total amount after percentage calculation of tip
+          // tipPercentageCalculatedToAdded = controller.addTip.value == 'Custom'
+          //     ? customTipController!.text.isEmpty || customTipController!.text == null
+          //     ? 0.0
+          //     : double.tryParse(customTipController!.text.toString()):controller.serviceSummary!.serviceType.toString() == '1' ?0.0: ((controller.tipAmount!*grandTotal)/100);
 
-          /// totalAmountToPay
-          totalAmountToPay = restaurantsController.subTotalPrice! + tipPercentageCalculatedToAdded!+
-              controller.serviceSummary!.bookingConfirmationAmount ;
+          // /// totalAmountToPay
+          // totalAmountToPay = restaurantsController.subTotalPrice! + tipPercentageCalculatedToAdded!+
+          //     controller.serviceSummary!.bookingConfirmationAmount! ;
 
 
           /// payment mode is only credit card
@@ -107,7 +107,8 @@ class PaymentMode extends StatelessWidget {
             /// alert dialog
             commonAlertDialog(
               context,
-              totalAmountToPay,
+                (restaurantsController.grandTotal! + controller.tipAmountAddedToAddedInTotalPrice.value),
+          //    totalAmountToPay,
                   () {
                 ///on tap of ok button in alert dialog to make payment
 
@@ -118,13 +119,14 @@ class PaymentMode extends StatelessWidget {
                       "specialEventController": specialEventController!.text.trim().isEmpty? "" : specialEventController!.text.trim(),
                       "allergiesController":allergiesController!.text.trim().isEmpty?"":allergiesController!.text.trim(),
                       "customTipController":customTipController,
-                      "tipAmount":tipAmountToAdded,
+                     "tipAmount":tipAmountToAdded,
                       "restaurantId": controller.serviceSummary!.restaurantId,
                       "bookingDate": controller.serviceSummary!.bookingDate,
                       "partySize": controller.serviceSummary!.partySize,
                       "bookingTime": controller.serviceSummary!.bookingTime,
                       "slotId": controller.serviceSummary!.slotId,
-                      "totalAmount":totalAmountToPay,
+                      // "totalAmount":totalAmountToPay,
+                      "totalAmount":(restaurantsController.grandTotal! + controller.tipAmountAddedToAddedInTotalPrice.value),
                       "serviceType": controller.serviceSummary!.serviceType,
                       "StatusId":controller.serviceSummary!.statusId,
                     }
