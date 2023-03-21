@@ -43,9 +43,9 @@ class OrderMorePaymentMode extends StatelessWidget {
                 // "Amount": reservationController.subTotalPrice +
                 //     reservationController.tipAddedOrderMore +
                 //     toGoReservationController.toGoSubTotalPrice,
-                "Amount": reservationController.totalAmountOrderMore! +
-                    reservationController.tipAddedOrderMore! +
-                    toGoReservationController.toGoGrandTotalAmount!,
+                "Amount": reservationController.totalAmountOrderMore.value +
+                    reservationController.tipAddedOrderMore.value +
+                    toGoReservationController.toGoGrandTotalAmount.value,
                 "CardId": 0,
               }).then((value) {
                 reservationController.orderMoreConfirmationIsLoading.value =
@@ -71,9 +71,9 @@ class OrderMorePaymentMode extends StatelessWidget {
                 // reservationController.subTotalPrice +
                 //     reservationController.tipAddedOrderMore +
                 //     toGoReservationController.toGoSubTotalPrice!,
-                reservationController.totalAmountOrderMore! +
-                    reservationController.tipAddedOrderMore! +
-                    toGoReservationController.toGoGrandTotalAmount!,
+                reservationController.totalAmountOrderMore.value +
+                    reservationController.tipAddedOrderMore.value +
+                    toGoReservationController.toGoGrandTotalAmount.value,
                 () {
                   ///on tap of ok button in alert dialog to make payment
                   Navigator.pop(context);

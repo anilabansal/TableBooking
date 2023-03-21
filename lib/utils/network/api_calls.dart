@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../common/common_strings.dart';
+import '../common/widgets_methods/common_sized_box.dart';
 
 class ApiCalls extends GetConnect {
   // var imageFile = File('').obs;
@@ -69,15 +70,87 @@ class ApiCalls extends GetConnect {
         // return response.body;
         return jsonDecode(response.body);
       }
-      else if(response.statusCode==401){
-        Future.delayed(const Duration(seconds: 1), ()async{
-          userSessionController.setIsLogin(false);
-          userSessionController.setSocialLogin(false);
-          userSessionController.setUserToken("");
-          await userSessionController.box.erase();
-          Get.offAllNamed('/authentication');
-        });
+      else if (response.statusCode == 401) {
+        Future.delayed(const Duration(seconds: 1), () async {
+          // userSessionController.setIsLogin(false);
+          // userSessionController.setSocialLogin(false);
+          // userSessionController.setUserToken("");
+          // await userSessionController.box.erase();
+          // Get.offAllNamed('/authentication');
+       /// dialog to be display if token is expired
+          Get.defaultDialog(
+            title:  "Invalid Session!!",
+            titleStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            content: Column(
+              children: [
+                Image.asset(
+                  'assets/images/error.png',
+                  height: 80,
+                ),
+                CommonSizedBox(
+                  height: 15,
+                ),
+                CommonText(
+                  fontSize: 16,
+                  text: "Please login again to continue..",
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+            radius: 0010,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 5.0),
+                // padding: const EdgeInsets.all(0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Expanded(
+                    //   child:
+                    SizedBox(
+                      width: 80,
+                      height: 40,
+                      child: CommonButton(
+                        bgColor: redE2211C,
+                        text: 'Cancel',
+                        onTap: () {
+                          Get.back();
+                        },
+                        textColor: Colors.white,
+                      ),
 
+                    ),
+                    // ),
+                    CommonSizedBox(
+                      width: 15,
+                    ),
+                    // Expanded(
+                    //   child:
+                    SizedBox(
+                      width: 80,
+                      height: 40,
+                      child:   CommonButton(
+                        bgColor: redE2211C,
+                        text:  'Login',
+                        textColor: Colors.white,
+                        onTap: () async {
+                          userSessionController.setIsLogin(false);
+                          userSessionController.setSocialLogin(false);
+                          userSessionController.setUserToken("");
+                          await userSessionController.box.erase();
+                          Get.offAllNamed('/authentication');
+                        },
+                      ),
+
+                    ),
+                    // ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        });
       }
     } catch (e) {
       print("========> Responses Error ${e.toString()}");

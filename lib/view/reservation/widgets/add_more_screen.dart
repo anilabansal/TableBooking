@@ -18,24 +18,6 @@ class AddMoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    reservationController.taxAddedOrderMore =
-        ((reservationController.subTotalPrice!.toDouble() *
-                reservationController
-                    .bookRestaurantDetails!.bookinglistresponse.tax!
-                    .toDouble()) /
-            100);
-    reservationController.totalAmountOrderMore =
-        reservationController.subTotalPrice +
-            reservationController.taxAddedOrderMore;
-    reservationController.tipAddedOrderMore = reservationController
-            .bookRestaurantDetails!.bookinglistresponse.tip!
-            .endsWith('%')
-        ? ((reservationController.totalAmountOrderMore! *
-                double.parse(reservationController
-                    .bookRestaurantDetails!.bookinglistresponse.tip!
-                    .replaceAll('%', ''))) /
-            100)
-        : 0.0;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -287,7 +269,7 @@ class AddMoreScreen extends StatelessWidget {
                         const Spacer(),
                         CommonText(
                           text:
-                              "\$${reservationController.taxAddedOrderMore!.toStringAsFixed(2)}",
+                              "\$${reservationController.taxAddedOrderMore.value.toStringAsFixed(2)}",
                           // text: totalPrice.toString(),
                           // text: ,
                           fontSize: 13,
@@ -310,7 +292,7 @@ class AddMoreScreen extends StatelessWidget {
                         const Spacer(),
                         CommonText(
                           text:
-                              "\$${reservationController.totalAmountOrderMore!.toStringAsFixed(2)}",
+                              "\$${reservationController.totalAmountOrderMore.value.toStringAsFixed(2)}",
                           // text: totalPrice.toString(),
                           // text: ,
                           fontSize: 13,
@@ -347,7 +329,7 @@ class AddMoreScreen extends StatelessWidget {
                           const Spacer(),
                           CommonText(
                             text:
-                                "\$${reservationController.tipAddedOrderMore!.toStringAsFixed(2)}",
+                                "\$${reservationController.tipAddedOrderMore.value.toStringAsFixed(2)}",
                             // text: totalPrice.toString(),
                             // text: ,
                             fontSize: 13,
@@ -382,7 +364,7 @@ class AddMoreScreen extends StatelessWidget {
                     const Spacer(),
                     CommonText(
                       text:
-                          "\$${(reservationController.totalAmountOrderMore! + reservationController.tipAddedOrderMore!).toStringAsFixed(2)}",
+                          "\$${(reservationController.totalAmountOrderMore.value + reservationController.tipAddedOrderMore.value).toStringAsFixed(2)}",
                       // text: totalPrice.toString(),
                       // text: ,
                       fontSize: 13,

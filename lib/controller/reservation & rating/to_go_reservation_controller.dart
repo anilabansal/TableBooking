@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:booking_table/controller/reservation%20&%20rating/reservation_controller.dart';
 import 'package:get/get.dart';
 import '../../model/reservation/to_go_menu_detail.dart';
 import '../../model/restaurant_menu/Cart_model.dart';
@@ -8,19 +9,24 @@ import '../../utils/common/toast_message.dart';
 import '../../utils/network/api_calls.dart';
 import '../user_session/user_session_controller.dart';
 
-class ToGoReservationController extends GetxController{
+class ToGoReservationController extends GetxController {
   ApiCalls apiCall = ApiCalls();
   UserSessionController userSessionController = Get.find();
+  ReservationController reservationController = Get.find();
   var toGoMenuIsLoading = true.obs;
   var toGoAddOnIsLoading = true.obs;
   var toGoMenuDetail = <ToGoMenuDetails>[];
   List<Cart> toGoCart = [];
+
   /// overall prices after adding different itemIds
   dynamic toGoSubTotalPrice = 0.0;
+
   /// for addOn prices added during confirm booking
   dynamic previousAddedAddOnPrice = 0.0;
+
   ///previous added addOns in menu
   RxList<AddedAddOns> bookedAddedAddOns = <AddedAddOns>[].obs;
+
   /// to calculate addOn prices
   double? addOnPrices = 0.0;
   List<AddOns> addOnIngredients = [];
@@ -28,26 +34,32 @@ class ToGoReservationController extends GetxController{
   var addOnMenuIngredientList = <AddOnIngredientList>[].obs;
 
   /// to calculate tax on togo total amount
-  double? toGoTaxAdded = 0.0;
+  RxDouble toGoTaxAdded = 0.0.obs;
 
   /// toGoTotalAmount i.e calculated tax on totalAmount of items + totalAmountOf item
-  double? toGoGrandTotalAmount = 0.0;
+  RxDouble toGoGrandTotalAmount = 0.0.obs;
 
   /// toGoSubTotal price calculations
   toGoSubTotalPriceCalculation(itemTotalPrice) {
     toGoSubTotalPrice = toGoSubTotalPrice! + itemTotalPrice;
+    calTaxToGoService();
+    calToGoGrandTotal();
     update();
   }
 
   ///subtotal price after removing items
   void toGoSubTotalPriceAfterRemoving(itemSubtractionPrice) {
     toGoSubTotalPrice = toGoSubTotalPrice! - itemSubtractionPrice;
+    calTaxToGoService();
+    calToGoGrandTotal();
     update();
   }
 
-
   /// add quantity in cart
-  void addQuantity(int index, int subIndex,) {
+  void addQuantity(
+    int index,
+    int subIndex,
+  ) {
     toGoMenuDetail[index].menu![subIndex].quantity =
         toGoMenuDetail[index].menu![subIndex].quantity! + 1;
     toGoMenuDetail[index].menu![subIndex].newAddedQuantity =
@@ -55,16 +67,17 @@ class ToGoReservationController extends GetxController{
 
     /// to check at particular itemId if addOns are added during confirm booking or not
 
-    if(toGoMenuDetail[index].menu![subIndex].addedAddOns!= null){
-      bookedAddedAddOns.value = toGoMenuDetail[index].menu![subIndex].addedAddOns!;
+    if (toGoMenuDetail[index].menu![subIndex].addedAddOns != null) {
+      bookedAddedAddOns.value =
+          toGoMenuDetail[index].menu![subIndex].addedAddOns!;
       //  bookedAddedAddOnsTemp = reservationOrderMoreMenu[index].menu![subIndex].addedAddOns!;
-      if( bookedAddedAddOns.isNotEmpty){
-        for(int i = 0; i< bookedAddedAddOns.length; i++){
-          previousAddedAddOnPrice = previousAddedAddOnPrice+  bookedAddedAddOns[i].price;
+      if (bookedAddedAddOns.isNotEmpty) {
+        for (int i = 0; i < bookedAddedAddOns.length; i++) {
+          previousAddedAddOnPrice =
+              previousAddedAddOnPrice + bookedAddedAddOns[i].price;
           AddOns newData = AddOns(
             ingredientName: bookedAddedAddOns[i].addOnName,
             ItemAddOnId: bookedAddedAddOns[i].addOnId,
-
           );
           addOnIngredients.add(newData);
         }
@@ -72,52 +85,42 @@ class ToGoReservationController extends GetxController{
     }
 
     var list = toGoCart.where((element) =>
-    element.ItemId ==
-        toGoMenuDetail[index].menu![subIndex].itemId);
+        element.ItemId == toGoMenuDetail[index].menu![subIndex].itemId);
     List<AddOns> _listAddOn = [];
     _listAddOn.addAll(addOnIngredients);
 
-
     if (list.isEmpty) {
-
       /// first time when particular itemId is not added in cart ---> to add itemPrice and add on price
       double? addOnItemPrices =
-      (toGoMenuDetail[index].menu![subIndex].itemPrice! +
-          ( bookedAddedAddOns.isNotEmpty ?  previousAddedAddOnPrice : addOnPrices!)
-      );
-
+          (toGoMenuDetail[index].menu![subIndex].itemPrice! +
+              (bookedAddedAddOns.isNotEmpty
+                  ? previousAddedAddOnPrice
+                  : addOnPrices!));
 
       /// first time when particular itemId is not added in cart ---> to add offerPrice and add on price
       double? addOfferPrices =
-      (toGoMenuDetail[index].menu![subIndex].offerPrice! +
-          ( bookedAddedAddOns.isNotEmpty?previousAddedAddOnPrice:addOnPrices!)
-      );
-
+          (toGoMenuDetail[index].menu![subIndex].offerPrice! +
+              (bookedAddedAddOns.isNotEmpty
+                  ? previousAddedAddOnPrice
+                  : addOnPrices!));
 
       /// created variable of Cart type
       Cart cart = Cart(
         ItemId: toGoMenuDetail[index].menu![subIndex].itemId,
-        ItemQuantity:
-        toGoMenuDetail[index].menu![subIndex].newAddedQuantity,
+        ItemQuantity: toGoMenuDetail[index].menu![subIndex].newAddedQuantity,
         ItemlPriceSingleQuantity:
-        (toGoMenuDetail[index].menu![subIndex].itemPrice!),
+            (toGoMenuDetail[index].menu![subIndex].itemPrice!),
         itemName: toGoMenuDetail[index].menu![subIndex].itemName,
         categoryId: toGoMenuDetail[index].categoryId,
-        isOfferItem:
-        toGoMenuDetail[index].menu![subIndex].isOfferItem,
-        offerPrice:
-        (toGoMenuDetail[index].menu![subIndex].offerPrice!),
+        isOfferItem: toGoMenuDetail[index].menu![subIndex].isOfferItem,
+        offerPrice: (toGoMenuDetail[index].menu![subIndex].offerPrice!),
         offerTitle: toGoMenuDetail[index].menu![subIndex].offerTitle,
         ItemTotalPrice:
-        toGoMenuDetail[index].menu![subIndex].isOfferItem == true
-            ? toGoMenuDetail[index].menu![subIndex].offerPrice! *
-            toGoMenuDetail[index]
-                .menu![subIndex]
-                .newAddedQuantity!
-            : toGoMenuDetail[index].menu![subIndex].itemPrice! *
-            toGoMenuDetail[index]
-                .menu![subIndex]
-                .newAddedQuantity!,
+            toGoMenuDetail[index].menu![subIndex].isOfferItem == true
+                ? toGoMenuDetail[index].menu![subIndex].offerPrice! *
+                    toGoMenuDetail[index].menu![subIndex].newAddedQuantity!
+                : toGoMenuDetail[index].menu![subIndex].itemPrice! *
+                    toGoMenuDetail[index].menu![subIndex].newAddedQuantity!,
         addOnPrice: addOnItemPrices,
         addOns: _listAddOn,
         addOnPriceQuantity: addOnItemPrices,
@@ -136,15 +139,13 @@ class ToGoReservationController extends GetxController{
       /// in else case at same itemId we have updated firstly added cart
       Cart cart = list.first;
       cart.ItemQuantity =
-      toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
-      cart.ItemTotalPrice = toGoMenuDetail[index]
-          .menu![subIndex]
-          .isOfferItem ==
-          true
-          ? toGoMenuDetail[index].menu![subIndex].offerPrice! *
-          toGoMenuDetail[index].menu![subIndex].newAddedQuantity!
-          : toGoMenuDetail[index].menu![subIndex].itemPrice! *
           toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
+      cart.ItemTotalPrice =
+          toGoMenuDetail[index].menu![subIndex].isOfferItem == true
+              ? toGoMenuDetail[index].menu![subIndex].offerPrice! *
+                  toGoMenuDetail[index].menu![subIndex].newAddedQuantity!
+              : toGoMenuDetail[index].menu![subIndex].itemPrice! *
+                  toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
 
       /// first we will check if addon list in cart is empty or not at particular ItemId which is already in cart then we will multiply addOnPriceQuantity with quantity
       if (cart.addOns!.isNotEmpty) {
@@ -156,54 +157,59 @@ class ToGoReservationController extends GetxController{
         cart.addOnOfferQuantity = cart.addOnOfferPrice! *
             toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
       } else {
-        double? addOnItemPrices = (toGoMenuDetail[index]
-            .menu![subIndex]
-            .itemPrice! +  ( bookedAddedAddOns.isNotEmpty ? previousAddedAddOnPrice : addOnPrices!)
-        ) *
-            toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
-        double? addOfferPrices = (toGoMenuDetail[index]
-            .menu![subIndex]
-            .offerPrice! +  ( bookedAddedAddOns.isNotEmpty ? previousAddedAddOnPrice : addOnPrices!)
-        ) *
-            toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
+        double? addOnItemPrices =
+            (toGoMenuDetail[index].menu![subIndex].itemPrice! +
+                    (bookedAddedAddOns.isNotEmpty
+                        ? previousAddedAddOnPrice
+                        : addOnPrices!)) *
+                toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
+        double? addOfferPrices =
+            (toGoMenuDetail[index].menu![subIndex].offerPrice! +
+                    (bookedAddedAddOns.isNotEmpty
+                        ? previousAddedAddOnPrice
+                        : addOnPrices!)) *
+                toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
         cart.addOnPriceQuantity = addOnItemPrices;
         cart.addOnOfferQuantity = addOfferPrices;
       }
 
       /// updating cart at same itemId
       toGoCart[toGoCart.indexWhere((element) =>
-      element.ItemId ==
-          toGoMenuDetail[index].menu![subIndex].itemId)] = cart;
+              element.ItemId == toGoMenuDetail[index].menu![subIndex].itemId)] =
+          cart;
     }
 
     /// after adding items in cart and updating cart at same itemId we will overall calculate subTotalPrice
     Cart cartParticularItem = toGoCart.firstWhere((element) =>
-    element.ItemId ==
-        toGoMenuDetail[index].menu![subIndex].itemId);
+        element.ItemId == toGoMenuDetail[index].menu![subIndex].itemId);
     cartParticularItem.isOfferItem == true
         ? toGoSubTotalPriceCalculation(cartParticularItem.addOnOfferPrice)
         : toGoSubTotalPriceCalculation(cartParticularItem.addOnPrice);
     print('toGoSubTotalPrice--->$toGoSubTotalPrice');
 
     print('toGoQuantity --->${toGoMenuDetail[index].menu![subIndex].quantity}');
-    print('toGoNewQuantity --->${toGoMenuDetail[index].menu![subIndex].newAddedQuantity}');
+    print(
+        'toGoNewQuantity --->${toGoMenuDetail[index].menu![subIndex].newAddedQuantity}');
     print('toGoEncodeCart${jsonDecode(jsonEncode(toGoCart))}');
     addOnIngredients.clear();
     previousAddedAddOnPrice = 0.0;
-    print("bookedAddedADonMenu1${toGoMenuDetail[index].menu![subIndex].addedAddOns!.length}");
+    print(
+        "bookedAddedADonMenu1${toGoMenuDetail[index].menu![subIndex].addedAddOns!.length}");
     print("bookedAddedADon1${bookedAddedAddOns.length}");
     bookedAddedAddOns.clear();
-    print("bookedAddedADonMenu12${toGoMenuDetail[index].menu![subIndex].addedAddOns!.length}");
+    print(
+        "bookedAddedADonMenu12${toGoMenuDetail[index].menu![subIndex].addedAddOns!.length}");
     print("bookedAddedADon12${bookedAddedAddOns.length}");
     update();
   }
 
   /// delete quantity in cart
   void deleteQuantity(int index, int subIndex) {
-
     print("newAddedPrice${previousAddedAddOnPrice}");
-    toGoMenuDetail[index].menu![subIndex].newAddedQuantity = toGoMenuDetail[index].menu![subIndex].newAddedQuantity! - 1;
-    toGoMenuDetail[index].menu![subIndex].quantity = toGoMenuDetail[index].menu![subIndex].quantity! - 1;
+    toGoMenuDetail[index].menu![subIndex].newAddedQuantity =
+        toGoMenuDetail[index].menu![subIndex].newAddedQuantity! - 1;
+    toGoMenuDetail[index].menu![subIndex].quantity =
+        toGoMenuDetail[index].menu![subIndex].quantity! - 1;
 
     /// if at particular itemId in cart is having quantity 1 , if its quantity is decreased then that quantity will be zero , so that itemId can be deleted from cart
     if (toGoMenuDetail[index].menu![subIndex].newAddedQuantity! < 0) {
@@ -211,57 +217,51 @@ class ToGoReservationController extends GetxController{
     } else {
       /// first time check itemId in cart
       var list = toGoCart.where((element) =>
-      element.ItemId ==
-          toGoMenuDetail[index].menu![subIndex].itemId);
+          element.ItemId == toGoMenuDetail[index].menu![subIndex].itemId);
 
       /// to check at particular itemId if addOns are added during confirm booking or not
-      if(toGoMenuDetail[index].menu![subIndex].addedAddOns!= null){
-        bookedAddedAddOns.value = toGoMenuDetail[index].menu![subIndex].addedAddOns!;
-        if(bookedAddedAddOns.isNotEmpty){
-          for(int i = 0; i<bookedAddedAddOns.length; i++){
-            previousAddedAddOnPrice = previousAddedAddOnPrice + bookedAddedAddOns[i].price;
+      if (toGoMenuDetail[index].menu![subIndex].addedAddOns != null) {
+        bookedAddedAddOns.value =
+            toGoMenuDetail[index].menu![subIndex].addedAddOns!;
+        if (bookedAddedAddOns.isNotEmpty) {
+          for (int i = 0; i < bookedAddedAddOns.length; i++) {
+            previousAddedAddOnPrice =
+                previousAddedAddOnPrice + bookedAddedAddOns[i].price;
           }
         }
       }
       double? addOnItemPrices =
-      (toGoMenuDetail[index].menu![subIndex].itemPrice! +
-          (bookedAddedAddOns.isNotEmpty?previousAddedAddOnPrice:addOnPrices!));
+          (toGoMenuDetail[index].menu![subIndex].itemPrice! +
+              (bookedAddedAddOns.isNotEmpty
+                  ? previousAddedAddOnPrice
+                  : addOnPrices!));
       double? addOfferPrices =
-      (toGoMenuDetail[index].menu![subIndex].offerPrice! +
-          (bookedAddedAddOns.isNotEmpty?previousAddedAddOnPrice:addOnPrices!));
+          (toGoMenuDetail[index].menu![subIndex].offerPrice! +
+              (bookedAddedAddOns.isNotEmpty
+                  ? previousAddedAddOnPrice
+                  : addOnPrices!));
       if (list.isEmpty) {
-
         /// created Cart type variable
         Cart cart = Cart(
           ItemId: toGoMenuDetail[index].menu![subIndex].itemId,
-          ItemQuantity:
-          toGoMenuDetail[index].menu![subIndex].newAddedQuantity,
+          ItemQuantity: toGoMenuDetail[index].menu![subIndex].newAddedQuantity,
           ItemlPriceSingleQuantity:
-          toGoMenuDetail[index].menu![subIndex].itemPrice!,
+              toGoMenuDetail[index].menu![subIndex].itemPrice!,
           itemName: toGoMenuDetail[index].menu![subIndex].itemName,
           categoryId: toGoMenuDetail[index].categoryId,
-          isOfferItem:
-          toGoMenuDetail[index].menu![subIndex].isOfferItem,
-          offerPrice:
-          toGoMenuDetail[index].menu![subIndex].offerPrice!,
-          offerTitle:
-          toGoMenuDetail[index].menu![subIndex].offerTitle,
+          isOfferItem: toGoMenuDetail[index].menu![subIndex].isOfferItem,
+          offerPrice: toGoMenuDetail[index].menu![subIndex].offerPrice!,
+          offerTitle: toGoMenuDetail[index].menu![subIndex].offerTitle,
           addOnPrice: addOnItemPrices,
           addOnPriceQuantity: addOnItemPrices,
           addOnOfferPrice: addOfferPrices,
           addOnOfferQuantity: addOfferPrices,
-          ItemTotalPrice: toGoMenuDetail[index]
-              .menu![subIndex]
-              .isOfferItem ==
-              true
-              ? toGoMenuDetail[index].menu![subIndex].offerPrice! *
-              toGoMenuDetail[index]
-                  .menu![subIndex]
-                  .newAddedQuantity!
-              : toGoMenuDetail[index].menu![subIndex].itemPrice! *
-              toGoMenuDetail[index]
-                  .menu![subIndex]
-                  .newAddedQuantity!,
+          ItemTotalPrice:
+              toGoMenuDetail[index].menu![subIndex].isOfferItem == true
+                  ? toGoMenuDetail[index].menu![subIndex].offerPrice! *
+                      toGoMenuDetail[index].menu![subIndex].newAddedQuantity!
+                  : toGoMenuDetail[index].menu![subIndex].itemPrice! *
+                      toGoMenuDetail[index].menu![subIndex].newAddedQuantity!,
         );
         toGoCart.remove(cart);
       } else {
@@ -269,17 +269,13 @@ class ToGoReservationController extends GetxController{
         Cart cart = list.first;
 
         cart.ItemQuantity =
-        toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
+            toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
         cart.ItemTotalPrice =
-        toGoMenuDetail[index].menu![subIndex].isOfferItem == true
-            ? toGoMenuDetail[index].menu![subIndex].offerPrice! *
-            toGoMenuDetail[index]
-                .menu![subIndex]
-                .newAddedQuantity!
-            : toGoMenuDetail[index].menu![subIndex].itemPrice! *
-            toGoMenuDetail[index]
-                .menu![subIndex]
-                .newAddedQuantity!;
+            toGoMenuDetail[index].menu![subIndex].isOfferItem == true
+                ? toGoMenuDetail[index].menu![subIndex].offerPrice! *
+                    toGoMenuDetail[index].menu![subIndex].newAddedQuantity!
+                : toGoMenuDetail[index].menu![subIndex].itemPrice! *
+                    toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
 
         /// according to addOn list is empty or not in cart, prices are updated according to quantity
         if (cart.addOns!.isNotEmpty) {
@@ -288,18 +284,19 @@ class ToGoReservationController extends GetxController{
           cart.addOnOfferQuantity = cart.addOnOfferPrice! *
               toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
         } else {
-          double? addOnItemPrices = (toGoMenuDetail[index]
-              .menu![subIndex]
-              .itemPrice! +  (bookedAddedAddOns.isNotEmpty?previousAddedAddOnPrice:addOnPrices!)
-          ) *
-              toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
+          double? addOnItemPrices =
+              (toGoMenuDetail[index].menu![subIndex].itemPrice! +
+                      (bookedAddedAddOns.isNotEmpty
+                          ? previousAddedAddOnPrice
+                          : addOnPrices!)) *
+                  toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
 
-
-          double? addOfferPrices = (toGoMenuDetail[index]
-              .menu![subIndex]
-              .offerPrice! +  (bookedAddedAddOns.isNotEmpty?previousAddedAddOnPrice:addOnPrices!)
-          ) *
-              toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
+          double? addOfferPrices =
+              (toGoMenuDetail[index].menu![subIndex].offerPrice! +
+                      (bookedAddedAddOns.isNotEmpty
+                          ? previousAddedAddOnPrice
+                          : addOnPrices!)) *
+                  toGoMenuDetail[index].menu![subIndex].newAddedQuantity!;
 
           cart.addOnPriceQuantity = addOnItemPrices;
           cart.addOnOfferQuantity = addOfferPrices;
@@ -307,7 +304,7 @@ class ToGoReservationController extends GetxController{
 
         /// updated cart on already added itemId in cart
         toGoCart[toGoCart.indexWhere((element) =>
-        element.ItemId ==
+            element.ItemId ==
             toGoMenuDetail[index].menu![subIndex].itemId)] = cart;
 
         /// In cart if particular itemQuantity is zero , to remove itemId from cart
@@ -325,12 +322,10 @@ class ToGoReservationController extends GetxController{
 
       /// after adding items in cart and updating cart at same itemId we will overall calculate subTotalPrice
       var cartItem = toGoCart.where((element) =>
-      element.ItemId ==
-          toGoMenuDetail[index].menu![subIndex].itemId);
+          element.ItemId == toGoMenuDetail[index].menu![subIndex].itemId);
       if (cartItem.isNotEmpty) {
         Cart cartParticularItem = toGoCart.firstWhere((element) =>
-        element.ItemId ==
-            toGoMenuDetail[index].menu![subIndex].itemId);
+            element.ItemId == toGoMenuDetail[index].menu![subIndex].itemId);
         cartParticularItem.isOfferItem == true
             ? toGoSubTotalPriceAfterRemoving(cartParticularItem.addOnOfferPrice)
             : toGoSubTotalPriceAfterRemoving(cartParticularItem.addOnPrice);
@@ -339,16 +334,15 @@ class ToGoReservationController extends GetxController{
 
       print('encodeCart${jsonEncode(toGoCart)}');
     }
-    previousAddedAddOnPrice=0.0;
+    previousAddedAddOnPrice = 0.0;
     update();
   }
-
 
   /// remove cartItem at particular index
   void removeItemAtIndex(value, index) {
     ///find the object at particular itemId
     Cart cartParticularItem =
-    toGoCart.firstWhere((element) => element.ItemId == value);
+        toGoCart.firstWhere((element) => element.ItemId == value);
 
     cartParticularItem.isOfferItem == true
         ? toGoSubTotalPriceAfterRemoving(cartParticularItem.addOnOfferQuantity)
@@ -357,7 +351,7 @@ class ToGoReservationController extends GetxController{
 
     /// matched the menuCategoryId with the CartCategoryId
     Iterable data = toGoMenuDetail.where(
-          (element) => element.categoryId == cartParticularItem.categoryId,
+      (element) => element.categoryId == cartParticularItem.categoryId,
     );
 
     if (data.isNotEmpty) {
@@ -365,16 +359,15 @@ class ToGoReservationController extends GetxController{
 
       /// from dataMenu object if itemId matches with itemId of remove itemId , then at particularItemId quantity is zero
       Menu menu =
-      dataMenu.menu!.firstWhere((element) => element.itemId == value);
+          dataMenu.menu!.firstWhere((element) => element.itemId == value);
       print("menuName${menu.itemName}");
 
-      menu.quantity = menu.quantity!-menu.newAddedQuantity!;
+      menu.quantity = menu.quantity! - menu.newAddedQuantity!;
       menu.newAddedQuantity = 0;
-
 
       /// now update Restaurant menu list
       toGoMenuDetail[toGoMenuDetail.indexWhere((element) =>
-      element.categoryId == cartParticularItem.categoryId)] ==
+              element.categoryId == cartParticularItem.categoryId)] ==
           menu;
     }
     toGoCart.removeAt(index);
@@ -397,7 +390,6 @@ class ToGoReservationController extends GetxController{
     update();
   }
 
-
   /// check selected Ingredient Is added to List or not
   checkIngredientContains(IngredientTypes value) {
     return selectedIngredient.contains(value);
@@ -418,12 +410,29 @@ class ToGoReservationController extends GetxController{
       addOnPrices = addOnPrices! - value.amount!;
     }
     print('removeItemId ---> ${value.addOnId}');
-    selectedIngredient.removeWhere((element) => element.addOnId==value.addOnId);
-   // selectedIngredient.remove(value);
+    selectedIngredient
+        .removeWhere((element) => element.addOnId == value.addOnId);
+    // selectedIngredient.remove(value);
     // addOnPrices = addOnPrices! - value.amount!;
     print('removeIngredientItem${jsonDecode(jsonEncode(addOnIngredients))}');
     update();
   }
+
+  /// to add tax in togo items
+  calTaxToGoService() {
+    toGoTaxAdded.value = (reservationController
+                .bookRestaurantDetails!.bookinglistresponse.tax!
+                .toDouble() *
+            toGoSubTotalPrice!) /
+        100;
+  }
+
+
+  /// cal toGo grandTotal
+  calToGoGrandTotal(){
+    toGoGrandTotalAmount.value = toGoTaxAdded.value + toGoSubTotalPrice;
+  }
+
 
   /// add - on- ingredients menu api call
   Future<dynamic> addOnIngredientMenuApiCall({
@@ -454,7 +463,7 @@ class ToGoReservationController extends GetxController{
     return false;
   }
 
-    /// to go order menu api call
+  /// to go order menu api call
   Future<dynamic> toGoMenuApiCall({
     dynamic body,
   }) async {
@@ -466,7 +475,8 @@ class ToGoReservationController extends GetxController{
       );
       if (response['response'] == 1) {
         if (response['data'] != null) {
-          toGoMenuDetail =List<ToGoMenuDetails>.from(response['data'].map((x)=>ToGoMenuDetails.fromJson(x))) ;
+          toGoMenuDetail = List<ToGoMenuDetails>.from(
+              response['data'].map((x) => ToGoMenuDetails.fromJson(x)));
         }
         return true;
       } else {

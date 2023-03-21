@@ -3,6 +3,7 @@ import 'package:booking_table/view/reservation/widgets/resevation_reviews_list_w
 import 'package:booking_table/view/reservation/widgets/to_go_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../controller/reservation & rating/reservation_controller.dart';
 import '../../../controller/reservation & rating/to_go_reservation_controller.dart';
 import '../../../utils/common/common_strings.dart';
@@ -17,8 +18,10 @@ import 'order_more_payment.dart';
 
 class BookingDetailsView extends StatefulWidget {
   final String callFrom;
+
   const BookingDetailsView({Key? key, required this.callFrom})
       : super(key: key);
+
   @override
   State<BookingDetailsView> createState() => _BookingDetailsViewState();
 }
@@ -139,7 +142,7 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
         return
             // reservationController.bookedRestaurantDetailsLoading.value && reservationController.orderMoreItemIsLoading.value &&
             //reservationController.orderMoreItemIsLoading.value == true
-          reservationController.bookedRestaurantDetailsLoading.value
+            reservationController.bookedRestaurantDetailsLoading.value
                 ? const Center(
                     child: CircularProgressIndicator(
                       color: redE2211C,
@@ -203,14 +206,14 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
                                 fontWeight: FontWeight.w400,
                               ),
                               Visibility(
-                                visible: widget.callFrom == 'Previous'
-                                    ||widget.callFrom=='Upcoming'||
-                                    reservationController
-                                        .bookRestaurantDetails!
-                                        .bookinglistresponse
-                                        .serviceType
-                                        .toString() ==
-                                        "To Go"
+                                visible: widget.callFrom == 'Previous' ||
+                                        widget.callFrom == 'Upcoming' ||
+                                        reservationController
+                                                .bookRestaurantDetails!
+                                                .bookinglistresponse
+                                                .serviceType
+                                                .toString() ==
+                                            "To Go"
                                     ? false
                                     : true,
                                 child: ToGoView(
@@ -309,7 +312,7 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
                                                   },
                                                   textColor: Colors.white,
                                                   bgColor: redE2211C,
-                                                  text: 'Order More',
+                                                  text: 'Edit Order',
                                                 ),
                                               )
                                             : null,
@@ -404,7 +407,7 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
                                   ),
                                   // Pre Order Details
                                   BookingDetailsPreOrderDetails(
-                                    callFrom:widget.callFrom ,
+                                    callFrom: widget.callFrom,
                                   ),
                                   // CommonSizedBox(
                                   //   height: 20,
@@ -451,43 +454,100 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
                                           widget.callFrom == 'Running'
                                       ? GetBuilder<ReservationController>(
                                           builder: (controller) {
-                                          return GetBuilder<ToGoReservationController>(
+                                          return GetBuilder<
+                                                  ToGoReservationController>(
                                               builder: (toGoController) {
-                                              return Column(
-                                                children: [
-                                                  Visibility(
-                                                    visible: controller
-                                                            .cartNewItemsList.isNotEmpty
-                                                        ? true
-                                                        : false,
-                                                    child: Column(
-                                                      children: [
-                                                        AddMoreScreen(
-                                                          bookingId: controller
-                                                              .bookRestaurantDetails!
-                                                              .bookinglistresponse
-                                                              .bookingId,
-                                                        ),
-
-                                                      ],
-                                                    ),
+                                            return Column(
+                                              children: [
+                                                Visibility(
+                                                  visible: controller
+                                                          .cartNewItemsList
+                                                          .isNotEmpty
+                                                      ? true
+                                                      : false,
+                                                  child: Column(
+                                                    children: [
+                                                      AddMoreScreen(
+                                                        bookingId: controller
+                                                            .bookRestaurantDetails!
+                                                            .bookinglistresponse
+                                                            .bookingId,
+                                                      ),
+                                                    ],
                                                   ),
-                                                  Visibility(
-                                                    visible: controller
-                                                        .cartNewItemsList.isNotEmpty || toGoController.toGoCart.isNotEmpty
-                                                        ? true
-                                                        : false,
-                                                    child: OrderMorePaymentMode(
-                                                      bookingId: controller
-                                                          .bookRestaurantDetails!
-                                                          .bookinglistresponse
-                                                          .bookingId,
-                                                    ),
-                                                  )
-                                                ],
-                                              );
-                                            }
-                                          );
+                                                ),
+                                                Visibility(
+                                                  visible: controller
+                                                              .cartNewItemsList
+                                                              .isNotEmpty ||
+                                                          toGoController
+                                                              .toGoCart
+                                                              .isNotEmpty
+                                                      ? true
+                                                      : false,
+                                                  child: Column(
+                                                    children: [
+                                                      Visibility(
+                                                        visible:
+                                                            widget.callFrom ==
+                                                                'Running',
+                                                        child: Row(
+                                                          children: [
+                                                            CommonText(
+                                                              text:
+                                                                  "Total Amount To Pay",
+                                                              color:
+                                                                  black0D0000,
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                            const Spacer(),
+                                                            CommonText(
+                                                              text:
+                                                                  // controller
+                                                                  //             .cartNewItemsList
+                                                                  //             .isNotEmpty &
+                                                                  //         toGoController
+                                                                  //             .toGoCart
+                                                                  //             .isNotEmpty
+                                                                  //     ?
+                                                                  (reservationController.totalAmountOrderMore.value +
+                                                                          reservationController
+                                                                              .tipAddedOrderMore
+                                                                              .value +
+                                                                          toGoReservationController
+                                                                              .toGoGrandTotalAmount
+                                                                              .value)
+                                                                      .toStringAsFixed(
+                                                                          2),
+                                                              // : "",
+                                                              color:
+                                                                  black0D0000,
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 15,
+                                                      ),
+                                                      OrderMorePaymentMode(
+                                                        bookingId: controller
+                                                            .bookRestaurantDetails!
+                                                            .bookinglistresponse
+                                                            .bookingId,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            );
+                                          });
                                         })
                                       : ReservationReviewList(),
 

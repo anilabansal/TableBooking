@@ -268,9 +268,9 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
       // "Amount": reservationController.subTotalPrice +
       //     reservationController.tipAddedOrderMore +
       //     toGoReservationController.toGoSubTotalPrice,
-      "Amount": reservationController.totalAmountOrderMore! +
-          reservationController.tipAddedOrderMore! +
-          toGoReservationController.toGoGrandTotalAmount!,
+      "Amount": reservationController.totalAmountOrderMore.value +
+          reservationController.tipAddedOrderMore.value +
+          toGoReservationController.toGoGrandTotalAmount.value,
       "CardId": addCardDetailsController.cardSelected!.cardId,
     }).then((value) {
       reservationController.orderMoreConfirmationIsLoading.value = false;
@@ -283,9 +283,9 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
             MaterialPageRoute(
               builder: (BuildContext context) => PaymentDoneView(
                 paymentMode: "Credit Card",
-                amountPayed: reservationController.totalAmountOrderMore! +
-                    reservationController.tipAddedOrderMore! +
-                    toGoReservationController.toGoGrandTotalAmount!,
+                amountPayed: reservationController.totalAmountOrderMore.value +
+                    reservationController.tipAddedOrderMore.value +
+                    toGoReservationController.toGoGrandTotalAmount.value,
               ),
             ),
             (Route<dynamic> route) => route.isFirst);

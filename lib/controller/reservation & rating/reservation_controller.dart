@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../model/reservation/add_more_cart_modal.dart';
 import '../../model/reservation/book_restaurant_detail_modal.dart';
 import '../../model/reservation/reservation_order_more_menu.dart';
@@ -27,10 +28,10 @@ class ReservationController extends GetxController
   List<Cart> cartNewItemsList = [];
   List<IngredientTypes> selectedIngredient = [];
   List<AddOns> addOnIngredients = [];
-double? tipAddedOrderMore = 0.0 ;
- double? taxAddedOrderMore = 0.0;
+  RxDouble  tipAddedOrderMore = 0.0.obs ;
+ RxDouble taxAddedOrderMore = 0.0.obs;
  ///totalAmountOrderMore i.e items subTotal price + tax
- double?totalAmountOrderMore = 0.0;
+  RxDouble totalAmountOrderMore = 0.0.obs;
 
   double? addOnPrices = 0.0;
  dynamic subTotalPrice = 0.0;
@@ -72,12 +73,16 @@ double? tipAddedOrderMore = 0.0 ;
   /// subTotal price calculations
   subTotalPriceCalculation(itemTotalPrice) {
     subTotalPrice = subTotalPrice! + itemTotalPrice;
+    calTaxAddedOrderMore();
+    callTotalAmountItemsAndTax();
     update();
   }
 
   ///subtotal price after removing items
   void subTotalPriceAfterRemoving(itemSubtractionPrice) {
     subTotalPrice = subTotalPrice! - itemSubtractionPrice;
+    calTaxAddedOrderMore();
+    callTotalAmountItemsAndTax();
     update();
   }
 
@@ -448,6 +453,28 @@ double? tipAddedOrderMore = 0.0 ;
   }
 
 
+
+  /// calculation of tax added in order more
+  calTaxAddedOrderMore(){
+   taxAddedOrderMore.value =
+    ((subTotalPrice!.toDouble() *
+        bookRestaurantDetails!.bookinglistresponse.tax!
+            .toDouble()) /
+        100);
+  }
+  /// calTotal Amount i.e tax added and total item price
+  callTotalAmountItemsAndTax(){
+    totalAmountOrderMore.value =
+       subTotalPrice +
+           taxAddedOrderMore.value;
+  tipAddedOrderMore.value = bookRestaurantDetails!.bookinglistresponse.tip!
+        .endsWith('%')
+        ? ((totalAmountOrderMore.value *
+        double.parse(bookRestaurantDetails!.bookinglistresponse.tip!
+            .replaceAll('%', ''))) /
+        100)
+        : 0.0;
+  }
 
   /// reservation & rating booking restaurant api call
   Future<dynamic> reservationBookingRestaurantsApiCall({

@@ -14,8 +14,8 @@ class ToGoAddedItemView extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return GetBuilder<ToGoReservationController>(builder: (toGoReservationController) {
-      toGoReservationController.toGoTaxAdded = (reservationController.bookRestaurantDetails!.bookinglistresponse.tax!.toDouble() * toGoReservationController.toGoSubTotalPrice!)/100;
-      toGoReservationController.toGoGrandTotalAmount = toGoReservationController.toGoTaxAdded! + toGoReservationController.toGoSubTotalPrice;
+      // toGoReservationController.toGoTaxAdded = (reservationController.bookRestaurantDetails!.bookinglistresponse.tax!.toDouble() * toGoReservationController.toGoSubTotalPrice!)/100;
+      // toGoReservationController.toGoGrandTotalAmount = toGoReservationController.toGoTaxAdded! + toGoReservationController.toGoSubTotalPrice;
         return Visibility(
           visible:toGoReservationController.toGoCart.isNotEmpty?true:false ,
           child: Column(
