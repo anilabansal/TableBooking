@@ -31,9 +31,6 @@ selectBookTableTime(hintText) {
             isExpanded: true,
             underline: const SizedBox(),
             borderRadius: BorderRadius.zero,
-            // hint: const Text(
-            //   'Select Time',
-            // ),
             hint:hintText,
             icon: const Icon(
               Icons.arrow_drop_down,
@@ -44,7 +41,6 @@ selectBookTableTime(hintText) {
               bookTableController.setSelectedBookTime(newValue);
               print(newValue);
             },
-            //value: _filterController.selectedFoodType,
             value: bookTableController.selectedBookTableTime,
             items: bookTableController.selectTimeList.isNotEmpty
                 ? bookTableController.selectTimeList.map(
@@ -52,35 +48,6 @@ selectBookTableTime(hintText) {
                       return DropdownMenuItem<FilterSelectTime>(
                         value: value,
                         child: Text(value.startTime!),
-                        // child:  Row(
-                        //   children: [
-                        //     Text(value.startTime!),
-                        //     const Text("-"),
-                        //     Text(value.endTime!),
-                        //   ],
-                        // ),
-                        // child: Row(
-                        //   children: [
-                        //     // Checkbox(
-                        //     //   onChanged: (newValue) {
-                        //     //   // this.value = newValue;
-                        //     //   //   value = value;
-                        //     //   //   bookTableController.isTimeChecked.value = !bookTableController.isTimeChecked.value;
-                        //     //  //  bookTableController.updateCheckbox(newValue);
-                        //     //     // if(bookTableController.isTimeChecked.value == true){
-                        //     //     //   // value = value;
-                        //     //     //   bookTableController.setSelectedBookTime(value);
-                        //     //     // }
-                        //     //   },
-                        //     //   value:false,
-                        //     // ),
-                        //
-                        //     Text(value.startTime!),
-                        //     //  const SizedBox(width: 8,),
-                        //     const Text("-"),
-                        //     Text(value.endTime!),
-                        //   ],
-                        // ),
                       );
                     },
                   ).toList()

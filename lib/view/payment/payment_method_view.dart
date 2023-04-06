@@ -263,7 +263,7 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
       "TipAmount": reservationController
               .bookRestaurantDetails!.bookinglistresponse.tip!
               .endsWith('%')
-          ? reservationController.tipAddedOrderMore
+          ? reservationController.tipAddedOrderMore.value
           : 0.0,
       // "Amount": reservationController.subTotalPrice +
       //     reservationController.tipAddedOrderMore +

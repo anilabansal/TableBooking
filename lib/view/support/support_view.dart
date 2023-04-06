@@ -14,6 +14,7 @@ import '../../utils/common/widgets_methods/common_text_form_field.dart';
 
 class SupportView extends StatelessWidget {
    SupportView({Key? key}) : super(key: key);
+
    SupportController supportController = Get.find();
 var emailTextController = TextEditingController();
 var topicController = TextEditingController();

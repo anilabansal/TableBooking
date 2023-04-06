@@ -3,7 +3,6 @@ import 'package:booking_table/view/reservation/widgets/resevation_reviews_list_w
 import 'package:booking_table/view/reservation/widgets/to_go_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import '../../../controller/reservation & rating/reservation_controller.dart';
 import '../../../controller/reservation & rating/to_go_reservation_controller.dart';
 import '../../../utils/common/common_strings.dart';
@@ -206,7 +205,10 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
                                 fontWeight: FontWeight.w400,
                               ),
                               Visibility(
-                                visible: widget.callFrom == 'Previous' ||
+                                visible:
+                                widget.callFrom == 'Previous' && reservationController
+                                    .bookRestaurantDetails!
+                                    .bookinglistresponse.gotoorderlistdetail!.isEmpty||
                                         widget.callFrom == 'Upcoming' ||
                                         reservationController
                                                 .bookRestaurantDetails!
@@ -421,6 +423,7 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
                                   CommonSizedBox(
                                     height: 20,
                                   ),
+
                                   Row(
                                     children: [
                                       CommonText(
@@ -443,6 +446,54 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ],
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Visibility(
+                                    visible: reservationController
+                                            .bookRestaurantDetails!
+                                            .bookinglistresponse
+                                            .gotoorderlistdetail!
+                                            .isEmpty
+                                        ? false
+                                        : true,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            CommonText(
+                                              text: 'Total Amount Paid',
+                                              color: textGrey868686,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            // CommonSizedBox(
+                                            //   height: 20,
+                                            // ),
+                                            const Spacer(),
+                                            CommonText(
+                                              text:
+                                                  "\$${reservationController.bookRestaurantDetails!.bookinglistresponse.grandTotal!.toStringAsFixed(2)}",
+                                              color: textGrey868686,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ],
+                                        ),
+                                        CommonText(
+                                          text:
+                                              '(To Go + ${reservationController.bookRestaurantDetails!.bookinglistresponse.serviceType} )',
+                                          color: textGrey868686,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ],
+                                    ),
                                   ),
 
                                   // const UpcomingReservationsPaymentDetails(),
@@ -490,30 +541,35 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
                                                       Visibility(
                                                         visible:
                                                             widget.callFrom ==
-                                                                'Running',
-                                                        child: Row(
+                                                                'Running' && controller
+                                                                .cartNewItemsList
+                                                                .isNotEmpty &&
+                                                                toGoController
+                                                                    .toGoCart
+                                                                    .isNotEmpty,
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
-                                                            CommonText(
-                                                              text:
-                                                                  "Total Amount To Pay",
-                                                              color:
-                                                                  black0D0000,
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
-                                                            const Spacer(),
-                                                            CommonText(
-                                                              text:
-                                                                  // controller
-                                                                  //             .cartNewItemsList
-                                                                  //             .isNotEmpty &
-                                                                  //         toGoController
-                                                                  //             .toGoCart
-                                                                  //             .isNotEmpty
-                                                                  //     ?
-                                                                  (reservationController.totalAmountOrderMore.value +
+                                                            Row(
+                                                              children: [
+                                                                CommonText(
+                                                                  text:
+                                                                      "Total Amount To Pay",
+                                                                  color:
+                                                                      black0D0000,
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
+                                                                const Spacer(),
+                                                                CommonText(
+                                                                  text: (reservationController.totalAmountOrderMore.value +
                                                                           reservationController
                                                                               .tipAddedOrderMore
                                                                               .value +
@@ -522,14 +578,25 @@ class _BookingDetailsViewState extends State<BookingDetailsView> {
                                                                               .value)
                                                                       .toStringAsFixed(
                                                                           2),
-                                                              // : "",
-                                                              color:
-                                                                  black0D0000,
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
+                                                                  color:
+                                                                      black0D0000,
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
+                                                              ],
                                                             ),
+                                                            Visibility(
+                                                              // visible:
+                                                              //     toGoController
+                                                              //         .toGoCart
+                                                              //         .isNotEmpty,
+                                                              child: CommonText(
+                                                                text:
+                                                               ('(To Go Order + ${reservationController.bookRestaurantDetails!.bookinglistresponse.serviceType} New Order) '),
+                                                              ),
+                                                            )
                                                           ],
                                                         ),
                                                       ),

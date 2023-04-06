@@ -7,19 +7,19 @@ import '../../../controller/reservation & rating/reservation_controller.dart';
 
 class BookingDetailsPreOrderDetails extends StatelessWidget {
   final String? callFrom;
-  BookingDetailsPreOrderDetails({
-    Key? key,this.callFrom
-  }) : super(key: key);
+
+  BookingDetailsPreOrderDetails({Key? key, this.callFrom}) : super(key: key);
   ReservationController reservationController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: reservationController.bookRestaurantDetails!
-          .bookinglistresponse.serviceType
-          .toString() ==
-          "Full Service" ||
-          reservationController.bookRestaurantDetails!
-              .bookinglistresponse.orderlistdetail!.isEmpty
+      visible: reservationController
+                      .bookRestaurantDetails!.bookinglistresponse.serviceType
+                      .toString() ==
+                  "Full Service" ||
+              reservationController.bookRestaurantDetails!.bookinglistresponse
+                  .orderlistdetail!.isEmpty
           ? false
           : true,
       child: Container(
@@ -90,8 +90,7 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
                           ),
                           Wrap(children: [
                             SizedBox(
-                              width:
-                                  MediaQuery.of(context).size.width * 0.5,
+                              width: MediaQuery.of(context).size.width * 0.5,
                               height: 20,
                               child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
@@ -102,8 +101,7 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
                                       .addOns!
                                       .length,
                                   shrinkWrap: true,
-                                  physics:
-                                      const NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   itemBuilder: (context, i) {
                                     return Row(
                                       mainAxisAlignment:
@@ -168,7 +166,8 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
                 CommonText(
-                  text:'${reservationController.bookRestaurantDetails!.bookinglistresponse.tax!.toString()}%',
+                  text:
+                      '${reservationController.bookRestaurantDetails!.bookinglistresponse.tax!.toString()}%',
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
@@ -201,8 +200,8 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
                 ),
                 CommonText(
                   text: reservationController
-                      .bookRestaurantDetails!.bookinglistresponse.tip!
-                      .endsWith('%')
+                          .bookRestaurantDetails!.bookinglistresponse.tip!
+                          .endsWith('%')
                       ? '${reservationController.bookRestaurantDetails!.bookinglistresponse.tip}'
                       : '\$${reservationController.bookRestaurantDetails!.bookinglistresponse.tip}',
                   fontSize: 12,
@@ -246,7 +245,8 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Column(mainAxisAlignment: MainAxisAlignment.start,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CommonText(
@@ -266,7 +266,8 @@ class BookingDetailsPreOrderDetails extends StatelessWidget {
                 CommonText(
                   // text:
                   //     '\$${(reservationController.bookRestaurantDetails!.bookinglistresponse.toGoTotalAmount!+reservationController.bookRestaurantDetails!.bookinglistresponse.totalAmount!).toStringAsFixed(2)}',
-                  text: "\$${reservationController.bookRestaurantDetails!.bookinglistresponse.grandTotal!.toStringAsFixed(2)}",
+                  text:
+                      "\$${(reservationController.bookRestaurantDetails!.bookinglistresponse.grandTotal! - reservationController.bookRestaurantDetails!.bookinglistresponse.toGoTotalAmount!).toStringAsFixed(2)}",
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),

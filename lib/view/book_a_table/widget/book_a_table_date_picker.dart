@@ -31,7 +31,6 @@ class BookTableDatePicker extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () async {
-          // bookingTable.selectTime.value = [];
           DateTime? picked = await showDatePicker(
             builder: (context, child) {
               return Theme(
@@ -51,7 +50,6 @@ class BookTableDatePicker extends StatelessWidget {
             ),
           );
           if (picked != null) {
-            // controller!.text = DateFormat('yyyy-MM-dd').format(picked);
             controller!.text = DateFormat('MM-dd-yyyy').format(picked);
             loadAllBookTime(context);
           }

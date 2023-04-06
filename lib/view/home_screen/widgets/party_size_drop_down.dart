@@ -24,7 +24,7 @@ class PartySizeDropDown extends StatelessWidget {
             underline: const SizedBox(),
             borderRadius: BorderRadius.zero,
             hint: const Text(
-              'Select Time',
+              'Number of Guests',
             ),
             icon: const Icon(
               Icons.arrow_drop_down,

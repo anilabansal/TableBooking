@@ -2,7 +2,6 @@ import 'package:booking_table/model/book_table_modals/party_size_list_modal.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/book_a_table/book_a_table_controller.dart';
-import '../../../controller/filter/filter_screen_controller.dart';
 import '../../../utils/common/common_strings.dart';
 
 class BookTablePartySizeDropDown extends StatelessWidget {
@@ -25,7 +24,7 @@ class BookTablePartySizeDropDown extends StatelessWidget {
             underline: const SizedBox(),
             borderRadius: BorderRadius.zero,
             hint: const Text(
-              'Select Time',
+              'Number of Guests',
             ),
             icon: const Icon(
               Icons.arrow_drop_down,
