@@ -15,7 +15,7 @@ class LocationController extends GetxController {
   }
   LocationController._internal();
   ApiCalls apiCall = ApiCalls();
-  UserSessionController userSession = Get.find();
+  //UserSessionController userSession = Get.find();
   final searchController = TextEditingController().obs;
   // var location = Location();
   // LocationData? locationData;
