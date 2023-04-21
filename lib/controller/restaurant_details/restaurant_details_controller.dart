@@ -341,6 +341,9 @@ class RestaurantDetailsController extends GetxController {
       addOnPrices = addOnPrices! + value.amount!;
     }
     selectedIngredient.add(value);
+    print('encodeCart${jsonEncode(cartItemsList)}');
+    print('selectedIngredients${jsonDecode(jsonEncode(selectedIngredient))}');
+    print('encodeCart222${jsonDecode(jsonEncode(addOnIngredients))}');
     // ingredientNames =  selectedIngredient.map((e) => e.name).toString();
     update();
   }
@@ -352,12 +355,22 @@ class RestaurantDetailsController extends GetxController {
 
   /// if selected ingredient is already in list then remove it on tap
   removeSelectedIngredient(IngredientTypes value) {
-    addOnIngredients.remove(AddOns(
+    AddOns data = AddOns(
         ingredientName: value.name!,
         addOnPrice: value.amount!,
-        ItemAddOnId: value.addOnId));
+        ItemAddOnId: value.addOnId,);
+
+     // addOnIngredients.remove(data);
+    addOnIngredients.removeWhere((item) => item.ItemAddOnId == data.ItemAddOnId);
+    // addOnIngredients.remove(AddOns(
+    //     ingredientName: value.name!,
+    //     addOnPrice: value.amount!,
+    //     ItemAddOnId: value.addOnId),);
     selectedIngredient.remove(value);
     addOnPrices = addOnPrices! - value.amount!;
+    print('encodeCart${jsonDecode(jsonEncode(cartItemsList))}');
+    print('selectedIngredients${jsonDecode(jsonEncode(selectedIngredient))}');
+    print('encodeCart111${jsonDecode(jsonEncode(addOnIngredients),)}');
     update();
   }
 

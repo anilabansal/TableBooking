@@ -21,7 +21,7 @@ class SearchBox extends StatefulWidget {
 
 class _SearchBoxState extends State<SearchBox> {
   LocationController locationController = Get.find();
-  var googleApiKey = "AIzaSyBLVQD5gh9CP8C4_yrzuhvn06ZfhfFUODE";
+  var googleApiKey = "AIzaSyAh44zG-nwjUK3-C0IR8lLpw2uBZfVukVY";
 
   @override
   Widget build(BuildContext context) {

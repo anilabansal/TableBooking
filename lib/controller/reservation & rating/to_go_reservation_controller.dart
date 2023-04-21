@@ -405,7 +405,7 @@ class ToGoReservationController extends GetxController {
         ingredientName: value.name!,
         addOnPrice: value.amount!,
         ItemAddOnId: value.addOnId);
-    addOnIngredients.remove(data);
+    addOnIngredients.removeWhere((item) => item.ItemAddOnId == data.ItemAddOnId);
     if (addOnIngredients.contains(data)) {
       addOnPrices = addOnPrices! - value.amount!;
     }

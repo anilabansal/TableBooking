@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -49,46 +47,48 @@ class _ToGoAddOnIngredientViewState extends State<ToGoAddOnIngredientView> {
             color: redE2211C,
           ),
         )
-            : Column(
+            : SingleChildScrollView(
+              child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                CommonText(
-                  text: "Ingredients",
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: black000000,
-                ),
-                const Spacer(),
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.close,
-                    color: black0D0000,
-                    size: 20,
+              Row(
+                children: [
+                  CommonText(
+                    text: "Ingredients",
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: black000000,
                   ),
-                )
-              ],
-            ),
-            CommonSizedBox(
-              height: 25,
-            ),
-            GetBuilder<ToGoReservationController>(
-                builder: (toGoReservationDetailController) {
-                  return Expanded(
-                    child: ListView(
+                  const Spacer(),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.close,
+                      color: black0D0000,
+                      size: 20,
+                    ),
+                  )
+                ],
+              ),
+              CommonSizedBox(
+                height: 25,
+              ),
+              GetBuilder<ToGoReservationController>(
+                  builder: (toGoReservationDetailController) {
+                    return ListView(
                       primary: false,
                       controller: ScrollController(keepScrollOffset: false),
                       shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       children: [
                         ListView.builder(
                             itemCount: toGoReservationDetailController
                                 .addOnMenuIngredientList.length,
                             shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,6 +111,7 @@ class _ToGoAddOnIngredientViewState extends State<ToGoAddOnIngredientView> {
                                           .ingredientTypes!
                                           .length,
                                       shrinkWrap: true,
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemBuilder: (context, i) {
                                         return InkWell(
                                           onTap: () {
@@ -202,23 +203,23 @@ class _ToGoAddOnIngredientViewState extends State<ToGoAddOnIngredientView> {
                               );
                             }),
                       ],
-                    ),
+                    );
+                  }),
+              CommonButton(
+                onTap: () {
+                  toGoReservationController.addQuantity(
+                    widget.menuCategoryIndex!,
+                    widget.menuIndex!,
                   );
-                }),
-            CommonButton(
-              onTap: () {
-                toGoReservationController.addQuantity(
-                  widget.menuCategoryIndex!,
-                  widget.menuIndex!,
-                );
-                Get.back();
-              },
-              text: 'Add',
-              bgColor: redE2211C,
-              textColor: Colors.white,
-            ),
+                  Get.back();
+                },
+                text: 'Add',
+                bgColor: redE2211C,
+                textColor: Colors.white,
+              ),
           ],
-        );
+        ),
+            );
       }),
     );
   }

@@ -554,11 +554,12 @@ class _PreOrderViewState extends State<PreOrderView> {
         isScrollControlled: true,
         context: context,
         builder: (builder) {
-          return Wrap(
+          return
+            Wrap(
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.75,
+               height: MediaQuery.of(context).size.height * 0.8,
                 // padding: const EdgeInsets.only(left: 16, right: 16),
                 decoration: const BoxDecoration(
                   color: white,
@@ -572,7 +573,7 @@ class _PreOrderViewState extends State<PreOrderView> {
                   menuCategoryIndex: menuCategoryIndex,
                   menuIndex: menuIndex,
                 ),
-              ),
+              )
             ],
           );
         });

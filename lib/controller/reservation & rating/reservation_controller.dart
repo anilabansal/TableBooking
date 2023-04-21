@@ -443,10 +443,11 @@ class ReservationController extends GetxController
 
   /// if selected ingredient is already in list then remove it on tap
   removeSelectedIngredient(IngredientTypes value) {
-    addOnIngredients.remove(AddOns(
+    AddOns data =AddOns(
         ingredientName: value.name!,
         addOnPrice: value.amount!,
-        ItemAddOnId: value.addOnId));
+        ItemAddOnId: value.addOnId);
+    addOnIngredients.removeWhere((item) => item.ItemAddOnId == data.ItemAddOnId);
     selectedIngredient.remove(value);
     addOnPrices = addOnPrices! - value.amount!;
     update();

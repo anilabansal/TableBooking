@@ -52,46 +52,48 @@ class _OrderMoreAddOnIngredientViewState extends State<OrderMoreAddOnIngredientV
             color: redE2211C,
           ),
         )
-            : Column(
+            : SingleChildScrollView(
+              child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                CommonText(
-                  text: "Ingredients",
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: black000000,
-                ),
-                const Spacer(),
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.close,
-                    color: black0D0000,
-                    size: 20,
+              Row(
+                children: [
+                  CommonText(
+                    text: "Ingredients",
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: black000000,
                   ),
-                )
-              ],
-            ),
-            CommonSizedBox(
-              height: 25,
-            ),
-            GetBuilder<ReservationController>(
-                builder: (reservationDetailController) {
-                  return Expanded(
-                    child: ListView(
+                  const Spacer(),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.close,
+                      color: black0D0000,
+                      size: 20,
+                    ),
+                  )
+                ],
+              ),
+              CommonSizedBox(
+                height: 25,
+              ),
+              GetBuilder<ReservationController>(
+                  builder: (reservationDetailController) {
+                    return ListView(
                       primary: false,
                       controller: ScrollController(keepScrollOffset: false),
                       shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       children: [
                         ListView.builder(
                             itemCount: reservationDetailController
                                 .addOnMenuIngredientList.length,
                             shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,6 +116,7 @@ class _OrderMoreAddOnIngredientViewState extends State<OrderMoreAddOnIngredientV
                                           .ingredientTypes!
                                           .length,
                                       shrinkWrap: true,
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemBuilder: (context, i) {
                                         return InkWell(
                                           onTap: () {
@@ -204,23 +207,23 @@ class _OrderMoreAddOnIngredientViewState extends State<OrderMoreAddOnIngredientV
                               );
                             }),
                       ],
-                    ),
+                    );
+                  }),
+              CommonButton(
+                onTap: () {
+                  reservationController.addQuantity(
+                    widget.menuCategoryIndex!,
+                    widget.menuIndex!,
                   );
-                }),
-            CommonButton(
-              onTap: () {
-                reservationController.addQuantity(
-                  widget.menuCategoryIndex!,
-                  widget.menuIndex!,
-                );
-                Get.back();
-              },
-              text: 'Add',
-              bgColor: redE2211C,
-              textColor: Colors.white,
-            ),
+                  Get.back();
+                },
+                text: 'Add',
+                bgColor: redE2211C,
+                textColor: Colors.white,
+              ),
           ],
-        );
+        ),
+            );
       }),
     );
   }

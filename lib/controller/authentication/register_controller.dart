@@ -29,7 +29,7 @@ class RegisterController extends GetxController {
     print('Register Response ======> $response');
     if (response['response'] == 1) {
       ShowToast.show(
-        msg: "Otp Is ${response['otp'].toString()}",
+        msg: response["errorMessage"],
       );
     //  userSession.setIsProfileCreated(response['isProfileCreated']);
       userSession.setCountryCode(countryCode.value);

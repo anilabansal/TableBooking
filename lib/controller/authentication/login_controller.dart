@@ -29,7 +29,7 @@ class LoginController extends GetxController {
     );
     if (response['response'] == 1) {
       ShowToast.show(
-        msg: "Otp Is ${response['otp'].toString()}",
+        msg:  response["errorMessage"],
       );
       isLoading.value = false;
       userSession.setIsProfileCreated(response['isProfileCreated']);
