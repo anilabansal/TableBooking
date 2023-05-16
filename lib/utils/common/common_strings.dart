@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 // Base URL
 //const baseURL = 'http://apitablebooking.harishparas.com';
 const baseURL ='http://app.servrest.com';
-const privacyPolicyUrl = 'http://admintablebooking.harishparas.com/PrivacyPolicy';
-const termsAndConditionUrl ='http://admintablebooking.harishparas.com/TermsAndCondiotion';
-
+// const privacyPolicyUrl = 'http://admintablebooking.harishparas.com/PrivacyPolicy';
+// const termsAndConditionUrl ='http://admintablebooking.harishparas.com/TermsAndCondiotion';
+const privacyPolicyUrl = 'http://admin.servrest.com/PrivacyPolicy';
+const termsAndConditionUrl ='http://admin.servrest.com/TermsAndCondiotion';
 const logInEndPoint = 'api/Basic/EnterMobileNo';
 const signUpEndPoint = 'api/Basic/RegisterMobileNo';
 const submitOtp = 'api/Basic/OTPSubmit';

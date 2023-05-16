@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'package:booking_table/controller/authentication/login_controller.dart';
 import 'package:booking_table/controller/authentication/otp_controller.dart';
-import 'package:booking_table/routes/route_name.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/toast_message.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
@@ -11,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
+
 
 import '../../../controller/user_session/user_session_controller.dart';
 import '../../../utils/common/widgets_methods/progress_loader.dart';

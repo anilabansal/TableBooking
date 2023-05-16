@@ -206,7 +206,7 @@ class RestaurantHomeScreen extends StatelessWidget {
                                     ),
                                     CommonText(
                                       text:
-                                          "${homeController.homeRestaurantList[index].distance} miles away",
+                                          "${homeController.homeRestaurantList[index].distance.toStringAsFixed(2)} miles away",
                                       fontWeight: FontWeight.normal,
                                       fontSize: 15,
                                       color: grey868686,

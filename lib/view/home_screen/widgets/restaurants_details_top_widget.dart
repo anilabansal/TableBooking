@@ -138,7 +138,7 @@ class RestaurantDetailTopScreen extends StatelessWidget {
                           ),
                           CommonText(
                             text:
-                                "${controller.detailsRestaurantList.value.distance.toString()} miles away",
+                                "${controller.detailsRestaurantList.value.distance.toStringAsFixed(2)} miles away",
                             color: textGrey868686,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
