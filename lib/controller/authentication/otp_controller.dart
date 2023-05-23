@@ -67,7 +67,7 @@ class OtpController extends GetxController {
     print('OTP Response ======> $response');
     if (response['response'] == 1) {
       ShowToast.show(
-        msg: response['otp'.toString()].toString(),
+        msg:  response["errorMessage"],
       );
       resendLoading.value = false;
       return true;

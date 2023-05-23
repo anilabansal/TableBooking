@@ -6,6 +6,7 @@ import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/home/home_controller.dart';
+import '../../../controller/support/customer_support_controller.dart';
 
 class DrawerScreen extends StatelessWidget {
   UserSessionController userSessionController = Get.find();
@@ -231,6 +232,9 @@ class DrawerScreen extends StatelessWidget {
                         ),
                         // userSessionController.isLogin == true
                         //     ?
+
+
+
                         userSessionController.isLogin == false
                             ? Container()
                             : textAndIcon(
@@ -241,7 +245,17 @@ class DrawerScreen extends StatelessWidget {
                                     callFrom: "Logout",
                                   );
                                 },
-                              )
+                              ),
+                        textAndIcon(
+                          "Delete Account",
+                              textColor: redE2211C,
+                              () async {
+                            //  userSessionController.logOut();
+                            await getXBuildDefaultDialog(
+                              callFrom: "Delete Account",
+                            );
+                          },
+                        ),
                         // : Container(),
                       ],
                     );
@@ -271,7 +285,9 @@ class DrawerScreen extends StatelessWidget {
           CommonText(
             fontSize: 16,
             text: callFrom == "Logout"
-                ? 'Are you sure you want to logout?'
+                ? 'Are you sure you want to logout?':
+            callFrom == "Delete Account"
+                ?"Are you sure you want to Delete Account"
                 : "You're not logged In\nPlease login to continue..",
             textAlign: TextAlign.center,
           ),
@@ -293,12 +309,19 @@ class DrawerScreen extends StatelessWidget {
                 height: 40,
                 child: CommonButton(
                   bgColor: redE2211C,
-                  text: callFrom == "Logout" ? "Confirm" : 'Login',
+                  text: callFrom == "Logout"|| callFrom =="Delete Account" ? "Confirm" : 'Login',
                   textColor: Colors.white,
                   onTap: () async {
                     callFrom == "Logout"
-                        ? await userSessionController.logOut()
+                        ? await userSessionController.logOut():
+                  callFrom=="Delete Account"?
+                  await Get.find<SupportController>().deleteAccountApiCall(
+                    body: {
+                      "UserId":userSessionController.userId
+                    }
+                  )
                         : Get.offAllNamed('/authentication');
+
                     // : Get.toNamed('/login');
                   },
                 ),
@@ -373,7 +396,7 @@ class DrawerScreen extends StatelessWidget {
     );
   }
 
-  textAndIcon(text, onTap) {
+  textAndIcon(text, onTap,{textColor}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
@@ -387,7 +410,7 @@ class DrawerScreen extends StatelessWidget {
                   fontSize: 16,
                   fontFamily: proximaNovaFont,
                   fontWeight: FontWeight.w400,
-                  color: black000000,
+                  color: textColor??black000000,
                 ),
                 const Spacer(),
                 const Icon(

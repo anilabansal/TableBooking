@@ -14,7 +14,6 @@ const submitOtp = 'api/Basic/OTPSubmit';
 const resendOtp = 'api/Basic/ResendOTP';
 const createProfileEndPoint = 'api/Basic/SignUp';
 const socialLogInEndPoint = 'api/Basic/SocialLogin';
-
 const zipCode = 'api/Home/SearchLocation';
 const aboutUs = 'api/Home/AboutUsDetail';
 const gallery = 'api/Home/ViewRestaurantGallery';
@@ -55,6 +54,8 @@ const orderMoreConfirmationEndPoint = 'api/Home/OrderMore';
 
 const toGoMenuEndPoint = 'api/Home/ToGoServiceMenuDetail';
 const toGoOrderMoreEndPoint = 'api/Home/ToGoServiceAddMoreMenuScreen';
+const deleteAccountEndPoint = 'api/Basic/DeleteMyAccount';
+
 
 ///    Common Fonts
 // Fonts

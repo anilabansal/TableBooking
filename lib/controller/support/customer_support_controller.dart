@@ -39,4 +39,40 @@ var contactUsLoading = true.obs;
     return false;
   }
 
+
+  ///delete account api call
+
+  Future<dynamic> deleteAccountApiCall({
+    dynamic body,
+  }) async {
+    try {
+      final response = await apiCall.callPostApi(
+        body,
+        deleteAccountEndPoint,
+        token: userSessionController.token,
+      );
+      if (response['response'] == 1) {
+        ShowToast.show(
+          msg:'Account Deleted Successfully' ,
+        );
+        userSessionController.setIsLogin(false);
+        userSessionController.setSocialLogin(false);
+        userSessionController.setUserToken("");
+        await  userSessionController.box.erase();
+        Get.offAllNamed('/authentication');
+        userSessionController.setGuestUserNavigateScreen("");
+        return true;
+      } else {
+        ShowToast.show(
+          msg: response['errorMessage'] ?? 'Please try again!',
+          isError: true,
+        );
+        return false;
+      }
+    } catch (e) {
+      print('Error --------> $e');
+    }
+    return false;
+  }
+
 }

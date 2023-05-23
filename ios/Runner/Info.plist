@@ -29,7 +29,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.250363232703-gvdu43ck122qjmbjvik074om87mbq0dd</string>
+				<string>com.googleusercontent.apps.250363232703-a75v7r92p21soq4eep3k1cupmb499d2h</string>
 				<string>fb450962570572175</string>
 			</array>
 		</dict>
@@ -67,7 +67,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>To capture photo please grant camera access</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Needed to access location</string>
+	<string>This app needs access to location to fetch nearby restaurants </string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>app needs access to photo lib for profile images</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
