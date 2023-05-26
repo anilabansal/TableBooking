@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:booking_table/controller/profile/profile_controller.dart';
 import 'package:booking_table/controller/user_session/user_session_controller.dart';
 import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/utils/common/widgets_methods/common_button.dart';
@@ -27,6 +28,7 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
   LoginController loginController = Get.find();
 
   UserSessionController userController = Get.find();
+  final ProfileController profileController = Get.put(ProfileController());
 
   @override
   void initState() {
@@ -188,7 +190,12 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
                 final email = await fb.getUserEmail();
                 if (email != null) print('And your email is $email');
 
-              socialLogin(context,"Facebook",profile.userId);
+              socialLogin(context,"Facebook",profile.userId, firstName: profile.name!
+                  .substring(0, profile.name!.lastIndexOf(' '),),
+                lastName: profile.name!.substring(
+                    profile.name!.lastIndexOf(" ") + 1),
+                email: email
+              );
                 break;
               case FacebookLoginStatus.cancel:
                 Fluttertoast.showToast(
@@ -214,7 +221,12 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
             );
             await _googleSignIn.signIn().then(
               (value) {
-                socialLogin(context,"Google",value!.id);
+                socialLogin(context,"Google",value!.id,email: value.email,
+                    // displayName: value.displayName,
+                    firstName: value.displayName!
+                        .substring(0, value.displayName!.lastIndexOf(' ')),
+                    lastName: value.displayName!.substring(
+                        value.displayName!.lastIndexOf(" ") + 1));
               },
             );
           },
@@ -270,27 +282,38 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
               String email = value.split('/').last;
               // appleLogin(email, credential.userIdentifier, name);
               //socialLogin("Apple",credential.userIdentifier);
-              print('Email - $name');
-              print('Email - $email');
+              print('appleFirstName - $name');
+              print('appleLastName - $email');
               //  appleLogIn(email, credential.userIdentifier);
-              socialLogin(context,"Apple",credential.userIdentifier.toString());
+              socialLogin(context,"Apple",credential.userIdentifier.toString(), firstName: name,  email:email );
             } else {
+              print("apple login2");
+              print('User detail --> ${credential.userIdentifier}');
+              String name = value!.split('/').first;
+              String email = value.split('/').last;
+
+              print('appleName - $name');
+              print('appleEmail - $email');
               //   appleLogIn(credential.email, credential.userIdentifier);
-              socialLogin(context,"Apple",credential.userIdentifier.toString());
+              socialLogin(context,"Apple",credential.userIdentifier.toString(), firstName: name,  email:email );
             }
           } else {
+            print("apple login");
+            print('User detail --> ${credential.userIdentifier}');
+            print('appleName - ${credential.givenName}');
+            print('appleEmail - ${credential.email}');
             await FlutterKeychain.put(
                 key: credential.userIdentifier.toString(),
                 value: "${credential.givenName}/${credential.email}");
             // appleLogIn(credential.email, credential.userIdentifier);
-          socialLogin(context,"Apple",credential.userIdentifier.toString());
+          socialLogin(context,"Apple",credential.userIdentifier.toString(),firstName: credential.givenName,  email:credential.email );
           }
         },
       ),
     );
   }
 
-  socialLogin(context,String authenticationType, String authenticationId){
+  socialLogin(context,String authenticationType, String authenticationId,{firstName, lastName, email}){
     ProgressDialog.showProgressDialog(context);
     loginController.authLoading.value = true;
    return loginController.socialLogin(
@@ -313,6 +336,11 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
         // Get.back();
         if (value) {
           print("signIn successfully");
+          print(' firstName11232----$firstName');
+          profileController.firstNameController.text= firstName??"";
+          profileController.lastNameController.text = lastName??"";
+          profileController.emailAddressController.text = email??"";
+
           loginController.authLoading.value = false;
           userController.isProfileCreated == true
               ? Get.offAllNamed('/zip-code')

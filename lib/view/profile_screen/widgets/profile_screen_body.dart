@@ -29,15 +29,15 @@ class EditProfileScreenBody extends StatefulWidget {
 
 class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
   final ProfileController _profileController = Get.find();
-
+ var data = Get.arguments;
   //  ProfileController _profileController = Get.put(ProfileController());
   final UserSessionController userSessionController = Get.find();
   var isFirstCome = false;
-  var firstNameController = TextEditingController();
-  var lastNameController = TextEditingController();
+  // var firstNameController = TextEditingController();
+  // var lastNameController = TextEditingController();
   var dateController = TextEditingController();
   var streetAddressController = TextEditingController();
-  var emailAddressController = TextEditingController();
+  // var emailAddressController = TextEditingController();
   var cityController = TextEditingController();
   var stateController = TextEditingController();
   var zipCodeController = TextEditingController();
@@ -49,6 +49,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
   void initState() {
     // TODO: implement initState
     loadAllEditProfileData();
+
     super.initState();
   }
 
@@ -59,9 +60,10 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
         _profileController.editProfileLoader.value = false;
         if (!isFirstCome) {
           isFirstCome = true;
-          firstNameController.text =
+          _profileController.firstNameController.text =
+
               _profileController.userProfileData.value.firstName!;
-          lastNameController.text =
+          _profileController.lastNameController.text =
               _profileController.userProfileData.value.lastName!;
           // dateController.text = _profileController
           //     .userProfileData.value.dateofBirth!
@@ -72,7 +74,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
 
           streetAddressController.text =
               _profileController.userProfileData.value.address!;
-          emailAddressController.text =
+          _profileController.emailAddressController.text =
               _profileController.userProfileData.value.email!;
           flagController.text = _profileController.userSession.countryFlag;
           countryCodeController.text =
@@ -253,7 +255,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                           filled: true,
                           fillColor: greyF4F4F4,
                           // controller: _profileController.firstNameController,
-                          controller: firstNameController,
+                          controller: _profileController.firstNameController,
                           keyboardType: TextInputType.text,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
@@ -281,7 +283,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                           filled: true,
                           fillColor: greyF4F4F4,
                           // controller: _profileController.lastNameController,
-                          controller: lastNameController,
+                          controller: _profileController.lastNameController,
                           keyboardType: TextInputType.text,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
@@ -385,7 +387,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                           hintText: "enter your email address".toTitleCase(),
                           filled: true,
                           fillColor: greyF4F4F4,
-                          controller: emailAddressController,
+                          controller: _profileController.emailAddressController,
                           keyboardType: TextInputType.emailAddress,
                           // controller: _profileController.emailAddressController,
                         ),
@@ -542,8 +544,8 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                             ProgressDialog.showProgressDialog(context);
                             await _profileController.createProfile(
                               body: {
-                                "FirstName": firstNameController.text.trim(),
-                                "LastName": lastNameController.text.trim(),
+                                "FirstName": _profileController.firstNameController.text.trim(),
+                                "LastName": _profileController.lastNameController.text.trim(),
                                 "MobileNo": userSessionController.isSocialLogin
                                     ? ""
                                     : widget.callFrom == "Create Profile"
@@ -552,7 +554,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                                 "Address": streetAddressController.text.trim(),
                                 "DateofBirth": dateController.text,
                                 "City": cityController.text.trim(),
-                                "Email": emailAddressController.text.trim(),
+                                "Email": _profileController.emailAddressController.text.trim(),
                                 "State": stateController.text.trim(),
                                 "ZipCode": zipCodeController.text,
                                 "AuthenticationId": "fgs",
@@ -602,9 +604,9 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                                   }
                                   _profileController.createProfileImage.value =
                                       File('');
-                                  // _profileController.firstNameController
-                                  //     .clear();
-                                  // _profileController.lastNameController.clear();
+                                  _profileController.firstNameController
+                                      .clear();
+                                  _profileController.lastNameController.clear();
                                   // _profileController
                                   //     .mobileNumberControllerRegister.value
                                   //     .clear();
@@ -616,7 +618,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                                   // _profileController.zipCodeController.clear();
                                   // _profileController.createProfileImage.value =
                                   //     File('');
-                                  // _profileController.emailAddressController.clear();
+                                  _profileController.emailAddressController.clear();
 
                                   // showtoast
                                 }
@@ -641,11 +643,11 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
 
   /// validateFields
   validateFields() {
-    if (firstNameController.text.trim().isEmpty) {
+    if (_profileController.firstNameController.text.trim().isEmpty) {
       return 'please enter your first name!'.toTitleCase();
-    } else if (lastNameController.value.text.isEmpty) {
+    } else if (_profileController.lastNameController.value.text.isEmpty) {
       return 'please enter your last name!'.toTitleCase();
-    } else if (!GetUtils.isEmail(emailAddressController.value.text.trim())) {
+    } else if (!GetUtils.isEmail(_profileController.emailAddressController.value.text.trim())) {
       return 'please enter valid email!'.toTitleCase();
     }
     // else if (_profileController.dateController.value.text.isEmpty) {

@@ -45,11 +45,11 @@ class ProfileController extends GetxController {
   ApiCalls apiCall = ApiCalls();
 
   /// Text Editing Controllers
-  // var firstNameController = TextEditingController();
-  // var lastNameController = TextEditingController();
+  var firstNameController = TextEditingController();
+  var lastNameController = TextEditingController();
   // var dateController = TextEditingController();
   // var streetAddressController = TextEditingController();
-  // var emailAddressController = TextEditingController();
+  var emailAddressController = TextEditingController();
   // var cityController = TextEditingController();
   // var stateController = TextEditingController();
   // var zipCodeController = TextEditingController();
