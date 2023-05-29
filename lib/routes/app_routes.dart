@@ -42,6 +42,11 @@ class AppRoutes {
       binding: MainBindings(),
     ),
     GetPage(
+      name: RouteName.createSocialProfile,
+      page: () => ProfileView(callFrom: 'Social Login'),
+      binding: MainBindings(),
+    ),
+    GetPage(
       name: RouteName.authSelectionScreen,
       page: () => const AuthSelectionView(),
       binding: MainBindings(),

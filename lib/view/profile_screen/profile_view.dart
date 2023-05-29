@@ -12,7 +12,7 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
       backgroundColor: white,
       appBar: appBarCommon(
-        text: callFrom == "Create Profile" ? "Create Profile" : "Edit Details",
+        text: callFrom == "Create Profile"||callFrom == "Social Login" ? "Create Profile" : "Edit Details",
       ),
       body: EditProfileScreenBody(
         callFrom: callFrom,

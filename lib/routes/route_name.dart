@@ -27,6 +27,7 @@ class RouteName {
   static const zipCodeView = '/zip-code';
   static const editProfile = '/edit-profile';
   static const createProfile = '/create-profile';
+  static const createSocialProfile = '/social-profile';
   static const filterResultScreen = '/filter-result-screen';
   static const filterScreen = '/filter-screen';
   static const paymentMethod = '/payment-method';

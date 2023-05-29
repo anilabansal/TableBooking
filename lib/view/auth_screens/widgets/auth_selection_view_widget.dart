@@ -344,7 +344,9 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
           loginController.authLoading.value = false;
           userController.isProfileCreated == true
               ? Get.offAllNamed('/zip-code')
-              : Get.offAllNamed('/create-profile');
+              : Get.offAllNamed('/social-profile',
+
+          );
         }
       },
     );

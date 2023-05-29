@@ -389,6 +389,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                           fillColor: greyF4F4F4,
                           controller: _profileController.emailAddressController,
                           keyboardType: TextInputType.emailAddress,
+                          readOnly:widget.callFrom == 'Social Login'?true:false ,
                           // controller: _profileController.emailAddressController,
                         ),
 
@@ -422,6 +423,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                             DateTextFormatter(),
                           ],
                           filled: true,
+
                         ),
                         const SizedBox(
                           height: 20,
@@ -577,14 +579,14 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                                   // callFrom == "Create Profile"
                                   //     ? Get.toNamed('/zip-code')
                                   //     : Get.back();
-                                  if (widget.callFrom == "Create Profile" &&
+                                  if (widget.callFrom == "Create Profile"||widget.callFrom == "Social Login" &&
                                       userSessionController
                                               .saveGuestUserNavigateScreen !=
                                           'Book-now') {
                                     Get.offNamedUntil('/zip-code', (route) => false);
                                     //Get.offNamed('/zip-code');
                                   } else if (widget.callFrom ==
-                                          "Create Profile" &&
+                                          "Create Profile" || widget.callFrom == "Social Login"&&
                                       userSessionController
                                               .saveGuestUserNavigateScreen ==
                                           'Book-now') {
@@ -626,7 +628,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                             );
                             // Get.toNamed('/zip-code');
                           },
-                          text: widget.callFrom == "Create Profile"
+                          text: widget.callFrom == "Create Profile"||widget.callFrom == "Social Login"
                               ? "Proceed"
                               : "Save Changes",
                           bgColor: redE2211C,
