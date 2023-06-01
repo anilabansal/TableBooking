@@ -20,6 +20,8 @@ class UserSessionController extends GetxController {
   final _saveGuestUserNavigateScreen = ''.obs;
   final _saveRestaurantId = 0.obs;
 
+  var _userType ="".obs;
+
   // final _recentSearchLocation = <String>[].obs;
 
   final _recentSearchLocation = <RecentSearch>[].obs;
@@ -27,6 +29,7 @@ class UserSessionController extends GetxController {
   init() async {
     _isLogin.value = box.read(isLogInString) ?? false;
     _token.value = box.read(tokenString) ?? '';
+    _userType.value = box.read(userTypeString) ?? '';
     _userId.value = box.read(userIdString) ?? '';
     _mobileNumber.value = box.read(mobileNumberString) ?? '';
     _countryCode.value = box.read(countryCodeString) ?? '';
@@ -48,6 +51,7 @@ class UserSessionController extends GetxController {
   get token => _token.value;
 
   get countryCode => _countryCode.value;
+  get userType => _userType.value;
 
   get countryFlag => _countryFlag.value;
 
@@ -83,6 +87,8 @@ class UserSessionController extends GetxController {
     _isSocialLogin.value = value;
   }
 
+
+
   void setSearchLocation(String value, double latitude, double longitude) {
     RecentSearch temp = _recentSearchLocation.firstWhere(
       (element) => element.address == value.trim(),
@@ -105,6 +111,12 @@ class UserSessionController extends GetxController {
   void setIsLogin(bool value) {
     _isLogin.value = value;
     setPref(isLogInString, value);
+  }
+
+  void setUserType(String value){
+    _userType.value=value;
+    setPref(userTypeString, value);
+
   }
 
   void setUserToken(String value) {

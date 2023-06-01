@@ -167,6 +167,7 @@ const isLogInString = 'isLogInString';
 const mobileNumberString = 'mobileNumber';
 const tokenString = 'tokenString';
 const socialLoginString = 'socialLoginString';
+const userTypeString = 'user_Type';
 
 const countryCodeString = 'countryCodeString';
 const countryFlagString = 'countryFlagString';

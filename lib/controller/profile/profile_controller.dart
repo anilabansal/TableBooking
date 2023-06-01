@@ -96,7 +96,7 @@ class ProfileController extends GetxController {
         userSession.setEmail(response['data']['email']);
         userSession.setUserId(response['data']['userId'].toString());
         userSession.setFullName(
-            "${response['data']['firstName']} ${response['data']['lastName']}");
+            "${response['data']['firstName']} ${response['data']['lastName']??""}");
         // userSession.setProfilePic(
         //     "http://apitablebooking.harishparas.com/${response['data']['profilePic']}");
         userSession.setProfilePic(response['data']['profilePic'] ?? '');

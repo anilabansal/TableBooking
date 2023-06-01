@@ -80,6 +80,7 @@ class LoginController extends GetxController {
           userSession.setIsLogin(true);
         }
         userSession.setSocialLogin(true);
+        userSession.setUserType(body["AuthenticationType"]);
         userSession.setEmail(response['data']['emailId']??"");
         userSession.setUserId(response['data']['userId'].toString());
         // userSession.setFullName(response['firstName']['lastName']);
@@ -87,6 +88,7 @@ class LoginController extends GetxController {
         userSession.setProfilePic(response['data']['profilePic'] ?? "");
         authLoading.value = false;
         // update();
+        print("userType --->${userSession.userType}");
         return true;
       } else {
         ShowToast.show(

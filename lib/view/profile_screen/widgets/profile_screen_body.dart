@@ -59,12 +59,17 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
       (value) {
         _profileController.editProfileLoader.value = false;
         if (!isFirstCome) {
+          print("authenticationType--->${_profileController.userProfileData.value
+              .authenticationType}");
+          print('callFrom--->${widget.callFrom}');
+          print("userType --->${userSessionController.userType}");
+          print("FYLLname --->${userSessionController.fullName}");
           isFirstCome = true;
           _profileController.firstNameController.text =
 
               _profileController.userProfileData.value.firstName!;
           _profileController.lastNameController.text =
-              _profileController.userProfileData.value.lastName!;
+              _profileController.userProfileData.value.lastName==null?"": _profileController.userProfileData.value.lastName!;
           // dateController.text = _profileController
           //     .userProfileData.value.dateofBirth!
           //     .substring(0, 10);
@@ -104,6 +109,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
             : Column(
                 children: [
                   widget.callFrom == 'Create Profile'
+                      ||widget.callFrom == "Social Login"
                       ? SizedBox(
                           // height: 200,
                           child: Stack(
@@ -223,6 +229,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                     child: Center(
                       child: CommonText(
                         text: widget.callFrom == 'Create Profile'
+                            ||widget.callFrom == "Social Login"
                             ? "Upload Photo (optional)"
                             : "Change Photo",
                         fontWeight: FontWeight.w400,
@@ -256,6 +263,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                           fillColor: greyF4F4F4,
                           // controller: _profileController.firstNameController,
                           controller: _profileController.firstNameController,
+                          readOnly:widget.callFrom == 'Social Login'?true:false ,
                           keyboardType: TextInputType.text,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
@@ -285,6 +293,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                           // controller: _profileController.lastNameController,
                           controller: _profileController.lastNameController,
                           keyboardType: TextInputType.text,
+                          readOnly:widget.callFrom == 'Social Login'&& _profileController.lastNameController.text.isNotEmpty?true:false ,
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                               RegExp('[a-zA-Z]'),
@@ -389,7 +398,16 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                           fillColor: greyF4F4F4,
                           controller: _profileController.emailAddressController,
                           keyboardType: TextInputType.emailAddress,
-                          readOnly:widget.callFrom == 'Social Login'?true:false ,
+                          readOnly:widget.callFrom == 'Social Login'||userSessionController.isSocialLogin ||
+                              _profileController.userProfileData.value
+                                  .authenticationType ==
+                                  "Google" ||
+                              _profileController.userProfileData.value
+                                  .authenticationType ==
+                                  "Facebook" ||
+                              _profileController.userProfileData.value
+                                  .authenticationType ==
+                                  "Apple"?true:false ,
                           // controller: _profileController.emailAddressController,
                         ),
 
@@ -565,6 +583,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                                 "DeviceType": "dfsgfgsd",
                               },
                               endPoint: widget.callFrom == "Create Profile"
+                                  ||widget.callFrom == "Social Login"
                                   ? createProfileEndPoint
                                   : updateProfileDetail,
                               imageFile:
@@ -575,18 +594,24 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                                   // _profileController.createProfileImage.value == "";
                                   print(_profileController
                                       .createProfileImage.value);
+                                  print("navi Value-->${ userSessionController
+                                      .saveGuestUserNavigateScreen }");
                                   // await _profileController.getProfileDetails();
                                   // callFrom == "Create Profile"
                                   //     ? Get.toNamed('/zip-code')
                                   //     : Get.back();
-                                  if (widget.callFrom == "Create Profile"||widget.callFrom == "Social Login" &&
+                                  if ((widget.callFrom == "Create Profile"
+                                      ||widget.callFrom == "Social Login")
+                                          &&
                                       userSessionController
                                               .saveGuestUserNavigateScreen !=
                                           'Book-now') {
                                     Get.offNamedUntil('/zip-code', (route) => false);
                                     //Get.offNamed('/zip-code');
-                                  } else if (widget.callFrom ==
-                                          "Create Profile" || widget.callFrom == "Social Login"&&
+                                  } else if ((widget.callFrom ==
+                                      "Create Profile"
+                                      || widget.callFrom == "Social Login")
+                                          &&
                                       userSessionController
                                               .saveGuestUserNavigateScreen ==
                                           'Book-now') {
@@ -647,9 +672,11 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
   validateFields() {
     if (_profileController.firstNameController.text.trim().isEmpty) {
       return 'please enter your first name!'.toTitleCase();
-    } else if (_profileController.lastNameController.value.text.isEmpty) {
+    }
+    else if (_profileController.lastNameController.value.text.isEmpty && (userSessionController.userType!="Apple") ) {
       return 'please enter your last name!'.toTitleCase();
-    } else if (!GetUtils.isEmail(_profileController.emailAddressController.value.text.trim())) {
+    }
+    else if (!GetUtils.isEmail(_profileController.emailAddressController.value.text.trim())) {
       return 'please enter valid email!'.toTitleCase();
     }
     // else if (_profileController.dateController.value.text.isEmpty) {

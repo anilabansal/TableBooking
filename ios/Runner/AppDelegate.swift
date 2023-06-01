@@ -12,8 +12,8 @@ import GoogleSignIn
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-//   GIDSignIn.sharedInstance().clientID = "250363232703-gvdu43ck122qjmbjvik074om87mbq0dd.apps.googleusercontent.com"
     FirebaseApp.configure()
+     // GIDSignIn.sharedInstance.clientID = "250363232703-a75v7r92p21soq4eep3k1cupmb499d2h.apps.googleusercontent.com"
     GMSServices.provideAPIKey("AIzaSyAh44zG-nwjUK3-C0IR8lLpw2uBZfVukVY")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)

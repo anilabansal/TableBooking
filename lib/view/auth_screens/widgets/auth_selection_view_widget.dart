@@ -29,7 +29,7 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
 
   UserSessionController userController = Get.find();
   final ProfileController profileController = Get.put(ProfileController());
-
+  UserSessionController userSession = Get.find();
   @override
   void initState() {
     // FCMService().getFCMToken().then((value) {
@@ -344,9 +344,11 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
           loginController.authLoading.value = false;
           userController.isProfileCreated == true
               ? Get.offAllNamed('/zip-code')
-              : Get.offAllNamed('/social-profile',
+              :
+          Get.offAllNamed('/social-profile',
 
           );
+
         }
       },
     );
