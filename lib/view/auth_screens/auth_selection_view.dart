@@ -3,6 +3,7 @@ import 'package:booking_table/view/auth_screens/widgets/auth_selection_view_widg
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/common/widgets_methods/common_text.dart';
+
 class AuthSelectionView extends StatelessWidget {
   const AuthSelectionView({Key? key}) : super(key: key);
   @override

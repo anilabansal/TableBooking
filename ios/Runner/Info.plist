@@ -65,7 +65,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>To capture photo please grant camera access</string>
+	<string>Access to camera allows you to take photos for your profile</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app needs access to location to fetch nearby restaurants </string>
 	<key>NSPhotoLibraryUsageDescription</key>

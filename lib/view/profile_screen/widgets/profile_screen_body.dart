@@ -73,21 +73,22 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
           // dateController.text = _profileController
           //     .userProfileData.value.dateofBirth!
           //     .substring(0, 10);
-          dateController.text = _profileController
+          dateController.text =_profileController
+              .userProfileData.value.dateofBirth==null?"": _profileController
               .userProfileData.value.dateofBirth!
               .convertEditProfileDateBirthToFormat();
 
           streetAddressController.text =
-              _profileController.userProfileData.value.address!;
+              _profileController.userProfileData.value.address==null?"":    _profileController.userProfileData.value.address!;
           _profileController.emailAddressController.text =
               _profileController.userProfileData.value.email!;
           flagController.text = _profileController.userSession.countryFlag;
           countryCodeController.text =
               _profileController.userSession.countryCode;
-          cityController.text = _profileController.userProfileData.value.city!;
-          stateController.text =
+          cityController.text =_profileController.userProfileData.value.city==null?"": _profileController.userProfileData.value.city!;
+          stateController.text = _profileController.userProfileData.value.state==null?"":
               _profileController.userProfileData.value.state!;
-          zipCodeController.text =
+          zipCodeController.text =_profileController.userProfileData.value.zipCode==null?"":
               _profileController.userProfileData.value.zipCode!;
           mobileNumberController.text =
               _profileController.userSession.mobileNumber;
@@ -275,7 +276,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                           height: 20,
                         ),
                         CommonText(
-                          text: "Last Name",
+                          text:userSessionController.userType=="Apple"?"Last Name (optional)": "Last Name",
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: black040404,
@@ -415,7 +416,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                           height: 20,
                         ),
                         CommonText(
-                          text: "Date of Birth",
+                          text: userSessionController.userType=="Apple"?"Date of Birth (optional)":"Date of Birth",
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: black040404,
@@ -447,7 +448,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                           height: 20,
                         ),
                         CommonText(
-                          text: "Street Address",
+                          text: userSessionController.userType=="Apple"?"Street Address (optional)":"Street Address",
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: black040404,
@@ -471,7 +472,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                           height: 20,
                         ),
                         CommonText(
-                          text: "City",
+                          text:  userSessionController.userType=="Apple"?"City (optional)":"City",
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: black040404,
@@ -494,7 +495,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                           height: 20,
                         ),
                         CommonText(
-                          text: "State",
+                          text: userSessionController.userType=="Apple"?"State (optional)": "State",
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: black040404,
@@ -518,7 +519,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                         ),
 
                         CommonText(
-                          text: "Zip Code",
+                          text:userSessionController.userType=="Apple"?"Zip Code (optional)": "Zip Code",
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: black040404,
@@ -691,20 +692,20 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
     // }
     else if (!RegExp(
             r"^(0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])[-](19|20)[0-9]{2}")
-        .hasMatch(dateController.text.trim())) {
+        .hasMatch(dateController.text.trim() ) && (userSessionController.userType!="Apple")) {
       return "please enter valid date of birth!".toTitleCase();
     }
     // else if (!RegExp(r"^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$")
     //     .hasMatch(dateController.text.trim())) {
     //   return "please enter valid date of birth!".toTitleCase();
     // }
-    else if (streetAddressController.value.text.trim().isEmpty) {
+    else if (streetAddressController.value.text.trim().isEmpty && (userSessionController.userType!="Apple")) {
       return 'please enter your Street Address!'.toTitleCase();
-    } else if (cityController.value.text.trim().isEmpty) {
+    } else if (cityController.value.text.trim().isEmpty && (userSessionController.userType!="Apple")) {
       return 'please enter your city!'.toTitleCase();
-    } else if (stateController.value.text.trim().isEmpty) {
+    } else if (stateController.value.text.trim().isEmpty && (userSessionController.userType!="Apple")) {
       return 'please enter your state!'.toTitleCase();
-    } else if (zipCodeController.value.text.trim().isEmpty) {
+    } else if (zipCodeController.value.text.trim().isEmpty && (userSessionController.userType!="Apple")) {
       return 'please enter your zip code!'.toTitleCase();
     }
     // else if (_profileController.mobileNumberController.value.text.isEmpty) {

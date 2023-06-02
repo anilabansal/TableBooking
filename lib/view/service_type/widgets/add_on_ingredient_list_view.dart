@@ -158,7 +158,7 @@ class _AddOnIngredientViewState extends State<AddOnIngredientView> {
                                           color: textDark3F3E3E,
                                         ),
                                         trailing: SizedBox(
-                                          width: Get.width * 0.2,
+                                          width: Get.width * 0.25,
                                           child: Row(
                                             children: [
                                               CommonText(
