@@ -276,7 +276,7 @@ class _EditProfileScreenBodyState extends State<EditProfileScreenBody> {
                           height: 20,
                         ),
                         CommonText(
-                          text:userSessionController.userType=="Apple"?"Last Name (optional)": "Last Name",
+                          text: "Last Name",
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: black040404,

@@ -37,14 +37,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   LocationController locationController = Get.put(LocationController());
-  @override
-  void initState() {
-    super.initState();
-    locationController.requestPermission();
-    // FCMService().getFCMToken();
-    // FCMService().showForGroundMessage();
-    // TODO: implement initState
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //  // locationController.requestPermission();
+  //   // FCMService().getFCMToken();
+  //   // FCMService().showForGroundMessage();
+  //   // TODO: implement initState
+  // }
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([

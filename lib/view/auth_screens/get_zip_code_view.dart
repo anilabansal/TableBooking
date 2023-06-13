@@ -135,6 +135,16 @@ class _GetZipCodeViewState extends State<GetZipCodeView> {
                       : CommonTextFormField(
                  //   contentPadding: const EdgeInsets.only(top:10),
                           //maxLines: 2,
+                    onTap: (){
+                      locationController.requestPermission().then(
+                            (value) {
+                          if (value) {
+                            Get.to(() => const SearchLocation());
+                          }
+
+                        },
+                      );
+                    },
                            maxLength: 250,
                           hintMaxLines: 3,
                           readOnly: true,

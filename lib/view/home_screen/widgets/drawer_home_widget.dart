@@ -83,14 +83,18 @@ class DrawerScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CommonText(
-                                  text: _userSessionController.isLogin == false
-                                      ? "Guest User"
-                                      : _userSessionController.fullName,
-                                  fontFamily: proximaNovaFont,
-                                  fontWeight: FontWeight.w600,
-                                  color: black000000,
-                                  fontSize: 16,
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width-180,
+                                  child: CommonText(
+                                    text: _userSessionController.isLogin == false
+                                        ? "Guest User"
+                                        : _userSessionController.fullName,
+                                    fontFamily: proximaNovaFont,
+                                    fontWeight: FontWeight.w600,
+                                    color: black000000,
+                                    fontSize: 16,
+                                    softWrap: true,
+                                  ),
                                 ),
                                 _userSessionController.isLogin == false
                                     ? Container()

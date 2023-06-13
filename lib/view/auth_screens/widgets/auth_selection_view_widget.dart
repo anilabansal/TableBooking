@@ -30,17 +30,18 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
   UserSessionController userController = Get.find();
   final ProfileController profileController = Get.put(ProfileController());
   UserSessionController userSession = Get.find();
-  @override
-  void initState() {
-    // FCMService().getFCMToken().then((value) {
-    //   loginController.deviceToken.value = value!;
-    //   // setState(() {
-    //   //   deviceTokenStr = value;
-    //   // });
-    //   print('Token -----> $value}');
-    // });
-    // super.initState();
-  }
+
+  // @override
+  // void initState() {
+  //   // FCMService().getFCMToken().then((value) {
+  //   //   loginController.deviceToken.value = value!;
+  //   //   // setState(() {
+  //   //   //   deviceTokenStr = value;
+  //   //   // });
+  //   //   print('Token -----> $value}');
+  //   // });
+  //   // super.initState();
+  // }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -152,17 +153,15 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
         // SOCIAL SIGN IN
         CommonSizedBox(height: 15),
         _iconRow(context),
-       Visibility(
-         visible:GetPlatform.isIOS?true:false ,
-         child: Padding(
-           padding: const EdgeInsets.only(top: 15.0),
-           child: Column(
-             children: [
-               signInApple(context)
-             ],
-           ),
-         ),
-       ),
+        Visibility(
+          visible: GetPlatform.isIOS ? true : false,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 15.0),
+            child: Column(
+              children: [signInApple(context)],
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -190,19 +189,20 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
                 final email = await fb.getUserEmail();
                 if (email != null) print('And your email is $email');
 
-              socialLogin(context,"Facebook",profile.userId, firstName: profile.name!
-                  .substring(0, profile.name!.lastIndexOf(' '),),
-                lastName: profile.name!.substring(
-                    profile.name!.lastIndexOf(" ") + 1),
-                email: email
-              );
+                socialLogin(context, "Facebook", profile.userId,
+                    firstName: profile.name!.substring(
+                      0,
+                      profile.name!.lastIndexOf(' '),
+                    ),
+                    lastName: profile.name!
+                        .substring(profile.name!.lastIndexOf(" ") + 1),
+                    email: email);
                 break;
               case FacebookLoginStatus.cancel:
                 Fluttertoast.showToast(
                     msg: 'You have canceled. Please try again!');
                 break;
             }
-
           },
           child: Image.asset(
             facebookLogo,
@@ -221,12 +221,13 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
             );
             await _googleSignIn.signIn().then(
               (value) {
-                socialLogin(context,"Google",value!.id,email: value.email,
+                socialLogin(context, "Google", value!.id,
+                    email: value.email,
                     // displayName: value.displayName,
                     firstName: value.displayName!
                         .substring(0, value.displayName!.lastIndexOf(' ')),
-                    lastName: value.displayName!.substring(
-                        value.displayName!.lastIndexOf(" ") + 1));
+                    lastName: value.displayName!
+                        .substring(value.displayName!.lastIndexOf(" ") + 1));
               },
             );
           },
@@ -264,7 +265,7 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
       child: SignInWithAppleButton(
         height: 46,
         //height: 40,
-      //  style: SignInWithAppleButtonStyle.white,
+        //  style: SignInWithAppleButtonStyle.white,
         borderRadius: BorderRadius.circular(5.0),
         onPressed: () async {
           final credential = await SignInWithApple.getAppleIDCredential(
@@ -285,7 +286,9 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
               print('appleFirstName - $name');
               print('appleLastName - $email');
               //  appleLogIn(email, credential.userIdentifier);
-              socialLogin(context,"Apple",credential.userIdentifier.toString(), firstName: name,  email:email );
+              socialLogin(
+                  context, "Apple", credential.userIdentifier.toString(),
+                  firstName: name, email: email);
             } else {
               print("apple login2");
               print('User detail --> ${credential.userIdentifier}');
@@ -295,7 +298,9 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
               print('appleName - $name');
               print('appleEmail - $email');
               //   appleLogIn(credential.email, credential.userIdentifier);
-              socialLogin(context,"Apple",credential.userIdentifier.toString(), firstName: name,  email:email );
+              socialLogin(
+                  context, "Apple", credential.userIdentifier.toString(),
+                  firstName: name, email: email);
             }
           } else {
             print("apple login");
@@ -306,17 +311,19 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
                 key: credential.userIdentifier.toString(),
                 value: "${credential.givenName}/${credential.email}");
             // appleLogIn(credential.email, credential.userIdentifier);
-          socialLogin(context,"Apple",credential.userIdentifier.toString(),firstName: credential.givenName,  email:credential.email );
+            socialLogin(context, "Apple", credential.userIdentifier.toString(),
+                firstName: credential.givenName, email: credential.email);
           }
         },
       ),
     );
   }
 
-  socialLogin(context,String authenticationType, String authenticationId,{firstName, lastName, email}){
+  socialLogin(context, String authenticationType, String authenticationId,
+      {firstName, lastName, email}) {
     ProgressDialog.showProgressDialog(context);
     loginController.authLoading.value = true;
-   return loginController.socialLogin(
+    return loginController.socialLogin(
       body: {
         "FirstName": "",
         "LastName": "",
@@ -325,30 +332,29 @@ class _AuthScreenViewWidgetState extends State<AuthScreenViewWidget> {
         "City": "",
         "State": "",
         "ZipCode": "",
-        "DeviceToken":'1234' ,
+        "DeviceToken": '1234',
         "DeviceType": GetPlatform.isAndroid ? "Android" : "iOS",
-        "AuthenticationType":authenticationType,
+        "AuthenticationType": authenticationType,
         "AuthenticationId": authenticationId,
       },
       endPoint: socialLogInEndPoint,
     ).then(
-          (value) {
+      (value) {
         // Get.back();
         if (value) {
           print("signIn successfully");
           print(' firstName11232----$firstName');
-          profileController.firstNameController.text= firstName??"";
-          profileController.lastNameController.text = lastName??"";
-          profileController.emailAddressController.text = email??"";
+          profileController.firstNameController.text = firstName ?? "";
+          profileController.lastNameController.text =
+              authenticationType == "Apple" ? firstName : lastName ?? "";
+          profileController.emailAddressController.text = email ?? "";
 
           loginController.authLoading.value = false;
           userController.isProfileCreated == true
               ? Get.offAllNamed('/zip-code')
-              :
-          Get.offAllNamed('/social-profile',
-
-          );
-
+              : Get.offAllNamed(
+                  '/social-profile',
+                );
         }
       },
     );

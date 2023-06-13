@@ -326,9 +326,11 @@ class _BookATableBodyState extends State<BookATableBody> {
                               // "BookingDate": dateController.text,
                               //   "BookingTime":bookingTable.selectedBookTableTime!.startTime,
                               // "PartySize": partySizeController.text.trim(),
-                              "PartySize":bookingTable.serviceType.value == "4"?"0": bookingTable
-                                  .selectedBookTablePartySize!.number
-                                  .toString(),
+                              "PartySize": bookingTable.serviceType.value == "4"
+                                  ? "0"
+                                  : bookingTable
+                                      .selectedBookTablePartySize!.number
+                                      .toString(),
                               // .selectedPartySize!.number
                               // .toString(),
                               // "PartySize": filterViewController
@@ -414,7 +416,6 @@ class _BookATableBodyState extends State<BookATableBody> {
                   ).paddingOnly(
                     left: 20,
                     right: 20,
-
                   ),
                 ],
               ),
@@ -462,7 +463,8 @@ class _BookATableBodyState extends State<BookATableBody> {
     // else if (partySizeController.text.trim().isEmpty) {
     //   return 'please enter party size!'.toTitleCase();
     // }
-    else if (bookingTable.serviceType.value != "4" && bookingTable.selectedBookTablePartySize == null ||
+    else if (bookingTable.serviceType.value != "4" &&
+            bookingTable.selectedBookTablePartySize == null ||
         bookingTable.selectedBookTablePartySize == '') {
       return 'please select party size!'.toTitleCase();
     } else if (bookingTable.serviceType.value.trim().isEmpty) {

@@ -1,9 +1,13 @@
+import 'package:booking_table/utils/common/widgets_methods/common_text.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../../utils/common/common_strings.dart';
+import '../../utils/common/widgets_methods/common_button.dart';
+import '../../utils/common/widgets_methods/common_sized_box.dart';
 import '../../utils/network/api_calls.dart';
 import '../user_session/user_session_controller.dart';
 
@@ -28,6 +32,7 @@ class LocationController extends GetxController {
   var searchLatLng = const LatLng(0.0, 0.0).obs;
   var searchPlaceId = ''.obs;
 var isSearchMap = false.obs;
+
   /// set latLng
   void setLatLng(LatLng latLng) {
     searchLocationData = latLng;
@@ -65,7 +70,68 @@ var isSearchMap = false.obs;
       return true;
     }
     else if (status.isPermanentlyDenied) {
-      openAppSettings();
+      Get.defaultDialog(
+        barrierDismissible: false,
+        title:  "Location",
+        titleStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        content: CommonText(
+          text: "Allow Access to Location to Fetch Nearby Restaurants",
+          textAlign: TextAlign.center,
+          fontSize: 16,
+          softWrap: true,
+        ),
+        radius: 0010,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 5.0),
+            // padding: const EdgeInsets.all(0),
+            child:
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Expanded(
+                //   child:
+                SizedBox(
+                  width: 80,
+                  height: 40,
+                  child: CommonButton(
+                    bgColor: redE2211C,
+                    text: 'Cancel',
+                    onTap: () {
+                      Get.back();
+                    },
+                    textColor: Colors.white,
+                  ),
+
+                ),
+                // ),
+                CommonSizedBox(
+                  width: 15,
+                ),
+                // Expanded(
+                //   child:
+                SizedBox(
+                  width: 80,
+                  height: 40,
+                  child:   CommonButton(
+                    bgColor: redE2211C,
+                    text:  'Okay',
+                    textColor: Colors.white,
+                    onTap: ()  {
+                      Get.back();
+                      openAppSettings();
+                    },
+                  ),
+
+                ),
+                // ),
+              ],
+            ),
+          ),
+        ],
+      );
+
       return false;
     }
     else {

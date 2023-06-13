@@ -2,10 +2,22 @@ import 'package:booking_table/utils/common/common_strings.dart';
 import 'package:booking_table/view/auth_screens/widgets/auth_selection_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controller/location/location_controller.dart';
 import '../../utils/common/widgets_methods/common_text.dart';
 
-class AuthSelectionView extends StatelessWidget {
+class AuthSelectionView extends StatefulWidget {
   const AuthSelectionView({Key? key}) : super(key: key);
+  @override
+  State<AuthSelectionView> createState() => _AuthSelectionViewState();
+}
+
+class _AuthSelectionViewState extends State<AuthSelectionView> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    Get.find<LocationController>().requestPermission();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
